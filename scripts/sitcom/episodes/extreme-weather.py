@@ -83,8 +83,7 @@ D_MAP = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210">
 # ---------------- COLD OPEN ----------------
 scene("living", [("tara", 300), ("mum", 760)], "TAMPINES · Quarter To Six In The Morning · July")
 L("mum", "Tara! The wind! My new towels are on the bamboo poles! Three for ten dollars!", mood="shock", shot="close")
-L("tara", "I'm awake, Mum. The whole block is awake. The pigeons are awake.", mood="deadpan", shot="close")
-L("mum", "Who said it wouldn't rain?", mood="annoyed", shot="two", gap=0.3)
+L("tara", "I'm awake, Mum. The pigeons are awake.", mood="deadpan", shot="close")
 scene("living", [("tara", 260), ("mum", 600), ("dad", 980)])
 sfx("door")
 L("dad", "Relax. I checked my forecast. Last night I looked out of the window. Not one cloud. Sunny all week.", mood="smug", shot="close", prop="tablet")
@@ -103,79 +102,73 @@ scene("kitchen", [("tara", 380)])
 L("tara", "Soggy towels, soggy Dad. Time to open the drawer we don't open.", mood="determined", shot="wide")
 sfx("drawer")
 poof("globo", 860)
-L("globo", "Who wakes a globe at dawn? Ah, the Raos. That squall rattled my Antarctica.", mood="bored", shot="close")
+L("globo", "Who wakes a globe at dawn? That squall rattled my Antarctica.", mood="bored", shot="close")
 L("tara", "Globo, Dad's calling it extreme weather.", mood="worried", shot="two")
-L("globo", "Extreme weather is much more severe than usual for that place and time of year, and it causes harm or disruption. Thirty five degrees is normal in Dubai. In London, it's a heatwave.", mood="teach", shot="close",
+L("globo", "Extreme weather is much more severe than usual for that place and season, and causes harm. Thirty five degrees is normal in Dubai. In London, it's a heatwave.", mood="teach", shot="close",
   boardClear=True, board="EXTREME = much worse than usual there")
-L("globo", "Seven types. Tropical storms. Droughts and heatwaves, under high pressure, like the Sahel or Europe. Blizzards, sandstorms, flash floods, and tornadoes in the central United States.", mood="teach", shot="close",
+L("globo", "Seven types. Tropical storms, droughts, heatwaves, blizzards, sandstorms, flash floods, and tornadoes, like in the central United States.", mood="teach", shot="close",
   board="Storm · drought · heatwave · blizzard")
 L("tara", "So rising air gives storms, and sinking air gives droughts and heatwaves.", mood="happy", shot="close",
   board="Sandstorm · flash flood · tornado")
-L("globo", "Correct. Singapore is hot and wet all year. The monsoons set the seasons. Northeast, December to early March, wet. Southwest, June to September, drier. In between, afternoon thunderstorms.", mood="teach", shot="close",
+L("globo", "Correct. In Singapore, the monsoons set the seasons. Northeast, December to early March, wet. Southwest, June to September, drier. In between, afternoon thunderstorms.", mood="teach", shot="close",
   boardClear=True, board="NE Monsoon: Dec–early Mar (wet)")
 L("tara", "So what hit us this morning?", mood="thinking", shot="close", board="SW Monsoon: Jun–Sep (drier)")
-L("globo", "A Sumatra squall. A line of thunderstorms that forms at night over Sumatra or the Strait of Malacca, sweeps east, and usually arrives before dawn, with gusts of about forty to eighty kilometres an hour.", mood="teach", shot="close",
+L("globo", "A Sumatra squall. A line of storms that forms at night over the Strait of Malacca, sweeps east, and arrives before dawn, with gusts of about forty to eighty kilometres an hour.", mood="teach", shot="close",
   board="Inter-monsoons: afternoon storms")
-L("globo", "Heavy rain on concrete can cause flash floods, like Orchard Road in twenty ten. Hence the giant underground Stamford Detention Tank.", mood="teach", shot="close",
+L("globo", "Heavy rain on concrete causes flash floods, like Orchard Road in twenty ten. Rain must go somewhere. Usually your father's towels.", mood="teach", shot="close",
   board="SUMATRA SQUALL: before dawn, 40–80 km/h")
-L("tara", "Rain must go somewhere.", mood="deadpan", shot="close")
-L("globo", "Usually your father's towels.", mood="smug", shot="close", board="Concrete → flash floods (Orchard Rd)", gap=0.4)
+L("tara", "Hence the giant underground tank at Stamford.", mood="deadpan", shot="close", board="Concrete → flash floods (Orchard Rd)", gap=0.4)
 
-confess("globo", "GLOBO · Retired Classroom Globe · Lives In The Junk Drawer")
-L("globo", "I am Globo. Thirty years in a classroom. I survived a boy called Darren. A squall does not frighten me.", mood="smug", gap=0.5)
 
 # ---------------- ACT 2: TROPICAL STORMS ----------------
-card("MEANWHILE, AT RAO WEATHER", "A studio rented by the hour. Mum got a deal.", 2.4)
+card("MEANWHILE, AT RAO WEATHER", "A studio rented by the hour. Mum got a deal.", 2.0)
 scene("weatherdesk", [("dad", 300), ("mum", 640)], "RAO WEATHER STUDIO · Rented From A Karaoke Bar")
-L("dad", "Breaking news. I predict a typhoon. Right here. Next Tuesday.", mood="excited", shot="close")
+L("dad", "Breaking news. A typhoon. Right here. Next Tuesday.", mood="excited", shot="close")
 L("mum", "Ooh. Will the shops have a typhoon sale?", mood="excited", shot="close")
 poof("globo", 980)
-L("globo", "Singapore is about one degree north of the Equator. A tropical storm needs spin, from the Earth's rotation, the Coriolis effect. Within about five degrees of the Equator, there's almost none.", mood="teach", shot="close",
+L("globo", "Singapore is about one degree north of the Equator. Storms need spin, from the Coriolis effect, and within about five degrees of the Equator there's almost none.", mood="teach", shot="close",
   boardClear=True, board="SG ~1° N: almost NO Coriolis spin", diagram=D_BELT)
 L("dad", "So what does a typhoon need? I'll order one.", mood="thinking", shot="close", board="No spin → (almost) no typhoons ✔")
 L("globo", "Sea at least twenty six point five degrees. Five to thirty degrees from the Equator. Low wind shear, so it isn't torn apart. And the Coriolis effect, for spin.", mood="teach", shot="close",
   boardClear=True, board="Sea ≥ 26.5 °C · 5–30° from Equator")
-L("globo", "Warm water evaporates. Moist air rises, condenses and releases heat, so it rises faster. Low pressure pulls in more air, and it spirals. A heat engine. Over land, it runs out of fuel.", mood="teach", shot="close",
-  board="Low wind shear · Coriolis → SPIN")
-L("mum", "An engine that runs on free sea water? What a deal.", mood="excited", shot="close", board="Over land → no fuel → weakens")
+L("globo", "Warm water evaporates, rises and condenses, releasing heat. Low pressure pulls in more air, which spirals. A heat engine. Over land, it runs out of fuel.", mood="teach", shot="close",
+  board="Low shear · Coriolis → SPIN · weak on land")
 L("globo", "Same storm, three names. Hurricane in the Atlantic, typhoon in the north west Pacific, cyclone in the Indian Ocean. A calm eye of sinking air. Around it, the eyewall, with the worst winds. Then rain bands.", mood="teach", shot="close",
   boardClear=True, board="Hurricane · typhoon · cyclone", diagram=D_STORM)
 L("dad", "So I'll stand in the eye. Calm. Sunny.", mood="smug", shot="close", board="EYE calm · EYEWALL worst · rain bands")
-L("globo", "Then the eye passes, and the other eyewall hits you from the opposite side. You'd be forecasting from Johor.", mood="eyeroll", shot="close", gap=0.3)
-L("globo", "The Saffir Simpson scale rates wind speed. Category one starts at one hundred and nineteen kilometres an hour. Category five is two hundred and fifty two or more. But storm surge, sea water pushed onto the coast, is often the biggest killer.", mood="teach", shot="close",
+L("globo", "Then the eye passes, and the eyewall hits you again from the other side. You'd be forecasting from Johor.", mood="eyeroll", shot="close", gap=0.3)
+L("globo", "The Saffir Simpson scale rates wind. Category one starts at one hundred and nineteen kilometres an hour. Category five, two hundred and fifty two. But storm surge, the sea pushed onto the coast, is often the biggest killer.", mood="teach", shot="close",
   boardClear=True, board="Cat 1: 119–153 km/h · Cat 5: ≥252")
-L("globo", "In twenty thirteen, Typhoon Haiyan hit the Philippines. Category five. A surge of around five metres swept through Tacloban. About six thousand three hundred people died, and about four million were displaced.", mood="teach", shot="close",
+L("globo", "In twenty thirteen, Typhoon Haiyan, a category five, hit the Philippines. A surge of around five metres swept through Tacloban. About six thousand three hundred people died, and about four million were displaced.", mood="teach", shot="close",
   board="STORM SURGE: often the biggest killer")
 L("mum", "Oh. Those poor families. No more typhoon sale jokes from me.", mood="sad", shot="close", board="HAIYAN 2013: Cat 5 · ~6,300 deaths")
 L("globo", "Countries including Singapore sent aid. The rebuilding included stronger homes and new mangroves.", mood="teach", shot="close",
   board="~4 million displaced · aid + mangroves", gap=0.4)
 
 confess("dad", "VIKRAM RAO · Dad · Self-Described Meteorology Genius")
-L("dad", "I wasn't wrong about the typhoon. I was early. And about two thousand kilometres to the south.", mood="smug", gap=0.6)
+L("dad", "I wasn't wrong. I was early. And about two thousand kilometres too far south.", mood="smug", gap=0.6)
 
 # ---------------- ACT 3: MEASURING THE WEATHER ----------------
-card("MEANWHILE, ON THE HDB CORRIDOR", "Mum's weather station. Seventy percent off.", 2.4)
+card("MEANWHILE, ON THE HDB CORRIDOR", "Mum's weather station kit. On sale, obviously.", 2.0)
 scene("park", [("tara", 240), ("mum", 500), ("dad", 780)], "BLOCK TWO ONE FIVE · Corridor Weather Station")
 L("mum", "A whole weather station kit. Seventy percent off! Box only slightly squashed!", mood="excited", shot="close", prop="bucket")
 L("dad", "I taped the thermometer to the sunny wall. Forty one degrees! Rao Weather exclusive!", mood="excited", shot="close")
 poof("globo", 1050)
 L("tara", "Dad, you measured the wall. And the Sun. Air temperature goes in the shade.", mood="deadpan", shot="close",
   boardClear=True, board="Thermometer in SHADE, not on a wall", diagram=D_INSTR)
-L("globo", "In a Stevenson screen. White to reflect sunlight, slatted so air flows through, about one point two five metres above grass.", mood="teach", shot="close",
+L("globo", "In a Stevenson screen. White, slatted, about one point two five metres above grass.", mood="teach", shot="close",
   board="STEVENSON SCREEN: white, slatted, 1.25 m")
-L("globo", "A rain gauge measures rain in millimetres. A barometer, air pressure in hectopascals. Falling pressure often means rain. An anemometer, wind speed. A hygrometer, humidity.", mood="teach", shot="close",
+L("globo", "A rain gauge measures rain in millimetres. A barometer, air pressure in hectopascals. An anemometer, wind speed. A hygrometer, humidity.", mood="teach", shot="close",
   board="Rain gauge: mm · Barometer: hPa")
 L("dad", "The wind vane points north. So the wind is going north!", mood="smug", shot="close")
 L("tara", "No. A wind vane points to where the wind comes from. That's a north wind, blowing from the north.", mood="deadpan", shot="close",
   boardClear=True, board="Anemometer: speed · Hygrometer: %")
-L("globo", "Winds are named after where they come from. Like your father's ideas. Nowhere.", mood="smug", shot="close",
+L("globo", "Winds are named after where they come from. Unlike your father's ideas.", mood="smug", shot="close",
   board="WIND VANE: points to where wind is FROM")
-L("globo", "Satellites like Himawari track storms from space. Radar shows where rain is falling right now. And read your instruments at the same time each day. The mean is the total divided by the number of readings.", mood="teach", shot="close",
+L("globo", "Satellites track storms from space. Radar shows where it's raining now. And the mean is the total, divided by the number of readings.", mood="teach", shot="close",
   board="Satellites + radar · MEAN = total ÷ n")
 L("mum", "Mean? This morning's rain was very mean. It took my towels.", mood="annoyed", shot="close", gap=0.4)
 
-confess("mum", "MUM · Deal Hunter · Has Never Paid Full Price")
-L("mum", "Seventy percent off a weather station. And the weather itself is free. Every single day.", mood="smug", gap=0.5)
 
 # ---------------- ACT 4: FORECASTING AND WARNINGS ----------------
 card("RAO WEATHER · LIVE", "Episode two. Now with an actual map.", 2.2)
@@ -189,31 +182,31 @@ L("globo", "And fronts bring bands of rain. Cold fronts, blue triangles. Warm fr
   board="Close ISOBARS = strong winds")
 L("dad", "Isobars? Never heard of them. Isobar none.", mood="smug", shot="close")
 sfx("trombone")
-L("globo", "Real forecasts take millions of observations, then supercomputer models, run many times as an ensemble. If the runs agree, be confident.", mood="teach", shot="close",
+L("globo", "Real forecasts use millions of observations and supercomputer models, run many times. If the runs agree, be confident.", mood="teach", shot="close",
   boardClear=True, board="Observe → model → ENSEMBLE → warn")
 L("globo", "But the atmosphere is chaotic. Tiny errors grow every hour. Day by day detail has little skill beyond about two weeks.", mood="teach", shot="close",
   board="Chaos: errors grow → < ~2 weeks skill")
 L("tara", "So Dad's ninety day forecast is guessing. With a microphone.", mood="deadpan", shot="close", gap=0.3)
-L("globo", "Warnings save lives. The three Ps. Prediction, tracking the hazard. Protection, like shelters and bigger drains. Preparation, like evacuation plans and flood alerts on your phone.", mood="teach", shot="close",
+L("globo", "Warnings save lives. The three Ps. Prediction, tracking the hazard. Protection, like shelters and drains. Preparation, like evacuation plans and phone alerts.", mood="teach", shot="close",
   boardClear=True, board="3 Ps: PREDICTION · PROTECTION")
-L("globo", "In nineteen seventy, the Bhola cyclone killed an estimated three to five hundred thousand people in what is now Bangladesh. Since then, Bangladesh has built thousands of raised shelters.", mood="teach", shot="close",
+L("globo", "In nineteen seventy, the Bhola cyclone killed an estimated three hundred thousand to half a million people in what is now Bangladesh.", mood="teach", shot="close",
   board="     · PREPARATION")
 L("tara", "And for Cyclone Amphan in twenty twenty, about three million people were evacuated. Reported deaths were about one hundred and thirty.", mood="thinking", shot="close",
   board="Bhola 1970: ~300,000–500,000 deaths")
-L("globo", "The storm can't be stopped. But people can be out of its way.", mood="teach", shot="close",
-  board="Amphan 2020: ~3M evacuated · ~130 ✔", gap=0.5)
+L("globo", "The storm can't be stopped. But people can move.", mood="teach", shot="close",
+  board="Amphan 2020: ~3M evacuated · ~130 ✔", gap=0.4)
 
 confess("globo", "GLOBO · Recap Globe · Spinning Slowly For Dad")
-L("globo", "Recap. One. Singapore gets monsoons and Sumatra squalls.", mood="teach", boardClear=True, board="1. Monsoons + Sumatra squalls (SG)")
-L("globo", "Two. Storms need warm sea, five to thirty degrees, low shear and spin.", mood="teach", board="2. ≥26.5 °C · 5–30° · low shear · spin")
-L("globo", "Three. Calm eye, deadly eyewall, and beware the storm surge.", mood="teach", board="3. Eye · eyewall · storm surge")
-L("globo", "Four. Wind vanes point to where the wind comes from.", mood="teach", board="4. Vane points FROM · Stevenson screen")
-L("globo", "Five. Close isobars, strong winds. And the three Ps save lives.", mood="smug", board="5. Close isobars = windy · 3 Ps", gap=0.5)
+L("globo", "Recap. One. Monsoons and Sumatra squalls.", mood="teach", boardClear=True, board="1. Monsoons + Sumatra squalls (SG)")
+L("globo", "Two. Warm sea, five to thirty degrees, low shear, spin.", mood="teach", board="2. ≥26.5 °C · 5–30° · low shear · spin")
+L("globo", "Three. The eye is calm. Beware the eyewall and the surge.", mood="teach", board="3. Eye · eyewall · storm surge")
+L("globo", "Four. Wind vanes point to where wind comes from.", mood="teach", board="4. Vane points FROM · Stevenson screen")
+L("globo", "Five. Close isobars, strong winds. Three Ps save lives.", mood="smug", board="5. Close isobars = windy · 3 Ps", gap=0.5)
 
 # ---------------- BUTTON ----------------
 card("THE NEXT MORNING", "Five fifteen. The laundry is indoors.", 2.2)
 scene("living", [("tara", 260), ("mum", 560), ("dad", 840)])
-L("dad", "Rao Weather bulletin. Radar shows a Sumatra squall crossing the Strait of Malacca. Arriving before dawn. Bring in your towels.", mood="determined", shot="close", prop="tablet")
+L("dad", "Rao Weather bulletin. Radar shows a Sumatra squall, arriving before dawn. Bring in your towels.", mood="determined", shot="close", prop="tablet")
 L("mum", "Towels are in. And umbrellas. Ten for twenty dollars.", mood="smug", shot="close", prop="umbrella")
 sfx("whoosh")
 L("tara", "It's here. Right on time. Dad, you got one right.", mood="shock", shot="close")
@@ -224,12 +217,12 @@ L("globo", "Fifty three subscribers. The new one is me. Purely to complain.", mo
 # ---------------- PAUSE CHALLENGE ----------------
 card("PAUSE CHALLENGE", "Globo gives you 5 seconds. Then he sulks.", 3.0)
 challenge(1, "Why does Singapore almost never get typhoons?", "NO SPIN", "~1° N → Coriolis almost zero within 5°",
-  "Question one. Singapore has warm seas. So why does it almost never get typhoons?",
-  "It's too close to the Equator. The Coriolis effect is almost zero there, so storms can't spin.")
+  "Question one. Why does Singapore almost never get typhoons?",
+  "Too close to the Equator. There's almost no Coriolis effect, so no spin.")
 challenge(2, "A wind vane points north. Where is the wind coming from?", "THE NORTH", "vane points to where wind comes FROM",
   "Question two. A wind vane points north. Where is the wind coming from?",
   "From the north. A wind vane points into the wind.")
 challenge(3, "On a weather map, isobars are packed close together. What does that mean?", "STRONG WINDS", "pressure changes fast over a short distance",
-  "Question three. The isobars on a weather map are packed close together. What does that mean?",
-  "Strong winds. Pressure changes quickly over a short distance.")
+  "Question three. Isobars packed close together mean what?",
+  "Strong winds.")
 end_card()
