@@ -1,0 +1,750 @@
+import type { Paper } from "../../types.ts";
+
+// ---------------------------------------------------------------------------
+// Diagrams
+// ---------------------------------------------------------------------------
+
+const FREEZE_THAW = `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three stages of a crack in rock: stage 1 water fills the crack, stage 2 the water freezes into ice and the crack is pushed wider, stage 3 after many cycles a piece of rock breaks off"><rect x="0" y="0" width="460" height="200" fill="#ffffff"/><g font-family="sans-serif" font-size="12" fill="#1f2937"><rect x="15" y="40" width="130" height="110" fill="#d6d3d1" stroke="#334155"/><path d="M70 40 L80 110 L90 40 Z" fill="#bae6fd" stroke="#334155"/><text x="80" y="25" text-anchor="middle" font-weight="bold">Stage 1</text><text x="80" y="170" text-anchor="middle">Water seeps into</text><text x="80" y="185" text-anchor="middle">a crack (day, above 0 °C)</text><rect x="165" y="40" width="130" height="110" fill="#d6d3d1" stroke="#334155"/><path d="M214 40 L230 125 L246 40 Z" fill="#e0f2fe" stroke="#334155"/><text x="230" y="70" text-anchor="middle" font-size="11">ice</text><path d="M205 55 L196 55 M255 55 L264 55" stroke="#1f2937" stroke-width="2"/><path d="M196 55 L201 51 M196 55 L201 59 M264 55 L259 51 M264 55 L259 59" stroke="#1f2937" stroke-width="2"/><text x="230" y="25" text-anchor="middle" font-weight="bold">Stage 2</text><text x="230" y="170" text-anchor="middle">Water freezes and</text><text x="230" y="185" text-anchor="middle">expands (night, below 0 °C)</text><rect x="315" y="40" width="130" height="110" fill="#d6d3d1" stroke="#334155"/><path d="M355 40 L380 140 L405 40 Z" fill="#ffffff" stroke="#334155"/><path d="M405 40 L430 40 L418 95 Z" fill="#fecaca" stroke="#334155"/><text x="380" y="25" text-anchor="middle" font-weight="bold">Stage 3</text><text x="380" y="170" text-anchor="middle">Repeated many times:</text><text x="380" y="185" text-anchor="middle">a fragment breaks off</text></g></svg>`;
+
+const SLUMP = `<svg viewBox="0 0 440 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a clay cliff. A curved slip surface runs from the cliff top down to the foot of the cliff. The block above it has slipped down and tilted back. Rain soaks into the cliff from above and waves attack the foot."><rect x="0" y="0" width="440" height="240" fill="#ffffff"/><path d="M0 60 L250 60 L330 200 L440 200 L440 240 L0 240 Z" fill="#fde68a" stroke="#334155"/><path d="M330 200 L440 200 L440 240 L330 240 Z" fill="#bae6fd" stroke="#334155"/><path d="M150 60 Q170 170 300 190" fill="none" stroke="#b91c1c" stroke-width="3" stroke-dasharray="7 4"/><path d="M190 95 L240 85 L275 150 L215 140 Z" fill="#fecaca" stroke="#334155"/><path d="M262 110 Q232 112 214 102" fill="none" stroke="#1f2937" stroke-width="2"/><path d="M214 102 L222 98 M214 102 L220 108" stroke="#1f2937" stroke-width="2"/><g stroke="#2563eb" stroke-width="2"><path d="M60 15 L55 40"/><path d="M100 15 L95 40"/><path d="M140 15 L135 40"/></g><path d="M420 185 L345 185" stroke="#1f2937" stroke-width="2"/><path d="M345 185 L353 180 M345 185 L353 190" stroke="#1f2937" stroke-width="2"/><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="15" y="12">Heavy rain soaks in</text><text x="20" y="110">Soft boulder clay</text><text x="60" y="185" fill="#b91c1c">Curved slip surface</text><text x="300" y="95">Block slips and</text><text x="300" y="110">tilts backwards</text><text x="350" y="175">Waves</text><text x="358" y="222">Sea</text></g></svg>`;
+
+const SWASH_BACKWASH = `<svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two beach diagrams. Wave P: a long thick arrow up the beach labelled swash and a short thin arrow back down labelled backwash. Wave Q: a short thin swash arrow and a long thick backwash arrow."><rect x="0" y="0" width="460" height="200" fill="#ffffff"/><g font-family="sans-serif" font-size="12" fill="#1f2937"><path d="M10 150 L210 70 L210 170 L10 170 Z" fill="#fde68a" stroke="#334155"/><path d="M10 150 L10 170 L60 170 L60 130 Z" fill="#bae6fd"/><path d="M40 135 L180 79" stroke="#1f2937" stroke-width="6"/><path d="M180 79 L166 78 M180 79 L172 90" stroke="#1f2937" stroke-width="5"/><path d="M110 120 L70 136" stroke="#1f2937" stroke-width="2"/><path d="M70 136 L78 130 M70 136 L79 139" stroke="#1f2937" stroke-width="2"/><text x="85" y="72">Swash</text><text x="95" y="150">Backwash</text><text x="110" y="192" text-anchor="middle" font-weight="bold">Wave P</text><path d="M240 150 L440 70 L440 170 L240 170 Z" fill="#fde68a" stroke="#334155"/><path d="M240 150 L240 170 L290 170 L290 130 Z" fill="#bae6fd"/><path d="M270 135 L310 119" stroke="#1f2937" stroke-width="2"/><path d="M310 119 L301 118 M310 119 L305 126" stroke="#1f2937" stroke-width="2"/><path d="M410 92 L280 144" stroke="#1f2937" stroke-width="6"/><path d="M280 144 L292 135 M280 144 L294 146" stroke="#1f2937" stroke-width="5"/><text x="262" y="110">Swash</text><text x="345" y="150">Backwash</text><text x="340" y="192" text-anchor="middle" font-weight="bold">Wave Q</text></g></svg>`;
+
+const EROSION_LABELS = `<svg viewBox="0 0 440 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a cliff with breaking waves. Label 1: a pebble thrown by a wave at the cliff face. Label 2: two pebbles in the water knocking into each other. Label 3: air trapped and squeezed in a crack by a wave."><rect x="0" y="0" width="440" height="230" fill="#ffffff"/><path d="M260 20 L440 20 L440 230 L260 230 Z" fill="#d6d3d1" stroke="#334155"/><path d="M262 150 L300 140" stroke="#334155" stroke-width="3"/><path d="M0 120 Q60 100 120 125 Q180 145 260 118 L260 230 L0 230 Z" fill="#bae6fd" stroke="#334155"/><circle cx="235" cy="135" r="8" fill="#a8a29e" stroke="#334155"/><path d="M200 140 L224 136" stroke="#1f2937" stroke-width="2"/><path d="M224 136 L217 132 M224 136 L218 141" stroke="#1f2937" stroke-width="2"/><circle cx="95" cy="170" r="9" fill="#a8a29e" stroke="#334155"/><circle cx="113" cy="166" r="9" fill="#a8a29e" stroke="#334155"/><path d="M80 160 L86 166 M128 158 L122 163" stroke="#1f2937" stroke-width="2"/><g fill="#fecaca" stroke="#334155"><circle cx="280" cy="146" r="4"/><circle cx="291" cy="143" r="3"/></g><g font-family="sans-serif" font-size="13" fill="#1f2937" font-weight="bold"><circle cx="225" cy="105" r="11" fill="#c7d2fe" stroke="#334155"/><text x="225" y="110" text-anchor="middle">1</text><circle cx="104" cy="140" r="11" fill="#c7d2fe" stroke="#334155"/><text x="104" y="145" text-anchor="middle">2</text><circle cx="320" cy="125" r="11" fill="#c7d2fe" stroke="#334155"/><text x="320" y="130" text-anchor="middle">3</text></g><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="350" y="60">Cliff</text><text x="30" y="215">Sea</text><text x="300" y="175">crack</text></g></svg>`;
+
+const FETCH_ISLAND = `<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Map of an island. Beach 1 on the north-east coast faces a 40 km wide bay. Beach 2 on the south-west coast faces about 5,000 km of open ocean. Beach 3 on the south-east coast faces about 120 km of sea to another island. The prevailing wind blows from the south-west."><rect x="0" y="0" width="460" height="260" fill="#bae6fd"/><path d="M150 60 Q230 30 300 70 Q340 120 300 180 Q230 220 160 190 Q110 130 150 60 Z" fill="#bbf7d0" stroke="#334155"/><path d="M330 10 L460 10 L460 60 Q400 70 360 40 Z" fill="#bbf7d0" stroke="#334155"/><path d="M380 230 Q420 200 460 210 L460 260 L370 260 Z" fill="#bbf7d0" stroke="#334155"/><g fill="#fde68a" stroke="#334155"><circle cx="300" cy="80" r="9"/><circle cx="165" cy="175" r="9"/><circle cx="300" cy="170" r="9"/></g><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="296" y="84" font-weight="bold">1</text><text x="161" y="179" font-weight="bold">2</text><text x="296" y="174" font-weight="bold">3</text><text x="320" y="95">Beach 1: 40 km bay</text><text x="20" y="215">Beach 2: about 5,000 km</text><text x="20" y="230">of open ocean</text><text x="315" y="160">Beach 3: 120 km</text><text x="315" y="174">to next island</text><text x="200" y="125">ISLAND</text></g><path d="M40 245 L95 200" stroke="#1f2937" stroke-width="3"/><path d="M95 200 L84 202 M95 200 L92 211" stroke="#1f2937" stroke-width="3"/><text x="45" y="190" font-family="sans-serif" font-size="12" fill="#1f2937">Prevailing wind (from SW)</text><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="425" y="120" text-anchor="middle">N</text><path d="M425 150 L425 126" stroke="#1f2937" stroke-width="2"/><path d="M425 126 L420 134 M425 126 L430 134" stroke="#1f2937" stroke-width="2"/></g></svg>`;
+
+// ---------------------------------------------------------------------------
+// Papers
+// ---------------------------------------------------------------------------
+
+export const mcqPapers: Paper[] = [
+  {
+    id: "coastal-erosion-m1",
+    title: "MCQ Paper 1",
+    questions: [
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q01",
+        question: "Which erosion process happens when waves pick up sand and pebbles and hurl them at a cliff, wearing it away like sandpaper?",
+        options: ["Abrasion", "Attrition", "Hydraulic action", "Solution"],
+        answerIndex: 0,
+        explanation:
+          "**Abrasion** is the sea using its 'ammunition' — sand and pebbles — to scrape and chip the cliff. Attrition is tempting because it also involves pebbles, but attrition is pebbles knocking into **each other**, not into the cliff.",
+        difficulty: "warmup",
+        guideRef: "erosion-processes",
+        hints: ["Is the load hitting the cliff, or hitting other bits of load?"],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q02",
+        question: "What is **weathering**?",
+        options: [
+          "The removal of rock from a cliff by waves",
+          "The breakdown of rock in place, without it being moved away",
+          "The downhill movement of rock and soil under gravity",
+          "The dropping of sediment when waves lose energy",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Weathering breaks rock down **where it is** (in situ) — by ice, salt, chemicals or living things. Removal by waves is erosion, the downhill movement under gravity is mass movement, and dropping sediment is deposition.",
+        difficulty: "warmup",
+        guideRef: "weathering",
+        hints: ["Weathering does not need anything to move the rock away."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q03",
+        question: "What creates most of the waves that reach a coast?",
+        options: ["The pull of the Moon", "Earthquakes under the sea", "Wind blowing over the surface of the sea", "Rivers flowing into the sea"],
+        answerIndex: 2,
+        explanation:
+          "Friction between **wind** and the sea surface passes energy to the water, making waves. The Moon causes **tides**, not everyday waves — a common mix-up. Earthquakes can cause tsunamis, but these are rare.",
+        difficulty: "warmup",
+        guideRef: "waves",
+        hints: ["Think about what makes ripples on a puddle on a breezy day."],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q04",
+        question: "Which is the best description of the **coast**?",
+        options: [
+          "The sandy beach only",
+          "The open sea far beyond the shore",
+          "Any land more than 10 km from the sea",
+          "The narrow zone where the land meets the sea",
+        ],
+        answerIndex: 3,
+        explanation:
+          "The coast is the **zone where land and sea meet** — it includes cliffs, beaches, the shallow sea and the land just behind. A beach is only one part of a coast, so 'the sandy beach only' is too narrow.",
+        difficulty: "warmup",
+        guideRef: "intro-to-coasts",
+        hints: ["Many coasts have no sand at all — think of cliffs."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q05",
+        question: "What does **fetch** mean?",
+        options: [
+          "The height of a wave from trough to crest",
+          "The distance of open water over which the wind blows",
+          "The movement of water up the beach after a wave breaks",
+          "The time between two wave crests passing a point",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Fetch is the **distance of open water** the wind blows across. The longer the fetch, the more energy the wind can pass to the water and the bigger the waves. Water moving up the beach is the swash, not the fetch.",
+        difficulty: "core",
+        guideRef: "waves",
+        hints: ["Fetch is measured in kilometres.", "It is about how far the wind has 'travelled' over the sea."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q06",
+        question: "Pebbles on a beach become smaller, smoother and more rounded over many years. Which process is mainly responsible?",
+        options: ["Attrition", "Abrasion", "Hydraulic action", "Freeze–thaw weathering"],
+        answerIndex: 0,
+        explanation:
+          "In **attrition**, pebbles carried by the waves knock into each other, chipping off corners until they are small and round. Abrasion is when the load is thrown **at the cliff** — it wears the cliff, not mainly the pebbles.",
+        difficulty: "core",
+        guideRef: "erosion-processes",
+        hints: ["What are the pebbles bumping into?", "The process that rounds the load itself is the one where pieces of load collide."],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q07",
+        question: "Study the diagram. Which process does it show?",
+        diagram: FREEZE_THAW,
+        options: ["Salt weathering", "Carbonation", "Biological weathering", "Freeze–thaw weathering"],
+        answerIndex: 3,
+        explanation:
+          "Water in the crack **freezes and expands** (by about 9%), pushing the crack wider; when it thaws, more water gets in. Repeated many times, a fragment breaks off — **freeze–thaw**. Salt weathering also widens cracks, but by salt crystals growing, not ice.",
+        difficulty: "core",
+        guideRef: "weathering",
+        hints: ["Look at the labels for day and night temperatures.", "What happens to water when it turns to ice?"],
+        strategy: "Read the key first",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q08",
+        question: "Study the cross-section of a boulder clay cliff. Which type of mass movement is shown?",
+        diagram: SLUMP,
+        options: ["Rockfall", "Sliding along a flat bedding plane", "Slumping (rotational slip)", "Attrition"],
+        answerIndex: 2,
+        explanation:
+          "The block has moved along a **curved** slip surface and tilted backwards — that is **slumping (rotational slip)**, typical of saturated clay. Sliding moves along a **straight** plane, and rockfall is pieces dropping freely from a steep face. Attrition is erosion, not mass movement.",
+        difficulty: "core",
+        guideRef: "mass-movement",
+        hints: ["Look at the shape of the red dashed line.", "Is it straight or curved? Does the block tilt?"],
+        strategy: "Read the key first",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q09",
+        question: "The diagram shows two waves breaking on beaches. The thickness and length of each arrow show its strength. Which statement is correct?",
+        diagram: SWASH_BACKWASH,
+        options: [
+          "Wave P is destructive, because its swash is stronger than its backwash",
+          "Wave P is destructive, because it is moving towards the beach",
+          "Wave Q is destructive, because its backwash is stronger than its swash and drags material off the beach",
+          "Wave Q is destructive, because it has a long wavelength and breaks gently",
+        ],
+        answerIndex: 2,
+        explanation:
+          "A **destructive** wave has a **backwash stronger than its swash**, so it pulls sediment back out to sea — that is Wave Q. Wave P has the strong swash of a **constructive** wave, which builds beaches. Long wavelength and gentle breaking describe constructive waves, not destructive ones.",
+        difficulty: "core",
+        guideRef: "waves",
+        hints: ["Which arrow is thicker in each diagram?", "Destructive waves take material away from the beach — which direction carries material out to sea?"],
+        strategy: "Read the key first",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q10",
+        question: "Singapore has added land by reclamation since the 1960s. Roughly how much has its land area grown?",
+        options: ["About 1%", "About 5%", "It has doubled", "Roughly a quarter (about 25%)"],
+        answerIndex: 3,
+        explanation:
+          "Singapore's land area has grown by **roughly a quarter** — from about 580 km² in the 1960s to about 735 km² today. 'Doubled' is far too much; 1% or 5% hugely underestimates projects such as Changi Airport, Jurong Island and Tuas.",
+        difficulty: "core",
+        guideRef: "intro-to-coasts",
+        hints: ["Today Singapore is about 735 km².", "In the 1960s it was about 580 km². Is 155 km² closer to 5% or 25% of 580?"],
+        strategy: "Use figures from the source",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q11",
+        question: "**Solution** (corrosion) erodes some coastal rocks much faster than others. Which rocks are most affected?",
+        options: ["Chalk and limestone (made of calcium carbonate)", "Granite", "Basalt", "Slate"],
+        answerIndex: 0,
+        explanation:
+          "Seawater is slightly acidic and slowly **dissolves calcium carbonate**, so chalk and limestone are attacked by solution. Granite, basalt and slate are made of minerals that hardly dissolve, so they are worn mainly by hydraulic action and abrasion instead.",
+        difficulty: "core",
+        guideRef: "erosion-processes",
+        hints: ["Solution is a chemical process.", "Which rock fizzes and dissolves in acid?"],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q12",
+        question: "Why are clay cliffs more likely to collapse after several days of heavy rain?",
+        options: [
+          "The rain cools the cliff so it contracts and cracks",
+          "Water adds weight and makes the clay slippery, reducing friction so it slips",
+          "Rainwater instantly freezes inside the cliff",
+          "The rain dissolves all the clay away",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Water soaking into the cliff makes it **heavier** and **lubricates** the clay, so friction holding it in place falls and it slips. The rain does not freeze instantly or dissolve the clay away — those mix up weathering and erosion with mass movement.",
+        difficulty: "core",
+        guideRef: "mass-movement",
+        hints: ["Think of what wet clay feels like in your hands.", "Two effects: weight goes up, grip goes down."],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q13",
+        question:
+          "Two beaches face storm winds of the same strength, blowing for the same length of time. Beach X faces about 4,000 km of open ocean; Beach Y faces a strait only 30 km wide. Which statement best explains the difference in their waves?",
+        options: [
+          "Beach Y gets bigger waves because the wind is squeezed through the narrow strait",
+          "The waves will be the same size because the wind speed and duration are the same",
+          "Beach X gets bigger waves because the water there is saltier",
+          "Beach X gets bigger waves because the wind has a longer fetch over which to pass energy to the water",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Wave size depends on **wind speed, how long it blows, and fetch**. With speed and duration equal, the much longer **fetch** at Beach X lets the wind pass far more energy to the water. 'The same size' forgets that fetch is the third factor.",
+        difficulty: "challenge",
+        guideRef: "waves",
+        hints: ["Name the three things that control wave size.", "Two of the three are the same here — which one is different?"],
+        strategy: "Compare and contrast",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q14",
+        question: "Which of these is an example of **weathering**, not erosion?",
+        options: [
+          "Salt crystals growing in the pores of a sandstone cliff top above the reach of the waves, making the grains crumble",
+          "Waves hurling shingle at the foot of a cliff",
+          "Air being squeezed into a crack by a breaking wave",
+          "Seawater dissolving chalk at the foot of a cliff",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Salt crystals growing in pores break the rock **where it is**, without the waves moving it — that is **salt weathering**. Seawater dissolving chalk at the cliff foot is tempting because it is chemical, but it is the **erosion** process of solution: the sea is wearing the rock away and carrying it off.",
+        difficulty: "challenge",
+        guideRef: "weathering",
+        hints: ["Which option does not involve the waves doing the work?", "Erosion needs a moving agent (waves); weathering does not."],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m1-q15",
+        question: "Which sequence best describes how a cliff of hard, jointed rock retreats?",
+        options: [
+          "A rockfall happens first → waves then cut a notch → weathering widens joints → the debris protects the cliff forever",
+          "Weathering removes the debris → the overhang grows upwards → waves fill the notch with sand",
+          "Waves erode a notch at the cliff foot → an overhang is left → weathering widens joints in the overhang → it collapses as a rockfall and the waves remove the debris",
+          "Attrition rounds the cliff face → slumping on a curved surface → a new beach forms on the cliff top",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Erosion at the base (hydraulic action, abrasion) cuts a **notch**, leaving an **overhang**. Weathering weakens the overhang along joints until gravity wins and it falls (**rockfall**). Waves then clear the debris and the cycle repeats. Debris does not protect the cliff for ever — waves remove it.",
+        difficulty: "challenge",
+        guideRef: "mass-movement",
+        hints: ["Where do waves attack a cliff — top or bottom?", "What happens to rock left hanging with nothing underneath?", "After a collapse, what must happen before the waves can attack the cliff foot again?"],
+        strategy: "Cause → process → effect",
+      },
+    ],
+  },
+  {
+    id: "coastal-erosion-m2",
+    title: "MCQ Paper 2",
+    questions: [
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q01",
+        question: "Name the process where the sheer force of breaking waves, and air squeezed into cracks, breaks rock apart.",
+        options: ["Abrasion", "Solution", "Hydraulic action", "Attrition"],
+        answerIndex: 2,
+        explanation:
+          "**Hydraulic action** is the power of the water itself — no load is needed. Abrasion needs sand and pebbles as 'tools', and solution is chemical.",
+        difficulty: "warmup",
+        guideRef: "erosion-processes",
+        hints: ["'Hydro' means water."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q02",
+        question: "Rainwater is a very weak acid because it has dissolved which gas from the air?",
+        options: ["Oxygen", "Nitrogen", "Water vapour", "Carbon dioxide"],
+        answerIndex: 3,
+        explanation:
+          "Rain dissolves **carbon dioxide**, forming weak **carbonic acid**, which reacts with limestone and chalk in **carbonation**. Oxygen and nitrogen are the main gases in air but they do not make rain acidic in this way.",
+        difficulty: "warmup",
+        guideRef: "weathering",
+        hints: ["It is the gas we breathe out."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q03",
+        question: "What is **mass movement**?",
+        options: [
+          "The downhill movement of rock and soil under the influence of gravity",
+          "The wearing away of rock by waves",
+          "The breakdown of rock by plants and animals",
+          "Sand being moved along a beach by waves",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Mass movement is material moving **downslope because of gravity** — rockfalls, slumps and slides. Wearing away by waves is erosion; sand moved along the beach is longshore drift (transportation).",
+        difficulty: "warmup",
+        guideRef: "mass-movement",
+        hints: ["What force pulls everything downhill?"],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q04",
+        question: "Which description fits a **constructive** wave?",
+        options: [
+          "Tall and steep, with a strong backwash",
+          "Low and gentle, with a strong swash that builds up the beach",
+          "Caused by an undersea earthquake",
+          "Only found at high tide",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Constructive waves are **low** with a **strong swash** and weak backwash, so they push sediment up the beach and build it. 'Tall and steep with a strong backwash' describes a **destructive** wave.",
+        difficulty: "warmup",
+        guideRef: "waves",
+        hints: ["'Constructive' means building."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q05",
+        question: "Thinking of the coast as a **system**, which of these is an **input**?",
+        options: ["Deposition of sand on a beach", "A spit forming at a river mouth", "Longshore drift carrying shingle", "Wave energy generated by the wind"],
+        answerIndex: 3,
+        explanation:
+          "Inputs are what **enter** the system — energy from wind and waves, and sediment from rivers or eroding cliffs. Deposition and longshore drift are **processes**; a spit is a landform made by those processes (an output).",
+        difficulty: "core",
+        guideRef: "intro-to-coasts",
+        hints: ["Inputs → processes → outputs.", "Which option comes from outside the coast and drives everything else?"],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q06",
+        question: "Rainwater soaks into the cracks of a limestone cliff top and reacts with the calcium carbonate, slowly dissolving it. Which type of weathering is this?",
+        options: ["Freeze–thaw", "Salt weathering", "Carbonation", "Abrasion"],
+        answerIndex: 2,
+        explanation:
+          "**Carbonation** is chemical weathering: weak carbonic acid in rain dissolves calcium carbonate. Abrasion is wrong on two counts — it is erosion, and it is physical (load hitting rock), not chemical.",
+        difficulty: "core",
+        guideRef: "weathering",
+        hints: ["Is this physical or chemical?", "The name of the process comes from the acid involved: carbonic acid."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q07",
+        question: "Which of these cliffs is likely to erode **fastest**?",
+        options: [
+          "A granite cliff with few cracks in a sheltered bay",
+          "A boulder clay cliff facing a long fetch, with only a narrow beach in front",
+          "A chalk cliff protected by a wide beach",
+          "A granite cliff facing a long fetch",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Soft **boulder clay** + **long fetch** (powerful waves) + **little beach** to absorb energy is the fastest-eroding combination — this is why Holderness retreats so quickly. A granite cliff facing a long fetch gets big waves, but granite is very resistant, so it still erodes slowly.",
+        difficulty: "core",
+        guideRef: "erosion-processes",
+        hints: ["Three factors: rock type, wave energy, protection.", "Which option is weak on all three?"],
+        strategy: "Compare and contrast",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q08",
+        question: "On a steep cliff of hard, jointed rock, blocks loosened by freeze–thaw drop straight down to the foot of the cliff. This is…",
+        options: ["Rockfall", "Slumping", "Sliding", "Abrasion"],
+        answerIndex: 0,
+        explanation:
+          "Blocks breaking off a **steep face** and dropping freely is **rockfall**. Slumping happens on a curved surface in soft, saturated material such as clay — not hard, jointed rock.",
+        difficulty: "core",
+        guideRef: "mass-movement",
+        hints: ["Is the material falling through the air or slipping along a surface?", "Hard rock with joints breaks into blocks."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q09",
+        question: "Why do waves break as they approach the shore?",
+        options: [
+          "The base of the wave is slowed by friction with the seabed, so the top gets higher and topples over",
+          "The wind suddenly stops near the land",
+          "The tide pulls the wave backwards",
+          "The water becomes saltier near the shore",
+        ],
+        answerIndex: 0,
+        explanation:
+          "In shallow water the bottom of the wave **drags on the seabed** and slows, while the top keeps going. The wave grows taller and steeper until the crest **topples over** — it breaks, and the water rushes up the beach as swash. The wind does not suddenly stop at the coast.",
+        difficulty: "core",
+        guideRef: "waves",
+        hints: ["What changes about the water depth near the beach?", "If your feet are slowed but your body keeps going, what happens?"],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q10",
+        question: "How does weathering differ from erosion?",
+        options: [
+          "Weathering only happens in cold places",
+          "Weathering breaks rock down where it is; erosion wears rock away and removes it using a moving force such as waves",
+          "Weathering is always faster than erosion",
+          "Weathering always involves moving water",
+        ],
+        answerIndex: 1,
+        explanation:
+          "The key difference is **movement**: weathering happens **in place**, erosion is wearing away **by a moving agent** (waves) that carries material off. Weathering is not only cold — carbonation and salt weathering happen in warm places too.",
+        difficulty: "core",
+        guideRef: "weathering",
+        hints: ["Think: does the rock stay put or get taken away?", "Erosion needs an agent — at the coast, the waves."],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q11",
+        question: "What is the main reason Singapore has reclaimed land from the sea?",
+        options: [
+          "Because sea level around Singapore is falling",
+          "To make the waves around the island smaller",
+          "Because it has very little land for housing, industry, its port and its airport",
+          "Because reclaimed land never needs protecting from the sea",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Singapore is a small, crowded country (about 735 km²), so it **creates land** for homes, industry (Jurong Island), the port (Tuas) and Changi Airport. Reclaimed land is low-lying and **does** need protection — especially as sea levels rise, not fall.",
+        difficulty: "core",
+        guideRef: "intro-to-coasts",
+        hints: ["Think about Singapore's size and population.", "What do Changi Airport and Jurong Island have in common?"],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q12",
+        question: "Study the diagram. Which erosion process is shown at label 2?",
+        diagram: EROSION_LABELS,
+        options: ["Abrasion", "Hydraulic action", "Solution", "Attrition"],
+        answerIndex: 3,
+        explanation:
+          "At label 2, two pebbles in the water are **knocking into each other** — **attrition**. Label 1 (a pebble thrown at the cliff) is abrasion, and label 3 (air squeezed into a crack) is hydraulic action.",
+        difficulty: "core",
+        guideRef: "erosion-processes",
+        hints: ["What is the pebble at label 2 hitting?", "Abrasion = load hits the cliff; attrition = load hits load."],
+        strategy: "Read the key first",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q13",
+        question:
+          "A student counts about 13 waves breaking per minute on a beach during a stormy week. Each wave is tall and steep, and its backwash is stronger than its swash. What is most likely to happen to the beach?",
+        options: [
+          "It will build up as sediment is pushed up the beach",
+          "It will lose sediment as the strong backwash drags it offshore",
+          "It will stay the same because swash and backwash cancel out",
+          "It will gain sediment because more waves arrive each minute",
+        ],
+        answerIndex: 1,
+        explanation:
+          "These are **destructive** waves: frequent, steep and with a strong backwash that **drags sediment seawards**, so the beach is lowered and narrowed. More waves per minute does not mean more sediment arriving — frequent waves interfere, weakening each swash.",
+        difficulty: "challenge",
+        guideRef: "waves",
+        hints: ["Is this wave constructive or destructive?", "Which way does the stronger flow of water carry sand?"],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q14",
+        question:
+          "On the Holderness coast, cliffs of soft boulder clay often **slump**, while the chalk cliffs at nearby Flamborough Head more often suffer **rockfalls**. What is the best explanation?",
+        options: [
+          "Clay is a harder rock than chalk",
+          "Chalk cliffs never get wet",
+          "Slumping only happens on south-facing coasts",
+          "Clay soaks up water, becomes heavy and slippery and slips on a curved surface, while stronger, jointed chalk breaks off in blocks from steep faces",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Saturated **clay** loses strength and moves as a slump along a curved surface. **Chalk** is stronger and stands as steep faces, but it is cut by joints, so blocks break away and fall. Clay is softer than chalk, not harder — that distractor reverses the facts.",
+        difficulty: "challenge",
+        guideRef: "mass-movement",
+        hints: ["How does each rock behave when it gets wet?", "Which rock can stand as a steep, vertical face?"],
+        strategy: "Compare and contrast",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m2-q15",
+        question: "A cliff top on the Holderness coast retreated 36 m between 2000 and 2024. What was its average rate of retreat?",
+        options: ["1.5 m per year", "0.67 m per year", "36 m per year", "2.4 m per year"],
+        answerIndex: 0,
+        explanation:
+          "Rate = distance ÷ time = 36 m ÷ 24 years = **1.5 m per year** — within the roughly 1–2 m per year usually quoted for Holderness. 0.67 comes from dividing the wrong way round (24 ÷ 36).\n\n    2024 − 2000 = 24 years\n    36 ÷ 24 = 1.5 m per year",
+        difficulty: "challenge",
+        guideRef: "erosion-processes",
+        hints: ["First work out how many years passed.", "Rate = distance ÷ time — which number goes on top?"],
+        strategy: "Use figures from the source",
+      },
+    ],
+  },
+  {
+    id: "coastal-erosion-m3",
+    title: "MCQ Paper 3",
+    questions: [
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q01",
+        question: "Seawater slowly dissolving chalk or limestone cliffs is called…",
+        options: ["Attrition", "Solution (corrosion)", "Abrasion", "Hydraulic action"],
+        answerIndex: 1,
+        explanation:
+          "**Solution** (also called corrosion) is chemical erosion: slightly acidic seawater dissolves calcium carbonate rocks. The other three are physical processes.",
+        difficulty: "warmup",
+        guideRef: "erosion-processes",
+        hints: ["Which process is chemical — like sugar dissolving in tea?"],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q02",
+        question: "What is the movement of water **up** the beach after a wave breaks called?",
+        options: ["Swash", "Backwash", "Fetch", "Longshore drift"],
+        answerIndex: 0,
+        explanation:
+          "**Swash** goes up the beach; **backwash** runs back down towards the sea under gravity. Fetch is the distance of open water the wind blows over.",
+        difficulty: "warmup",
+        guideRef: "waves",
+        hints: ["Backwash goes back — so what goes up?"],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q03",
+        question: "Freeze–thaw weathering is most effective where…",
+        options: [
+          "the temperature stays below freezing all year",
+          "it is hot and dry all year",
+          "it rains every day at about 30 °C",
+          "the temperature often rises above and falls below 0 °C",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Freeze–thaw needs **repeated** cycles: water must melt to seep further in, then freeze to expand. Somewhere that stays frozen all year has no thawing, so cracks are not repeatedly refilled and widened.",
+        difficulty: "warmup",
+        guideRef: "weathering",
+        hints: ["The name has two parts: freeze AND thaw."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q04",
+        question: "Which is a reason why many people and cities are found on coasts?",
+        options: [
+          "Coasts are never affected by storms",
+          "Coastal land is always higher than inland areas",
+          "Ports allow trade by sea, and coasts support fishing and tourism",
+          "There is no erosion on coasts",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Coasts offer **ports for trade**, fishing and tourism — Singapore grew as a port city. The other options are false: coasts face storms and erosion, and much coastal land is low-lying.",
+        difficulty: "warmup",
+        guideRef: "intro-to-coasts",
+        hints: ["Think about why Singapore became an important city."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q05",
+        question: "A layer of rock moves down a cliff along a **straight**, sloping bedding plane, staying mostly in one piece. This is…",
+        options: ["Sliding", "Slumping (rotational slip)", "Rockfall", "Attrition"],
+        answerIndex: 0,
+        explanation:
+          "Movement along a **flat or straight** surface is **sliding** (a translational slide). Slumping moves along a **curved** surface and the block rotates. Rockfall is material falling freely through the air.",
+        difficulty: "core",
+        guideRef: "mass-movement",
+        hints: ["Is the surface straight or curved?", "Slump = curved; slide = straight."],
+        strategy: "Compare and contrast",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q06",
+        question: "Study the map of an island. Which beach is likely to receive the most powerful waves on most days?",
+        diagram: FETCH_ISLAND,
+        options: [
+          "Beach 1, facing a 40 km bay",
+          "Beach 2, facing the prevailing wind across about 5,000 km of open ocean",
+          "Beach 3, facing 120 km of sea",
+          "All three beaches, because they are on the same island",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Beach 2 faces **into the prevailing south-westerly wind** and has by far the **longest fetch** (about 5,000 km), so the wind has the most distance to build big waves. Being on the same island does not mean the same waves — direction and fetch differ.",
+        difficulty: "core",
+        guideRef: "waves",
+        hints: ["Which way does the prevailing wind blow from?", "Which beach has the wind blowing towards it over the greatest distance?"],
+        strategy: "Work it out from the map",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q07",
+        question: "How does **hydraulic action** widen cracks in a cliff?",
+        options: [
+          "Sand grains rub the crack like sandpaper",
+          "Seawater dissolves the rock chemically",
+          "A breaking wave traps and squeezes air in the crack; when the wave pulls back the air expands suddenly, weakening the rock",
+          "Ice expands in the crack at night",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Waves force water and **compressed air** into cracks; as the wave retreats the pressure is released suddenly. Repeated thousands of times, this widens the crack. Sand rubbing the rock is abrasion; ice expanding is freeze–thaw (weathering).",
+        difficulty: "core",
+        guideRef: "erosion-processes",
+        hints: ["Hydraulic action needs no sand — just water and…?", "What gets trapped at the back of a crack when water rushes in?"],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q08",
+        question: "Which of these is **biological** weathering?",
+        options: [
+          "Waves hurling pebbles at a cliff",
+          "Ice forming in a crack",
+          "Rainwater dissolving limestone",
+          "Rabbits and puffins burrowing into a cliff top, and roots widening cracks",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Biological weathering is caused by **living things** — burrowing animals and growing roots break rock apart. Rainwater dissolving limestone is **chemical** weathering (carbonation), and waves hurling pebbles is erosion (abrasion).",
+        difficulty: "core",
+        guideRef: "weathering",
+        hints: ["'Bio' means life.", "Which option involves plants or animals?"],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q09",
+        question: "Which human action is most likely to **increase** the risk of a slump on a clay cliff?",
+        options: [
+          "Planting vegetation on the cliff face",
+          "Draining water out of the cliff with pipes",
+          "Placing rock armour at the foot of the cliff",
+          "Building heavy houses near the cliff edge, with leaking drains soaking into the clay",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Extra **weight** at the top and extra **water** in the clay both make slumping more likely. Planting vegetation, draining the cliff and rock armour all **reduce** the risk — they are ways of stabilising cliffs.",
+        difficulty: "core",
+        guideRef: "mass-movement",
+        hints: ["What two things make clay more likely to slip?", "Which option adds both weight and water?"],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q10",
+        question: "Which description best fits **destructive** waves?",
+        options: [
+          "Low, with a long wavelength and a strong swash",
+          "Only found in sheltered bays",
+          "Tall and steep, breaking frequently (often quoted as roughly 10–14 a minute), with a backwash stronger than the swash",
+          "Formed by the tide rather than the wind",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Destructive waves are **high, steep and frequent**, and their **strong backwash** removes sediment. Low waves with a strong swash are **constructive**. Exact frequencies vary between sources, which is why the figure is given as roughly 10–14.",
+        difficulty: "core",
+        guideRef: "waves",
+        hints: ["'Destructive' — they take material away.", "Which flow must be stronger to take material away?"],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q11",
+        question: "Why does a wide beach at the foot of a cliff slow down the rate of cliff erosion?",
+        options: [
+          "Beaches make waves bigger",
+          "Waves break on the beach and lose much of their energy before reaching the cliff",
+          "Beach sand cements itself to the cliff",
+          "Beaches stop all weathering of the cliff",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A wide beach makes waves **break early** and spend their energy moving sand, so less energy reaches the cliff foot. It does not stop weathering — rain, frost and salt still act on the cliff face.",
+        difficulty: "core",
+        guideRef: "erosion-processes",
+        hints: ["Where does the wave's energy go?", "Think of the beach as a shock absorber."],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q12",
+        question: "East Coast Park in Singapore is built on…",
+        options: ["Land reclaimed from the sea", "Natural chalk cliffs", "A coral atoll", "Volcanic rock from a recent eruption"],
+        answerIndex: 0,
+        explanation:
+          "East Coast Park was created on **reclaimed land** — part of Singapore's large-scale reclamation along its south-east coast. Singapore has no chalk cliffs and no recent volcanoes.",
+        difficulty: "core",
+        guideRef: "intro-to-coasts",
+        hints: ["Think about how Singapore has made new land.", "Does Singapore have chalk cliffs or volcanoes?"],
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q13",
+        question:
+          "After a winter with many nights just below 0 °C and days just above it, what is most likely to happen to a steep, jointed limestone cliff in northern England?",
+        options: [
+          "More slumping, because limestone soaks up water like clay",
+          "Less erosion, because ice protects the cliff",
+          "More rockfalls, because freeze–thaw has loosened blocks along the joints",
+          "More attrition on the cliff face",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Many **freeze–thaw** cycles widen joints, loosening blocks that then fall as **rockfalls** — weathering prepares the rock and gravity finishes the job. Limestone does not behave like saturated clay, and attrition happens between pebbles in the sea, not on a cliff face.",
+        difficulty: "challenge",
+        guideRef: "mass-movement",
+        hints: ["What weathering process does the weather describe?", "What does a loosened block on a steep face do next?"],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q14",
+        question: "Which statement about **solution** as an erosion process is correct?",
+        options: [
+          "It is the main way granite cliffs are eroded",
+          "It is chemical, so it can attack chalk and limestone even when waves are small",
+          "It is another name for attrition",
+          "It only works at freezing temperatures",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Solution is **chemical** — it depends on the rock's minerals and the water, not on wave power, so it works on calcium carbonate rocks even in calm conditions. Granite hardly dissolves, so solution is not its main erosion process.",
+        difficulty: "challenge",
+        guideRef: "erosion-processes",
+        hints: ["Does dissolving need big waves?", "Which rocks dissolve: granite or chalk?"],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "coastal-erosion-m3-q15",
+        question: "Singapore's coasts usually get much smaller waves than the coast of Cornwall in south-west England. What is the best explanation?",
+        options: [
+          "Water near the equator is too warm to form waves",
+          "Singapore never has any wind",
+          "Cornwall's waves are made by tides, while Singapore's are made by wind",
+          "Singapore is sheltered by nearby land such as Peninsular Malaysia and the Indonesian islands, so fetches are short, while Cornwall faces thousands of km of Atlantic Ocean",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Singapore sits in a narrow strait surrounded by land, so the wind has only a **short fetch** to build waves. Cornwall faces the prevailing south-westerly winds across the **open Atlantic** — a fetch of thousands of km. Warm water can still form waves, and both places get waves from the wind.",
+        difficulty: "challenge",
+        guideRef: "waves",
+        hints: ["Look at a map: what surrounds Singapore?", "Which of the three wave-size factors is most different between the two places?"],
+        strategy: "Think at different scales",
+      },
+    ],
+  },
+];
