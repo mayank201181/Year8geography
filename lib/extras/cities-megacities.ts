@@ -1,105 +1,102 @@
-import type { TopicExtras } from "../types.ts";
+import type { TopicExtras } from "../types";
 
-export const extras: TopicExtras = {
-  hook: "In 1950 only two cities on Earth had 10 million people: Tokyo and New York. Today there are more than thirty such megacities — and most of them are in Asia. What changed, and why are cities in poorer countries now growing fastest?",
+export const citiesMegacitiesExtras: TopicExtras = {
+  hook:
+    "In 1950 only two cities on Earth, New York and Tokyo, had about 10 million people. Today there are more than 30 of these megacities, and most are in Asia, Africa and Latin America. Why did the world's biggest cities move?",
   didYouKnow: [
-    "Around 2007, for the first time in human history, more people lived in towns and cities than in the countryside (UN estimate). By 2023 the figure was about 57%, and the UN projects about 68% by 2050.",
-    "Singapore is counted as 100% urban — it is a city-state, so the whole country is one city. Even so, nearly half of its land is green cover such as parks, nature reserves and park connectors.",
-    "There is no single world definition of 'urban'. Some countries count any settlement over a few thousand people as a town; others use much higher thresholds — so % urban figures are only roughly comparable.",
-    "City rankings depend on where you draw the boundary. Using one method, Tokyo is the world's biggest urban area (about 37 million people in 2018); a 2025 UN report using a new, satellite-based method ranked Jakarta first.",
-    "In many fast-growing cities, natural increase adds as many people as migration does — because migrants are mostly young adults who go on to start families in the city.",
-    "Counter-urbanisation is real: in many high-income countries, people move out of big cities to smaller towns and villages, helped by cars, fast internet and working from home.",
+    "Around 2007 the world became more urban than rural for the first time in history. The UN expects about 68% of people to live in urban areas by 2050, up from about 56% in 2020.",
+    "About 90% of the extra 2.5 billion urban dwellers expected by 2050 will be in Asia and Africa. India, China and Nigeria alone account for over a third of that growth (UN estimate).",
+    "Greater Tokyo has about 37 million people, more than the whole population of Australia (about 27 million).",
+    "Lagos grew from roughly 0.3 million people in 1950 to around 15 million by 2020, about 50 times bigger in 70 years (approximate UN estimates).",
+    "The UN projects that Delhi will overtake Tokyo as the world's largest city around 2028, and that Kinshasa and Lagos will each pass 20 million by 2030.",
   ],
-  activities: [
+  experiments: [
     {
-      title: "Map the zones of your neighbourhood",
-      emoji: "🗺️",
-      materials: ["A printed map or screenshot of your area (e.g. from OneMap)", "Coloured pencils", "A notebook", "Optional: a phone camera"],
+      title: "Land-use transect: from MRT station outwards",
+      emoji: "🚇",
+      materials: ["A map of your neighbourhood (printed or on a phone)", "Clipboard, paper and pencil", "A phone timer or step counter", "Coloured pencils"],
       steps: [
-        "Choose a route from a busy centre (e.g. a town centre or MRT interchange) out towards the edge of your area.",
-        "Walk or ride it with an adult. Every few hundred metres, note the main land use: offices, shops, housing, industry, parks or open land.",
-        "Also note building height (low / medium / high-rise) and how busy the streets are.",
-        "Colour your map with a key: red = commercial (shops/offices), yellow = housing, purple = industry, green = parks/open space.",
-        "Compare your map with the CBD → inner city → suburbs → rural–urban fringe model. Where does your area fit — and where does it NOT fit the model?",
+        "Pick an MRT station near you, such as a town centre station, and plan a straight-ish walk of about 1 km away from it.",
+        "Every 100 m (about 130 steps), stop and record: the main land use (shops, offices, housing, park, school, industry), the tallest building's number of storeys, and how busy it is (count people passing in 1 minute).",
+        "Colour each stop on your map: red = shops/commercial, yellow = housing, green = open space, blue = services, grey = industry.",
+        "Draw a line graph of building height and people count against distance from the station.",
+        "Write a TEA paragraph: what is the trend as you move away from the station? Give an example with numbers, and any anomaly.",
       ],
-      maths: "Land-use models say land values and building heights fall as you move away from the centre, because the centre is the most accessible place and everyone competes for it. Singapore is planned, so its pattern differs: HDB new towns each have their own town centre, a bit like mini-CBDs. Spotting where reality differs from the model is exactly what geographers do.",
+      science:
+        "Land is most valuable and accessible near transport hubs, so you usually find shops, offices and the tallest, densest buildings there, with homes and open space further out. This is the same pattern as a city's CBD and its outer zones in urban land-use models. Singapore plans its towns this way on purpose: each HDB new town has a town centre around the MRT station.",
+      safety: "Go with an adult or a friend, stay on pavements, use crossings and do not stop in the middle of busy walkways.",
     },
     {
-      title: "Family migration interview",
-      emoji: "🧳",
-      materials: ["A family member or neighbour who has moved home, city or country", "A notebook or phone voice recorder", "A world map"],
+      title: "Family migration story: kampong to city",
+      emoji: "🏘️",
+      materials: ["Notebook or voice recorder (with permission)", "A grandparent or older relative to interview", "A world or Southeast Asia map"],
       steps: [
-        "Ask: Where did you (or your parents or grandparents) live before? Was it rural or urban?",
-        "Ask: Why did you leave? List each reason under a PUSH heading.",
-        "Ask: Why did you choose the new place? List each reason under a PULL heading.",
-        "Ask: What was hard about moving (cost, distance, language, leaving family)? These are intervening obstacles.",
-        "Plot the journey on the map and sort your reasons into social, economic and environmental.",
+        "Ask: where did you grow up? Was it a village (kampong), a small town or a big city? Mark it on the map.",
+        "Ask: when did your family move, and where to? Draw an arrow on the map for each move.",
+        "Ask: what made you leave (push factors) and what attracted you to the new place (pull factors)? Write them in two columns.",
+        "Ask: what was housing, water, electricity and transport like before and after the move?",
+        "Compare with classmates: which push and pull factors come up most often?",
       ],
-      maths: "Migration is usually explained with push factors (problems at the origin), pull factors (attractions of the destination) and obstacles in between. Real decisions mix several of each — and economic reasons (jobs, wages) are often the strongest. This is the same process that is driving the growth of megacities such as Dhaka and Lagos.",
+      science:
+        "Most city growth comes from rural-urban migration and natural increase. Push factors (few jobs, poor services, farming hardship) and pull factors (jobs, schools, hospitals, a better life) explain why people move. Many Singapore families moved from kampongs into HDB flats in the 1960s to 1980s; today the same process is happening very fast in cities such as Dhaka, Lagos and Delhi.",
+      safety: "Be respectful: some memories can be sensitive, so let people skip any question they prefer not to answer.",
     },
   ],
   bonusDiagrams: [
     {
-      title: "The settlement hierarchy",
-      svg: `<svg viewBox="0 0 440 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Settlement hierarchy pyramid: hamlet at the bottom, then village, town, city, conurbation and megacity at the top. Arrows show that population and number of services increase going up, while the number of settlements decreases.">
-  <rect x="0" y="0" width="440" height="280" fill="#ffffff"/>
-  <polygon points="160,20 190,20 300,250 50,250" fill="#e5e7eb" stroke="#1f2937" stroke-width="1.5"/>
-  <line x1="141" y1="58" x2="209" y2="58" stroke="#334155"/>
-  <line x1="123" y1="96" x2="227" y2="96" stroke="#334155"/>
-  <line x1="105" y1="135" x2="245" y2="135" stroke="#334155"/>
-  <line x1="87" y1="173" x2="263" y2="173" stroke="#334155"/>
-  <line x1="69" y1="212" x2="281" y2="212" stroke="#334155"/>
-  <polygon points="160,20 190,20 209,58 141,58" fill="#fecaca" stroke="#1f2937"/>
-  <text x="175" y="44" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#1f2937">Megacity</text>
-  <text x="175" y="82" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">Conurbation</text>
-  <text x="175" y="120" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">City</text>
-  <text x="175" y="158" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">Town</text>
-  <text x="175" y="197" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">Village</text>
-  <text x="175" y="236" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">Hamlet</text>
-  <line x1="330" y1="240" x2="330" y2="35" stroke="#1f2937" stroke-width="2"/>
-  <polygon points="330,25 324,38 336,38" fill="#1f2937"/>
-  <text x="342" y="80" font-family="sans-serif" font-size="11" fill="#1f2937">More people</text>
-  <text x="342" y="96" font-family="sans-serif" font-size="11" fill="#1f2937">More services</text>
-  <text x="342" y="112" font-family="sans-serif" font-size="11" fill="#1f2937">Bigger sphere</text>
-  <text x="342" y="126" font-family="sans-serif" font-size="11" fill="#1f2937">of influence</text>
-  <line x1="20" y1="35" x2="20" y2="240" stroke="#1f2937" stroke-width="2"/>
-  <polygon points="20,250 14,237 26,237" fill="#1f2937"/>
-  <text x="30" y="270" font-family="sans-serif" font-size="11" fill="#1f2937">More settlements of this type</text>
-  <text x="300" y="270" font-family="sans-serif" font-size="11" fill="#1f2937">Megacity = 10 million+</text>
+      title: "Why people move to cities: push and pull factors",
+      svg: `<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rural-urban migration: push factors from the countryside such as few jobs, poor services and crop failure push people out; pull factors in the city such as jobs, schools, hospitals and better pay pull people in">
+  <rect x="0" y="0" width="360" height="200" fill="#ffffff"/>
+  <rect x="10" y="30" width="130" height="150" rx="12" fill="#ecfdf5" stroke="#16a34a" stroke-width="2"/>
+  <text x="75" y="52" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">Countryside</text>
+  <text x="75" y="72" text-anchor="middle" font-size="12" font-weight="bold" fill="#b91c1c">PUSH factors</text>
+  <text x="20" y="94" font-size="11" fill="#334155">• Few jobs, low pay</text>
+  <text x="20" y="112" font-size="11" fill="#334155">• Poor schools, clinics</text>
+  <text x="20" y="130" font-size="11" fill="#334155">• Drought, crop failure</text>
+  <text x="20" y="148" font-size="11" fill="#334155">• Farm machines</text>
+  <text x="20" y="166" font-size="11" fill="#334155">• Conflict</text>
+  <rect x="220" y="30" width="130" height="150" rx="12" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+  <text x="285" y="52" text-anchor="middle" font-size="14" font-weight="bold" fill="#3730a3">City</text>
+  <text x="285" y="72" text-anchor="middle" font-size="12" font-weight="bold" fill="#15803d">PULL factors</text>
+  <text x="230" y="94" font-size="11" fill="#334155">• Factory, office jobs</text>
+  <text x="230" y="112" font-size="11" fill="#334155">• Schools, hospitals</text>
+  <text x="230" y="130" font-size="11" fill="#334155">• Higher wages</text>
+  <text x="230" y="148" font-size="11" fill="#334155">• Water, electricity</text>
+  <text x="230" y="166" font-size="11" fill="#334155">• Family already there</text>
+  <line x1="145" y1="105" x2="210" y2="105" stroke="#f59e0b" stroke-width="5"/>
+  <polygon points="214,105 202,97 202,113" fill="#f59e0b"/>
+  <text x="180" y="95" text-anchor="middle" font-size="11" font-weight="bold" fill="#b45309">migration</text>
+  <text x="180" y="20" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">Rural-urban migration</text>
+  <text x="180" y="138" text-anchor="middle" font-size="11" fill="#475569">+ natural</text>
+  <text x="180" y="152" text-anchor="middle" font-size="11" fill="#475569">increase</text>
+  <text x="180" y="166" text-anchor="middle" font-size="11" fill="#475569">= urban growth</text>
 </svg>`,
-      caption: "Going up the hierarchy, settlements have more people and more (and more specialised) services, but there are fewer of them. There are thousands of hamlets in a country — but only a few dozen megacities in the whole world.",
+      caption:
+        "Cities grow in two ways: people move in from the countryside (rural-urban migration) and city populations have more births than deaths (natural increase). In fast-growing cities such as Lagos and Dhaka, both happen at once.",
     },
     {
-      title: "Urban land-use zones (simplified model)",
-      svg: `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Concentric land-use model of a city: the CBD in the centre, surrounded by the inner city, then the suburbs, then the rural-urban fringe at the edge, with labels describing each zone.">
-  <rect x="0" y="0" width="440" height="300" fill="#ffffff"/>
-  <circle cx="150" cy="150" r="135" fill="#bbf7d0" stroke="#1f2937" stroke-width="1.5"/>
-  <circle cx="150" cy="150" r="100" fill="#e0f2fe" stroke="#1f2937" stroke-width="1.5"/>
-  <circle cx="150" cy="150" r="62" fill="#e5e7eb" stroke="#1f2937" stroke-width="1.5"/>
-  <circle cx="150" cy="150" r="28" fill="#fecaca" stroke="#1f2937" stroke-width="1.5"/>
-  <text x="150" y="154" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#1f2937">CBD</text>
-  <text x="150" y="110" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#1f2937">Inner city</text>
-  <text x="150" y="72" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#1f2937">Suburbs</text>
-  <text x="150" y="35" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#1f2937">Rural–urban fringe</text>
-  <text x="300" y="40" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1f2937">CBD</text>
-  <text x="300" y="54" font-family="sans-serif" font-size="11" fill="#334155">offices, shops, tall buildings,</text>
-  <text x="300" y="67" font-family="sans-serif" font-size="11" fill="#334155">highest land value</text>
-  <text x="300" y="100" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1f2937">Inner city</text>
-  <text x="300" y="114" font-family="sans-serif" font-size="11" fill="#334155">older dense housing,</text>
-  <text x="300" y="127" font-family="sans-serif" font-size="11" fill="#334155">old industry, redevelopment</text>
-  <text x="300" y="160" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1f2937">Suburbs</text>
-  <text x="300" y="174" font-family="sans-serif" font-size="11" fill="#334155">newer housing, green space,</text>
-  <text x="300" y="187" font-family="sans-serif" font-size="11" fill="#334155">commuters</text>
-  <text x="300" y="220" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1f2937">Rural–urban fringe</text>
-  <text x="300" y="234" font-family="sans-serif" font-size="11" fill="#334155">retail parks, farmland,</text>
-  <text x="300" y="247" font-family="sans-serif" font-size="11" fill="#334155">lowest land value</text>
-  <text x="300" y="280" font-family="sans-serif" font-size="11" fill="#334155">Land value falls outwards →</text>
+      title: "The urbanisation S-curve",
+      svg: `<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="An S-shaped curve of percent urban against time with three stages: early stage below about 30 percent, acceleration stage with rapid growth, and terminal stage levelling off above about 75 percent. Example countries: Nigeria in acceleration, UK and Japan in terminal stage">
+  <rect x="0" y="0" width="360" height="200" fill="#ffffff"/>
+  <line x1="40" y1="165" x2="345" y2="165" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="40" y1="165" x2="40" y2="15" stroke="#64748b" stroke-width="1.5"/>
+  <text x="192" y="190" text-anchor="middle" font-size="11" fill="#475569">Time</text>
+  <text x="14" y="90" text-anchor="middle" font-size="11" fill="#475569" transform="rotate(-90 14 90)">% urban</text>
+  <line x1="40" y1="120" x2="345" y2="120" stroke="#e2e8f0" stroke-dasharray="4 3"/>
+  <line x1="40" y1="55" x2="345" y2="55" stroke="#e2e8f0" stroke-dasharray="4 3"/>
+  <path d="M 45 155 C 120 152, 130 140, 160 115 S 220 50, 260 42 S 330 35, 340 34" fill="none" stroke="#4f46e5" stroke-width="3"/>
+  <text x="85" y="122" text-anchor="middle" font-size="11" font-weight="bold" fill="#166534">Early</text>
+  <text x="85" y="135" text-anchor="middle" font-size="11" fill="#334155">mostly rural</text>
+  <text x="200" y="128" text-anchor="middle" font-size="11" font-weight="bold" fill="#b45309">Acceleration</text>
+  <text x="200" y="141" text-anchor="middle" font-size="11" fill="#334155">e.g. Nigeria, India</text>
+  <text x="295" y="68" text-anchor="middle" font-size="11" font-weight="bold" fill="#3730a3">Terminal</text>
+  <text x="295" y="81" text-anchor="middle" font-size="11" fill="#334155">e.g. UK, Japan</text>
+  <text x="44" y="116" font-size="11" fill="#94a3b8">~30%</text>
+  <text x="44" y="51" font-size="11" fill="#94a3b8">~75%</text>
 </svg>`,
-      caption: "A simplified model: land is most valuable at the accessible centre, so the CBD builds upwards; housing gets newer and less dense towards the edge. Real cities (especially planned ones like Singapore) only partly fit it.",
+      caption:
+        "Simplified model: most countries follow an S-shaped path. Urbanisation starts slowly, speeds up as industry and services grow, then levels off once most people already live in towns and cities. Use the Urbanisation Curves widget to see which stage each country is in.",
     },
   ],
-  history: {
-    title: "John Snow and the Broad Street pump",
-    story: "In 1854 cholera swept through Soho, a crowded district of London — then the biggest city in the world. Most doctors believed disease spread through 'bad air'. Dr John Snow disagreed. He walked the streets, asked where victims had collected their water, and marked every death on a map. The deaths clustered around one public water pump on Broad Street. Snow persuaded the local council to remove the pump's handle, and the outbreak, which was already declining, faded away. His map was strong evidence that cholera spread through dirty water, not air. Over the following years, his ideas — together with the 'Great Stink' of 1858 — helped push London to build a modern sewer system, and his map became one of the founding stories of both epidemiology and geographical mapping — and a reminder that crowded, fast-growing cities need clean water and sanitation.",
-  },
+  interactives: ["cities-megacities:UrbanisationCurves", "cities-megacities:MegacityRace"],
 };

@@ -1,393 +1,327 @@
 "use client";
-// Interactive explorables for "Sustainable Cities of the Future".
-import { useState } from "react";
-import { WidgetFrame, Slider, Segmented, Readout, type WidgetDef } from "./kit";
 
-// ---------------------------------------------------------------------------
-// 1. Four National Taps mixer
-// ---------------------------------------------------------------------------
+import { useMemo, useState } from "react";
+import { Choice, Frame, Slider, Stat } from "./kit";
 
-type TapKey = "catchment" | "imported" | "newater" | "desal";
-type Scenario = "normal" | "dry" | "after2061" | "worst";
+/* ------------------------------------------------------------------ */
+/* 1. Eco-City Designer: land, energy, transport, water → 3 pillars    */
+/* ------------------------------------------------------------------ */
 
-interface Tap {
-  key: TapKey;
-  name: string;
-  /** Rough, illustrative energy to supply 1 m³ (kWh). */
-  kwh: number;
-  colour: string;
-  weatherProof: boolean;
-}
+type Density = "low" | "mid" | "high";
+type Transport = "car" | "mrt" | "cycle";
 
-const TAPS: Tap[] = [
-  { key: "catchment", name: "Local catchment", kwh: 0.3, colour: "#38bdf8", weatherProof: false },
-  { key: "imported", name: "Imported (Johor)", kwh: 0.5, colour: "#a3e635", weatherProof: false },
-  { key: "newater", name: "NEWater", kwh: 1.0, colour: "#818cf8", weatherProof: true },
-  { key: "desal", name: "Desalination", kwh: 3.5, colour: "#f59e0b", weatherProof: true },
-];
-
-/** Fraction of each tap's planned share that is actually available in a scenario (simplified model). */
-const AVAIL: Record<Scenario, Record<TapKey, number>> = {
-  normal: { catchment: 1, imported: 1, newater: 1, desal: 1 },
-  dry: { catchment: 0.4, imported: 0.7, newater: 1, desal: 1 },
-  after2061: { catchment: 1, imported: 0, newater: 1, desal: 1 },
-  worst: { catchment: 0.4, imported: 0, newater: 1, desal: 1 },
+const DENSITY: Record<Density, { env: number; econ: number; soc: number; homes: number; label: string }> = {
+  low: { env: -8, econ: -3, soc: 2, homes: 0.5, label: "Low-rise houses" },
+  mid: { env: 3, econ: 2, soc: 6, homes: 1, label: "Mid-rise (6–12 storeys)" },
+  high: { env: 6, econ: 3, soc: 2, homes: 1.6, label: "High-rise (HDB-style)" },
+};
+const TRANSPORT: Record<Transport, { env: number; econ: number; soc: number; label: string }> = {
+  car: { env: -15, econ: 2, soc: -6, label: "Cars & roads" },
+  mrt: { env: 8, econ: 4, soc: 8, label: "MRT/BRT spine" },
+  cycle: { env: 14, econ: 3, soc: 12, label: "MRT/BRT + cycling" },
 };
 
-const SCENARIO_TEXT: Record<Scenario, string> = {
-  normal: "A normal year: every tap delivers what was planned.",
-  dry: "A long dry spell: reservoirs in Singapore and Johor run low (catchment 40%, imported 70% of normal in this model).",
-  after2061: "After 2061: the water agreement with Malaysia ends, so in this model imported water drops to zero.",
-  worst: "Worst case: a dry spell AND no imported water.",
-};
+const clamp = (v: number) => Math.max(0, Math.min(100, Math.round(v)));
 
-/** NEWater is made from used water, and some water is always lost, so it cannot supply everything. */
-const NEWATER_CAP = 60;
+/** Spread k "yes" items evenly through n slots (deterministic). */
+const spread = (idx: number, k: number, n: number) => n > 0 && Math.floor(((idx + 1) * k) / n) > Math.floor((idx * k) / n);
 
-function TapsMixer() {
-  const [w, setW] = useState<Record<TapKey, number>>({ catchment: 30, imported: 30, newater: 30, desal: 10 });
-  const [scenario, setScenario] = useState<Scenario>("normal");
+export function EcoCityDesigner() {
+  const [housing, setHousing] = useState(40);
+  const [green, setGreen] = useState(20);
+  const [industry, setIndustry] = useState(15);
+  const [density, setDensity] = useState<Density>("high");
+  const [solar, setSolar] = useState(20);
+  const [coal, setCoal] = useState(20);
+  const [transport, setTransport] = useState<Transport>("car");
+  const [newater, setNewater] = useState(false);
+  const [desal, setDesal] = useState(false);
+  const [recycle, setRecycle] = useState(30);
 
-  const total = TAPS.reduce((a, t) => a + w[t.key], 0);
-  const share = (k: TapKey) => (total === 0 ? 0 : (w[k] / total) * 100);
-  const newaterShare = share("newater");
-  const newaterUsable = Math.min(newaterShare, NEWATER_CAP);
+  const commerce = 100 - housing - green - industry;
+  const gas = 100 - solar - coal;
 
-  const delivered = TAPS.map((t) => {
-    const planned = t.key === "newater" ? newaterUsable : share(t.key);
-    return { t, planned: share(t.key), got: planned * AVAIL[scenario][t.key] };
-  });
-  const met = Math.min(100, delivered.reduce((a, d) => a + d.got, 0));
-  const energy = TAPS.reduce((a, t) => a + (share(t.key) / 100) * t.kwh, 0);
-  const proof = TAPS.filter((t) => t.weatherProof).reduce((a, t) => a + share(t.key), 0);
+  const r = useMemo(() => {
+    const d = DENSITY[density], t = TRANSPORT[transport];
+    const homes = housing * d.homes; // index: 40 = enough homes for the planned population
+    const water = newater && desal ? 10 : newater || desal ? 6 : -8;
+    const env = 50 + 0.8 * (green - 15) - 0.9 * industry + 0.35 * solar - 0.45 * coal + t.env + d.env
+      + (newater ? 4 : 0) - (desal ? 4 : 0) + 0.25 * (recycle - 30);
+    const econ = 45 + 1.4 * industry - 0.04 * industry * industry + 0.5 * (commerce - 20) - 0.25 * Math.max(0, solar - 25)
+      + 0.08 * coal + t.econ + d.econ - (newater ? 2 : 0) - (desal ? 5 : 0) + (newater || desal ? 6 : 0)
+      - 0.08 * (recycle - 30) - 0.3 * Math.max(0, green - 30) - (homes < 40 ? 0.3 * (40 - homes) : 0);
+    const soc = 45 + 0.6 * (Math.min(green, 35) - 15) - 0.5 * industry - 0.15 * coal
+      + (homes < 40 ? -0.8 * (40 - homes) : Math.min(10, 0.2 * (homes - 40))) + t.soc + d.soc + water;
+    return { env: clamp(env), econ: clamp(econ), soc: clamp(soc), homes };
+  }, [housing, green, industry, density, solar, coal, transport, newater, desal, recycle, commerce]);
 
-  const pct = (x: number) => `${Math.round(x)}%`;
-  const W = 440;
-  const barW = W - 40;
+  const overall = Math.round((r.env + r.econ + r.soc) / 3);
+  const pillars = [
+    { name: "Social", v: r.soc, color: "#f59e0b" },
+    { name: "Economic", v: r.econ, color: "#0ea5e9" },
+    { name: "Environmental", v: r.env, color: "#10b981" },
+  ];
+  const weakest = [...pillars].sort((a, b) => a.v - b.v)[0];
 
-  const planSegments = TAPS.reduce<{ key: string; x: number; width: number; colour: string }[]>((acc, t) => {
-    const prevEnd = acc.length > 0 ? acc[acc.length - 1].x + acc[acc.length - 1].width : 20;
-    const width = (share(t.key) / 100) * barW;
-    return [...acc, { key: t.key, x: prevEnd, width, colour: t.colour }];
-  }, []);
-  const planBars = planSegments.map((s) => (
-    <rect key={s.key} x={s.x} y={40} width={s.width} height={34} fill={s.colour} className="stroke-ink" strokeWidth={0.5} />
-  ));
-  const gotSegments = delivered.reduce<{ key: string; x: number; width: number; colour: string }[]>((acc, d) => {
-    const prevEnd = acc.length > 0 ? acc[acc.length - 1].x + acc[acc.length - 1].width : 20;
-    const width = (d.got / 100) * barW;
-    return [...acc, { key: d.t.key, x: prevEnd, width, colour: d.t.colour }];
-  }, []);
-  const gotBars = gotSegments.map((s) => (
-    <rect key={s.key} x={s.x} y={118} width={s.width} height={34} fill={s.colour} className="stroke-ink" strokeWidth={0.5} />
-  ));
+  const trades: string[] = [];
+  if (industry >= 20) trades.push("Lots of industry: jobs and taxes (economic ↑) but air and noise pollution (environmental ↓, social ↓). Keep it downwind, buffered by green space.");
+  if (industry <= 5) trades.push("Almost no industry: clean air, but few local jobs, so residents must commute out to work (economic ↓).");
+  if (green >= 35) trades.push("Lots of green space: cooler, healthier and soaks up floodwater (environmental & social ↑), but less land for homes and jobs (economic ↓).");
+  if (green < 12) trades.push("Little green space: a stronger urban heat island and more flash floods.");
+  if (r.homes < 40) trades.push("Not enough homes for the population: housing becomes scarce and unaffordable (social ↓). Build higher or zone more housing.");
+  if (density === "low") trades.push("Low-rise houses spread the city out (urban sprawl): more land used, longer trips, more car use.");
+  if (coal >= 30) trades.push("Coal is cheap, but it is the dirtiest fuel: the most CO₂ and air pollution per unit of electricity.");
+  if (solar >= 40) trades.push("High solar: clean power, but it needs lots of roof and land space plus batteries for night and cloudy days (cost ↑).");
+  if (transport === "car") trades.push("Car-based transport: flexible, but brings congestion, emissions and leaves out people who cannot drive.");
+  if (transport === "cycle") trades.push("MRT + cycling: low carbon and healthy, but in Singapore's heat the lanes need shade and safe crossings.");
+  if (!newater && !desal) trades.push("No water recycling or desalination: the city depends on rain and imports, which is risky in a drought.");
+  if (desal) trades.push("Desalination makes fresh water from the sea whatever the weather, but uses a lot of energy (environmental ↓, cost ↑).");
+  if (recycle >= 60) trades.push("High recycling: less waste to landfill, but sorting and collection cost money and need everyone to join in.");
+  if (recycle < 25) trades.push("Low recycling: more waste burned or landfilled. Singapore's only landfill (Semakau) may be full by about 2035.");
 
-  const verdict =
-    total === 0
-      ? "Turn on at least one tap!"
-      : met >= 99.5
-        ? "Taps keep running: 100% of demand is met in this scenario."
-        : met >= 85
-          ? `Close: ${pct(met)} of demand is met — water restrictions would be needed.`
-          : `Shortage: only ${pct(met)} of demand is met. Singapore's planners avoid relying on taps that fail together.`;
+  // ---- city grid: 10 × 10 cells, 1 cell = 1% of the land ----
+  const cells = useMemo(() => {
+    const all = Array.from({ length: 100 }, (_, k) => ({ r: Math.floor(k / 10), c: k % 10 }));
+    const dc = (p: { r: number; c: number }) => Math.hypot(p.r - 4.5, p.c - 4.5) + (p.r * 10 + p.c) * 1e-4;
+    const byCentre = [...all].sort((a, b) => dc(a) - dc(b));
+    const kind: string[] = Array(100).fill("home");
+    const com = byCentre.slice(0, commerce);
+    com.forEach((p) => (kind[p.r * 10 + p.c] = "com"));
+    const rest = byCentre.slice(commerce);
+    const dCorner = (p: { r: number; c: number }) => Math.hypot(p.r - 9, p.c - 9) + p.c * 1e-4;
+    const ind = [...rest].sort((a, b) => dCorner(a) - dCorner(b)).slice(0, industry);
+    ind.forEach((p) => (kind[p.r * 10 + p.c] = "ind"));
+    const left = rest.filter((p) => kind[p.r * 10 + p.c] === "home");
+    left.forEach((p, k) => { if (spread(k, green, left.length)) kind[p.r * 10 + p.c] = "green"; });
+    return all.map((p, k) => ({ ...p, kind: kind[k] }));
+  }, [commerce, industry, green]);
+
+  const S = 24, X0 = 8, Y0 = 34;
+  let homeIdx = 0;
+  const smoke = coal >= 30 ? "#475569" : coal >= 10 ? "#94a3b8" : "#e2e8f0";
+  const legend: [string, string][] = [["#fde68a", "Homes"], ["#bbf7d0", "Green space"], ["#cbd5e1", "Industry"], ["#c7d2fe", "Shops & offices"]];
 
   return (
-    <WidgetFrame
-      title="Four National Taps mixer"
-      tryThis={[
-        "Set catchment and imported water high, then switch to **Worst case**. What happens — and why?",
-        "Find a mix that meets 100% of demand in the **worst case**. What is the LOWEST energy (kWh per m³) you can manage?",
-        "Push NEWater to 100%. Why can't a city run on recycled water alone?",
-        "Desalination is drought-proof. Why doesn't Singapore just use it for everything?",
-      ]}
-      caption={
-        <>
-          <p>
-            <strong>{SCENARIO_TEXT[scenario]}</strong> {verdict}
-          </p>
-          <p className="mt-2">
-            Weather-proof taps (NEWater + desalination) make up <strong>{pct(proof)}</strong> of your plan. Rain-fed taps are cheap
-            and low-energy but fail together in a drought; desalination never runs dry but uses the most energy (more cost and
-            more carbon). That trade-off — resilience versus energy — is why Singapore uses <em>four</em> taps, not one.
-            {newaterShare > NEWATER_CAP
-              ? ` NEWater is made from used water and some water is always lost, so in this model it can supply at most ${NEWATER_CAP}% — the rest of your NEWater plan cannot be delivered.`
-              : ""}
-          </p>
-          <p className="mt-2 text-xs text-ink-2">
-            Simplified model with rough, illustrative energy values (kWh per m³): catchment 0.3, imported 0.5, NEWater 1.0,
-            desalination 3.5. Real figures vary by plant and year.
-          </p>
-        </>
-      }
+    <Frame
+      title="Eco-City Designer: plan a city for the Eco City competition"
+      caption={<p><b>Notice:</b> your weakest pillar is <b>{weakest.name}</b> ({weakest.v}/100). A sustainable city needs all three pillars, now and for future generations, so a design that scores 90 on one pillar and 30 on another would lose to a balanced one. <i>Simplified scoring model: the numbers show the direction of each trade-off, not exact real values.</i></p>}
     >
-      <div className="grid gap-4 sm:grid-cols-2">
+      <p className="mb-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900"><b>Predict first:</b> switch transport from cars to MRT/BRT + cycling. Which pillar do you think rises most, and does any pillar lose?</p>
+      <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-3">
-          {TAPS.map((t) => (
-            <Slider
-              key={t.key}
-              label={
-                <span className="inline-flex items-center gap-2">
-                  <span aria-hidden className="inline-block h-3 w-3 rounded-sm" style={{ background: t.colour }} />
-                  {t.name}
-                </span>
-              }
-              value={w[t.key]}
-              min={0}
-              max={100}
-              step={5}
-              onChange={(v) => setW((p) => ({ ...p, [t.key]: v }))}
-              format={() => pct(share(t.key))}
-            />
-          ))}
-          <p className="text-xs text-ink-2">Sliders set each tap&apos;s weight; shares are scaled so the plan always adds up to 100%.</p>
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-500">1. Land use (shops & offices get the rest: {commerce}%)</p>
+          <Slider label="Housing" min={15} max={60} value={housing} onChange={(v) => setHousing(Math.min(v, 95 - green - industry))} suffix="%" color="#d97706" />
+          <Slider label="Green space & parks" min={5} max={50} value={green} onChange={(v) => setGreen(Math.min(v, 95 - housing - industry))} suffix="%" color="#16a34a" />
+          <Slider label="Industry" min={0} max={30} value={industry} onChange={(v) => setIndustry(Math.min(v, 95 - housing - green))} suffix="%" color="#64748b" />
+          <Choice label="Housing density" value={density} onChange={setDensity} options={(Object.keys(DENSITY) as Density[]).map((id) => ({ id, label: DENSITY[id].label }))} />
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-500">2. Electricity mix (gas makes up the rest: {gas}%)</p>
+          <Slider label="Solar" min={0} max={60} value={solar} onChange={(v) => { setSolar(v); setCoal((c) => Math.min(c, 100 - v)); }} suffix="%" color="#ca8a04" />
+          <Slider label="Coal" min={0} max={60} value={coal} onChange={(v) => setCoal(Math.min(v, 100 - solar))} suffix="%" color="#475569" />
+          <p className="text-xs font-bold uppercase tracking-wide text-slate-500">3. Transport, water & waste</p>
+          <Choice value={transport} onChange={setTransport} options={(Object.keys(TRANSPORT) as Transport[]).map((id) => ({ id, label: TRANSPORT[id].label }))} />
+          <div className="flex flex-wrap gap-2 text-sm">
+            {([["NEWater-style recycling", newater, setNewater], ["Desalination plant", desal, setDesal]] as const).map(([lbl, on, set]) => (
+              <button key={lbl} type="button" aria-pressed={on} onClick={() => set(!on)} className={`rounded-full px-3 py-1.5 font-semibold ring-1 ${on ? "bg-sky-600 text-white ring-sky-600" : "bg-white text-slate-700 ring-slate-200"}`}>{on ? "✓ " : "+ "}{lbl}</button>
+            ))}
+          </div>
+          <Slider label="Recycling rate" min={10} max={80} value={recycle} onChange={setRecycle} suffix="%" color="#059669" />
         </div>
-        <div className="space-y-3">
-          <Segmented<Scenario>
-            label="Scenario"
-            value={scenario}
-            onChange={setScenario}
-            options={[
-              { value: "normal", label: "Normal year" },
-              { value: "dry", label: "Dry spell" },
-              { value: "after2061", label: "After 2061" },
-              { value: "worst", label: "Worst case" },
-            ]}
-          />
-          <div className="grid grid-cols-3 gap-2">
-            <Readout label="Demand met" value={pct(met)} tone={met >= 99.5 ? "good" : "bad"} />
-            <Readout label="kWh per m³" value={energy.toFixed(2)} tone={energy <= 1.5 ? "good" : energy <= 2.2 ? "ink" : "bad"} />
-            <Readout label="Weather-proof" value={pct(proof)} tone="ink" />
+
+        <div>
+          <svg viewBox="0 0 360 284" className="w-full" role="img" aria-label={`City map: ${housing}% homes, ${green}% green space, ${industry}% industry, ${commerce}% shops and offices, transport ${TRANSPORT[transport].label}`}>
+            <rect x={X0} y={8} width={S * 10} height={22} fill="#bae6fd" />
+            <text x={X0 + 6} y={23} fontSize="11" fill="#0369a1">Sea</text>
+            {newater && <g><rect x={X0 + 40} y={11} width={64} height={16} rx={3} fill="#7c3aed" /><text x={X0 + 72} y={23} fontSize="11" fill="#fff" textAnchor="middle">NEWater</text></g>}
+            {desal && <g><rect x={X0 + 112} y={11} width={70} height={16} rx={3} fill="#0284c7" /><text x={X0 + 147} y={23} fontSize="11" fill="#fff" textAnchor="middle">Desal plant</text></g>}
+            {cells.map((p) => {
+              const x = X0 + p.c * S, y = Y0 + p.r * S;
+              if (p.kind === "green") return <g key={`${p.r}-${p.c}`}><rect x={x} y={y} width={S} height={S} fill="#bbf7d0" stroke="#fff" /><circle cx={x + 12} cy={y + 11} r={6} fill="#16a34a" /><rect x={x + 11} y={y + 16} width={2} height={5} fill="#78350f" /></g>;
+              if (p.kind === "ind") return <g key={`${p.r}-${p.c}`}><rect x={x} y={y} width={S} height={S} fill="#cbd5e1" stroke="#fff" /><rect x={x + 4} y={y + 12} width={16} height={9} fill="#64748b" /><rect x={x + 15} y={y + 5} width={3} height={8} fill="#475569" /><circle cx={x + 18} cy={y + 4} r={3} fill={smoke} /></g>;
+              if (p.kind === "com") return <g key={`${p.r}-${p.c}`}><rect x={x} y={y} width={S} height={S} fill="#c7d2fe" stroke="#fff" /><rect x={x + 6} y={y + 5} width={12} height={16} fill="#6366f1" /></g>;
+              const k = homeIdx++;
+              const panel = spread(k, solar, 100) || (solar >= 50 && k % 2 === 0);
+              const tall = density === "high" ? 17 : density === "mid" ? 11 : 6;
+              return (
+                <g key={`${p.r}-${p.c}`}>
+                  <rect x={x} y={y} width={S} height={S} fill="#fde68a" stroke="#fff" />
+                  {density === "low"
+                    ? <><rect x={x + 3} y={y + 14} width={7} height={6} fill="#d97706" /><rect x={x + 14} y={y + 14} width={7} height={6} fill="#d97706" /></>
+                    : <><rect x={x + 4} y={y + 21 - tall} width={7} height={tall} fill="#d97706" /><rect x={x + 13} y={y + 21 - tall + (density === "high" ? 3 : 0)} width={7} height={tall - (density === "high" ? 3 : 0)} fill="#b45309" /></>}
+                  {panel && <rect x={x + 3} y={y + 2} width={10} height={4} fill="#1e3a8a" />}
+                </g>
+              );
+            })}
+            {transport === "car" && [3, 6].map((n) => (
+              <g key={n} opacity={0.85}>
+                <rect x={X0} y={Y0 + n * S - 2} width={S * 10} height={4} fill="#475569" />
+                <rect x={X0 + n * S - 2} y={Y0} width={4} height={S * 10} fill="#475569" />
+              </g>
+            ))}
+            {transport !== "car" && (
+              <g>
+                <line x1={X0} y1={Y0 + 5 * S} x2={X0 + 10 * S} y2={Y0 + 5 * S} stroke="#dc2626" strokeWidth={4} />
+                <line x1={X0 + 5 * S} y1={Y0} x2={X0 + 5 * S} y2={Y0 + 10 * S} stroke="#dc2626" strokeWidth={4} />
+                {[1.5, 5, 8.5].flatMap((a) => [[a, 5], [5, a]]).map(([cx, cy], i) => <circle key={i} cx={X0 + cx * S} cy={Y0 + cy * S} r={4} fill="#fff" stroke="#dc2626" strokeWidth={2} />)}
+              </g>
+            )}
+            {transport === "cycle" && [2, 8].map((n) => (
+              <g key={n}>
+                <line x1={X0} y1={Y0 + n * S} x2={X0 + 10 * S} y2={Y0 + n * S} stroke="#15803d" strokeWidth={2.5} strokeDasharray="5 3" />
+                <line x1={X0 + n * S} y1={Y0} x2={X0 + n * S} y2={Y0 + 10 * S} stroke="#15803d" strokeWidth={2.5} strokeDasharray="5 3" />
+              </g>
+            ))}
+            <text x={X0 + 10 * S - 2} y={Y0 + 10 * S + 13} fontSize="11" textAnchor="end" fill="#64748b">industry kept in one corner, downwind</text>
+            {legend.map(([c, l], i) => (
+              <g key={l}><rect x={256} y={40 + i * 22} width={14} height={14} fill={c} /><text x={274} y={51 + i * 22} fontSize="11" fill="#334155">{l}</text></g>
+            ))}
+            <g><line x1={256} x2={270} y1={135} y2={135} stroke={transport === "car" ? "#475569" : "#dc2626"} strokeWidth={4} /><text x={274} y={139} fontSize="11" fill="#334155">{transport === "car" ? "Main roads" : "MRT/BRT line"}</text></g>
+            {transport === "cycle" && <g><line x1={256} x2={270} y1={157} y2={157} stroke="#15803d" strokeWidth={2.5} strokeDasharray="5 3" /><text x={274} y={161} fontSize="11" fill="#334155">Cycle lanes</text></g>}
+            <g><rect x={256} y={172} width={14} height={6} fill="#1e3a8a" /><text x={274} y={179} fontSize="11" fill="#334155">Solar roofs</text></g>
+            <text x={256} y={204} fontSize="11" fill="#334155">♻ Recycling {recycle}%</text>
+            <text x={256} y={222} fontSize="11" fill="#334155">⚡ {solar}% solar</text>
+            <text x={256} y={238} fontSize="11" fill="#334155">{gas}% gas, {coal}% coal</text>
+          </svg>
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <Stat label="Overall score" value={`${overall}/100`} tone={overall >= 65 ? "emerald" : overall >= 50 ? "amber" : "rose"} />
+            <Stat label="Homes vs need" value={r.homes >= 40 ? "Enough" : "Short"} tone={r.homes >= 40 ? "sky" : "rose"} />
+          </div>
+          <div className="mt-2 space-y-1.5">
+            {pillars.map((p) => (
+              <div key={p.name} className="text-sm">
+                <div className="flex justify-between font-semibold text-slate-700"><span>{p.name}</span><span className="tabular-nums">{p.v}</span></div>
+                <div className="h-2.5 rounded-full bg-slate-200"><div className="h-2.5 rounded-full" style={{ width: `${p.v}%`, background: p.color }} /></div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-      <svg
-        viewBox={`0 0 ${W} 190`}
-        className="mt-4 h-auto w-full"
-        role="img"
-        aria-label={`Planned water mix: ${TAPS.map((t) => `${t.name} ${pct(share(t.key))}`).join(", ")}. Delivered in this scenario: ${pct(met)} of demand.`}
-      >
-        <text x={20} y={30} fontSize={13} className="fill-ink" fontWeight={700}>Planned supply (100% of demand)</text>
-        <rect x={20} y={40} width={barW} height={34} className="fill-surface-2 stroke-line" />
-        {planBars}
-        <text x={20} y={108} fontSize={13} className="fill-ink" fontWeight={700}>Actually delivered in this scenario</text>
-        <rect x={20} y={118} width={barW} height={34} className="fill-bad-soft stroke-line" />
-        {gotBars}
-        {met < 99.5 ? (
-          <text x={20 + (met / 100) * barW + 6} y={140} fontSize={12} className="fill-bad" fontWeight={700}>
-            shortfall {pct(100 - met)}
-          </text>
-        ) : null}
-        <line x1={20 + barW} x2={20 + barW} y1={34} y2={160} className="stroke-ink" strokeDasharray="4 3" />
-        <text x={20 + barW} y={176} fontSize={11} textAnchor="end" className="fill-ink-2">100% of demand</text>
-      </svg>
-    </WidgetFrame>
+      <div className="mt-3 rounded-lg bg-white p-3 ring-1 ring-slate-200">
+        <p className="mb-1 text-sm font-bold text-slate-700">Trade-offs in your design</p>
+        <ul className="list-disc space-y-1 pl-5 text-sm text-slate-600">
+          {(trades.length ? trades.slice(0, 4) : ["A balanced design: no big trade-off warnings. Can you explain each choice to the judges?"]).map((t) => <li key={t}>{t}</li>)}
+        </ul>
+      </div>
+    </Frame>
   );
 }
 
-// ---------------------------------------------------------------------------
-// 2. Eco-city designer
-// ---------------------------------------------------------------------------
+/* ------------------------------------------------------------------ */
+/* 2. Ecological Footprint Calculator: lifestyle → gha → "Earths"      */
+/* ------------------------------------------------------------------ */
 
-interface Choice {
-  id: string;
-  label: string;
-  /** Social, economic, environmental scores 0–3. */
-  s: number;
-  ec: number;
-  en: number;
-  cost: number;
-  why: string;
-}
-
-interface Category {
-  key: string;
-  name: string;
-  emoji: string;
-  options: Choice[];
-}
-
-const CATS: Category[] = [
-  {
-    key: "transport", name: "Transport", emoji: "🚇",
-    options: [
-      { id: "car", label: "Wide roads + car parks", s: 1, ec: 2, en: 0, cost: 1, why: "Car-based roads mean congestion, air pollution and high emissions; people without cars are left out." },
-      { id: "brt", label: "BRT + cycle lanes", s: 2, ec: 2, en: 2, cost: 2, why: "Bus rapid transit (as in Curitiba) is cheap to build and moves many people with low emissions per person." },
-      { id: "mrt", label: "MRT + car-free centre", s: 3, ec: 3, en: 3, cost: 4, why: "Rail plus a car-free centre (like Tengah or Vauban) is clean, fast and safe — but expensive to build." },
-    ],
-  },
-  {
-    key: "energy", name: "Energy", emoji: "⚡",
-    options: [
-      { id: "gas", label: "Gas power station", s: 1, ec: 2, en: 0, cost: 1, why: "Gas is reliable and cheap to start, but burning a fossil fuel releases CO₂." },
-      { id: "wte", label: "Waste-to-energy + some solar", s: 2, ec: 2, en: 2, cost: 2, why: "Burning rubbish for power shrinks landfill, and solar adds clean energy." },
-      { id: "solar", label: "Rooftop & floating solar", s: 2, ec: 2, en: 3, cost: 3, why: "Solar panels on roofs and reservoirs make renewable electricity with no emissions while generating." },
-    ],
-  },
-  {
-    key: "housing", name: "Housing", emoji: "🏘️",
-    options: [
-      { id: "detached", label: "Low-density detached houses", s: 1, ec: 1, en: 0, cost: 2, why: "Spread-out houses cause urban sprawl: more land, longer trips and car dependence." },
-      { id: "mixed", label: "Mixed-income high-rise with shops below", s: 3, ec: 2, en: 2, cost: 3, why: "Dense, mixed-use, mixed-income blocks (like HDB towns) save land and keep shops and services close." },
-      { id: "luxury", label: "Luxury towers only", s: 0, ec: 3, en: 1, cost: 3, why: "Luxury towers earn money but price out ordinary families — not socially sustainable." },
-    ],
-  },
-  {
-    key: "water", name: "Water", emoji: "💧",
-    options: [
-      { id: "mains", label: "Mains water only", s: 1, ec: 1, en: 0, cost: 1, why: "Relying on one source wastes rain and leaves the city exposed in a drought." },
-      { id: "harvest", label: "Rainwater harvesting + greywater reuse", s: 2, ec: 2, en: 3, cost: 2, why: "Catching rain and reusing greywater for toilets cuts demand on reservoirs." },
-      { id: "desal", label: "Build a desalination plant", s: 2, ec: 1, en: 1, cost: 3, why: "Drought-proof, but desalination is costly and energy-hungry." },
-    ],
-  },
-  {
-    key: "waste", name: "Waste", emoji: "♻️",
-    options: [
-      { id: "landfill", label: "Send it all to landfill", s: 0, ec: 1, en: 0, cost: 1, why: "Landfill uses up land and can leak methane and polluted liquid." },
-      { id: "incin", label: "Incinerate everything", s: 1, ec: 2, en: 1, cost: 2, why: "Incineration shrinks waste and can make electricity, but still releases CO₂." },
-      { id: "recycle", label: "Recycling + composting", s: 2, ec: 2, en: 3, cost: 2, why: "Recycling and composting save resources and create local jobs." },
-    ],
-  },
-  {
-    key: "green", name: "Green space", emoji: "🌳",
-    options: [
-      { id: "none", label: "None — build on every plot", s: 0, ec: 2, en: 0, cost: 0, why: "Building on every plot earns more but makes the city hotter and unhealthy, with no habitats." },
-      { id: "pocket", label: "Small pocket parks", s: 2, ec: 1, en: 1, cost: 1, why: "Pocket parks give people somewhere to relax and cool down." },
-      { id: "corridor", label: "Green corridors + wetland park", s: 3, ec: 2, en: 3, cost: 3, why: "Linked green corridors (like Singapore's park connectors) support wildlife, cool the city and soak up floods." },
-    ],
-  },
+const BIOCAP = 1.6; // Earth's biocapacity, global hectares per person (approx.)
+const DIET = { vegan: { v: 0.7, l: "Vegan" }, veg: { v: 0.9, l: "Vegetarian" }, some: { v: 1.3, l: "Some meat" }, daily: { v: 1.8, l: "Meat every day" } };
+const HOME = { hdb3: { v: 0.5, l: "HDB 3-room" }, hdb5: { v: 0.8, l: "HDB 5-room" }, condo: { v: 1.1, l: "Condo" }, landed: { v: 1.8, l: "Landed house" } };
+const TRAVEL = { walk: { v: 0.05, l: "Walk / cycle" }, bus: { v: 0.25, l: "Bus & MRT" }, car: { v: 1.0, l: "Family car" } };
+const WASTE = { low: { v: 0.4, l: "Low: buy little, recycle" }, avg: { v: 0.7, l: "Average" }, high: { v: 1.1, l: "High: lots of new stuff" } };
+const SHARED = 1.5; // roads, schools, hospitals, government, imported goods: shared by everyone in Singapore
+const COMPARE = [
+  { l: "India", v: 1.0 }, { l: "World avg", v: 2.6 }, { l: "Singapore", v: 5.5 }, { l: "USA", v: 7.5 },
 ];
 
-const BUDGET = 14;
-const MAX = CATS.length * 3;
+function earthWedge(cx: number, cy: number, r: number, f: number) {
+  if (f >= 0.999) return null;
+  const a = 2 * Math.PI * f - Math.PI / 2;
+  const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+  return `M${cx},${cy} L${cx},${cy - r} A${r},${r} 0 ${f > 0.5 ? 1 : 0} 1 ${x.toFixed(2)},${y.toFixed(2)} Z`;
+}
 
-function EcoCityDesigner() {
-  const [pick, setPick] = useState<Record<string, string>>(() =>
-    Object.fromEntries(CATS.map((c) => [c.key, c.options[0].id])),
-  );
+export function FootprintCalculator() {
+  const [diet, setDiet] = useState<keyof typeof DIET>("some");
+  const [home, setHome] = useState<keyof typeof HOME>("hdb5");
+  const [travel, setTravel] = useState<keyof typeof TRAVEL>("bus");
+  const [waste, setWaste] = useState<keyof typeof WASTE>("avg");
+  const [shortF, setShortF] = useState(1);
+  const [longF, setLongF] = useState(0);
+  const [guess, setGuess] = useState<"" | "1" | "2" | "3-4" | "5+">("");
 
-  const chosen = CATS.map((c) => c.options.find((o) => o.id === pick[c.key]) ?? c.options[0]);
-  const S = chosen.reduce((a, o) => a + o.s, 0);
-  const Ec = chosen.reduce((a, o) => a + o.ec, 0);
-  const En = chosen.reduce((a, o) => a + o.en, 0);
-  const cost = chosen.reduce((a, o) => a + o.cost, 0);
-  const over = cost > BUDGET;
-  const pct = (v: number) => Math.round((v / MAX) * 100);
-  const pillars = [
-    { name: "Social", v: S },
-    { name: "Economic", v: Ec },
-    { name: "Environmental", v: En },
+  // Simplified model. 1 return short-haul flight (e.g. SG–Bangkok) ≈ 0.5 t CO₂ ≈ 0.15 gha;
+  // 1 return long-haul flight (e.g. SG–London) ≈ 2.5–3 t CO₂ ≈ 0.8 gha.
+  const parts = [
+    { l: "Food", v: DIET[diet].v, c: "#f59e0b" },
+    { l: "Home energy", v: HOME[home].v, c: "#ef4444" },
+    { l: "Transport", v: TRAVEL[travel].v, c: "#6366f1" },
+    { l: "Flights", v: shortF * 0.15 + longF * 0.8, c: "#0ea5e9" },
+    { l: "Stuff & waste", v: WASTE[waste].v, c: "#a855f7" },
+    { l: "Shared services", v: SHARED, c: "#94a3b8" },
   ];
-  const weakest = pillars.reduce((a, b) => (b.v < a.v ? b : a));
-  const minPct = pct(weakest.v);
+  const total = parts.reduce((s, p) => s + p.v, 0);
+  const earths = total / BIOCAP;
+  const biggest = parts.slice(0, 5).sort((a, b) => b.v - a.v)[0];
 
-  const verdict = over
-    ? `Over budget by ${cost - BUDGET} credit${cost - BUDGET === 1 ? "" : "s"} — the council can't afford this plan. Make a trade-off.`
-    : minPct >= 67
-      ? "A balanced eco-city: every pillar scores at least two-thirds. The judges would be impressed."
-      : `Weakest pillar: ${weakest.name} (${minPct}%). A city is only sustainable if it works for people, the economy AND the environment.`;
+  const bars = [{ l: "You", v: total }, ...COMPARE];
+  const W = 360, L = 34, B = 168, T = 18;
+  const max = Math.max(9, Math.ceil(total));
+  const yy = (v: number) => B - (v / max) * (B - T);
+  const bw = 46, gap = (W - L - 8 - bw * bars.length) / bars.length;
 
-  const W = 440;
-  const bx = 120;
-  const bw = W - bx - 50;
+  const nEarth = Math.min(8, Math.ceil(earths));
+  const sgEarths = 5.5 / BIOCAP;
 
   return (
-    <WidgetFrame
-      title="Eco-city designer"
-      tryThis={[
-        `Get **every** pillar to at least 67% while staying within the budget of ${BUDGET} credits.`,
-        "Choose luxury towers. Which pillar goes up and which collapses? Why?",
-        "Pick the best option in every category. What stops you building it — and what does that teach you about real city planning?",
-        "Swap MRT for BRT. How much budget do you free up, and what could you spend it on?",
-      ]}
-      caption={
-        <>
-          <p><strong>{verdict}</strong></p>
-          <ul className="mt-2 list-disc space-y-1 pl-5">
-            {chosen.map((o, i) => (
-              <li key={o.id}>
-                <strong>{CATS[i].name}:</strong> {o.why}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-2 text-xs text-ink-2">
-            Simplified scoring model (0–3 per pillar per choice) — real plans are judged on far more detail, but the idea of
-            balancing social, economic and environmental goals within a budget is exactly how planners and eco-city competition
-            judges think.
-          </p>
-        </>
-      }
+    <Frame
+      title="Ecological Footprint Calculator: how many Earths?"
+      caption={<p><b>Notice:</b> your biggest personal slice is <b>{biggest.l}</b> ({biggest.v.toFixed(1)} gha). Even with the greenest choices, the grey &quot;shared services&quot; slice stays: it depends on how the whole city is built and powered. That is why city design (try the Eco-City Designer) matters as much as personal choices. <i>Simplified model; country figures are approximate (Global Footprint Network data, recent years).</i></p>}
     >
-      <div className="grid gap-3 sm:grid-cols-2">
-        {CATS.map((c) => (
-          <fieldset key={c.key} className="rounded-xl border border-line bg-surface p-3">
-            <legend className="px-1 text-sm font-bold text-ink-2">
-              <span aria-hidden>{c.emoji}</span> {c.name}
-            </legend>
-            <div className="flex flex-col gap-1.5" role="radiogroup" aria-label={c.name}>
-              {c.options.map((o) => {
-                const on = pick[c.key] === o.id;
-                return (
-                  <button
-                    key={o.id}
-                    type="button"
-                    role="radio"
-                    aria-checked={on}
-                    onClick={() => setPick((p) => ({ ...p, [c.key]: o.id }))}
-                    className={`flex min-h-[40px] items-center justify-between gap-2 rounded-lg border px-3 py-1.5 text-left text-sm font-semibold transition ${on ? "border-brand bg-brand-soft text-ink" : "border-line text-ink-2 hover:text-ink"}`}
-                  >
-                    <span>{o.label}</span>
-                    <span className="shrink-0 text-xs tabular-nums text-ink-2">{o.cost} cr</span>
-                  </button>
-                );
-              })}
-            </div>
-          </fieldset>
-        ))}
+      <div className="mb-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">
+        <p className="mb-1"><b>Predict first:</b> if everyone on Earth lived like the average Singaporean, how many Earths would we need?</p>
+        <Choice value={guess} onChange={setGuess} options={[{ id: "1", label: "1" }, { id: "2", label: "2" }, { id: "3-4", label: "3–4" }, { id: "5+", label: "5+" }]} />
+        {guess && <p className="mt-1">{guess === "3-4" ? "Correct! " : "Not quite. "}About 5.5 gha ÷ 1.6 gha ≈ <b>{sgEarths.toFixed(1)} Earths</b> (approximate).</p>}
       </div>
-
-      <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <Readout label="Budget used" value={`${cost} / ${BUDGET}`} tone={over ? "bad" : "good"} />
-        <Readout label="Social" value={`${pct(S)}%`} tone="ink" />
-        <Readout label="Economic" value={`${pct(Ec)}%`} tone="ink" />
-        <Readout label="Environmental" value={`${pct(En)}%`} tone="ink" />
+      <div className="grid gap-3 md:grid-cols-2">
+        <div className="space-y-3">
+          <Choice label="Diet" value={diet} onChange={setDiet} options={(Object.keys(DIET) as (keyof typeof DIET)[]).map((id) => ({ id, label: DIET[id].l }))} />
+          <Choice label="Home" value={home} onChange={setHome} options={(Object.keys(HOME) as (keyof typeof HOME)[]).map((id) => ({ id, label: HOME[id].l }))} />
+          <Choice label="Daily travel" value={travel} onChange={setTravel} options={(Object.keys(TRAVEL) as (keyof typeof TRAVEL)[]).map((id) => ({ id, label: TRAVEL[id].l }))} />
+          <Slider label="Short-haul return flights a year (≤ 4 h)" min={0} max={8} value={shortF} onChange={setShortF} color="#0ea5e9" />
+          <Slider label="Long-haul return flights a year" min={0} max={4} value={longF} onChange={setLongF} color="#0369a1" />
+          <Choice label="Shopping & waste" value={waste} onChange={setWaste} options={(Object.keys(WASTE) as (keyof typeof WASTE)[]).map((id) => ({ id, label: WASTE[id].l }))} />
+        </div>
+        <div>
+          <div className="grid grid-cols-2 gap-2">
+            <Stat label="Your footprint" value={`${total.toFixed(1)} gha`} tone={total <= 2.6 ? "emerald" : total <= 5 ? "amber" : "rose"} />
+            <Stat label="Earths needed" value={earths.toFixed(1)} tone={earths <= 1.05 ? "emerald" : "rose"} />
+          </div>
+          <svg viewBox="0 0 360 62" className="mt-2 w-full" role="img" aria-label={`${earths.toFixed(1)} Earths would be needed if everyone lived like you`}>
+            {Array.from({ length: nEarth }).map((_, i) => {
+              const f = Math.min(1, earths - i), cx = 22 + i * 44, cy = 26;
+              const wedge = earthWedge(cx, cy, 18, f);
+              return (
+                <g key={i}>
+                  <circle cx={cx} cy={cy} r={18} fill={wedge ? "#e2e8f0" : "#38bdf8"} stroke="#0369a1" />
+                  {wedge && <path d={wedge} fill="#38bdf8" />}
+                  {!wedge && <path d={`M${cx - 9},${cy - 6} q6,-6 10,0 q-2,6 -8,8 z M${cx + 3},${cy + 4} q6,-2 7,4 q-5,4 -8,0 z`} fill="#22c55e" />}
+                </g>
+              );
+            })}
+            {earths > 8 && <text x={356} y={30} fontSize="12" textAnchor="end" fill="#be123c">+ more</text>}
+            <text x={4} y={58} fontSize="11" fill="#64748b">Each globe = one Earth&apos;s worth of land and sea</text>
+          </svg>
+          <svg viewBox="0 0 360 46" className="mt-1 w-full" role="img" aria-label="Stacked bar showing your footprint broken down by category">
+            {(() => { let x = 4; return parts.map((p) => { const w = (p.v / Math.max(total, 0.01)) * 352; const el = <rect key={p.l} x={x} y={4} width={w} height={14} fill={p.c} />; x += w; return el; }); })()}
+            {parts.map((p, i) => (
+              <g key={p.l}><rect x={4 + (i % 3) * 120} y={i < 3 ? 22 : 32} width={8} height={8} fill={p.c} /><text x={15 + (i % 3) * 120} y={i < 3 ? 30 : 40} fontSize="11" fill="#475569">{p.l} {p.v.toFixed(1)}</text></g>
+            ))}
+          </svg>
+        </div>
       </div>
-
-      <svg
-        viewBox={`0 0 ${W} 150`}
-        className="mt-4 h-auto w-full"
-        role="img"
-        aria-label={`Sustainability scores: social ${pct(S)}%, economic ${pct(Ec)}%, environmental ${pct(En)}%. Budget ${cost} of ${BUDGET} credits.`}
-      >
-        {pillars.map((p, i) => {
-          const y = 18 + i * 40;
-          const good = pct(p.v) >= 67;
+      <svg viewBox="0 0 360 196" className="mt-3 w-full" role="img" aria-label={`Bar chart comparing your ${total.toFixed(1)} gha footprint with India about 1.0, world average about 2.6, Singapore about 5.5 and USA about 7.5 gha; Earth's biocapacity is about 1.6 gha per person`}>
+        <line x1={L} y1={B} x2={W - 4} y2={B} stroke="#94a3b8" />
+        {[0, 3, 6, 9].filter((v) => v <= max).map((v) => <text key={v} x={L - 4} y={yy(v) + 4} fontSize="11" textAnchor="end" fill="#64748b">{v}</text>)}
+        {bars.map((b, i) => {
+          const x = L + gap / 2 + i * (bw + gap);
           return (
-            <g key={p.name}>
-              <text x={bx - 8} y={y + 17} fontSize={13} textAnchor="end" className="fill-ink" fontWeight={700}>{p.name}</text>
-              <rect x={bx} y={y} width={bw} height={24} rx={4} className="fill-surface-2 stroke-line" />
-              <rect x={bx} y={y} width={(p.v / MAX) * bw} height={24} rx={4} className={good ? "fill-good" : "fill-accent"} />
-              <text x={bx + bw + 6} y={y + 17} fontSize={12} className="fill-ink">{pct(p.v)}%</text>
+            <g key={b.l}>
+              <rect x={x} y={yy(b.v)} width={bw} height={B - yy(b.v)} rx={3} fill={i === 0 ? "#6366f1" : b.v > BIOCAP ? "#fda4af" : "#86efac"} />
+              <text x={x + bw / 2} y={yy(b.v) - 4} fontSize="11" fontWeight="bold" textAnchor="middle" fill="#1e293b">{i === 0 ? b.v.toFixed(1) : `≈${b.v.toFixed(1)}`}</text>
+              <text x={x + bw / 2} y={B + 14} fontSize="11" textAnchor="middle" fill="#475569">{b.l}</text>
             </g>
           );
         })}
-        <line x1={bx + (bw * 2) / 3} x2={bx + (bw * 2) / 3} y1={10} y2={138} className="stroke-ink" strokeDasharray="4 3" />
-        <text x={bx + (bw * 2) / 3} y={148} fontSize={10} textAnchor="middle" className="fill-ink-2">target 67%</text>
+        <line x1={L} x2={W - 4} y1={yy(BIOCAP)} y2={yy(BIOCAP)} stroke="#15803d" strokeDasharray="5 4" strokeWidth={1.5} />
+        <text x={W - 6} y={yy(BIOCAP) - 4} fontSize="11" textAnchor="end" fill="#15803d" stroke="#fff" strokeWidth={3} paintOrder="stroke">Earth&apos;s share ≈ 1.6 gha each</text>
+        <text x={L} y={192} fontSize="11" fill="#64748b">gha per person (global hectares)</text>
       </svg>
-    </WidgetFrame>
+    </Frame>
   );
 }
-
-export const widgets: WidgetDef[] = [
-  {
-    id: "four-taps-mixer",
-    title: "Four National Taps mixer",
-    blurb: "Mix Singapore's four water sources, then test your plan in a drought and after 2061 — resilience versus energy.",
-    Component: TapsMixer,
-  },
-  {
-    id: "eco-city-designer",
-    title: "Eco-city designer",
-    blurb: "Pick transport, energy, housing, water, waste and green space within a budget and balance the three pillars.",
-    Component: EcoCityDesigner,
-  },
-];

@@ -1,10 +1,5 @@
 # Sitcom episodes — "Totally Raotional"
 
-**Season 2 (Geography): "Totally Raotional: Off The Map".** Globo, a grumpy talking globe from the
-junk drawer, replaces Centi as the teacher; new sets `beach desert polar mountain megacity reef
-weatherdesk`. Writers' guide: `docs/SITCOM.md`. Pilot: `episodes/coastal-landforms.py`.
-Season 1 notes below still apply to the pipeline.
-
 Animated, voiced sitcom episodes (one per topic) rendered to MP4. Original cast:
 Tara (12, deadpan), Mum (deal hunter), Dad (self-described financial genius),
 and Centi, the 100-eyed calculator monster who lives in the junk drawer.

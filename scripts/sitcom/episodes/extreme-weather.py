@@ -1,228 +1,240 @@
-# "Totally Raotional: Off The Map" S02E08 "Isobar None" (Topic: Extreme Weather & Forecasting)
-# Format and helpers: see common.py and docs/SITCOM.md; check with lint_episode.py.
-# Sections taught: types-of-extreme-weather, tropical-storms, measuring-weather, forecasting.
+# "Off The Map" (a Claude Sitcom) S01E07 "Under Pressure" (Topic: Extreme Weather & Forecasting)
+# Format and helpers: see common.py and EPISODE_GUIDE.md; check with lint_episode.py.
 
-EP = dict(topic="extreme-weather",
-          logline="Dad launches Rao Weather, a forecasting channel run by looking out of the window, and a Sumatra squall soaks the laundry. "
-                  "Globo explains extreme weather, Singapore's monsoons and squalls, how typhoons form, weather instruments, and how forecasts and warnings save lives.")
+EP = dict(
+    topic="extreme-weather",
+    logline="Dad appoints his left knee as the family weather forecaster and books a sunrise picnic in June. A Sumatra squall disagrees. Atlas spins the family to the typhoon coast of the Philippines to meet a real meteorologist.",
+    names={"guest": "DR REYES"},
+    display={"P S I": "PSI", "El Nino": "El Niño"},
+)
 
-D_BELT = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">
-<rect width="520" height="200" fill="#0c4a6e"/>
-<rect y="22" width="520" height="56" fill="#f87171" opacity="0.45"/>
-<rect y="122" width="520" height="56" fill="#f87171" opacity="0.45"/>
-<rect y="78" width="520" height="44" fill="#38bdf8" opacity="0.25"/>
-<line x1="0" y1="100" x2="520" y2="100" stroke="#fde047" stroke-width="2" stroke-dasharray="8 5"/>
-<text x="10" y="18" font-family="sans-serif" font-size="14" fill="#e2e8f0">30°N</text>
-<text x="10" y="74" font-family="sans-serif" font-size="14" fill="#e2e8f0">5°N</text>
-<text x="10" y="136" font-family="sans-serif" font-size="14" fill="#e2e8f0">5°S</text>
-<text x="10" y="194" font-family="sans-serif" font-size="14" fill="#e2e8f0">30°S</text>
-<text x="300" y="56" font-family="sans-serif" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle">STORM BELT: warm sea + spin</text>
-<text x="300" y="156" font-family="sans-serif" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle">STORM BELT: warm sea + spin</text>
-<text x="470" y="96" font-family="sans-serif" font-size="14" fill="#fde047" text-anchor="end">Equator</text>
-<circle cx="250" cy="97" r="7" fill="#22c55e" stroke="#fff" stroke-width="2"/>
-<text x="262" y="116" font-family="sans-serif" font-size="14" font-weight="bold" fill="#bbf7d0">Singapore ~1°N: no spin</text>
-</svg>"""
+CYCLONE = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 240">'
+    '<rect x="0" y="196" width="520" height="44" fill="#1d4ed8"/>'
+    '<text x="260" y="226" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#f8fafc">warm sea, at least 26.5 °C</text>'
+    '<path d="M70,192 Q80,130 150,118 Q170,62 230,66 L230,192 Z" fill="#64748b"/>'
+    '<path d="M450,192 Q440,130 370,118 Q350,62 290,66 L290,192 Z" fill="#64748b"/>'
+    '<line x1="190" y1="182" x2="190" y2="92" stroke="#fca5a5" stroke-width="5"/>'
+    '<polygon points="180,96 200,96 190,78" fill="#fca5a5"/>'
+    '<line x1="330" y1="182" x2="330" y2="92" stroke="#fca5a5" stroke-width="5"/>'
+    '<polygon points="320,96 340,96 330,78" fill="#fca5a5"/>'
+    '<line x1="260" y1="120" x2="260" y2="168" stroke="#7dd3fc" stroke-width="5"/>'
+    '<polygon points="250,164 270,164 260,182" fill="#7dd3fc"/>'
+    '<text x="260" y="108" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#7dd3fc">EYE</text>'
+    '<line x1="12" y1="186" x2="70" y2="186" stroke="#fde047" stroke-width="4"/>'
+    '<polygon points="66,178 66,194 82,186" fill="#fde047"/>'
+    '<line x1="508" y1="186" x2="450" y2="186" stroke="#fde047" stroke-width="4"/>'
+    '<polygon points="454,178 454,194 438,186" fill="#fde047"/>'
+    '<text x="10" y="26" font-family="sans-serif" font-size="18" fill="#fca5a5">eye wall: rising air, worst winds</text>'
+    '<text x="510" y="52" text-anchor="end" font-family="sans-serif" font-size="18" fill="#7dd3fc">eye: calm, sinking air</text>'
+    '<text x="10" y="170" font-family="sans-serif" font-size="18" fill="#fde047">air in</text>'
+    '<text x="510" y="170" text-anchor="end" font-family="sans-serif" font-size="18" fill="#fde047">air in</text>'
+    '</svg>'
+)
 
-D_STORM = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210">
-<rect width="520" height="210" fill="#0f172a"/>
-<rect y="170" width="520" height="40" fill="#0369a1"/>
-<path d="M60 170 C60 120 90 100 110 110 C125 95 140 120 140 170Z" fill="#cbd5e1"/>
-<path d="M380 170 C380 120 400 95 420 110 C440 100 460 120 460 170Z" fill="#cbd5e1"/>
-<path d="M170 170 C165 90 190 40 230 36 L230 170Z" fill="#e2e8f0"/>
-<path d="M350 170 C355 90 330 40 290 36 L290 170Z" fill="#e2e8f0"/>
-<path d="M260 50 V150" stroke="#fde047" stroke-width="3" stroke-dasharray="6 4"/>
-<path d="M260 160 l-7 -12 h14z" fill="#fde047"/>
-<path d="M200 160 V70 M320 160 V70" stroke="#f87171" stroke-width="4"/>
-<path d="M200 62 l-7 12 h14z M320 62 l-7 12 h14z" fill="#f87171"/>
-<text x="260" y="22" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fde047" text-anchor="middle">EYE: calm, sinking air</text>
-<text x="200" y="196" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">EYEWALL</text>
-<text x="320" y="196" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">EYEWALL</text>
-<text x="100" y="196" font-family="sans-serif" font-size="14" fill="#e0f2fe" text-anchor="middle">rain bands</text>
-<text x="420" y="196" font-family="sans-serif" font-size="14" fill="#e0f2fe" text-anchor="middle">rain bands</text>
-<text x="20" y="40" font-family="sans-serif" font-size="13" fill="#fca5a5">red = warm moist air rising</text>
-</svg>"""
+WARNINGS = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">'
+    '<text x="10" y="32" font-family="sans-serif" font-size="22" fill="#f8fafc">Deaths: Bay of Bengal cyclones</text>'
+    '<text x="10" y="84" font-family="sans-serif" font-size="20" fill="#f8fafc">Bhola 1970</text>'
+    '<rect x="160" y="58" width="350" height="38" fill="#fca5a5"/>'
+    '<text x="500" y="84" text-anchor="end" font-family="sans-serif" font-size="20" fill="#111827">300,000–500,000</text>'
+    '<text x="10" y="138" font-family="sans-serif" font-size="20" fill="#f8fafc">Fani 2019</text>'
+    '<rect x="160" y="112" width="4" height="38" fill="#86efac"/>'
+    '<text x="176" y="138" font-family="sans-serif" font-size="20" fill="#86efac">fewer than 100 (Odisha)</text>'
+    '<text x="10" y="186" font-family="sans-serif" font-size="20" fill="#fde047">Fani: about 1.2 million evacuated first</text>'
+    '</svg>'
+)
 
-D_INSTR = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 170">
-<rect width="520" height="170" fill="#0f172a"/>
-<rect y="130" width="520" height="40" fill="#166534"/>
-<rect x="40" y="46" width="70" height="44" fill="#f8fafc"/>
-<path d="M32 46 L75 28 L118 46Z" fill="#f8fafc"/>
-<path d="M46 56 H104 M46 64 H104 M46 72 H104 M46 80 H104" stroke="#94a3b8" stroke-width="2"/>
-<path d="M55 90 V130 M95 90 V130" stroke="#f8fafc" stroke-width="4"/>
-<text x="75" y="160" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">Stevenson screen</text>
-<path d="M190 78 L230 78 L218 92 L202 92Z" fill="#e2e8f0"/>
-<rect x="200" y="92" width="20" height="38" fill="#bae6fd"/>
-<text x="210" y="160" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">rain gauge</text>
-<path d="M320 130 V60 M296 60 H344" stroke="#e2e8f0" stroke-width="4"/>
-<circle cx="292" cy="56" r="9" fill="#a5b4fc"/><circle cx="348" cy="56" r="9" fill="#a5b4fc"/>
-<text x="320" y="160" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">anemometer</text>
-<path d="M440 130 V70 M405 70 H470" stroke="#e2e8f0" stroke-width="4"/>
-<path d="M400 70 l14 -9 v18z" fill="#fde047"/><path d="M462 58 h14 v24 h-14z" fill="#a5b4fc"/>
-<text x="440" y="160" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">wind vane</text>
-<text x="440" y="44" font-family="sans-serif" font-size="12" fill="#fde047" text-anchor="middle">points INTO the wind</text>
-</svg>"""
-
-D_MAP = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210">
-<rect width="520" height="210" fill="#0f172a"/>
-<g fill="none" stroke="#e2e8f0" stroke-width="2">
-<ellipse cx="130" cy="100" rx="18" ry="14"/><ellipse cx="130" cy="100" rx="34" ry="27"/><ellipse cx="130" cy="100" rx="50" ry="40"/><ellipse cx="130" cy="100" rx="66" ry="53"/><ellipse cx="130" cy="100" rx="82" ry="66"/>
-<ellipse cx="390" cy="100" rx="40" ry="30"/><ellipse cx="390" cy="100" rx="80" ry="62"/>
-</g>
-<text x="130" y="108" font-family="sans-serif" font-size="24" font-weight="bold" fill="#f87171" text-anchor="middle">L</text>
-<text x="390" y="108" font-family="sans-serif" font-size="24" font-weight="bold" fill="#60a5fa" text-anchor="middle">H</text>
-<text x="130" y="186" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">close isobars: STRONG wind</text>
-<text x="390" y="186" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">far apart: light wind</text>
-<line x1="20" y1="202" x2="90" y2="202" stroke="#60a5fa" stroke-width="3"/>
-<path d="M28 202 l6 -9 l6 9z M48 202 l6 -9 l6 9z M68 202 l6 -9 l6 9z" fill="#60a5fa"/>
-<text x="96" y="206" font-family="sans-serif" font-size="12" fill="#bfdbfe">cold front</text>
-<line x1="300" y1="202" x2="370" y2="202" stroke="#f87171" stroke-width="3"/>
-<path d="M308 202 a6 6 0 0 1 12 0z M330 202 a6 6 0 0 1 12 0z M352 202 a6 6 0 0 1 12 0z" fill="#f87171"/>
-<text x="376" y="206" font-family="sans-serif" font-size="12" fill="#fecaca">warm front</text>
-</svg>"""
+ISOBARS = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220">'
+    '<g fill="none" stroke="#f8fafc" stroke-width="2">'
+    '<ellipse cx="140" cy="100" rx="20" ry="16"/><ellipse cx="140" cy="100" rx="38" ry="30"/>'
+    '<ellipse cx="140" cy="100" rx="56" ry="44"/><ellipse cx="140" cy="100" rx="74" ry="58"/>'
+    '<ellipse cx="390" cy="104" rx="30" ry="24"/><ellipse cx="390" cy="104" rx="75" ry="52"/>'
+    '<ellipse cx="390" cy="104" rx="118" ry="80"/>'
+    '</g>'
+    '<text x="140" y="110" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#fca5a5">L</text>'
+    '<text x="390" y="114" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#86efac">H</text>'
+    '<text x="140" y="200" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fca5a5">close = strong wind</text>'
+    '<text x="390" y="212" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#86efac">far apart = calm</text>'
+    '</svg>'
+)
 
 # ---------------- COLD OPEN ----------------
-scene("living", [("tara", 300), ("mum", 760)], "TAMPINES · Quarter To Six In The Morning · July")
-L("mum", "Tara! The wind! My new towels are on the bamboo poles! Three for ten dollars!", mood="shock", shot="close")
-L("tara", "I'm awake, Mum. The pigeons are awake.", mood="deadpan", shot="close")
-scene("living", [("tara", 260), ("mum", 600), ("dad", 980)])
-sfx("door")
-L("dad", "Relax. I checked my forecast. Last night I looked out of the window. Not one cloud. Sunny all week.", mood="smug", shot="close", prop="tablet")
-L("dad", "That's why I've launched a weather channel. Rao Weather. Fifty two subscribers. Mostly your aunties.", mood="smug", shot="close")
-L("tara", "Dad. You looked out of the window. At night. It was dark.", mood="deadpan", shot="close")
-L("dad", "Exactly. Zero clouds visible.", mood="smug", shot="close")
+scene("park", [("dad", 300), ("mum", 540), ("priya", 780), ("nani", 1020)])
+L("dad", "Behold! The Sunrise Family Picnic. Six in the morning. Perfect blue skies.", mood="excited", shot="wide", prop="plate")
+L("priya", "It's still dark, Dad. And it's June.", mood="deadpan", shot="close")
+L("mum", "Mats, check. Sandwiches, check. Forecast?", mood="determined", shot="close")
+L("dad", "I am the forecast. My left knee is never wrong. And it says... sunshine.", mood="smug", shot="close")
+L("nani", "Your knee also said the durian was ripe. We had to evacuate the flat.", mood="deadpan", shot="close", gap=0.4)
+L("priya", "June means the Southwest Monsoon. Sumatra squalls. They arrive before dawn.", mood="worried", shot="close")
+L("dad", "Squalls are a myth invented by umbrella shops. Pass the egg sandwiches.", mood="smug", shot="close")
 sfx("whoosh")
-freeze("\"SUNNY ALL WEEK\"", 2.4, narrator="Narrator: The towels were found two blocks away.")
-confess("tara", "TARA RAO · 12 · Only Sane Person In This House")
-L("tara", "My father's weather forecast is a window. At night.", mood="deadpan", gap=0.6)
+freeze("ZERO % CHANCE OF RAIN", 2.6, narrator="Narrator: The squall arrived four seconds later.")
+confess("priya", "PRIYA · 12 · Brought Her Own Umbrella")
+L("priya", "Dad's knee has a forecasting accuracy of zero. The egg sandwiches are now egg soup.", mood="deadpan")
+L("priya", "Nani's knee is better. It only ever says one thing. Dad is wrong.", mood="smug", gap=0.6)
 
 title()
 
-# ---------------- ACT 1: TYPES OF EXTREME WEATHER + SINGAPORE ----------------
-scene("kitchen", [("tara", 380)])
-L("tara", "Soggy towels, soggy Dad. Time to open the drawer we don't open.", mood="determined", shot="wide")
-sfx("drawer")
-poof("globo", 860)
-L("globo", "Who wakes a globe at dawn? That squall rattled my Antarctica.", mood="bored", shot="close")
-L("tara", "Globo, Dad's calling it extreme weather.", mood="worried", shot="two")
-L("globo", "Extreme weather is much more severe than usual for that place and season, and causes harm. Thirty five degrees is normal in Dubai. In London, it's a heatwave.", mood="teach", shot="close",
-  boardClear=True, board="EXTREME = much worse than usual there")
-L("globo", "Seven types. Tropical storms, droughts, heatwaves, blizzards, sandstorms, flash floods, and tornadoes, like in the central United States.", mood="teach", shot="close",
-  board="Storm · drought · heatwave · blizzard")
-L("tara", "So rising air gives storms, and sinking air gives droughts and heatwaves.", mood="happy", shot="close",
-  board="Sandstorm · flash flood · tornado")
-L("globo", "Correct. In Singapore, the monsoons set the seasons. Northeast, December to early March, wet. Southwest, June to September, drier. In between, afternoon thunderstorms.", mood="teach", shot="close",
-  boardClear=True, board="NE Monsoon: Dec–early Mar (wet)")
-L("tara", "So what hit us this morning?", mood="thinking", shot="close", board="SW Monsoon: Jun–Sep (drier)")
-L("globo", "A Sumatra squall. A line of storms that forms at night over the Strait of Malacca, sweeps east, and arrives before dawn, with gusts of about forty to eighty kilometres an hour.", mood="teach", shot="close",
-  board="Inter-monsoons: afternoon storms")
-L("globo", "Heavy rain on concrete causes flash floods, like Orchard Road in twenty ten. Rain must go somewhere. Usually your father's towels.", mood="teach", shot="close",
-  board="SUMATRA SQUALL: before dawn, 40–80 km/h")
-L("tara", "Hence the giant underground tank at Stamford.", mood="deadpan", shot="close", board="Concrete → flash floods (Orchard Rd)", gap=0.4)
-
-
-# ---------------- ACT 2: TROPICAL STORMS ----------------
-card("MEANWHILE, AT RAO WEATHER", "A studio rented by the hour. Mum got a deal.", 2.0)
-scene("weatherdesk", [("dad", 300), ("mum", 640)], "RAO WEATHER STUDIO · Rented From A Karaoke Bar")
-L("dad", "Breaking news. A typhoon. Right here. Next Tuesday.", mood="excited", shot="close")
-L("mum", "Ooh. Will the shops have a typhoon sale?", mood="excited", shot="close")
-poof("globo", 980)
-L("globo", "Singapore is about one degree north of the Equator. Storms need spin, from the Coriolis effect, and within about five degrees of the Equator there's almost none.", mood="teach", shot="close",
-  boardClear=True, board="SG ~1° N: almost NO Coriolis spin", diagram=D_BELT)
-L("dad", "So what does a typhoon need? I'll order one.", mood="thinking", shot="close", board="No spin → (almost) no typhoons ✔")
-L("globo", "Sea at least twenty six point five degrees. Five to thirty degrees from the Equator. Low wind shear, so it isn't torn apart. And the Coriolis effect, for spin.", mood="teach", shot="close",
-  boardClear=True, board="Sea ≥ 26.5 °C · 5–30° from Equator")
-L("globo", "Warm water evaporates, rises and condenses, releasing heat. Low pressure pulls in more air, which spirals. A heat engine. Over land, it runs out of fuel.", mood="teach", shot="close",
-  board="Low shear · Coriolis → SPIN · weak on land")
-L("globo", "Same storm, three names. Hurricane in the Atlantic, typhoon in the north west Pacific, cyclone in the Indian Ocean. A calm eye of sinking air. Around it, the eyewall, with the worst winds. Then rain bands.", mood="teach", shot="close",
-  boardClear=True, board="Hurricane · typhoon · cyclone", diagram=D_STORM)
-L("dad", "So I'll stand in the eye. Calm. Sunny.", mood="smug", shot="close", board="EYE calm · EYEWALL worst · rain bands")
-L("globo", "Then the eye passes, and the eyewall hits you again from the other side. You'd be forecasting from Johor.", mood="eyeroll", shot="close", gap=0.3)
-L("globo", "The Saffir Simpson scale rates wind. Category one starts at one hundred and nineteen kilometres an hour. Category five, two hundred and fifty two. But storm surge, the sea pushed onto the coast, is often the biggest killer.", mood="teach", shot="close",
-  boardClear=True, board="Cat 1: 119–153 km/h · Cat 5: ≥252")
-L("globo", "In twenty thirteen, Typhoon Haiyan, a category five, hit the Philippines. A surge of around five metres swept through Tacloban. About six thousand three hundred people died, and about four million were displaced.", mood="teach", shot="close",
-  board="STORM SURGE: often the biggest killer")
-L("mum", "Oh. Those poor families. No more typhoon sale jokes from me.", mood="sad", shot="close", board="HAIYAN 2013: Cat 5 · ~6,300 deaths")
-L("globo", "Countries including Singapore sent aid. The rebuilding included stronger homes and new mangroves.", mood="teach", shot="close",
-  board="~4 million displaced · aid + mangroves", gap=0.4)
-
-confess("dad", "VIKRAM RAO · Dad · Self-Described Meteorology Genius")
-L("dad", "I wasn't wrong. I was early. And about two thousand kilometres too far south.", mood="smug", gap=0.6)
-
-# ---------------- ACT 3: MEASURING THE WEATHER ----------------
-card("MEANWHILE, ON THE HDB CORRIDOR", "Mum's weather station kit. On sale, obviously.", 2.0)
-scene("park", [("tara", 240), ("mum", 500), ("dad", 780)], "BLOCK TWO ONE FIVE · Corridor Weather Station")
-L("mum", "A whole weather station kit. Seventy percent off! Box only slightly squashed!", mood="excited", shot="close", prop="bucket")
-L("dad", "I taped the thermometer to the sunny wall. Forty one degrees! Rao Weather exclusive!", mood="excited", shot="close")
-poof("globo", 1050)
-L("tara", "Dad, you measured the wall. And the Sun. Air temperature goes in the shade.", mood="deadpan", shot="close",
-  boardClear=True, board="Thermometer in SHADE, not on a wall", diagram=D_INSTR)
-L("globo", "In a Stevenson screen. White, slatted, about one point two five metres above grass.", mood="teach", shot="close",
-  board="STEVENSON SCREEN: white, slatted, 1.25 m")
-L("globo", "A rain gauge measures rain in millimetres. A barometer, air pressure in hectopascals. An anemometer, wind speed. A hygrometer, humidity.", mood="teach", shot="close",
-  board="Rain gauge: mm · Barometer: hPa")
-L("dad", "The wind vane points north. So the wind is going north!", mood="smug", shot="close")
-L("tara", "No. A wind vane points to where the wind comes from. That's a north wind, blowing from the north.", mood="deadpan", shot="close",
-  boardClear=True, board="Anemometer: speed · Hygrometer: %")
-L("globo", "Winds are named after where they come from. Unlike your father's ideas.", mood="smug", shot="close",
-  board="WIND VANE: points to where wind is FROM")
-L("globo", "Satellites track storms from space. Radar shows where it's raining now. And the mean is the total, divided by the number of readings.", mood="teach", shot="close",
-  board="Satellites + radar · MEAN = total ÷ n")
-L("mum", "Mean? This morning's rain was very mean. It took my towels.", mood="annoyed", shot="close", gap=0.4)
-
-
-# ---------------- ACT 4: FORECASTING AND WARNINGS ----------------
-card("RAO WEATHER · LIVE", "Episode two. Now with an actual map.", 2.2)
-scene("weatherdesk", [("tara", 260), ("dad", 600), ("globo", 960)])
-L("dad", "Tonight, my ninety day forecast. Day one, sunny. Day ninety, also sunny.", mood="smug", shot="close")
-L("globo", "Stop. The map first. Low pressure, L, means rising air. Cloud, rain and wind. High pressure, H, means sinking air. Dry and settled.", mood="teach", shot="close",
-  boardClear=True, board="L: rising air → cloud, rain, wind", diagram=D_MAP)
-L("tara", "And isobars join places with the same pressure. Close together means strong winds.", mood="happy", shot="close",
-  board="H: sinking air → dry, settled")
-L("globo", "And fronts bring bands of rain. Cold fronts, blue triangles. Warm fronts, red semicircles.", mood="teach", shot="close",
-  board="Close ISOBARS = strong winds")
-L("dad", "Isobars? Never heard of them. Isobar none.", mood="smug", shot="close")
-sfx("trombone")
-L("globo", "Real forecasts use millions of observations and supercomputer models, run many times. If the runs agree, be confident.", mood="teach", shot="close",
-  boardClear=True, board="Observe → model → ENSEMBLE → warn")
-L("globo", "But the atmosphere is chaotic. Tiny errors grow every hour. Day by day detail has little skill beyond about two weeks.", mood="teach", shot="close",
-  board="Chaos: errors grow → < ~2 weeks skill")
-L("tara", "So Dad's ninety day forecast is guessing. With a microphone.", mood="deadpan", shot="close", gap=0.3)
-L("globo", "Warnings save lives. The three Ps. Prediction, tracking the hazard. Protection, like shelters and drains. Preparation, like evacuation plans and phone alerts.", mood="teach", shot="close",
-  boardClear=True, board="3 Ps: PREDICTION · PROTECTION")
-L("globo", "In nineteen seventy, the Bhola cyclone killed an estimated three hundred thousand to half a million people in what is now Bangladesh.", mood="teach", shot="close",
-  board="     · PREPARATION")
-L("tara", "And for Cyclone Amphan in twenty twenty, about three million people were evacuated. Reported deaths were about one hundred and thirty.", mood="thinking", shot="close",
-  board="Bhola 1970: ~300,000–500,000 deaths")
-L("globo", "The storm can't be stopped. But people can move.", mood="teach", shot="close",
-  board="Amphan 2020: ~3M evacuated · ~130 ✔", gap=0.4)
-
-confess("globo", "GLOBO · Recap Globe · Spinning Slowly For Dad")
-L("globo", "Recap. One. Monsoons and Sumatra squalls.", mood="teach", boardClear=True, board="1. Monsoons + Sumatra squalls (SG)")
-L("globo", "Two. Warm sea, five to thirty degrees, low shear, spin.", mood="teach", board="2. ≥26.5 °C · 5–30° · low shear · spin")
-L("globo", "Three. The eye is calm. Beware the eyewall and the surge.", mood="teach", board="3. Eye · eyewall · storm surge")
-L("globo", "Four. Wind vanes point to where wind comes from.", mood="teach", board="4. Vane points FROM · Stevenson screen")
-L("globo", "Five. Close isobars, strong winds. Three Ps save lives.", mood="smug", board="5. Close isobars = windy · 3 Ps", gap=0.5)
-
-# ---------------- BUTTON ----------------
-card("THE NEXT MORNING", "Five fifteen. The laundry is indoors.", 2.2)
-scene("living", [("tara", 260), ("mum", 560), ("dad", 840)])
-L("dad", "Rao Weather bulletin. Radar shows a Sumatra squall, arriving before dawn. Bring in your towels.", mood="determined", shot="close", prop="tablet")
-L("mum", "Towels are in. And umbrellas. Ten for twenty dollars.", mood="smug", shot="close", prop="umbrella")
+# ---------------- ACT 1: WEATHER, CLIMATE, SINGAPORE ----------------
+scene("living", [("priya", 220), ("dad", 460), ("nani", 700)])
+L("dad", "A freak event. Singapore's climate today is clearly broken.", mood="annoyed", shot="close", prop="umbrella")
+L("priya", "Atlas! Dad just mixed up weather and climate.", mood="determined", shot="wide")
 sfx("whoosh")
-L("tara", "It's here. Right on time. Dad, you got one right.", mood="shock", shot="close")
-L("dad", "I used radar. And the window. But this time, in the morning.", mood="smug", shot="close")
-sfx("ding")
-L("globo", "Fifty three subscribers. The new one is me. Purely to complain.", mood="bored", shot="wide", offstage=True, gap=0.8)
+poof("atlas", 1000)
+L("atlas", "Why is everyone dripping on me? I am paper glued to a ball.", mood="annoyed", shot="close")
+L("atlas", "Weather is the atmosphere right now. Rain, wind, temperature, pressure. It changes by the hour.", mood="teach", shot="close",
+  boardClear=True, board="Weather = the atmosphere now")
+L("atlas", "Climate is the average weather over about thirty years. Your climate isn't broken. Your morning was.", mood="smug", shot="close",
+  board="Climate = average weather over ~30 years")
+L("nani", "Singapore is equatorial. Hot all year, about twenty seven degrees, and wet. Very reliable. Unlike your knee.", mood="smug", shot="close",
+  board="Singapore: equatorial · ~27 °C · wet")
+L("priya", "That was a Sumatra squall. A line of thunderstorms that forms at night over Sumatra, then blows east to us.", mood="teach", shot="close",
+  boardClear=True, board="Sumatra squall = line of thunderstorms")
+L("atlas", "It arrives before dawn, with gusts of forty to eighty kilometres an hour. Exactly picnic time.", mood="teach", shot="close",
+  board="Arrives pre-dawn · gusts 40–80 km/h")
+L("atlas", "June to September is the Southwest Monsoon. December to early March, the Northeast. In between, the most lightning.", mood="teach", shot="close",
+  board="SW Monsoon Jun–Sep · NE Monsoon Dec–Mar")
+L("nani", "The Southwest Monsoon brings haze too. In twenty fifteen, Indonesian fires and El Nino pushed the P S I above three hundred. Schools shut for a day.", mood="sad", shot="close",
+  board="2015 haze: PSI over 300 · schools shut")
+L("dad", "Small stuff. My knee has survived worse.", mood="smug", shot="close")
+L("atlas", "Has it? Tornadoes, over three hundred kilometres an hour. Blizzards. Heatwaves, forty point three degrees in the UK. And droughts, which creep up slowly.", mood="teach", shot="close",
+  boardClear=True, board="Tornado · blizzard · heatwave · drought")
+L("dad", "But a typhoon? I'd stand on the beach and laugh at it.", mood="smug", shot="close")
+L("atlas", "Would you. Then hold on. Not to me. I'm damp.", mood="smug", shot="close", gap=0.3)
+
+confess("atlas", "ATLAS · Desk Globe · Waterproof In Theory")
+L("atlas", "I have been dropped eleven times. Usually on Australia. Today, Sumatra also got rained on.", mood="bored")
+L("atlas", "Dad's knee has been wrong more often than I have been dropped. Mostly by Dad.", mood="smug", gap=0.5)
+
+# ---------------- ACT 2: TYPHOON COAST ----------------
+sfx("whoosh")
+scene("beach", [("priya", 220), ("dad", 450), ("atlas", 760)], caption="LEYTE · The Philippines · Typhoon season")
+L("dad", "The Philippines! Warm sea, lovely breeze. Bring on the typhoon!", mood="excited", shot="close")
+sfx("door")
+poof("guest", 1075)
+L("guest", "Hello! I'm Doctor Reyes, a forecaster with the Philippine weather service. We get about twenty typhoons a year. Please don't say bring it on.", mood="happy", shot="close")
+L("priya", "Our dad thinks his knee can forecast the weather.", mood="deadpan", shot="two")
+L("guest", "Lovely. We use satellites. But the knee is welcome.", mood="happy", shot="close", gap=0.3)
+L("guest", "Hurricane, typhoon, cyclone. Same storm, a tropical cyclone. Only the ocean changes the name.", mood="teach", shot="close",
+  boardClear=True, board="Hurricane = typhoon = cyclone")
+L("guest", "It needs a warm sea, at least twenty six point five degrees. That's the fuel.", mood="teach", shot="close",
+  board="Sea at least 26.5 °C = the fuel")
+L("guest", "And a latitude of about five to thirty degrees, where the Coriolis effect from the Earth's spin can make it rotate.", mood="teach", shot="close",
+  board="5–30° from Equator · Coriolis = spin")
+L("priya", "So Singapore, at one degree north, almost never gets hit.", mood="thinking", shot="close",
+  board="Also: low wind shear, rising moist air")
+L("atlas", "Warm moist air rises, making low pressure. It condenses into giant clouds and releases heat, so it rises faster. A self-feeding engine.", mood="teach", shot="close",
+  boardClear=True, diagram=CYCLONE)
+L("guest", "The eye is calm, with sinking air. The eye wall has the strongest winds and heaviest rain.", mood="teach", shot="close",
+  board="Eye = calm · eye wall = worst winds")
+L("dad", "So when the eye comes, I pop out for a selfie.", mood="excited", shot="close", prop="phone")
+L("guest", "Please don't. The other side of the eye wall arrives soon after, with winds from the opposite direction.", mood="worried", shot="close",
+  board="The eye passing ≠ the storm is over")
+L("atlas", "On the Saffir Simpson scale, category one starts at one hundred and nineteen kilometres an hour. Category five, two hundred and fifty two or more.", mood="teach", shot="close",
+  board="Saffir–Simpson: Cat 1 119 → Cat 5 252+")
+L("guest", "Typhoon Haiyan. The eighth of November, twenty thirteen. Winds of about three hundred and fifteen kilometres an hour. But water killed more than wind.", mood="sad", shot="close",
+  boardClear=True, board="Haiyan: 8 Nov 2013 · ~315 km/h winds")
+L("guest", "A storm surge of five to seven metres swept into Tacloban, at the end of a narrowing bay.", mood="sad", shot="close",
+  board="Storm surge 5–7 m at Tacloban")
+L("atlas", "A surge is the sea bulging up under low pressure, with the wind piling it onto the coast. It usually causes most deaths.", mood="teach", shot="close",
+  board="Surge = low pressure + wind push the sea")
+L("guest", "About six thousand three hundred people died. Around four million were displaced. Heavy rain brought floods and landslides too.", mood="sad", shot="close",
+  board="~6,300 deaths · ~4 million displaced")
+L("guest", "The forecast was right, and about eight hundred thousand evacuated. But many didn't understand the words storm surge.", mood="sad", shot="close",
+  board="Warnings must be UNDERSTOOD")
+L("dad", "So a warning only works if people understand it.", mood="thinking", shot="close")
+L("priya", "Dad said something true. Somebody write down the date.", mood="shock", shot="close", gap=0.3)
+L("dad", "So how do you forecast? A really big knee?", mood="thinking", shot="close")
+L("guest", "Observe, model, warn. Satellites, radar, ocean buoys and weather balloons measure the atmosphere.", mood="teach", shot="close",
+  boardClear=True, board="1. OBSERVE: satellites, radar, buoys")
+L("atlas", "Supercomputers use physics to run the forecast about fifty times. That's an ensemble. If the runs agree, be confident.", mood="teach", shot="close",
+  board="2. MODEL: supercomputer ensembles")
+L("dad", "My knee is an ensemble of one.", mood="smug", shot="close",
+  board="3. WARN: people understand and act")
+L("guest", "How confident is it?", mood="deadpan", shot="close")
+L("dad", "Extremely. Wrongly, but extremely.", mood="worried", shot="close", gap=0.4)
+L("guest", "Warnings save lives. In nineteen seventy the Bhola cyclone hit what is now Bangladesh with little warning. Up to half a million people died.", mood="sad", shot="close",
+  boardClear=True, diagram=WARNINGS)
+L("priya", "Now Bangladesh has over seventy thousand warning volunteers, and raised cyclone shelters.", mood="thinking", shot="close",
+  board="Bangladesh: 70,000+ volunteers, shelters")
+L("guest", "And Odisha, in India, moved about one point two million people before Cyclone Fani in twenty nineteen. Fewer than one hundred died.", mood="happy", shot="close",
+  board="Better warnings = fewer deaths")
+
+confess("dad", "DAD · Chief Forecaster (Self-Appointed) · Forty Airports")
+L("dad", "I have been to forty countries. Well. Forty airports. Eleven flights delayed by weather. I blamed the pilots.", mood="sad")
+L("dad", "My knee is retiring. It wants to spend more time with the other knee.", mood="sad", gap=0.6)
+
+# ---------------- ACT 3: KITCHEN WEATHER STATION ----------------
+card("MEANWHILE, BACK IN SINGAPORE", "Mum has turned the kitchen into a weather station. Nobody asked.", 2.4)
+scene("kitchen", [("mum", 220), ("nani", 450), ("priya", 680)])
+L("mum", "If this family needs a forecaster, it will be a proper one. A kitchen weather station.", mood="determined", shot="wide", prop="thermometer")
+L("mum", "Rain gauge. A funnel in a jam jar. Rainfall in millimetres.", mood="teach", shot="close",
+  boardClear=True, board="Rain gauge → rainfall (mm)")
+L("priya", "Wind vane, from a chopstick. Winds are named after where they come from.", mood="teach", shot="close",
+  board="Wind vane → direction (named FROM)")
+L("mum", "Paper cup anemometer for wind speed. Barometer for air pressure, in hectopascals.", mood="teach", shot="close",
+  board="Anemometer → speed · Barometer → hPa")
+L("nani", "A hygrometer for humidity? I don't need one. I have hair.", mood="smug", shot="close",
+  board="Hygrometer → humidity (%)", gap=0.4)
+poof("atlas", 990)
+L("mum", "And the thermometer lives in a white, slatted box on legs, on the grass. A Stevenson screen!", mood="smug", shot="close",
+  boardClear=True, board="Stevenson screen: white, louvred, 1.25 m")
+L("atlas", "Splendid. About one point two five metres up, away from buildings, so you measure the air, not the sun.", mood="teach", shot="close",
+  board="On grass, away from buildings")
+L("priya", "Memory trick. The Rain Bucket Annoys Wet Hikers.", mood="smug", shot="close",
+  board="The Rain Bucket Annoys Wet Hikers")
+L("dad", "Has anyone seen the white shoe cupboard?", mood="worried", offstage=True)
+L("mum", "No.", mood="deadpan", shot="close", gap=0.4)
+
+# ---------------- SYNOPTIC CHART ----------------
+scene("classroom", [("teacher", 260), ("priya", 560), ("atlas", 880)])
+L("teacher", "Exam skill. Synoptic charts. Isobars are lines joining places of equal air pressure.", mood="teach", shot="close",
+  boardClear=True, diagram=ISOBARS)
+L("teacher", "Close together means strong winds. Far apart means light winds. Do not read it backwards.", mood="teach", shot="close",
+  board="Close isobars = STRONG winds")
+L("priya", "Lows have rising air, cloud and rain. Highs have sinking air and clear skies.", mood="thinking", shot="close",
+  board="LOW: rising air, rain · HIGH: clear")
+L("teacher", "In case studies, quote numbers. Not very windy. Three hundred and fifteen kilometres an hour.", mood="annoyed", shot="close",
+  board="Case studies: quote the numbers")
+L("teacher", "Why is there a damp globe at the back of my class?", mood="worried", shot="close")
+L("priya", "He followed me.", mood="deadpan", shot="close", gap=0.4)
+
+# ---------------- RECAP ----------------
+confess("atlas", "ATLAS · Recap Globe · Still Drying Out")
+L("atlas", "Recap. First. Weather is now. Climate is the thirty year average.", mood="teach",
+  boardClear=True, board="1. Weather = now · climate = 30-yr average")
+L("atlas", "Second. Cyclones need a sea of at least twenty six point five degrees, five to thirty degrees from the Equator, and spin.", mood="teach",
+  board="2. Sea ≥ 26.5 °C · 5–30° · Coriolis")
+L("atlas", "Third. Storm surge usually kills the most.", mood="teach",
+  board="3. Storm surge kills most (Haiyan 5–7 m)")
+L("atlas", "Fourth. Observe, model, warn. And people must act.", mood="teach",
+  board="4. Observe → model → warn → ACT")
+L("atlas", "And finally. Close isobars mean strong winds.", mood="smug",
+  board="5. Close isobars = strong winds", gap=0.5)
+
+# ---------------- TAG ----------------
+scene("park", [("dad", 300), ("priya", 560), ("atlas", 880)])
+L("dad", "New system. Radar, satellites, and an ensemble. Fifty runs.", mood="smug", shot="close", prop="tablet")
+L("priya", "And?", mood="deadpan", shot="close")
+L("dad", "Forty nine say rain. One says sunshine. I'm going with that one.", mood="excited", shot="close")
+L("atlas", "That one is his knee.", mood="deadpan", shot="close")
+sfx("trombone")
+L("priya", "Umbrella.", mood="deadpan", shot="wide", prop="umbrella", gap=0.8)
 
 # ---------------- PAUSE CHALLENGE ----------------
-card("PAUSE CHALLENGE", "Globo gives you 5 seconds. Then he sulks.", 3.0)
-challenge(1, "Why does Singapore almost never get typhoons?", "NO SPIN", "~1° N → Coriolis almost zero within 5°",
-  "Question one. Why does Singapore almost never get typhoons?",
-  "Too close to the Equator. There's almost no Coriolis effect, so no spin.")
-challenge(2, "A wind vane points north. Where is the wind coming from?", "THE NORTH", "vane points to where wind comes FROM",
-  "Question two. A wind vane points north. Where is the wind coming from?",
-  "From the north. A wind vane points into the wind.")
-challenge(3, "On a weather map, isobars are packed close together. What does that mean?", "STRONG WINDS", "pressure changes fast over a short distance",
-  "Question three. Isobars packed close together mean what?",
-  "Strong winds.")
+card("PAUSE CHALLENGE", "Atlas gives you 5 seconds. Then he checks the radar.", 3.0)
+challenge(1, "Give TWO conditions needed for a tropical cyclone to form.", "Sea ≥ 26.5 °C; 5–30° lat",
+  "Also: Coriolis spin, low wind shear",
+  "Question one. Give two conditions needed for a tropical cyclone to form.",
+  "A sea of at least twenty six point five degrees, and a latitude of five to thirty degrees. Low wind shear also scores.")
+challenge(2, "On a synoptic chart the isobars are very close together. What does this show?", "Strong winds",
+  "Steep pressure gradient → strong wind",
+  "Question two. The isobars are very close together. What does this show?",
+  "Strong winds. Close isobars mean a steep pressure gradient.")
+challenge(3, "Which tropical cyclone hazard usually causes the most deaths?", "Storm surge",
+  "Haiyan 2013: 5–7 m surge at Tacloban",
+  "Question three. Which cyclone hazard usually causes the most deaths?",
+  "Storm surge. Water kills more than wind.")
 end_card()

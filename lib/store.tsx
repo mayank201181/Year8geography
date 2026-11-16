@@ -1,651 +1,414 @@
 "use client";
 
-// ---------------------------------------------------------------------------
-// Global learner store.
+// Global progress + rewards store.
 //
-// - Cloud mode: a family account with learner profiles; progress syncs to the
-//   server (Vercel Blob) and is cached in localStorage for offline use.
-// - Guest mode: no account; progress lives on this device only.
-//
-// Sync safety: every save is an immutable snapshot bound to one account+learner,
-// and the server MERGES it into the stored copy (mergeProgress in profileTypes),
-// so a stale tab or device can never erase newer work; only a PIN-checked reset
-// overwrites. Unsynced local work ("dirty") is merged with the cloud copy on
-// load. If the cloud copy can't be read and nothing here is unsynced, the
-// learner isn't opened (Retry screen), so an old copy is never pushed.
-// ---------------------------------------------------------------------------
+// Progress is now per-LEARNER-PROFILE and synced to the cloud (Vercel Blob)
+// so it follows the learner across devices. localStorage is kept only as a
+// fast offline cache. The provider also records lightweight usage analytics
+// (time on task, questions answered/correct, per-topic activity) for the
+// PIN-protected parent dashboard.
 
-import { createContext, useCallback, useContext, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import type { Difficulty } from "./types";
-import type { Account, AttemptState, DayStat, Profile, ProgressDoc, Slip } from "./profileTypes";
-import { emptyProgress, mergeProgress, normalizeProgress, progressDelta, sameProgress, withRemoved } from "./profileTypes";
-import { createProgressSaveQueue, withProgressTimeout, type ProgressSaveSnapshot } from "./progressSaveQueue";
-import { DRILL_STAR_CAP, nextSrs, skillLevel, slipKey, starsFor, updateSkill } from "./learning";
-import { todayISO } from "./dates";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import type { Analytics, AttemptState, Profile, ProgressDoc, TopicStat } from "./profileTypes";
+import { emptyProgress, normalizeProgress } from "./profileTypes";
+import { lookup } from "./questionIndex";
+import { createProgressSaveQueue, withProgressTimeout } from "./progressSaveQueue";
 
-export type Status = "loading" | "anon" | "no-profile" | "ready" | "load-error";
-export type Mode = "cloud" | "guest";
+export type { AttemptState } from "./profileTypes";
+
+export interface LastActivity {
+  href: string;
+  label: string;
+  topicId?: string;
+  at: number;
+}
+
+export interface Streak {
+  count: number;
+  last: string;
+  best: number;
+}
+
+export interface PublicAccount {
+  id: string;
+  displayName: string;
+  profiles: Profile[];
+}
+
+type Status = "loading" | "anon" | "no-profile" | "ready" | "load-error";
+
+type StoreData = ProgressDoc;
 
 const HEARTBEAT_MS = 20000;
-/** Time on task only counts while the learner did something this recently. */
-const IDLE_MS = 120000;
-const INPUT_EVENTS = ["pointerdown", "keydown", "touchstart", "wheel", "scroll"] as const;
-/** Browsers cap request bodies that may outlive the page (keepalive) at 64 KiB. */
-const KEEPALIVE_MAX = 60000;
-const GUEST_PROFILE: Profile = { id: "guest", name: "Guest", avatar: "🦊", createdAt: 0 };
+/** Spaced-repetition interval ladder (days). Graduate after the last step. */
+const SRS_STEPS = [1, 3, 7, 16, 35];
 
-const k = {
-  cache: (acc: string, pid: string) => `y8m2:cache:${acc}:${pid}`,
-  guest: "y8m2:guest",
-  last: (acc: string) => `y8m2:last:${acc}`,
-  mode: "y8m2:mode",
-  // v1 keys (read once for migration)
-  legacyProgress: (pid: string) => `y8m_progress_${pid}`,
-  legacyActive: "y8m_active_profile",
-};
-
-function lsGet(key: string): string | null {
-  try {
-    return localStorage.getItem(key);
-  } catch {
-    return null;
-  }
-}
-function lsSet(key: string, value: string) {
-  try {
-    localStorage.setItem(key, value);
-  } catch {
-    /* storage blocked or full */
-  }
-}
-function lsDel(key: string) {
-  try {
-    localStorage.removeItem(key);
-  } catch {
-    /* ignore */
-  }
+function addDaysISO(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
 }
 
+function todayISO(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+function dayDiff(a: string, b: string): number {
+  return Math.round((Date.parse(b + "T00:00:00") - Date.parse(a + "T00:00:00")) / 86400000);
+}
+function bumpStreak(s: Streak): Streak {
+  const today = todayISO();
+  if (s.last === today) return s;
+  let count = 1;
+  if (s.last && dayDiff(s.last, today) === 1) count = s.count + 1;
+  return { count, last: today, best: Math.max(s.best, count) };
+}
+function defTopic(): TopicStat {
+  return { timeMs: 0, answered: 0, correct: 0, guideRead: false, challengeBest: 0 };
+}
+function pushLog(a: Analytics, type: string, topicId?: string, detail?: string): Analytics {
+  const log = [...a.log, { at: Date.now(), type, topicId, detail }].slice(-120);
+  return { ...a, log, lastActiveAt: Date.now() };
+}
+/** Network or server failures become a message, never an unhandled rejection. */
 const OFFLINE = "Couldn't reach the server. Check your internet connection and try again.";
-async function callJson(url: string, method: string, body?: unknown): Promise<{ ok: boolean; status: number; data: Record<string, unknown> }> {
+async function postJson(url: string, method: string, body: unknown): Promise<{ ok: boolean; data: Record<string, unknown> }> {
   try {
-    const r = await fetch(url, {
-      method,
-      headers: body ? { "Content-Type": "application/json" } : undefined,
-      body: body ? JSON.stringify(body) : undefined,
-      cache: "no-store",
-    });
+    const r = await fetch(url, { method, headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
     const data = await r.json().catch(() => ({}));
-    return { ok: r.ok, status: r.status, data: (data && typeof data === "object" ? data : {}) as Record<string, unknown> };
+    return { ok: r.ok, data: (data && typeof data === "object" ? data : {}) as Record<string, unknown> };
   } catch {
-    return { ok: false, status: 0, data: { error: OFFLINE } };
+    return { ok: false, data: { error: OFFLINE } };
   }
 }
-const errorOf = (d: Record<string, unknown>) => (typeof d.error === "string" ? d.error : "Something went wrong. Please try again.");
+const errorOf = (data: Record<string, unknown>) => (typeof data.error === "string" ? data.error : "Something went wrong. Please try again.");
+
+interface StoreContextValue extends StoreData {
+  status: Status;
+  account: PublicAccount | null;
+  activeProfile: Profile | null;
+  // auth / profile actions
+  signup: (username: string, password: string, pin: string) => Promise<{ ok: boolean; error?: string }>;
+  login: (username: string, password: string) => Promise<{ ok: boolean; error?: string }>;
+  logout: () => Promise<void>;
+  createProfile: (name: string, emoji: string) => Promise<{ ok: boolean; error?: string }>;
+  updateProfile: (profileId: string, name: string, emoji: string) => Promise<{ ok: boolean; error?: string }>;
+  deleteProfile: (profileId: string) => Promise<{ ok: boolean; error?: string }>;
+  selectProfile: (profileId: string) => Promise<void>;
+  switchProfile: () => void;
+  /** Start (or resume) device-only mode: no account, progress saved in this browser only. */
+  useDevice: () => void;
+  /** Whether the server has cloud storage configured (accounts + sync). */
+  cloudAvailable: boolean;
+  // progress actions
+  award: (key: string, amount: number) => number;
+  hasAward: (key: string) => boolean;
+  saveAttempt: (key: string, state: AttemptState) => void;
+  getAttempt: (key: string) => AttemptState | undefined;
+  markGuideRead: (topicId: string) => void;
+  setLast: (a: Omit<LastActivity, "at">) => void;
+  recordResult: (qid: string, correct: boolean) => void;
+  setChallengeBest: (topicId: string, score: number) => void;
+  setGoalMinutes: (minutes: number) => void;
+  touchStreak: () => void;
+  resetAll: () => void;
+}
+
+const StoreContext = createContext<StoreContextValue | null>(null);
+
+const cacheKey = (acc: string, prof: string) => `y8cache:${acc}:${prof}`;
+/** Device-only "guest" account: profiles and progress live in this browser's localStorage only. */
+export const GUEST_ID = "guest-device";
+const GUEST_KEY = "y8g:guest-account";
+const isGuest = (id: string | undefined | null) => id === GUEST_ID;
+function guestPaused(): boolean { try { return !!localStorage.getItem(GUEST_KEY + ":paused"); } catch { return false; } }
+function readGuest(): PublicAccount | null {
+  try { const raw = localStorage.getItem(GUEST_KEY); return raw ? (JSON.parse(raw) as PublicAccount) : null; } catch { return null; }
+}
+function writeGuest(acc: PublicAccount | null) {
+  try { if (acc) localStorage.setItem(GUEST_KEY, JSON.stringify(acc)); else localStorage.removeItem(GUEST_KEY); } catch {}
+}
+const newId = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+const lastProfileKey = (acc: string) => `y8last:${acc}`;
 
 function currentTopicId(): string | undefined {
   if (typeof window === "undefined") return undefined;
-  const m = window.location.pathname.match(/\/(?:topic|certificate)\/([a-z0-9-]{2,60})(?:[/?#]|$)/);
+  const m = window.location.pathname.match(/\/(?:topic|challenge|certificate)\/([^/]+)/);
   return m ? m[1] : undefined;
 }
 
-const byteLength = (s: string) => new TextEncoder().encode(s).length;
-
-/** The snapshot as a delta against the last copy the server confirmed (null if there isn't one). */
-function deltaBody(snapshot: ProgressSaveSnapshot, synced: { cacheKey: string; body: string } | null): string | null {
-  if (!synced || synced.cacheKey !== snapshot.cacheKey) return null;
-  try {
-    const cur = JSON.parse(snapshot.body) as { profileId: string; progress: unknown };
-    const base = JSON.parse(synced.body) as { progress: unknown };
-    return JSON.stringify({ profileId: cur.profileId, progress: progressDelta(normalizeProgress(cur.progress), normalizeProgress(base.progress)) });
-  } catch {
-    return null;
-  }
-}
-
-function bumpStreak(s: ProgressDoc["streak"]): ProgressDoc["streak"] {
-  const today = todayISO();
-  if (s.last === today) return s;
-  const y = new Date();
-  y.setDate(y.getDate() - 1);
-  const yesterday = `${y.getFullYear()}-${String(y.getMonth() + 1).padStart(2, "0")}-${String(y.getDate()).padStart(2, "0")}`;
-  const count = s.last === yesterday ? s.count + 1 : 1;
-  return { count, last: today, best: Math.max(s.best, count) };
-}
-
-function pushLog(doc: ProgressDoc, type: string, topicId?: string, detail?: string): ProgressDoc["analytics"] {
-  return { ...doc.analytics, log: [...doc.analytics.log, { at: Date.now(), type, topicId, detail }].slice(-150), lastActiveAt: Date.now() };
-}
-
-function bumpDay(doc: ProgressDoc, f: (d: DayStat) => DayStat): Record<string, DayStat> {
-  const today = todayISO();
-  const days = { ...doc.analytics.days };
-  days[today] = f({ ...(days[today] ?? { timeMs: 0, answered: 0, correct: 0, hinted: 0 }) });
-  return days;
-}
-
-function withSlip(slips: Record<string, Slip>, topicId: string, label: string): Record<string, Slip> {
-  const key = slipKey(topicId, label);
-  const next = { ...slips };
-  const cur = next[key];
-  next[key] = { label: label.slice(0, 200), topicId, count: (cur?.count ?? 0) + 1, last: Date.now() };
-  const keys = Object.keys(next);
-  if (keys.length > 60) {
-    keys.sort((a, b) => next[a].last - next[b].last);
-    for (const old of keys.slice(0, keys.length - 60)) delete next[old];
-  }
-  return next;
-}
-
-export interface AnswerRecord {
-  qid: string;
-  topicId?: string;
-  difficulty: Difficulty;
-  /** Fully correct (score 1). */
-  correct: boolean;
-  hints: number;
-  tries: number;
-  solutionShown: boolean;
-  /** Feedback text of a matched trap (a predictable slip). */
-  slip?: string;
-  /** Answered in mixed practice (Daily 5 / review). */
-  mixed?: boolean;
-}
-
-export interface SkillRecord {
-  skillId: string;
-  topicId: string;
-  correct: boolean;
-  tier: 1 | 2 | 3;
-  hinted: boolean;
-  solutionShown: boolean;
-  mixed: boolean;
-  slip?: string;
-}
-
-interface StoreValue {
-  status: Status;
-  mode: Mode;
-  /** Accounts/cloud sync available on this deployment. */
-  cloudAvailable: boolean;
-  account: Account | null;
-  activeProfile: Profile | null;
-  data: ProgressDoc;
-  /** Parent focus topics merged with the learner's own. */
-  focusTopics: string[];
-  // auth / profiles
-  signup: (name: string, password: string, pin: string) => Promise<{ ok: boolean; error?: string }>;
-  login: (name: string, password: string) => Promise<{ ok: boolean; error?: string }>;
-  logout: () => Promise<void>;
-  startGuest: () => void;
-  leaveGuest: () => void;
-  /** `importError`: the learner was added but the guest progress couldn't be copied (retry with importGuest). */
-  createProfile: (name: string, avatar: string, importGuest?: boolean) => Promise<{ ok: boolean; error?: string; importError?: string }>;
-  /** Merge this device's guest progress into a learner, then open them. */
-  importGuest: (profileId: string) => Promise<{ ok: boolean; error?: string }>;
-  updateProfile: (id: string, name: string, avatar: string) => Promise<{ ok: boolean; error?: string }>;
-  deleteProfile: (id: string, pin: string) => Promise<{ ok: boolean; error?: string }>;
-  selectProfile: (id: string) => Promise<void>;
-  switchProfile: () => void;
-  retryLoad: () => Promise<void>;
-  refreshAccount: () => Promise<void>;
-  guestHasProgress: () => boolean;
-  // progress
-  recordAnswer: (r: AnswerRecord) => number;
-  recordSkill: (r: SkillRecord) => { stars: number; levelUp: number | null };
-  award: (key: string, amount: number) => number;
-  saveAttempt: (key: string, state: AttemptState) => void;
-  clearAttempt: (key: string) => void;
-  markSectionRead: (topicId: string, sectionId: string) => void;
-  finishDaily: (correct: number, total: number) => number;
-  setBest: (key: string, value: number) => boolean;
-  setGoalMinutes: (m: number) => void;
-  setWeeklyDays: (n: number) => void;
-  setFocusTopics: (ids: string[]) => void;
-  setLast: (href: string, label: string, topicId?: string) => void;
-  flagQuestion: (qid: string, note: string) => void;
-  /** Start again from zero. In cloud mode the parent PIN is checked by the server. */
-  resetAll: (pin?: string) => Promise<{ ok: boolean; error?: string }>;
-}
-
-const StoreContext = createContext<StoreValue | null>(null);
-
-export function StoreProvider({ children }: { children: ReactNode }) {
+export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<Status>("loading");
-  const [mode, setMode] = useState<Mode>("cloud");
-  const [cloudAvailable, setCloudAvailable] = useState(false);
-  const [account, setAccount] = useState<Account | null>(null);
+  const [account, setAccount] = useState<PublicAccount | null>(null);
   const [activeProfile, setActiveProfile] = useState<Profile | null>(null);
-  const [data, setData] = useState<ProgressDoc>(() => emptyProgress(0));
+  const [data, setData] = useState<StoreData>(emptyProgress());
+  const [cloudAvailable, setCloudAvailable] = useState(true);
 
-  // Handlers read the latest committed values through these refs.
   const dataRef = useRef(data);
+  dataRef.current = data;
   const accountRef = useRef(account);
+  accountRef.current = account;
   const activeRef = useRef(activeProfile);
-  const modeRef = useRef(mode);
-  useLayoutEffect(() => {
-    dataRef.current = data;
-    accountRef.current = account;
-    activeRef.current = activeProfile;
-    modeRef.current = mode;
-  });
+  activeRef.current = activeProfile;
   const canSaveRef = useRef(false);
   const loadVersion = useRef(0);
   const saveRevision = useRef(0);
-  /** Last save body the server confirmed for the open learner (base for page-close deltas). */
-  const syncedRef = useRef<{ cacheKey: string; body: string } | null>(null);
   const saver = useRef<ReturnType<typeof createProgressSaveQueue> | null>(null);
+  if (!saver.current) saver.current = createProgressSaveQueue(async (snapshot) => {
+    if (accountRef.current?.id !== snapshot.accountId) throw new Error("Account changed before save");
+    if (isGuest(snapshot.accountId)) {
+      try { if (localStorage.getItem(`${snapshot.cacheKey}:dirty`) === snapshot.revision) localStorage.removeItem(`${snapshot.cacheKey}:dirty`); } catch {}
+      return;
+    }
+    const response = await withProgressTimeout((signal) => fetch("/api/progress", {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: snapshot.body, signal,
+      // Lets a save started as the app is closed finish; browsers cap keepalive bodies at 64 KB.
+      keepalive: new TextEncoder().encode(snapshot.body).length < 60000,
+    }));
+    if (!response.ok) throw new Error("Progress could not be saved");
+    try {
+      if (localStorage.getItem(`${snapshot.cacheKey}:dirty`) === snapshot.revision) {
+        localStorage.removeItem(`${snapshot.cacheKey}:dirty`);
+      }
+    } catch {}
+  }, 1800);
 
-  // Merge another copy of the open learner's progress (a server reply, another tab) into
-  // ours. Merging never drops local work; an unchanged result keeps the same object, so it
-  // doesn't trigger another save.
-  const mergeIn = useCallback((other: ProgressDoc) => {
-    setData((cur) => {
-      if (!canSaveRef.current) return cur;
-      const next = mergeProgress(cur, other);
-      return sameProgress(next, cur) ? cur : next;
-    });
-  }, []);
-
-  // Created on first use (never during render).
-  const getSaver = useCallback(() => {
-    saver.current ??= createProgressSaveQueue(async (snapshot, urgent) => {
-      if (accountRef.current?.id !== snapshot.accountId) throw new Error("Account changed before save");
-      let body = snapshot.body;
-      let whole = true;
-      if (urgent && byteLength(body) > KEEPALIVE_MAX) {
-        // Too big to outlive the page: send only what the server doesn't have yet.
-        const delta = deltaBody(snapshot, syncedRef.current);
-        if (delta && byteLength(delta) <= KEEPALIVE_MAX) {
-          body = delta;
-          whole = false;
-        }
-      }
-      // Only page-hide saves use keepalive, so they get the browser's whole keepalive quota.
-      const keepalive = urgent && byteLength(body) <= KEEPALIVE_MAX;
-      const post = (keep: boolean) =>
-        withProgressTimeout((signal) => fetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body, signal, keepalive: keep }));
-      let response: Response;
-      try {
-        response = await post(keepalive);
-      } catch (e) {
-        // A keepalive request over the browser's quota is refused (TypeError): send it normally.
-        if (!keepalive || !(e instanceof TypeError)) throw e;
-        response = await post(false);
-      }
-      if (!response.ok) throw new Error("Progress could not be saved");
-      if (whole) {
-        if (lsGet(`${snapshot.cacheKey}:dirty`) === snapshot.revision) lsDel(`${snapshot.cacheKey}:dirty`);
-        syncedRef.current = { cacheKey: snapshot.cacheKey, body: snapshot.body };
-      }
-      // The server's copy had work ours lacks (another tab or device): take it in.
-      const reply = (await response.json().catch(() => null)) as { progress?: unknown } | null;
-      if (reply?.progress && modeRef.current === "cloud" && accountRef.current?.id === snapshot.accountId && activeRef.current?.id === snapshot.profileId) {
-        mergeIn(normalizeProgress(reply.progress));
-      }
-    }, 1500);
-    return saver.current;
-  }, [mergeIn]);
-
-  // Send at once on hide/close (not behind a save in flight); cancel on unmount (dirty cache keeps unsent work).
+  // Send pending work as soon as the app is hidden (switching apps, locking the
+  // phone) so another device sees it. On unmount, unsent work is cancelled; the
+  // local cache and its dirty marker keep it for the next load.
   useEffect(() => {
-    const onHide = (e: Event) => {
-      if (e.type === "pagehide" || document.visibilityState === "hidden") void saver.current?.flushNow().catch(() => {});
+    const onHide = () => {
+      if (document.visibilityState === "hidden") void saver.current?.flush().catch(() => {});
     };
-    document.addEventListener("visibilitychange", onHide);
-    window.addEventListener("pagehide", onHide);
-    return () => {
-      document.removeEventListener("visibilitychange", onHide);
-      window.removeEventListener("pagehide", onHide);
+    const stop = () => {
       canSaveRef.current = false;
-      // A counter, not a DOM ref: bumping the live value is the point (late loads become stale).
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       ++loadVersion.current;
       saver.current?.cancel();
     };
+    document.addEventListener("visibilitychange", onHide);
+    return () => {
+      document.removeEventListener("visibilitychange", onHide);
+      stop();
+    };
   }, []);
 
-  // ---------------------------------------------------------------- loading
-  const loadGuest = useCallback(() => {
-    ++loadVersion.current;
-    let doc: ProgressDoc | null = null;
-    const raw = lsGet(k.guest) ?? lsGet(k.legacyProgress("guest"));
-    if (raw) {
+  // ---- bootstrap: who is signed in? ----
+  useEffect(() => {
+    (async () => {
       try {
-        doc = normalizeProgress(JSON.parse(raw));
+        const r = await fetch("/api/auth/me", { cache: "no-store" });
+        const j = await r.json();
+        setCloudAvailable(j.cloud !== false);
+        if (!j.account) {
+          const guest = guestPaused() ? null : readGuest();
+          if (guest) j.account = guest;
+        }
+        if (j.account) {
+          const acc: PublicAccount = { ...j.account, profiles: Array.isArray(j.account.profiles) ? j.account.profiles : [] };
+          setAccount(acc);
+          let lastId: string | null = null;
+          try { lastId = localStorage.getItem(lastProfileKey(acc.id)); } catch {}
+          const prof = acc.profiles.find((p) => p.id === lastId);
+          if (prof) {
+            await selectLoaded(acc.id, prof);
+            return;
+          }
+          setStatus("no-profile");
+        } else {
+          setStatus("anon");
+        }
       } catch {
-        doc = null;
+        const guest = guestPaused() ? null : readGuest();
+        if (guest) { setAccount(guest); setStatus("no-profile"); return; }
+        setStatus("anon");
       }
-    }
-    doc = doc ?? emptyProgress();
-    doc = { ...doc, analytics: pushLog({ ...doc, analytics: { ...doc.analytics, sessionCount: doc.analytics.sessionCount + 1 } }, "start") };
-    setMode("guest");
-    setAccount(null);
-    setActiveProfile(GUEST_PROFILE);
-    setData(doc);
-    lsSet(k.mode, "guest");
-    canSaveRef.current = true;
-    setStatus("ready");
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const loadProfile = useCallback(async (acc: Account, prof: Profile) => {
+  // Unexpected failures while loading show the retry screen rather than crashing.
+  async function selectLoaded(accountId: string, prof: Profile) {
+    try { await loadProfile(accountId, prof); }
+    catch (error) {
+      console.error("Could not load learner progress", error);
+      canSaveRef.current = false;
+      setStatus("load-error");
+    }
+  }
+
+  async function loadProfile(accountId: string, prof: Profile) {
     const version = ++loadVersion.current;
     canSaveRef.current = false;
     setStatus("loading");
-    await getSaver().flush().catch(() => {});
+    await saver.current!.flush().catch(() => {});
     if (version !== loadVersion.current) return;
-    setMode("cloud");
     setActiveProfile(prof);
-    const key = k.cache(acc.id, prof.id);
     let cached: ProgressDoc | null = null;
     let dirty = false;
     try {
-      const raw = lsGet(key);
-      if (raw) {
-        cached = normalizeProgress(JSON.parse(raw));
-        dirty = !!lsGet(`${key}:dirty`);
-      } else {
-        // v1 cache: only worth keeping if it holds unsynced work.
-        const legacy = lsGet(k.legacyProgress(prof.id));
-        if (legacy && lsGet(`${k.legacyProgress(prof.id)}:dirty`)) {
-          cached = normalizeProgress(JSON.parse(legacy));
-          dirty = true;
-        }
-      }
-    } catch {
-      cached = null;
-    }
+      const raw = localStorage.getItem(cacheKey(accountId, prof.id));
+      if (raw) cached = normalizeProgress(JSON.parse(raw));
+      dirty = !!localStorage.getItem(`${cacheKey(accountId, prof.id)}:dirty`);
+    } catch {}
     let doc = cached ?? emptyProgress();
-    setData(doc); // never inherit the previous learner's state
-    let cloudRead = false;
-    let cloud: ProgressDoc | null = null;
+    setData(doc); // A fresh/offline profile must never inherit the prior learner's state.
+    if (isGuest(accountId)) {
+      if (version !== loadVersion.current) return;
+      doc = { ...doc, analytics: pushLog({ ...doc.analytics, sessionCount: doc.analytics.sessionCount + 1 }, "start") };
+      setData(doc);
+      try { localStorage.setItem(lastProfileKey(accountId), prof.id); } catch {}
+      canSaveRef.current = true;
+      setStatus("ready");
+      return;
+    }
     try {
       const j = await withProgressTimeout(async (signal) => {
-        const r = await fetch(`/api/progress?profileId=${encodeURIComponent(prof.id)}`, { cache: "no-store", signal });
+        const r = await fetch(`/api/progress?profileId=${prof.id}`, { cache: "no-store", signal });
         if (!r.ok) throw new Error("Progress unavailable");
-        return (await r.json()) as { progress: unknown };
+        return await r.json();
       });
       if (version !== loadVersion.current) return;
-      cloudRead = true;
-      cloud = j.progress ? normalizeProgress(j.progress) : null;
+      // Unsynced local work takes precedence over an older remote copy.
+      if (!cached || !dirty) doc = normalizeProgress(j.progress);
     } catch {
       if (version !== loadVersion.current) return;
+      // An unreadable remote document is not evidence of empty progress.
+      if (!cached) {
+        setStatus("load-error");
+        return; // canSave remains false; retry before accepting new work.
+      }
     }
     if (version !== loadVersion.current) return;
-    if (!cloudRead && !(cached && dirty)) {
-      // The cloud copy couldn't be checked and nothing here is unsynced: don't open (and
-      // later save) a copy that may be out of date. Unsynced work is fine — the server merges it.
-      setStatus("load-error");
-      return;
-    }
-    // Unsynced work from this device is merged with the cloud copy, never chosen over it.
-    if (cloud) doc = cached && dirty ? mergeProgress(cached, cloud) : cloud;
-    syncedRef.current = cloud ? { cacheKey: key, body: JSON.stringify({ profileId: prof.id, progress: cloud }) } : null;
-    doc = { ...doc, analytics: pushLog({ ...doc, analytics: { ...doc.analytics, sessionCount: doc.analytics.sessionCount + 1 } }, "start") };
+    doc = { ...doc, analytics: pushLog({ ...doc.analytics, sessionCount: doc.analytics.sessionCount + 1 }, "start") };
     setData(doc);
-    lsSet(k.last(acc.id), prof.id);
+    try { localStorage.setItem(lastProfileKey(accountId), prof.id); } catch {}
     canSaveRef.current = true;
     setStatus("ready");
-  }, [getSaver]);
+  }
 
-  const safeLoadProfile = useCallback(
-    async (acc: Account, prof: Profile) => {
-      try {
-        await loadProfile(acc, prof);
-      } catch (e) {
-        console.error("Could not load learner progress", e);
-        canSaveRef.current = false;
-        setStatus("load-error");
-      }
-    },
-    [loadProfile],
-  );
-
-  // Starts in "loading" (initial state, or set by the caller) so the mount effect never sets state synchronously.
-  const bootstrap = useCallback(async () => {
-    const r = await callJson("/api/auth/me", "GET");
-    // Only a definite answer may lead to guest mode or sign-in: a failed check (offline,
-    // server error) shows the Retry screen instead of quietly dropping a family into guest mode.
-    if (!r.ok || typeof r.data.accounts !== "boolean") {
-      setStatus("load-error");
-      return;
-    }
-    const cloud = r.data.accounts;
-    setCloudAvailable(cloud);
-    const acc = r.data.account && typeof r.data.account === "object" ? (r.data.account as Account) : null;
-    if (acc) {
-      acc.profiles = Array.isArray(acc.profiles) ? acc.profiles : [];
-      setAccount(acc);
-      setMode("cloud");
-      lsDel(k.mode); // signed in: an old "guest" choice must not come back later
-      const lastId = lsGet(k.last(acc.id)) ?? lsGet(k.legacyActive);
-      const prof = acc.profiles.find((p) => p.id === lastId) ?? (acc.profiles.length === 1 ? acc.profiles[0] : undefined);
-      if (prof) await safeLoadProfile(acc, prof);
-      else setStatus("no-profile");
-      return;
-    }
-    // No account: resume guest mode if chosen before (or if v1 guest data exists), else ask.
-    const hadGuest = lsGet(k.mode) === "guest" || !!lsGet(k.legacyProgress("guest"));
-    if (hadGuest || !cloud) loadGuest();
-    else setStatus("anon");
-  }, [loadGuest, safeLoadProfile]);
-
+  // ---- persist an immutable, learner-bound snapshot (debounced) ----
   useEffect(() => {
-    // bootstrap awaits /api/auth/me before it sets any state.
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    void bootstrap();
-  }, [bootstrap]);
-
-  // ------------------------------------------------------------- persisting
-  useEffect(() => {
-    if (status !== "ready" || !canSaveRef.current || !activeRef.current) return;
-    if (modeRef.current === "guest") {
-      lsSet(k.guest, JSON.stringify(data));
-      return;
-    }
-    const acc = accountRef.current;
-    if (!acc) return;
+    if (status !== "ready" || !accountRef.current || !activeRef.current || !canSaveRef.current) return;
+    const acc = accountRef.current.id;
     const pid = activeRef.current.id;
-    const key = k.cache(acc.id, pid);
+    const key = cacheKey(acc, pid);
     const revision = `${Date.now()}:${++saveRevision.current}`;
-    lsSet(key, JSON.stringify(data));
-    lsSet(`${key}:dirty`, revision);
-    getSaver().schedule({ accountId: acc.id, profileId: pid, cacheKey: key, revision, body: JSON.stringify({ profileId: pid, progress: data }) });
-  }, [data, status, getSaver]);
+    try {
+      localStorage.setItem(key, JSON.stringify(data));
+      localStorage.setItem(`${key}:dirty`, revision);
+    } catch {}
+    saver.current!.schedule({ accountId: acc, profileId: pid, cacheKey: key, revision,
+      body: JSON.stringify({ profileId: pid, progress: data }) });
+  }, [data, status]);
 
-  // Another tab saved the same learner: merge its copy in, so this tab's next save carries
-  // that work too (in guest mode there is no server to merge for us).
+  // ---- heartbeat: time on task ----
   useEffect(() => {
-    const onStorage = (e: StorageEvent) => {
-      if (!e.newValue || !canSaveRef.current) return;
-      const acc = accountRef.current;
-      const prof = activeRef.current;
-      const key = modeRef.current === "guest" ? k.guest : acc && prof ? k.cache(acc.id, prof.id) : null;
-      if (!key || e.key !== key) return;
-      try {
-        mergeIn(normalizeProgress(JSON.parse(e.newValue)));
-      } catch {
-        /* unreadable: ignore */
-      }
-    };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
-  }, [mergeIn]);
-
-  // ----------------------------------------------------- time-on-task beat
-  // Last learner input: an open but untouched page isn't study time.
-  const lastInputRef = useRef(0);
-  useEffect(() => {
-    const mark = () => {
-      lastInputRef.current = Date.now();
-    };
-    const opts = { capture: true, passive: true };
-    for (const type of INPUT_EVENTS) window.addEventListener(type, mark, opts);
-    return () => {
-      for (const type of INPUT_EVENTS) window.removeEventListener(type, mark, opts);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (status !== "ready") return;
-    lastInputRef.current = Date.now(); // opening a learner counts as activity
     const id = setInterval(() => {
-      // Idle (or hidden): change nothing, so nothing is saved either.
-      if (!canSaveRef.current || document.visibilityState !== "visible" || Date.now() - lastInputRef.current > IDLE_MS) return;
+      if (!canSaveRef.current || status !== "ready" || document.visibilityState !== "visible") return;
       const tid = currentTopicId();
       setData((d) => {
         if (!canSaveRef.current) return d;
+        const today = todayISO();
+        const days = { ...d.analytics.days };
+        const day = { ...(days[today] || { timeMs: 0, answered: 0, correct: 0 }) };
+        day.timeMs += HEARTBEAT_MS;
+        days[today] = day;
         const topics = { ...d.analytics.topics };
         if (tid) {
-          const t = topics[tid] ?? { timeMs: 0, answered: 0, correct: 0 };
-          topics[tid] = { ...t, timeMs: t.timeMs + HEARTBEAT_MS };
+          const t = { ...(topics[tid] || defTopic()) };
+          t.timeMs += HEARTBEAT_MS;
+          topics[tid] = t;
         }
-        return {
-          ...d,
-          updatedAt: Date.now(),
-          analytics: {
-            ...d.analytics,
-            totalTimeMs: d.analytics.totalTimeMs + HEARTBEAT_MS,
-            lastActiveAt: Date.now(),
-            days: bumpDay(d, (x) => ({ ...x, timeMs: x.timeMs + HEARTBEAT_MS })),
-            topics,
-          },
-        };
+        return { ...d, analytics: { ...d.analytics, totalTimeMs: d.analytics.totalTimeMs + HEARTBEAT_MS, lastActiveAt: Date.now(), days, topics } };
       });
     }, HEARTBEAT_MS);
     return () => clearInterval(id);
   }, [status]);
 
-  // -------------------------------------------------------- auth/profiles
-  const signup = useCallback(async (name: string, password: string, pin: string) => {
-    const { ok, data: d } = await callJson("/api/auth/signup", "POST", { name, password, pin });
-    if (!ok) return { ok: false, error: errorOf(d) };
-    const acc = d.account as Account;
-    setAccount({ ...acc, profiles: acc.profiles ?? [] });
-    setMode("cloud");
-    lsDel(k.mode);
-    canSaveRef.current = false;
+  // ---- auth / profile actions ----
+  const signup = useCallback(async (username: string, password: string, pin: string) => {
+    const { ok, data } = await postJson("/api/auth/signup", "POST", { username, password, pin });
+    if (!ok) return { ok: false, error: errorOf(data) };
+    setAccount(data.account as PublicAccount);
     setStatus("no-profile");
     return { ok: true };
   }, []);
 
-  const login = useCallback(
-    async (name: string, password: string) => {
-      const { ok, data: d } = await callJson("/api/auth/login", "POST", { name, password });
-      if (!ok) return { ok: false, error: errorOf(d) };
-      const acc = d.account as Account;
-      acc.profiles = Array.isArray(acc.profiles) ? acc.profiles : [];
-      setAccount(acc);
-      setMode("cloud");
-      lsDel(k.mode);
-      canSaveRef.current = false;
-      const lastId = lsGet(k.last(acc.id));
-      const prof = acc.profiles.find((p) => p.id === lastId) ?? (acc.profiles.length === 1 ? acc.profiles[0] : undefined);
-      if (prof) await safeLoadProfile(acc, prof);
-      else setStatus("no-profile");
-      return { ok: true };
-    },
-    [safeLoadProfile],
-  );
+  const login = useCallback(async (username: string, password: string) => {
+    const { ok, data } = await postJson("/api/auth/login", "POST", { username, password });
+    if (!ok) return { ok: false, error: errorOf(data) };
+    setAccount(data.account as PublicAccount);
+    setStatus("no-profile");
+    return { ok: true };
+  }, []);
 
   const logout = useCallback(async () => {
     ++loadVersion.current;
     canSaveRef.current = false;
     setStatus("loading");
-    await getSaver().flush().catch(() => {});
-    await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+    await saver.current!.flush().catch(() => {});
+    if (isGuest(accountRef.current?.id)) { try { localStorage.setItem(GUEST_KEY + ":paused", "1"); } catch {} }
+    else await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
     setAccount(null);
     setActiveProfile(null);
     setData(emptyProgress());
-    lsDel(k.mode);
-    setStatus("anon");
-  }, [getSaver]);
-
-  const startGuest = useCallback(() => loadGuest(), [loadGuest]);
-
-  const leaveGuest = useCallback(() => {
-    ++loadVersion.current;
     canSaveRef.current = false;
-    lsDel(k.mode);
-    setActiveProfile(null);
     setStatus("anon");
   }, []);
 
-  const guestHasProgress = useCallback(() => {
-    const raw = lsGet(k.guest) ?? lsGet(k.legacyProgress("guest"));
-    if (!raw) return false;
-    try {
-      const d = normalizeProgress(JSON.parse(raw));
-      return d.stars > 0 || d.analytics.answered > 0;
-    } catch {
-      return false;
+  const createProfile = useCallback(async (name: string, emoji: string) => {
+    if (isGuest(accountRef.current?.id)) {
+      const clean = name.trim().slice(0, 30);
+      if (!clean) return { ok: false, error: "Please enter a name." };
+      const prof = { id: newId(), name: clean, emoji, createdAt: Date.now() } as Profile;
+      const acc = { ...accountRef.current!, profiles: [...accountRef.current!.profiles, prof] };
+      writeGuest(acc); setAccount(acc); accountRef.current = acc;
+      await selectLoaded(acc.id, prof);
+      return { ok: true };
     }
+    const { ok, data } = await postJson("/api/profiles", "POST", { name, emoji });
+    if (!ok || !data.profile) return { ok: false, error: errorOf(data) };
+    const prof = data.profile as Profile;
+    setAccount((a) => (a ? { ...a, profiles: [...a.profiles, prof] } : a));
+    const accId = accountRef.current?.id;
+    if (accId) await selectLoaded(accId, prof);
+    return { ok: true };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /** Merge this device's guest progress into a learner's cloud copy. Returns an error message, or null when done (or nothing to bring). */
-  const sendGuestProgress = useCallback(async (profileId: string): Promise<string | null> => {
-    const raw = lsGet(k.guest) ?? lsGet(k.legacyProgress("guest"));
-    if (!raw) return null;
-    let guestDoc: ProgressDoc;
-    try {
-      guestDoc = normalizeProgress(JSON.parse(raw));
-    } catch {
-      return null;
+  const updateProfile = useCallback(async (profileId: string, name: string, emoji: string) => {
+    if (isGuest(accountRef.current?.id)) {
+      const acc = { ...accountRef.current!, profiles: accountRef.current!.profiles.map((p) => (p.id === profileId ? { ...p, name: name.trim().slice(0, 30) || p.name, emoji } : p)) };
+      writeGuest(acc); setAccount(acc);
+      setActiveProfile((p) => (p && p.id === profileId ? acc.profiles.find((x) => x.id === profileId) ?? p : p));
+      return { ok: true };
     }
-    const res = await callJson("/api/progress", "POST", { profileId, progress: guestDoc, import: true });
-    if (!res.ok) return errorOf(res.data); // the guest data stays on the device
-    lsDel(k.guest);
-    lsDel(k.legacyProgress("guest"));
-    return null;
-  }, []);
-
-  const createProfile = useCallback(
-    async (name: string, avatar: string, importGuest = false) => {
-      const { ok, data: d } = await callJson("/api/profiles", "POST", { name, avatar });
-      if (!ok || !d.account) return { ok: false, error: errorOf(d) };
-      const acc = d.account as Account;
-      const prof = (d.profile as Profile) ?? acc.profiles[acc.profiles.length - 1];
-      setAccount(acc);
-      if (importGuest) {
-        const error = await sendGuestProgress(prof.id);
-        // The learner exists either way; stay on "Who's studying?" so the import can be retried.
-        if (error) return { ok: true, importError: `${prof.name} has been added, but the progress from guest mode couldn't be copied across. ${error}` };
-      }
-      await safeLoadProfile(acc, prof);
-      return { ok: true };
-    },
-    [safeLoadProfile, sendGuestProgress],
-  );
-
-  const importGuest = useCallback(
-    async (profileId: string) => {
-      const acc = accountRef.current;
-      const prof = acc?.profiles.find((p) => p.id === profileId);
-      if (!acc || !prof) return { ok: false, error: "Learner not found." };
-      const error = await sendGuestProgress(prof.id);
-      if (error) return { ok: false, error };
-      await safeLoadProfile(acc, prof);
-      return { ok: true };
-    },
-    [safeLoadProfile, sendGuestProgress],
-  );
-
-  const updateProfile = useCallback(async (id: string, name: string, avatar: string) => {
-    const { ok, data: d } = await callJson("/api/profiles", "PATCH", { id, name, avatar });
-    if (!ok || !d.account) return { ok: false, error: errorOf(d) };
-    const acc = d.account as Account;
-    setAccount(acc);
-    setActiveProfile((p) => (p && p.id === id ? acc.profiles.find((x) => x.id === id) ?? p : p));
+    const { ok, data } = await postJson("/api/profiles", "PATCH", { profileId, name, emoji });
+    if (!ok || !data.profile) return { ok: false, error: errorOf(data) };
+    const prof = data.profile as Profile;
+    setAccount((a) => (a ? { ...a, profiles: a.profiles.map((p) => (p.id === prof.id ? prof : p)) } : a));
+    setActiveProfile((p) => (p && p.id === prof.id ? prof : p));
     return { ok: true };
   }, []);
 
-  const deleteProfile = useCallback(async (id: string, pin: string) => {
-    const { ok, data: d } = await callJson("/api/profiles", "DELETE", { id, pin });
-    if (!ok || !d.account) return { ok: false, error: errorOf(d) };
-    const acc = d.account as Account;
-    setAccount(acc);
-    if (activeRef.current?.id === id) {
-      ++loadVersion.current;
+  const deleteProfile = useCallback(async (profileId: string) => {
+    if (isGuest(accountRef.current?.id)) {
+      const acc = { ...accountRef.current!, profiles: accountRef.current!.profiles.filter((p) => p.id !== profileId) };
+      writeGuest(acc);
+      try { localStorage.removeItem(cacheKey(acc.id, profileId)); } catch {}
+    } else {
+      const { ok, data } = await postJson("/api/profiles", "DELETE", { profileId });
+      if (!ok) return { ok: false, error: errorOf(data) };
+    }
+    setAccount((a) => (a ? { ...a, profiles: a.profiles.filter((p) => p.id !== profileId) } : a));
+    if (activeRef.current?.id === profileId) {
       canSaveRef.current = false;
       setActiveProfile(null);
       setData(emptyProgress());
@@ -654,329 +417,204 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return { ok: true };
   }, []);
 
-  const selectProfile = useCallback(
-    async (id: string) => {
-      const acc = accountRef.current;
-      const prof = acc?.profiles.find((p) => p.id === id);
-      if (acc && prof) await safeLoadProfile(acc, prof);
-    },
-    [safeLoadProfile],
-  );
+  const selectProfile = useCallback(async (profileId: string) => {
+    const acc = accountRef.current;
+    const prof = acc?.profiles.find((p) => p.id === profileId);
+    if (acc && prof) await selectLoaded(acc.id, prof);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const useDevice = useCallback(() => {
+    const acc: PublicAccount = readGuest() ?? { id: GUEST_ID, displayName: "This device", profiles: [] };
+    writeGuest(acc);
+    try { localStorage.removeItem(GUEST_KEY + ":paused"); } catch {}
+    setAccount(acc);
+    accountRef.current = acc;
+    setStatus("no-profile");
+  }, []);
 
   const switchProfile = useCallback(() => {
     ++loadVersion.current;
     canSaveRef.current = false;
-    void getSaver().flush().catch(() => {});
+    // flush() cancels the timer; its body is already bound to the old learner.
+    void saver.current!.flush().catch(() => {});
     setActiveProfile(null);
     setData(emptyProgress());
     setStatus("no-profile");
-  }, [getSaver]);
-
-  const retryLoad = useCallback(async () => {
-    const acc = accountRef.current;
-    const prof = activeRef.current;
-    if (acc && prof) await safeLoadProfile(acc, prof);
-    else {
-      setStatus("loading");
-      await bootstrap();
-    }
-  }, [bootstrap, safeLoadProfile]);
-
-  const refreshAccount = useCallback(async () => {
-    const r = await callJson("/api/auth/me", "GET");
-    if (r.ok && r.data.account) {
-      const acc = r.data.account as Account;
-      setAccount(acc);
-      setActiveProfile((p) => (p ? acc.profiles.find((x) => x.id === p.id) ?? p : p));
-    }
   }, []);
 
-  // ---------------------------------------------------------- mutations
-  const update = useCallback((f: (d: ProgressDoc) => ProgressDoc) => {
+  // Recheck inside the React updater so stale callbacks cannot modify an unloaded learner.
+  const updateProgress = useCallback((update: (current: StoreData) => StoreData) => {
     if (!canSaveRef.current) return;
-    setData((cur) => {
-      if (!canSaveRef.current) return cur;
-      const next = f(cur);
-      return next === cur ? cur : { ...next, updatedAt: Date.now() };
-    });
+    setData(current => !canSaveRef.current ? current : update(current));
   }, []);
 
-  const recordAnswer = useCallback(
-    (r: AnswerRecord) => {
-      const before = dataRef.current;
-      const firstSolve = r.correct && !r.solutionShown && !before.solved[r.qid];
-      const stars = firstSolve ? starsFor(r.difficulty, { hints: r.hints, tries: r.tries, solutionShown: r.solutionShown }) : 0;
-      update((d) => {
-        const now = Date.now();
-        const srs = { ...d.srs };
-        let removed = d.removed;
-        const cur = srs[r.qid];
-        const n = nextSrs(cur, r.correct && !r.solutionShown);
-        if (n === null) {
-          delete srs[r.qid];
-          // Graduated: remember it, or an older copy (another device) would put it back.
-          removed = withRemoved(d.removed, `srs:${r.qid}`, Math.max(now, (cur?.at ?? 0) + 1));
-        } else if (n && n !== cur) srs[r.qid] = { ...n, at: Math.max(now, d.removed[`srs:${r.qid}`] ?? 0) };
-        const solved = r.correct && !r.solutionShown && !d.solved[r.qid] ? { ...d.solved, [r.qid]: true as const } : d.solved;
-        const gain = d.solved[r.qid] ? 0 : stars;
-        const topics = { ...d.analytics.topics };
-        if (r.topicId) {
-          const t = topics[r.topicId] ?? { timeMs: 0, answered: 0, correct: 0 };
-          topics[r.topicId] = { ...t, answered: t.answered + 1, correct: t.correct + (r.correct ? 1 : 0) };
-        }
-        return {
-          ...d,
-          stars: d.stars + gain,
-          solved,
-          srs,
-          removed,
-          slips: r.slip && r.topicId ? withSlip(d.slips, r.topicId, r.slip) : d.slips,
-          streak: bumpStreak(d.streak),
-          analytics: {
-            ...d.analytics,
-            answered: d.analytics.answered + 1,
-            correct: d.analytics.correct + (r.correct ? 1 : 0),
-            hinted: d.analytics.hinted + (r.hints > 0 ? 1 : 0),
-            lastActiveAt: Date.now(),
-            days: bumpDay(d, (x) => ({ ...x, answered: x.answered + 1, correct: x.correct + (r.correct ? 1 : 0), hinted: x.hinted + (r.hints > 0 ? 1 : 0) })),
-            topics,
-          },
-        };
-      });
-      return stars;
-    },
-    [update],
-  );
+  // ---- progress mutations ----
+  const award = useCallback((key: string, amount: number) => {
+    let added = 0;
+    updateProgress((d) => {
+      if (d.awarded[key]) return d;
+      added = amount;
+      return { ...d, stars: d.stars + amount, awarded: { ...d.awarded, [key]: true } };
+    });
+    return added;
+  }, [updateProgress]);
 
-  const recordSkill = useCallback(
-    (r: SkillRecord) => {
-      const before = dataRef.current;
-      const prevLevel = skillLevel(before.skills[r.skillId]);
-      const credited = r.correct && !r.solutionShown;
-      const nextSkill = updateSkill(before.skills[r.skillId], { correct: credited, tier: r.tier, mixed: r.mixed });
-      const newLevel = skillLevel(nextSkill);
-      const today = todayISO();
-      const todayStars = before.analytics.days[today]?.drillStars ?? 0;
-      let stars = credited && todayStars < DRILL_STAR_CAP ? 1 : 0;
-      let levelUp: number | null = null;
-      const bonusKeys: string[] = [];
-      if (newLevel > prevLevel && newLevel >= 2) {
-        const key = `sk${newLevel}:${r.skillId}`;
-        if (!before.awarded[key]) {
-          levelUp = newLevel;
-          stars += newLevel === 3 ? 10 : 5;
-          bonusKeys.push(key);
+  const hasAward = useCallback((key: string) => !!dataRef.current.awarded[key], []);
+
+  const saveAttempt = useCallback((key: string, state: AttemptState) => {
+    updateProgress((d) => ({ ...d, attempts: { ...d.attempts, [key]: state }, streak: bumpStreak(d.streak) }));
+  }, [updateProgress]);
+
+  const getAttempt = useCallback((key: string) => dataRef.current.attempts[key] as AttemptState | undefined, []);
+
+  const markGuideRead = useCallback((topicId: string) => {
+    updateProgress((d) => {
+      const topics = { ...d.analytics.topics };
+      topics[topicId] = { ...(topics[topicId] || defTopic()), guideRead: true };
+      const analytics = pushLog({ ...d.analytics, topics }, "guide", topicId);
+      return { ...d, guidesRead: { ...d.guidesRead, [topicId]: true }, streak: bumpStreak(d.streak), analytics };
+    });
+  }, [updateProgress]);
+
+  const recordResult = useCallback((qid: string, correct: boolean) => {
+    const topicId = lookup(qid)?.topicId;
+    updateProgress((d) => {
+      const missed = { ...d.missed };
+      const srs = { ...d.srs };
+      if (correct) {
+        // Advance the spaced-repetition schedule if this was a review item.
+        const cur = srs[qid];
+        if (cur) {
+          const reps = cur.reps + 1;
+          if (reps >= SRS_STEPS.length) {
+            delete srs[qid]; // graduated — mastered
+            delete missed[qid];
+          } else {
+            const interval = SRS_STEPS[reps];
+            srs[qid] = { due: addDaysISO(interval), reps, interval };
+            delete missed[qid]; // not due again until `due`
+          }
         }
+      } else {
+        // Missed: schedule for review today, reset the ladder.
+        srs[qid] = { due: todayISO(), reps: 0, interval: 1 };
+        missed[qid] = true;
       }
-      update((d) => {
-        const awarded = { ...d.awarded };
-        for (const bk of bonusKeys) awarded[bk] = true;
-        const topics = { ...d.analytics.topics };
-        const t = topics[r.topicId] ?? { timeMs: 0, answered: 0, correct: 0 };
-        topics[r.topicId] = { ...t, answered: t.answered + 1, correct: t.correct + (r.correct ? 1 : 0) };
-        return {
-          ...d,
-          stars: d.stars + stars,
-          awarded,
-          skills: { ...d.skills, [r.skillId]: updateSkill(d.skills[r.skillId], { correct: credited, tier: r.tier, mixed: r.mixed }) },
-          slips: r.slip ? withSlip(d.slips, r.topicId, r.slip) : d.slips,
-          streak: bumpStreak(d.streak),
-          analytics: {
-            ...d.analytics,
-            answered: d.analytics.answered + 1,
-            correct: d.analytics.correct + (r.correct ? 1 : 0),
-            hinted: d.analytics.hinted + (r.hinted ? 1 : 0),
-            lastActiveAt: Date.now(),
-            days: bumpDay(d, (x) => ({
-              ...x,
-              answered: x.answered + 1,
-              correct: x.correct + (r.correct ? 1 : 0),
-              hinted: x.hinted + (r.hinted ? 1 : 0),
-              drillStars: (x.drillStars ?? 0) + (credited && (x.drillStars ?? 0) < DRILL_STAR_CAP ? 1 : 0),
-            })),
-            topics,
-          },
-        };
-      });
-      return { stars, levelUp };
-    },
-    [update],
-  );
-
-  const award = useCallback(
-    (key: string, amount: number) => {
-      if (dataRef.current.awarded[key]) return 0;
-      update((d) => (d.awarded[key] ? d : { ...d, stars: d.stars + amount, awarded: { ...d.awarded, [key]: true } }));
-      return amount;
-    },
-    [update],
-  );
-
-  const saveAttempt = useCallback(
-    (key: string, state: AttemptState) => {
-      // Never older than a restart of the same paper (see clearAttempt).
-      update((d) => ({ ...d, attempts: { ...d.attempts, [key]: { ...state, updatedAt: Math.max(Date.now(), d.removed[`attempt:${key}`] ?? 0) } } }));
-    },
-    [update],
-  );
-
-  const clearAttempt = useCallback(
-    (key: string) => {
-      update((d) => {
-        const cur = d.attempts[key];
-        if (!cur) return d;
-        const attempts = { ...d.attempts };
-        delete attempts[key];
-        // Remember the restart, or an older copy (another device) would bring the old attempt back.
-        return { ...d, attempts, removed: withRemoved(d.removed, `attempt:${key}`, Math.max(Date.now(), cur.updatedAt + 1)) };
-      });
-    },
-    [update],
-  );
-
-  const markSectionRead = useCallback(
-    (topicId: string, sectionId: string) => {
-      const key = `${topicId}#${sectionId}`;
-      if (dataRef.current.guidesRead[key]) return;
-      update((d) =>
-        d.guidesRead[key]
-          ? d
-          : { ...d, guidesRead: { ...d.guidesRead, [key]: true }, streak: bumpStreak(d.streak), analytics: pushLog(d, "guide", topicId, sectionId) },
-      );
-    },
-    [update],
-  );
-
-  const finishDaily = useCallback(
-    (correct: number, total: number) => {
       const today = todayISO();
-      const already = dataRef.current.daily[today]?.done;
-      const stars = already ? 0 : 5;
-      update((d) => ({
+      const days = { ...d.analytics.days };
+      const day = { ...(days[today] || { timeMs: 0, answered: 0, correct: 0 }) };
+      day.answered += 1;
+      if (correct) day.correct += 1;
+      days[today] = day;
+      const topics = { ...d.analytics.topics };
+      if (topicId) {
+        const t = { ...(topics[topicId] || defTopic()) };
+        t.answered += 1;
+        if (correct) t.correct += 1;
+        topics[topicId] = t;
+      }
+      const analytics: Analytics = {
+        ...d.analytics,
+        answered: d.analytics.answered + 1,
+        correct: d.analytics.correct + (correct ? 1 : 0),
+        lastActiveAt: Date.now(),
+        days,
+        topics,
+      };
+      return { ...d, missed, srs, streak: bumpStreak(d.streak), analytics };
+    });
+  }, [updateProgress]);
+
+  const setGoalMinutes = useCallback((minutes: number) => {
+    updateProgress((d) => ({ ...d, goalMinutes: Math.max(5, Math.min(60, Math.round(minutes))) }));
+  }, [updateProgress]);
+
+  const setChallengeBest = useCallback((topicId: string, score: number) => {
+    updateProgress((d) => {
+      const topics = { ...d.analytics.topics };
+      topics[topicId] = { ...(topics[topicId] || defTopic()), challengeBest: Math.max(topics[topicId]?.challengeBest ?? 0, score) };
+      const analytics = pushLog({ ...d.analytics, topics }, "challenge", topicId, `${score}%`);
+      return {
         ...d,
-        stars: d.stars + (d.daily[today]?.done ? 0 : 5),
-        daily: { ...d.daily, [today]: { correct, total, done: true } },
+        challengeBest: { ...d.challengeBest, [topicId]: Math.max(d.challengeBest[topicId] ?? 0, score) },
         streak: bumpStreak(d.streak),
-        analytics: pushLog(d, "daily", undefined, `${correct}/${total}`),
-      }));
-      return stars;
-    },
-    [update],
-  );
+        analytics,
+      };
+    });
+  }, [updateProgress]);
 
-  const setBest = useCallback(
-    (key: string, value: number) => {
-      const isBest = value > (dataRef.current.bests[key] ?? -Infinity);
-      if (isBest) update((d) => ({ ...d, bests: { ...d.bests, [key]: Math.max(d.bests[key] ?? -Infinity, value) }, analytics: pushLog(d, "best", undefined, `${key}=${value}`) }));
-      return isBest;
-    },
-    [update],
-  );
+  const touchStreak = useCallback(() => {
+    updateProgress((d) => ({ ...d, streak: bumpStreak(d.streak) }));
+  }, [updateProgress]);
 
-  // settingsAt: a merge keeps the settings changed last, whichever copy was saved last.
-  const setGoalMinutes = useCallback((m: number) => update((d) => ({ ...d, goalMinutes: Math.max(5, Math.min(60, Math.round(m))), settingsAt: Date.now() })), [update]);
-  const setWeeklyDays = useCallback((n: number) => update((d) => ({ ...d, weeklyDays: Math.max(1, Math.min(7, Math.round(n))), settingsAt: Date.now() })), [update]);
-  const setFocusTopics = useCallback((ids: string[]) => update((d) => ({ ...d, focusTopics: ids.slice(0, 6), settingsAt: Date.now() })), [update]);
-  const setLast = useCallback(
-    (href: string, label: string, topicId?: string) => {
-      const cur = dataRef.current.last;
-      if (cur && cur.href === href && Date.now() - cur.at < 60000) return;
-      update((d) => ({ ...d, last: { href, label, topicId, at: Date.now() } }));
-    },
-    [update],
-  );
+  const setLast = useCallback((a: Omit<LastActivity, "at">) => {
+    updateProgress((d) => ({ ...d, last: { ...a, at: Date.now() } }));
+  }, [updateProgress]);
 
-  const flagQuestion = useCallback(
-    (qid: string, note: string) => {
-      update((d) => {
-        const flags = { ...d.flags, [qid]: { at: Date.now(), note: note.slice(0, 300) } };
-        const keys = Object.keys(flags);
-        if (keys.length > 100) {
-          keys.sort((a, b) => flags[a].at - flags[b].at);
-          for (const k of keys.slice(0, keys.length - 100)) delete flags[k];
-        }
-        return { ...d, flags, analytics: pushLog(d, "flag", undefined, qid) };
-      });
-    },
-    [update],
-  );
+  const resetAll = useCallback(() => {
+    if (!canSaveRef.current) return;
+    const fresh = emptyProgress();
+    fresh.analytics.sessionCount = dataRef.current.analytics.sessionCount;
+    updateProgress(() => fresh);
+  }, [updateProgress]);
 
-  const resetAll = useCallback(
-    async (pin?: string) => {
-      if (!canSaveRef.current) return { ok: false, error: "Progress isn't open yet. Please try again." };
-      const fresh = emptyProgress();
-      fresh.analytics.sessionCount = dataRef.current.analytics.sessionCount;
-      if (modeRef.current === "guest") {
-        fresh.resetAt = Date.now(); // other open tabs take the reset instead of merging old work back
-        update(() => fresh);
-        return { ok: true };
-      }
-      const acc = accountRef.current;
-      const prof = activeRef.current;
-      if (!acc || !prof) return { ok: false, error: errorOf({}) };
-      // Saves are merged, so a reset must replace the cloud copy: the server allows that only with the parent PIN.
-      const r = await callJson("/api/progress", "POST", { profileId: prof.id, progress: fresh, replace: true, pin });
-      if (!r.ok) return { ok: false, error: errorOf(r.data) };
-      if (!canSaveRef.current || accountRef.current?.id !== acc.id || activeRef.current?.id !== prof.id) return { ok: true };
-      const doc = normalizeProgress(r.data.progress ?? fresh);
-      syncedRef.current = { cacheKey: k.cache(acc.id, prof.id), body: JSON.stringify({ profileId: prof.id, progress: doc }) };
-      setData(doc);
-      return { ok: true };
-    },
-    [update],
-  );
-
-  const focusTopics = useMemo(() => {
-    const parent = activeProfile?.settings?.focusTopics ?? [];
-    return Array.from(new Set([...parent, ...data.focusTopics])).slice(0, 6);
-  }, [activeProfile, data.focusTopics]);
-
-  const value = useMemo<StoreValue>(
+  const value = useMemo<StoreContextValue>(
     () => ({
+      ...data,
       status,
-      mode,
-      cloudAvailable,
       account,
       activeProfile,
-      data,
-      focusTopics,
       signup,
       login,
       logout,
-      startGuest,
-      leaveGuest,
       createProfile,
-      importGuest,
       updateProfile,
       deleteProfile,
       selectProfile,
       switchProfile,
-      retryLoad,
-      refreshAccount,
-      guestHasProgress,
-      recordAnswer,
-      recordSkill,
+      useDevice,
+      cloudAvailable,
       award,
+      hasAward,
       saveAttempt,
-      clearAttempt,
-      markSectionRead,
-      finishDaily,
-      setBest,
-      setGoalMinutes,
-      setWeeklyDays,
-      setFocusTopics,
+      getAttempt,
+      markGuideRead,
       setLast,
-      flagQuestion,
+      recordResult,
+      setChallengeBest,
+      setGoalMinutes,
+      touchStreak,
       resetAll,
     }),
-    [status, mode, cloudAvailable, account, activeProfile, data, focusTopics, signup, login, logout, startGuest, leaveGuest, createProfile, importGuest, updateProfile, deleteProfile, selectProfile, switchProfile, retryLoad, refreshAccount, guestHasProgress, recordAnswer, recordSkill, award, saveAttempt, clearAttempt, markSectionRead, finishDaily, setBest, setGoalMinutes, setWeeklyDays, setFocusTopics, setLast, flagQuestion, resetAll],
+    [data, status, account, activeProfile, signup, login, logout, createProfile, updateProfile, deleteProfile, selectProfile, switchProfile, useDevice, cloudAvailable, award, hasAward, saveAttempt, getAttempt, markGuideRead, setLast, recordResult, setChallengeBest, setGoalMinutes, touchStreak, resetAll],
   );
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
 }
 
-export function useStore(): StoreValue {
+export function useStore(): StoreContextValue {
   const ctx = useContext(StoreContext);
-  if (!ctx) throw new Error("useStore must be used within StoreProvider");
+  if (!ctx) throw new Error("useStore must be used within ProgressProvider");
   return ctx;
 }
+
+export interface Rank {
+  min: number;
+  name: string;
+  emoji: string;
+}
+export const RANKS: Rank[] = [
+  { min: 0, name: "Curious Cadet", emoji: "🌱" },
+  { min: 25, name: "Map Reader", emoji: "🗺️" },
+  { min: 75, name: "Field Explorer", emoji: "🥾" },
+  { min: 150, name: "Geo Whiz", emoji: "🧭" },
+  { min: 300, name: "Expedition Leader", emoji: "🏔️" },
+  { min: 500, name: "Royal Geographer", emoji: "🌏" },
+];
+export function rankFor(stars: number) {
+  let r = RANKS[0];
+  for (const rank of RANKS) if (stars >= rank.min) r = rank;
+  return r;
+}
+

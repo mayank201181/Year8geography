@@ -1,10 +1,7 @@
 "use client";
-import { useEffect } from "react";
+
 import { ErrorFallback } from "@/components/ErrorFallback";
 
-export default function ErrorPage({ error, retry, reset }: { error: Error & { digest?: string }; retry?: () => void; reset?: () => void }) {
-  useEffect(() => {
-    console.error(error);
-  }, [error]);
-  return <ErrorFallback error={error} onRetry={retry ?? reset} />;
+export default function ErrorPage({ error, unstable_retry, reset }: { error: Error; unstable_retry?: () => void; reset: () => void }) {
+  return <ErrorFallback error={error} onRetry={unstable_retry ?? reset} />;
 }

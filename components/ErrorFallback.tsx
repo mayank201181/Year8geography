@@ -1,32 +1,41 @@
 "use client";
-// Friendly, recoverable error screen. Inline styles so it renders even if CSS fails.
-export function ErrorFallback({ error, onRetry }: { error?: Error & { digest?: string }; onRetry?: () => void }) {
-  const sha = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7);
+
+// Shown when part of the app fails to render. Inline styles so it still looks
+// right from global-error.tsx, where the app stylesheet may not have loaded.
+
+const BUILD = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? "local";
+
+function describe(error: unknown): string {
+  if (error instanceof Error) return `${error.name}: ${error.message}`.slice(0, 300);
+  return String(error).slice(0, 300);
+}
+
+export function ErrorFallback({ error, onRetry }: { error: unknown; onRetry?: () => void }) {
+  const button = { padding: "12px 20px", borderRadius: "12px", fontWeight: 600, fontSize: "16px", cursor: "pointer" } as const;
   return (
-    <div style={{ maxWidth: 520, margin: "48px auto", padding: 24, fontFamily: "system-ui, sans-serif", textAlign: "center" }}>
-      <div style={{ fontSize: 48 }} aria-hidden>
-        🧮
-      </div>
-      <h1 style={{ fontSize: 22, fontWeight: 800, margin: "8px 0" }}>Oops — that sum didn&apos;t add up</h1>
-      <p style={{ color: "#555b78" }}>Something went wrong on this page. Your saved progress is safe.</p>
-      <div style={{ display: "flex", gap: 8, justifyContent: "center", marginTop: 16, flexWrap: "wrap" }}>
-        {onRetry ? (
-          <button type="button" onClick={onRetry} style={{ padding: "10px 16px", borderRadius: 12, background: "#0e7490", color: "#fff", fontWeight: 700, border: 0, cursor: "pointer" }}>
+    <main role="alert" style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: "24px", background: "#f8fafc", color: "#0f172a", fontFamily: "system-ui, sans-serif" }}>
+      <section style={{ maxWidth: "420px", textAlign: "center" }}>
+        <div style={{ fontSize: "48px" }} aria-hidden>🧪</div>
+        <h1 style={{ fontSize: "22px", fontWeight: 800, margin: "12px 0 8px" }}>Oops, that experiment fizzled</h1>
+        <p style={{ color: "#475569", lineHeight: 1.5 }}>
+          Something went wrong on this screen. Your saved progress is safe. Try again, or head back to the home page.
+        </p>
+        <div style={{ display: "flex", gap: "12px", justifyContent: "center", flexWrap: "wrap", marginTop: "20px" }}>
+          <button type="button" onClick={() => (onRetry ? onRetry() : window.location.reload())}
+            style={{ ...button, border: "1px solid #4f46e5", background: "#4f46e5", color: "white" }}>
             Try again
           </button>
-        ) : null}
-        {/* A full page load on purpose: after a crash the client router may be in a bad state. */}
-        {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
-        <a href="/" style={{ padding: "10px 16px", borderRadius: 12, border: "1px solid #e0e3ef", fontWeight: 700, color: "inherit", textDecoration: "none" }}>
-          Go home
-        </a>
-      </div>
-      <details style={{ marginTop: 24, fontSize: 12, color: "#555b78", textAlign: "left" }}>
-        <summary style={{ cursor: "pointer" }}>Details for grown-ups</summary>
-        <p>{error?.message || "Unknown error"}</p>
-        {error?.digest ? <p>Digest: {error.digest}</p> : null}
-        {sha ? <p>Build: {sha}</p> : null}
-      </details>
-    </div>
+          <button type="button" onClick={() => { window.location.href = "/"; }}
+            style={{ ...button, border: "1px solid #cbd5e1", background: "white", color: "#334155" }}>
+            Go to home
+          </button>
+        </div>
+        <details style={{ marginTop: "24px", fontSize: "12px", color: "#64748b", textAlign: "left" }}>
+          <summary style={{ cursor: "pointer", textAlign: "center" }}>Details for grown-ups</summary>
+          <p style={{ marginTop: "8px", wordBreak: "break-word", fontFamily: "ui-monospace, monospace" }}>{describe(error)}</p>
+          <p style={{ fontFamily: "ui-monospace, monospace" }}>Build {BUILD}</p>
+        </details>
+      </section>
+    </main>
   );
 }

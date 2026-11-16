@@ -1,53 +1,48 @@
-# Shared cast, season list and beat helpers for "Totally Raotional: Off The Map" (Season 2, Geography).
+# Shared cast, season list and beat helpers for "Off The Map" (a Claude Sitcom, Year 8 Geography).
 # build.py / lint_episode.py exec this file, then the episode file, in one namespace.
-# Episode files set EP = dict(topic=..., title=...) and call the helpers below.
+# Episode files set EP = dict(topic=..., logline=..., names={...}) and call the helpers below.
+
+SHOW = "OFF THE MAP"
 
 VOICES = {
-    "tara":    dict(voice="af_heart", speed=1.06, lang="en-us"),
+    "priya":   dict(voice="af_heart", speed=1.06, lang="en-us"),
     "mum":     dict(voice="bf_emma", speed=1.08, lang="en-gb"),
     "dad":     dict(voice="bm_george", speed=1.0, lang="en-gb"),
-    "centi":   dict(voice="am_fenrir", speed=0.95, lang="en-us", pitch=-2.5),
-    "globo":   dict(voice="bm_lewis", speed=1.1, lang="en-gb", pitch=-1.5),
-    "cashier": dict(voice="am_puck", speed=1.12, lang="en-us"),
-    "teacher": dict(voice="af_sarah", speed=1.02, lang="en-us"),
-    "uncle":   dict(voice="am_michael", speed=1.0, lang="en-us", pitch=-1.0),
+    "nani":    dict(voice="bf_isabella", speed=0.96, lang="en-gb", pitch=-1.5),
+    "atlas":   dict(voice="bm_lewis", speed=0.97, lang="en-gb", pitch=-2.0),
+    "teacher": dict(voice="am_michael", speed=1.02, lang="en-us"),
+    "uncle":   dict(voice="am_onyx", speed=1.0, lang="en-us", pitch=-1.0),
+    "guest":   dict(voice="am_puck", speed=1.06, lang="en-us"),
+    "guest2":  dict(voice="af_nova", speed=1.04, lang="en-us"),
 }
+# The pause-challenge host (voices the questions and answers).
+HOST = "atlas"
 
-SHOW = "TOTALLY RAOTIONAL"
-SHOW_TAG = "OFF THE MAP"
-SEASON_NUM = 2
-TEACHER = "globo"   # who runs the holo-board and the pause challenges
-
-# Season 2 running order = the Geography Lab's topic order (lib/topics/meta.ts).
-# (num, topic id, short topic name, episode title)
+# Season 1 running order = the app's topic order.  (num, topic id, short topic name, episode title)
 SEASON = [
-    (1, "geo-skills", "Geo Skills", "Six Figures And Still Lost"),
-    (2, "population-distribution", "Where People Live", "Location, Location, Population"),
-    (3, "population-growth", "Population Growth", "The J-Curve Strikes Back"),
-    (4, "demography", "Demography", "Census And Sensibility"),
-    (5, "population-change", "Population Change", "Push Me, Pull You"),
-    (6, "population-problems", "Population Problems", "One Child, Many Opinions"),
-    (7, "extreme-climates", "Extreme Climates", "Hot Desert, Cold Shoulder"),
-    (8, "extreme-weather", "Extreme Weather", "Isobar None"),
-    (9, "adaptations", "Adaptations", "Cactus Makes Perfect"),
-    (10, "living-in-extremes", "Living In Extremes", "Base Camp Drama"),
-    (11, "coastal-erosion", "Coastal Erosion", "Erosion Of Trust"),
-    (12, "coastal-landforms", "Coastal Landforms", "Stack To The Future"),
-    (13, "coral-reefs", "Coral Reefs", "Bleach, Please"),
-    (14, "protecting-reefs", "Protecting Reefs", "Great Barrier Grief"),
-    (15, "cities-megacities", "Cities & Megacities", "Concrete Jungle Fever"),
-    (16, "lagos", "Lagos", "Go-Slow, Go Lagos"),
-    (17, "sustainable-cities", "Sustainable Cities", "Turn On All Four Taps"),
+    (1, "population-distribution", "Distribution & Density", "Crowded House"),
+    (2, "population-growth", "Population Growth", "Eight Billion And One"),
+    (3, "demography", "Demography", "Pyramid Scheme"),
+    (4, "population-change", "Migration", "Push Comes To Shove"),
+    (5, "population-policies", "Population Policies", "One Is The Loneliest Number"),
+    (6, "extreme-environments", "Extreme Environments", "Hot Stuff, Cold Feet"),
+    (7, "extreme-weather", "Extreme Weather", "Under Pressure"),
+    (8, "adaptations", "Adaptations", "Survival Of The Fluffiest"),
+    (9, "extreme-tourism", "Extreme Tourism", "Penguins Don't Do Selfies"),
+    (10, "coastal-processes", "Coastal Processes", "Shore Thing"),
+    (11, "coastal-landforms", "Coastal Landforms", "Stack To The Future"),
+    (12, "coral-reefs", "Coral Reefs", "Bleached Out"),
+    (13, "cities-megacities", "Cities & Megacities", "Mega Problems"),
+    (14, "lagos", "Lagos", "Go-Slow Your Roll"),
+    (15, "sustainable-cities", "Sustainable Cities", "Green Day"),
 ]
 
 CHARACTERS = set(VOICES)
-SETS = {"living", "kitchen", "mall", "checkout", "classroom", "hawker", "park",
-        "beach", "desert", "polar", "mountain", "megacity", "reef", "weatherdesk"}  # + confess_<character>
+SETS = {"living", "kitchen", "classroom", "hawker", "park", "beach", "desert", "polar", "mountain", "reef", "city", "lagos", "ecocity"}  # + confess_<character>
 MOODS = {"neutral", "happy", "excited", "deadpan", "annoyed", "shock", "smug", "thinking", "worried", "sad",
          "determined", "teach", "bored", "eyeroll"}
 SHOTS = {"close", "two", "wide"}
-PROPS = {"phone", "tablet", "cushion", "book", "plate", "map", "dice", "calculator", "compass", "paintroller",
-         "globe", "umbrella", "sunglasses", "binoculars", "bucket"}
+PROPS = {"phone", "tablet", "book", "plate", "map", "compass", "binoculars", "suitcase", "umbrella", "thermometer", "flag", "calculator"}
 SFX_NAMES = {"ding", "buzzer", "scratch", "trombone", "poof", "whoosh", "tick", "door", "drawer"}
 
 B = []
@@ -64,11 +59,11 @@ def _ep():
     ep = globals().get("EP") or {}
     row = next(r for r in SEASON if r[1] == ep["topic"])
     return row
-def title(dur=5.5):
+def title(dur=5.0):
     num, _, _, t = _ep()
-    B.append(dict(type="title", title=SHOW, tag=SHOW_TAG, sub=f"Season {SEASON_NUM} · Episode {num} · “{t}”", dur=dur))
+    B.append(dict(type="title", title=SHOW, sub=f"Episode {num} · “{t}”", dur=dur))
 def end_card(dur=4.0):
     num = _ep()[0]
     nxt = next((r for r in SEASON if r[0] == num + 1), None)
-    sub = f"Next time: {nxt[2]} — “{nxt[3]}”" if nxt else f"That's a wrap on Season {SEASON_NUM}!"
-    B.append(dict(type="card", text=f"{SHOW}: {SHOW_TAG}", sub=sub, dur=dur))
+    sub = f"Next time: {nxt[2]} — “{nxt[3]}”" if nxt else "That's a wrap on Season 1!"
+    B.append(dict(type="card", text=SHOW, sub=sub, dur=dur))

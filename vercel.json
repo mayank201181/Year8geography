@@ -1,4 +1,3 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "ignoreCommand": "git log -1 --pretty=%s | grep -q '^WIP' && exit 0 || exit 1"
+  "framework": "nextjs"
 }

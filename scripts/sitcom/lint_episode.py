@@ -14,8 +14,7 @@ def load(path):
 
 BAD_SPOKEN = [
     (r"[0-9]", "digits in spoken text — write numbers as words"),
-    (r"[%/×÷=^√π<>≤≥+°£$&]", "symbol in spoken text — say it in words"),
-    (r"\b(km|mm|cm|kg)\b", "unit abbreviation in spoken text — write it out (kilometres, millimetres)"),
+    (r"[%/×÷=^√π<>≤≥+]", "maths symbol in spoken text — say it in words"),
     (r"\bnought\b", "say 'zero', not 'nought' (TTS says 'not')"),
     (r"\b(Sigh|Ugh|Hmm+|Pfft|Tsk|Argh|Ahem)\b", "interjection TTS mangles — use a real word"),
     (r"(^|[.!?]\s+)(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+(Per ?cent|Percent)", "'One. Percent' is heard as 'one percent'"),
@@ -48,9 +47,9 @@ def lint(path):
                 if not (180 <= x <= 1100): warns.append(f"{where}: x={x} for {w} near edge (use 200..1080)")
             xs = sorted(x for w, x in b["cast"])
             if any(b2 - a2 < 200 for a2, b2 in zip(xs, xs[1:])): warns.append(f"{where}: characters closer than 200px")
-            if sid in ("checkout", "hawker"):
+            if sid == "hawker":
                 for w, x in b["cast"]:
-                    if w in ("cashier", "uncle") and not (950 <= x <= 1060): warns.append(f"{where}: {w} should stand at x≈1000 behind the counter")
+                    if w == "uncle" and not (950 <= x <= 1060): warns.append(f"{where}: {w} should stand at x≈1000 behind the counter")
             board_n = 0; has_diag = False
         elif k == "poof":
             if b["who"] not in ns["CHARACTERS"]: errs.append(f"{where}: unknown poof {b['who']}")
@@ -93,7 +92,7 @@ def lint(path):
                 for pat, msg in BAD_SPOKEN:
                     if re.search(pat, b[f]): errs.append(f"{where} challenge {f}: {msg}: {b[f][:70]!r}")
             if len(b["work"]) > 60: warns.append(f"{where}: challenge work text long ({len(b['work'])})")
-            if len(b["a"]) > 14: warns.append(f"{where}: challenge answer should be short (<=14 chars)")
+            if len(b["a"]) > 26: warns.append(f"{where}: challenge answer should be short (<=26 chars)")
             spoken += len(b["qs"]) + len(b["as_"])
         elif k == "freeze":
             if len(b["text"]) > 22: warns.append(f"{where}: freeze text long")

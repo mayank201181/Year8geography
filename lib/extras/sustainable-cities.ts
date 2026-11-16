@@ -1,118 +1,109 @@
-import type { TopicExtras } from "../types.ts";
+import type { TopicExtras } from "../types";
 
-export const extras: TopicExtras = {
+const todSvg = `<svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan of a transit-oriented eco-neighbourhood: an MRT station in the centre surrounded by mixed-use shops and offices, a 400 to 500 metre walking circle of homes, a park connector with cycle lanes, and industry placed downwind behind a green buffer">
+  <rect x="0" y="0" width="360" height="260" fill="#ffffff"/>
+  <text x="180" y="18" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e293b">A transit-oriented eco-neighbourhood</text>
+  <rect x="10" y="28" width="250" height="222" fill="#fef3c7" stroke="#fcd34d"/>
+  <circle cx="135" cy="139" r="96" fill="#fde68a" stroke="#d97706" stroke-dasharray="6 4"/>
+  <text x="135" y="54" font-size="11" text-anchor="middle" fill="#92400e">400–500 m walk (5–10 min)</text>
+  <circle cx="135" cy="139" r="40" fill="#c7d2fe" stroke="#6366f1"/>
+  <text x="135" y="112" font-size="11" text-anchor="middle" fill="#3730a3">mixed-use core</text>
+  <line x1="10" y1="139" x2="260" y2="139" stroke="#dc2626" stroke-width="5"/>
+  <circle cx="135" cy="139" r="9" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
+  <text x="135" y="166" font-size="11" text-anchor="middle" fill="#991b1b">MRT station</text>
+  <rect x="10" y="214" width="250" height="16" fill="#bbf7d0"/>
+  <line x1="10" y1="222" x2="260" y2="222" stroke="#15803d" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <text x="135" y="244" font-size="11" text-anchor="middle" fill="#166534">park connector + cycle lane (flood-safe green corridor)</text>
+  <rect x="30" y="70" width="16" height="30" fill="#d97706"/><rect x="50" y="62" width="16" height="38" fill="#b45309"/>
+  <rect x="200" y="70" width="16" height="30" fill="#d97706"/><rect x="220" y="62" width="16" height="38" fill="#b45309"/>
+  <text x="56" y="114" font-size="11" text-anchor="middle" fill="#92400e">high-rise homes</text>
+  <rect x="272" y="28" width="80" height="80" fill="#bbf7d0"/>
+  <circle cx="292" cy="56" r="9" fill="#16a34a"/><circle cx="314" cy="70" r="9" fill="#16a34a"/><circle cx="334" cy="52" r="9" fill="#16a34a"/>
+  <text x="312" y="98" font-size="11" text-anchor="middle" fill="#166534">green buffer</text>
+  <rect x="272" y="118" width="80" height="80" fill="#cbd5e1"/>
+  <rect x="284" y="150" width="40" height="26" fill="#64748b"/><rect x="314" y="134" width="6" height="18" fill="#475569"/>
+  <text x="312" y="192" font-size="11" text-anchor="middle" fill="#334155">industry</text>
+  <text x="312" y="226" font-size="11" text-anchor="middle" fill="#334155">downwind,</text>
+  <text x="312" y="240" font-size="11" text-anchor="middle" fill="#334155">away from homes</text>
+</svg>`;
+
+const hierarchySvg = `<svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The waste hierarchy as an upside-down pyramid: reduce is the most preferred at the top, then reuse, recycle, recover energy, and landfill as the least preferred at the bottom">
+  <rect x="0" y="0" width="360" height="230" fill="#ffffff"/>
+  <text x="180" y="18" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e293b">The waste hierarchy</text>
+  <polygon points="40,30 320,30 296,68 64,68" fill="#059669"/>
+  <text x="180" y="54" font-size="13" font-weight="bold" text-anchor="middle" fill="#ffffff">REDUCE: buy and waste less</text>
+  <polygon points="66,72 294,72 270,110 90,110" fill="#10b981"/>
+  <text x="180" y="96" font-size="13" font-weight="bold" text-anchor="middle" fill="#ffffff">REUSE: repair, share, refill</text>
+  <polygon points="92,114 268,114 244,152 116,152" fill="#84cc16"/>
+  <text x="180" y="138" font-size="12" font-weight="bold" text-anchor="middle" fill="#1e293b">RECYCLE (blue bins)</text>
+  <polygon points="118,156 242,156 218,192 142,192" fill="#f59e0b"/>
+  <text x="180" y="178" font-size="11" font-weight="bold" text-anchor="middle" fill="#1e293b">RECOVER energy</text>
+  <polygon points="144,196 216,196 196,222 164,222" fill="#ef4444"/>
+  <text x="180" y="213" font-size="11" font-weight="bold" text-anchor="middle" fill="#ffffff">LANDFILL</text>
+  <text x="8" y="50" font-size="11" fill="#059669">best</text>
+  <text x="8" y="214" font-size="11" fill="#b91c1c">worst</text>
+  <line x1="22" y1="60" x2="22" y2="198" stroke="#64748b" stroke-width="1.5"/>
+  <polygon points="17,196 27,196 22,204" fill="#64748b"/>
+  <text x="352" y="96" font-size="11" text-anchor="end" fill="#475569">most</text>
+  <text x="352" y="110" font-size="11" text-anchor="end" fill="#475569">sustainable</text>
+  <text x="352" y="196" font-size="11" text-anchor="end" fill="#475569">least</text>
+</svg>`;
+
+export const sustainableCitiesExtras: TopicExtras = {
   hook:
-    "Singapore has almost no rivers, no lakes and no underground water — yet its taps never run dry. Meanwhile Las Vegas, in one of the driest deserts in North America, is home to more than two million people. How can a city survive where nature says it shouldn't — and can it last?",
-
+    "Cities cover only a tiny slice of the planet's land, yet they use most of its energy. So if you could redesign one city from scratch, what would you change first: the buildings, the buses, the bins or the way people live?",
   didYouKnow: [
-    "Singapore ran the world's first congestion-charging scheme: from 1975, drivers had to buy a paper licence to enter the city centre at busy times. Electronic Road Pricing (ERP) replaced it in 1998.",
-    "Most NEWater is not drunk at all — it is so pure that it is mainly piped to wafer-fabrication plants, factories and air-conditioning cooling towers. A small amount is added to reservoirs to top up drinking water.",
-    "In 2022 Lake Mead, which supplies about 90% of Las Vegas's water, fell to its lowest level since it was first filled in the 1930s. Sunken boats that had been underwater for decades appeared on the shore.",
-    "Humanity as a whole uses natural resources about as fast as 1.7 Earths could renew them (Global Footprint Network estimate) — that is why Earth Overshoot Day falls months before the end of the year.",
-    "Curitiba in Brazil couldn't afford an underground railway, so in 1974 it gave buses their own lanes and later added tube-shaped stations where people pay before boarding. The idea, bus rapid transit (BRT), has since been copied by cities around the world.",
-    "Tengah, HDB's 'forest town', is the first HDB town planned with a centralised cooling system, and its town centre puts roads underground so the surface is left for people on foot and on bikes.",
+    "Cities cover less than 2% of Earth's land surface, but according to UN-Habitat they use about 78% of the world's energy and produce more than 60% of greenhouse gas emissions.",
+    "Singapore's NEWater, launched in 2003, turns used water into ultra-clean water. It can already meet up to about 40% of the country's water demand, and the target is about 55% by 2060.",
+    "The Tengeh Reservoir floating solar farm in Singapore, opened in 2021, has about 122,000 solar panels covering 45 hectares of water, roughly the size of 45 football fields, and can generate 60 megawatts at peak.",
+    "Semakau, Singapore's only landfill, is built offshore from incineration ash and waste. At current rates it is expected to be full by about 2035, which is why Singapore is pushing its 'Zero Waste Nation' plans.",
+    "Humanity uses nature's resources about 1.7 times faster than Earth can renew them. In 2025, Earth Overshoot Day (the day we have used up a whole year's worth of nature) fell on 24 July.",
   ],
-
-  activities: [
+  experiments: [
     {
-      title: "Family water audit",
-      emoji: "🚿",
-      materials: ["Your home's water meter (or a recent PUB/SP utilities bill)", "Notebook or phone", "Calculator", "A 1-litre jug and a timer"],
+      title: "15-minute neighbourhood audit",
+      emoji: "🚶",
+      materials: ["A printed or phone map of your estate (e.g. OneMap)", "A stopwatch or phone timer", "Coloured pens", "A notebook"],
       steps: [
-        "Ask an adult to show you the water meter. Write down the reading (in m³) at the same time each day for a week. If you can't reach the meter, use the water figure on a monthly bill instead.",
-        "Work out how much water the household used in the week: last reading − first reading. Change m³ to litres (1 m³ = 1,000 litres).",
-        "Divide by the number of people and then by 7 to get litres per person per day. Compare it with Singapore's 2030 target of 130 litres.",
-        "Time how long your shower runs, then use the jug and timer to find how many litres per minute the shower gives. How much water does one shower use?",
-        "Choose two changes (e.g. a 5-minute shower timer, turning the tap off while brushing teeth, running the washing machine only when full). Repeat the audit for a second week and calculate the percentage saving.",
+        "Mark your HDB block or home on the map and draw a circle of about 500 m around it (roughly a 5–10 minute walk).",
+        "Walk to the nearest MRT station or bus interchange, hawker centre or market, school, clinic and park. Time each walk.",
+        "Colour each place: green if it is under 10 minutes on foot, amber for 10–15 minutes, red if you would need a car or bus.",
+        "Score each walk for comfort: is there shade, a covered walkway, a safe crossing, a cycle path or park connector?",
+        "Write three improvements a planner could make, and which of the three pillars (social, economic, environmental) each one helps.",
       ],
-      maths:
-        "This is exactly the data PUB uses to plan Singapore's water supply. Demand per person, multiplied by about 6 million people, sets how much the Four National Taps must deliver every day. Cutting demand is the cheapest 'fifth tap': every litre not used is a litre that doesn't need to be collected, imported, recycled or desalinated — saving energy and money as well as water.",
+      science:
+        "You are testing whether your area is a 'transit-oriented' or '15-minute' neighbourhood. When daily needs are within walking distance of homes and an MRT/BRT stop, people drive less, which cuts emissions and congestion (environmental), helps those who cannot drive such as children and elderly people (social), and supports local shops (economic). This is exactly the kind of evidence judges look for in the Eco City competition.",
+      safety: "Walk with an adult or a friend, in daylight, and use proper crossings. Bring water: Singapore's heat can cause dehydration.",
     },
     {
-      title: "Sustainability audit of your neighbourhood",
-      emoji: "🗺️",
-      materials: ["A printed map of your estate or a screenshot from a map app", "Coloured pens (three colours)", "Clipboard or phone notes", "An adult to walk with you"],
+      title: "One-week household waste audit",
+      emoji: "♻️",
+      materials: ["Kitchen scale or luggage scale", "Two bags: one for general waste, one for recyclables", "Rubber gloves", "A tally chart"],
       steps: [
-        "Walk a loop of about 1 km around where you live (an HDB estate, condo area or town centre).",
-        "Mark on the map anything that helps SOCIAL sustainability (e.g. playgrounds, clinics, community centres, ramps) in one colour, ECONOMIC (shops, hawker centres, offices, markets) in a second and ENVIRONMENTAL (recycling bins, park connectors, solar panels on HDB roofs, trees, rain gardens) in the third.",
-        "Note the problems too: busy roads with no crossing, empty plots, litter, places with no shade.",
-        "Give each pillar a score out of 10 and justify each score with at least two pieces of evidence from your map.",
-        "Suggest ONE improvement for your weakest pillar, say who would pay for it and who would benefit — then present your idea as a mini eco-city competition pitch.",
+        "For seven days, put clean recyclables (paper, plastic, metal, glass) in one bag and everything else in the other.",
+        "Each evening, weigh both bags (or estimate by counting items) and record the totals on your tally chart.",
+        "At the end of the week, work out your recycling rate: recyclables ÷ total waste × 100.",
+        "Look at the general waste: which items could have been avoided (reduce), reused or recycled instead?",
+        "Plan one change for next week, repeat the audit and compare the two recycling rates.",
       ],
-      maths:
-        "This is fieldwork: collecting primary data, mapping it and using it to judge a place against criteria. Using the three pillars (social, economic, environmental) stops you judging a place only on how green it looks — a truly sustainable neighbourhood has to work for people and for the economy too.",
+      science:
+        "You measure how your household fits the waste hierarchy (reduce, reuse, recycle, recover, landfill). Most of Singapore's general waste is burned in waste-to-energy plants and the ash goes to Semakau Landfill, so every kilogram you avoid saves landfill space and cuts emissions. Your recycling rate is a small-scale version of the indicator cities use to judge how sustainable they are.",
+      safety: "Wear gloves, do not handle broken glass or sharp cans, and wash your hands afterwards. Rinse food containers before sorting.",
     },
   ],
-
   bonusDiagrams: [
     {
-      title: "The three pillars of sustainability",
+      title: "Designing a transit-oriented eco-neighbourhood",
+      svg: todSvg,
       caption:
-        "A sustainable city sits where all three circles overlap. A plan that is good for the economy but bad for people or nature (for example luxury towers on a wetland) falls outside the centre.",
-      svg: `<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venn diagram of three overlapping circles labelled social, economic and environmental, with sustainable city in the centre where all three overlap">
-<rect x="0" y="0" width="420" height="300" fill="#ffffff"/>
-<circle cx="160" cy="105" r="82" fill="#c7d2fe" fill-opacity="0.75" stroke="#334155" stroke-width="2"/>
-<circle cx="260" cy="105" r="82" fill="#fde68a" fill-opacity="0.75" stroke="#334155" stroke-width="2"/>
-<circle cx="210" cy="185" r="82" fill="#bbf7d0" fill-opacity="0.75" stroke="#334155" stroke-width="2"/>
-<text x="120" y="80" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">SOCIAL</text>
-<text x="120" y="98" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">homes, health,</text>
-<text x="120" y="112" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">safety, community</text>
-<text x="300" y="80" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">ECONOMIC</text>
-<text x="300" y="98" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">jobs, income,</text>
-<text x="300" y="112" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">affordable costs</text>
-<text x="210" y="226" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle">ENVIRONMENTAL</text>
-<text x="210" y="242" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">clean air and water,</text>
-<text x="210" y="256" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">energy, waste, wildlife</text>
-<text x="210" y="134" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">SUSTAINABLE</text>
-<text x="210" y="148" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">CITY</text>
-</svg>`,
+        "Homes, shops and offices cluster within a 5–10 minute walk of an MRT station, a green corridor doubles as a cycle route and flood space, and industry sits downwind behind a green buffer. Use this layout as a starting point for your Eco City competition design.",
     },
     {
-      title: "Singapore's water loop: the Four National Taps",
+      title: "The waste hierarchy",
+      svg: hierarchySvg,
       caption:
-        "Rain and imported water feed the reservoirs; used water is collected through the Deep Tunnel Sewerage System, cleaned and partly turned into NEWater; desalination adds water from the sea. Two taps depend on rain — two are weather-proof.",
-      svg: `<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow diagram of Singapore's water loop. Local catchment rain and imported water from Johor flow to reservoirs and waterworks, then to homes and industry. Used water goes to water reclamation plants, then NEWater factories which supply industry and top up reservoirs. Desalination plants turn seawater into drinking water.">
-<rect x="0" y="0" width="460" height="300" fill="#ffffff"/>
-<defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#334155"/></marker></defs>
-<rect x="10" y="20" width="120" height="44" rx="8" fill="#bae6fd" stroke="#334155"/>
-<text x="70" y="38" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">1 Local catchment</text>
-<text x="70" y="54" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">rain → drains</text>
-<rect x="10" y="84" width="120" height="44" rx="8" fill="#bbf7d0" stroke="#334155"/>
-<text x="70" y="102" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">2 Imported water</text>
-<text x="70" y="118" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">Johor, Malaysia</text>
-<rect x="170" y="50" width="120" height="44" rx="8" fill="#e0f2fe" stroke="#334155"/>
-<text x="230" y="68" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">Reservoirs and</text>
-<text x="230" y="84" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">waterworks</text>
-<rect x="330" y="110" width="120" height="44" rx="8" fill="#e5e7eb" stroke="#334155"/>
-<text x="390" y="128" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">Homes and</text>
-<text x="390" y="144" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">industry</text>
-<rect x="330" y="200" width="120" height="44" rx="8" fill="#d6d3d1" stroke="#334155"/>
-<text x="390" y="218" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">Used water</text>
-<text x="390" y="234" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">via Deep Tunnel</text>
-<rect x="170" y="200" width="120" height="44" rx="8" fill="#c7d2fe" stroke="#334155"/>
-<text x="230" y="218" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">3 NEWater</text>
-<text x="230" y="234" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">membranes + UV</text>
-<rect x="10" y="200" width="120" height="44" rx="8" fill="#fde68a" stroke="#334155"/>
-<text x="70" y="218" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1f2937" text-anchor="middle">4 Desalination</text>
-<text x="70" y="234" font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle">seawater → fresh</text>
-<line x1="130" y1="42" x2="168" y2="64" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
-<line x1="130" y1="106" x2="168" y2="84" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
-<line x1="290" y1="78" x2="340" y2="108" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
-<line x1="390" y1="154" x2="390" y2="198" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
-<line x1="330" y1="222" x2="292" y2="222" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
-<line x1="270" y1="200" x2="350" y2="156" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
-<line x1="220" y1="200" x2="225" y2="96" stroke="#334155" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#arr)"/>
-<path d="M70,244 C70,285 330,285 380,156" fill="none" stroke="#334155" stroke-width="2" marker-end="url(#arr)"/>
-<text x="198" y="150" font-family="sans-serif" font-size="10" fill="#334155" text-anchor="middle">top-up</text>
-<text x="300" y="196" font-family="sans-serif" font-size="10" fill="#334155">to industry</text>
-<text x="230" y="292" font-family="sans-serif" font-size="10" fill="#334155" text-anchor="middle">drinking water to homes</text>
-</svg>`,
+        "The higher up the pyramid, the more sustainable the option. Recycling is good, but avoiding waste in the first place (reduce) is better; landfill is the last resort, which matters in a land-scarce city like Singapore.",
     },
   ],
-
-  history: {
-    title: "Curitiba's 72-hour street",
-    story:
-      "In 1971 Jaime Lerner, a young architect and planner, became mayor of Curitiba in southern Brazil. Car traffic was choking the old city centre, and he wanted to turn its main shopping street, Rua XV de Novembro, into a street for people on foot. Shopkeepers feared they would lose customers, so in 1972 his team ripped up the road and laid paving and flower beds over a single weekend — about 72 hours — before opponents could stop it. Takings went up, and shopkeepers on other streets soon asked for the same. When a group of motorists threatened to drive back in, the city covered the street with long rolls of paper for children to paint on. Two years later Curitiba opened express bus lanes — the start of the bus rapid transit system that cities around the world have copied.",
-  },
+  interactives: ["sustainable-cities:EcoCityDesigner", "sustainable-cities:FootprintCalculator"],
 };

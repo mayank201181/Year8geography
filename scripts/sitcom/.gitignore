@@ -2,3 +2,6 @@ kokoro-v1.0.onnx
 voices-v1.0.bin
 tts_cache/
 out/
+ready.txt
+queue.log
+out-lint-*.txt

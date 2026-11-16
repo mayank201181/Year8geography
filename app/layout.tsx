@@ -1,43 +1,42 @@
 import type { Metadata, Viewport } from "next";
-import { Nunito } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { StoreProvider } from "@/lib/store";
+import { ProgressProvider } from "@/lib/store";
+import { SiteHeader } from "@/components/SiteHeader";
+import { Mascot } from "@/components/Mascot";
 import { AppGate } from "@/components/AppGate";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
-const nunito = Nunito({ subsets: ["latin"], variable: "--font-nunito", display: "swap" });
+const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
+const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: { default: "Year 8 Geography Lab", template: "%s · Year 8 Geography Lab" },
-  description: "Learn, practise and master Year 8 geography — problem-first lessons, auto-marked practice, skill drills, a daily mixed set and a parent dashboard.",
-  applicationName: "Geography Lab",
+  title: "Year 8 Geography Lab",
+  description:
+    "An interactive Year 8 Geography course: illustrated guides with case studies, interactive explorers, Claude Sitcom episodes, quizzes and practice papers across population, extreme environments, coasts and cities.",
   appleWebApp: { capable: true, statusBarStyle: "default", title: "Geography Lab" },
-  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#0e7490" },
-    { media: "(prefers-color-scheme: dark)", color: "#0e1020" },
-  ],
-  width: "device-width",
-  initialScale: 1,
+  themeColor: "#4f46e5",
 };
 
-// Apply a saved theme before paint (no flash).
-const themeScript = `try{var t=localStorage.getItem("y8m2:theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-GB" className={nunito.variable} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
-      <body className="min-h-screen antialiased">
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col bg-[var(--background)]">
+        {/* Errors in this layout bypass app/error.tsx, so the provider gets its own boundary. */}
         <ErrorBoundary>
-          <StoreProvider>
-            <AppGate>{children}</AppGate>
-          </StoreProvider>
+        <ProgressProvider>
+          <AppGate>
+            <ErrorBoundary silent><SiteHeader /></ErrorBoundary>
+            <main className="flex-1">{children}</main>
+            <ErrorBoundary silent><Mascot /></ErrorBoundary>
+            <footer className="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
+              Year 8 Geography Lab · Built for curious explorers 🌏 · Progress saves automatically.
+            </footer>
+          </AppGate>
+        </ProgressProvider>
         </ErrorBoundary>
       </body>
     </html>

@@ -1,269 +1,264 @@
-# "Totally Raotional: Off The Map" S02E16 "Go-Slow, Go Lagos" (Topic: Lagos: A Growing Megacity)
-# Format and helpers: see common.py and docs/SITCOM.md; check with lint_episode.py.
-# Sections taught: lagos-location-growth, push-pull, lagos-challenges, lagos-solutions.
+# "Off The Map" (a Claude Sitcom) S01E14 "Go-Slow Your Roll" (Topic: Lagos, a megacity case study)
+# Format and helpers: see common.py and EPISODE_GUIDE.md; check with lint_episode.py.
 
-EP = dict(topic="lagos",
-          logline="Dad decides to 'bring films to Lagos', home of Nollywood. Globo flies the Raos in to learn where Lagos is and why it grew, "
-                  "push and pull factors, the go-slow, Makoko and Olusosun, and how BRT, the new rail lines and Eko Atlantic measure up.")
+EP = dict(
+    topic="lagos",
+    logline="Priya volunteers for the optional Lagos speech, and Dad claims he can cross Lagos in ten minutes. Atlas spins them into a go-slow, where a Yaba tech founder and a Makoko teacher show them the city's problems and its energy.",
+    names={"guest": "TOLU", "guest2": "MRS AGBO"},
+    display={"B R T": "BRT", "new water": "NEWater", "Kunle": "Kunlé", "U S dollars": "US dollars"},
+)
 
-D_MAP = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220">
-<rect width="520" height="220" fill="#0c4a6e"/>
-<path d="M60 40 L380 30 L470 70 L480 150 L420 190 L300 168 L210 176 L120 182 L80 120 Z" fill="#a3e635" opacity="0.85"/>
-<text x="260" y="70" font-family="sans-serif" font-size="20" font-weight="bold" fill="#1a2e05" text-anchor="middle">NIGERIA</text>
-<circle cx="290" cy="112" r="8" fill="#fde047"/>
-<text x="302" y="118" font-family="sans-serif" font-size="15" font-weight="bold" fill="#1a2e05">Abuja (capital)</text>
-<circle cx="108" cy="176" r="10" fill="#f97316"/>
-<text x="126" y="166" font-family="sans-serif" font-size="17" font-weight="bold" fill="#7c2d12">LAGOS</text>
-<text x="200" y="210" font-family="sans-serif" font-size="15" fill="#fff" text-anchor="middle">Gulf of Guinea (Bight of Benin)</text>
-<text x="20" y="30" font-family="sans-serif" font-size="13" fill="#fff">Benin</text>
-<path d="M60 40 L60 200" stroke="#fff" stroke-width="2" stroke-dasharray="5 4"/>
-<text x="508" y="210" font-family="sans-serif" font-size="13" fill="#cbd5e1" text-anchor="end">~6.5°N</text>
-</svg>"""
+GROWTH = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 240">'
+    '<line x1="20" y1="200" x2="510" y2="200" stroke="#f8fafc" stroke-width="2"/>'
+    '<line x1="20" y1="115" x2="510" y2="115" stroke="#fca5a5" stroke-width="2" stroke-dasharray="8 6"/>'
+    '<text x="20" y="108" font-family="sans-serif" font-size="18" fill="#fca5a5">megacity: 10 million</text>'
+    '<rect x="30" y="197" width="60" height="3" fill="#fde047"/>'
+    '<text x="60" y="190" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fde047">0.3m</text>'
+    '<rect x="110" y="188" width="60" height="12" fill="#fde047"/>'
+    '<text x="140" y="180" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fde047">1.4m</text>'
+    '<rect x="190" y="159" width="60" height="41" fill="#fde047"/>'
+    '<text x="220" y="151" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fde047">4.8m</text>'
+    '<rect x="270" y="112" width="60" height="88" fill="#fde047"/>'
+    '<text x="300" y="104" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fde047">10.4m</text>'
+    '<rect x="350" y="78" width="60" height="122" fill="#fde047"/>'
+    '<text x="380" y="70" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fde047">14.4m</text>'
+    '<rect x="430" y="30" width="60" height="170" fill="none" stroke="#86efac" stroke-width="3" stroke-dasharray="6 4"/>'
+    '<text x="460" y="22" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#86efac">15-20m+</text>'
+    '<text x="60" y="226" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#f8fafc">1950</text>'
+    '<text x="140" y="226" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#f8fafc">1970</text>'
+    '<text x="220" y="226" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#f8fafc">1990</text>'
+    '<text x="300" y="226" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#f8fafc">2010</text>'
+    '<text x="380" y="226" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#f8fafc">2020</text>'
+    '<text x="460" y="226" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#86efac">now?</text>'
+    '</svg>'
+)
 
-D_GROWTH = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">
-<rect width="520" height="200" fill="#0f172a"/>
-<path d="M40 170 H500" stroke="#94a3b8" stroke-width="2"/>
-<rect x="60" y="167" width="60" height="3" fill="#38bdf8"/>
-<rect x="150" y="155" width="60" height="15" fill="#38bdf8"/>
-<rect x="240" y="122" width="60" height="48" fill="#38bdf8"/>
-<rect x="330" y="66" width="60" height="104" fill="#38bdf8"/>
-<rect x="420" y="26" width="60" height="144" fill="#f97316"/>
-<text x="90" y="160" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">0.3m</text>
-<text x="180" y="148" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">1.4m</text>
-<text x="270" y="115" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">4.8m</text>
-<text x="360" y="59" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">10.4m</text>
-<text x="450" y="19" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">14.4m</text>
-<text x="90" y="190" font-family="sans-serif" font-size="14" fill="#cbd5e1" text-anchor="middle">1950</text>
-<text x="180" y="190" font-family="sans-serif" font-size="14" fill="#cbd5e1" text-anchor="middle">1970</text>
-<text x="270" y="190" font-family="sans-serif" font-size="14" fill="#cbd5e1" text-anchor="middle">1990</text>
-<text x="360" y="190" font-family="sans-serif" font-size="14" fill="#cbd5e1" text-anchor="middle">2010</text>
-<text x="450" y="190" font-family="sans-serif" font-size="14" fill="#cbd5e1" text-anchor="middle">2020</text>
-<text x="50" y="40" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fde047">UN estimates (approx.)</text>
-</svg>"""
+PUSHPULL = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 230">'
+    '<rect x="5" y="10" width="215" height="210" rx="12" fill="#7f1d1d"/>'
+    '<text x="112" y="40" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#fca5a5">PUSH: rural Nigeria</text>'
+    '<text x="16" y="80" font-family="sans-serif" font-size="18" fill="#f8fafc">poverty, low pay</text>'
+    '<text x="16" y="114" font-family="sans-serif" font-size="18" fill="#f8fafc">drought</text>'
+    '<text x="16" y="148" font-family="sans-serif" font-size="18" fill="#f8fafc">Boko Haram conflict</text>'
+    '<text x="16" y="182" font-family="sans-serif" font-size="18" fill="#f8fafc">few schools, clinics</text>'
+    '<text x="260" y="110" text-anchor="middle" font-family="sans-serif" font-size="40" fill="#fde047">→</text>'
+    '<text x="260" y="140" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fde047">people</text>'
+    '<rect x="300" y="10" width="215" height="210" rx="12" fill="#14532d"/>'
+    '<text x="407" y="40" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#86efac">PULL: Lagos</text>'
+    '<text x="311" y="80" font-family="sans-serif" font-size="18" fill="#f8fafc">jobs, the port</text>'
+    '<text x="311" y="114" font-family="sans-serif" font-size="18" fill="#f8fafc">oil money, banks</text>'
+    '<text x="311" y="148" font-family="sans-serif" font-size="18" fill="#f8fafc">Nollywood films</text>'
+    '<text x="311" y="182" font-family="sans-serif" font-size="18" fill="#f8fafc">Yaba tech start-ups</text>'
+    '</svg>'
+)
 
-D_PUSHPULL = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">
-<rect width="520" height="200" fill="#0f172a"/>
-<rect x="14" y="20" width="200" height="160" rx="12" fill="#7c2d12"/>
-<rect x="306" y="20" width="200" height="160" rx="12" fill="#14532d"/>
-<text x="114" y="46" font-family="sans-serif" font-size="17" font-weight="bold" fill="#fed7aa" text-anchor="middle">RURAL NIGERIA</text>
-<text x="406" y="46" font-family="sans-serif" font-size="17" font-weight="bold" fill="#bbf7d0" text-anchor="middle">LAGOS</text>
-<text x="30" y="78" font-family="sans-serif" font-size="14" fill="#fff">PUSH: poverty</text>
-<text x="30" y="102" font-family="sans-serif" font-size="14" fill="#fff">drought (Sahel)</text>
-<text x="30" y="126" font-family="sans-serif" font-size="14" fill="#fff">floods · conflict</text>
-<text x="30" y="150" font-family="sans-serif" font-size="14" fill="#fff">few services</text>
-<text x="322" y="78" font-family="sans-serif" font-size="14" fill="#fff">PULL: jobs, wages</text>
-<text x="322" y="102" font-family="sans-serif" font-size="14" fill="#fff">schools · hospitals</text>
-<text x="322" y="126" font-family="sans-serif" font-size="14" fill="#fff">family already there</text>
-<text x="322" y="150" font-family="sans-serif" font-size="14" fill="#fff">'bright lights'</text>
-<path d="M222 100 H292" stroke="#fde047" stroke-width="6"/><path d="M298 100 l-16 -10 v20z" fill="#fde047"/>
-<text x="260" y="88" font-family="sans-serif" font-size="13" fill="#fde047" text-anchor="middle">migrants</text>
-</svg>"""
+CHAIN = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 190">'
+    '<rect x="10" y="20" width="130" height="50" rx="10" fill="#1e3a8a"/>'
+    '<text x="75" y="52" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">Rubbish</text>'
+    '<text x="160" y="54" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#fde047">→</text>'
+    '<rect x="180" y="20" width="160" height="50" rx="10" fill="#1e3a8a"/>'
+    '<text x="260" y="52" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">Blocked drains</text>'
+    '<text x="360" y="54" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#fde047">→</text>'
+    '<rect x="380" y="20" width="130" height="50" rx="10" fill="#7f1d1d"/>'
+    '<text x="445" y="52" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">Floods</text>'
+    '<text x="445" y="104" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#fde047">↓</text>'
+    '<rect x="380" y="120" width="130" height="50" rx="10" fill="#7f1d1d"/>'
+    '<text x="445" y="152" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">Disease</text>'
+    '<text x="360" y="154" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#fde047">←</text>'
+    '<rect x="180" y="120" width="160" height="50" rx="10" fill="#7f1d1d"/>'
+    '<text x="260" y="152" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">Broken roads</text>'
+    '<text x="160" y="154" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#fde047">←</text>'
+    '<rect x="10" y="120" width="130" height="50" rx="10" fill="#7f1d1d"/>'
+    '<text x="75" y="152" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">Go-slows</text>'
+    '</svg>'
+)
 
-D_STILTS = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 190">
-<rect width="520" height="190" fill="#0f172a"/>
-<rect y="120" width="520" height="70" fill="#0369a1"/>
-<path d="M0 104 H520" stroke="#7dd3fc" stroke-width="2" stroke-dasharray="6 5"/>
-<text x="510" y="98" font-family="sans-serif" font-size="13" fill="#7dd3fc" text-anchor="end">flood / storm surge</text>
-<g fill="#a16207"><rect x="30" y="50" width="90" height="40"/><rect x="150" y="56" width="90" height="34"/><rect x="270" y="48" width="90" height="42"/></g>
-<g stroke="#fcd34d" stroke-width="4"><path d="M40 90 V180 M110 90 V180 M160 90 V180 M230 90 V180 M280 90 V180 M350 90 V180"/></g>
-<path d="M20 50 L75 26 L130 50Z M140 56 L195 32 L250 56Z M260 48 L315 24 L370 48Z" fill="#94a3b8"/>
-<path d="M390 140 q20 10 40 0" stroke="#fde047" stroke-width="5" fill="none"/>
-<text x="410" y="164" font-family="sans-serif" font-size="13" fill="#fff" text-anchor="middle">canoe</text>
-<text x="510" y="184" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff" text-anchor="end">Lagos Lagoon</text>
-<text x="510" y="60" font-family="sans-serif" font-size="14" fill="#fecaca" text-anchor="end">no mains sewer</text>
-</svg>"""
-
-D_CHAIN = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 170">
-<rect width="520" height="170" fill="#0f172a"/>
-<rect x="10" y="20" width="150" height="56" rx="10" fill="#1d4ed8"/>
-<rect x="185" y="20" width="150" height="56" rx="10" fill="#b45309"/>
-<rect x="360" y="20" width="150" height="56" rx="10" fill="#b91c1c"/>
-<text x="85" y="44" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">Rubbish not</text>
-<text x="85" y="64" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">collected</text>
-<text x="260" y="44" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">Drains</text>
-<text x="260" y="64" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">blocked</text>
-<text x="435" y="44" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">Heavy rain</text>
-<text x="435" y="64" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">→ FLOODS</text>
-<path d="M162 48 H180 M337 48 H355" stroke="#fde047" stroke-width="4"/>
-<text x="260" y="118" font-family="sans-serif" font-size="16" fill="#fde047" text-anchor="middle">Growth faster than infrastructure</text>
-<text x="260" y="146" font-family="sans-serif" font-size="14" fill="#cbd5e1" text-anchor="middle">low-lying coast · building on wetlands</text>
-</svg>"""
-
-D_JUDGE = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210">
-<rect width="520" height="210" fill="#0f172a"/>
-<text x="20" y="30" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fde047">Scheme</text>
-<text x="220" y="30" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fde047">Who benefits?</text>
-<text x="400" y="30" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fde047">Limit</text>
-<path d="M14 40 H506" stroke="#475569" stroke-width="2"/>
-<g font-family="sans-serif" font-size="14" fill="#fff">
-<text x="20" y="66">BRT (2008)</text><text x="220" y="66">ordinary commuters</text><text x="400" y="66">crowded</text>
-<text x="20" y="96">Blue + Red Lines</text><text x="220" y="96">those corridors</text><text x="400" y="96">small network</text>
-<text x="20" y="126">Eko Atlantic</text><text x="220" y="126">wealthy, investors</text><text x="400" y="126">excludes most</text>
-<text x="20" y="156">Recycling</text><text x="220" y="156">households, pickers</text><text x="400" y="156">some areas</text>
-<text x="20" y="186">Community upgrade</text><text x="220" y="186">low-income residents</text><text x="400" y="186">small scale</text>
-</g>
-</svg>"""
+SPEECH = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 230">'
+    '<rect x="40" y="8" width="440" height="36" rx="8" fill="#854d0e"/>'
+    '<text x="260" y="33" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#fde047">HOOK: a fact, question or story</text>'
+    '<rect x="40" y="52" width="440" height="36" rx="8" fill="#854d0e"/>'
+    '<text x="260" y="77" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#fde047">POSITION: what you want</text>'
+    '<rect x="40" y="96" width="440" height="36" rx="8" fill="#14532d"/>'
+    '<text x="260" y="121" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#86efac">3 × PEEL arguments</text>'
+    '<rect x="40" y="140" width="440" height="36" rx="8" fill="#1e3a8a"/>'
+    '<text x="260" y="165" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#7dd3fc">COUNTER-ARGUMENT + rebuttal</text>'
+    '<rect x="40" y="184" width="440" height="36" rx="8" fill="#7f1d1d"/>'
+    '<text x="260" y="209" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#fca5a5">CALL TO ACTION</text>'
+    '</svg>'
+)
 
 # ---------------- COLD OPEN ----------------
-scene("living", [("tara", 260), ("mum", 600), ("dad", 960)])
-L("mum", "Three months of Nigerian films for the price of one! We're a Nollywood family now.", mood="excited", shot="close", prop="tablet")
-L("dad", "And I have a vision. Lagos. Lovely little town. Capital of Nigeria.", mood="smug", shot="close")
-L("tara", "Dad, Lagos is not little. And it is not the capital.", mood="deadpan", shot="close")
-L("dad", "Details. I'll open a film studio there. Bring them the magic of cinema.", mood="excited", shot="close", prop="phone")
-L("mum", "Vikram. We are watching a film from Lagos. Right now. You cried twice.", mood="annoyed", shot="two", gap=0.3)
-freeze("\"THE MAGIC OF CINEMA.\"", 2.6, narrator="Narrator: Nollywood is one of the biggest film industries on Earth, by number of films made.")
-confess("tara", "TARA RAO · 12 · Only Sane Person In This House")
-L("tara", "My father wants to bring films to the home of Nollywood. Next week, he's bringing rain to Singapore.", mood="deadpan", gap=0.6)
+scene("living", [("priya", 330), ("dad", 640)])
+L("priya", "Ladies and gentlemen. Lagos. A city of twenty million dreams. My speech. It's optional.", mood="determined", shot="close", prop="book")
+L("dad", "Optional means you don't have to do it.", mood="smug", shot="close")
+L("priya", "Optional means I get to do it.", mood="deadpan", shot="close", gap=0.3)
+L("dad", "I've been to Lagos. Well. The airport. Lovely shiny floor. Small place. I could cross it in ten minutes.", mood="smug", shot="close")
+L("priya", "Ten minutes.", mood="deadpan", shot="close")
+L("dad", "Eight, if I skip the snacks.", mood="excited", shot="close")
+freeze("DAD'S 10-MINUTE PLAN", 2.6, narrator="Narrator: One bridge alone is nearly twelve kilometres long.")
+confess("priya", "PRIYA · 12 · Optional Means Mandatory")
+L("priya", "Dad also thinks Lagos is the capital of Nigeria. It hasn't been since nineteen ninety one.", mood="deadpan")
+L("priya", "Luckily, I know a globe.", mood="smug", gap=0.6)
 
 title()
 
-# ---------------- ACT 1: WHERE LAGOS IS AND HOW IT GREW ----------------
-scene("kitchen", [("tara", 380)])
-L("tara", "Right. Before Dad books a flight. The drawer.", mood="determined", shot="wide")
-sfx("drawer")
-poof("globo", 860)
-L("globo", "Who disturbs the drawer? Oh. The Raos.", mood="bored", shot="close")
-L("tara", "Globo, Dad wants to open a film studio in Lagos. To introduce films.", mood="worried", shot="two")
-L("globo", "To Nollywood. Of course. Last year he tried to sell me sand. I am seventy percent ocean.", mood="eyeroll", shot="close", gap=0.4)
+# ---------------- ACT 1: WHERE, AND HOW BIG? ----------------
+scene("living", [("priya", 300), ("dad", 600)])
+L("priya", "Atlas! Geography emergency. Dad wants to cross Lagos in ten minutes.", mood="determined", shot="wide")
+sfx("whoosh")
+poof("atlas", 900)
+L("atlas", "Lagos? Splendid. West Africa is on my good side. Australia took all the dents.", mood="smug", shot="close")
+L("atlas", "Lagos is in south west Nigeria, in West Africa, on the Gulf of Guinea. That stretch of coast is the Bight of Benin.", mood="teach", shot="close",
+  boardClear=True, board="Lagos: SW Nigeria, Gulf of Guinea")
+L("dad", "The Bite of Benin. Sounds painful.", mood="worried", shot="close")
+L("atlas", "Bight. A curving bay. Nobody gets bitten. The city wraps around Lagos Lagoon, with a mainland and islands like Victoria Island.", mood="eyeroll", shot="close",
+  board="Built around Lagos Lagoon + islands")
+L("priya", "Joined by bridges. The Third Mainland Bridge is about eleven point eight kilometres long.", mood="thinking", shot="close",
+  board="Third Mainland Bridge ≈ 11.8 km")
+L("dad", "And of course, it's the capital.", mood="smug", shot="close")
+sfx("buzzer")
+L("atlas", "Wrong. Lagos was the capital until nineteen ninety one. Then the government moved to Abuja, a planned city in the centre.", mood="teach", shot="close",
+  board="Capital until 1991 → now ABUJA")
+L("priya", "But Lagos is still the commercial capital. Banks, shipping, business.", mood="neutral", shot="close",
+  board="Still the COMMERCIAL capital")
+L("atlas", "Growth. In nineteen fifty, Lagos had about three hundred thousand people.", mood="teach", shot="close",
+  boardClear=True, diagram=GROWTH)
+L("atlas", "Today, estimates range from about fifteen to over twenty million. The last full census was in two thousand and six.", mood="teach", shot="close",
+  board="Today: est. 15–20+ million")
+L("priya", "So quote a range, and say sources disagree. Over ten million makes it a megacity.", mood="thinking", shot="close",
+  board="Megacity = over 10 million people")
+L("dad", "Is it called a megacity because it's mega?", mood="thinking", shot="close")
+L("atlas", "Yes. Annoyingly, yes.", mood="bored", shot="close", gap=0.4)
+L("atlas", "Two causes. First, rural to urban migration. Second, natural increase. Birth rate minus death rate.", mood="teach", shot="close",
+  boardClear=True, board="1. Rural–urban migration")
+L("priya", "Nigeria's median age is about eighteen, and women have about five children on average. Migrants are young, so they start families in Lagos.", mood="thinking", shot="close",
+  board="2. Natural increase = births − deaths")
 
-scene("megacity", [("tara", 280), ("dad", 600), ("globo", 960)], "LAGOS · South-West Nigeria · Flown In By Globo Airways")
-L("dad", "Whoa. This is a lot of city.", mood="shock", shot="close", prop="sunglasses")
-L("globo", "Lagos. South west Nigeria, on the Gulf of Guinea. Built around a lagoon, on islands and the mainland.", mood="teach", shot="close",
-  boardClear=True, board="LAGOS: south-west Nigeria, Gulf of Guinea", diagram=D_MAP)
-L("tara", "So the lagoon is a sheltered harbour. Perfect for a port. That's why the city grew here.", mood="thinking", shot="close",
-  board="Lagoon = sheltered harbour → PORT")
-L("dad", "And it's the capital. Which I am standing in.", mood="smug", shot="close")
-L("globo", "It was the capital until nineteen ninety one. Then Abuja, a planned city in the centre, took over. But Lagos is still the business capital.", mood="teach", shot="close",
-  board="Capital until 1991 → ABUJA. Still the $ hub")
-sfx("trombone")
-L("globo", "Nigeria, Africa's most populous country, is a newly emerging economy. Growing fast, but wealth is shared very unequally.", mood="teach", shot="close",
-  boardClear=True, board="Nigeria: NEE · ~220–230 million people")
-L("dad", "So how many people live in Lagos? Exactly. For my spreadsheet.", mood="determined", shot="close", prop="calculator")
-L("globo", "Nobody knows. Estimates range from about fifteen million to over twenty million.", mood="smug", shot="close",
-  board="Megacity: estimates ~15 to 20+ million")
-L("tara", "That's almost a whole Singapore. Just missing.", mood="deadpan", shot="close")
-L("globo", "Boundaries. An old census, from two thousand and six. Informal settlements that are hard to count. And politics.", mood="teach", shot="close",
-  board="Why? boundaries · old census (2006)")
-L("tara", "So you always give a range, and say who made the estimate.", mood="happy", shot="close",
-  board="informal homes · politics → give a RANGE")
-L("globo", "But it grew fast. UN estimates. Point three of a million in nineteen fifty. About fourteen million by twenty twenty.", mood="teach", shot="close",
-  boardClear=True, board="UN: 0.3m (1950) → 14.4m (2020)", diagram=D_GROWTH)
-L("tara", "About forty eight times bigger. Better than Dad's investments.", mood="shock", shot="close", board="≈ 48 times bigger in 70 years")
-L("globo", "And it's a hub for the continent. Nollywood, Afrobeats, fashion, markets, tech start ups.", mood="teach", shot="close",
-  board="Nollywood · Afrobeats · markets · tech")
+confess("atlas", "ATLAS · Desk Globe · Dropped Eleven Times")
+L("atlas", "Nobody knows the exact population of Lagos. Much like my age. Distinguished. Uncountable.", mood="smug", gap=0.5)
 
+# ---------------- ACT 2: LAGOS ----------------
+scene("living", [("priya", 260), ("dad", 560), ("atlas", 880)])
+L("dad", "Take me there, Atlas. Ten minutes. Start the clock.", mood="determined", shot="close", prop="phone")
+L("atlas", "Hold on to something. Not my equator. It's ticklish.", mood="smug", shot="close")
+sfx("whoosh")
+scene("lagos", [("priya", 260), ("dad", 520), ("atlas", 800)], caption="LAGOS · Nigeria · Rush hour on the mainland")
+L("dad", "Clock's running! Why is nothing moving?", mood="shock", shot="close")
+sfx("door")
+poof("guest", 1080)
+L("guest", "Welcome to a go-slow! A traffic jam. I'm Tolu, Funmi's cousin. She didn't mention the talking globe.", mood="happy", shot="close")
+L("guest", "Millions live on the mainland and work on the islands. Two to four hours each way is normal.", mood="teach", shot="close",
+  boardClear=True, board="Go-slow: 2–4 hours each way")
+L("dad", "I've already bought a cold drink, a phone charger and plantain chips through a car window.", mood="worried", shot="close")
+L("guest", "The informal economy. Work that isn't registered or taxed. Hawkers, traders, okada riders. Over half of Lagos workers. Easy to start, but low pay and no pension.", mood="teach", shot="close",
+  board="Informal economy: over half of workers")
+L("guest", "And me? I build payment apps in Yaba. Yabacon Valley! A Lagos start-up called Paystack sold for over two hundred million U S dollars.", mood="smug", shot="close",
+  board="Yabacon Valley: tech start-ups")
+L("priya", "Pull factors. Jobs, the port, oil money in the banks, Nollywood, universities.", mood="thinking", shot="close",
+  boardClear=True, diagram=PUSHPULL)
+L("guest", "And push factors in rural Nigeria. Poor farms. Drought. The Boko Haram conflict in the north east has displaced over two million people.", mood="sad", shot="close")
+L("guest", "My uncle's village had no secondary school. Lagos had a cousin, a sofa and a job. Chain migration.", mood="happy", shot="close",
+  board="Family networks = chain migration")
+L("guest", "The catch? Lagos grew faster than its pipes and power lines. So, daily power cuts and generators, and most homes use boreholes or buy sachets of water.", mood="teach", shot="close",
+  boardClear=True, board="Power cuts · boreholes, sachet water")
+L("priya", "And waste. Olusosun landfill, about forty hectares, had a huge fire in twenty eighteen.", mood="teach", shot="close",
+  board="Olusosun landfill: ~40 ha, fire 2018")
+L("guest", "And floods. Much of Lagos is less than two metres above sea level.", mood="worried", shot="close",
+  board="Low-lying (<2 m) → flooding")
+L("atlas", "All linked. Rubbish blocks drains, floods spread disease and break roads. A vicious circle.", mood="teach", shot="close",
+  boardClear=True, diagram=CHAIN)
+L("dad", "Ten minutes are up. Where are we?", mood="determined", shot="close", prop="phone")
+L("priya", "About two hundred metres from where we started.", mood="deadpan", shot="close")
+L("guest", "Honestly? For rush hour, that's a good day.", mood="happy", shot="close", gap=0.4)
 
-# ---------------- ACT 2: PUSH AND PULL ----------------
-card("MEANWHILE, IN THE GO-SLOW", "Mum's ride is moving at walking pace.", 2.4)
-scene("megacity", [("mum", 300), ("tara", 620), ("globo", 960)])
-L("mum", "Why is everyone coming to Lagos? Is there a sale?", mood="thinking", shot="close", prop="phone")
-L("globo", "Rural urban migration. Push factors drive people out of the countryside. Pull factors attract them to the city.", mood="teach", shot="close",
-  boardClear=True, board="RURAL–URBAN MIGRATION", diagram=D_PUSHPULL)
-L("globo", "Push factors. Poverty. Few schools or clinics. Drought in the north. Floods. And conflict.", mood="teach", shot="close",
-  board="PUSH: poverty · drought · conflict")
-L("tara", "And the pull is jobs. Better pay than farming, plus schools and hospitals.", mood="thinking", shot="close",
-  board="PULL: jobs · wages · schools · hospitals")
-L("mum", "So push is the old shop's high prices, and pull is the new shop's better offer!", mood="excited", shot="close")
-L("tara", "That's actually right. Don't get used to it.", mood="deadpan", shot="close")
-L("globo", "Add family. A cousin finds you a room and a job. Chain migration. And the bright lights, the hope of a better life.", mood="teach", shot="close",
-  boardClear=True, board="Family help = CHAIN MIGRATION")
-L("mum", "Like Auntie Priya moving to Singapore. Then her sister. Then her whole badminton team.", mood="smug", shot="close",
-  board="'Bright lights': hope of a better life")
-L("globo", "And migrants are mostly young, so they start families. Natural increase, about two point four percent a year.", mood="teach", shot="close",
-  board="NATURAL INCREASE ≈ 2.4% a year")
-L("tara", "So Lagos would keep growing even if nobody else moved in.", mood="thinking", shot="close",
-  board="~400,000 extra people a year (2010–20)")
+scene("lagos", [("priya", 220), ("dad", 460), ("guest", 720), ("guest2", 1000)], caption="MAKOKO · Lagos Lagoon · Homes on stilts")
+L("guest2", "Mind the plank! Welcome to Makoko. I'm Mrs Agbo. I taught at the floating school.", mood="happy", shot="close")
+L("guest2", "Makoko began as a fishing village. Now between forty thousand and over a hundred thousand people live here, on stilts.", mood="teach", shot="close",
+  boardClear=True, board="Makoko: est. 40,000 to 100,000+")
+L("dad", "So nobody here has a job, then?", mood="thinking", shot="close")
+L("guest2", "Everybody works. Fishing, sawmills, trading. Informal work, with low pay.", mood="annoyed", shot="close")
+L("dad", "A child just overtook me in a canoe.", mood="shock", shot="close")
+L("guest2", "That's Kemi. She's late for school.", mood="deadpan", shot="close", gap=0.4)
+L("guest2", "No sewers, so waste goes into the water and cholera spreads. And in twenty twelve, part of Makoko was demolished.", mood="sad", shot="close",
+  board="No sewers · part demolished 2012")
+L("guest2", "The floating school, by architect Kunle Adeyemi, opened in twenty thirteen on about two hundred and fifty plastic barrels.", mood="happy", shot="close",
+  board="Floating School 2013: ~250 barrels")
+L("guest2", "A storm wrecked it in twenty sixteen. But the cheap, community idea spread worldwide.", mood="determined", shot="close",
+  board="Collapsed 2016 · the idea spread")
+L("guest", "Bottom up! Top down, we've had the B R T bus lanes since two thousand and eight. The Blue Line trains opened in twenty twenty three.", mood="excited", shot="close",
+  boardClear=True, board="BRT 2008 · Blue Line 2023 · Red 2024")
+L("guest", "And by the sea, Eko Atlantic. Ten square kilometres of land reclaimed from the ocean, behind an eight point five kilometre sea wall.", mood="teach", shot="close",
+  board="Eko Atlantic: ~10 km², 8.5 km sea wall")
+L("priya", "It protects the coast and brings investment. But the flats are mostly for the rich.", mood="thinking", shot="close",
+  board="+ protection, investment · − for the rich")
+L("guest2", "And it does nothing for Makoko.", mood="neutral", shot="close")
+L("guest", "That's Lagos. Big problems, bigger energy.", mood="smug", shot="close", gap=0.4)
 
-# ---------------- ACT 2B: CHALLENGES ----------------
-card("STILL IN THE GO-SLOW", "Forty minutes later. Same lamp post.", 2.4)
-scene("megacity", [("dad", 300), ("tara", 620), ("globo", 960)])
-L("dad", "Forty minutes, not moving. I've bought a hat, a charger and plantain chips through the window!", mood="excited", shot="close", prop="plate")
-L("dad", "My business idea! Selling to people in traffic!", mood="smug", shot="close")
-L("tara", "Dad. The people who sold you all that had your idea first. And they're better at it.", mood="deadpan", shot="close")
-L("globo", "The go-slow. Only three main bridges join the mainland to Lagos Island. Millions of vehicles.", mood="teach", shot="close",
-  boardClear=True, board="GO-SLOW: traffic · 3 main bridges")
-L("globo", "And those traders are the informal economy. Work that isn't registered or taxed.", mood="teach", shot="close",
-  board="INFORMAL ECONOMY: not registered/taxed")
-L("tara", "Good, it gives millions of people jobs. Bad, there's no sick pay, and no tax for services.", mood="thinking", shot="close",
-  board="✔ jobs, enterprise ✘ no security, no tax")
-L("dad", "No tax? I love it.", mood="happy", shot="close")
-L("tara", "Dad, tax pays for roads. Which is why we're not moving.", mood="deadpan", shot="close", gap=0.3)
+confess("dad", "DAD · Explorer · Forty Airports, One Canoe")
+L("dad", "I've now been to Lagos twice. Once to the airport. Once to everywhere else, very slowly.", mood="smug")
+L("dad", "Tolu gave me a lift on an okada. A motorbike taxi. I screamed all the way to the lagoon.", mood="worried", gap=0.6)
 
-scene("megacity", [("tara", 280), ("mum", 600), ("globo", 960)], "THE LAGOS LAGOON · Makoko")
-L("mum", "Look! Houses on stilts in the water! Children paddling canoes to school!", mood="shock", shot="close", prop="binoculars")
-L("globo", "Makoko. A fishing community over a century old, with homes on stilts over the lagoon.", mood="teach", shot="close",
-  boardClear=True, board="MAKOKO: stilt homes on the lagoon", diagram=D_STILTS)
-L("globo", "Housing can't keep up, so estimates often say well over half of Lagosians live in informal settlements. Makoko has no mains sewer. In twenty twelve, it was partly demolished.", mood="teach", shot="close",
-  board="Informal settlements: often over half")
-L("mum", "Where does all the rubbish go?", mood="worried", shot="close", board="No sewer · partly demolished 2012")
-L("globo", "Dumps like Olusosun, one of Africa's largest. Waste pickers earn a living there, but it pollutes, and caught fire in twenty eighteen.", mood="teach", shot="close",
-  boardClear=True, board="OLUSOSUN: huge dump · jobs + pollution")
-L("tara", "And uncollected rubbish blocks the drains. So when heavy rain falls, the water can't escape, and streets flood.", mood="thinking", shot="close",
-  board="Waste → blocked drains → FLOODS", diagram=D_CHAIN)
-L("globo", "Plus little piped water, and power cuts, so people use generators. All linked. Growth beats infrastructure.", mood="teach", shot="close",
-  board="Water + power cuts → generators")
+# ---------------- ACT 3: SINGAPORE ----------------
+card("MEANWHILE, BACK IN SINGAPORE", "Dad is still holding the plantain chips.", 2.4)
+scene("hawker", [("priya", 300), ("nani", 600), ("uncle", 1000)])
+L("priya", "Lagos gets about fifteen hundred millimetres of rain and runs short of water. Las Vegas gets about a hundred.", mood="thinking", shot="close",
+  boardClear=True, board="Rain: Lagos ~1,500 mm · Las Vegas ~100 mm")
+L("priya", "About ninety percent of its water comes from Lake Mead, behind the Hoover Dam.", mood="teach", shot="close",
+  board="Vegas: ~90% of water from Lake Mead")
+L("nani", "When I was a girl, we queued at a standpipe. Now we have reservoirs and new water. Water is about investment, not just rain.", mood="smug", shot="close",
+  board="Water = investment, not just rain")
+L("uncle", "So Lagos needs pipes, and Las Vegas needs rain.", mood="thinking", shot="close")
+L("nani", "And your stall needs a fan.", mood="deadpan", shot="close", gap=0.4)
 
-confess("dad", "VIKRAM RAO · Dad · Self-Described Business Genius")
-L("dad", "I came to teach Lagos about business. A man sold me four things in under a minute. I've been out-businessed. Respectfully.", mood="sad", gap=0.6)
-
-# ---------------- ACT 3: IMPROVING LIFE IN LAGOS ----------------
-card("LATER, ON VICTORIA ISLAND", "Dad has a new plan. It has a sea view.", 2.4)
-scene("megacity", [("tara", 260), ("mum", 560), ("dad", 820), ("globo", 1060)])
-L("dad", "Forget films. I'm buying a flat in Eko Atlantic. Very exclusive.", mood="smug", shot="close", prop="tablet")
-L("globo", "Eko Atlantic. Land reclaimed from the sea, behind a sea wall. Planned for roughly two hundred and fifty thousand people.", mood="teach", shot="close",
-  boardClear=True, board="EKO ATLANTIC: land reclaimed from sea")
-L("globo", "It protects the coast and brings investment. But critics say it's an enclave for the wealthy.", mood="teach", shot="close",
-  board="✔ sea wall, investment ✘ for the wealthy")
-L("tara", "A quarter of a million people, in a city of maybe fifteen to twenty million. It helps very few.", mood="thinking", shot="close",
-  board="~250,000 residents vs 15–20+ million")
-L("dad", "Exactly. Very few. That's what exclusive means.", mood="smug", shot="close")
-L("tara", "Dad. That's the problem, not the selling point.", mood="deadpan", shot="close", gap=0.3)
-L("globo", "Bus Rapid Transit opened in two thousand and eight, with its own lanes. But the buses are crowded.", mood="teach", shot="close",
-  boardClear=True, board="BRT (2008): own lanes ✘ crowded")
-L("globo", "Then rail. The Blue Line in twenty twenty three, the Red Line in twenty twenty four. No traffic, but a small network so far.", mood="teach", shot="close",
-  board="RAIL: Blue Line 2023 · Red Line 2024")
-L("dad", "A train that ignores traffic? Lagos has an MRT?", mood="shock", shot="close")
-L("tara", "Yes, Dad. And ferries on the lagoon.", mood="deadpan", shot="close")
-L("globo", "Recycling. A social enterprise called Wecyclers collects it by cargo bike, and rewards families with points.", mood="teach", shot="close",
-  board="RECYCLING: Wecyclers bikes · points")
-L("mum", "Points? For rubbish? Sign me up. Your father alone is worth a fortune.", mood="excited", shot="close")
-L("globo", "And community led upgrading. Residents in Makoko drew up their own plans for water, toilets and schools. Cheaper, but small.", mood="teach", shot="close",
-  board="COMMUNITY-LED upgrading: bottom-up")
-L("tara", "So to judge a scheme, ask. Who benefits? How many? Who pays? Does it fix the cause, or just the symptom?", mood="determined", shot="close",
-  boardClear=True, board="JUDGE: who benefits? how many?", diagram=D_JUDGE)
-L("globo", "Not just, it looks shiny.", mood="eyeroll", shot="close",
-  board="cost · sustainable? cause or symptom?", gap=0.3)
-
-confess("mum", "MUM · Deal Hunter · Has Never Paid Full Price")
-L("mum", "At Balogun market, a trader out-bargained me. Three fabrics I didn't need, and I said thank you. I've met my hero.", mood="happy", gap=0.5)
+scene("classroom", [("teacher", 300), ("priya", 640), ("atlas", 940)])
+L("teacher", "A persuasive speech. Hook, position, three PEEL paragraphs, a counter argument, a call to action.", mood="teach", shot="close",
+  boardClear=True, diagram=SPEECH)
+L("priya", "In nineteen fifty, three hundred thousand people lived in Lagos. Today, perhaps twenty million. A problem, or a promise?", mood="determined", shot="close")
+L("priya", "My point. Lagos is a city of opportunity.", mood="determined", shot="close",
+  boardClear=True, board="P: a city of opportunity")
+L("priya", "Evidence. Yaba's tech hub, Nollywood, and the Blue Line, opened in twenty twenty three.", mood="teach", shot="close",
+  board="E: Yaba tech · Nollywood · Blue Line 2023")
+L("priya", "Explanation. Jobs and transport give young Lagosians a future.", mood="thinking", shot="close",
+  board="E: jobs + transport = a future")
+L("priya", "Some say Eko Atlantic is only for the rich. True. So invest in Makoko too. Opportunity must be for everyone.", mood="determined", shot="close",
+  board="L: invest in Makoko too")
+L("teacher", "Excellent. Who brought a globe?", mood="happy", shot="close")
+L("priya", "He followed me.", mood="deadpan", shot="close", gap=0.4)
 
 # ---------------- RECAP ----------------
-confess("globo", "GLOBO · Recap Globe · Spinning Slowly For Dad")
-L("globo", "Recap. One. Lagos. A lagoon port, not the capital. Estimates vary, fifteen to over twenty million.", mood="teach", boardClear=True, board="1. Lagoon port · NOT capital · 15–20m+")
-L("globo", "Two. Push, pull, and natural increase.", mood="teach", board="2. Push + pull + natural increase")
-L("globo", "Three. Makoko, the go-slow, Olusosun, floods.", mood="teach", board="3. Makoko · go-slow · Olusosun · floods")
-L("globo", "Four. The informal economy. Jobs, but no security.", mood="teach", board="4. Informal economy: jobs vs security")
-L("globo", "Five. Buses, trains, Eko Atlantic. Always ask who benefits.", mood="smug", board="5. Judge schemes: who benefits?", gap=0.5)
+confess("atlas", "ATLAS · Recap Globe · Stuck In A Go-Slow")
+L("atlas", "Recap. First. Lagos, south west Nigeria, around a lagoon. Capital until nineteen ninety one.", mood="teach",
+  boardClear=True, board="1. SW Nigeria, lagoon · capital to 1991")
+L("atlas", "Second. Three hundred thousand in nineteen fifty. An estimated fifteen to twenty million or more today.", mood="teach",
+  board="2. 300,000 (1950) → est. 15–20+ million")
+L("atlas", "Third. Push, pull, and natural increase.", mood="teach",
+  board="3. Push + pull + natural increase")
+L("atlas", "Fourth. Growth outran infrastructure. Go-slows, waste, water, power, floods.", mood="teach",
+  board="4. Go-slow, waste, water, power, floods")
+L("atlas", "Finally. Solutions. Give a benefit and a criticism.", mood="smug",
+  board="5. BRT, rail, Eko Atlantic, floating school", gap=0.5)
 
-# ---------------- BUTTON ----------------
-scene("living", [("tara", 260), ("mum", 560), ("dad", 860)])
-L("mum", "Dinner! Vegetarian jollof rice and fried plantain. From a free cooking video.", mood="happy", shot="close", prop="plate")
-L("dad", "Announcement. Rao Enterprises has made its first investment in Nollywood.", mood="smug", shot="close")
-L("tara", "You bought a film?", mood="shock", shot="close")
-L("dad", "I bought a ticket. To a film. At full price.", mood="smug", shot="close")
-L("mum", "Full price?", mood="shock", shot="two")
-sfx("ding")
-L("globo", "A Rao paid full price. Mark the date. I'll be in the drawer, recovering.", mood="bored", shot="wide", offstage=True, gap=0.8)
+scene("living", [("priya", 260), ("dad", 560), ("atlas", 880)])
+L("dad", "Ladies and gentlemen. Lagos. I have been to its airport.", mood="determined", shot="close", prop="book")
+L("atlas", "Hook, weak. Evidence, none.", mood="eyeroll", shot="close")
+sfx("trombone")
+L("priya", "It's optional, Dad. Means you don't have to.", mood="deadpan", shot="wide", gap=0.8)
 
 # ---------------- PAUSE CHALLENGE ----------------
-card("PAUSE CHALLENGE", "Globo gives you 5 seconds. Then he sulks.", 3.0)
-challenge(1, "A cousin finds Tunde a market job in Lagos. Push or pull?", "PULL", "attracts him TO the city · chain migration",
-  "Question one. Tunde's cousin finds him a job on a market stall in Lagos. Push factor, or pull factor?",
-  "Pull. It attracts him to the city. And family helping is chain migration.")
-challenge(2, "Why can uncollected rubbish make floods worse in Lagos?", "BLOCKS DRAINS", "rubbish → drains blocked → rain can't escape",
-  "Question two. Why can uncollected rubbish make flooding worse in Lagos?",
-  "It blocks the drains, so heavy rain can't flow away, and low lying streets flood.")
-challenge(3, "Which scheme mainly benefits the wealthy?", "EKO ATLANTIC", "reclaimed land · ~250,000 people · expensive",
-  "Question three. Which mainly benefits the wealthy? BRT buses, or Eko Atlantic?",
-  "Eko Atlantic. Homes most Lagosians could never afford.")
+card("PAUSE CHALLENGE", "Atlas gives you 5 seconds. Then he gets stuck in a go-slow.", 3.0)
+challenge(1, "Lagos had 0.3 million people in 1950 and 14.4 million in 2020. Calculate the % change.", "4,700%",
+  "(14.4 − 0.3) ÷ 0.3 × 100 = 4,700%",
+  "Question one. Lagos grew from zero point three million in nineteen fifty to fourteen point four million in twenty twenty. Percentage change?",
+  "Four thousand seven hundred percent. New minus old, divided by old, times one hundred.")
+challenge(2, "Is 'drought in northern Nigeria' a push or a pull factor?", "Push factor",
+  "It drives people away from the countryside",
+  "Question two. Is drought in northern Nigeria a push or a pull factor?",
+  "A push factor. It drives people away. Jobs in Lagos are a pull.")
+challenge(3, "Give one benefit and one criticism of Eko Atlantic.", "Protects coast; for rich",
+  "Benefit + criticism, then a judgement",
+  "Question three. Give one benefit and one criticism of Eko Atlantic.",
+  "It protects the coast, but its homes are mostly for the rich.")
 end_card()

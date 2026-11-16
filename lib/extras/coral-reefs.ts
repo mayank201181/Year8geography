@@ -1,157 +1,72 @@
-import type { TopicExtras } from "../types.ts";
+import type { TopicExtras } from "../types";
 
-export const extras: TopicExtras = {
+export const coralReefsExtras: TopicExtras = {
   hook:
-    "The Great Barrier Reef is the largest structure on Earth built by living things — you can see it from space — yet its builders are animals smaller than your fingernail. So why can a few weeks of sea water just 1–2 °C too warm turn huge areas of it white?",
-
+    "In the middle of the Pacific there are rings of white sand and palm trees around calm turquoise lagoons, and more than a kilometre beneath them lies the top of a drowned volcano. How did animals smaller than your fingernail build all the way up from it, and why is the same coral now turning ghost-white?",
   didYouKnow: [
-    "Coral reefs cover less than 1% of the ocean floor, yet about a quarter of all marine species depend on them at some point in their lives.",
-    "A coral is an animal, not a plant — a colony of tiny polyps related to jellyfish and sea anemones. Most of its food, though, is made by algae living inside it, using sunlight.",
-    "Much of the white sand on tropical beaches is parrotfish poo: they scrape algae off coral with beak-like teeth and grind the coral into fine sand.",
-    "Singapore's waters, right next to one of the world's busiest ports, are home to more than 250 species of hard coral.",
-    "On a few nights after a full moon in late spring, many corals on the Great Barrier Reef release their eggs and sperm at the same time — a mass spawning that looks like an underwater snowstorm.",
-    "In the 2016 marine heatwave, roughly 30% of the Great Barrier Reef's shallow-water corals died, with the far north hit hardest.",
+    "The Great Barrier Reef is about 2,300 km long and covers roughly 344,400 km², which is bigger than Italy. It is made of around 2,900 separate reefs and 900 islands, making it the largest structure on Earth built by living things.",
+    "A healthy coral reef can absorb about 97% of the energy of incoming waves, so reefs act as natural breakwaters that protect coasts from erosion and storm surges.",
+    "In 2004 the Great Barrier Reef Marine Park was rezoned, raising the share of strictly protected 'green' no-take zones from under 5% to about 33% of the park.",
+    "A single adult crown-of-thorns starfish can eat roughly 6–10 m² of living coral a year, and a female can release tens of millions of eggs in one spawning season. That is why outbreaks can strip whole reefs.",
+    "Singapore is estimated to have lost about 60% of its original coral reef area, mostly to land reclamation. Yet its remaining reefs still hold over 250 species of hard coral, and Sisters' Islands Marine Park, Singapore's first marine park, opened in 2014 to protect some of them.",
   ],
-
-  activities: [
+  experiments: [
     {
-      title: "The acid test: why acidic oceans worry coral scientists",
-      emoji: "🥚",
+      title: "Murky water light test (make a mini Secchi disk)",
+      emoji: "🫙",
       materials: [
-        "Two clean eggshells (calcium carbonate, like coral skeletons)",
-        "Two clear glasses or jars",
-        "White vinegar and tap water",
-        "Kitchen scales (optional) and a phone camera",
+        "A tall clear jar, vase or 1.5 L bottle with the top cut off",
+        "A white plastic lid that fits inside, plus a black permanent marker",
+        "Tap water",
+        "A few teaspoons of garden soil or potting mix",
+        "A ruler and a notebook",
       ],
       steps: [
-        "Rinse and dry the eggshells. If you have scales, weigh each one and write the mass down.",
-        "Half-fill one glass with vinegar and the other with water. Label them.",
-        "Drop one eggshell into each glass. Watch the vinegar glass closely for the first minute — what do you see forming on the shell?",
-        "Leave both for 24 hours, then take photos. Rinse, dry and reweigh the shells.",
-        "Work out the percentage change in mass for each shell: (new − old) ÷ old × 100.",
+        "Colour two opposite quarters of the white lid black, so it looks like a black-and-white pie. This is your Secchi disk, the same tool marine scientists use to measure how clear water is.",
+        "Put the disk flat on the bottom of the jar and fill the jar with water. Measure the water depth with the ruler.",
+        "Predict: how many teaspoons of soil will it take before you can no longer see the disk?",
+        "Add one teaspoon of soil, stir, wait 10 seconds and look straight down. Can you still see the black and white quarters?",
+        "Keep adding one teaspoon at a time and record when the disk becomes blurry and when it disappears. Leave the jar for an hour and see how much clearer it becomes as the mud settles.",
       ],
-      maths:
-        "The bubbles are carbon dioxide released as the acid dissolves calcium carbonate — the same material corals use to build their skeletons. Real sea water is NOT acidic like vinegar (its pH is about 8.1), and this is a strong exaggeration. But as the ocean absorbs CO₂ from burning fossil fuels its pH has slowly fallen from about 8.2, which makes it harder for corals to build skeletons. That's ocean acidification — a global threat no local reef manager can stop.",
+      science:
+        "Mud washed off farms and building sites (run-off) makes sea water cloudy, so less sunlight reaches the zooxanthellae algae inside corals. With less light the algae make less food and the coral grows more slowly or dies, and mud can also smother the polyps. This is why river plumes after heavy rain harm inshore parts of the Great Barrier Reef, and why Singapore's reefs, in water clouded by dredging and reclamation, now grow mostly in the top few metres where light still reaches.",
+      safety: "Do this outdoors or over a sink, and wash your hands after handling soil.",
     },
     {
-      title: "Make a Secchi disc: how mud steals the light",
-      emoji: "🔦",
+      title: "Coral health check on a guided low-tide walk",
+      emoji: "🪸",
       materials: [
-        "A white plastic lid (a takeaway-tub lid works)",
-        "A black marker and some string",
-        "A tall clear container or bucket of water",
-        "A few spoonfuls of garden soil",
-        "A ruler or tape measure",
+        "A place on an NParks guided intertidal walk (e.g. Sisters' Islands Marine Park) or a low-tide visit to a rocky shore with an adult",
+        "A printed CoralWatch Coral Health Chart (free to download from CoralWatch, University of Queensland), or your own 6-shade colour strip from pale to dark",
+        "Clipboard, pencil and a recording table",
+        "Covered shoes that can get wet, hat, sunscreen and water",
       ],
       steps: [
-        "Colour two opposite quarters of the lid black, like a pie chart. Tie the string through a hole in the middle — this is a Secchi disc, the tool scientists use to measure water clarity.",
-        "Lower the disc slowly into clear water and measure how deep it is when you can no longer see it (if your container isn't deep enough, note that you can still see it at the bottom).",
-        "Stir in one spoonful of soil and repeat. Then two spoonfuls, then three. Record each depth in a table.",
-        "Plot a line graph: spoonfuls of soil (x-axis) against depth at which the disc disappears (y-axis).",
-        "Next time you visit East Coast Park or take a ferry to the Southern Islands, look at the colour of the sea. Is it clear blue or green-brown?",
+        "Check the tide table and go only at a low spring tide with your guide or an adult.",
+        "Without touching it, hold the colour chart next to a coral and record the closest shade (1 = very pale, 6 = dark and healthy). Also note the coral's shape (branching, boulder or plate).",
+        "Record 15–20 different corals along the path and note any that are completely white (bleached) or covered with fuzzy seaweed (dead).",
+        "Back home, work out the average colour score and the percentage of pale or white corals.",
+        "Look up the sea temperature for that month (e.g. NOAA Coral Reef Watch online) and discuss: was the water unusually warm? If you can, repeat the survey a few months later and compare.",
       ],
-      maths:
-        "Sediment scatters and absorbs sunlight, so light fades much faster with depth in muddy water. Coral polyps rely on their zooxanthellae, which need light to photosynthesise — so murky water squeezes corals into a thinner and thinner shallow strip. That's why Singapore's corals, in water clouded by sediment from reclamation, dredging and shipping, mostly grow in shallow water, and why farm run-off of soil is such a threat to the Great Barrier Reef.",
+      science:
+        "Coral colour comes mostly from the zooxanthellae living in its tissue, so a paler coral has lost some of its algae and is under stress, often from heat. Scientists around the world use exactly this colour chart to track bleaching, and Singapore's reefs bleached during the marine heatwaves of 1998, 2010, 2016 and 2024. Your survey turns a simple observation into data you can compare over time.",
+      safety:
+        "Only go with a guide or an adult and leave before the tide turns. Never step on, touch or collect corals or animals (it is illegal in a marine park and harms them); walk only on sand or bare rock. Wear covered shoes and protect yourself from the sun.",
     },
   ],
-
   bonusDiagrams: [
     {
-      title: "Darwin's theory: from fringing reef to atoll",
+      title: "From farm to reef: how run-off feeds crown-of-thorns outbreaks",
+      svg: `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow from sugarcane farms through a river flood plume to the reef, where extra nutrients feed plankton, crown-of-thorns starfish larvae survive and the starfish eat coral" font-family="sans-serif"><rect width="360" height="220" fill="#f8fafc"/><rect x="0" y="0" width="110" height="120" fill="#ecfccb"/><rect x="110" y="0" width="250" height="120" fill="#bae6fd"/><g stroke="#4d7c0f" stroke-width="3"><line x1="12" y1="80" x2="12" y2="50"/><line x1="24" y1="80" x2="24" y2="46"/><line x1="36" y1="80" x2="36" y2="52"/><line x1="48" y1="80" x2="48" y2="44"/></g><rect x="0" y="80" width="110" height="40" fill="#a16207"/><text x="8" y="18" font-size="11" font-weight="700" fill="#365314">Farms</text><text x="8" y="32" font-size="11" fill="#365314">fertiliser + soil</text><path d="M60 100 Q100 95 120 90 Q180 80 240 86" stroke="#8b5a2b" stroke-width="10" fill="none" opacity="0.55" stroke-linecap="round"/><text x="150" y="70" font-size="11" fill="#78350f">muddy flood plume</text><g fill="#16a34a"><circle cx="200" cy="40" r="3"/><circle cx="214" cy="30" r="3"/><circle cx="228" cy="44" r="3"/><circle cx="242" cy="34" r="3"/></g><text x="190" y="20" font-size="11" fill="#14532d">plankton bloom</text><g fill="#7c3aed"><circle cx="300" cy="96" r="7"/><circle cx="322" cy="104" r="7"/></g><path d="M276 120 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0 q10 -14 20 0" fill="#f472b6"/><text x="278" y="80" font-size="11" fill="#4c1d95">starfish</text><rect x="6" y="132" width="80" height="44" rx="6" fill="#fef3c7" stroke="#d97706"/><text x="46" y="150" font-size="11" text-anchor="middle" fill="#78350f">heavy rain,</text><text x="46" y="166" font-size="11" text-anchor="middle" fill="#78350f">run-off</text><rect x="96" y="132" width="80" height="44" rx="6" fill="#dcfce7" stroke="#16a34a"/><text x="136" y="150" font-size="11" text-anchor="middle" fill="#14532d">more</text><text x="136" y="166" font-size="11" text-anchor="middle" fill="#14532d">plankton</text><rect x="186" y="132" width="80" height="44" rx="6" fill="#ede9fe" stroke="#7c3aed"/><text x="226" y="150" font-size="11" text-anchor="middle" fill="#4c1d95">more COTS</text><text x="226" y="166" font-size="11" text-anchor="middle" fill="#4c1d95">larvae survive</text><rect x="276" y="132" width="78" height="44" rx="6" fill="#fee2e2" stroke="#dc2626"/><text x="315" y="150" font-size="11" text-anchor="middle" fill="#7f1d1d">coral</text><text x="315" y="166" font-size="11" text-anchor="middle" fill="#7f1d1d">eaten</text><g fill="#334155"><polygon points="94,154 88,150 88,158"/><polygon points="184,154 178,150 178,158"/><polygon points="274,154 268,150 268,158"/></g><text x="180" y="200" font-size="11" text-anchor="middle" fill="#0f172a">Fix: less fertiliser, fewer bare fields, cull starfish,</text><text x="180" y="214" font-size="11" text-anchor="middle" fill="#0f172a">no-take zones keep the fish that eat young starfish</text></svg>`,
       caption:
-        "As a volcanic island slowly sinks, the reef keeps growing upwards towards the light. A fringing reef becomes a barrier reef with a lagoon, and finally an atoll when the island disappears.",
-      svg: `<svg viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three cross-sections showing a fringing reef around a volcanic island, a barrier reef with a lagoon around a smaller sinking island, and an atoll ring of reef with only a lagoon in the middle">
-<rect x="0" y="0" width="480" height="300" fill="#ffffff"/>
-<g font-family="sans-serif" font-size="12" fill="#1f2937">
-<text x="80" y="22" text-anchor="middle" font-weight="bold">1. Fringing reef</text>
-<text x="240" y="22" text-anchor="middle" font-weight="bold">2. Barrier reef</text>
-<text x="400" y="22" text-anchor="middle" font-weight="bold">3. Atoll</text>
-</g>
-<rect x="5" y="110" width="150" height="150" fill="#bae6fd"/>
-<rect x="165" y="110" width="150" height="150" fill="#bae6fd"/>
-<rect x="325" y="110" width="150" height="150" fill="#bae6fd"/>
-<line x1="5" y1="110" x2="155" y2="110" stroke="#334155" stroke-width="1.5"/>
-<line x1="165" y1="110" x2="315" y2="110" stroke="#334155" stroke-width="1.5"/>
-<line x1="325" y1="110" x2="475" y2="110" stroke="#334155" stroke-width="1.5"/>
-<path d="M30 260 L80 50 L130 260 Z" fill="#d6d3d1" stroke="#334155" stroke-width="1.5"/>
-<path d="M44 200 L36 110 L52 110 L58 200 Z" fill="#fecaca" stroke="#334155"/>
-<path d="M116 200 L124 110 L108 110 L102 200 Z" fill="#fecaca" stroke="#334155"/>
-<path d="M200 260 L240 90 L280 260 Z" fill="#d6d3d1" stroke="#334155" stroke-width="1.5"/>
-<path d="M176 260 L180 110 L196 110 L198 260 Z" fill="#fecaca" stroke="#334155"/>
-<path d="M304 260 L300 110 L284 110 L282 260 Z" fill="#fecaca" stroke="#334155"/>
-<path d="M370 260 L400 150 L430 260 Z" fill="#d6d3d1" stroke="#334155" stroke-width="1.5"/>
-<path d="M336 260 L340 110 L358 110 L362 260 Z" fill="#fecaca" stroke="#334155"/>
-<path d="M464 260 L460 110 L442 110 L438 260 Z" fill="#fecaca" stroke="#334155"/>
-<g font-family="sans-serif" font-size="11" fill="#1f2937">
-<text x="80" y="104" text-anchor="middle">volcanic island</text>
-<text x="240" y="84" text-anchor="middle">island sinking</text>
-<text x="400" y="104" text-anchor="middle">lagoon</text>
-<text x="218" y="128" text-anchor="middle">lagoon</text>
-<text x="80" y="282" text-anchor="middle">reef hugs the shore</text>
-<text x="240" y="282" text-anchor="middle">lagoon between reef and land</text>
-<text x="400" y="282" text-anchor="middle">ring of reef, no island</text>
-<text x="400" y="240" text-anchor="middle">old volcano</text>
-</g>
-<path d="M150 60 L176 60" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
-<path d="M310 60 L336 60" stroke="#334155" stroke-width="2" marker-end="url(#a)"/>
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#334155"/></marker></defs>
-<g font-family="sans-serif" font-size="10" fill="#334155">
-<text x="163" y="52" text-anchor="middle">sinks</text>
-<text x="323" y="52" text-anchor="middle">sinks</text>
-</g>
-</svg>`,
+        "Nutrients from farm fertiliser wash into the sea in flood plumes and feed plankton, which is food for crown-of-thorns starfish (COTS) larvae. More larvae survive, adults swarm the reef and eat the coral. Cutting run-off tackles the cause; culling starfish treats the symptom.",
     },
     {
-      title: "Inside a coral polyp",
+      title: "What a reef does for people",
+      svg: `<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A coral reef in the centre with five benefits around it: coastal protection, food, tourism, medicines and biodiversity" font-family="sans-serif"><rect width="360" height="220" fill="#f0f9ff"/><ellipse cx="180" cy="112" rx="58" ry="34" fill="#f9a8d4" stroke="#db2777"/><text x="180" y="108" font-size="12" font-weight="700" text-anchor="middle" fill="#831843">Coral</text><text x="180" y="124" font-size="12" font-weight="700" text-anchor="middle" fill="#831843">reef</text><g stroke="#94a3b8" stroke-width="1.5"><line x1="150" y1="86" x2="96" y2="50"/><line x1="210" y1="86" x2="264" y2="50"/><line x1="124" y1="118" x2="96" y2="150"/><line x1="236" y1="118" x2="264" y2="150"/><line x1="180" y1="146" x2="180" y2="174"/></g><rect x="6" y="20" width="132" height="44" rx="8" fill="#e0f2fe" stroke="#0284c7"/><text x="72" y="38" font-size="11" text-anchor="middle" fill="#075985">Coastal protection</text><text x="72" y="54" font-size="11" text-anchor="middle" fill="#075985">absorbs ~97% wave energy</text><rect x="222" y="20" width="132" height="44" rx="8" fill="#dcfce7" stroke="#16a34a"/><text x="288" y="38" font-size="11" text-anchor="middle" fill="#14532d">Food</text><text x="288" y="54" font-size="11" text-anchor="middle" fill="#14532d">fish for coastal families</text><rect x="6" y="140" width="132" height="44" rx="8" fill="#fef3c7" stroke="#d97706"/><text x="72" y="158" font-size="11" text-anchor="middle" fill="#78350f">Tourism (GBR)</text><text x="72" y="174" font-size="11" text-anchor="middle" fill="#78350f">~A$6.4 bn/yr, 64,000 jobs</text><rect x="222" y="140" width="132" height="44" rx="8" fill="#ede9fe" stroke="#7c3aed"/><text x="288" y="158" font-size="11" text-anchor="middle" fill="#4c1d95">Medicines</text><text x="288" y="174" font-size="11" text-anchor="middle" fill="#4c1d95">new chemicals from reef life</text><rect x="110" y="176" width="140" height="40" rx="8" fill="#fce7f3" stroke="#db2777"/><text x="180" y="192" font-size="11" text-anchor="middle" fill="#831843">Biodiversity</text><text x="180" y="207" font-size="11" text-anchor="middle" fill="#831843">~25% of marine species</text></svg>`,
       caption:
-        "Each polyp sits in a cup of calcium carbonate it builds itself. Algae (zooxanthellae) in its tissue make sugar by photosynthesis; at night the tentacles catch plankton. Bleaching is when heat-stressed polyps expel these algae.",
-      svg: `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Labelled diagram of a coral polyp showing tentacles, mouth, tissue containing zooxanthellae algae, and the calcium carbonate skeleton cup it sits in">
-<rect x="0" y="0" width="440" height="300" fill="#ffffff"/>
-<rect x="110" y="200" width="160" height="80" fill="#d6d3d1" stroke="#334155" stroke-width="1.5"/>
-<path d="M130 200 L130 120 Q190 100 250 120 L250 200 Z" fill="#fde68a" stroke="#334155" stroke-width="1.5"/>
-<path d="M150 200 L150 170 L230 170 L230 200 Z" fill="#ffffff" stroke="#334155" stroke-dasharray="3 3"/>
-<g stroke="#334155" stroke-width="7" stroke-linecap="round" fill="none" opacity="0.9">
-<path d="M140 120 Q120 80 100 60" stroke="#fdba74"/>
-<path d="M160 112 Q150 70 140 40" stroke="#fdba74"/>
-<path d="M190 108 Q190 66 190 30" stroke="#fdba74"/>
-<path d="M220 112 Q230 70 240 40" stroke="#fdba74"/>
-<path d="M240 120 Q260 80 280 60" stroke="#fdba74"/>
-</g>
-<ellipse cx="190" cy="118" rx="12" ry="5" fill="#7c2d12"/>
-<g fill="#65a30d">
-<circle cx="145" cy="140" r="4"/><circle cx="160" cy="155" r="4"/><circle cx="175" cy="135" r="4"/><circle cx="205" cy="140" r="4"/><circle cx="220" cy="155" r="4"/><circle cx="238" cy="138" r="4"/><circle cx="190" cy="152" r="4"/>
-</g>
-<g stroke="#334155" stroke-width="1">
-<line x1="280" y1="60" x2="320" y2="50"/>
-<line x1="202" y1="118" x2="320" y2="100"/>
-<line x1="238" y1="138" x2="320" y2="150"/>
-<line x1="230" y1="185" x2="320" y2="200"/>
-<line x1="270" y1="250" x2="320" y2="250"/>
-</g>
-<g font-family="sans-serif" font-size="12" fill="#1f2937">
-<text x="324" y="54">tentacles with</text>
-<text x="324" y="68">stinging cells</text>
-<text x="324" y="104">mouth</text>
-<text x="324" y="148">zooxanthellae</text>
-<text x="324" y="162">(algae) in tissue</text>
-<text x="324" y="204">stomach</text>
-<text x="324" y="248">calcium carbonate</text>
-<text x="324" y="262">skeleton (cup)</text>
-<text x="20" y="40">sunlight →</text>
-<text x="20" y="54">algae make sugar</text>
-<text x="20" y="290">many reef-coral polyps are only a few millimetres across</text>
-</g>
-<g stroke="#f59e0b" stroke-width="2">
-<line x1="60" y1="70" x2="120" y2="130"/>
-<line x1="40" y1="80" x2="110" y2="150"/>
-</g>
-</svg>`,
+        "Reefs are worth far more than their beauty: they shield coasts from waves (an important link to coastal erosion), feed hundreds of millions of people, earn billions from tourism and may hold future medicines. Tourism figures are a 2017 estimate for the Great Barrier Reef.",
     },
   ],
-
-  history: {
-    title: "Darwin's atoll puzzle",
-    story:
-      "In 1836, near the end of his voyage on HMS Beagle, the young Charles Darwin stepped ashore on the Cocos (Keeling) Islands in the Indian Ocean — a ring of low coral islands around a lagoon. How could corals, which only live in shallow, sunlit water, build a ring in the middle of a deep ocean? Darwin's answer, published in 1842, was bold: the corals first grew as a fringing reef around a volcanic island. As the island slowly sank, the corals kept growing upwards towards the light, becoming a barrier reef and finally an atoll once the island vanished. Many scientists doubted him for over a century. Then, in the early 1950s, engineers drilling on Enewetak atoll in the Pacific bored through more than 1,000 m of coral limestone — and hit volcanic rock. Darwin had been right.",
-  },
+  interactives: ["coral-reefs:ReefHealthSimulator", "coral-reefs:ReefTypesTimeMachine"],
 };

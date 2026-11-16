@@ -1,80 +1,23 @@
 "use client";
-// Plays one "Totally Raotional" sitcom episode and records it as watched (90% viewed)
-// in the same localStorage object the Watch tab already uses (y8m2:watch-v1).
-import { useRef, useSyncExternalStore } from "react";
+// Plays one "Off The Map" (Claude Sitcom) episode. Watching 90% of it awards stars once
+// (key `sitcom:<topicId>`), which also marks it watched on every device via the synced store.
+import { useRef } from "react";
 import type { SitcomEpisode } from "@/lib/sitcom";
+import { useStore } from "@/lib/store";
 
-const KEY = "y8m2:watch-v1";
-const EVENT = "y8m2-episode-watched";
-
-interface WatchStore {
-  completedMc?: Record<string, boolean>;
-  completedSitcom?: Record<string, boolean>;
-  completedEpisode?: Record<string, boolean>;
-}
-
-function readStore(): WatchStore {
-  try {
-    return JSON.parse(localStorage.getItem(KEY) ?? "{}") as WatchStore;
-  } catch {
-    return {};
-  }
-}
-
-export function markEpisodeWatched(topicId: string): void {
-  try {
-    const s = readStore();
-    if (s.completedEpisode?.[topicId]) return;
-    s.completedEpisode = { ...(s.completedEpisode ?? {}), [topicId]: true };
-    localStorage.setItem(KEY, JSON.stringify(s));
-    window.dispatchEvent(new Event(EVENT));
-  } catch {
-    // Storage unavailable (private mode): watching still works, it just isn't remembered.
-  }
-}
-
-function subscribe(onChange: () => void): () => void {
-  window.addEventListener(EVENT, onChange);
-  window.addEventListener("storage", onChange);
-  return () => {
-    window.removeEventListener(EVENT, onChange);
-    window.removeEventListener("storage", onChange);
-  };
-}
-
-function snapshot(): string {
-  try {
-    return localStorage.getItem(KEY) ?? "";
-  } catch {
-    return "";
-  }
-}
-
-/** Topic ids whose episode has been watched. Re-renders when any player marks one. */
-export function useWatchedEpisodes(): Record<string, boolean> {
-  const raw = useSyncExternalStore(subscribe, snapshot, () => "");
-  if (!raw) return {};
-  try {
-    return (JSON.parse(raw) as WatchStore).completedEpisode ?? {};
-  } catch {
-    return {};
-  }
-}
+export const SITCOM_STARS = 5;
+export const sitcomKey = (topicId: string) => `sitcom:${topicId}`;
 
 export function formatDuration(sec: number): string {
   return `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, "0")}`;
 }
 
-export function EpisodePlayer({
-  episode,
-  autoPlay = false,
-  onEnded,
-}: {
-  episode: SitcomEpisode;
-  autoPlay?: boolean;
-  onEnded?: () => void;
-}) {
+export function EpisodePlayer({ episode, autoPlay = false, onEnded }: { episode: SitcomEpisode; autoPlay?: boolean; onEnded?: () => void }) {
   const ref = useRef<HTMLVideoElement>(null);
+  const { award, hasAward } = useStore();
+  const done = () => {
+    if (!hasAward(sitcomKey(episode.topicId))) award(sitcomKey(episode.topicId), SITCOM_STARS);
+  };
   return (
     <video
       ref={ref}
@@ -88,10 +31,10 @@ export function EpisodePlayer({
       className="aspect-video w-full rounded-xl bg-black"
       onTimeUpdate={() => {
         const v = ref.current;
-        if (v && v.duration && v.currentTime / v.duration > 0.9) markEpisodeWatched(episode.topicId);
+        if (v && v.duration && v.currentTime / v.duration > 0.9) done();
       }}
       onEnded={() => {
-        markEpisodeWatched(episode.topicId);
+        done();
         onEnded?.();
       }}
     >

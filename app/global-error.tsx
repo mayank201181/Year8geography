@@ -1,12 +1,8 @@
 "use client";
+
 import { ErrorFallback } from "@/components/ErrorFallback";
 
-export default function GlobalError({ error, retry, reset }: { error: Error & { digest?: string }; retry?: () => void; reset?: () => void }) {
-  return (
-    <html lang="en-GB">
-      <body>
-        <ErrorFallback error={error} onRetry={retry ?? reset} />
-      </body>
-    </html>
-  );
+// Replaces the root layout, so it must render its own html and body.
+export default function GlobalError({ error, unstable_retry, reset }: { error: Error; unstable_retry?: () => void; reset: () => void }) {
+  return <html lang="en"><body style={{ margin: 0 }}><ErrorFallback error={error} onRetry={unstable_retry ?? reset} /></body></html>;
 }

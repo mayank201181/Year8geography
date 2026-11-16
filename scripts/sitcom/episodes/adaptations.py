@@ -1,214 +1,259 @@
-# "Totally Raotional: Off The Map" S02E09 "Cactus Makes Perfect" (Topic: Plant & Animal Adaptations)
-# Format and helpers: see common.py and docs/SITCOM.md; check with lint_episode.py.
-# Sections taught: what-is-adaptation, desert-adaptations, polar-adaptations, mountain-adaptations.
+# "Off The Map" (a Claude Sitcom) S01E08 "Survival Of The Fluffiest" (Topic: Adaptations)
+# Format and helpers: see common.py and EPISODE_GUIDE.md; check with lint_episode.py.
 
-EP = dict(topic="adaptations",
-          logline="Mum is drowning a bargain cactus and Dad wants to bottle 'camel hump water'. Globo flies the Raos to the "
-                  "desert, the ice and the Himalayas to teach the three types of adaptation, and bust the hump myth for good.")
+EP = dict(
+    topic="adaptations",
+    logline="Dad buys a documentary called Polar Bear Versus Penguin and insists they are neighbours. Atlas spins the family to Antarctica, where there are no bears at all, then to the Sahara, where the camel's hump is not what Dad thinks.",
+    names={"guest": "MOUSSA", "guest2": "DR AROHA"},
+    display={"C A M": "CAM"},
+)
 
-D_FOXES = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">
-<rect width="260" height="200" fill="#78350f"/><rect x="260" width="260" height="200" fill="#0c4a6e"/>
-<path d="M80 120 L60 30 L115 100Z M180 120 L200 30 L145 100Z" fill="#fcd34d"/>
-<circle cx="130" cy="130" r="42" fill="#fcd34d"/><circle cx="115" cy="122" r="5" fill="#1e293b"/><circle cx="145" cy="122" r="5" fill="#1e293b"/>
-<path d="M352 112 L358 88 L376 104Z M428 112 L422 88 L404 104Z" fill="#f1f5f9"/>
-<circle cx="390" cy="130" r="42" fill="#f1f5f9"/><circle cx="375" cy="124" r="5" fill="#1e293b"/><circle cx="405" cy="124" r="5" fill="#1e293b"/>
-<text x="130" y="22" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">FENNEC FOX · Sahara</text>
-<text x="390" y="22" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">ARCTIC FOX · tundra</text>
-<text x="130" y="192" font-family="sans-serif" font-size="14" fill="#fde68a" text-anchor="middle">big ears → LOSE heat</text>
-<text x="390" y="192" font-family="sans-serif" font-size="14" fill="#bae6fd" text-anchor="middle">small ears → KEEP heat</text>
-</svg>"""
+POLES = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 232">'
+    '<rect x="10" y="8" width="500" height="84" rx="12" fill="#1e3a8a"/>'
+    '<text x="24" y="40" font-family="sans-serif" font-size="22" fill="#bfdbfe">ARCTIC · north · frozen OCEAN</text>'
+    '<text x="24" y="76" font-family="sans-serif" font-size="19" fill="#f8fafc">Polar bears, Arctic foxes · NO penguins</text>'
+    '<line x1="10" y1="104" x2="510" y2="104" stroke="#fca5a5" stroke-width="3" stroke-dasharray="10 6"/>'
+    '<text x="260" y="128" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fca5a5">EQUATOR · too hot to cross in a fur coat</text>'
+    '<rect x="10" y="140" width="500" height="84" rx="12" fill="#155e75"/>'
+    '<text x="24" y="172" font-family="sans-serif" font-size="22" fill="#a5f3fc">ANTARCTICA · south · frozen LAND</text>'
+    '<text x="24" y="208" font-family="sans-serif" font-size="19" fill="#f8fafc">Emperor penguins · NO polar bears</text>'
+    '</svg>'
+)
 
-D_CACTUS = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220">
-<rect width="520" height="150" fill="#1e3a5f"/><rect y="150" width="520" height="70" fill="#a16207"/>
-<rect x="90" y="30" width="44" height="122" rx="20" fill="#16a34a"/><rect x="40" y="70" width="22" height="50" rx="10" fill="#16a34a"/>
-<rect x="40" y="108" width="52" height="16" rx="8" fill="#16a34a"/>
-<path d="M100 40 v110 M112 36 v114 M124 40 v110" stroke="#14532d" stroke-width="2"/>
-<path d="M88 60 l-8 -4 M136 60 l8 -4 M88 90 l-8 -4 M136 90 l8 -4" stroke="#fde68a" stroke-width="2"/>
-<path d="M112 152 Q60 160 20 158 M112 152 Q170 162 230 158 M112 152 Q80 170 50 168 M112 152 Q150 172 200 170" stroke="#fde68a" stroke-width="3" fill="none"/>
-<path d="M380 120 v90" stroke="#fde68a" stroke-width="4"/><circle cx="380" cy="100" r="26" fill="#65a30d"/>
-<text x="160" y="56" font-family="sans-serif" font-size="14" fill="#fff">spines = LEAVES</text>
-<text x="160" y="82" font-family="sans-serif" font-size="14" fill="#fff">waxy skin</text>
-<text x="160" y="108" font-family="sans-serif" font-size="14" fill="#fff">pleated stem stores water</text>
-<text x="20" y="208" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff">wide, shallow roots</text>
-<text x="400" y="190" font-family="sans-serif" font-size="14" font-weight="bold" fill="#fff">deep TAP ROOT</text>
-<text x="380" y="60" font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">mesquite</text>
-</svg>"""
+PERMAFROST = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210">'
+    '<text x="10" y="28" font-family="sans-serif" font-size="19" fill="#86efac">Tundra plants: low, small, shallow roots</text>'
+    '<rect x="0" y="56" width="520" height="54" fill="#92400e"/>'
+    '<ellipse cx="60" cy="54" rx="22" ry="8" fill="#22c55e"/>'
+    '<ellipse cx="160" cy="54" rx="14" ry="9" fill="#22c55e"/>'
+    '<ellipse cx="420" cy="54" rx="20" ry="8" fill="#22c55e"/>'
+    '<ellipse cx="300" cy="58" rx="40" ry="6" fill="#7dd3fc"/>'
+    '<line x1="60" y1="60" x2="60" y2="80" stroke="#fde68a" stroke-width="2"/>'
+    '<line x1="160" y1="62" x2="160" y2="84" stroke="#fde68a" stroke-width="2"/>'
+    '<line x1="420" y1="60" x2="420" y2="80" stroke="#fde68a" stroke-width="2"/>'
+    '<text x="190" y="94" font-family="sans-serif" font-size="19" fill="#fde047">ACTIVE LAYER · thaws in summer</text>'
+    '<rect x="0" y="110" width="520" height="96" fill="#334155"/>'
+    '<line x1="0" y1="110" x2="520" y2="110" stroke="#7dd3fc" stroke-width="3" stroke-dasharray="8 5"/>'
+    '<text x="10" y="146" font-family="sans-serif" font-size="20" fill="#7dd3fc">PERMAFROST · frozen 2+ years in a row</text>'
+    '<text x="10" y="184" font-family="sans-serif" font-size="18" fill="#f8fafc">Water can\'t drain → boggy summer pools</text>'
+    '</svg>'
+)
 
-D_HUDDLE = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">
-<rect width="520" height="200" fill="#0f172a"/>
-<circle cx="200" cy="100" r="84" fill="#1e3a8a"/><circle cx="200" cy="100" r="54" fill="#b45309"/><circle cx="200" cy="100" r="26" fill="#dc2626"/>
-<text x="200" y="106" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">20°C+</text>
-<path d="M200 10 A90 90 0 0 1 290 100" stroke="#fde047" stroke-width="3" fill="none"/><path d="M290 100 l-8 -12 l14 0z" fill="#fde047"/>
-<path d="M500 40 H310 M500 100 H310 M500 160 H310" stroke="#7dd3fc" stroke-width="3" stroke-dasharray="10 8"/>
-<text x="410" y="30" font-family="sans-serif" font-size="14" fill="#bae6fd" text-anchor="middle">icy wind</text>
-<text x="200" y="196" font-family="sans-serif" font-size="14" fill="#fde047" text-anchor="middle">birds rotate: edge ↔ middle</text>
-</svg>"""
+CACTUS = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250">'
+    '<rect x="0" y="206" width="520" height="44" fill="#57300f"/>'
+    '<rect x="80" y="36" width="44" height="172" rx="20" fill="#4d7c0f"/>'
+    '<path d="M80 130 h-26 v-50 a12 12 0 0 1 24 0 v34 h2 Z" fill="#4d7c0f"/>'
+    '<path d="M124 112 h24 v-40 a12 12 0 0 1 24 0 v52 h-48 Z" fill="#4d7c0f"/>'
+    '<line x1="94" y1="44" x2="94" y2="204" stroke="#365314" stroke-width="2"/>'
+    '<line x1="110" y1="44" x2="110" y2="204" stroke="#365314" stroke-width="2"/>'
+    '<g stroke="#fef9c3" stroke-width="2">'
+    '<line x1="80" y1="60" x2="70" y2="54"/><line x1="80" y1="90" x2="70" y2="84"/>'
+    '<line x1="124" y1="70" x2="134" y2="64"/><line x1="124" y1="160" x2="134" y2="154"/>'
+    '</g>'
+    '<g stroke="#fde68a" stroke-width="2" fill="none">'
+    '<path d="M102 208 C70 214 40 218 10 220"/><path d="M102 208 C130 214 160 218 180 220"/>'
+    '</g>'
+    '<text x="190" y="50" font-family="sans-serif" font-size="19" fill="#fde047">Spines = tiny leaves</text>'
+    '<text x="190" y="76" font-family="sans-serif" font-size="19" fill="#f8fafc">→ less transpiration</text>'
+    '<text x="190" y="112" font-family="sans-serif" font-size="19" fill="#86efac">Waxy skin seals in water</text>'
+    '<text x="190" y="146" font-family="sans-serif" font-size="19" fill="#7dd3fc">Pleated stem stores water</text>'
+    '<text x="190" y="180" font-family="sans-serif" font-size="19" fill="#fca5a5">Stomata open at NIGHT (CAM)</text>'
+    '<text x="190" y="236" font-family="sans-serif" font-size="19" fill="#fde68a">Shallow wide roots ~10 cm deep</text>'
+    '</svg>'
+)
 
-D_AIR = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220">
-<rect width="520" height="220" fill="#0f172a"/>
-<rect x="40" y="40" width="80" height="140" fill="#38bdf8"/>
-<rect x="160" y="89" width="80" height="91" fill="#38bdf8"/>
-<rect x="280" y="110" width="80" height="70" fill="#38bdf8"/>
-<rect x="400" y="134" width="80" height="46" fill="#38bdf8"/>
-<text x="80" y="32" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">100%</text>
-<text x="200" y="81" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">~65%</text>
-<text x="320" y="102" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">~50%</text>
-<text x="440" y="126" font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">~33%</text>
-<text x="80" y="200" font-family="sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">Singapore 0 m</text>
-<text x="200" y="200" font-family="sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">La Paz 3,600 m</text>
-<text x="320" y="200" font-family="sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">5,500 m</text>
-<text x="440" y="200" font-family="sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">Everest 8,849 m</text>
-<text x="260" y="216" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">air pressure, % of sea level</text>
-</svg>"""
+LAPSE = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 236">'
+    '<text x="10" y="28" font-family="sans-serif" font-size="21" fill="#fde047">Oxygen in each breath · −6.5 °C per 1,000 m</text>'
+    '<text x="10" y="74" font-family="sans-serif" font-size="19" fill="#f8fafc">Sea level</text>'
+    '<rect x="200" y="48" width="300" height="38" fill="#86efac"/>'
+    '<text x="490" y="74" text-anchor="end" font-family="sans-serif" font-size="19" fill="#111827">100%</text>'
+    '<text x="10" y="124" font-family="sans-serif" font-size="19" fill="#f8fafc">About 5,500 m</text>'
+    '<rect x="200" y="98" width="150" height="38" fill="#7dd3fc"/>'
+    '<text x="360" y="124" font-family="sans-serif" font-size="19" fill="#7dd3fc">about half</text>'
+    '<text x="10" y="174" font-family="sans-serif" font-size="19" fill="#f8fafc">Everest 8,849 m</text>'
+    '<rect x="200" y="148" width="100" height="38" fill="#fca5a5"/>'
+    '<text x="310" y="174" font-family="sans-serif" font-size="19" fill="#fca5a5">about a third</text>'
+    '<text x="10" y="220" font-family="sans-serif" font-size="18" fill="#f8fafc">Less oxygen → altitude sickness (2,500 m+)</text>'
+    '</svg>'
+)
 
 # ---------------- COLD OPEN ----------------
-scene("living", [("tara", 300), ("mum", 760)])
-L("mum", "Tara! Three cactuses for the price of two! I water them morning, noon and night.", mood="excited", shot="close", prop="bucket")
-L("tara", "Mum, it's a desert plant. You're watering it like it owes you money.", mood="deadpan", shot="close")
-L("mum", "Everything in Singapore likes water!", mood="happy", shot="two")
-L("tara", "This one's gone soft. I think it's trying to swim.", mood="deadpan", shot="close", gap=0.5)
-scene("living", [("tara", 260), ("mum", 600), ("dad", 980)])
-sfx("door")
-L("dad", "Family. My next business. Camels store water in their humps, yes? So I'll bottle it. Raos' Hump Water. Slogan. It's been through a lot.", mood="smug", shot="close", prop="tablet")
-freeze("\"BEEN THROUGH A LOT\"", 2.4, narrator="Narrator: So had the family.")
-confess("tara", "TARA RAO · 12 · Only Sane Person In This House")
-L("tara", "Mum is drowning a cactus. Dad wants to sell camel juice. Time to call the only adult in this flat. He lives in a drawer.", mood="deadpan", gap=0.6)
+scene("living", [("dad", 340), ("priya", 700)])
+L("dad", "Family! Tonight's documentary. Polar Bear Versus Penguin. Neighbours At War.", mood="excited", shot="close", prop="tablet")
+L("priya", "Dad. Polar bears and penguins are not neighbours.", mood="deadpan", shot="close")
+L("dad", "Of course they are. Both cold. Both black and white. They probably share a fridge.", mood="smug", shot="close")
+freeze("DAD'S DOCUMENTARY", 2.6, narrator="Narrator: The two stars live at opposite ends of the Earth.")
+confess("priya", "PRIYA · 12 · Has Never Shared A Fridge With A Bear")
+L("priya", "They have never met. They will never meet. Unless Dad organises it.", mood="deadpan", gap=0.6)
 
 title()
 
-# ---------------- ACT 1: WHAT IS AN ADAPTATION? ----------------
-scene("kitchen", [("tara", 380)])
-L("tara", "Right. Time to open the drawer we don't open.", mood="determined", shot="wide")
-sfx("drawer")
-poof("globo", 860)
-L("globo", "Who disturbs the drawer? Oh. The Raos. I was napping behind the takeaway menus.", mood="bored", shot="close")
-L("tara", "Globo, Mum is drowning a cactus, and Dad thinks camel humps are full of water.", mood="worried", shot="two")
-L("globo", "Of course he does. Your father once asked me which way is north. I am a globe. It is written on me.", mood="eyeroll", shot="close", gap=0.4)
+# ---------------- ACT 1: TWO POLES ----------------
+scene("living", [("priya", 260), ("dad", 540)])
+L("priya", "Atlas! Dad thinks polar bears eat penguins for breakfast.", mood="determined", shot="wide")
+sfx("whoosh")
+poof("atlas", 880)
+L("atlas", "To catch a penguin, a polar bear would have to cross the equator. In a fur coat. Nobody is that hungry.", mood="bored", shot="close")
+L("atlas", "Polar bears live only in the Arctic, a frozen ocean. Penguins live only in the southern hemisphere, mostly around Antarctica, a frozen continent.", mood="teach", shot="close",
+  boardClear=True, diagram=POLES)
+L("priya", "Exam trick. Arctic comes from the Greek word for bear. Antarctic means opposite the bear.", mood="smug", shot="close",
+  board="Arktos = bear · Ant-arctic = anti-bear")
+L("atlas", "So how does anything survive at either end? Adaptations. A feature or behaviour that helps a living thing survive.", mood="teach", shot="close",
+  boardClear=True, board="Adaptation = feature or behaviour")
+L("atlas", "Structural adaptations are body features, like thick fur. Behavioural ones are actions, like hunting at night.", mood="teach", shot="close",
+  board="Structural = body · Behavioural = action")
+L("dad", "So my belly is structural. For surviving buffets.", mood="smug", shot="close")
+L("priya", "And the nap afterwards is behavioural.", mood="deadpan", shot="close", gap=0.4)
+L("atlas", "Every extreme place throws five problems at you. Water, food, temperature, isolation, access.", mood="teach", shot="close",
+  board="Will Food Travel In Antarctica?")
+L("dad", "Will food travel in Antarctica? Excellent question. I'm packing snacks.", mood="determined", shot="close", gap=0.3)
 
-confess("globo", "GLOBO · Retired Classroom Globe · Lives In The Junk Drawer")
-L("globo", "I am Globo. I have survived every extreme environment. Including Year Eight on a Friday.", mood="smug", gap=0.5)
+confess("atlas", "ATLAS · Desk Globe · Both Poles Chipped")
+L("atlas", "Both my poles are chipped. And I was dropped on Australia again. It now has a dent shaped like a flip-flop.", mood="bored", gap=0.5)
 
-scene("kitchen", [("tara", 300), ("globo", 860)])
-L("globo", "An adaptation is an inherited feature that helps a living thing survive and reproduce. It builds up over many generations, by natural selection. No animal decides to adapt.", mood="teach", shot="close",
-  boardClear=True, board="ADAPTATION: an INHERITED feature")
-L("globo", "Three types. Structural, a body part. Behavioural, what it does. Physiological, a process inside its body.", mood="teach", shot="close",
-  board="STRUCTURAL: what it HAS (body part)")
-L("tara", "So spines are structural. Huddling is behavioural. Making very concentrated wee is physiological.", mood="happy", shot="close",
-  board="BEHAVIOURAL: what it DOES")
-L("globo", "Correct, if graphic. Every adaptation beats a challenge. Heat, cold, drought, or low oxygen.", mood="smug", shot="close",
-  board="PHYSIOLOGICAL: a process INSIDE it")
-L("globo", "Two foxes. The fennec fox in the Sahara has enormous ears. The Arctic fox has tiny ones. Ears work like radiators.", mood="teach", shot="close",
-  boardClear=True, board="Challenges: heat · cold · drought · low O₂", diagram=D_FOXES)
-L("tara", "Big surface area loses heat fast. Good in a desert. Small ears keep heat in. Good in the cold.", mood="thinking", shot="close",
-  board="Big surface area → loses heat fast")
-L("globo", "In exams, write a chain. Feature, how it works, the challenge, so it survives. Now. Globo Airways is boarding.", mood="teach", shot="close",
-  board="Feature → how → challenge → survives")
+# ---------------- ACT 2A: ANTARCTICA ----------------
+scene("living", [("priya", 260), ("dad", 540), ("atlas", 880)])
+L("dad", "Take me to the iceberg where they both live. I'll film it.", mood="determined", shot="close", prop="phone")
+L("atlas", "Wrap up warm. Not around me. I am not a radiator.", mood="smug", shot="close")
+sfx("whoosh")
+scene("polar", [("priya", 240), ("dad", 480), ("atlas", 780)], caption="ANTARCTICA · Emperor penguin colony · Winter · −40 °C")
+L("dad", "Penguins! Where are the bears? My eyebrows have frozen.", mood="shock", shot="close", prop="binoculars")
+L("atlas", "No bears. This is Antarctica, the largest desert on Earth. Deserts get under about two hundred and fifty millimetres of precipitation a year.", mood="smug", shot="close",
+  boardClear=True, board="Desert = under ~250 mm precipitation/yr")
+sfx("door")
+poof("guest2", 1080)
+L("guest2", "Hello! I'm Doctor Aroha. I study emperor penguins. And no, no polar bears.", mood="happy", shot="close")
+L("dad", "Why are the penguins all squashed together? Is there a sale?", mood="thinking", shot="two")
+L("guest2", "That's a huddle. Behavioural. Thousands pack together and shuffle, so everyone takes a turn on the cold outside.", mood="teach", shot="close",
+  board="Huddle = BEHAVIOURAL adaptation")
+L("guest2", "The air can fall below minus forty. Inside a huddle it can rise above twenty degrees.", mood="teach", shot="close",
+  board="Air −40 °C · inside huddle 20 °C+")
+L("guest2", "Blubber insulates them. Dense, overlapping feathers trap warm air. And the fathers hold the egg on their feet for two months, eating nothing.", mood="teach", shot="close",
+  board="Blubber · dense feathers · egg on feet")
+L("dad", "Two months without food.", mood="worried", shot="close")
+L("priya", "You lasted forty minutes when the hawker centre was closed.", mood="deadpan", shot="close", gap=0.4)
+L("dad", "So basically, it's survival of the fluffiest.", mood="smug", shot="close")
+L("guest2", "Biologists say fittest. But fluffy helps. A polar bear's guard hairs are transparent and hollow, and its skin is black, to absorb heat.", mood="teach", shot="close",
+  boardClear=True, board="Polar bear: clear hollow hairs, BLACK skin")
+L("guest2", "Plus blubber up to about ten centimetres thick, small ears, and huge paws to spread its weight on thin ice.", mood="teach", shot="close",
+  board="Blubber ~10 cm · small ears · huge paws")
+L("atlas", "Small ears mean a small surface area, so less heat escapes. Remember that. It comes back in the desert, in reverse.", mood="teach", shot="close",
+  board="Small surface area = less heat lost")
+L("guest2", "Plants? Antarctica has just two native flowering plants. Try the Arctic tundra, on permafrost.", mood="teach", shot="close",
+  boardClear=True, diagram=PERMAFROST)
+L("atlas", "Permafrost stays frozen for at least two years in a row. Only the active layer on top thaws. So tundra plants grow low, with shallow roots, and flower fast in a fifty to sixty day growing season.", mood="teach", shot="close",
+  board="Low · shallow roots · flower fast")
 
-# ---------------- ACT 2: THE DESERT ----------------
-scene("desert", [("tara", 260), ("dad", 600), ("globo", 960)], "THE SAHARA · North Africa · Flown In By Globo Airways")
-L("dad", "The desert! Where are the camels? I brought a bucket, and a very small straw.", mood="excited", shot="close", prop="sunglasses")
-L("globo", "Hot deserts get under two hundred and fifty millimetres of rain a year. Days top forty degrees, nights can be cold.", mood="teach", shot="close",
-  boardClear=True, board="Hot desert: < 250 mm rain a year")
-L("globo", "Take a cactus. Those spines are leaves. Modified leaves, with a tiny surface area, so very little water is lost by transpiration.", mood="teach", shot="close",
-  boardClear=True, board="CACTUS: spines = modified leaves", diagram=D_CACTUS)
-L("tara", "Waxy skin waterproofs it. The swollen, pleated stem stores water. Wide shallow roots grab rain fast, and some plants grow deep tap roots.", mood="happy", shot="close",
-  board="Waxy skin · swollen stem stores water")
-L("dad", "But the camel. My hump water empire!", mood="determined", shot="close", board="Wide shallow roots · deep tap roots")
-sfx("tick")
-L("globo", "The hump stores fat. Not water. Fat. An energy store for when food is scarce.", mood="teach", shot="close",
-  boardClear=True, board="MYTH BUSTED: hump stores FAT, not water")
-L("dad", "Fat? So my product is, hump fat?", mood="shock", shot="close")
+confess("dad", "DAD · Explorer · Has Been To Forty Airports")
+L("dad", "Forty countries. Well, forty airports. One had a penguin keyring. Very lifelike.", mood="smug", gap=0.6)
+
+# ---------------- ACT 2B: THE SAHARA ----------------
+scene("polar", [("priya", 240), ("dad", 480), ("atlas", 780)])
+L("atlas", "Now, from the coldest desert to a hot one. Hold on to your eyebrows.", mood="smug", shot="close")
+sfx("whoosh")
+scene("desert", [("priya", 240), ("dad", 480), ("atlas", 780)], caption="THE SAHARA · Niger · Midday · 44 °C")
+L("dad", "My eyebrows have defrosted. Now they are cooking.", mood="shock", shot="close")
+poof("guest", 1080)
+L("guest", "Welcome! I'm Moussa. My family are Tuareg, camel herders for generations.", mood="happy", shot="close")
+L("dad", "I know camels. The hump is a water tank.", mood="smug", shot="two")
+L("guest", "Everybody says that. Everybody is wrong. The hump is fat, up to about thirty five kilograms. Energy for when food is scarce.", mood="teach", shot="close",
+  boardClear=True, board="Camel hump = FAT (up to ~35 kg)")
+L("guest", "A camel can lose about a quarter of its body weight in water and survive, then drink about a hundred litres in ten minutes.", mood="teach", shot="close",
+  board="Loses ~25% · drinks ~100 L in ~10 min")
+L("guest", "And look. Long double eyelashes against sand. Nostrils that close. Wide padded feet that don't sink.", mood="teach", shot="close",
+  board="Lashes · closable nostrils · wide feet")
+L("dad", "She has better eyelashes than me.", mood="sad", shot="close")
+L("atlas", "She has better everything than you.", mood="smug", shot="close", gap=0.4)
+L("atlas", "The fennec fox is the reverse. Ears up to fifteen centimetres long, with a big surface area to radiate heat. And it hunts at night.", mood="teach", shot="close",
+  boardClear=True, board="Fennec fox: big ears radiate heat")
+L("guest", "We move our herds between wells, so no place is drunk dry. Loose, layered robes trap cooler air, and the tagelmust veil stops sun and sand.", mood="teach", shot="close",
+  board="Tuareg: nomadic herds · loose robes")
+L("dad", "I'm wearing shorts and a T-shirt from Changi Airport.", mood="worried", shot="close")
+L("guest", "Yes. Everybody noticed.", mood="deadpan", shot="close", gap=0.4)
+L("dad", "At least that cactus is a local.", mood="smug", shot="close")
+L("guest", "Planted. Wild cacti come from the Americas.", mood="teach", shot="close",
+  boardClear=True, diagram=CACTUS)
+L("atlas", "Spines are leaves shrunk to points, so less water is lost by transpiration. Waxy skin seals it in.", mood="teach", shot="close",
+  board="Spines = tiny leaves → less water lost")
+L("atlas", "Shallow, wide roots grab rain fast. The pleated stem swells to store it.", mood="teach", shot="close",
+  board="Shallow wide roots · stem stores water")
+L("priya", "And it opens its stomata at night, when it's cooler. That's C A M.", mood="smug", shot="close",
+  board="CAM: stomata open at NIGHT")
+
+# ---------------- ACT 3: SINGAPORE ----------------
+card("MEANWHILE, BACK IN SINGAPORE", "Dad has drunk three litres of water and asked for a camel.", 2.4)
+scene("kitchen", [("priya", 220), ("dad", 440), ("nani", 660)])
+L("dad", "Aircon on. Full blast. I survived two extreme environments today.", mood="determined", shot="close")
+L("nani", "In the sixties we had no aircon. Your grandfather slept on the floor because the tiles were cool.", mood="smug", shot="close")
+L("priya", "Nani, that's a behavioural adaptation.", mood="happy", shot="close")
+L("nani", "That was a cheap adaptation.", mood="deadpan", shot="close", gap=0.3)
+poof("atlas", 980)
+L("atlas", "People can't grow fur, so we use culture, like Moussa's robes, and technology, like aircon and desalination.", mood="teach", shot="close",
+  boardClear=True, board="People adapt: CULTURE + TECHNOLOGY")
+L("priya", "Desalination is one of Singapore's Four National Taps.", mood="teach", shot="close",
+  board="Desalination: 1 of SG's 4 National Taps")
+L("nani", "And both eat electricity. The aircon blows its heat outside. Onto my laundry.", mood="annoyed", shot="close",
+  board="Downside: uses lots of energy")
+L("nani", "And Singapore? Heat plus humidity. Sweat can't evaporate, so you can't cool down. Heatstroke is when your core passes about forty degrees.", mood="worried", shot="close",
+  boardClear=True, board="Heatstroke: core ~40 °C or more")
+L("priya", "Normal is thirty seven. Hypothermia is below thirty five. Frostbite is when fingers and toes freeze.", mood="teach", shot="close",
+  board="Hypothermia <35 °C · frostbite = freezing")
+
+# ---------------- MR TAN: DESCRIBE AND EXPLAIN ----------------
+scene("classroom", [("teacher", 260), ("priya", 560), ("atlas", 900)])
+L("teacher", "Exam skill. The cactus has spines. One mark. Spines have a small surface area, which means that less water is lost. Two marks.", mood="teach", shot="close",
+  boardClear=True, board="Describe + 'which means that…' = 2 marks")
+L("teacher", "Priya. Snow leopard, then yak.", mood="neutral", shot="close")
+L("priya", "Wide, furry paws, which means that they work like snowshoes on snow.", mood="determined", shot="close",
+  board="Snow leopard: furry paws = snowshoes")
+L("priya", "Shaggy hair and a woolly undercoat, which means that warm air is trapped. Big lungs and heart, for scarce oxygen.", mood="determined", shot="close",
+  board="Yak: shaggy hair, big lungs and heart")
+L("atlas", "It gets colder, about six point five degrees every thousand metres, and each breath holds less oxygen. On Everest's summit, a third.", mood="teach", shot="close",
+  boardClear=True, diagram=LAPSE)
+L("teacher", "Altitude sickness is caused by lack of oxygen, not cold. Climb slowly to acclimatise. The cure is to go down.", mood="teach", shot="close",
+  board="Altitude sickness = LOW OXYGEN")
+L("priya", "And Sherpa bodies have adapted over generations. Better blood flow, not thicker blood.", mood="smug", shot="close",
+  board="Sherpa: better blood flow")
+L("teacher", "Excellent. Who brought a globe to class?", mood="worried", shot="close")
+L("priya", "He followed me.", mood="deadpan", shot="close", gap=0.4)
+
+# ---------------- RECAP ----------------
+confess("atlas", "ATLAS · Recap Globe · Still Slightly Sandy")
+L("atlas", "Recap. One. Adaptations are structural, or behavioural.", mood="teach",
+  boardClear=True, board="1. Structural (body) vs behavioural")
+L("atlas", "Two. Polar bears, Arctic only. Penguins, south only.", mood="teach",
+  board="2. Bears = Arctic · penguins = south")
+L("atlas", "Three. The camel's hump is fat. Cactus spines and C A M save water.", mood="teach",
+  board="3. Hump = fat · cactus: spines, CAM")
+L("atlas", "Four. Altitude sickness means too little oxygen. Descend.", mood="teach",
+  board="4. Altitude sickness = low oxygen")
+L("atlas", "Five. Describe, then explain. Which means that.", mood="smug",
+  board="5. Describe + explain: 'which means…'", gap=0.5)
+
+# ---------------- TAG ----------------
+scene("living", [("priya", 220), ("dad", 440), ("nani", 660)])
+poof("atlas", 980)
+L("dad", "The aircon is broken. Tonight we survive like emperor penguins. We huddle.", mood="determined", shot="close")
+L("nani", "Fine. But we rotate. Your turn on the outside.", mood="smug", shot="close")
+L("atlas", "Survival of the sweatiest.", mood="bored", shot="close")
 sfx("trombone")
-L("globo", "A camel can lose about a quarter of its body mass as water and survive, then reportedly drink over a hundred litres in ten to fifteen minutes.", mood="teach", shot="close",
-  board="Survives losing ~¼ of body mass as water")
-L("globo", "Its body temperature rises by day, so it sweats less. Its eyelashes and nostrils keep out sand. Wide feet stop it sinking.", mood="teach", shot="close",
-  board="Eyelashes · closable nostrils · wide feet")
-L("tara", "The fennec fox is nocturnal, and gets water from its food.", mood="happy", shot="close",
-  boardClear=True, board="FENNEC FOX: nocturnal, water from food")
-L("globo", "The kangaroo rat may never drink at all. It gets water from the seeds it eats.", mood="teach", shot="close",
-  board="KANGAROO RAT: water from seeds")
-L("globo", "And ephemeral plants wait for years as seeds. After rain, they flower and set seed within weeks.", mood="teach", shot="close",
-  board="EPHEMERALS: seed → flower in weeks")
-
-confess("dad", "VIKRAM RAO · Dad · Self-Described Business Genius")
-L("dad", "All those labels, wasted. Unless. Raos' Hump Fat. Moisturiser. Your skin has been through a lot.", mood="smug", gap=0.6)
-
-# ---------------- ACT 3: THE ICE ----------------
-card("MEANWHILE, MUCH FURTHER SOUTH", "Mum packed one cardigan. It was on sale.", 2.4)
-scene("polar", [("mum", 300), ("tara", 620), ("globo", 960)], "ANTARCTICA · Very Cold · Flown In By Globo Airways")
-L("mum", "Where are the polar bears? I want a photo of a polar bear hugging a penguin.", mood="excited", shot="close", prop="phone")
-L("globo", "Polar bears live in the Arctic. Penguins live in the south. They never meet. Your photo will be a penguin, alone, judging you.", mood="eyeroll", shot="close",
-  boardClear=True, board="Polar bears: ARCTIC · penguins: SOUTH")
-L("globo", "Antarctica holds the record low. Minus eighty nine point two degrees. Plus wind, darkness and little food.", mood="teach", shot="close",
-  board="Record low: −89.2 °C, Vostok, 1983")
-L("globo", "In the Arctic, the polar bear has black skin under its fur. The hairs are see-through and hollow. They scatter light, like snow.", mood="teach", shot="close",
-  boardClear=True, board="POLAR BEAR: black skin, see-through hair")
-L("tara", "Dense fur traps warm air. Blubber, up to about ten centimetres thick. Small ears, and huge paws for thin ice.", mood="happy", shot="close",
-  board="Blubber up to ~10 cm · small ears")
-L("globo", "Emperor penguins breed in winter. The dad holds the egg on his feet for about two months, eating nothing.", mood="teach", shot="close",
-  boardClear=True, board="EMPEROR PENGUIN: dad holds egg ~2 months", diagram=D_HUDDLE)
-L("globo", "They huddle. Thousands pack together, taking turns on the windy edge. Inside, it can top twenty degrees.", mood="teach", shot="close",
-  board="HUDDLING (behavioural): centre 20 °C+")
-L("mum", "Like the MRT at rush hour! Warm in the middle, freezing by the door.", mood="excited", shot="close")
-L("tara", "Mum's right. Write that down. It may not happen again.", mood="shock", shot="close")
-L("globo", "In their feet, warm blood flowing out heats the cold blood flowing back. Counter current heat exchange.", mood="teach", shot="close",
-  board="Counter-current blood flow in feet")
-L("tara", "Arctic foxes turn white in winter. Seals have blubber. Tundra plants grow low, with shallow roots above the permafrost.", mood="thinking", shot="close",
-  boardClear=True, board="TUNDRA PLANTS: low · shallow roots")
-L("globo", "And it all rests on krill. Krill eat phytoplankton. Penguins eat krill, seals eat penguins. Harm the krill, you harm them all.", mood="teach", shot="close",
-  board="Phyto → KRILL → penguin → seal → orca")
-
-confess("mum", "MUM · Deal Hunter · Has Never Paid Full Price")
-L("mum", "The penguins share the warm middle. Everybody gets a turn. No queue jumping. Better than any sale I've been to.", mood="happy", gap=0.5)
-
-# ---------------- ACT 4: THE MOUNTAINS ----------------
-card("MEANWHILE, MUCH FURTHER UP", "Dad has decided to run.", 2.2)
-scene("mountain", [("tara", 260), ("dad", 600), ("globo", 960)], "THE HIMALAYAS · Nepal · Flown In By Globo Airways")
-L("dad", "Race you to the top! I am a mountain goat! Why is the mountain spinning?", mood="worried", shot="close")
-L("globo", "Altitude sickness. Headache, nausea, dizziness. Usually above about two and a half thousand metres. The cure is to go down.", mood="teach", shot="close",
-  boardClear=True, board="ALTITUDE SICKNESS: usually > ~2,500 m")
-L("dad", "But there's still oxygen up here! Same percentage as Singapore!", mood="annoyed", shot="close", board="Cure: GO DOWN")
-L("globo", "Half right. Air is still about twenty one percent oxygen. But the pressure drops. Near the top of Everest, each breath holds about a third as much.", mood="teach", shot="close",
-  boardClear=True, board="Still ~21% O₂, but PRESSURE drops", diagram=D_AIR)
-L("tara", "And it gets about six and a half degrees colder for every thousand metres.", mood="thinking", shot="close",
-  board="Colder: ~6.5 °C per 1,000 m")
-L("globo", "The yak has shaggy hair over a woolly undercoat, few sweat glands, and big lungs and a big heart.", mood="teach", shot="close",
-  boardClear=True, board="YAK: shaggy hair · big lungs + heart")
-L("tara", "Snow leopards have a long thick tail and snowshoe paws. Cushion plants grow in low domes, so the wind slides over.", mood="happy", shot="close",
-  board="SNOW LEOPARD: tail · snowshoe paws")
-L("dad", "Give me a weekend. I'll grow big lungs. I'll become a yak.", mood="determined", shot="close", board="CUSHION PLANTS: low domes · hairy leaves")
-L("globo", "That's acclimatisation. Over days to weeks, you breathe faster and make extra red blood cells. Climb high, sleep low.", mood="teach", shot="close",
-  boardClear=True, board="ACCLIMATISE: days–weeks, in ONE person")
-L("globo", "True adaptation is inherited. Sherpa and Tibetan people tend to breathe more, without many extra red blood cells. Andean peoples tend to have more haemoglobin.", mood="teach", shot="close",
-  board="INHERITED: Sherpa, Tibetan, Andean")
-L("tara", "So Dad needs a few thousand years. And grandchildren who like mountains.", mood="deadpan", shot="close", gap=0.4)
-
-confess("globo", "GLOBO · Recap Globe · Slightly Out Of Breath")
-L("globo", "Recap. One. Adaptations are inherited. Structural, behavioural, physiological.", mood="teach", boardClear=True, board="1. Inherited: structural·behav.·physiol.")
-L("globo", "Two. Cactus spines are leaves. The camel's hump is fat, not water.", mood="teach", board="2. Spines = leaves · hump = FAT")
-L("globo", "Three. Polar bears have black skin and blubber. Penguins huddle.", mood="teach", board="3. Black skin + blubber · huddling")
-L("globo", "Four. High up, the pressure drops, so each breath holds less oxygen.", mood="teach", board="4. Thin air: lower pressure, less O₂")
-L("globo", "Five. Acclimatisation takes weeks. Adaptation takes generations.", mood="smug", board="5. Acclimatise: weeks · adapt: generations", gap=0.5)
-
-# ---------------- BUTTON ----------------
-card("BACK HOME", "One cactus survived. It is not speaking to Mum.", 2.4)
-scene("living", [("tara", 260), ("mum", 560), ("dad", 840)])
-L("mum", "New rule. The cactus gets water once a month. The Sahara Saver plan.", mood="happy", shot="close", prop="bucket")
-L("dad", "And I've pivoted. Raos' Penguin Huddle. Group hugs at the void deck. Ten dollars. Warm in the middle.", mood="smug", shot="close", prop="tablet")
-L("tara", "Dad. It's thirty two degrees. Nobody in Singapore wants to be warmer.", mood="deadpan", shot="close")
-L("dad", "Fine. The windy edge costs extra.", mood="smug", shot="close")
-sfx("ding")
-L("globo", "Put me back in the drawer. Somewhere cool. I'm adapted to it.", mood="bored", shot="wide", offstage=True, gap=0.8)
+L("priya", "Behavioural adaptation. I'm going to the mall.", mood="deadpan", shot="wide", gap=0.8)
 
 # ---------------- PAUSE CHALLENGE ----------------
-card("PAUSE CHALLENGE", "Globo gives you 5 seconds. Then he sulks.", 3.0)
-challenge(1, "What does a camel's hump store?", "FAT", "fat = energy store · NOT water",
-  "Question one. What does a camel's hump store?",
-  "Fat, an energy store. If you said water, don't go into business with Dad.")
-challenge(2, "Emperor penguins huddle. Structural, behavioural or physiological?", "BEHAVIOURAL", "huddling is something they DO",
-  "Question two. Emperor penguins huddle. Structural, behavioural, or physiological?",
-  "Behavioural. Huddling is something they do.")
-challenge(3, "At the top of Everest, air is still ~21% oxygen. So what has changed?", "AIR PRESSURE", "lower pressure → less O₂ per breath",
-  "Question three. At the top of Everest, air is still about twenty one percent oxygen. So what has changed?",
-  "The air pressure. It drops, so each breath holds much less oxygen.")
+card("PAUSE CHALLENGE", "Atlas gives you 5 seconds. Then he spins smugly.", 3.0)
+challenge(1, "A card shows a polar bear chasing a penguin. Why is that impossible?", "Opposite poles",
+  "Bears: Arctic only · penguins: southern hemisphere",
+  "Question one. A card shows a polar bear chasing a penguin. Why is that impossible?",
+  "Opposite poles. Polar bears, Arctic. Penguins, southern hemisphere.")
+challenge(2, "Explain how spines help a cactus survive in a hot desert.", "Less water lost",
+  "Small surface area → less transpiration",
+  "Question two. Explain how spines help a cactus survive.",
+  "Spines have a small surface area, which means that less water is lost by transpiration.")
+challenge(3, "A town at sea level is 25 °C. Using 6.5 °C per 1,000 m, what is it at 2,000 m?", "12 °C",
+  "2 × 6.5 = 13 · 25 − 13 = 12 °C",
+  "Question three. Sea level is twenty five degrees. What is it at two thousand metres?",
+  "Twelve degrees. Twenty five minus thirteen.")
 end_card()

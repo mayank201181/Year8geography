@@ -1,220 +1,231 @@
-# "Totally Raotional: Off The Map" S02E03 "The J-Curve Strikes Back" (Topic: Population Growth)
-# Format and helpers: see common.py and docs/SITCOM.md; check with lint_episode.py.
-# Sections taught: growth-over-time, birth-death-rates, demographic-transition, future-population.
+# "Off The Map" (a Claude Sitcom) S01E02 "Eight Billion And One" (Topic: Population Growth)
+# Format and helpers: see common.py and EPISODE_GUIDE.md; check with lint_episode.py.
 
-EP = dict(topic="population-growth",
-          logline="Dad buys ten thousand prams because 'the population only goes up'. Globo, the grumpy globe from the junk drawer, "
-                  "explains the J-curve, birth and death rates, the Demographic Transition Model and why the world may peak at about 10.3 billion.")
+EP = dict(
+    topic="population-growth",
+    logline="Dad buys fifty glitter cards to personally welcome every new person on Earth. Atlas spins the family to Lagos, where a demographer explains why the world grew so fast and where it is growing fastest now.",
+    names={"guest": "DR ADA OKAFOR"},
+    display={"U N": "UN", "H D B": "HDB", "M R T": "MRT"},
+)
 
-D_JCURVE = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220">
-<rect width="520" height="220" fill="#0f172a"/>
-<line x1="50" y1="190" x2="500" y2="190" stroke="#94a3b8" stroke-width="2"/>
-<line x1="50" y1="190" x2="50" y2="20" stroke="#94a3b8" stroke-width="2"/>
-<polyline points="58,170 290,151 357,132 385,113 412,94 436,75 461,56 483,37" fill="none" stroke="#fde047" stroke-width="4"/>
-<g fill="#fde047"><circle cx="58" cy="170" r="5"/><circle cx="290" cy="151" r="5"/><circle cx="357" cy="132" r="5"/><circle cx="483" cy="37" r="6"/></g>
-<g font-family="sans-serif" font-size="14" fill="#fff">
-<text x="66" y="162">1 bn · 1804</text>
-<text x="200" y="140">2 bn · 1927</text>
-<text x="262" y="122">3 bn · 1960</text>
-<text x="352" y="34">8 bn · 2022</text>
-<text x="56" y="208">1800</text><text x="460" y="208">2022</text>
-</g>
-<text x="150" y="70" font-family="sans-serif" font-size="22" font-weight="bold" fill="#7dd3fc">THE J-CURVE</text>
-</svg>"""
+MILESTONES = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 250">'
+    '<text x="10" y="26" font-family="sans-serif" font-size="20" fill="#f8fafc">World population (billions)</text>'
+    '<line x1="60" y1="212" x2="505" y2="212" stroke="#94a3b8" stroke-width="2"/>'
+    '<line x1="60" y1="212" x2="60" y2="40" stroke="#94a3b8" stroke-width="2"/>'
+    '<text x="60" y="238" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#cbd5e1">1800</text>'
+    '<text x="258" y="238" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#cbd5e1">1900</text>'
+    '<text x="456" y="238" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#cbd5e1">2000</text>'
+    '<polyline points="60,190 68,188 312,165 377,143 405,120 431,98 454,75 478,53 500,30" fill="none" stroke="#7dd3fc" stroke-width="4"/>'
+    '<g fill="#fde047"><circle cx="68" cy="188" r="6"/><circle cx="312" cy="165" r="6"/><circle cx="377" cy="143" r="6"/>'
+    '<circle cx="405" cy="120" r="6"/><circle cx="431" cy="98" r="6"/><circle cx="454" cy="75" r="6"/>'
+    '<circle cx="478" cy="53" r="6"/><circle cx="500" cy="30" r="6"/></g>'
+    '<text x="78" y="180" font-family="sans-serif" font-size="18" fill="#fde047">1bn 1804</text>'
+    '<text x="300" y="186" text-anchor="end" font-family="sans-serif" font-size="18" fill="#fde047">2bn 1927</text>'
+    '<text x="365" y="140" text-anchor="end" font-family="sans-serif" font-size="18" fill="#fde047">3bn 1960</text>'
+    '<text x="488" y="34" text-anchor="end" font-family="sans-serif" font-size="18" fill="#86efac">8bn 2022</text>'
+    '</svg>'
+)
 
-D_RATES = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">
-<rect width="520" height="200" fill="#0f172a"/>
-<line x1="30" y1="160" x2="500" y2="160" stroke="#94a3b8" stroke-width="2"/>
-<rect x="60" y="25" width="40" height="135" fill="#7dd3fc"/><rect x="104" y="133" width="40" height="27" fill="#fca5a5"/>
-<rect x="185" y="109" width="40" height="51" fill="#7dd3fc"/><rect x="229" y="136" width="40" height="24" fill="#fca5a5"/>
-<rect x="310" y="130" width="40" height="30" fill="#7dd3fc"/><rect x="354" y="133" width="40" height="27" fill="#fca5a5"/>
-<rect x="400" y="142" width="40" height="18" fill="#7dd3fc"/><rect x="444" y="121" width="40" height="39" fill="#fca5a5"/>
-<g font-family="sans-serif" font-size="14" fill="#fff" text-anchor="middle">
-<text x="102" y="180">Niger</text><text x="227" y="180">World</text><text x="352" y="180">UK</text><text x="442" y="180">Japan</text>
-<text x="102" y="196">+3.6%</text><text x="227" y="196">+0.9%</text><text x="352" y="196">+0.1%</text><text x="442" y="196">−0.7%</text>
-</g>
-<rect x="300" y="20" width="14" height="14" fill="#7dd3fc"/><text x="320" y="32" font-family="sans-serif" font-size="14" fill="#fff">births per 1,000</text>
-<rect x="300" y="44" width="14" height="14" fill="#fca5a5"/><text x="320" y="56" font-family="sans-serif" font-size="14" fill="#fff">deaths per 1,000</text>
-</svg>"""
+GAP = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 220">'
+    '<line x1="40" y1="190" x2="500" y2="190" stroke="#94a3b8" stroke-width="2"/>'
+    '<line x1="40" y1="190" x2="40" y2="20" stroke="#94a3b8" stroke-width="2"/>'
+    '<path d="M40,50 L300,56 Q400,64 495,150" fill="none" stroke="#7dd3fc" stroke-width="5"/>'
+    '<path d="M40,64 Q110,70 170,130 Q220,170 495,170" fill="none" stroke="#fca5a5" stroke-width="5"/>'
+    '<text x="60" y="40" font-family="sans-serif" font-size="20" fill="#7dd3fc">Birth rate stays high</text>'
+    '<text x="300" y="212" font-family="sans-serif" font-size="20" fill="#fca5a5">Death rate falls</text>'
+    '<text x="205" y="112" font-family="sans-serif" font-size="22" fill="#fde047">GAP = growth</text>'
+    '<line x1="250" y1="62" x2="250" y2="88" stroke="#fde047" stroke-width="3"/>'
+    '<line x1="250" y1="122" x2="250" y2="160" stroke="#fde047" stroke-width="3"/>'
+    '</svg>'
+)
 
-D_DTM = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 230">
-<rect width="520" height="230" fill="#0f172a"/>
-<g stroke="#475569" stroke-dasharray="4 4"><line x1="122" y1="30" x2="122" y2="190"/><line x1="214" y1="30" x2="214" y2="190"/><line x1="306" y1="30" x2="306" y2="190"/><line x1="398" y1="30" x2="398" y2="190"/></g>
-<polygon points="122,50 168,50 214,56 260,100 306,160 306,172 260,166 214,152 168,120 122,62" fill="#facc15" opacity="0.35"/>
-<polyline points="30,52 60,40 90,60 122,50 168,50 214,56 260,100 306,160 352,166 398,162 450,176 500,180" fill="none" stroke="#7dd3fc" stroke-width="4"/>
-<polyline points="30,60 60,48 90,70 122,62 168,120 214,152 260,166 306,172 352,170 398,172 450,166 500,162" fill="none" stroke="#fca5a5" stroke-width="4"/>
-<g font-family="sans-serif" font-size="15" font-weight="bold" fill="#fff" text-anchor="middle">
-<text x="76" y="24">1</text><text x="168" y="24">2</text><text x="260" y="24">3</text><text x="352" y="24">4</text><text x="450" y="24">5</text>
-</g>
-<g font-family="sans-serif" font-size="13" fill="#e2e8f0" text-anchor="middle">
-<text x="76" y="208">none today</text><text x="168" y="208">Niger</text><text x="260" y="208">India</text><text x="352" y="208">UK</text><text x="450" y="208">Japan</text>
-</g>
-<text x="208" y="122" font-family="sans-serif" font-size="13" fill="#fde047" text-anchor="middle">natural increase</text>
-<text x="30" y="225" font-family="sans-serif" font-size="13" fill="#7dd3fc">— birth rate</text>
-<text x="140" y="225" font-family="sans-serif" font-size="13" fill="#fca5a5">— death rate</text>
-</svg>"""
-
-D_FUTURE = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210">
-<rect width="520" height="210" fill="#0f172a"/>
-<line x1="40" y1="180" x2="500" y2="180" stroke="#94a3b8" stroke-width="2"/>
-<polygon points="200,92 330,58 420,40 490,30 490,118 420,96 330,82" fill="#818cf8" opacity="0.35"/>
-<polyline points="50,150 110,135 160,115 200,92" fill="none" stroke="#fde047" stroke-width="4"/>
-<polyline points="200,92 330,70 420,64 490,66" fill="none" stroke="#fde047" stroke-width="4" stroke-dasharray="10 6"/>
-<g fill="#fde047"><circle cx="200" cy="92" r="5"/><circle cx="330" cy="70" r="5"/><circle cx="420" cy="64" r="6"/></g>
-<g font-family="sans-serif" font-size="14" fill="#fff">
-<text x="120" y="86">8 bn (2022)</text>
-<text x="280" y="108">~9.7 bn (2050)</text>
-<text x="350" y="30">peak ~10.3 bn (2080s)</text>
-<text x="56" y="200">1960</text><text x="190" y="200">2022</text><text x="460" y="200">2100</text>
-</g>
-<text x="300" y="150" font-family="sans-serif" font-size="13" fill="#c7d2fe">shaded = uncertainty</text>
-</svg>"""
+TFR = (
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 260">'
+    '<g font-family="sans-serif" font-size="19" fill="#f8fafc" text-anchor="end">'
+    '<text x="130" y="40">Niger</text><text x="130" y="76">Nigeria</text><text x="130" y="112">World</text>'
+    '<text x="130" y="148">India</text><text x="130" y="184">China</text><text x="130" y="220">Singapore</text></g>'
+    '<rect x="140" y="20" width="300" height="26" fill="#fca5a5"/>'
+    '<rect x="140" y="56" width="250" height="26" fill="#fca5a5"/>'
+    '<rect x="140" y="92" width="115" height="26" fill="#cbd5e1"/>'
+    '<rect x="140" y="128" width="100" height="26" fill="#86efac"/>'
+    '<rect x="140" y="164" width="50" height="26" fill="#7dd3fc"/>'
+    '<rect x="140" y="200" width="48" height="26" fill="#7dd3fc"/>'
+    '<g font-family="sans-serif" font-size="19" fill="#f8fafc">'
+    '<text x="448" y="40">~6</text><text x="398" y="76">~5</text><text x="263" y="112">~2.3</text>'
+    '<text x="252" y="148">~2.0</text><text x="198" y="184">~1.0</text><text x="196" y="220">0.97</text></g>'
+    '<line x1="245" y1="12" x2="245" y2="232" stroke="#fde047" stroke-width="3" stroke-dasharray="8 6"/>'
+    '<text x="245" y="254" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#fde047">replacement 2.1</text>'
+    '</svg>'
+)
 
 # ---------------- COLD OPEN ----------------
-scene("living", [("tara", 300), ("mum", 760)])
-L("mum", "Tara! The prata shop downstairs gave me a family card. Buy ten pratas, get one free. For a family of eight!", mood="excited", shot="close", prop="phone")
-L("tara", "Mum. There are three of us.", mood="deadpan", shot="close")
-L("mum", "For now! The world keeps growing. I'm buying ahead.", mood="smug", shot="two")
-L("tara", "You can't bulk buy relatives.", mood="deadpan", shot="close", gap=0.5)
-scene("living", [("tara", 260), ("mum", 600), ("dad", 980)])
-sfx("door")
-L("dad", "Family. Big news. I bought ten thousand prams. The population only goes up, so babies are the safest investment in history.", mood="smug", shot="close", prop="tablet")
-L("tara", "Dad. Where are ten thousand prams going to live?", mood="worried", shot="close")
-L("dad", "The void deck. Temporarily. The town council doesn't know yet.", mood="smug", shot="close")
-freeze("10,000 PRAMS", 2.4, narrator="Narrator: The town council found out at about seven fifteen the next morning.")
-confess("tara", "TARA RAO · 12 · Only Sane Person In This House")
-L("tara", "In Singapore, the average woman has fewer than one child. My father has bought ten thousand prams.", mood="deadpan", gap=0.6)
+scene("living", [("dad", 330), ("priya", 640), ("nani", 950)])
+L("dad", "Big news. In November twenty twenty two, the world reached eight billion people.", mood="excited", shot="close", prop="phone")
+L("priya", "And?", mood="deadpan", shot="close")
+L("dad", "Nobody welcomed number eight billion and one. So I will. I've bought fifty welcome cards. With glitter.", mood="determined", shot="close")
+L("priya", "Dad, the world adds about seventy million people a year. That's more than two every second.", mood="deadpan", shot="close")
+L("dad", "Then I shall write very fast.", mood="worried", shot="close", gap=0.4)
+freeze("DAD'S CARDS: 50", 2.6, narrator="Narrator: Fifty cards. About twenty two seconds of world population growth.")
+confess("priya", "PRIYA · 12 · Counts Faster Than Dad Writes")
+L("priya", "Dad thinks population growth is a party. It's actually maths. Very fast maths.", mood="deadpan")
+L("priya", "Luckily, my grandmother has watched five billion people arrive.", mood="smug", gap=0.6)
 
 title()
 
-# ---------------- ACT 1: FROM 1 BILLION TO 8 BILLION ----------------
-scene("kitchen", [("tara", 380)])
-L("tara", "Right. Emergency. Time to open the drawer we don't open.", mood="determined", shot="wide")
-sfx("drawer")
-poof("globo", 860)
-L("globo", "Who disturbs the drawer? Oh, the Raos. I smell rubber wheels. Your father has invested again.", mood="bored", shot="close")
-L("tara", "Globo, Dad says the world's population only goes up. So he bought ten thousand prams.", mood="worried", shot="two")
+# ---------------- ACT 1: THE J-CURVE ----------------
+scene("living", [("priya", 220), ("nani", 460), ("dad", 680)])
+L("nani", "When I was ten, in nineteen sixty, there were three billion people in the whole world.", mood="thinking", shot="close",
+  boardClear=True, board="1960: 3 billion people")
+L("priya", "Five billion more people since then, and you still get a seat on the M R T. Atlas! We need the timeline.", mood="determined", shot="wide")
+sfx("whoosh")
+poof("atlas", 1000)
+L("atlas", "Population? It took all of history to reach one billion, around eighteen oh four. Two billion took another hundred and twenty three years.", mood="teach", shot="close",
+  boardClear=True, diagram=MILESTONES, board="1bn 1804 · 2bn 1927 (123 years)")
+L("atlas", "Three billion in nineteen sixty. Then one more roughly every twelve to fourteen years.", mood="teach", shot="close",
+  board="3bn 1960 · 4bn 1974 · 5bn 1987")
+L("atlas", "Eight billion in twenty twenty two. The gap shrank from a hundred and twenty three years to about twelve.", mood="teach", shot="close",
+  board="6bn 1999 · 7bn 2011 · 8bn Nov 2022")
+L("dad", "A billion every twelve years? My cards will need a warehouse.", mood="shock", shot="close")
+L("atlas", "Flat for thousands of years, a bend around seventeen fifty, then straight up. The J curve.", mood="teach", shot="close",
+  boardClear=True, board="J-curve: flat → bend c.1750 → steep rise")
+L("atlas", "Exponential growth. Today's babies become tomorrow's parents, so it grows by a percentage of itself.", mood="teach", shot="close",
+  board="Exponential = same % growth each year")
+L("priya", "So is the world growing faster than ever?", mood="thinking", shot="close")
+L("atlas", "No. Classic trap. The growth rate peaked at just over two percent a year in the nineteen sixties. Now it is under one percent. Still, that adds about seventy million a year.", mood="teach", shot="close",
+  board="Growth rate: ~2% (1960s) → under 1% now")
+L("dad", "So the explosion happened because everyone had loads more babies. Obviously.", mood="smug", shot="close")
+L("nani", "Wrong. My grandmother had eight children. Only five grew up. Not more babies. Fewer babies died.", mood="sad", shot="close")
+L("atlas", "Exactly. Death rates fell, while birth rates stayed high. The gap between the two lines is the growth.", mood="teach", shot="close",
+  boardClear=True, diagram=GAP, board="Death rate FELL, birth rate stayed high")
+L("atlas", "Remember FISH. Food, from better farming. Industry, bringing wealth. Sanitation, clean water and sewers. Health care, like vaccines and antibiotics.", mood="teach", shot="close",
+  board="F·I·S·H: Food, Industry, Sanitation, Health")
+L("nani", "World life expectancy was about forty six in nineteen fifty. Now about seventy three. I intend to beat it.", mood="smug", shot="close",
+  board="Life expectancy: ~46 (1950) → ~73 now")
 
-scene("living", [("tara", 260), ("dad", 600), ("globo", 960)], "THE RAO FLAT · Living Room · Now A Lecture Theatre")
-L("globo", "For most of history, population grew very slowly. Lots of babies, but lots of deaths, from famine and disease.", mood="teach", shot="close",
-  boardClear=True, board="For centuries: high births, high deaths")
-L("globo", "One billion in about eighteen oh four. Two billion in nineteen twenty seven, a hundred and twenty three years later.", mood="teach", shot="close",
-  boardClear=True, board="1 bn ≈ 1804 · 2 bn 1927 (123 years)", diagram=D_JCURVE)
-L("globo", "But seven billion to eight billion took just eleven years, to November twenty twenty two. Plot it, and you get a J. The J-curve.", mood="teach", shot="close",
-  board="7 bn 2011 → 8 bn 2022 (11 years)")
-L("globo", "And no, people did not suddenly have more babies. Growth exploded because death rates fell, while birth rates stayed high.", mood="teach", shot="close",
-  boardClear=True, board="Growth exploded because DEATH RATES FELL")
-L("globo", "Better farming, so fewer famines. Clean water and sewers, so less cholera. Vaccines, and then antibiotics like penicillin.", mood="teach", shot="close",
-  board="Farming → food · sanitation → less disease")
-L("tara", "So more children survived, grew up, and had children of their own. It grows on itself.", mood="happy", shot="close",
-  board="Medicine: vaccines + antibiotics")
-L("globo", "Like interest on savings. Which your father would know about, if he had any. Doubling time shrank too. Two billion to four billion took just forty seven years.", mood="smug", shot="close",
-  board="Doubling time: 123 yrs → 47 yrs")
-L("globo", "But the growth rate peaked at a little over two percent a year, in the nineteen sixties. Today it is below one percent.", mood="eyeroll", shot="close",
-  boardClear=True, board="Growth RATE: ~2%+ (1960s) → under 1% now")
-L("dad", "Slowing down? Nobody told the prams.", mood="sad", shot="close")
+confess("atlas", "ATLAS · Desk Globe · Older Than Six Billion People")
+L("atlas", "I was made in nineteen twenty seven, the year of the second billion. Since then, six billion more people.", mood="smug")
+L("atlas", "Eleven of them have dropped me. Usually on Australia.", mood="bored", gap=0.5)
+
+# ---------------- ACT 2: LAGOS ----------------
+scene("living", [("priya", 260), ("dad", 560), ("atlas", 900)])
+L("dad", "So where are all these new people being born? I need addresses.", mood="determined", shot="close")
+L("atlas", "Then hold on. Not to my Pacific. It is fragile.", mood="smug", shot="close")
+sfx("whoosh")
+scene("lagos", [("priya", 240), ("dad", 500), ("atlas", 820)], caption="LAGOS · Nigeria · Makoko, on the lagoon")
+L("dad", "Buses, boats, people everywhere. It's like forty airports at once.", mood="excited", shot="close")
+L("atlas", "Lagos, Nigeria. Africa's most populous country. Roughly two hundred and twenty to two hundred and thirty million people.", mood="teach", shot="close",
+  boardClear=True, board="Nigeria: ~220–230 million people")
+sfx("door")
+poof("guest", 1080)
+L("guest", "Welcome! I'm Doctor Ada Okafor. I'm a demographer. I study how populations change.", mood="happy", shot="close")
+L("priya", "My dad wants to send a card to every new baby.", mood="deadpan", shot="two")
+L("guest", "Then he needs stamps. Here, a woman has about five children on average. That's the total fertility rate. By twenty fifty, we could reach about three hundred and seventy five million.", mood="smug", shot="close",
+  board="TFR = children per woman. Nigeria ~5")
+L("dad", "So why so many children? Is it just tradition?", mood="thinking", shot="close",
+  board="Projected: ~375 million by 2050")
+L("guest", "It's not that people don't know better. A big family often makes sense. In the countryside, children help on the farm.", mood="teach", shot="close",
+  boardClear=True, board="Children help on farms")
+L("guest", "Few people have pensions, so children care for you in old age. Where many children die young, parents have more.", mood="sad", shot="close",
+  board="Few pensions · high child mortality")
+L("guest", "When girls stay in school longer and contraception is easy to get, families get smaller.", mood="teach", shot="close",
+  board="Girls' education → smaller families")
+L("atlas", "Remember CHEAP. Contraception. Health, fewer child deaths. Education of girls. Affordability. Places, meaning cities.", mood="teach", shot="close",
+  board="CHEAP: Contraception, Health, Education,")
+L("dad", "Cheap. Like my cards.", mood="smug", shot="close",
+  board="Affordability, Places (cities)")
+L("guest", "Growth is fastest in sub Saharan Africa. Next door in Niger, women have about six children each. Growth is about three and a half percent a year.", mood="teach", shot="close",
+  boardClear=True, diagram=TFR, board="Fastest growth: sub-Saharan Africa")
+L("guest", "Rule of seventy. Seventy divided by three point five is twenty. Niger's twenty seven million people would double in about twenty years.", mood="teach", shot="close",
+  board="Niger: 70 ÷ 3.5 = 20 years to double")
+L("priya", "And half the people in Niger are under about fifteen.", mood="shock", shot="close",
+  board="Median age in Niger: about 15")
+L("dad", "India's on the chart! I've been to Delhi airport. Very full. That's how I knew.", mood="smug", shot="close")
+L("atlas", "In twenty twenty three, India overtook China as the most populous country. About one point four three billion people.", mood="teach", shot="close",
+  boardClear=True, board="2023: India overtook China (~1.43 bn)")
+L("guest", "Mainly because India kept growing. China's population fell a little in twenty twenty two, the first time since nineteen sixty one.", mood="teach", shot="close",
+  board="China fell in 2022, first time since 1961")
+L("atlas", "India's fertility is below replacement, but so many young people will become parents that it keeps growing. Population momentum.", mood="teach", shot="close",
+  board="Momentum: young people → keeps growing")
+L("guest", "By the way, you'll need a new pack of cards every few seconds.", mood="smug", shot="close", gap=0.4)
+
+confess("dad", "DAD · Explorer · Owner Of Forty Nine Cards")
+L("dad", "Forty countries. Well. Forty airports. I gave one card to the taxi driver. He was very moved.", mood="smug")
+L("dad", "I have one child. She corrects me. For free.", mood="sad", gap=0.6)
+
+# ---------------- ACT 3: SINGAPORE ----------------
+card("MEANWHILE, BACK IN SINGAPORE", "Dad has 49 cards left. Mum has a checklist.", 2.4)
+scene("kitchen", [("mum", 240), ("nani", 480), ("dad", 720), ("priya", 960)])
+L("mum", "Checklist. Singapore's fertility rate in twenty twenty three, zero point nine seven. First time ever below one.", mood="determined", shot="close", prop="book",
+  boardClear=True, board="Singapore TFR: 0.97 (2023)")
+L("nani", "In nineteen sixty, about five point eight. Then babies stopped dying, girls like me went to work, and children got expensive.", mood="annoyed", shot="close",
+  board="1960: about 5.8 children per woman")
+L("nani", "In nineteen seventy two the government said Stop at Two. So I stopped at two.", mood="neutral", shot="close",
+  board="1972: Stop at Two (anti-natalist)")
+L("mum", "And in nineteen eighty seven it became Have Three or More, if you can afford it.", mood="teach", shot="close",
+  board="1987: Have Three or More (pro-natalist)")
+L("nani", "By then I was too tired. And you were enough trouble.", mood="smug", shot="close", gap=0.4)
+L("dad", "So why is Singapore's population still growing?", mood="thinking", shot="close")
+L("mum", "Immigration. We grow mainly because people move here.", mood="teach", shot="close",
+  board="Singapore grows mainly by immigration")
+L("priya", "The world won't grow forever, either. The U N projects a peak of about ten point three billion in the mid twenty eighties.", mood="thinking", shot="close",
+  boardClear=True, board="UN: ~9.7bn 2050 · peak ~10.3bn mid-2080s")
+L("mum", "Projected. Not promised. In the exam, write is projected to.", mood="determined", shot="close", gap=0.3)
+
+# ---------------- EXAM SKILL: CALCULATING GROWTH ----------------
+scene("classroom", [("teacher", 300), ("priya", 640), ("atlas", 940)])
+L("teacher", "Exam skill. Birth and death rates are per thousand people, per year. Not percent.", mood="teach", shot="close",
+  boardClear=True, board="Birth & death rates: per 1,000 per year")
+L("teacher", "World birth rate, about seventeen per thousand. Death rate, about eight. Natural increase is birth rate minus death rate.", mood="teach", shot="close",
+  board="17 − 8 = 9 per 1,000 (natural increase)")
+L("priya", "Nine per thousand. Divide by ten for a percentage. Zero point nine percent a year.", mood="thinking", shot="close",
+  board="9 ÷ 10 = 0.9% growth a year")
+L("teacher", "Doubling time? Seventy divided by the growth rate in percent. Never the other way round.", mood="teach", shot="close",
+  board="Doubling time = 70 ÷ growth rate (%)")
+L("priya", "Seventy divided by zero point nine. About seventy eight years.", mood="excited", shot="close",
+  board="70 ÷ 0.9 ≈ 78 years")
+L("teacher", "Last trap. Birth rate forty, death rate thirty five, grows by five. Birth rate twenty, death rate five, grows by fifteen.", mood="teach", shot="close",
+  boardClear=True, board="40 − 35 = 5 · 20 − 5 = 15 → the GAP")
+L("atlas", "It is the gap that matters. And fertility rate is different. That is children per woman.", mood="teach", shot="close",
+  board="Birth rate ≠ fertility rate (per woman)")
+L("teacher", "Who brought a globe to class? Again?", mood="worried", shot="close")
+L("priya", "He followed me.", mood="deadpan", shot="close", gap=0.4)
+
+# ---------------- RECAP ----------------
+confess("atlas", "ATLAS · Recap Globe · Counting Since 1927")
+L("atlas", "Recap. One billion in eighteen oh four, eight billion in twenty twenty two. A J curve.", mood="teach",
+  boardClear=True, board="1. 1bn 1804 → 8bn 2022: a J-curve")
+L("atlas", "Second. Death rates fell while birth rates stayed high. FISH.", mood="teach",
+  board="2. Death rates fell first: F·I·S·H")
+L("atlas", "Third. Birth rates fall later. CHEAP.", mood="teach",
+  board="3. Birth rates fall: C·H·E·A·P")
+L("atlas", "Fourth. Birth rate minus death rate. Divide by ten for percent. Seventy divided by that is the doubling time.", mood="teach",
+  board="4. BR − DR; ÷ 10 = %; 70 ÷ % = doubling")
+L("atlas", "Finally. Growth is fastest in sub Saharan Africa, like Niger.", mood="smug",
+  board="5. Fastest: sub-Saharan Africa", gap=0.5)
+
+scene("living", [("priya", 260), ("dad", 560), ("nani", 860)])
+L("dad", "New plan. I'll just welcome every new baby in our H D B block.", mood="determined", shot="close")
+L("nani", "The last baby born in this block was the Lim twins.", mood="deadpan", shot="close")
+L("dad", "Wonderful! When?", mood="excited", shot="close")
+L("nani", "They're doing National Service.", mood="smug", shot="close")
 sfx("trombone")
-
-# ---------------- ACT 2: BIRTH RATES, DEATH RATES, NATURAL INCREASE ----------------
-card("MEANWHILE, AT THE HAWKER CENTRE", "Mum is redeeming her prata card", 2.4)
-scene("hawker", [("mum", 240), ("tara", 480), ("uncle", 1000)])
-L("uncle", "Two prata kosong, one egg prata, one teh. Your card says family of eight?", mood="happy", shot="close")
-L("mum", "Yes. Some of them are coming later. In maybe twenty years.", mood="smug", shot="close", prop="plate")
-poof("globo", 740)
-L("globo", "Your mother is making a population projection. Badly. Geographers use rates per thousand people, per year.", mood="teach", shot="close",
-  boardClear=True, board="BIRTH RATE: live births per 1,000 per year")
-L("globo", "Births higher than deaths is natural increase. Deaths higher than births is natural decrease.", mood="teach", shot="close",
-  board="DEATH RATE: deaths per 1,000 per year")
-L("mum", "Niger's birth rate is about forty five? So it grows forty five percent a year? Better than my card!", mood="excited", shot="close",
-  board="Births > deaths = NATURAL INCREASE")
-L("tara", "No, Mum. It's per thousand, not per hundred. You take away the death rate, then divide by ten.", mood="deadpan", shot="close",
-  boardClear=True, board="RNI (%) = (birth rate − death rate) ÷ 10", diagram=D_RATES)
-L("globo", "Correct. Niger, about forty five births and nine deaths. Thirty six, divided by ten. About three point six percent a year.", mood="teach", shot="close",
-  board="Niger: (45 − 9) ÷ 10 ≈ +3.6%")
-L("globo", "Japan, in twenty twenty three, about six births and thirteen deaths. Minus zero point seven percent. A natural decrease.", mood="teach", shot="close",
-  board="Japan 2023: (6 − 13) ÷ 10 ≈ −0.7%")
-L("globo", "Natural change ignores migration. Total change adds immigrants, minus emigrants.", mood="teach", shot="close",
-  boardClear=True, board="Change = (births − deaths) + net migration")
-L("globo", "Total fertility rate is the average number of children a woman would have. About two point one is replacement level.", mood="teach", shot="close",
-  board="TFR ≈ 2.1 = REPLACEMENT LEVEL")
-L("mum", "Why the extra point one? Is that the service charge?", mood="thinking", shot="close")
-L("tara", "It's because not every child survives to adulthood, and slightly more boys are born than girls.", mood="deadpan", shot="close")
-L("globo", "Singapore's resident rate was zero point nine seven in twenty twenty three. Immigration keeps the population growing.", mood="teach", shot="close",
-  board="Singapore resident TFR: 0.97 (2023)")
-L("globo", "Also, life expectancy. And infant mortality, baby deaths before age one, per thousand births. Singapore's is about two.", mood="teach", shot="close",
-  board="Life expectancy · infant mortality")
-
-confess("mum", "MUM · Deal Hunter · Has Never Paid Full Price")
-L("mum", "Replacement level, two point one. With Tara, we are halfway there. And she was full price.", mood="smug", gap=0.5)
-
-# ---------------- ACT 3: THE DEMOGRAPHIC TRANSITION MODEL ----------------
-card("THE NEXT DAY, AT SCHOOL", "Dad has come to collect the prams from the void deck. Via school.", 2.4)
-scene("classroom", [("teacher", 240), ("tara", 700), ("dad", 960)])
-L("teacher", "Today, the Demographic Transition Model. How birth and death rates change as a country develops.", mood="teach", shot="close")
-L("dad", "Five stages? Like a business plan! I'll take stage two. Sounds like growth.", mood="excited", shot="close", prop="book")
-poof("globo", 470)
-L("globo", "I'll take it from here, Ms Lim. Stage one. High birth rate, high death rate. Population low and steady. No countries today.", mood="teach", shot="close",
-  boardClear=True, board="1 HIGH STATIONARY: both high", diagram=D_DTM)
-L("globo", "Stage two. The death rate falls fast. Births stay high. Population booms. Niger is often placed here.", mood="teach", shot="close",
-  board="2 EARLY EXPANDING: death rate falls")
-L("tara", "Stage three. The birth rate falls. Fewer babies die, girls stay in school longer, and city children are expensive. India is late stage three.", mood="happy", shot="close",
-  board="3 LATE EXPANDING: birth rate falls")
-L("globo", "Stage four. Both rates low. The population is high and stable, like the UK and the USA.", mood="teach", shot="close",
-  boardClear=True, board="4 LOW STATIONARY: both low (UK, USA)")
-L("globo", "Stage five. The birth rate drops below the death rate, and the population slowly falls. Japan is the usual example.", mood="teach", shot="close",
-  board="5 DECLINING: births < deaths (Japan)")
-L("globo", "It's only a model, based on Europe. It ignores migration. Speed varies. The UK took around two hundred years. South Korea, a few decades.", mood="teach", shot="close",
-  boardClear=True, board="LIMITS: based on Europe · ignores migration")
-L("globo", "Policies, like China's One Child Policy, or disease, can bend the lines.", mood="teach", shot="close",
-  board="Speed varies · policy + disease disrupt it")
-L("tara", "Happy Elephants Love Lazy Days. High, early, late, low, declining.", mood="happy", shot="close",
-  board="Gap in stages 2–3 = natural increase")
-
-# ---------------- ACT 4: FUTURE POPULATION ----------------
-card("FLOWN IN BY GLOBO AIRWAYS", "Dad is looking for pram customers", 2.2)
-scene("megacity", [("tara", 260), ("dad", 600), ("globo", 960)], "LAGOS, NIGERIA · A Very Young City · Flown In By Globo Airways")
-L("dad", "Now this is more like it! Look at all these people!", mood="excited", shot="close", prop="sunglasses")
-L("globo", "The United Nations projects about nine point seven billion by twenty fifty. Then a peak of about ten point three billion, in the twenty eighties.", mood="teach", shot="close",
-  boardClear=True, board="UN 2024: ~9.7 bn by 2050", diagram=D_FUTURE)
-L("tara", "So the world stops growing. Like the Rao family.", mood="deadpan", shot="close", board="Peak ~10.3 bn in mid-2080s, then fall")
-L("globo", "Sub-Saharan Africa, including Nigeria, is expected to provide most future growth. Fertility is high and people are young, so there's momentum.", mood="teach", shot="close",
-  boardClear=True, board="Growing: SUB-SAHARAN AFRICA (young)")
-L("globo", "East Asia and Europe are shrinking, or close to it. China's population fell in twenty twenty two, and India overtook it, the UN estimates.", mood="teach", shot="close",
-  board="Shrinking: EUROPE + EAST ASIA")
-L("dad", "So I sell the prams here. Perfect plan.", mood="smug", shot="close", board="India overtook China (2023, UN est.)")
-L("globo", "But projections rest on fertility assumptions. Another study projected a lower, earlier peak. And pandemics or wars change things.", mood="teach", shot="close",
-  boardClear=True, board="Projections = ASSUMPTIONS, not facts")
-L("tara", "So it's what happens if the assumptions hold. Not a promise.", mood="happy", shot="close", board="IHME 2020: ~9.7 bn peak, 2060s")
-L("globo", "Exactly. Say projected to be about. Never will be.", mood="smug", shot="close", board="Say \"projected to be ABOUT…\"", gap=0.3)
-
-confess("globo", "GLOBO · Recap Globe · Spinning Slowly For Dad")
-L("globo", "Recap. One. The J-curve. Growth exploded because death rates fell.", mood="teach", boardClear=True, board="1. J-curve: 1 bn 1804 → 8 bn 2022")
-L("globo", "Two. Rate of natural increase is birth rate minus death rate, divided by ten.", mood="teach", board="2. RNI % = (BR − DR) ÷ 10")
-L("globo", "Three. Replacement level fertility is about two point one.", mood="teach", board="3. Replacement TFR ≈ 2.1")
-L("globo", "Four. In the model, death rate falls first, birth rate follows. Five stages.", mood="teach", board="4. DTM: death rate falls FIRST")
-L("globo", "Five. The UN projects a peak of about ten point three billion. And never buy prams by the ten thousand.", mood="smug", board="5. UN peak ~10.3 bn, 2080s (projected)", gap=0.5)
-
-# ---------------- BUTTON ----------------
-card("ONE WEEK LATER", "Void deck status: clear", 2.2)
-scene("living", [("tara", 260), ("mum", 560), ("dad", 860)])
-L("dad", "Good news. I sold every single pram.", mood="smug", shot="close", prop="phone")
-L("tara", "To who?", mood="shock", shot="close")
-L("dad", "Japan. An ageing population. They're using them as shopping trolleys. Stage five, baby!", mood="excited", shot="close")
-L("mum", "Did you at least make a profit?", mood="thinking", shot="close")
-L("dad", "I sold them at a discount.", mood="sad", shot="close")
-L("mum", "Finally. He's learning.", mood="happy", shot="close")
-sfx("ding")
-L("globo", "Put me back in the drawer. Gently. My population is very fragile.", mood="bored", shot="wide", offstage=True, gap=0.8)
+L("dad", "Then I'll send a welcome card anyway. Nineteen years late.", mood="worried", shot="close")
+L("priya", "That's called a birthday card, Dad.", mood="deadpan", shot="wide", gap=0.8)
 
 # ---------------- PAUSE CHALLENGE ----------------
-card("PAUSE CHALLENGE", "Globo gives you 5 seconds. Then he sulks.", 3.0)
-challenge(1, "Birth rate 32, death rate 7 (per 1,000). RNI?", "2.5%", "(32 − 7) ÷ 10 = 2.5%",
-  "Question one. Birth rate thirty two, death rate seven, per thousand. What is the rate of natural increase?",
-  "Two point five percent. Twenty five, divided by ten. If you said twenty five percent, drop a zero.")
-challenge(2, "In the DTM, which falls first: birth rate or death rate?", "DEATH RATE", "stage 2: death rate falls · stage 3: birth rate",
-  "Question two. In the Demographic Transition Model, which falls first? The birth rate, or the death rate?",
-  "The death rate, in stage two. The birth rate follows in stage three. Death departs first, births behind.")
-challenge(3, "What TFR is replacement level?", "ABOUT 2.1", "2 parents + extra for children who don't survive",
-  "Question three. What total fertility rate is replacement level?",
-  "About two point one. Two to replace both parents, plus a little extra.")
+card("PAUSE CHALLENGE", "Atlas gives you 5 seconds. Dad uses them to write one card.", 3.0)
+challenge(1, "Birth rate 30 per 1,000, death rate 10 per 1,000. What is the growth rate in %?", "2% a year",
+  "30 − 10 = 20 per 1,000; 20 ÷ 10 = 2%",
+  "Question one. Birth rate thirty per thousand, death rate ten. What is the growth rate as a percentage?",
+  "Two percent a year. Thirty minus ten is twenty per thousand. Divide by ten.")
+challenge(2, "A population grows by 2% a year. Use the rule of 70 to find its doubling time.", "35 years",
+  "70 ÷ 2 = 35",
+  "Question two. Growth is two percent a year. Use the rule of seventy for the doubling time.",
+  "Thirty five years. Seventy divided by two.")
+challenge(3, "Give the main reason world population grew so fast after 1800.", "Death rates fell",
+  "Births stayed high; food, water, medicine",
+  "Question three. Why did world population grow so fast after eighteen hundred?",
+  "Death rates fell, while birth rates stayed high. Not more babies.")
 end_card()

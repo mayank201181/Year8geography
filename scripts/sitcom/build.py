@@ -16,7 +16,6 @@ ns = {}
 exec(open(os.path.join(HERE, "common.py")).read(), ns)
 exec(open(script_path).read(), ns)
 BEATS, VOICES, EP = ns["B"], ns["VOICES"], ns["EP"]
-TEACHER = ns.get("TEACHER", "centi")
 
 _k = None
 def kokoro():
@@ -155,7 +154,8 @@ def chunks(text, maxlen=95):
 
 def display_text(text):
     # spoken -> display tweaks
-    return text.replace("G S T", "GST").replace("Banana Coin", "BananaCoin")
+    for a, b in (EP.get("display") or {}).items(): text = text.replace(a, b)
+    return text
 
 # ---------------- timeline assembly ----------------
 segs, sfx_events, dialog = [], [], []
@@ -203,7 +203,7 @@ for b in BEATS:
         push("freeze", b["dur"], text=b["text"], narrator=b.get("narrator", ""), hold=round(hold, 3), ref=len(segs) - 1); continue
     if k == "title":
         set_music(False)
-        sfx_events.append((t, "jingle", 0.8)); push("title", b["dur"], title=b["title"], sub=b["sub"], tag=b.get("tag", "")); continue
+        sfx_events.append((t, "jingle", 0.8)); push("title", b["dur"], title=b["title"], sub=b["sub"]); continue
     if k == "card":
         set_music(False)
         sfx_events.append((t, "whoosh", 0.6)); push("card", b["dur"], text=b["text"], sub=b.get("sub", "")); continue
@@ -214,12 +214,12 @@ for b in BEATS:
                 for i in range(5): sfx_events.append((t + i, "tick", 1.0))
                 push("challenge", 5.2, phase="count", n=b["n"], q=b["q"], a=b["a"], work=b["work"]); continue
             text = b["qs"] if phase == "q" else b["as_"]
-            a = tts(TEACHER, text)
+            a = tts(ns.get("HOST", "atlas"), text)
             if phase == "a": sfx_events.append((t, "ding", 0.7))
             st = t + 0.3; dialog.append((st, a))
             d = len(a)/SR
             push("challenge", 0.3 + d + 0.9, phase=phase, n=b["n"], q=b["q"], a=b["a"], work=b["work"],
-                 who=TEACHER, say0=round(st, 3), env=envelope(a), subs=[], text=display_text(text))
+                 who=ns.get("HOST", "atlas"), say0=round(st, 3), env=envelope(a), subs=[], text=display_text(text))
         continue
     if k == "line":
         who = b["who"]
@@ -270,5 +270,5 @@ mix /= max(1.0, np.abs(mix).max() / 0.97)
 sf.write(os.path.join(out, "audio.wav"), mix, SR)
 
 title_t = next((x["t0"] for x in segs if x["kind"] == "title"), 5.0)
-json.dump(dict(fps=FPS, duration=round(total, 3), topic=EP["topic"], teacher=TEACHER, poster_t=round(title_t + 3.6, 2), segments=segs), open(os.path.join(out, "timeline.json"), "w"))
+json.dump(dict(fps=FPS, duration=round(total, 3), topic=EP["topic"], poster_t=round(title_t + 3.6, 2), names=EP.get("names", {}), looks=EP.get("looks", {}), segments=segs), open(os.path.join(out, "timeline.json"), "w"))
 print(f"segments={len(segs)} duration={total:.1f}s ({total/60:.1f} min)")
