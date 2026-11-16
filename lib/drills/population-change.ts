@@ -288,27 +288,27 @@ const MOVES: MoveScenario[] = [
 const CASE_FACTS: Fact[] = [
   { d: "Which landlocked West African country, whose capital is Niamey, has one of the highest fertility rates in the world?", a: ["Niger"], why: "Niger's TFR is roughly 6 children per woman, and about half its people are under 15.", hint: "It shares its name with a great West African river." },
   { d: "In 2023 Singapore's resident total fertility rate fell below which whole number for the first time?", a: ["1", "one"], why: "it was about 0.97 — far below the replacement level of about 2.1.", hint: "It is less than half of replacement level (2.1)." },
-  { d: "What is the name of Singapore's cash gift to parents of newborn babies, part of its pro-natalist policy?", a: ["Baby Bonus", "Baby Bonus scheme"], why: "the Baby Bonus gives cash gifts and savings support to encourage births.", hint: "Two words: who it is for, and what it gives." },
+  { d: "What is the name of Singapore's cash gift to parents of newborn babies, part of its pro-natalist policy?", a: ["Baby Bonus", "Baby Bonus scheme"], why: "the Baby Bonus gives cash gifts and savings support to encourage births.", hint: "Two words: who it is for, and a word meaning an extra reward." },
   { d: "In which year did China's one-child policy begin?", a: ["1980"], why: "it ran from 1980 to 2015.", hint: "The start of a decade." },
-  { d: "In which year did China's two-child policy come into effect, replacing the one-child policy?", a: ["2016"], why: "the one-child policy ended in 2015; the two-child policy began in 2016.", hint: "The year after the one-child policy ended in 2015." },
-  { d: "In which year did China move to a three-child policy?", a: ["2021"], why: "births kept falling under the two-child policy, so China allowed three children from 2021.", hint: "Five years after the two-child policy (2016)." },
+  { d: "In which year did China's two-child policy come into effect, replacing the one-child policy?", a: ["2016"], why: "the one-child policy ended in 2015; the two-child policy began in 2016.", hint: "It came into force on 1 January, in the middle of the 2010s." },
+  { d: "In which year did China move to a three-child policy?", a: ["2021"], why: "births kept falling under the two-child policy, so China allowed three children from 2021.", hint: "It was announced soon after China's 2020 census showed births still falling." },
   { d: "Which East Asian country had the world's lowest total fertility rate in 2023, at about 0.72?", a: ["South Korea", "Korea", "Republic of Korea"], why: "South Korea's TFR of about 0.72 was the lowest of any country.", hint: "Its capital is Seoul." },
   { d: "Which South Asian country cut its total fertility rate from about 6 children per woman in the 1970s to about 2 today, helped by village family-planning workers?", a: ["Bangladesh"], why: "door-to-door family-planning workers and girls' education helped fertility fall fast.", hint: "Its capital is Dhaka.", hard: true },
   { d: "Which Indian state is famous for low birth rates linked to high female literacy, even though it is not one of India's richest states?", a: ["Kerala"], why: "Kerala shows that educating women can cut birth rates even without great wealth.", hint: "A state on India's south-west (Malabar) coast.", hard: true },
   { d: "Which disease, carried by mosquitoes, is a major cause of child deaths in sub-Saharan Africa?", a: ["malaria"], why: "mosquito nets and medicines have cut malaria deaths, but it still kills many young children.", hint: "Its name comes from Italian for 'bad air'." },
   { d: "Which water-borne disease did John Snow trace to a public water pump in London in 1854?", a: ["cholera"], why: "Snow mapped cholera deaths around the Broad Street pump — evidence that clean water lowers death rates.", hint: "It spreads through water contaminated with sewage." },
-  { d: "In which year did the World Health Organization declare smallpox eradicated?", a: ["1980"], why: "smallpox is the only human disease to have been eradicated, thanks to vaccination.", hint: "The same year China's one-child policy began." },
+  { d: "In which year did the World Health Organization declare smallpox eradicated?", a: ["1980"], why: "smallpox is the only human disease to have been eradicated, thanks to vaccination.", hint: "It was declared at the start of a decade, a few years after the last natural case (Somalia, 1977)." },
   { d: "Who developed the first smallpox vaccine, in 1796?", a: ["Edward Jenner", "Jenner"], why: "Jenner used cowpox to protect people against smallpox — the start of vaccination.", hint: "An English country doctor from Gloucestershire." },
   { d: "Which disease, caused by a virus first identified in the 1980s, cut life expectancy sharply in several southern African countries in the 1990s and 2000s?", a: ["HIV/AIDS", "AIDS", "HIV", "HIV AIDS"], why: "life expectancy recovered once antiretroviral treatment became widely available.", hint: "Four letters, often written with the virus that causes it.", hard: true },
-  { d: "In which year did the World Health Organization declare COVID-19 a pandemic?", a: ["2020"], why: "COVID-19 was declared a pandemic in March 2020.", hint: "A year that is a 'double' number." },
-  { d: "Which United Nations agency protects and supports refugees?", a: ["UNHCR", "UN Refugee Agency", "United Nations High Commissioner for Refugees"], why: "UNHCR, the UN Refugee Agency.", hint: "Five letters: UN + High Commissioner for Refugees." },
+  { d: "In which year did the World Health Organization declare COVID-19 a pandemic?", a: ["2020"], why: "COVID-19 was declared a pandemic in March 2020.", hint: "Think of the year schools around the world first closed for lockdowns." },
+  { d: "Which United Nations agency protects and supports refugees?", a: ["UNHCR", "UN Refugee Agency", "United Nations High Commissioner for Refugees"], why: "UNHCR, the UN Refugee Agency.", hint: "Its initials start with UN; the rest stand for the job title of the official who leads it." },
   { d: "Which country, where a civil war began in 2011, was the origin of the largest number of refugees in the world for much of the 2010s?", a: ["Syria"], why: "millions fled to Turkey, Lebanon, Jordan and Europe.", hint: "Its capital is Damascus.", hard: true },
   { d: "In 2017 hundreds of thousands of Rohingya people fled Myanmar. Which neighbouring country did most of them flee to?", a: ["Bangladesh"], why: "most now live in camps around Cox's Bazar in Bangladesh.", hint: "Myanmar's neighbour to the west." },
-  { d: "Which Singapore work pass is for lower-skilled foreign workers in sectors such as construction?", a: ["Work Permit"], why: "Work Permit holders are a big part of Singapore's foreign workforce.", hint: "Two words, starting with W and P." },
-  { d: "Which Singapore work pass is for foreign professionals, managers and executives?", a: ["Employment Pass", "EP"], why: "the Employment Pass (EP) is for higher-paid professionals.", hint: "Two words, starting with E and P." },
+  { d: "Which Singapore work pass is for lower-skilled foreign workers in sectors such as construction?", a: ["Work Permit"], why: "Work Permit holders are a big part of Singapore's foreign workforce.", hint: "Two words — it is the pass below the S Pass, for jobs in construction, shipyards and manufacturing." },
+  { d: "Which Singapore work pass is for foreign professionals, managers and executives?", a: ["Employment Pass", "EP"], why: "the Employment Pass (EP) is for higher-paid professionals.", hint: "Two words — it is the top tier of pass, above the S Pass." },
   { d: "Which ship's arrival in 1948 is remembered as the start of large-scale Caribbean migration to the UK?", a: ["Empire Windrush", "Windrush", "HMT Empire Windrush"], why: "the 'Windrush generation' was invited to help fill labour shortages after the Second World War.", hint: "Its name includes a type of weather and a word for 'hurry'.", hard: true },
   { d: "Which European country's population fell by around a fifth through deaths and emigration after the potato famine of the 1840s?", a: ["Ireland"], why: "about a million people died and more than a million emigrated, many to the USA and Britain.", hint: "The Emerald Isle.", hard: true },
-  { d: "In which year did world population reach 8 billion, according to the UN?", a: ["2022"], why: "the UN marked 15 November 2022 as the day the world reached 8 billion.", hint: "Two years after COVID-19 was declared a pandemic." },
+  { d: "In which year did world population reach 8 billion, according to the UN?", a: ["2022"], why: "the UN marked 15 November 2022 as the day the world reached 8 billion.", hint: "It was in the early 2020s — the UN picked a date in November." },
   { d: "Which Asian country, with a median age of about 49, has had more deaths than births every year since the late 2000s?", a: ["Japan"], why: "Japan has very low fertility and very high life expectancy, so its population is shrinking.", hint: "Its capital is Tokyo.", hard: true },
   { d: "What name is given to the 14th-century plague pandemic that killed perhaps a third or more of Europe's people?", a: ["Black Death", "bubonic plague", "plague"], why: "the Black Death (from 1347) shows how disease can make death rates soar.", hint: "Two words: a colour and what it brought.", hard: true },
   { d: "The 1918 influenza pandemic is often known by what name?", a: ["Spanish flu", "Spanish influenza", "1918 flu"], why: "it killed tens of millions worldwide — more than the First World War.", hint: "Named (unfairly) after a European country." },
@@ -527,7 +527,7 @@ export const drills: Drill[] = [
       const table = `| Births | Deaths | Immigrants | Emigrants |\n|---|---|---|---|\n| ${big(B)} | ${big(D)} | ${big(I)} | ${big(E)} |`;
       const intro = `A town had ${big(P)} people at the start of the year. During the year:\n\n${table}\n\n`;
       const steps = [`Natural change = births − deaths = ${big(B)} − ${big(D)} = ${big(nat)}`, `Net migration = immigrants − emigrants = ${big(I)} − ${big(E)} = ${big(net)}`];
-      const neg = tier === 1 ? "" : " (use a minus sign if it falls)";
+      const neg = " (use a minus sign if it is negative)";
       if (kind === "net") {
         return {
           prompt: `${intro}Calculate the **net migration**${neg}.`,
@@ -577,7 +577,7 @@ export const drills: Drill[] = [
       let ch = change;
       let EE = E;
       if (pct === 0) {
-        EE = E - Math.round(scale * 3);
+        EE = E + Math.round(scale * 3);
         ch = nat + I - EE;
         pct = roundTo((ch / P) * 100, 1);
       }

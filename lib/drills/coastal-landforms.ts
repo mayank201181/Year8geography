@@ -232,7 +232,7 @@ const EROSION_BANK: Entry[] = [
     traps: [{ a: ["stack"], fb: "A stack is still tall. Once it collapses to a low rock covered at high tide, it is a stump." }],
   },
   {
-    a: ["hydraulic action", "hydraulic power"],
+    a: ["hydraulic action", "hydraulic power", "hydraulic"],
     t: 2,
     clues: [
       "Name the erosion process where waves force air and water into cracks, compressing them and weakening the rock.",
@@ -265,7 +265,7 @@ const EROSION_BANK: Entry[] = [
     a: ["solution", "corrosion"],
     t: 2,
     clues: [
-      "Name the erosion process where slightly acidic seawater dissolves rocks such as chalk and limestone.",
+      "Name the erosion process where seawater slowly dissolves rocks such as chalk and limestone.",
       "Which erosion process is chemical rather than physical, slowly dissolving calcium carbonate in the cliff?",
     ],
     why: "solution (corrosion) is the chemical dissolving of rock by seawater.",

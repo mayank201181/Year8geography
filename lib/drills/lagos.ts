@@ -290,7 +290,8 @@ export const drills: Drill[] = [
       }
       if (tier === 2) {
         const area = rng.pick([1.5, 2.5, 3.2, 0.8, 1.2, 4.5, 6.4]);
-        const pop = rng.int(30, 160) * 1000;
+        // Keep densities realistic for a crowded district (about 15,000–80,000 per km²).
+        const pop = Math.round(area * rng.int(15, 80)) * 1000;
         const d = roundTo(pop / area, 0);
         return {
           prompt: `Imagine ${place} with ${big(pop)} people in ${num(area)} km². Calculate its population density in people per km², to the nearest whole number.`,
@@ -301,8 +302,8 @@ export const drills: Drill[] = [
       }
       // tier 3: area in hectares, compare with Singapore (≈ 8,000 per km²)
       const ha = rng.pick([40, 60, 75, 80, 120, 150, 250]);
-      const pop = rng.int(20, 90) * 1000;
       const km2 = clean(ha / 100);
+      const pop = Math.round(km2 * rng.int(15, 80)) * 1000;
       const d = roundTo(pop / km2, 0);
       const times = roundTo(d / 8000, 1);
       return {
@@ -402,7 +403,7 @@ export const drills: Drill[] = [
         const fast = rng.pick([20, 24, 25, 30]);
         const saved = roundTo((d * 60) / slow - (d * 60) / fast, 0);
         return {
-          prompt: `A ${d} km commute takes place at ${slow} km/h in a go-slow, or at ${fast} km/h on a BRT bus in its own lane. How many minutes does the BRT save on one trip? Give your answer to the nearest minute.`,
+          prompt: `${d === 8 || d === 11 || d === 18 ? "An" : "A"} ${d} km commute takes place at ${slow} km/h in a go-slow, or at ${fast} km/h on a BRT bus in its own lane. How many minutes does the BRT save on one trip? Give your answer to the nearest minute.`,
           answer: { type: "number", value: saved },
           solution: [
             `Go-slow: ${d} ÷ ${slow} × 60 = ${num(roundTo((d * 60) / slow, 1))} min.`,

@@ -102,7 +102,7 @@ const RATE_BANK: Fact[] = [
     ["machines replacing children's work on family farms", 2],
     ["laws banning child labour and making school compulsory", 2],
     ["state pensions, so parents no longer rely on their children in old age", 3],
-    ["fewer babies dying, so parents no longer have extra children as an insurance", 3],
+    ["parents being confident their babies will survive, so they stop having extra children 'just in case'", 3],
     ["more people moving from the countryside to small city flats", 3],
   ].map(([c, t]): Fact => ({
     tier: t as 1 | 2 | 3,
@@ -157,7 +157,7 @@ const TERM_BANK: Fact[] = [
   },
   {
     tier: 1,
-    clues: ["the movement of people into or out of a country — the other way, besides births and deaths, that its population changes", "people moving from one country to live in another"],
+    clues: ["the movement of people into or out of a country — the other way, besides births and deaths, that its population changes", "people moving to live somewhere else, whether arriving in or leaving a country (one general word)"],
     answer: text("migration", "international migration"),
     why: "Population changes through births, deaths and **migration**. *Natural* increase ignores migration.",
   },
@@ -189,9 +189,10 @@ const TERM_BANK: Fact[] = [
   },
   {
     tier: 3,
-    clues: ["a population shrinking because the death rate is higher than the birth rate, as in Japan today — the general name for a falling total population", "a fall in the total number of people living in a country"],
-    answer: text("population decline", "depopulation", "declining population"),
-    why: "When deaths outnumber births (and migration doesn't fill the gap) a country has **population decline** — Japan's population has been falling since about 2010.",
+    clues: ["a fall in a country's total population, whatever the cause (fewer births, more deaths or people leaving), as in Japan today", "a fall in the total number of people living in a country, from any cause"],
+    answer: text("population decline", "depopulation", "declining population", "population decrease", "shrinking population"),
+    why: "When a country's total number of people falls it has **population decline** — Japan's population has been falling since about 2010. (Natural decrease is only one cause: deaths outnumbering births.)",
+    traps: [textTrap(["natural decrease"], "Natural decrease is only one cause (deaths outnumbering births). The general term for any fall in total population is population decline.")],
   },
   {
     tier: 3,
@@ -243,7 +244,7 @@ const DTM_BANK: Fact[] = [
     // Stage 5
     [5, 1, "The birth rate falls below the death rate, so the population starts to shrink."],
     [5, 2, "There is natural decrease and a large, growing share of elderly people."],
-    [5, 2, "Very low fertility (well below 2.1 children per woman) means fewer young people each year."],
+    [5, 2, "Fertility has been far below 2.1 for decades, and now deaths outnumber births every year."],
     [5, 3, "Japan, whose population has been falling since about 2010, is the usual example."],
     [5, 3, "This stage was added later — the original model had only four stages."],
   ].map(([n, t, c]): Fact => {
@@ -421,7 +422,7 @@ export const drills: Drill[] = [
         prompt: p,
         answer: { type: "number", value: b, display: `${b} billion` },
         solution: [`In ${y} the world reached **${b} billion** people.`, "Milestones: 1 bn 1804 · 2 bn 1927 · 3 bn 1960 · 4 bn 1974 · 5 bn 1987 · 6 bn 1999 · 7 bn 2011 · 8 bn 2022."],
-        hint: "Since 1960 a new billion has arrived roughly every 12–14 years.",
+        hint: "Since 1960 a new billion has arrived roughly every 11–14 years.",
         traps,
       };
     },
@@ -705,7 +706,7 @@ export const drills: Drill[] = [
         const n = ((br - dr) * popM * 1000000) / 1000;
         const traps: Trap[] = [{ spec: { type: "number", value: (br - dr) * popM * 10000 }, feedback: "Rates are per 1000, not per 100 — divide by 1000." }];
         return {
-          prompt: `A country of ${popM} million people has a birth rate of ${br} per 1000 and a death rate of ${dr} per 1000. Ignoring migration, how many people are added to (or lost from) its population in a year?`,
+          prompt: `A country of ${popM} million people has a birth rate of ${br} per 1000 and a death rate of ${dr} per 1000. Ignoring migration, how many people are added to (or lost from) its population in a year? (Use a negative number for a fall.)`,
           answer: { type: "number", value: n, display: `${n < 0 ? "−" : ""}${big(Math.abs(n))} people` },
           solution: [
             `Natural change = ${br} − ${dr} = ${br - dr} per 1000 people.`,

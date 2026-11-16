@@ -8,13 +8,13 @@ const CONCORDANT = `<svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg
 
 const NOTCH = `<svg viewBox="0 0 440 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a cliff. Label C points to the cliff face. Label A points to a hollow cut into the bottom of the cliff at high-tide level. Label B points to a gently sloping rocky surface stretching out to sea from the cliff foot, covered at high tide and partly exposed at low tide."><rect x="0" y="0" width="440" height="220" fill="#ffffff"/><rect x="125" y="138" width="235" height="72" fill="#bae6fd"/><path d="M20,40 H120 L130,125 L112,135 L132,146 L340,172 L340,210 L20,210 Z" fill="#d6d3d1" stroke="#334155"/><line x1="125" y1="138" x2="360" y2="138" stroke="#334155" stroke-dasharray="5 3"/><line x1="284" y1="165" x2="360" y2="165" stroke="#334155" stroke-dasharray="2 3"/><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="364" y="142">High tide</text><text x="364" y="169">Low tide</text><text x="150" y="126" font-size="14" font-weight="bold">A</text><text x="210" y="138" font-size="14" font-weight="bold">B</text><text x="142" y="88" font-size="14" font-weight="bold">C</text><text x="40" y="75">Land</text></g><line x1="147" y1="124" x2="121" y2="136" stroke="#1f2937"/><line x1="215" y1="141" x2="215" y2="154" stroke="#1f2937"/><line x1="140" y1="85" x2="128" y2="92" stroke="#1f2937"/></svg>`;
 
-const GROYNES = `<svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan view of a beach with north at the top, land along the top and the sea to the south. Three groynes run from the land out to sea at right angles to the coast. In each section the beach is wide on the west side of a groyne and narrow on its east side. East of the last groyne the beach is very narrow. J marks the wide beach at the western end; K marks the narrow beach east of the last groyne."><rect x="0" y="0" width="380" height="230" fill="#ffffff"/><rect x="20" y="70" width="340" height="140" fill="#bae6fd"/><rect x="20" y="20" width="340" height="50" fill="#bbf7d0"/><polygon points="20,70 360,70 360,80 240,96 240,142 160,104 160,142 80,104 80,142 20,112" fill="#fde68a" stroke="#334155"/><rect x="20" y="20" width="340" height="190" fill="none" stroke="#334155"/><rect x="78" y="70" width="4" height="95" fill="#334155"/><rect x="158" y="70" width="4" height="95" fill="#334155"/><rect x="238" y="70" width="4" height="95" fill="#334155"/><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="30" y="50">Land</text><text x="246" y="178">Groyne</text><text x="40" y="96" font-size="14" font-weight="bold">J</text><text x="312" y="108" font-size="14" font-weight="bold">K</text><text x="40" y="195">SEA</text><text x="356" y="198">N</text></g><line x1="316" y1="96" x2="316" y2="83" stroke="#1f2937"/><line x1="346" y1="206" x2="346" y2="190" stroke="#1f2937" stroke-width="2"/><polygon points="346,182 341,192 351,192" fill="#1f2937"/></svg>`;
+const GROYNES = `<svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan view of a beach with north at the top, land along the top and the sea to the south. Three groynes run from the land out to sea at right angles to the coast. In each section the beach is wide on the west side of a groyne and narrow on its east side. East of the last groyne the beach is very narrow. J marks the wide beach at the western end; K marks the narrow beach east of the last groyne."><rect x="0" y="0" width="380" height="230" fill="#ffffff"/><rect x="20" y="70" width="340" height="140" fill="#bae6fd"/><rect x="20" y="20" width="340" height="50" fill="#bbf7d0"/><polygon points="20,70 360,70 360,80 240,96 240,142 160,104 160,142 80,104 80,142 20,112" fill="#fde68a" stroke="#334155"/><rect x="20" y="20" width="340" height="190" fill="none" stroke="#334155"/><rect x="78" y="70" width="4" height="95" fill="#334155"/><rect x="158" y="70" width="4" height="95" fill="#334155"/><rect x="238" y="70" width="4" height="95" fill="#334155"/><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="30" y="50">Land</text><text x="246" y="178">Groyne</text><text x="58" y="100" font-size="14" font-weight="bold">J</text><text x="312" y="108" font-size="14" font-weight="bold">K</text><text x="40" y="195">SEA</text><text x="356" y="198">N</text></g><line x1="316" y1="96" x2="316" y2="83" stroke="#1f2937"/><line x1="346" y1="206" x2="346" y2="190" stroke="#1f2937" stroke-width="2"/><polygon points="346,182 341,192 351,192" fill="#1f2937"/></svg>`;
 
 const LSD = `<svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan view of a beach with land at the top and the sea at the bottom (south). The prevailing wind blows from the south-west. A pebble's path zig-zags along the beach: arrow X goes up the beach at an angle towards the north-east; arrow Y comes straight back down the beach. Arrow Z in the sea points east along the coast."><defs><marker id="cmLsdHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f2937"/></marker></defs><rect x="0" y="0" width="380" height="230" fill="#ffffff"/><rect x="20" y="20" width="340" height="30" fill="#bbf7d0" stroke="#334155"/><rect x="20" y="50" width="340" height="80" fill="#fde68a" stroke="#334155"/><rect x="20" y="130" width="340" height="80" fill="#bae6fd" stroke="#334155"/><g stroke="#1f2937" stroke-width="2" fill="none" marker-end="url(#cmLsdHead)"><line x1="50" y1="120" x2="98" y2="72"/><line x1="100" y1="70" x2="100" y2="118"/><line x1="100" y1="120" x2="148" y2="72"/><line x1="150" y1="70" x2="150" y2="118"/><line x1="150" y1="120" x2="198" y2="72"/><line x1="200" y1="70" x2="200" y2="118"/><line x1="200" y1="120" x2="248" y2="72"/><line x1="250" y1="70" x2="250" y2="118"/><line x1="130" y1="178" x2="300" y2="178"/><line x1="35" y1="205" x2="78" y2="168"/></g><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="30" y="40">Land</text><text x="124" y="44" font-size="14" font-weight="bold">X</text><text x="210" y="152" font-size="14" font-weight="bold">Y</text><text x="306" y="183" font-size="14" font-weight="bold">Z</text><text x="86" y="196">Prevailing wind</text><text x="342" y="196">N</text></g><line x1="129" y1="48" x2="124" y2="94" stroke="#1f2937" stroke-dasharray="3 2"/><line x1="212" y1="140" x2="202" y2="100" stroke="#1f2937" stroke-dasharray="3 2"/><line x1="335" y1="208" x2="335" y2="186" stroke="#1f2937" stroke-width="2"/><polygon points="335,178 330,188 340,188" fill="#1f2937"/></svg>`;
 
 const SPIT = `<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan view of a spit. The coast runs north to south with the sea to the east, then turns west into a river estuary. Longshore drift moves south along the coast and the prevailing wind blows from the north-east. A narrow ridge of sand grows south across the estuary mouth and curves west at its end, labelled L. In the sheltered water behind the spit is a green area labelled M."><defs><marker id="cmSpitHead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#1f2937"/></marker></defs><rect x="0" y="0" width="360" height="240" fill="#bae6fd"/><path d="M0,0 H120 V110 Q80,128 0,122 Z" fill="#bbf7d0" stroke="#334155"/><path d="M0,240 H60 Q45,215 0,208 Z" fill="#bbf7d0" stroke="#334155"/><path d="M108,104 L134,104 Q142,170 122,206 Q102,226 78,214 Q98,204 110,182 Q118,150 108,104 Z" fill="#fde68a" stroke="#334155"/><path d="M106,122 Q112,155 104,180 Q86,170 84,145 Q90,128 106,122 Z" fill="#bbf7d0" stroke="#334155" stroke-dasharray="3 2"/><g stroke="#1f2937" stroke-width="2" fill="none" marker-end="url(#cmSpitHead)"><line x1="170" y1="20" x2="170" y2="92"/><line x1="310" y1="30" x2="250" y2="80"/><line x1="40" y1="165" x2="75" y2="165"/></g><g font-family="sans-serif" font-size="12" fill="#1f2937"><text x="20" y="50">Land</text><text x="176" y="58">Longshore drift</text><text x="236" y="22">Prevailing wind</text><text x="8" y="158">River</text><text x="88" y="156" font-size="14" font-weight="bold">M</text><text x="82" y="234" font-size="14" font-weight="bold">L</text><text x="250" y="160">SEA</text><text x="346" y="214">N</text></g><line x1="338" y1="232" x2="338" y2="208" stroke="#1f2937" stroke-width="2"/><polygon points="338,200 333,210 343,210" fill="#1f2937"/></svg>`;
 
-const SEQUENCE = `<svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="View from the sea of a headland being eroded. P is a hollow at the base of the headland. Q is a rock bridge with a hole right through it. R is a tall pillar of rock standing alone in the sea. S is a low, flat stump of rock whose top is below the dashed high-tide line."><rect x="0" y="0" width="380" height="230" fill="#ffffff"/><rect x="20" y="50" width="130" height="125" fill="#d6d3d1" stroke="#334155"/><path d="M50,175 V128 Q70,100 90,128 V175 Z" fill="#334155"/><path d="M165,175 V60 H235 V175 H220 V125 Q200,100 180,125 V175 Z" fill="#d6d3d1" stroke="#334155"/><rect x="260" y="65" width="30" height="110" fill="#d6d3d1" stroke="#334155"/><rect x="315" y="152" width="32" height="23" fill="#d6d3d1" stroke="#334155"/><rect x="0" y="148" width="380" height="52" fill="#bae6fd" fill-opacity="0.75"/><line x1="0" y1="148" x2="380" y2="148" stroke="#334155" stroke-dasharray="5 3"/><g font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937"><text x="64" y="92">P</text><text x="195" y="52">Q</text><text x="269" y="58">R</text><text x="326" y="144">S</text></g><text x="10" y="222" font-family="sans-serif" font-size="11" fill="#1f2937">Dashed line = high-tide level</text></svg>`;
+const SEQUENCE = `<svg viewBox="0 0 380 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="View from the sea of a headland being eroded. P is a hollow at the base of the headland. Q is a rock bridge with a hole right through it. R is a tall pillar of rock standing alone in the sea. S is a low, flat stump of rock whose top is below the dashed high-tide line."><rect x="0" y="0" width="380" height="230" fill="#ffffff"/><rect x="20" y="50" width="130" height="125" fill="#d6d3d1" stroke="#334155"/><path d="M50,175 V128 Q70,100 90,128 V175 Z" fill="#334155"/><path d="M165,175 V60 H235 V175 H220 V125 Q200,100 180,125 V175 Z" fill="#d6d3d1" stroke="#334155"/><rect x="260" y="65" width="30" height="110" fill="#d6d3d1" stroke="#334155"/><rect x="315" y="152" width="32" height="23" fill="#d6d3d1" stroke="#334155"/><rect x="0" y="148" width="380" height="52" fill="#bae6fd" fill-opacity="0.75"/><line x1="0" y1="148" x2="380" y2="148" stroke="#334155" stroke-dasharray="5 3"/><g font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937"><text x="64" y="92">P</text><text x="195" y="52">Q</text><text x="269" y="58">R</text><text x="326" y="144">S</text></g><line x1="70" y1="96" x2="70" y2="112" stroke="#1f2937"/><text x="10" y="222" font-family="sans-serif" font-size="11" fill="#1f2937">Dashed line = high-tide level</text></svg>`;
 
 // ================================ papers ===================================
 
@@ -151,14 +151,14 @@ export const mcqPapers: Paper[] = [
         id: "coastal-landforms-m1-q09",
         question: "Why do sandy beaches often form in bays rather than on headlands?",
         options: [
-          "The water in bays is deeper, so waves are stronger there",
+          "Waves are stronger in bays, so they throw more sand up the beach",
           "Bays are made of hard rock, which produces sand",
           "Wave energy is spread out and lower in a sheltered bay, so waves drop the material they carry",
           "Longshore drift never reaches headlands",
         ],
         answerIndex: 2,
         explanation:
-          "As waves approach the coast they bend (refract), concentrating energy on headlands and **spreading it out in bays**. With less energy, waves in bays cannot carry as much, so they **deposit** sand and shingle. Bays are cut in *soft* rock, and the water there is usually shallower, not deeper.",
+          "As waves approach the coast they bend (refract), concentrating energy on headlands and **spreading it out in bays**. With less energy, waves in bays cannot carry as much, so they **deposit** sand and shingle. Waves in bays are *weaker*, not stronger, and bays are cut in *soft* rock, not hard rock.",
         difficulty: "core",
         guideRef: "depositional-landforms",
         hints: ["Deposition happens when waves lose energy.", "Where along a headland-and-bay coast is wave energy lowest?"],
@@ -202,7 +202,7 @@ export const mcqPapers: Paper[] = [
         difficulty: "core",
         guideRef: "headlands-bays",
         hints: ["Headlands are made of the more resistant rock.", "Old Harry Rocks are famous white cliffs and stacks — what white rock is that?"],
-        strategy: "Use figures from the source",
+        strategy: "Eliminate options",
       },
       {
         kind: "mcq",
@@ -218,7 +218,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 0,
         explanation:
           "Behind a spit the water is **sheltered and calm**, so very fine silt and mud can settle out. Salt-tolerant plants colonise the mud, trapping more sediment, and a **salt marsh** develops (as behind Spurn Head on the Humber). Waves there are weak — too weak to cut a platform or throw sand into dunes.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "depositional-landforms",
         hints: ["Is the water at M rough or calm?", "What size of material settles out in very calm water?", "Plants that tolerate salt water then grow on that material."],
         strategy: "Cause → process → effect",
@@ -250,7 +250,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 3,
         explanation:
           "Time = distance ÷ rate = 200 ÷ 0.5 = **400 years**. The tempting 100 years comes from *multiplying* 200 × 0.5 instead of dividing. (In reality rates change over time, so this is only an estimate.)",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "cave-arch-stack",
         hints: ["The platform's width = how far the cliff has retreated.", "Time = distance ÷ rate.", "Dividing by 0.5 is the same as doubling."],
         strategy: "Use figures from the source",
@@ -448,7 +448,7 @@ export const mcqPapers: Paper[] = [
         options: ["About 10%", "About a third", "About 70–80%", "All of it"],
         answerIndex: 2,
         explanation:
-          "Government sources put it at roughly **70–80%** — most of Singapore's coast, much of it reclaimed land, is lined with sea walls or rock slopes. It is not all of it: some stretches are natural, such as mangroves at Sungei Buloh and on Pulau Ubin, and beaches like East Coast Park.",
+          "Government sources put it at roughly **70–80%** — most of Singapore's coast, much of it reclaimed land, is lined with sea walls or rock slopes. It is not all of it: some stretches are still natural, such as the mangroves at Sungei Buloh and on Pulau Ubin, and some beaches (such as East Coast Park's, held in place by offshore breakwaters) are not walled.",
         difficulty: "core",
         guideRef: "coastal-management",
         hints: ["Think about how much of Singapore's coast is reclaimed land with built edges.", "But some natural coastline remains — mangroves and beaches."],
@@ -480,7 +480,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 3,
         explanation:
           "Only the swash moves the pebble *along* the coast; the backwash runs straight down, adding no sideways movement. So 30 × 2 m = **60 m**. Answering 0 m assumes the backwash cancels the swash — but it only undoes the up-the-beach part, not the sideways part.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "longshore-drift",
         hints: ["Which part of each cycle moves the pebble sideways?", "Does the backwash cancel out the sideways movement?", "Multiply the sideways distance per swash by the number of cycles."],
         strategy: "Sketch it",
@@ -642,7 +642,7 @@ export const mcqPapers: Paper[] = [
         options: ["Large boulders", "Calcium carbonate dissolved from chalk or limestone", "Rounded pebbles", "Grains of sand"],
         answerIndex: 1,
         explanation:
-          "In **solution**, minerals are *dissolved* in sea water — chalk and limestone are made of calcium carbonate, which dissolves slowly in slightly acidic water. Boulders move by traction, pebbles by saltation and sand mainly by saltation or suspension.",
+          "In **solution**, minerals are *dissolved* in sea water — chalk and limestone are made of calcium carbonate, small amounts of which slowly dissolve and are carried away invisibly. Boulders move by traction, pebbles by saltation and sand mainly by saltation or suspension.",
         difficulty: "core",
         guideRef: "longshore-drift",
         hints: ["Solution = dissolved, like sugar in tea.", "Which rocks dissolve slowly in water?"],

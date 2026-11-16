@@ -403,11 +403,23 @@ function checkText(spec: Extract<AnswerSpec, { type: "text" }>, input: string): 
     const as = soft(a);
     if (as === ns) return { status: "correct" };
     // Only allow a typo when there are letters (never for numbers like "1804").
-    if (/[a-z]/.test(as) && !/\d/.test(as) && as.length >= 6 && editDistance(as, ns) <= (as.length >= 12 ? 2 : 1)) {
+    if (/[a-z]/.test(as) && !/\d/.test(as) && as.length >= 6 && sameWordStarts(a, input) && editDistance(as, ns) <= (as.length >= 12 ? 2 : 1)) {
       return { status: "correct", feedback: `Accepted — check the spelling: “${a}”.` };
     }
   }
   return { status: "incorrect" };
+}
+
+/**
+ * Typo tolerance must never turn one term into its opposite ("natural increase" vs
+ * "natural decrease", "immigration" vs "emigration", "constructive" vs "destructive"):
+ * require the same number of words and the same first two letters in every word.
+ */
+function sameWordStarts(a: string, b: string): boolean {
+  const words = (s: string) =>
+    normalizeInput(s).toLowerCase().replace(/[“”"'.,!?;:()-]/g, " ").replace(/\b(the|a|an)\b/g, " ").trim().split(/\s+/).filter(Boolean);
+  const wa = words(a), wb = words(b);
+  return wa.length === wb.length && wa.every((w, i) => w.slice(0, 2) === wb[i].slice(0, 2));
 }
 
 function editDistance(a: string, b: string): number {

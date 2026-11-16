@@ -58,7 +58,7 @@ const LATLONG: Fact[] = [
   { lv: 1, q: ["Singapore is at about 1° N, 104° E. Is it in the Northern or the Southern Hemisphere?"], a: txt("Northern", "Northern Hemisphere", "north"), why: "1° **N** means 1° north of the Equator, so Singapore is (just!) in the **Northern Hemisphere**.", traps: [trap("N stands for north — Singapore is about 1° north of the Equator.", "southern", "southern hemisphere", "south")] },
   { lv: 1, q: ["Singapore is at about 1° N, 104° E. Is it in the Eastern or the Western Hemisphere?"], a: txt("Eastern", "Eastern Hemisphere", "east"), why: "104° **E** means 104° east of the Prime Meridian, so Singapore is in the **Eastern Hemisphere**.", traps: [trap("E stands for east of the Prime Meridian.", "western", "western hemisphere", "west")] },
   { lv: 1, q: ["Lines of latitude measure how far north or south a place is from which line?"], a: txt("Equator"), why: "Latitude is measured in degrees north or south of the **Equator**." },
-  { lv: 1, q: ["Lines of longitude measure how far east or west a place is from which line?"], a: txt("Prime Meridian", "Greenwich Meridian"), why: "Longitude is measured in degrees east or west of the **Prime Meridian**." },
+  { lv: 1, q: ["Lines of longitude measure how far east or west a place is from which line?"], a: txt("Prime Meridian", "Greenwich Meridian", "meridian of Greenwich"), why: "Longitude is measured in degrees east or west of the **Prime Meridian**." },
   { lv: 1, q: ["What is the latitude of the North Pole, in degrees?", "How many degrees of latitude are there from the Equator to the South Pole?"], a: n(90), why: "The poles are at **90°** N and 90° S — a quarter-turn round the Earth from the Equator." },
   { lv: 2, q: ["What is the largest possible value of longitude, in degrees (east or west)?"], a: n(180), why: "Longitude runs from 0° to **180°** east and 0° to 180° west; 180° E and 180° W are the same line.", traps: [{ spec: n(90), feedback: "90° is the biggest *latitude*. Longitude goes half-way round the Earth: 180°." }, { spec: n(360), feedback: "Longitude is counted 0–180° east and 0–180° west, so the maximum is 180°." }] },
   { lv: 2, q: ["The International Date Line roughly follows which line of longitude (in degrees)?"], a: n(180), why: "The Date Line roughly follows **180°** longitude (it zig-zags round some islands).", traps: [{ spec: n(0), feedback: "0° is the Prime Meridian. The Date Line is on the opposite side of the Earth." }] },
@@ -89,8 +89,8 @@ const MAPTERMS: Fact[] = [
   { lv: 1, q: ["How many points does the compass used in KS3 geography have: N, NE, E, SE, S, SW, W, NW?"], a: n(8), why: "That is the **8-point compass**." },
   { lv: 2, q: ["What name is given to a dot on a map with a number next to it showing the exact height of that point in metres?"], a: txt("spot height"), why: "A **spot height** is a dot with a height in metres beside it.", traps: [trap("A trig point is a blue triangle marking a concrete survey pillar, usually on a hilltop.", "trig point", "triangulation pillar")] },
   { lv: 2, q: ["What is the name of the blue triangle symbol on an Ordnance Survey map marking a concrete survey pillar, often on a hilltop?"], a: txt("triangulation pillar", "trig point", "triangulation point", "trig pillar"), why: "A **triangulation pillar** (trig point) was used by surveyors to measure the land." },
-  { lv: 2, q: ["What word describes the height and shape of the land?"], a: txt("relief"), why: "**Relief** = the height and shape of the land, shown by contours, spot heights and colour." },
-  { lv: 2, q: ["A scale written as 1:50 000 is called what type of scale?"], a: txt("ratio scale", "ratio", "representative fraction"), why: "1:50 000 is a **ratio scale**: 1 cm on the map is 50 000 cm on the ground.", traps: [trap("A line scale is the drawn bar marked in km — 1:50 000 is written as a ratio.", "line scale", "bar scale")] },
+  { lv: 2, q: ["What word describes the height and shape of the land?"], a: txt("relief", "topography"), why: "**Relief** = the height and shape of the land, shown by contours, spot heights and colour." },
+  { lv: 2, q: ["A scale written as 1:50 000 is called what type of scale?"], a: txt("ratio scale", "ratio", "representative fraction", "RF"), why: "1:50 000 is a **ratio scale**: 1 cm on the map is 50 000 cm on the ground.", traps: [trap("A line scale is the drawn bar marked in km — 1:50 000 is written as a ratio.", "line scale", "bar scale")] },
   { lv: 2, q: ["What is the name of the drawn bar, divided into kilometres, used to measure distance on a map?"], a: txt("line scale", "bar scale", "linear scale", "scale bar"), why: "A **line scale** is a ruler-like bar; you can lay a strip of paper against it." },
   { lv: 2, q: ["Distance measured 'as the crow flies' is called what kind of distance?"], a: txt("straight-line distance", "straight line", "straight-line"), why: "**Straight-line distance** ignores bends. Roads and rivers give a longer *winding* distance." },
   { lv: 2, q: ["Contour lines drawn very close together show what kind of slope?"], a: txt("steep", "steep slope", "steep gradient"), why: "Close contours mean the height changes quickly over a short distance — a **steep** slope.", traps: [trap("Gentle slopes have contours far apart.", "gentle", "gentle slope", "flat")] },
@@ -591,7 +591,7 @@ export const drills: Drill[] = [
         const hi = Math.max(...temps), lo = Math.min(...temps);
         const r = hi - lo;
         const traps: Trap[] = [];
-        if (lo < 0 && hi + lo !== r) traps.push({ spec: n(Math.abs(hi + lo)), feedback: `Careful with negatives: ${num(hi)} − (${num(lo)}) = ${num(hi)} + ${num(-lo)}.` });
+        if (lo < 0 && Math.abs(hi + lo) !== r) traps.push({ spec: n(Math.abs(hi + lo)), feedback: `Careful with negatives: ${num(hi)} − (${num(lo)}) = ${num(hi)} + ${num(-lo)}.` });
         return {
           prompt: intro + "What is the annual temperature range in °C?",
           answer: { type: "number", value: r },
@@ -670,6 +670,8 @@ export const drills: Drill[] = [
         ],
       };
       const kind = rng.pick(["positive", "negative", "none"] as const);
+      // Lower-case an axis label for use mid-sentence, but keep acronyms such as GDP.
+      const lc = (t: string) => (/^[A-Z][a-z]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t);
       const ctx = rng.pick(CONTEXTS[kind]);
       const npts = tier === 1 ? 8 : 10;
       // Generate in unit square, retrying until |r| fits the kind clearly.
@@ -710,7 +712,7 @@ export const drills: Drill[] = [
         diagram: svg,
         answer: { type: "text", accept: acc, display: kind === "none" ? "no correlation" : `${kind} correlation` },
         solution: [
-          kind === "positive" ? `As ${ctx.x.toLowerCase()} increases, ${ctx.y.toLowerCase()} also tends to increase: **positive correlation**.` : kind === "negative" ? `As ${ctx.x.toLowerCase()} increases, ${ctx.y.toLowerCase()} tends to decrease: **negative correlation**.` : "The points are scattered with no upward or downward trend: **no correlation**.",
+          kind === "positive" ? `As ${lc(ctx.x)} increases, ${lc(ctx.y)} also tends to increase: **positive correlation**.` : kind === "negative" ? `As ${lc(ctx.x)} increases, ${lc(ctx.y)} tends to decrease: **negative correlation**.` : "The points are scattered with no upward or downward trend: **no correlation**.",
           "Correlation shows a relationship, not proof that one thing causes the other.",
         ],
         hint: "Imagine a line of best fit. Does it slope up, slope down, or can't you draw one?",
@@ -739,8 +741,10 @@ export const drills: Drill[] = [
       if (tier === 3 && rng.bool(0.5)) {
         // Rate of change per year, exact by construction.
         const years = c.y2 - c.y1;
-        const perYear = rng.int(2, 40) * 5 * (rng.bool(0.7) ? 1 : -1);
+        let perYear = rng.int(2, 40) * 5 * (rng.bool(0.7) ? 1 : -1);
         const start = rng.int(20, 90) * 100;
+        // A decrease must never take the count to zero or below.
+        if (start + perYear * years < start / 4) perYear = -perYear;
         const end = start + perYear * years;
         return {
           prompt: `${c.what} changed from **${big(start)}** ${c.unit} in ${c.y1} to **${big(end)}** in ${c.y2}. What was the average rate of change in ${c.unit} per year? (Use a negative number for a decrease.)`,

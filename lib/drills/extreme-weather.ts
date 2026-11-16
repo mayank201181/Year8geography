@@ -15,6 +15,8 @@ interface Fact {
   accept: string[];
   /** Number answer instead of text. */
   value?: number;
+  /** Optional tolerance for a number answer. */
+  tolerance?: number;
   /** 1 = core fact (all tiers), 3 = stretch only (tier 3, sometimes tier 2). */
   level: 1 | 2 | 3;
   why: string;
@@ -32,7 +34,7 @@ function factItem(rng: Rng, bank: Fact[], tier: 1 | 2 | 3, templates: string[], 
   const clue = rng.pick(f.clues);
   const prompt = rng.pick(templates).replace("#", clue);
   const answer: AnswerSpec =
-    f.value !== undefined ? { type: "number", value: f.value } : { type: "text", accept: f.accept, display: f.accept[0] };
+    f.value !== undefined ? { type: "number", value: f.value, ...(f.tolerance ? { tolerance: f.tolerance } : {}) } : { type: "text", accept: f.accept, display: f.accept[0] };
   return { prompt, answer, solution: [f.why], hint, traps: f.traps };
 }
 
@@ -265,7 +267,7 @@ const STORM_FACTS: Fact[] = [
   { clues: ["the US city where Hurricane Katrina (2005) broke the flood defences (levees), flooding about 80% of it"], accept: ["new orleans"], level: 2, why: "**New Orleans** lies largely below sea level; when Katrina's surge broke the levees, about 80% of the city flooded." },
   { clues: ["the country where Cyclone Nargis (2008) flooded the low Irrawaddy delta"], accept: ["myanmar", "burma"], level: 3, why: "Cyclone Nargis struck **Myanmar** in 2008; its storm surge swept across the flat, crowded Irrawaddy delta." },
   { clues: ["the African country where Cyclone Idai (2019) devastated the port city of Beira"], accept: ["mozambique"], level: 3, why: "Cyclone Idai hit **Mozambique** in March 2019, flattening much of Beira and flooding huge areas inland." },
-  { clues: ["the minimum sea-surface temperature, in °C, generally needed for a tropical storm to form"], accept: [], value: 26.5, level: 1, why: "Sea water must be at least about **26.5 °C** to supply enough heat and moisture." },
+  { clues: ["the minimum sea-surface temperature, in °C, generally needed for a tropical storm to form"], accept: [], value: 26.5, tolerance: 0.5, level: 1, why: "Sea water must be at least about **26.5 °C** (some textbooks round this to 26–27 °C) to supply enough heat and moisture." },
   { clues: ["the highest category on the Saffir–Simpson scale (give the number)"], accept: [], value: 5, level: 1, why: "**Category 5** is the top: sustained winds of 252 km/h or more." },
   { clues: ["the minimum distance from the equator, in degrees of latitude, where tropical storms usually form"], accept: [], value: 5, level: 2, why: "Storms usually form at least **5°** from the equator, where the Coriolis effect is strong enough to make them spin." },
   { clues: ["the sustained wind speed, in km/h, at which a tropical storm becomes a Category 1 hurricane"], accept: [], value: 119, level: 3, why: "**119 km/h** is the start of Category 1 on the Saffir–Simpson scale." },
@@ -280,7 +282,7 @@ const INSTRUMENTS: Fact[] = [
   { clues: ["a funnel and measuring cylinder that collects rain, recorded in millimetres", "the instrument for measuring precipitation in mm — best sunk into open ground away from trees and buildings"], accept: ["rain gauge", "raingauge", "rain gage"], level: 1, why: "A **rain gauge** collects rainfall; you read the depth in mm, usually at the same time each day." },
   { clues: ["the instrument that measures air pressure, in hectopascals (millibars)", "an instrument whose falling readings warn that a depression and wet, windy weather may be on the way"], accept: ["barometer", "aneroid barometer", "barograph"], level: 1, why: "A **barometer** measures air pressure in hPa (= millibars). Falling pressure usually means unsettled weather.", traps: [tt(["anemometer"], "An anemometer measures wind SPEED. Air pressure is measured with a barometer.")] },
   { clues: ["the instrument that measures wind speed using spinning cups", "an instrument whose cups turn faster the stronger the wind, giving a reading in km/h"], accept: ["anemometer", "cup anemometer"], level: 1, why: "An **anemometer** measures wind speed; the cups spin faster in stronger wind.", traps: [tt(["barometer"], "A barometer measures air pressure. Wind speed needs an anemometer."), tt(["wind vane", "weather vane", "weathervane"], "A wind vane shows wind DIRECTION, not speed.")] },
-  { clues: ["the instrument that shows wind direction by pointing to where the wind is blowing FROM", "an arrow on a pivot with compass points underneath it, showing which way the wind comes from"], accept: ["wind vane", "weather vane", "weathervane", "windvane", "wind sock", "windsock"], level: 1, why: "A **wind vane** points into the wind, showing the direction it comes FROM (a 'westerly' blows from the west).", traps: [tt(["anemometer"], "An anemometer measures wind SPEED. Direction needs a wind vane.")] },
+  { clues: ["the instrument that shows wind direction by pointing to where the wind is blowing FROM", "an arrow on a pivot with compass points underneath it, showing which way the wind comes from"], accept: ["wind vane", "weather vane", "weathervane", "windvane"], level: 1, why: "A **wind vane** points into the wind, showing the direction it comes FROM (a 'westerly' blows from the west).", traps: [tt(["anemometer"], "An anemometer measures wind SPEED. Direction needs a wind vane."), tt(["windsock", "wind sock"], "A windsock streams AWAY from the wind (it points where the wind is going). The arrow that points to where the wind comes from is a wind vane.")] },
   { clues: ["the instrument that measures humidity (how much water vapour is in the air), as a percentage", "an instrument that uses a wet-bulb and a dry-bulb thermometer side by side to work out humidity"], accept: ["hygrometer", "wet and dry bulb thermometer", "wet-and-dry bulb thermometer", "psychrometer", "whirling hygrometer", "wet and dry bulb"], level: 1, why: "A **hygrometer** measures relative humidity (%). The bigger the gap between wet and dry bulbs, the drier the air." },
   { clues: ["a white, louvred box on legs that shades thermometers from direct sunlight but lets air flow through", "the standard shelter that makes temperature readings fair by keeping instruments out of the sun and rain"], accept: ["stevenson screen", "stevensons screen", "stevenson's screen", "weather screen"], level: 1, why: "A **Stevenson screen** is white to reflect sunlight and has slatted (louvred) sides so air can circulate." },
   { clues: ["the thermometer that records the highest and lowest temperatures since it was last reset", "a thermometer with small markers that stay at the day's extremes"], accept: ["max-min thermometer", "maximum-minimum thermometer", "maximum and minimum thermometer", "max min thermometer", "six's thermometer", "sixs thermometer", "minimum-maximum thermometer"], level: 2, why: "A **max-min thermometer** keeps markers at the highest and lowest temperatures, so you can read both once a day.", traps: [tt(["thermometer"], "Close — which special thermometer keeps a record of BOTH extremes since it was reset?")] },
@@ -319,6 +321,11 @@ const FORECAST_FACTS: Fact[] = [
 ];
 
 const THREE_PS = ["prediction", "protection", "preparation"] as const;
+const THREE_PS_ACCEPT: Record<(typeof THREE_PS)[number], string[]> = {
+  prediction: ["prediction", "predicting", "predict", "forecasting"],
+  protection: ["protection", "protecting", "protect"],
+  preparation: ["preparation", "preparing", "prepare", "preparedness"],
+};
 const THREE_PS_WHY: Record<(typeof THREE_PS)[number], string> = {
   prediction: "**Prediction**: satellites, radar and computer models forecast where and when the hazard will strike.",
   protection: "**Protection**: building defences such as sea walls, storm shelters and stronger buildings.",
@@ -583,7 +590,7 @@ export const drills: Drill[] = [
         const shown = THREE_PS.map((p) => (p === missing ? "___" : p)).join(", ");
         return {
           prompt: `Warnings save lives through the "three Ps" of managing a hazard: ${shown}. Which P is missing?`,
-          answer: { type: "text", accept: [missing], display: missing },
+          answer: { type: "text", accept: THREE_PS_ACCEPT[missing], display: missing },
           solution: [THREE_PS_WHY[missing], "The three Ps are prediction, protection and preparation."],
           hint: "Think: forecast it, defend against it, get people ready for it.",
         };
@@ -712,10 +719,21 @@ export const drills: Drill[] = [
       const options: Fail[] = tier === 3 ? ["temperature", "latitude", "wind shear", "none"] : ["temperature", "latitude", "wind shear"];
       const fail = rng.pick(options);
       const sea = fail === "temperature" ? roundTo(rng.int(40, 51) / 2, 1) : roundTo(rng.int(55, 61) / 2, 1);
-      const lat = fail === "latitude" ? rng.int(1, 3) : rng.int(7, 25);
-      const hemi = rng.pick(["N", "S"]);
+      // Each ocean with its hemisphere and a realistic latitude band for a developing storm.
+      const OCEANS: { name: string; hemi: "N" | "S"; lo: number; hi: number }[] = [
+        { name: "western Pacific", hemi: "N", lo: 1, hi: 25 },
+        { name: "Bay of Bengal", hemi: "N", lo: 8, hi: 21 },
+        { name: "Caribbean Sea", hemi: "N", lo: 10, hi: 21 },
+        { name: "South Indian Ocean", hemi: "S", lo: 1, hi: 25 },
+        { name: "Coral Sea", hemi: "S", lo: 10, hi: 25 },
+        { name: "Arabian Sea", hemi: "N", lo: 8, hi: 22 },
+        { name: "South China Sea", hemi: "N", lo: 7, hi: 21 },
+      ];
+      const oc = rng.pick(fail === "latitude" ? OCEANS.filter((o) => o.lo <= 1) : OCEANS);
+      const lat = fail === "latitude" ? rng.int(1, 3) : rng.int(Math.max(7, oc.lo), oc.hi);
+      const hemi = oc.hemi;
       const shearHigh = fail === "wind shear";
-      const ocean = rng.pick(["western Pacific", "Bay of Bengal", "Caribbean Sea", "South Indian Ocean", "Coral Sea", "Arabian Sea", "South China Sea"]);
+      const ocean = oc.name;
       const latText = tier === 3 ? `about ${big(lat * 111)} km from the equator (1° of latitude ≈ 111 km)` : `latitude ${lat}°${hemi}`;
       const shearText = shearHigh
         ? rng.pick(["strong wind shear — winds high up blow much faster than near the surface", "high wind shear: upper winds are fast and from a different direction to surface winds"])

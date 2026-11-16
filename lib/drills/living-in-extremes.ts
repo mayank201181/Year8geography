@@ -50,7 +50,7 @@ const DIFFICULTIES: Fact[] = [
   { lvl: 2, q: ["Name the top layer of soil above permafrost that thaws each summer and refreezes each winter."], a: ["active layer"], why: "The active layer thaws in summer and refreezes in winter, so it heaves and slumps — that is why roads and buildings crack in permafrost regions." },
   { lvl: 1, q: ["Give the process that removes salt from seawater to make drinking water (used in Gulf states and at Tuas in Singapore).", "Name the technology that turns seawater into fresh water — one of Singapore's Four National Taps."], a: ["desalination", "desalinisation", "desalinization"], why: "Desalination removes salt from seawater, usually by reverse osmosis. It works anywhere on the coast but uses a lot of energy, so it is expensive.", traps: [{ a: "condensation", fb: "Condensation is vapour turning to liquid. Removing salt from seawater is desalination." }] },
   { lvl: 1, q: ["Name a fertile green spot in a desert where underground water reaches the surface."], a: ["oasis", "oases"], why: "An oasis forms where groundwater from an aquifer reaches the surface, so palms and crops can grow — desert trade routes linked oases together." },
-  { lvl: 2, q: ["Give the term for a layer of rock underground that stores water, which people in deserts reach with wells."], a: ["aquifer"], why: "An aquifer is porous rock (such as sandstone) that holds groundwater. Many desert towns rely on aquifers — but water pumped out faster than rain refills it is effectively 'fossil water' that runs out." },
+  { lvl: 2, q: ["Give the term for a layer of rock underground that stores water, which people in deserts reach with wells."], a: ["aquifer"], why: "An aquifer is porous rock (such as sandstone) that holds groundwater. Many desert towns rely on aquifers — but some hold 'fossil water' that soaked in thousands of years ago, so water pumped out faster than it is refilled will eventually run out." },
   { lvl: 1, q: ["Name the indigenous people of Arctic Canada, Greenland and Alaska who traditionally built snow houses and hunted from kayaks."], a: ["Inuit", "Inuk"], why: "The Inuit adapted to the Arctic with snow houses (igloos) for winter travel, fur parkas and kayaks. Today most live in modern settlements but keep many traditional skills.", traps: [{ a: "Eskimo", fb: "That is an outdated outsiders' word that many Inuit consider offensive — use the people's own name, Inuit." }] },
   { lvl: 1, q: ["Name the nomadic Arab people of the deserts of the Middle East and North Africa, famous for black goat-hair tents."], a: ["Bedouin", "Bedu", "Beduin"], why: "Bedouin herders traditionally moved with camels and goats between grazing and water. Their goat-hair tents are loosely woven, so hot air escapes, but the fibres swell to keep rain out.", traps: [{ a: "Tuareg", fb: "The Tuareg are Berber people of the central Sahara. The black goat-hair tents of Arabia belong to the Bedouin." }] },
   { lvl: 2, q: ["Name the Berber people of the central Sahara (Mali, Niger, Algeria) whose men traditionally wear an indigo-dyed veil to keep out sand and sun."], a: ["Tuareg", "Touareg", "Kel Tamasheq"], why: "Tuareg men wear the tagelmust — a long indigo cloth wrapped around the head and face against sun, wind and sand. They traditionally ran camel caravans across the Sahara.", traps: [{ a: "Bedouin", fb: "The Bedouin live mainly in Arabia. The indigo-veiled people of the central Sahara are the Tuareg." }] },
@@ -71,7 +71,7 @@ const DIFFICULTIES: Fact[] = [
   { lvl: 3, q: ["In the Atacama Desert, people hang fine mesh nets to collect drinking water from coastal mist. What are these called?"], a: ["fog nets", "fog net", "fog catcher", "fog catchers", "fog collector", "fog collectors", "fog harvesting"], why: "Tiny droplets in the fog hit the mesh, join together and drip into gutters — water from a place that gets almost no rain." },
   { lvl: 3, q: ["Name the insulated, above-ground box that carries water and sewage pipes between buildings in permafrost towns such as Inuvik, Canada."], a: ["utilidor"], why: "Pipes can't be buried in permafrost (the water would freeze and the warm pipes would thaw the ground), so they run above ground in an insulated, heated utilidor." },
   { lvl: 3, q: ["Name the slow process by which a person's body adjusts to lower oxygen at high altitude."], a: ["acclimatisation", "acclimatization", "acclimation"], why: "Over days and weeks the body makes more red blood cells and breathes more deeply, so climbers go up slowly ('climb high, sleep low')." },
-  { lvl: 2, q: ["The Inuit word for a hooded, windproof outer jacket, now used worldwide. What is it?"], a: ["anorak", "parka"], why: "Anorak (and parka) come from Arctic peoples' hooded skin jackets — a design so effective it is still used on every expedition." },
+  { lvl: 2, q: ["Which hooded, windproof outer jacket, now used worldwide, takes its name from a Greenlandic Inuit word?"], a: ["anorak", "anoraq"], why: "Anorak comes from the Greenlandic Inuit word *anoraq* — a hooded skin jacket so effective that the design is still used on every expedition.", traps: [{ a: "parka", fb: "Parka also comes from an Arctic word, but via Russian from the Nenets people of Siberia. The Greenlandic Inuit word is anorak." }] },
   { lvl: 3, q: ["Name the type of treeless, cold biome on top of permafrost, with mosses, lichens and short summers."], a: ["tundra"], why: "The tundra is too cold and windy, with too short a growing season, for trees. Underneath lies permafrost.", traps: [{ a: "permafrost", fb: "Permafrost is the frozen ground. The treeless biome on top is the tundra." }] },
 ];
 
@@ -84,7 +84,7 @@ const TOURISM: Fact[] = [
   { lvl: 2, q: ["Name the national park in Nepal that contains Mount Everest (a UNESCO World Heritage Site)."], a: ["Sagarmatha National Park", "Sagarmatha"], why: "Sagarmatha National Park was made a World Heritage Site in 1979. Trekkers pay an entry fee that helps fund rubbish collection and conservation." },
   { lvl: 2, q: ["Name the small mountain airstrip where most Everest trekkers begin their walk to Base Camp."], a: ["Lukla", "Tenzing-Hillary Airport", "Tenzing Hillary Airport"], why: "Lukla's short, sloping runway at about 2,800 m is the gateway to the Khumbu — flights there are often cancelled by cloud." },
   { lvl: 3, q: ["Name the Sherpa trading town at about 3,400 m where Everest trekkers usually rest to acclimatise."], a: ["Namche Bazaar", "Namche"], why: "Namche Bazaar grew from a trading village into the tourist hub of the Khumbu, full of lodges, bakeries and gear shops." },
-  { lvl: 2, q: ["Name the tough multi-day running race across the Sahara in southern Morocco, which carries runners' kit on their backs."], a: ["Marathon des Sables", "Marathon of the Sands", "MdS"], why: "The Marathon des Sables is a famous 'extreme' tourism event — runners cover roughly 250 km over about a week in desert heat." },
+  { lvl: 2, q: ["Name the tough multi-day running race across the Sahara in southern Morocco, in which runners carry their own kit on their backs."], a: ["Marathon des Sables", "Marathon of the Sands", "MdS"], why: "The Marathon des Sables is a famous 'extreme' tourism event — runners cover roughly 250 km over about a week in desert heat." },
   { lvl: 1, q: ["Name the glowing curtains of light in the night sky that draw winter tourists to the Arctic (northern Norway, Finland, Iceland)."], a: ["northern lights", "aurora borealis", "aurora", "the aurora"], why: "The aurora forms when particles from the Sun hit gases high in the atmosphere near the magnetic poles. Dark Arctic winters are the best time to see it." },
   { lvl: 1, q: ["Name the animal traditionally used to carry loads on Everest treks, well adapted to thin air and cold."], a: ["yak", "yaks", "dzo", "dzopkyo"], why: "Yaks (and yak–cow crosses called dzo) carry trekking gear above about 3,000 m, earning money for local herders." },
   { lvl: 1, q: ["Name the animal that carries tourists and supplies on Sahara desert treks."], a: ["camel", "camels", "dromedary"], why: "Camels can go days without drinking and have wide feet for sand, so they are still used on desert treks — tourism now gives many herders their main income." },
@@ -92,7 +92,7 @@ const TOURISM: Fact[] = [
   { lvl: 2, q: ["Give the term for the wearing away of soil and vegetation along trails by large numbers of walkers."], a: ["footpath erosion", "trail erosion", "path erosion"], why: "In cold places plants grow very slowly, so a trampled trail can take decades to recover." },
   { lvl: 2, q: ["Give the term for the total greenhouse gas emissions caused by an activity — such as flying across the world to visit Antarctica."], a: ["carbon footprint"], why: "Long-haul flights and cruise ships burn a lot of fuel, so extreme tourism has a large carbon footprint even if visitors leave no litter." },
   { lvl: 2, q: ["Since 2014, Nepal has made each Everest expedition pay a refundable sum that is only returned if they bring rubbish back down. What is this called?"], a: ["deposit", "rubbish deposit", "garbage deposit", "litter deposit", "refundable deposit"], why: "The deposit scheme gives teams a money reason to carry rubbish down instead of leaving it on the mountain." },
-  { lvl: 3, q: ["Name the dangerous, shifting area of glacier ice just above Everest Base Camp, crossed on ladders by climbers."], a: ["Khumbu Icefall", "Khumbu ice fall", "icefall"], why: "The Khumbu Icefall moves about a metre a day, so towers of ice (seracs) can collapse without warning — a big risk for Sherpa who cross it many times." },
+  { lvl: 3, q: ["Name the dangerous, shifting area of glacier ice just above Everest Base Camp, crossed on ladders by climbers."], a: ["Khumbu Icefall", "Khumbu ice fall", "icefall"], why: "The Khumbu Icefall can move about a metre a day, so towers of ice (seracs) can collapse without warning — a big risk for Sherpa who cross it many times." },
   { lvl: 3, q: ["Give the term for tourism involving physical challenge and some risk, e.g. trekking, climbing or desert running."], a: ["adventure tourism", "adventure travel", "extreme tourism"], why: "Adventure tourism sells challenge and remoteness — which is why it is drawn to extreme environments." },
   { lvl: 3, q: ["Give the term for jobs that exist only for part of the year, e.g. when trekking or climbing seasons are open."], a: ["seasonal", "seasonal employment", "seasonal jobs", "seasonal work"], why: "Everest has two main trekking seasons (spring and autumn), so guides and lodge workers may have little income in the monsoon and winter." },
   { lvl: 3, q: ["Give the term for 'too many visitors' — when tourist numbers spoil a place for locals and visitors alike."], a: ["overtourism", "over-tourism", "over tourism"], why: "Overtourism shows a place is beyond its carrying capacity — e.g. queues of climbers near Everest's summit on good-weather days." },
@@ -101,6 +101,11 @@ const TOURISM: Fact[] = [
   { lvl: 1, q: ["Name the biggest hot desert in the world, visited by tourists in Morocco, Tunisia and Egypt."], a: ["Sahara", "Sahara Desert"], why: "The Sahara covers about 9 million km² of North Africa. Tourists visit its dunes (ergs) on camel treks and 4×4 tours." },
 ];
 
+const SEE_ACCEPT: Record<"social" | "economic" | "environmental", string[]> = {
+  social: ["social", "society"],
+  economic: ["economic", "economy", "economical"],
+  environmental: ["environmental", "environment"],
+};
 interface Impact { text: string; see: "social" | "economic" | "environmental"; sign: "positive" | "negative"; why: string }
 const IMPACTS: Impact[] = [
   { text: "Sherpa guides on Everest can earn much more in one season than a year of farming would pay.", see: "economic", sign: "positive", why: "It is about money and jobs." },
@@ -121,14 +126,14 @@ const IMPACTS: Impact[] = [
   { text: "Tourist money helps pay for rangers and rubbish clean-ups in Sagarmatha National Park.", see: "environmental", sign: "positive", why: "The benefit is protection of the natural environment." },
   { text: "Visitors learn about Inuit culture from Inuit-run tours, helping keep traditions alive.", see: "social", sign: "positive", why: "It helps culture and community pride." },
   { text: "Hotel and lodge building creates construction jobs in a remote mountain valley.", see: "economic", sign: "positive", why: "It creates jobs and income." },
-  { text: "Rents and food prices rise in tourist towns, so some local families can't afford to live there.", see: "economic", sign: "negative", why: "It is about prices and the cost of living." },
+  { text: "Rents and food prices rise in tourist towns, pushing up the cost of living for local families.", see: "economic", sign: "negative", why: "It is about prices and the cost of living." },
   { text: "Crowds of tourists photograph people in their homes, and some locals feel they have lost privacy.", see: "social", sign: "negative", why: "It affects people's quality of life and culture." },
   { text: "Visitors accidentally bring seeds on their boots that could let non-native plants invade Antarctica.", see: "environmental", sign: "negative", why: "Invasive species are a threat to ecosystems." },
   { text: "Nepal earns valuable foreign currency from climbing permit fees.", see: "economic", sign: "positive", why: "It is national income." },
   { text: "Rescue helicopters for sick trekkers mean better emergency care is now available for villagers too.", see: "social", sign: "positive", why: "It improves people's health and safety." },
   { text: "Penguins near busy landing sites are disturbed when visitors get too close during breeding.", see: "environmental", sign: "negative", why: "It disturbs wildlife." },
   { text: "Local Sahara guides set up a cooperative so that more tour money stays in their villages.", see: "economic", sign: "positive", why: "It reduces leakage and keeps income local." },
-  { text: "New roads built for tourists also let villagers reach markets and hospitals more easily.", see: "social", sign: "positive", why: "It improves people's access to services." },
+  { text: "New roads built for tourists also let villagers reach schools and hospitals more easily.", see: "social", sign: "positive", why: "It improves people's access to education and health care." },
 ];
 
 const ANTARCTICA: Fact[] = [
@@ -153,7 +158,6 @@ const ANTARCTICA: Fact[] = [
   { lvl: 3, q: ["Name the restored British base on the Antarctic Peninsula that is now a museum and post office visited by thousands of tourists."], a: ["Port Lockroy"], why: "Port Lockroy (Base A) is run by the UK Antarctic Heritage Trust; money from its shop helps conserve historic huts." },
   { lvl: 3, q: ["Name the ocean that surrounds Antarctica."], a: ["Southern Ocean", "Antarctic Ocean", "Southern"], why: "The Southern Ocean circles Antarctica; its cold current helps keep the continent isolated and cold." },
   { lvl: 3, q: ["Antarctic tour operators belong to a group that sets rules for its own members rather than a government doing so. Give the term for this kind of regulation."], a: ["self-regulation", "self regulation", "self-regulating", "self regulating", "voluntary"], why: "IAATO is self-regulating — critics ask whether rules written by tour companies are strict enough as numbers grow." },
-  { lvl: 3, q: ["About what percentage of Antarctica is covered by ice? Give a whole number."], a: ["98", "99"], why: "About 98% of Antarctica is covered by ice — so ice-free ground, where most wildlife breeds and tourists land, is very limited." },
   { lvl: 1, q: ["Antarctica counts as a desert even though it is icy. It is a desert because it receives very little … what? (one word)"], a: ["precipitation", "rain", "snow", "rainfall", "snowfall"], why: "Antarctica gets very little precipitation (much of the interior less than 50 mm a year), so it is technically the world's largest desert." },
 ];
 
@@ -286,7 +290,8 @@ export const drills: Drill[] = [
       const trapUp = roundTo(t0 + drop, 1);
       return {
         prompt: `In ${s.name} (${big(s.h)} m above sea level) the temperature is ${num(t0)} °C. Trekkers climb to a camp at ${big(top)} m. Air cools by about 6.5 °C for every 1,000 m you climb. Estimate the temperature at the camp in °C${tier === 1 ? "" : ", to 1 decimal place"}.`,
-        answer: { type: "number", value: t1, display: `${num(t1)} °C`, ...(tier === 1 ? {} : { tolerance: 0.05 }) },
+        // Tiers 2–3: key the exact value with ±0.05 so either rounding of a ...5 (e.g. −2.75 → −2.7 or −2.8) is accepted.
+        answer: tier === 1 ? { type: "number", value: t1, display: `${num(t1)} °C` } : { type: "number", value: clean(t0 - drop), display: `${num(t1)} °C`, tolerance: 0.05 },
         solution: [
           `Height gained = ${big(top)} − ${big(s.h)} = ${big(climb)} m.`,
           `Cooling = {{${climb}/1000}} × 6.5 = ${num(drop)} °C.`,
@@ -338,7 +343,7 @@ export const drills: Drill[] = [
       const others = (["social", "economic", "environmental"] as const).filter((c) => c !== imp.see);
       return {
         prompt: `Tourism impact: *"${imp.text}"*\n\nIs this mainly a **social**, **economic** or **environmental** impact?`,
-        answer: { type: "text", accept: [imp.see], display: imp.see },
+        answer: { type: "text", accept: SEE_ACCEPT[imp.see], display: imp.see },
         solution: [`**${imp.see}** (${imp.sign}).`, imp.why],
         hint: "SEE: Social = people's lives, health, culture · Economic = money and jobs · Environmental = land, water, air, wildlife.",
         traps: others.map((o) => ({
@@ -510,7 +515,7 @@ export const drills: Drill[] = [
         return {
           prompt: `A polar sledging team of ${people} people will be out for ${days} days. Pulling sledges in extreme cold, each person needs about ${big(kcal)} kcal of food energy a day. How many kcal of food must the team carry in total?`,
           answer: { type: "number", value: total, display: `${big(total)} kcal` },
-          solution: [`Per person: ${big(kcal)} × ${days} = ${big(kcal * days)} kcal.`, `Team: ${big(kcal * days)} × ${people} = ${big(total)} kcal.`, "That is roughly double a normal adult's needs: the body burns energy to stay warm as well as to haul the sledge."],
+          solution: [`Per person: ${big(kcal)} × ${days} = ${big(kcal * days)} kcal.`, `Team: ${big(kcal * days)} × ${people} = ${big(total)} kcal.`, "That is about two to three times a normal adult's needs: the body burns energy to stay warm as well as to haul the sledge."],
           hint: "kcal per person per day × days × people.",
           traps: kcal * days !== total ? [{ spec: { type: "number", value: kcal * days }, feedback: "That's for one person — multiply by the number of people too." }] : undefined,
         };

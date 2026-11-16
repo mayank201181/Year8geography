@@ -52,12 +52,12 @@ const KEY_TERMS: Fact[] = [
   { tier: 1, q: ["Give the term for the way people are spread out across an area.", "Describing where people live on a map — crowded in some places, empty in others — describes the population ____."], a: ["population distribution", "distribution"], why: "distribution is *where* people are; density is *how many* per km².", trap: { accept: ["population density", "density"], feedback: "Density is a number (people per km²). The pattern of where people live is distribution." } },
   { tier: 1, q: ["Give the term for the average number of people per square kilometre.", "What is the name for population ÷ area, measured in people per km²?"], a: ["population density", "density"], why: "density = population ÷ area, in people per km².", trap: { accept: ["population distribution", "distribution"], feedback: "Distribution is the spread/pattern. People per km² is density." } },
   { tier: 1, q: ["Give the term for the make-up of a population by age and sex.", "A population pyramid shows the population ____ (its age and sex make-up)."], a: ["population structure", "structure", "age-sex structure", "age structure"], why: "population structure is the number or % of males and females in each age group." },
-  { tier: 1, q: ["Give the term for asking questions to only some of the population rather than everyone.", "Instead of a full census, a government might run a ____ of 1 in every 20 households."], a: ["survey", "sample survey"], why: "a survey questions a sample, so it is quicker and cheaper than a census." },
+  { tier: 1, q: ["Give the term for asking questions to only some of the population rather than everyone.", "Instead of a full census, a government might run a ____ of 1 in every 20 households."], a: ["survey", "sample survey", "sampling"], why: "a survey questions a sample, so it is quicker and cheaper than a census." },
   { tier: 2, q: ["Give the term for the average number of children a woman has in her lifetime.", "Singapore's resident figure for this was about 0.97 in 2023 — the average number of children per woman. Name the measure."], a: ["total fertility rate", "fertility rate", "tfr"], why: "TFR is children per woman; about 2.1 is replacement level.", trap: { accept: ["birth rate", "crude birth rate"], feedback: "Birth rate is births per 1,000 *people*. Children per *woman* is the total fertility rate." } },
   { tier: 2, q: ["Give the term for the number of babies who die before their first birthday, per 1,000 live births.", "Deaths of babies under one year old per 1,000 live births is called the ____."], a: ["infant mortality rate", "infant mortality", "imr"], why: "infant mortality rate is one of the best single measures of a country's healthcare.", trap: { accept: ["death rate", "crude death rate"], feedback: "Death rate counts everyone. Babies under 1 per 1,000 live births is infant mortality." } },
   { tier: 2, q: ["Give the term for birth rate minus death rate.", "If births outnumber deaths, the population grows by ____ (ignoring migration)."], a: ["natural increase", "rate of natural increase", "natural growth", "natural change"], why: "natural increase = birth rate − death rate; migration is counted separately." },
-  { tier: 2, q: ["Give the term for people moving INTO a country to live.", "Workers arriving in Singapore from other countries to live and work are examples of ____."], a: ["immigration"], why: "*im*migration = moving *in*.", trap: { accept: ["emigration"], feedback: "Emigration is *exit*-ing a country. Moving in is immigration." } },
-  { tier: 2, q: ["Give the term for people moving OUT of a country to live elsewhere.", "A family leaving their home country to settle abroad is an example of ____."], a: ["emigration"], why: "*e*migration = *exit*ing a country.", trap: { accept: ["immigration"], feedback: "Immigration is moving *in*. Leaving a country is emigration." } },
+  { tier: 2, q: ["Give the term for people moving INTO a country to live.", "Workers arriving in Singapore from other countries to live and work are examples of ____."], a: ["immigration", "immigrant"], why: "*im*migration = moving *in*.", trap: { accept: ["emigration", "emigrant"], feedback: "Emigration is *exit*-ing a country. Moving in is immigration." } },
+  { tier: 2, q: ["Give the term for people moving OUT of a country to live elsewhere.", "A family leaving their home country to settle abroad is an example of ____."], a: ["emigration", "emigrant"], why: "*e*migration = *exit*ing a country.", trap: { accept: ["immigration", "immigrant"], feedback: "Immigration is moving *in*. Leaving a country is emigration." } },
   { tier: 2, q: ["Give the term for immigration minus emigration.", "The difference between the number of people arriving and the number leaving a country is called ____."], a: ["net migration"], why: "net migration = immigrants − emigrants; it can be positive or negative." },
   { tier: 2, q: ["Every how many years does Singapore hold a full population census? Give a number.", "Singapore's censuses were held in 2000, 2010 and 2020. How many years apart are they?"], a: ["10", "ten", "10 years", "every 10 years"], why: "Singapore, like the UK, holds a census every 10 years (most recently 2020)." },
   { tier: 2, q: ["In which year was Singapore's most recent full census held?", "Give the year of Singapore's latest census (the one before the next due in 2030)."], a: ["2020"], why: "Census 2020 was Singapore's most recent census; they are held every 10 years." },
@@ -120,14 +120,14 @@ const PYRAMID_TERMS: Fact[] = [
   { tier: 1, q: ["Steeply sloping sides that narrow quickly up a pyramid show a high ____ rate.", "Which rate makes each bar much shorter than the one below it, giving a 'steep triangle' shape: birth rate or death rate?"], a: ["death", "death rate", "high death rate"], why: "if many people die at every age, fewer survive to fill the bars higher up." },
   { tier: 2, q: ["Singapore's resident TFR is about 1.0. Is that above or below replacement level?", "Is a TFR of 0.97 (Singapore, 2023) above or below the replacement level of 2.1?"], a: ["below", "below replacement", "lower"], why: "0.97 is less than half of 2.1, so each generation of residents is smaller than the last." },
   { tier: 2, q: ["What do the bars on the horizontal axis of a pyramid usually measure?", "The length of each bar on a pyramid shows the ____ of people in that age group (as a number or %)."], a: ["percentage", "percent", "%", "proportion", "number", "population", "share"], why: "bars show % of the total population (or numbers in thousands/millions)." },
-  { tier: 2, q: ["Give the term for a large group of young adults (about 20–35) on a pyramid made bigger by people arriving from other countries.", "A bulge of working-age adults caused by people moving in for jobs is caused by ____."], a: ["immigration", "in-migration", "in migration", "immigrants"], why: "migrant workers are mostly young adults, so they widen the 20–40 bars.", trap: { accept: ["emigration"], feedback: "Emigration (leaving) would make a notch. A bulge from arrivals is immigration." } },
+  { tier: 2, q: ["A pyramid has a large bulge of young adults (about 20–35) because people have arrived from other countries. Name the process that caused it.", "A bulge of working-age adults caused by people moving in for jobs is caused by ____."], a: ["immigration", "in-migration", "in migration", "immigrants"], why: "migrant workers are mostly young adults, so they widen the 20–40 bars.", trap: { accept: ["emigration"], feedback: "Emigration (leaving) would make a notch. A bulge from arrivals is immigration." } },
   { tier: 2, q: ["A pyramid has many more males than females aged 20–40. Gulf states such as Qatar show this. What is the most likely cause?", "What explains a big male bulge aged 20–40 in a rich oil state such as Qatar?"], a: ["male migrant workers", "migrant workers", "immigration", "male immigration", "labour migration", "migrant labour", "male migrants", "migrants"], why: "large numbers of mostly male workers move there for construction and oil jobs." },
   { tier: 2, q: ["A rectangular, column-shaped pyramid (similar bar lengths at most ages) shows low birth rates and low ____ rates.", "Which rate must be low for most people to survive into old age, giving straight sides?"], a: ["death", "death rate", "low death rate", "mortality"], why: "low death rates mean most people survive to old age, so bars stay similar." },
   { tier: 2, q: ["Which falls first as a country develops, the birth rate or the death rate?", "As clean water and vaccinations arrive, which rate drops first, making the population grow fast?"], a: ["death rate", "death", "the death rate"], why: "healthcare cuts death rates quickly; birth rates fall later as attitudes and economies change." },
   { tier: 2, q: ["A pyramid narrows sharply at age 0–4 compared with 5–9 because of a government's strict limit on births. Name the Chinese policy (1980–2015).", "Which Chinese policy, from 1980 to 2015, made the base of China's pyramid narrow?"], a: ["one-child policy", "one child policy", "ocp", "one-child"], why: "the One-Child Policy (1980–2015) cut births, narrowing the base of China's pyramid." },
   { tier: 3, q: ["A notch in the 70–74 cohort of a pyramid drawn in 1990 for a European country matches people born 1916–1920. Name the event that cut births then.", "Which global conflict (1914–1918) explains a notch of low births for European cohorts born 1915–1919?"], a: ["First World War", "World War One", "World War 1", "WW1", "WWI", "Great War", "the First World War", "World War I"], why: "with millions of men away fighting or killed, far fewer babies were born." },
   { tier: 3, q: ["China's pyramid shows a notch for people born about 1959–1961. Name the event that caused it.", "Which event in China, about 1959–1961, led to a famine that left a notch on today's pyramid?"], a: ["Great Leap Forward", "Great Chinese Famine", "the Great Leap Forward", "great famine", "famine"], why: "the famine during the Great Leap Forward caused many deaths and far fewer births." },
-  { tier: 3, q: ["China's pyramid has more boys than girls in young cohorts. Name the term for a population with unequal numbers of males and females.", "Give the term (two words) for an unequal ratio of males to females, as seen in China's younger cohorts."], a: ["gender imbalance", "sex imbalance", "skewed sex ratio", "sex ratio imbalance", "gender ratio imbalance", "sex ratio", "imbalance"], why: "preference for sons under the One-Child Policy led to more boys than girls." },
+  { tier: 3, q: ["China's pyramid has more boys than girls in young cohorts. Name the term for a population with unequal numbers of males and females.", "Give the term (two words) for an unequal ratio of males to females, as seen in China's younger cohorts."], a: ["gender imbalance", "sex imbalance", "skewed sex ratio", "sex ratio imbalance", "gender ratio imbalance", "unbalanced sex ratio", "imbalance"], why: "preference for sons under the One-Child Policy led to more boys than girls.", trap: { accept: ["sex ratio", "gender ratio"], feedback: "The sex ratio is the measure itself (males per 100 females). When it is unequal, the term is a gender (sex) imbalance." } },
   { tier: 3, q: ["Name the model that shows how birth rates and death rates change in stages as a country develops.", "Give the name of the model (often shortened to DTM) linking a country's development to its birth and death rates."], a: ["demographic transition model", "DTM", "demographic transition"], why: "the demographic transition model (DTM) shows births and deaths falling in stages as a country develops." },
   { tier: 3, q: ["Give the term for the number of males for every 100 females in a population.", "China's census reported about 105 males per 100 females in 2020. What is this measure called?"], a: ["sex ratio", "gender ratio", "male-female ratio", "male to female ratio"], why: "the sex ratio compares males with females; at birth it is naturally about 105 boys per 100 girls." },
   { tier: 3, q: ["Give the term for a pyramid whose youngest bars are SHORTER than the bars above them, giving a 'beehive' or 'urn' outline.", "A pyramid that is narrower at the base than in the middle is called a ____ (or contracting) pyramid."], a: ["constrictive", "constrictive pyramid", "contracting", "contracting pyramid", "declining", "declining pyramid", "urn", "beehive"], why: "a constrictive pyramid shows falling births — the population may start to shrink." },
@@ -192,7 +192,7 @@ function makePyramid(rng: Rng, shape: keyof typeof SHAPES): { m: number[]; f: nu
 
 function pyramidSvg(m: number[], f: number[], title: string): string {
   const max = Math.max(...m, ...f);
-  const scaleMax = max <= 10 ? 10 : max <= 14 ? 14 : 18;
+  const scaleMax = max <= 10 ? 10 : max <= 14 ? 14 : max <= 18 ? 18 : 22;
   const unit = 160 / scaleMax;
   const cx = 230, gap = 24, top = 34, h = 28;
   let s = '<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Population pyramid of ' + title + ' in 10-year age groups, males on the left and females on the right, bars labelled with percentages of the total population">';
@@ -256,7 +256,15 @@ export const drills: Drill[] = [
         : rng.pick([13, 14, 15, 16, 63, 64, 65, 66, 0, 1, 99]);
       const g = groupOf(age);
       const name = rng.pick(NAMES);
-      const rel = rng.pick(age <= 14 ? REL_YOUNG : age <= 59 ? REL_WORK : age <= 64 ? [...REL_WORK.slice(0, 2), "grandmother", "grandfather"] : REL_OLD);
+      // Relatives must be believable for the age (no 15-year-old "father", no 13-year-old "baby sister").
+      const rel = rng.pick(
+        age <= 3 ? ["baby sister", "baby brother", "cousin", "neighbour's child"]
+          : age <= 14 ? REL_YOUNG.filter((r) => r !== "baby sister")
+            : age <= 24 ? ["older brother", "older sister", "older cousin", "neighbour"]
+              : age <= 59 ? REL_WORK
+                : age <= 64 ? [...REL_WORK.slice(0, 2), "grandmother", "grandfather"]
+                  : REL_OLD,
+      );
       const form = rng.int(0, 2);
       const ageText = age === 0 ? "under 1 year old" : age === 1 ? "1 year old" : `${age} years old`;
       const prompt = form === 0
@@ -446,7 +454,7 @@ export const drills: Drill[] = [
         return {
           prompt: `You want a systematic sample of ${sample} from ${big(pop)} ${where}. You choose every *n*th one. What is *n*?`,
           answer: { type: "number", value: step },
-          solution: [`Interval = population ÷ sample size = ${big(pop)} ÷ ${sample} = **${step}**.`, `Pick a random start between 1 and ${step}, then take every ${step}th.`],
+          solution: [`Interval = population ÷ sample size = ${big(pop)} ÷ ${sample} = **${step}**.`, `Pick a random start between 1 and ${step}, then take every ${ordinal(step)} one.`],
           hint: "How many groups of the sample size fit into the population?",
           traps: [{ spec: { type: "number", value: clean(sample / pop) === step ? step + 1000 : roundTo(sample / pop, 3) }, feedback: "You divided the wrong way round: population ÷ sample size." }],
         };
@@ -494,6 +502,7 @@ export const drills: Drill[] = [
       } else if (tier === 2) {
         a = rng.int(120, 900) * 100;
         b = a + rng.nonZero(-40, 80) * rng.int(5, 30) * 10;
+        if (b < a / 2) b = a + (a - b); // keep falls realistic (never down to zero)
       } else {
         a = rng.int(1500, 9000) * 100;
         b = Math.round(a * (rng.int(60, 220) / 100) / 100) * 100;
@@ -506,7 +515,7 @@ export const drills: Drill[] = [
       return {
         prompt: `In ${area}, the 2010 census counted ${big(a)} ${g}. The 2020 census counted ${big(b)}. Calculate the percentage change${tier === 1 ? "" : ", to 1 decimal place"}. Use a minus sign if it fell.`,
         answer: { type: "number", value: ans, tolerance: tier === 1 ? undefined : 0.05 },
-        solution: [`Change = ${big(b)} − ${big(a)} = ${big(change)}.`, `% change = {{change/original}} × 100 = {{${change}/${a}}} × 100`, `= **${num(ans)}%**${change < 0 ? " (a fall)" : " (a rise)"}.`],
+        solution: [`Change = ${big(b)} − ${big(a)} = ${big(change)}.`, `% change = {{change/original}} × 100 = {{${change}/${a}}} × 100`, `= **${tier === 1 ? num(ans) : ans.toFixed(1).replace("-", "−")}%**${change < 0 ? " (a fall)" : " (a rise)"}.`],
         hint: "% change = (new − original) ÷ original × 100. The original is the 2010 figure.",
         traps: Math.abs(wrongBase - ans) > 0.05 ? [{ spec: { type: "number", value: wrongBase }, feedback: "You divided by the 2020 figure. Always divide by the ORIGINAL (2010) value." }] : undefined,
       };
@@ -608,7 +617,7 @@ export const drills: Drill[] = [
         solution: [
           `Working age = 100 − ${y} − ${o} = ${w}%.`,
           `Dependents = ${y} + ${o} = ${y + o}%.`,
-          `Ratio = {{${y + o}/${w}}} × 100 = ${num(roundTo(exact, 2))} ≈ **${num(ans)}**.`,
+          `Ratio = {{${y + o}/${w}}} × 100 ${Number.isInteger(exact) ? "=" : `= ${num(roundTo(exact, 2))} ≈`} **${num(ans)}**.`,
           y > o ? "Mostly young dependents — a youthful population needing schools and jobs." : "Mostly elderly dependents — an ageing population needing pensions and healthcare.",
         ],
         hint: "First find the working-age percentage: everything that is not 0–14 or 65+.",
@@ -617,6 +626,12 @@ export const drills: Drill[] = [
     },
   },
 ];
+
+function ordinal(n: number): string {
+  const t = n % 100;
+  if (t >= 11 && t <= 13) return `${n}th`;
+  return `${n}${n % 10 === 1 ? "st" : n % 10 === 2 ? "nd" : n % 10 === 3 ? "rd" : "th"}`;
+}
 
 function gcdSafe(a: number, b: number): number {
   while (b) [a, b] = [b, a % b];

@@ -74,7 +74,7 @@ const TYPE_BANK: { d: string; t: AType; lvl: 1 | 2 | 3 }[] = [
   { d: "Emperor penguins take turns moving from the cold edge of a huddle to the warmer middle.", t: "behavioural", lvl: 2 },
   { d: "Caribou migrate south to sheltered forests when winter comes.", t: "behavioural", lvl: 1 },
   { d: "A desert lizard moves between sun and shade to control its body temperature.", t: "behavioural", lvl: 2 },
-  { d: "An Arctic ground squirrel hibernates in a burrow through the winter.", t: "behavioural", lvl: 3 },
+  { d: "An Arctic ground squirrel digs a burrow below the frozen surface and stays in it all winter.", t: "behavioural", lvl: 3 },
   { d: "Mountaineers follow the rule \"climb high, sleep low\".", t: "behavioural", lvl: 3 },
   { d: "A kangaroo rat's kidneys produce very concentrated urine, saving water.", t: "physiological", lvl: 2 },
   { d: "A camel can let its body temperature rise by several degrees during the day before it starts to sweat.", t: "physiological", lvl: 2 },
@@ -95,7 +95,8 @@ const CH_ACCEPT: Record<Challenge, string[]> = {
   drought: ["drought", "lack of water", "water shortage", "dryness", "no water", "shortage of water", "dry"],
   "low oxygen": ["low oxygen", "thin air", "lack of oxygen", "less oxygen", "hypoxia", "oxygen"],
 };
-const CH_BANK: { d: string; c: Challenge; lvl: 1 | 2 | 3; why: string }[] = [
+// `also`: a second challenge the same feature genuinely helps with — accepted too, so the prompt stays fair.
+const CH_BANK: { d: string; c: Challenge; also?: Challenge; lvl: 1 | 2 | 3; why: string }[] = [
   { d: "a fennec fox's huge ears, full of blood vessels", c: "heat", lvl: 1, why: "Blood flowing through the thin ears gives off heat to the air, cooling the fox." },
   { d: "a polar bear's thick layer of blubber", c: "cold", lvl: 1, why: "Fat is a good insulator, so body heat stays in." },
   { d: "a cactus's thick, waxy skin", c: "drought", lvl: 1, why: "The wax seals the surface so less water escapes by transpiration." },
@@ -105,18 +106,18 @@ const CH_BANK: { d: string; c: Challenge; lvl: 1 | 2 | 3; why: string }[] = [
   { d: "emperor penguins huddling together", c: "cold", lvl: 1, why: "Each penguin has less body surface exposed to the wind, so it loses less heat." },
   { d: "a kangaroo rat's very concentrated urine", c: "drought", lvl: 2, why: "Its kidneys remove waste using very little water, so water is saved." },
   { d: "a climber's body making extra red blood cells", c: "low oxygen", lvl: 2, why: "More red blood cells can carry more oxygen from each thin breath." },
-  { d: "a fennec fox being nocturnal", c: "heat", lvl: 2, why: "Hunting at night avoids the hottest part of the day." },
+  { d: "a fennec fox being nocturnal", c: "heat", also: "drought", lvl: 2, why: "Hunting at night avoids the hottest part of the day (and so it also loses less water)." },
   { d: "the dense, woolly undercoat of an Arctic fox", c: "cold", lvl: 1, why: "Fur traps a layer of still air, which insulates the body." },
   { d: "the wide, shallow roots of a cactus", c: "drought", lvl: 2, why: "They soak up rain quickly from a large area before it evaporates or drains away." },
   { d: "a cactus's leaves being reduced to spines", c: "drought", lvl: 2, why: "Spines have a tiny surface area, so far less water is lost by transpiration than from broad leaves." },
   { d: "a camel storing fat in its hump instead of all over its body", c: "heat", lvl: 3, why: "With fat concentrated in one place, the rest of the body is not insulated, so heat can escape easily." },
-  { d: "a camel letting its body temperature rise during the day", c: "drought", lvl: 3, why: "It starts sweating later, so it saves water that would otherwise be lost as sweat." },
+  { d: "a camel letting its body temperature rise during the day", c: "drought", also: "heat", lvl: 3, why: "It copes with the daytime heat by starting to sweat later — which mainly saves water that would otherwise be lost as sweat." },
   { d: "a seal's blubber", c: "cold", lvl: 1, why: "Blubber insulates the seal in near-freezing water." },
   { d: "Andean peoples' larger chests and lung capacity", c: "low oxygen", lvl: 2, why: "Bigger lungs take in more air, and so more oxygen, with each breath." },
-  { d: "a snow leopard's enlarged nasal cavity", c: "cold", lvl: 3, why: "A large nasal cavity warms the very cold air before it reaches the lungs." },
+  { d: "a snow leopard's enlarged nasal cavity", c: "cold", also: "low oxygen", lvl: 3, why: "A large nasal cavity warms the very cold air before it reaches the lungs (and helps it breathe in plenty of thin mountain air)." },
   { d: "desert ephemeral seeds staying dormant until rain falls", c: "drought", lvl: 2, why: "The seeds wait out dry years and only grow when there is water to complete the life cycle." },
-  { d: "a polar bear's black skin under its fur", c: "cold", lvl: 2, why: "Dark skin absorbs heat from the sun." },
-  { d: "a kangaroo rat staying in a cool burrow during the day", c: "heat", lvl: 2, why: "Underground it is much cooler than the scorching surface." },
+  { d: "a polar bear's black skin under its fur", c: "cold", lvl: 2, why: "Dark skin is thought to help absorb heat; together with fur and blubber it keeps the bear warm." },
+  { d: "a kangaroo rat staying in a cool burrow during the day", c: "heat", also: "drought", lvl: 2, why: "Underground it is much cooler (and more humid) than the scorching surface, so it also loses less water." },
   { d: "a yak's blood picking up oxygen very efficiently", c: "low oxygen", lvl: 2, why: "Its blood loads oxygen even when there is little in each breath." },
   { d: "tundra plants growing low to the ground", c: "cold", lvl: 2, why: "Close to the ground they shelter from freezing winds and are insulated by snow in winter." },
   { d: "a desert lizard standing high on its legs on hot sand", c: "heat", lvl: 3, why: "Lifting its body off the sand reduces the heat it picks up from the hot ground." },
@@ -145,7 +146,7 @@ const DESERT: Fact[] = [
   { q: ["Name the giant cactus of the Sonoran Desert (USA and Mexico) whose pleated stem swells after rain."], a: ["saguaro", "saguaro cactus", "saguaros"], lvl: 3, why: "The saguaro's pleats open out like an accordion to hold water after rain." },
   { q: ["What name is given to plants adapted to survive in very dry conditions?"], a: ["xerophytes", "xerophyte", "xerophytic plants"], lvl: 3, why: "Xerophytes (from Greek *xeros*, dry) include cacti and other drought-tolerant plants." },
   { q: ["A kangaroo rat's kidneys save water by making very concentrated what?"], a: ["urine", "wee", "pee"], lvl: 2, why: "Very concentrated urine gets rid of waste using as little water as possible." },
-  { q: ["What part of a camel is wide and padded so it does not sink into soft sand?"], a: ["feet", "foot", "hooves", "pads", "toes"], lvl: 1, why: "Wide feet spread the camel's weight over a bigger area, like snowshoes on snow." },
+  { q: ["What part of a camel is wide and padded so it does not sink into soft sand?"], a: ["feet", "foot", "pads", "foot pads", "toes"], lvl: 1, why: "Wide feet spread the camel's weight over a bigger area, like snowshoes on snow." },
   { q: ["Fennec foxes have huge ears full of blood vessels. What do these ears help them get rid of?"], a: ["heat", "body heat", "excess heat"], lvl: 1, why: "Warm blood in the thin ears loses heat to the air." },
   { q: ["Cactus roots often spread out wide just below the surface. What word describes roots like these?"], a: ["shallow", "shallow roots", "shallow root", "surface roots"], lvl: 2, why: "Shallow, wide roots soak up rain quickly before it evaporates." },
   { q: ["A cactus has no proper leaves. Which process for making food does its green stem carry out instead?"], a: ["photosynthesis", "photosynthesising"], lvl: 2, why: "The green stem contains chlorophyll, so it takes over the job of photosynthesis." },
@@ -165,7 +166,7 @@ const POLAR: Fact[] = [
   { q: ["Name the cold, treeless biome around the Arctic Ocean, with frozen ground beneath."], a: ["tundra", "arctic tundra"], lvl: 1, why: "The tundra is too cold and windy, with too short a summer, for trees to grow." },
   { q: ["What is the name for ground that stays frozen for at least two years in a row?"], a: ["permafrost"], lvl: 1, why: "Permafrost stops roots growing deep and stops water draining away." },
   { q: ["An Arctic fox's ears are small to reduce the loss of what?"], a: ["heat", "body heat"], lvl: 1, why: "Small ears have less surface area, so less heat escapes." },
-  { q: ["What colour is an Arctic fox's coat in winter?"], a: ["white"], lvl: 1, why: "A white winter coat camouflages the fox against snow." },
+  { q: ["What colour is an Arctic fox's coat usually in winter?"], a: ["white"], lvl: 1, why: "A white winter coat camouflages the fox against snow." },
   { q: ["What colour does an Arctic fox's coat usually turn in summer?"], a: ["brown", "grey-brown", "greybrown", "brownish", "grey brown", "brown-grey"], lvl: 2, why: "When the snow melts, a brown coat matches the rocks and plants of the tundra." },
   { q: ["An Arctic fox's coat changes colour with the seasons so it can hide from prey. What is this kind of disguise called?"], a: ["camouflage", "camouflaged"], lvl: 1, why: "Camouflage helps the fox sneak up on prey such as lemmings." },
   { q: ["Where does a male emperor penguin hold the egg to keep it off the ice?"], a: ["on his feet", "feet", "his feet", "on its feet", "on feet", "on top of his feet", "foot"], lvl: 2, why: "The egg rests on his feet, covered by a warm fold of skin, through the winter." },
@@ -179,7 +180,7 @@ const POLAR: Fact[] = [
   { q: ["Name the seabird that flies from the Arctic to the Antarctic and back every year."], a: ["arctic tern", "arctic terns"], lvl: 3, why: "The Arctic tern has the longest yearly migration of any animal, enjoying two polar summers." },
   { q: ["What is a polar bear's main prey?"], a: ["seals", "seal", "ringed seal", "ringed seals"], lvl: 2, why: "Polar bears hunt seals from the sea ice, often at breathing holes." },
   { q: ["Small animals lose heat faster than large animals of the same shape. Which ratio explains this?"], a: ["surface area to volume ratio", "surface area to volume", "sa:v", "sa:v ratio", "surface area:volume", "surface area : volume ratio", "sa to v", "sa/v"], lvl: 3, why: "A small body has more surface area for each unit of volume, so heat escapes faster." },
-  { q: ["In which polar region do polar bears live in the wild?"], a: ["arctic", "the arctic", "north pole"], lvl: 1, why: "Polar bears live only in the Arctic; penguins live in the Southern Hemisphere.", traps: [{ a: ["antarctic", "antarctica"], fb: "No — polar bears are only found in the Arctic (far north)." }] },
+  { q: ["In which polar region do polar bears live in the wild?"], a: ["arctic", "the arctic", "north pole"], lvl: 1, why: "Polar bears live only in the Arctic; almost all penguins live in the Southern Hemisphere.", traps: [{ a: ["antarctic", "antarctica"], fb: "No — polar bears are only found in the Arctic (far north)." }] },
   { q: ["On which continent do emperor penguins breed?"], a: ["antarctica", "antarctic"], lvl: 1, why: "Emperor penguins breed only on and around Antarctica.", traps: [{ a: ["arctic"], fb: "No wild penguins live in the Arctic — emperors breed in Antarctica." }] },
   { q: ["In a penguin's legs, warm blood heading to the feet heats cold blood coming back. What is this system called?"], a: ["counter-current heat exchange", "countercurrent heat exchange", "counter current heat exchange", "counter-current", "countercurrent", "counter current", "countercurrent exchange", "counter-current exchange"], lvl: 3, why: "Heat passes from outgoing to returning blood, so very little is lost through the feet." },
   { q: ["An Arctic fox curls up and wraps which bushy body part around its face to keep warm?"], a: ["tail", "its tail"], lvl: 2, why: "The bushy tail acts like a blanket over the nose and feet." },
@@ -220,8 +221,8 @@ const TRUEFALSE: { s: string; v: boolean; lvl: 1 | 2 | 3; why: string }[] = [
   { s: "A camel's hump stores fat that can be used for energy.", v: true, lvl: 1, why: "When food is short, the fat is broken down for energy." },
   { s: "All deserts are hot.", v: false, lvl: 1, why: "A desert is defined by low rainfall, not heat — Antarctica and the Gobi are cold deserts." },
   { s: "Polar bears live in Antarctica.", v: false, lvl: 1, why: "Polar bears live only in the Arctic." },
-  { s: "Wild penguins live in the Arctic.", v: false, lvl: 1, why: "Wild penguins live in the Southern Hemisphere, not the Arctic." },
-  { s: "Polar bears have black skin under their fur.", v: true, lvl: 2, why: "The dark skin absorbs heat from the sun." },
+  { s: "Wild penguins live in the Arctic.", v: false, lvl: 1, why: "Almost all wild penguins live in the Southern Hemisphere (Galápagos penguins only just cross the equator) — none live in the Arctic." },
+  { s: "Polar bears have black skin under their fur.", v: true, lvl: 2, why: "Under the pale fur the skin is black, which is thought to help absorb heat." },
   { s: "Cactus spines are modified leaves.", v: true, lvl: 2, why: "Over many generations, leaves became spines that lose far less water." },
   { s: "An animal can develop a new adaptation during its own lifetime because it needs it.", v: false, lvl: 2, why: "Adaptations evolve over many generations by natural selection — individuals cannot choose them." },
   { s: "Adaptations develop over many generations through natural selection.", v: true, lvl: 2, why: "Individuals with helpful features survive and breed more, passing those features on." },
@@ -315,12 +316,13 @@ export const drills: Drill[] = [
     generate(rng, tier) {
       const f = tierPick(CH_BANK, rng, tier);
       const traps: Trap[] = [];
-      if (f.c === "drought") traps.push({ spec: { type: "text", accept: ["heat"] }, feedback: "Deserts are hot too — but this feature is about saving or finding *water*." });
-      if (f.c === "heat") traps.push({ spec: { type: "text", accept: ["drought"] }, feedback: "This feature is about getting rid of, or avoiding, *heat* rather than saving water." });
+      if (f.c === "drought" && f.also !== "heat") traps.push({ spec: { type: "text", accept: ["heat"] }, feedback: "Deserts are hot too — but this feature is about saving or finding *water*." });
+      if (f.c === "heat" && f.also !== "drought") traps.push({ spec: { type: "text", accept: ["drought"] }, feedback: "This feature is about getting rid of, or avoiding, *heat* rather than saving water." });
+      const accept = f.also ? [...CH_ACCEPT[f.c], ...CH_ACCEPT[f.also]] : CH_ACCEPT[f.c];
       return {
         prompt: `Which challenge does this feature mainly help with: **heat**, **cold**, **drought** or **low oxygen**?\n\n> ${cap(f.d)}`,
-        answer: { type: "text", accept: CH_ACCEPT[f.c], display: cap(f.c) },
-        solution: [`**${cap(f.c)}.**`, f.why],
+        answer: { type: "text", accept, display: cap(f.c) },
+        solution: [`**${cap(f.c)}.**${f.also ? ` (${cap(f.also)} is also accepted — this feature helps with both.)` : ""}`, f.why],
         hint: "Use cause → process → effect: what does the feature actually do to heat, water or oxygen?",
         traps: traps.length ? traps : undefined,
       };

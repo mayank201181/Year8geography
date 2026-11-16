@@ -6,6 +6,9 @@ import { num, big, roundTo, clean } from "./helpers.ts";
 
 const T = "population-problems";
 
+/** Show a value rounded to 1 d.p. with its trailing zero (73 → "73.0"), using a real minus sign. */
+const dp1 = (v: number): string => v.toFixed(1).replace("-", "−");
+
 // ---------------------------------------------------------------------------
 // Shared helpers for fact-bank drills
 // ---------------------------------------------------------------------------
@@ -204,7 +207,7 @@ const OVER_UNDER_TERMS: TermEntry[] = [
     accept: ["famine"],
     clues: [
       "a widespread, severe shortage of food in an area, causing hunger and deaths",
-      "one of the 'checks' Malthus predicted when population outgrew food supply",
+      "the food-shortage 'check' that Malthus predicted when population outgrew food supply",
     ],
     level: 2,
     why: "Famine is a classic symptom of a population exceeding the food resources available.",
@@ -351,7 +354,7 @@ const AGE_SCENES: ClassEntry[] = [
   { text: "The population pyramid is narrow at the base and wide near the top.", cat: "ageing", level: 1, why: "Few children and many older people — the shape of an ageing population." },
   { text: "Robots are being developed to help care for the elderly, as in Japan.", cat: "ageing", level: 2, why: "Japan has one of the oldest populations in the world and too few carers." },
   { text: "The median age is about 15, as in Niger.", cat: "youthful", level: 2, why: "Half the people are under 15 — a very young population." },
-  { text: "Over-65s make up about 29% of the population, as in Japan.", cat: "ageing", level: 2, why: "Nearly a third of people over 65 is a very old population." },
+  { text: "Over-65s make up about 29% of the population, as in Japan.", cat: "ageing", level: 2, why: "Nearly three in ten people aged 65+ is a very old population." },
   { text: "Rural villages are emptying of young people and many houses stand abandoned.", cat: "ageing", level: 3, why: "When young people leave, the population left behind ages (as in rural Japan)." },
   { text: "Retired people volunteer, look after grandchildren and spend savings — the 'grey pound' or silver economy.", cat: "ageing", level: 3, why: "An opportunity of an ageing population: older people's spending and unpaid work." },
   { text: "High youth unemployment could lead to social unrest and young adults emigrating to find work.", cat: "youthful", level: 3, why: "A big young generation without jobs is a risk of a youthful population." },
@@ -561,7 +564,7 @@ const CHINA_FACTS: ChinaFact[] = [
   { prompt: ["In which year did India overtake China as the world's most populous country, according to UN estimates?", "According to the UN, India's population passed China's in which year?"], answer: { kind: "year", value: 2023 }, level: 3, why: "UN estimates put India ahead of China in 2023." },
   { prompt: ["How many children were most urban Chinese couples allowed under the One-Child Policy? Give a number.", "Under the 1980 rules, how many children could a typical urban Han Chinese couple have?"], answer: { kind: "year", value: 1 }, level: 1, why: "Most urban couples were limited to one child." },
   { prompt: ["What is the name of the problem where one child must support 2 parents and 4 grandparents?", "Give the three-number name for China's 'one child, two parents, four grandparents' family structure.", "An inverted family tree with four grandparents, two parents and one child is called the ____ problem."], answer: { kind: "text", accept: ["4-2-1 problem", "4-2-1", "421", "4 2 1", "four-two-one"] }, level: 1, why: "The 4-2-1 problem — an inverted family tree." },
-  { prompt: ["Which groups in China were exempt from the One-Child Policy and allowed more children? (Give the two-word group.)", "Which kind of minority in China was usually allowed more than one child?", "Apart from many rural families, which groups were usually allowed more than one child under the One-Child Policy?"], answer: { kind: "text", accept: ["ethnic minorities", "ethnic minority", "minorities", "minority groups"] }, level: 2, why: "Ethnic minorities were usually allowed two or more children." },
+  { prompt: ["Which non-Han groups in China were exempt from the One-Child Policy and allowed more children? (Give the two-word group.)", "Which kind of minority in China was usually allowed more than one child?", "Apart from many rural families, which non-Han groups were usually allowed more than one child under the One-Child Policy?"], answer: { kind: "text", accept: ["ethnic minorities", "ethnic minority", "minorities", "minority groups"] }, level: 2, why: "Ethnic minorities were usually allowed two or more children." },
   { prompt: ["In many rural areas, couples could have a second child if their first child was a ____. (boy or girl?)", "Rural Chinese families were often allowed a second child if the first was of which sex?", "The rural '1.5-child' rule let farming families try again for a son if their first child was a boy or a girl?"], answer: { kind: "text", accept: ["girl", "a girl", "female", "daughter"] }, level: 2, why: "The '1.5-child' rule in many rural areas allowed a second child if the first was a girl." },
   { prompt: ["Because of a strong preference for sons, China's population now has more of which sex among young adults?", "The One-Child Policy left China with a surplus of young men or young women?", "China's high sex ratio means that millions of which group may struggle to find a marriage partner — young men or young women?"], answer: { kind: "text", accept: ["men", "males", "male", "boys", "young men"] }, level: 2, why: "Son preference led to many more boys than girls being born — tens of millions of 'missing women'." },
   { prompt: ["What nickname is given to the pampered only children of the One-Child era?", "Spoiled only children in China were nicknamed 'little ____'.", "Only children doted on by two parents and four grandparents were nicknamed what?"], answer: { kind: "text", accept: ["little emperors", "little emperor", "emperors", "emperor"] }, level: 2, why: "'Little emperors' — doted on by two parents and four grandparents." },
@@ -683,7 +686,7 @@ export const drills: Drill[] = [
           prompt,
           answer: { type: "number", value: v },
           solution: [`**${v}**`, f.why],
-          hint: "Timeline: 1970s 'Later, Longer, Fewer' → 1980 OCP → 2016 two-child → 2021 three-child → 2022 first fall.",
+          hint: "Put the story in order: 'Later, Longer, Fewer' → One-Child Policy (about 35 years) → two-child → three-child → the first population fall.",
           traps: traps && traps.length ? traps : undefined,
         };
       }
@@ -729,7 +732,7 @@ export const drills: Drill[] = [
         solution = [
           `Dependants = 0–14 + 65+ = ${big(young)} + ${big(old)} = ${big(deps)} ${unit}.`,
           `Dependency ratio = {{${deps}/${work}}} × 100 = ${num(roundTo(exact, 4))}${roundTo(exact, 4) === exact ? "" : "…"}`,
-          `= **${num(ans)}** dependants per 100 working-age people.`,
+          `= **${dp1(ans)}** dependants per 100 working-age people.`,
         ];
         const inv = roundTo((work / deps) * 100, 1);
         if (inv !== ans) traps.push({ spec: { type: "number", value: inv }, feedback: "You divided the wrong way round — it is dependants ÷ working-age population." });
@@ -742,7 +745,7 @@ export const drills: Drill[] = [
         prompt = `Use the table to work out the **${ask === "old" ? "old-age" : "young"} dependency ratio** (${ask === "old" ? "over-65s" : "under-15s"} per 100 people aged 15–64). Give your answer to 1 decimal place.\n\n${table}`;
         solution = [
           `${ask === "old" ? "Old-age" : "Young"} dependency ratio = {{${part}/${work}}} × 100.`,
-          `= **${num(answerVal)}** per 100 working-age people.`,
+          `= **${dp1(answerVal)}** per 100 working-age people.`,
         ];
         if (ans !== answerVal) traps.push({ spec: { type: "number", value: ans }, feedback: `That's the TOTAL dependency ratio — use only the ${ask === "old" ? "65+" : "0–14"} group.` });
       }
@@ -787,7 +790,7 @@ export const drills: Drill[] = [
         answer: { type: "number", value: pct, tolerance: 0.05 },
         solution: [
           `% aged 65+ = {{${old}/${total}}} × 100`,
-          `= **${num(pct)}%**`,
+          `= **${dp1(pct)}%**`,
           `Using commonly used labels, this population is ${label}.`,
         ],
         hint: "Part ÷ whole × 100.",
@@ -819,10 +822,12 @@ export const drills: Drill[] = [
         prompt: `Among ${what}, there were ${big(boys)} boys and ${big(girls)} girls. Calculate the sex ratio (boys per 100 girls)${tier === 1 ? "" : " to 1 decimal place"}.`,
         answer: { type: "number", value: ratio, tolerance: tier === 1 ? 0 : 0.05 },
         solution: [
-          `Sex ratio = {{${boys}/${girls}}} × 100 = **${num(ratio)}** boys per 100 girls.`,
+          `Sex ratio = {{${boys}/${girls}}} × 100 = **${tier === 1 ? num(ratio) : dp1(ratio)}** boys per 100 girls.`,
           ratio > 107
             ? "The natural sex ratio at birth is about 105 — this is well above it, a sign of son preference like that seen in China during the One-Child era."
-            : "The natural sex ratio at birth is about 105 boys per 100 girls, so this is close to normal.",
+            : ratio >= 103
+              ? "The natural sex ratio at birth is about 105 boys per 100 girls, so this is close to normal."
+              : "The natural sex ratio at birth is about 105 boys per 100 girls, so this is a little below the usual figure — no sign of son preference.",
         ],
         hint: "Boys ÷ girls × 100.",
         traps: traps.length ? traps : undefined,
@@ -863,7 +868,7 @@ export const drills: Drill[] = [
         answer: { type: "number", value: ch, tolerance: tier === 1 ? 0 : 0.05 },
         solution: [
           `Change = ${big(after)} − ${big(before)} = ${big(after - before)}`,
-          `% change = {{${after - before}/${before}}} × 100 = **${num(ch)}%**`,
+          `% change = {{${after - before}/${before}}} × 100 = **${tier === 1 ? num(ch) : dp1(ch)}%**`,
           `This is ${pro ? "a pro-natalist" : "an anti-natalist"} policy, so ${success ? "births moved the way the government wanted" : "births moved the OPPOSITE way to what the government wanted — policies often struggle against wider social and economic trends"}.`,
         ],
         hint: "(new − original) ÷ original × 100.",

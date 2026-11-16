@@ -138,7 +138,7 @@ const PROCESSES: Fact<Proc>[] = [
   { lvl: 2, d: "Sediment wears itself down by colliding with other sediment as the waves move it.", k: "attrition" },
   { lvl: 3, d: "Pebbles at the far end of a beach are much smaller and rounder than the jagged blocks at the foot of the cliff they came from, because they have been knocking together for longer.", k: "attrition" },
   { lvl: 3, d: "The load carried by the waves gets finer over time — not because it hits the cliff, but because the pieces hit each other.", k: "attrition" },
-  { lvl: 1, d: "Weak acids in sea water dissolve rocks such as chalk and limestone.", k: "solution" },
+  { lvl: 1, d: "Sea water slowly dissolves rocks such as chalk and limestone, carrying the dissolved minerals away.", k: "solution" },
   { lvl: 1, d: "Sea water reacts chemically with the cliff rock and dissolves it.", k: "solution" },
   { lvl: 2, d: "Calcium carbonate in a limestone cliff is slowly dissolved by sea water and carried away.", k: "solution" },
   { lvl: 2, d: "A chalk cliff loses material chemically, without any pieces being knocked off.", k: "solution" },
@@ -146,7 +146,7 @@ const PROCESSES: Fact<Proc>[] = [
   { lvl: 3, d: "Rock pools in a limestone platform slowly deepen as sea water chemically eats into the rock.", k: "solution" },
 ];
 const PROC_INFO: Record<Proc, { accept: string[]; feedback: string; why: string }> = {
-  hydraulic: { accept: ["hydraulic action", "hydraulic power"], feedback: "Hydraulic action is the force of the WATER (and squeezed air) — no rocks are thrown here.", why: "It is the force of the water and compressed air in cracks — **hydraulic action**." },
+  hydraulic: { accept: ["hydraulic action", "hydraulic power", "hydraulic", "hydraulic pressure"], feedback: "Hydraulic action is the force of the WATER (and squeezed air) — no rocks are thrown here.", why: "It is the force of the water and compressed air in cracks — **hydraulic action**." },
   abrasion: { accept: ["abrasion", "corrasion"], feedback: "Abrasion is rocks thrown AT THE CLIFF. Here the rocks are not hitting the cliff.", why: "The waves' load is thrown against the cliff and wears it like sandpaper — **abrasion**." },
   attrition: { accept: ["attrition"], feedback: "Attrition is rocks hitting EACH OTHER — this is something wearing the cliff (or dissolving it) instead.", why: "The load knocks against itself, so the pieces get smaller and rounder — **attrition**." },
   solution: { accept: ["solution", "corrosion"], feedback: "Solution (corrosion) is a chemical process — dissolving. This is a physical, mechanical action.", why: "The rock is dissolved chemically by sea water — **solution** (also called corrosion)." },
@@ -209,7 +209,7 @@ const WEM_BANK: Fact<WEM>[] = [
 const WEM_INFO: Record<WEM, { accept: string[]; feedback: string; why: string }> = {
   weathering: { accept: ["weathering"], feedback: "Weathering breaks rock down IN PLACE — nothing is moved away. Look for whether the material moves.", why: "The rock is broken down where it is, by the weather, plants or animals, with no movement — **weathering**." },
   erosion: { accept: ["erosion"], feedback: "Erosion needs a moving force — here the waves wear the rock away and remove it.", why: "A moving force (the waves) wears the rock away and removes it — **erosion**." },
-  mass: { accept: ["mass movement"], feedback: "Mass movement is material moving DOWNHILL under gravity — rockfall, slumping, sliding.", why: "Material moves down the cliff under gravity — **mass movement**." },
+  mass: { accept: ["mass movement", "mass wasting"], feedback: "Mass movement is material moving DOWNHILL under gravity — rockfall, slumping, sliding.", why: "Material moves down the cliff under gravity — **mass movement**." },
 };
 
 // ---------------------------------------------------------------------------

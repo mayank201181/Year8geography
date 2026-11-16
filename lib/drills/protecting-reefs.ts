@@ -77,7 +77,7 @@ const TERMS: Fact[] = [
   { d: 1, q: ["What is it called when stressed coral expels its algae and turns white?", "Name the process that turns corals white when the sea is too warm."], answer: text("coral bleaching", "bleaching"), why: "**Coral bleaching**: heat-stressed corals expel their zooxanthellae algae, losing colour and their main food supply.", hint: "It is named after what happens to the colour." },
   { d: 1, q: ["Give the term for a place of outstanding value to humanity, listed by UNESCO.", "The Great Barrier Reef has been one since 1981 — what kind of site is it?"], answer: text("World Heritage Site", "World Heritage", "UNESCO World Heritage Site", "World Heritage Area"), why: "A **World Heritage Site** is listed by UNESCO for outstanding universal value.", hint: "UNESCO keeps a list of these." },
   { d: 1, q: ["What word describes meeting today's needs without harming the ability of future generations to meet theirs?", "Give the term for using the reef in a way that can carry on long into the future."], answer: text("sustainable", "sustainability", "sustainable development"), why: "**Sustainable** use meets present needs without stopping future generations meeting theirs.", hint: "It begins with 'sustain'." },
-  { d: 1, q: ["Fertiliser and soil washing off farms into rivers and the sea is called agricultural ___.", "Give the term for water flowing over the land surface into rivers, carrying soil and chemicals."], answer: text("run-off", "runoff", "run off", "surface run-off", "surface runoff"), why: "Farm **run-off** carries sediment and nutrients to the reef, clouding water and feeding crown-of-thorns larvae.", hint: "The water 'runs ___' the fields.", traps: [trap("Leaching is water moving down through the soil — this is water flowing over the surface.", "leaching")] },
+  { d: 1, q: ["Fertiliser and soil washing off farms into rivers and the sea is called agricultural ___.", "Give the term for water flowing over the land surface into rivers, carrying soil and chemicals."], answer: text("run-off", "runoff", "run off", "surface run-off", "surface runoff", "overland flow"), why: "Farm **run-off** carries sediment and nutrients to the reef, clouding water and feeding crown-of-thorns larvae.", hint: "The water 'runs ___' the fields.", traps: [trap("Leaching is water moving down through the soil — this is water flowing over the surface.", "leaching")] },
   { d: 2, q: ["Growing small coral fragments on frames or 'trees' before planting them back on a reef is called a coral ___.", "What is the name for an underwater 'garden' where coral fragments are grown before transplanting?"], answer: text("nursery", "coral nursery", "coral nurseries", "coral garden", "coral gardening"), why: "A **coral nursery** grows fragments until they are big enough to transplant.", hint: "Plant growers use the same word for baby plants." },
   { d: 2, q: ["Fixed floats that boats tie up to, so they do not drop anchors on coral, are called ___.", "What do reef managers install so that boats do not need to anchor on coral?"], answer: text("mooring buoys", "moorings", "mooring buoy", "mooring", "public moorings"), why: "**Mooring buoys** stop anchors and chains smashing coral.", hint: "Boats 'moor' to them." },
   { d: 2, q: ["Name the fish-trawling method banned in green zones that drags a net along the sea floor.", "What fishing method drags a heavy net along the sea bed, damaging habitats?"], answer: text("trawling", "bottom trawling", "trawl", "trawl fishing"), why: "**Trawling** drags nets over the sea bed; it is banned in most zones except General Use.", hint: "A boat that does this is a 'trawler'." },
@@ -100,13 +100,13 @@ const ZONES: Zone[] = [
   { name: "General Use Zone", colour: "light blue" },
   { name: "Preservation Zone", colour: "pink" },
 ];
-type Act = { label: string; ok: [boolean, boolean, boolean, boolean]; reason: string };
+type Act = { label: string; verb: string; ok: [boolean, boolean, boolean, boolean]; reason: string };
 const ACTS: Act[] = [
-  { label: "snorkelling from a tourist boat", ok: [true, true, true, false], reason: "Looking is fine in most zones; only pink Preservation Zones are closed to entry without a permit." },
-  { label: "line fishing with one rod and one hook", ok: [false, true, true, false], reason: "Green and pink zones are no-take; yellow allows limited line fishing; light blue allows most fishing." },
-  { label: "trawling with a net dragged on the sea bed", ok: [false, false, true, false], reason: "Trawling is the most damaging method, so it is only allowed in General Use (light blue) zones." },
-  { label: "sailing a boat through the area", ok: [true, true, true, false], reason: "Boating is allowed everywhere except pink Preservation Zones." },
-  { label: "taking a shell or piece of coral home", ok: [false, false, false, false], reason: "Taking coral or shells as souvenirs is not allowed in green, yellow or pink zones, and coral collecting needs a special permit even in General Use areas — so for a tourist the answer is no." },
+  { label: "snorkelling from a tourist boat", verb: "snorkel from a tourist boat", ok: [true, true, true, false], reason: "Looking is fine in most zones; only pink Preservation Zones are closed to entry without a permit." },
+  { label: "line fishing with one rod and one hook", verb: "go line fishing with one rod and one hook", ok: [false, true, true, false], reason: "Green and pink zones are no-take; yellow allows limited line fishing; light blue allows most fishing." },
+  { label: "trawling with a net dragged on the sea bed", verb: "trawl with a net dragged on the sea bed", ok: [false, false, true, false], reason: "Trawling is the most damaging method, so it is only allowed in General Use (light blue) zones." },
+  { label: "sailing a boat through the area", verb: "sail a boat through the area", ok: [true, true, true, false], reason: "Boating is allowed everywhere except pink Preservation Zones." },
+  { label: "breaking off a piece of living coral to take home", verb: "break off a piece of living coral to take home", ok: [false, false, false, false], reason: "Collecting coral needs a special commercial permit even in General Use areas, and is banned outright in green and pink zones — so for a tourist the answer is no." },
 ];
 
 // ---------------------------------------------------------------------------
@@ -214,7 +214,7 @@ export const drills: Drill[] = [
       const where = tier === 3 ? `a ${z.name}` : `a ${z.colour} zone (${z.name})`;
       const prompt = rng.pick([
         `On the Great Barrier Reef zoning map, is **${a.label}** allowed in ${where}? Answer yes or no.`,
-        `A visitor wants to go ${a.label.replace(/^taking/, "take").replace(/^snorkelling/, "snorkel").replace(/^sailing/, "sail").replace(/^line fishing/, "line fish").replace(/^trawling/, "trawl")} in ${where}. Is it allowed? (yes / no)`,
+        `Someone wants to ${a.verb} in ${where}. Is it allowed? (yes / no)`,
       ]);
       return {
         prompt,

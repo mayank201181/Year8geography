@@ -230,7 +230,7 @@ const CONDITIONS: Fact[] = [
     traps: [[["barrier reef", "barrier"], "Singapore has no big offshore barrier reef — its reefs fringe the islands."]],
   },
   {
-    q: ["Name Singapore's first marine park, opened in 2014 around two small islands south of the main island.", "Which Singapore marine park, south of Sentosa, protects reefs around a pair of small islands?"],
+    q: ["Name Singapore's first marine park, set up in 2014 around two small islands south of the main island.", "Which Singapore marine park, south of Sentosa, protects reefs around a pair of small islands?"],
     a: ["Sisters' Islands Marine Park", "Sisters Islands Marine Park", "Sisters' Islands", "Sisters Islands", "Sister Islands", "Sisters Island"],
     why: "**Sisters' Islands Marine Park** (2014) was Singapore's first marine park.",
     lvl: 2,
@@ -345,37 +345,37 @@ const VALUE: Fact[] = [
   },
   {
     q: ["Social, economic or environmental benefit? 'Reefs provide jobs for dive instructors and boat crews.'"],
-    a: ["economic"],
+    a: ["economic", "economy"],
     why: "Jobs and income are an **economic** benefit.",
     lvl: 2,
   },
   {
     q: ["Social, economic or environmental benefit? 'Reefs are home to thousands of species of fish, corals and molluscs.'"],
-    a: ["environmental"],
+    a: ["environmental", "environment"],
     why: "Habitat and biodiversity are an **environmental** benefit.",
     lvl: 2,
   },
   {
     q: ["Social, economic or environmental benefit? 'The reef is part of the culture and traditions of Aboriginal and Torres Strait Islander peoples.'"],
-    a: ["social", "cultural"],
+    a: ["social", "cultural", "society"],
     why: "Culture, traditions and identity are a **social** benefit.",
     lvl: 2,
   },
   {
     q: ["Social, economic or environmental benefit? 'Reefs give sea turtles places to feed and shelter.'"],
-    a: ["environmental"],
+    a: ["environmental", "environment"],
     why: "Supporting wildlife habitats is an **environmental** benefit.",
     lvl: 2,
   },
   {
     q: ["Social, economic or environmental benefit? 'Reef tourism brings billions of dollars a year into Queensland.'"],
-    a: ["economic"],
+    a: ["economic", "economy"],
     why: "Money flowing into a region is an **economic** benefit.",
     lvl: 2,
   },
   {
     q: ["Social, economic or environmental benefit? 'Families and school groups enjoy snorkelling trips and learn about marine life.'"],
-    a: ["social"],
+    a: ["social", "society"],
     why: "Recreation, wellbeing and education are **social** benefits.",
     lvl: 2,
   },
@@ -450,13 +450,13 @@ const BLEACHING: Fact[] = [
     lvl: 1,
   },
   {
-    q: ["The Great Barrier Reef had mass bleaching in 2016, 2017, 2020, 2022 and which other year?"],
+    q: ["Between 2016 and 2024, the Great Barrier Reef had mass bleaching in 2016, 2017, 2020, 2022 and which other year?"],
     a: { type: "number", value: 2024 },
     why: "Mass bleaching hit the Great Barrier Reef in 2016, 2017, 2020, 2022 and **2024** — five events in nine years.",
     lvl: 2,
   },
   {
-    q: ["The Great Barrier Reef had mass bleaching in 2016, 2017, 2022, 2024 and which other year?"],
+    q: ["Between 2016 and 2024, the Great Barrier Reef had mass bleaching in 2016, 2017, 2022, 2024 and which other year?"],
     a: { type: "number", value: 2020 },
     why: "The five events were 2016, 2017, **2020**, 2022 and 2024.",
     lvl: 2,
@@ -474,7 +474,7 @@ const BLEACHING: Fact[] = [
     lvl: 2,
   },
   {
-    q: ["Oceans absorb carbon dioxide from the air, making the water more acidic. What is this called?", "Name the threat to corals caused by sea water becoming less alkaline as it absorbs CO₂."],
+    q: ["Oceans absorb carbon dioxide from the air, lowering the water's pH (making it less alkaline). What is this called?", "Name the threat to corals caused by sea water becoming less alkaline as it absorbs CO₂."],
     a: ["ocean acidification", "acidification"],
     why: "**Ocean acidification**: CO₂ dissolves to form carbonic acid, lowering the ocean's pH.",
     lvl: 2,
@@ -623,31 +623,31 @@ const THREATS: Fact[] = [
   },
   {
     q: ["Natural or human threat? A tropical cyclone smashes branching corals on a reef."],
-    a: ["natural"],
+    a: ["natural", "natural threat"],
     why: "Cyclones are a **natural** threat (though climate change may make the strongest ones stronger).",
     lvl: 2,
   },
   {
     q: ["Natural or human threat? A boat drops its anchor onto a reef."],
-    a: ["human"],
+    a: ["human", "human threat", "man-made", "human-made", "anthropogenic"],
     why: "Anchor damage is caused by people — a **human** threat.",
     lvl: 2,
   },
   {
     q: ["Natural or human threat? An extremely low tide leaves corals exposed to air and hot sun for hours."],
-    a: ["natural"],
+    a: ["natural", "natural threat"],
     why: "Very low tides are a **natural** stress on shallow reefs.",
     lvl: 2,
   },
   {
     q: ["Natural or human threat? Sand is dumped into shallow sea to build a new port."],
-    a: ["human"],
+    a: ["human", "human threat", "man-made", "human-made", "anthropogenic"],
     why: "Land reclamation is a **human** threat.",
     lvl: 2,
   },
   {
     q: ["Natural or human threat? Fishers use explosives to catch reef fish."],
-    a: ["human"],
+    a: ["human", "human threat", "man-made", "human-made", "anthropogenic"],
     why: "Blast fishing is a **human** threat.",
     lvl: 2,
   },
@@ -892,7 +892,8 @@ export const drills: Drill[] = [
         };
       }
       // tier 3: age of a colony from its size in metres
-      const r = rng.pick([5, 8, 10, 12, 15, 20, 25]);
+      // Massive (boulder) corals typically grow about 5–15 mm a year.
+      const r = rng.pick([5, 6, 8, 10, 12, 15]);
       let years = 100;
       let sizeM = 1;
       for (let i = 0; i < 50; i++) {

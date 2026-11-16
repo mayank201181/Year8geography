@@ -112,7 +112,7 @@ const PHYSICAL: { d: string; cat: string; lvl: 1 | 2 | 3; plus: boolean }[] = [
   { lvl: 1, cat: "water supply", plus: true, d: "Early villages were often built beside a spring or river so people could collect fresh drinking water." },
   { lvl: 2, cat: "water supply", plus: true, d: "In dry inland Australia, farms and towns depend on wells drilled into underground aquifers." },
   { lvl: 3, cat: "water supply", plus: false, d: "A desert town cannot grow any larger because its only well is already pumping out all the fresh water it can." },
-  { lvl: 1, cat: "soil", plus: true, d: "Fertile soil made from weathered volcanic ash lets farmers on Java grow rice all year." },
+  { lvl: 1, cat: "soil", plus: true, d: "Fertile soil made from weathered volcanic ash lets farmers on Java grow rich harvests of rice." },
   { lvl: 2, cat: "soil", plus: false, d: "Thin, nutrient-poor soils in much of the Amazon lose their fertility within a few years of the forest being cleared." },
   { lvl: 2, cat: "soil", plus: true, d: "Each year the Nile flood used to leave a fresh layer of fertile black silt on the fields, keeping crops productive." },
   { lvl: 3, cat: "soil", plus: true, d: "Ukraine's deep, dark chernozem (\"black earth\") is among the most fertile farmland in the world." },
@@ -184,7 +184,7 @@ const CASES: Fact[] = [
   { lvl: 2, q: "Many Egyptians live in a flat, fan-shaped area of fertile silt where the Nile meets the Mediterranean. Name this landform.", a: ["delta", "Nile Delta", "river delta"], why: "The Nile Delta is flat, fertile and well watered — ideal for farming and cities." },
   { lvl: 2, q: "Most Brazilians live near which ocean?", a: ["Atlantic", "Atlantic Ocean"], why: "Brazil's big cities — São Paulo, Rio de Janeiro, Salvador — are on or near the Atlantic coast.", trap: { a: ["Pacific", "Pacific Ocean"], fb: "Brazil doesn't touch the Pacific — its whole coast faces the Atlantic." } },
   { lvl: 2, q: "Which region of Brazil holds the most people, including São Paulo and Rio de Janeiro?", a: ["South-East", "Southeast", "South East", "SE"], why: "The South-East has jobs, ports, industry and a milder climate on the coastal plateau." },
-  { lvl: 2, q: "About 80% of Singapore residents live in public flats built by which government agency?", a: ["HDB", "Housing and Development Board", "Housing & Development Board"], why: "Planned HDB new towns spread Singapore's people across the island — government planning in action." },
+  { lvl: 2, q: "Nearly 80% of Singapore residents live in public flats built by which government agency?", a: ["HDB", "Housing and Development Board", "Housing & Development Board"], why: "Planned HDB new towns spread Singapore's people across the island — government planning in action." },
   { lvl: 2, q: "Singapore's land area grew by about a quarter after independence. What process created the new land?", a: ["land reclamation", "reclamation"], why: "Reclaiming land from the sea let Singapore house more people and build Changi Airport and the port." },
   { lvl: 2, q: "Which Chinese city grew from a small town into a megacity after becoming a Special Economic Zone in 1980?", a: ["Shenzhen"], why: "Factory jobs (a human factor) pulled tens of millions of migrants to Shenzhen." },
   { lvl: 3, q: "Which Indonesian island, with fertile volcanic soils and the capital Jakarta, holds over half of Indonesia's people?", a: ["Java"], why: "Fertile soil, rice farming and big-city jobs combine to make Java very densely populated." },
@@ -321,7 +321,7 @@ export const drills: Drill[] = [
       return {
         prompt: `${place} has ${num(millions)} million people and an area of ${big(area)} km². Calculate its population density in people per km², to 1 decimal place.`,
         answer: { type: "number", value: ans },
-        solution: [`${num(millions)} million = ${big(pop)} people`, `Density = ${big(pop)} ÷ ${big(area)} = ${num(roundTo(pop / area, 4))}…`, `≈ **${num(ans)} people per km²** (1 d.p.)`],
+        solution: [`${num(millions)} million = ${big(pop)} people`, `Density = ${big(pop)} ÷ ${big(area)} = ${num(roundTo(pop / area, 4))}…`, `≈ **${ans.toFixed(1)} people per km²** (1 d.p.)`],
         hint: "Write the population out in full first (1 million = 1,000,000).",
         traps: numTrap(roundTo(millions / area, 1), ans, "You divided the number of *millions* by the area. Convert to the full number of people first."),
       };

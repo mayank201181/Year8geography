@@ -2,11 +2,11 @@ import type { Paper } from "../../types.ts";
 
 // ----------------------------- shared resources -----------------------------
 
-const SVG_MAP = `<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Weather map. A low-pressure centre L of 984 mb is surrounded by isobars of 988, 992, 996 and 1000 mb. The isobars are close together on the west side, near Town P, and far apart on the east side, near Town Q. A high-pressure centre H of 1024 mb lies to the north-east, with Town R inside its 1020 mb isobar."><rect x="0" y="0" width="460" height="300" fill="#ffffff"/><g fill="none" stroke="#334155" stroke-width="1.5"><ellipse cx="130" cy="160" rx="30" ry="22"/><ellipse cx="142" cy="160" rx="55" ry="40"/><ellipse cx="154" cy="160" rx="80" ry="58"/><ellipse cx="166" cy="160" rx="105" ry="76"/><circle cx="390" cy="80" r="40"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle"><text x="130" y="135">988</text><text x="142" y="117">992</text><text x="154" y="99">996</text><text x="166" y="81">1000</text><text x="390" y="37">1020</text><text x="130" y="164" font-size="16" font-weight="bold">L</text><text x="130" y="178">984 mb</text><text x="395" y="84" font-size="16" font-weight="bold">H</text><text x="395" y="99">1024 mb</text></g><g fill="#1f2937" font-family="sans-serif" font-size="13" font-weight="bold"><circle cx="80" cy="160" r="4"/><text x="76" y="152">P</text><circle cx="250" cy="160" r="4"/><text x="246" y="152">Q</text><circle cx="365" cy="65" r="4"/><text x="371" y="62">R</text></g><g font-family="sans-serif" font-size="11" fill="#1f2937"><line x1="430" y1="290" x2="430" y2="255" stroke="#1f2937" stroke-width="2"/><polygon points="424,262 430,250 436,262" fill="#1f2937"/><text x="426" y="246">N</text><text x="10" y="290">Isobars in millibars (mb)</text></g></svg>`;
+const SVG_MAP = `<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Weather map. A low-pressure centre L of 984 mb is surrounded by isobars of 988, 992, 996 and 1000 mb. The isobars are close together on the west side, near Town P, and far apart on the east side, near Town Q. A high-pressure centre H of 1024 mb lies to the north-east, with Town R inside its 1020 mb isobar. Not every isobar is drawn."><rect x="0" y="0" width="460" height="300" fill="#ffffff"/><g fill="none" stroke="#334155" stroke-width="1.5"><ellipse cx="130" cy="160" rx="30" ry="22"/><ellipse cx="142" cy="160" rx="55" ry="40"/><ellipse cx="154" cy="160" rx="80" ry="58"/><ellipse cx="166" cy="160" rx="105" ry="76"/><circle cx="390" cy="80" r="40"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle"><text x="130" y="135">988</text><text x="142" y="117">992</text><text x="154" y="99">996</text><text x="166" y="81">1000</text><text x="390" y="37">1020</text><text x="130" y="161" font-size="16" font-weight="bold">L</text><text x="130" y="175">984 mb</text><text x="395" y="84" font-size="16" font-weight="bold">H</text><text x="395" y="99">1024 mb</text></g><g fill="#1f2937" font-family="sans-serif" font-size="13" font-weight="bold" stroke="#ffffff" stroke-width="3" paint-order="stroke"><circle cx="80" cy="160" r="4"/><text x="76" y="152">P</text><circle cx="250" cy="160" r="4"/><text x="246" y="152">Q</text><circle cx="365" cy="65" r="4"/><text x="371" y="62">R</text></g><g font-family="sans-serif" font-size="11" fill="#1f2937"><line x1="430" y1="290" x2="430" y2="255" stroke="#1f2937" stroke-width="2"/><polygon points="424,262 430,250 436,262" fill="#1f2937"/><text x="426" y="246">N</text><text x="10" y="290">Isobars in millibars (mb); not every isobar is drawn</text></g></svg>`;
 
 const SVG_STORM_CROSS = `<svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a tropical storm over a warm sea. In the centre, X marks a cloud-free eye with sinking air. Either side, Y marks towering eyewall clouds with strongly rising air. Further out, Z marks smaller spiralling rain band clouds. Air flows outwards at the top of the storm."><rect x="0" y="0" width="460" height="260" fill="#ffffff"/><rect x="0" y="220" width="460" height="40" fill="#bae6fd"/><text x="230" y="246" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">Warm sea (26.5 °C or more)</text><g fill="#e5e7eb" stroke="#334155" stroke-width="1.5"><rect x="175" y="50" width="40" height="170" rx="14"/><rect x="245" y="50" width="40" height="170" rx="14"/><rect x="60" y="120" width="50" height="100" rx="14"/><rect x="120" y="95" width="40" height="125" rx="14"/><rect x="300" y="95" width="40" height="125" rx="14"/><rect x="350" y="120" width="50" height="100" rx="14"/></g><g stroke="#1f2937" stroke-width="2" fill="#1f2937"><line x1="195" y1="200" x2="195" y2="80"/><polygon points="189,82 195,70 201,82"/><line x1="265" y1="200" x2="265" y2="80"/><polygon points="259,82 265,70 271,82"/><line x1="230" y1="80" x2="230" y2="180"/><polygon points="224,178 230,190 236,178"/><line x1="200" y1="40" x2="110" y2="40"/><polygon points="112,34 100,40 112,46"/><line x1="260" y1="40" x2="350" y2="40"/><polygon points="348,34 360,40 348,46"/></g><g font-family="sans-serif" font-size="14" font-weight="bold" fill="#1f2937" text-anchor="middle"><text x="230" y="70">X</text><text x="195" y="215">Y</text><text x="265" y="215">Y</text><text x="85" y="112">Z</text><text x="375" y="112">Z</text></g><text x="230" y="22" font-family="sans-serif" font-size="11" text-anchor="middle" fill="#1f2937">Air flows outwards at the top</text></svg>`;
 
-const SVG_TRACK = `<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic map of the north-west Pacific with latitude lines at 0, 10, 20 and 30 degrees north. A storm track moves west-north-west from Day 1 at about 8 degrees north with winds of 95 km/h, Day 2 at 150 km/h, Day 3 at 215 km/h, Day 4 over Island X at 260 km/h, then Day 5 over the mainland at about 23 degrees north with winds of 140 km/h."><rect x="0" y="0" width="460" height="300" fill="#bae6fd"/><polygon points="0,30 150,30 160,100 140,160 110,230 0,260" fill="#bbf7d0" stroke="#334155"/><polygon points="205,135 245,140 250,165 215,170" fill="#bbf7d0" stroke="#334155"/><g stroke="#334155" stroke-dasharray="5 4" stroke-width="1"><line x1="0" y1="270" x2="460" y2="270"/><line x1="0" y1="200" x2="460" y2="200"/><line x1="0" y1="130" x2="460" y2="130"/><line x1="0" y1="60" x2="460" y2="60"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="end"><text x="455" y="266">Equator 0°</text><text x="455" y="196">10°N</text><text x="455" y="126">20°N</text><text x="455" y="56">30°N</text></g><polyline points="400,215 340,195 280,172 225,152 150,110" fill="none" stroke="#b91c1c" stroke-width="2.5"/><polygon points="150,104 140,106 148,115" fill="#b91c1c"/><g fill="#b91c1c"><circle cx="400" cy="215" r="4"/><circle cx="340" cy="195" r="4"/><circle cx="280" cy="172" r="4"/><circle cx="225" cy="152" r="4"/><circle cx="150" cy="110" r="4"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle"><text x="400" y="234">Day 1: 95 km/h</text><text x="340" y="214">Day 2: 150 km/h</text><text x="322" y="160">Day 3: 215 km/h</text><text x="225" y="126">Day 4: 260 km/h</text><text x="90" y="104">Day 5: 140 km/h</text><text x="60" y="200">Mainland</text><text x="228" y="185">Island X</text></g><text x="10" y="292" font-family="sans-serif" font-size="11" fill="#1f2937">Dots = storm centre at noon each day (sustained wind speed)</text></svg>`;
+const SVG_TRACK = `<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematic map of the north-west Pacific with latitude lines at 0, 10, 20 and 30 degrees north. A storm track moves west-north-west from Day 1 at about 8 degrees north with winds of 95 km/h, Day 2 at 150 km/h, Day 3 at 215 km/h, Day 4 over Island X at 260 km/h, then Day 5 over the mainland at about 23 degrees north with winds of 140 km/h."><rect x="0" y="0" width="460" height="300" fill="#bae6fd"/><polygon points="0,30 150,30 160,100 140,160 110,230 0,260" fill="#bbf7d0" stroke="#334155"/><polygon points="205,135 245,140 250,165 215,170" fill="#bbf7d0" stroke="#334155"/><g stroke="#334155" stroke-dasharray="5 4" stroke-width="1"><line x1="0" y1="270" x2="460" y2="270"/><line x1="0" y1="200" x2="460" y2="200"/><line x1="0" y1="130" x2="460" y2="130"/><line x1="0" y1="60" x2="460" y2="60"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="end"><text x="455" y="266">Equator 0°</text><text x="455" y="196">10°N</text><text x="455" y="126">20°N</text><text x="455" y="56">30°N</text></g><polyline points="400,215 340,195 280,172 225,152 150,110" fill="none" stroke="#b91c1c" stroke-width="2.5"/><polygon points="150,104 140,106 148,115" fill="#b91c1c"/><g fill="#b91c1c"><circle cx="400" cy="215" r="4"/><circle cx="340" cy="195" r="4"/><circle cx="280" cy="172" r="4"/><circle cx="225" cy="152" r="4"/><circle cx="150" cy="110" r="4"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle"><text x="400" y="234">Day 1: 95 km/h</text><text x="346" y="181" text-anchor="start">Day 2: 150 km/h</text><text x="322" y="160">Day 3: 215 km/h</text><text x="225" y="126">Day 4: 260 km/h</text><text x="90" y="104">Day 5: 140 km/h</text><text x="55" y="182">Mainland</text><text x="228" y="185">Island X</text></g><text x="10" y="292" font-family="sans-serif" font-size="11" fill="#1f2937">Dots = storm centre at noon each day (sustained wind speed)</text></svg>`;
 
 const SVG_ANEMOMETER = `<svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A weather instrument made of three cups fixed to horizontal arms on top of a vertical pole; the cups spin round when the wind blows."><rect x="0" y="0" width="240" height="220" fill="#ffffff"/><rect x="0" y="200" width="240" height="20" fill="#bbf7d0"/><line x1="120" y1="75" x2="120" y2="200" stroke="#334155" stroke-width="5"/><g stroke="#334155" stroke-width="3"><line x1="120" y1="70" x2="48" y2="78"/><line x1="120" y1="70" x2="192" y2="78"/><line x1="120" y1="70" x2="128" y2="38"/></g><g fill="#c7d2fe" stroke="#1f2937" stroke-width="1.5"><circle cx="40" cy="80" r="13"/><circle cx="200" cy="80" r="13"/><circle cx="130" cy="30" r="11"/></g><circle cx="120" cy="70" r="5" fill="#1f2937"/><path d="M 60 120 Q 120 150 180 120" fill="none" stroke="#1f2937" stroke-width="1.5"/><polygon points="176,114 186,117 179,126" fill="#1f2937"/><text x="120" y="160" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#1f2937">The cups spin round</text></svg>`;
 
@@ -200,34 +200,26 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "extreme-weather-m1-q13",
-        question:
-          "Use the storm-track map and the Saffir–Simpson scale (Cat 1: 119–153 km/h, Cat 2: 154–177, Cat 3: 178–208, Cat 4: 209–251, Cat 5: 252 km/h or more). What category was the storm on **Day 3**?",
+        question: "Use the storm-track map and the Saffir–Simpson scale (Cat 1: 119–153 km/h, Cat 2: 154–177, Cat 3: 178–208, Cat 4: 209–251, Cat 5: 252 km/h or more). Between Day 2 and Day 3 the storm strengthened very quickly. By how much did its winds rise, and how many categories did it climb?",
         diagram: SVG_TRACK,
-        options: ["Category 2", "Category 3", "Category 5", "Category 4"],
+        options: ["65 km/h; it climbed 2 categories (Category 2 to Category 4)", "65 km/h; it climbed 2 categories (Category 1 to Category 3)", "120 km/h; it climbed 4 categories (tropical storm to Category 4)", "65 km/h; it climbed 3 categories (Category 1 to Category 4)"],
         answerIndex: 3,
-        explanation:
-          "On Day 3 the winds were 215 km/h. That is above the Category 4 minimum of 209 km/h and below the Category 5 minimum of 252 km/h, so it is **Category 4**. Category 3 tops out at 208 km/h — a common slip is to stop at the first band that 'looks close'.",
+        explanation: "Day 2: 150 km/h, which is inside Category 1 (119–153 km/h) — just below the Category 2 minimum of 154 km/h. Day 3: 215 km/h, above the Category 4 minimum of 209 km/h. Rise = 215 − 150 = 65 km/h, and Category 1 → Category 4 is a climb of **3 categories** in one day. Calling Day 2 'Category 2' or Day 3 'Category 3' comes from checking only one end of a band; 120 km/h is the rise from Day 1, not Day 2.",
         difficulty: "challenge",
         guideRef: "tropical-storms",
-        hints: ["Find Day 3 on the map and read its wind speed.", "Check which band the number fits between — compare it with both the lower and upper limit."],
+        hints: ["Read the Day 2 and Day 3 wind speeds from the map.", "Classify each speed — check it against both the lower and the upper limit of a band.", "150 km/h is close to a boundary. Is it at least 154 km/h?"],
         strategy: "Use figures from the source",
       },
       {
         kind: "mcq",
         id: "extreme-weather-m1-q14",
-        question: "Why is a 10-day weather forecast usually less reliable than a 2-day forecast?",
-        options: [
-          "Tiny errors in the starting observations grow as a computer model runs further ahead, so predictions drift away from reality",
-          "Computers are only powerful enough to calculate two days ahead",
-          "Weather is completely random, so forecasting more than two days ahead is guesswork",
-          "Long-range forecasts are made using older data",
-        ],
+        question: "Forecasters ran an **ensemble** of 20 versions of a computer model, each starting from very slightly different observations. For Singapore, 19 of the 20 runs gave heavy rain on day 2, but only 7 of the 20 gave heavy rain on day 8. What is the **best** interpretation?",
+        options: ["Heavy rain on day 2 is very likely; day 8 is much less certain, because small differences in the starting observations have grown and the runs now disagree", "Day 8 will definitely be dry, because most of the runs show no heavy rain", "The day 2 forecast is the less reliable one, because the runs have had less time to settle down", "The model has broken down for day 8, so the 7 runs showing heavy rain should be ignored"],
         answerIndex: 0,
-        explanation:
-          "Forecast models start from millions of observations, but no measurement is perfect. In the atmosphere small errors **grow over time**, so the further ahead the model runs, the less certain it becomes. Weather is not random — it follows physical laws, which is why 2-day forecasts are usually very good.",
+        explanation: "When almost all the runs agree (19 of 20), forecasters can be confident. By day 8 the tiny differences in the starting observations have grown, so the runs spread out: 7 of 20 is roughly a 35% chance of heavy rain — uncertainty, not a promise of dry weather. The model has not broken; showing this spread is exactly what an ensemble is for. Because errors grow with time, the day 2 forecast is the more reliable one, not the less.",
         difficulty: "challenge",
         guideRef: "forecasting",
-        hints: ["Every forecast starts from measurements — are they ever perfect?", "Imagine a small error in the starting data. What happens to it each time the model steps forward?"],
+        hints: ["What does it tell you when nearly all the runs agree?", "Why would runs that start almost the same end up different a week later?", "7 out of 20 is a chance, not a yes or a no."],
         strategy: "Spot the misconception",
       },
       {
@@ -235,18 +227,12 @@ export const mcqPapers: Paper[] = [
         id: "extreme-weather-m1-q15",
         question: "Using the storm-track map: between Day 4 and Day 5 the winds fell from 260 km/h to 140 km/h. What is the **best** explanation?",
         diagram: SVG_TRACK,
-        options: [
-          "It moved closer to the Equator, where the Coriolis effect is stronger",
-          "It moved over land, cutting off its supply of warm, moist air, and friction with the land slowed the winds",
-          "It moved over warmer sea, which slowed it down",
-          "The eye filled up with rain, so the storm stopped spinning",
-        ],
+        options: ["The Coriolis effect is weaker at 23° N than at 8° N, so the storm could no longer keep spinning", "It moved over land, cutting off its supply of warm, moist air, and friction with the land slowed the winds", "It moved north into sea cooler than 26.5 °C, which cut off its fuel", "After four days it had used up its energy, because every tropical storm weakens with age"],
         answerIndex: 1,
-        explanation:
-          "On Day 5 the storm is over the mainland. Without warm sea beneath it there is little evaporation, so less heat is released by condensation — the storm loses its **energy supply** — and the rough land surface adds **friction**. It actually moved *away* from the Equator, and the Coriolis effect is weakest near the Equator anyway.",
+        explanation: "The Day 5 dot is over the mainland. Without warm sea beneath it there is little evaporation, so less heat is released by condensation — the storm loses its **energy supply** — and the rough land surface adds **friction**. Cooler sea does weaken some storms, but this one's Day 5 position is over land, and 23° N is still inside the 5–30° zone. The Coriolis effect gets *stronger*, not weaker, away from the Equator. And storms do not simply weaken with age: this one strengthened every day it stayed over warm sea (Days 1–4).",
         difficulty: "challenge",
         guideRef: "tropical-storms",
-        hints: ["Where is the Day 5 dot — over sea or land?", "What does the storm need from the sea to keep going?", "Two things change over land: the energy supply and the surface roughness."],
+        hints: ["Where is the Day 5 dot — over sea or over land?", "What does the storm need from the sea to keep going?", "Test each option against the map: does the Coriolis effect get weaker or stronger further from the Equator?"],
         strategy: "Work it out from the map",
       },
     ],
@@ -445,56 +431,38 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "extreme-weather-m2-q13",
-        question: "Why do tropical storms almost never form within about 5° of the Equator, even though the sea there is warm enough?",
-        options: [
-          "The sea near the Equator is too cold",
-          "There is not enough evaporation near the Equator",
-          "The Coriolis effect is too weak there to start the air spinning",
-          "The Sun is not strong enough at the Equator",
-        ],
+        question: "In December 2001, **Typhoon Vamei** formed at about 1.5° N, just east of Singapore — the closest to the Equator a tropical cyclone has ever been recorded. Which conclusion is **best** supported?",
+        options: ["The 5–30° pattern is wrong: storms form near the Equator about as often as anywhere else", "The sea near Singapore is normally too cold for typhoons, and it must have been unusually warm in 2001", "Near-equatorial storms are possible but extremely rare, because the Coriolis effect there is so weak that unusual conditions are needed to start the spin", "The Coriolis effect is strongest at the Equator, so a storm like Vamei was to be expected"],
         answerIndex: 2,
-        explanation:
-          "The **Coriolis effect**, caused by Earth's rotation, is what sets a storm spinning — and it is almost zero at the Equator. Without spin, the rising air cannot organise into a rotating storm. The sea is warm and the Sun is strong near the Equator, so those options contradict the question.",
+        explanation: "One rare case does not overturn a pattern seen in thousands of storms. Within about 5° of the Equator the Coriolis effect is close to zero, so storms almost never start spinning — Vamei is famous precisely because it was so unusual. Meteorologists think a strong, long-lasting surge of north-east monsoon winds over the narrow southern South China Sea helped give it spin. The sea around Singapore is well above 26.5 °C all year, so temperature was not what was missing, and the Coriolis effect is weakest, not strongest, at the Equator.",
         difficulty: "challenge",
         guideRef: "tropical-storms",
-        hints: ["The question already tells you the sea is warm enough. So which condition is missing?", "Which force makes moving air turn, and how does it change with latitude?"],
-        strategy: "Eliminate options",
+        hints: ["Does one record-breaking event show that something is common?", "Is the sea near Singapore warm enough in a normal year?", "How does the Coriolis effect change as you approach the Equator — and what does that make a storm at 1.5° N?"],
+        strategy: "Spot the misconception",
       },
       {
         kind: "mcq",
         id: "extreme-weather-m2-q14",
-        question: "A hurricane forecast map shows a 'cone' around the predicted track that gets wider further into the future. What does the widening show?",
-        options: [
-          "The storm will grow bigger",
-          "The storm will slow down",
-          "The storm will weaken",
-          "Forecasters are less certain where the storm's centre will be further ahead",
-        ],
+        question: "A hurricane forecast map shows a 'cone' around the predicted track that gets wider further into the future. A coastal town lies just **outside** the edge of the cone for day 4. Which statement is most accurate?",
+        options: ["The town is safe, because the storm will not reach it", "The town will only get weak winds, because the cone shows the full size of the storm", "The cone gets wider because the storm is forecast to grow larger by day 4", "The town could still be hit: the cone shows only where the storm's centre is likely to be, and the wind and rain extend far beyond the centre"],
         answerIndex: 3,
-        explanation:
-          "The cone is the **zone of uncertainty** in where the centre will be. It widens because forecast errors grow with time. It says nothing about the storm's size or strength — a classic misreading is to think the storm itself gets wider.",
+        explanation: "The cone is a zone of **uncertainty about where the centre will be**; it widens because forecast errors grow with time. It says nothing about the storm's size. A tropical storm can be several hundred kilometres across, so damaging wind, rain and storm surge can reach places outside the cone — and the centre itself sometimes strays outside it. Reading the cone as the storm's size, or its edge as a safety line, are classic and dangerous misreadings.",
         difficulty: "challenge",
         guideRef: "forecasting",
-        hints: ["Is the cone a picture of the storm, or a picture of the forecast?", "Why are forecasts for day 5 less sure than for day 1?"],
+        hints: ["Is the cone a picture of the storm, or a picture of the forecast?", "Which part of the storm does the forecast track follow?", "How far from its centre can a tropical storm's wind and rain reach?"],
         strategy: "Spot the misconception",
       },
       {
         kind: "mcq",
         id: "extreme-weather-m2-q15",
-        question: "A student places a rain gauge under a tree, right next to a wall. Why will the readings be unreliable?",
-        options: [
-          "The tree and wall block or redirect the rain, so the gauge does not catch what falls in the open",
-          "Rain gauges only work on a roof",
-          "Shade makes rain evaporate faster than it falls",
-          "The wall raises the air pressure around the gauge",
-        ],
+        question: "Two students measure rain for the same week. Gauge A, in an open field, collects 42 mm in total. Gauge B, under a tree next to a wall, collects only 27 mm — yet on one day B collected **more** than A. Which explanation fits **both** observations?",
+        options: ["The tree and wall shelter B from most rain, but water dripping off soaked leaves and splashing off the wall can sometimes add extra", "B is in the shade, so more of its water evaporates", "A is the faulty gauge: in the open it collects dew as well as rain, so B's total is the true one", "The wall raises the air pressure around B, which pushes raindrops away from it"],
         answerIndex: 0,
-        explanation:
-          "A rain gauge must be in an **open space**, away from trees and buildings. Leaves and walls shelter it (too little rain) or drip and splash extra water into it (too much). A roof is actually a poor site, because wind swirls around buildings.",
+        explanation: "Shelter explains B's lower total: leaves and the wall block rain that would fall into an open gauge. But soaked leaves drip, funnelling water from a wide area of canopy into the gauge, and rain can splash off the wall — so on some days B catches *more*. Both are errors, which is why gauges belong in open ground. Shade actually *reduces* evaporation and could never explain the day B caught more; dew adds only a tiny amount; and a wall does not change air pressure enough to steer raindrops.",
         difficulty: "challenge",
         guideRef: "measuring-weather",
-        hints: ["What would happen to rain falling onto the leaves above the gauge?", "A fair test means measuring rain that falls on open ground."],
-        strategy: "Spot the misconception",
+        hints: ["What could make B catch less rain than really fell?", "What could make B catch more on a particular day?", "Look for the one option that explains both the low total and the odd day."],
+        strategy: "Eliminate options",
       },
     ],
   },
@@ -625,15 +593,15 @@ export const mcqPapers: Paper[] = [
           "Typhoons carry smoke south from the Philippines",
           "Volcanoes erupt more often during the monsoon",
           "Cold air from China traps traffic fumes over the city",
-          "South-westerly winds can carry smoke from land and forest fires in Sumatra and Kalimantan towards Singapore",
+          "Winds from the south-east or south-west can carry smoke from land and forest fires in Sumatra and Kalimantan (Borneo) towards Singapore",
         ],
         answerIndex: 3,
         explanation:
-          "In the SW Monsoon the prevailing winds blow from the **south or south-west**, from the direction of Sumatra and Kalimantan (Borneo), where land and forest fires are common in the drier months. The smoke drifts over Singapore. Typhoons don't track south to Singapore, and cold air from China arrives with the *North-east* Monsoon.",
+          "In the SW Monsoon the prevailing winds blow from the **south-east or south-west**. South-westerlies come from the direction of Sumatra and south-easterlies from Kalimantan (Borneo), where land and forest fires are common in the drier months. The smoke drifts over Singapore. Typhoons don't track south to Singapore, and cold air from China arrives with the *North-east* Monsoon.",
         difficulty: "core",
         guideRef: "types-of-extreme-weather",
         hints: ["Which direction do the winds come from in the South-west Monsoon?", "What lies upwind of Singapore in that direction?"],
-        strategy: "Work it out from the map",
+        strategy: "Cause → process → effect",
       },
       {
         kind: "mcq",
@@ -687,38 +655,25 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "extreme-weather-m3-q13",
-        question:
-          "A barometer at a coastal town gave these readings every 6 hours:\n\n| 00:00 | 06:00 | 12:00 | 18:00 |\n|---|---|---|---|\n| 1010 mb | 1004 mb | 992 mb | 978 mb |\n\nWhat is the most likely explanation?",
-        options: [
-          "A high-pressure system is arriving, bringing clear skies",
-          "A deep low-pressure system, possibly a tropical storm, is approaching",
-          "The barometer must be broken, because pressure cannot change this much",
-          "The weather is becoming calmer and more settled",
-        ],
+        question: "A barometer at a coastal town gave these readings every 6 hours:\n\n| 00:00 | 06:00 | 12:00 | 18:00 |\n|---|---|---|---|\n| 1010 mb | 1004 mb | 992 mb | 978 mb |\n\nIf the pressure keeps falling at the same rate as it did between 12:00 and 18:00, what will it be at **21:00**, and what does this suggest?",
+        options: ["About 964 mb — a deepening low, possibly a tropical storm, is approaching", "About 971 mb — a deepening low, possibly a tropical storm, is approaching", "About 985 mb — pressure is recovering, so the storm has passed", "About 973 mb — a deepening low, possibly a tropical storm, is approaching"],
         answerIndex: 1,
-        explanation:
-          "Pressure fell by 32 mb in 18 hours, and the fall is **speeding up** (6, then 12, then 14 mb). A rapid fall means a deep **low** is getting closer — with a drop this large, very likely a tropical storm. Rising pressure, not falling, would signal a high and settled weather.",
+        explanation: "Between 12:00 and 18:00 pressure fell 992 − 978 = 14 mb in 6 hours, which is 7 mb every 3 hours. At 21:00: 978 − 7 = **971 mb**. Taking off the whole 14 mb gives 964 mb — that is 6 hours, not 3. Using the average fall over all 18 hours (32 ÷ 18 ≈ 1.8 mb an hour) gives about 973 mb, but the question asks for the latest, faster rate. Adding instead of subtracting gives 985 mb. The fall is speeding up (6, then 12, then 14 mb), so a deep low is getting closer — possibly a tropical storm.",
         difficulty: "challenge",
         guideRef: "forecasting",
-        hints: ["Is the pressure rising or falling?", "Work out the change in each 6-hour step. Is it getting faster?", "Falling pressure means a low is approaching."],
+        hints: ["Is the pressure rising or falling — and is the fall speeding up?", "Work out the fall between 12:00 and 18:00.", "21:00 is only half of a 6-hour step."],
         strategy: "TEA (Trend, Evidence, Anomaly)",
       },
       {
         kind: "mcq",
         id: "extreme-weather-m3-q14",
-        question: "Why is the **storm surge** often the deadliest part of a tropical storm?",
-        options: [
-          "It is caused by an earthquake under the sea, so it gives no warning",
-          "It only happens far out at sea, where ships cannot escape",
-          "Low pressure and strong onshore winds raise the sea and push it inland over low-lying coasts, flooding large areas very quickly",
-          "It brings freezing water that causes hypothermia",
-        ],
+        question: "Which set of conditions would produce the **highest** storm surge when a tropical storm reaches the coast?",
+        options: ["Low tide, with strong offshore winds blowing from the land out to sea", "A storm centre with unusually high air pressure pressing down on the sea", "High tide, strong onshore winds and very low pressure, with a shallow sea beside a low, gently sloping coast", "Deep water right up to steep cliffs, so the water arrives faster"],
         answerIndex: 2,
-        explanation:
-          "Very low pressure lets the sea surface bulge upwards, and strong **onshore winds** pile the water against the coast. On flat, low-lying, densely populated coasts the surge floods large areas within minutes, and moving water is extremely dangerous. An earthquake causes a *tsunami*, not a storm surge.",
+        explanation: "A surge is raised by **very low pressure** (the sea surface bulges up) and **onshore winds** (which pile water against the coast). Winds pile water up most easily over a **shallow** sea, a **low, gently sloping** coast lets it flood far inland, and arriving at **high tide** puts the surge on top of the tide. Offshore winds push water away from the coast; the centre of a tropical storm has very *low* pressure, never high; and deep water beside steep cliffs keeps the surge small and stops it flooding inland.",
         difficulty: "challenge",
         guideRef: "tropical-storms",
-        hints: ["What two things in a storm can raise the level of the sea?", "Where do many people live — on high cliffs or low coasts?"],
+        hints: ["Two things in a tropical storm raise the sea surface. What are they?", "Would water pile up more easily over a shallow sea or a deep one?", "What would the tide add?"],
         strategy: "Cause → process → effect",
       },
       {
