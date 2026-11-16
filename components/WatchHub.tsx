@@ -96,8 +96,8 @@ export function WatchHub({ topics }: { topics: WatchTopicItem[] }) {
           </div>
           <div className="md:col-span-5">
             <Image
-              src="/coaching/assets/hero.jpg"
-              alt="Geography Lab coaching cast"
+              src="/videos/posters/coastal-landforms.jpg"
+              alt="Totally Raotional: Off the Map — Tara, Dad and Globo the talking globe on the Dorset coast"
               width={960}
               height={540}
               className="h-auto w-full rounded-2xl border border-line object-cover"
