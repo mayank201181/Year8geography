@@ -45,11 +45,11 @@ const parseTab = (v: string | null): TopicTab => (TABS.some((t) => t.id === v) ?
 const HEADER_OFFSET = 57;
 
 const STRAND_STYLE: Record<string, { text: string; soft: string; border: string; bar: string }> = {
-  Number: { text: "text-s-number", soft: "bg-s-number/10", border: "border-s-number/30", bar: "bg-s-number" },
-  "Ratio & Proportion": { text: "text-s-ratio", soft: "bg-s-ratio/10", border: "border-s-ratio/30", bar: "bg-s-ratio" },
-  Algebra: { text: "text-s-algebra", soft: "bg-s-algebra/10", border: "border-s-algebra/30", bar: "bg-s-algebra" },
-  "Geometry & Measure": { text: "text-s-geometry", soft: "bg-s-geometry/10", border: "border-s-geometry/30", bar: "bg-s-geometry" },
-  "Statistics & Probability": { text: "text-s-stats", soft: "bg-s-stats/10", border: "border-s-stats/30", bar: "bg-s-stats" },
+  Skills: { text: "text-s-number", soft: "bg-s-number/10", border: "border-s-number/30", bar: "bg-s-number" },
+  Coasts: { text: "text-s-ratio", soft: "bg-s-ratio/10", border: "border-s-ratio/30", bar: "bg-s-ratio" },
+  Cities: { text: "text-s-algebra", soft: "bg-s-algebra/10", border: "border-s-algebra/30", bar: "bg-s-algebra" },
+  "Extreme Environments": { text: "text-s-geometry", soft: "bg-s-geometry/10", border: "border-s-geometry/30", bar: "bg-s-geometry" },
+  Population: { text: "text-s-stats", soft: "bg-s-stats/10", border: "border-s-stats/30", bar: "bg-s-stats" },
 };
 
 /** In-app URL for a topic tab (optionally with an open practice runner or a hash). */
@@ -428,7 +428,7 @@ export function TopicView({
 
   const drills = useMemo(() => drillsForTopic(topic.id), [topic.id]);
   const runner = useMemo(() => resolveRunner(topic, drills, openParam), [topic, drills, openParam]);
-  const strand = STRAND_STYLE[topic.strand] ?? STRAND_STYLE.Number;
+  const strand = STRAND_STYLE[topic.strand] ?? STRAND_STYLE.Skills;
 
   const shape = useMemo<TopicShape>(() => {
     const meta = metaById(topic.id);

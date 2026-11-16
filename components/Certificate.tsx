@@ -32,7 +32,7 @@ export function PrintStyles({ orientation = "portrait", margin = "12mm" }: { ori
 @media print {
   :root:root:root {
     --bg: #ffffff; --surface: #ffffff; --surface-2: #f0f2f9; --ink: #171a2f; --ink-2: #555b78; --line: #e0e3ef;
-    --brand: #4f46e5; --brand-2: #7c3aed; --brand-ink: #ffffff; --brand-soft: #eceafe;
+    --brand: #0e7490; --brand-2: #0369a1; --brand-ink: #ffffff; --brand-soft: #e0f2fe;
     --accent: #f59e0b; --accent-soft: #fef3c7; --good: #15803d; --good-soft: #dcfce7;
     --bad: #c2410c; --bad-soft: #ffedd5; --warn: #a16207; --warn-soft: #fef9c3; --info: #0369a1; --info-soft: #e0f2fe;
     --s-number: #4f46e5; --s-ratio: #0d9488; --s-algebra: #7c3aed; --s-geometry: #ea580c; --s-stats: #db2777;
@@ -64,18 +64,18 @@ export function PrintButton({ label = "Print", className = "" }: { label?: strin
 // ------------------------------------------------------------------ helpers
 
 const STRAND_DOT: Record<string, string> = {
-  Number: "bg-s-number",
-  "Ratio & Proportion": "bg-s-ratio",
-  Algebra: "bg-s-algebra",
-  "Geometry & Measure": "bg-s-geometry",
-  "Statistics & Probability": "bg-s-stats",
+  Skills: "bg-s-number",
+  Coasts: "bg-s-ratio",
+  Cities: "bg-s-algebra",
+  "Extreme Environments": "bg-s-geometry",
+  Population: "bg-s-stats",
 };
 const STRAND_TEXT: Record<string, string> = {
-  Number: "text-s-number",
-  "Ratio & Proportion": "text-s-ratio",
-  Algebra: "text-s-algebra",
-  "Geometry & Measure": "text-s-geometry",
-  "Statistics & Probability": "text-s-stats",
+  Skills: "text-s-number",
+  Coasts: "text-s-ratio",
+  Cities: "text-s-algebra",
+  "Extreme Environments": "text-s-geometry",
+  Population: "text-s-stats",
 };
 
 interface Row {
@@ -142,7 +142,7 @@ const SEAL_EDGE = (() => {
 function Seal({ className }: { className?: string }) {
   const grad = `seal-${useId().replace(/[^a-zA-Z0-9_-]/g, "")}`;
   return (
-    <svg viewBox="0 0 120 120" className={className} role="img" aria-label="Year 8 Maths Lab seal">
+    <svg viewBox="0 0 120 120" className={className} role="img" aria-label="Year 8 Geography Lab seal">
       <defs>
         <linearGradient id={grad} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" style={{ stopColor: "var(--brand)" }} />
@@ -194,7 +194,7 @@ function CertificateSheet({ heading, name, verb, subject, icon, strand, stats, d
           <span aria-hidden className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-brand-2 text-base text-brand-ink">
             π
           </span>
-          Year 8 Maths Lab
+          Year 8 Geography Lab
         </div>
         <p className="relative mt-5 text-xs font-extrabold uppercase tracking-[0.32em] text-warn sm:text-sm">{heading}</p>
         <p className="relative mt-5 text-ink-2">This certifies that</p>
@@ -229,7 +229,7 @@ function CertificateSheet({ heading, name, verb, subject, icon, strand, stats, d
           </div>
           <Seal className="h-16 w-16 sm:h-24 sm:w-24" />
           <div className="border-t-2 border-line pt-1.5 text-sm">
-            <div className="font-serif font-bold italic text-ink">Year 8 Maths Lab</div>
+            <div className="font-serif font-bold italic text-ink">Year 8 Geography Lab</div>
             <div className="text-xs text-ink-2">Awarded by</div>
           </div>
         </div>
@@ -500,7 +500,7 @@ export function Certificate({ kind, topic, summaries }: CertificateProps) {
         <p className="text-sm text-ink-2">
           Also working towards the{" "}
           <Link href="/certificate/year8" className="font-bold text-brand hover:underline">
-            Year 8 Maths certificate
+            Year 8 Geography certificate
           </Link>
           .
         </p>
@@ -574,7 +574,7 @@ export function Certificate({ kind, topic, summaries }: CertificateProps) {
           <div>
             <h1 className="text-2xl font-black tracking-tight">Year 8 certificate earned 🎓</h1>
             <p className="text-ink-2">
-              {qualifying.length} topics at {YEAR8_TOPIC_PCT}%+ mastery — a whole year of maths. Print it, frame it, or save it as a PDF.
+              {qualifying.length} topics at {YEAR8_TOPIC_PCT}%+ mastery — a whole year of geography. Print it, frame it, or save it as a PDF.
             </p>
           </div>
           {controls}
@@ -620,7 +620,7 @@ export function Certificate({ kind, topic, summaries }: CertificateProps) {
     <div className="space-y-5">
       <header>
         <span className="chip">🎓 Certificate of Achievement</span>
-        <h1 className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">Year 8 Maths certificate</h1>
+        <h1 className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">Year 8 Geography certificate</h1>
         <p className="mt-1 text-ink-2">
           Get any {YEAR8_TOPICS_NEEDED} of the {rows.length} topics to {YEAR8_TOPIC_PCT}% mastery or more to unlock a printable certificate for the whole year.
         </p>

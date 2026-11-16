@@ -37,12 +37,12 @@ export function EpisodesHub() {
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <div className="flex flex-wrap gap-2">
-            <span className="chip border-0 bg-brand-soft text-brand">📺 Season 1 · {eps.length} episode{eps.length === 1 ? "" : "s"} · {totalMin} min</span>
+            <span className="chip border-0 bg-brand-soft text-brand">📺 Season 2 · Off the Map · {eps.length} episode{eps.length === 1 ? "" : "s"} · {totalMin} min</span>
             <span className="chip">⭐ {watchedCount}/{eps.length} watched</span>
           </div>
-          <h1 className="mt-2 text-2xl font-black sm:text-3xl">Totally Raotional</h1>
+          <h1 className="mt-2 text-2xl font-black sm:text-3xl">Totally Raotional: Off the Map</h1>
           <p className="text-sm text-ink-2">
-            One sarcastic family, one 100-eyed calculator monster, every Year 8 topic. Each episode ends with three pause challenges.
+            One sarcastic family, one grumpy talking globe, every Year 8 topic. Each episode ends with three pause challenges.
           </p>
         </div>
         <label className="flex cursor-pointer items-center gap-2 text-sm font-bold">

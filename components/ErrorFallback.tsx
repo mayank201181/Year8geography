@@ -11,7 +11,7 @@ export function ErrorFallback({ error, onRetry }: { error?: Error & { digest?: s
       <p style={{ color: "#555b78" }}>Something went wrong on this page. Your saved progress is safe.</p>
       <div style={{ display: "flex", gap: 8, justifyContent: "center", marginTop: 16, flexWrap: "wrap" }}>
         {onRetry ? (
-          <button type="button" onClick={onRetry} style={{ padding: "10px 16px", borderRadius: 12, background: "#4f46e5", color: "#fff", fontWeight: 700, border: 0, cursor: "pointer" }}>
+          <button type="button" onClick={onRetry} style={{ padding: "10px 16px", borderRadius: 12, background: "#0e7490", color: "#fff", fontWeight: 700, border: 0, cursor: "pointer" }}>
             Try again
           </button>
         ) : null}

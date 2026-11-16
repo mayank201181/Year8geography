@@ -28,19 +28,19 @@ interface TopicGroup {
 }
 
 const STRAND_DOT: Record<Strand, string> = {
-  Number: "bg-s-number",
-  "Ratio & Proportion": "bg-s-ratio",
-  Algebra: "bg-s-algebra",
-  "Geometry & Measure": "bg-s-geometry",
-  "Statistics & Probability": "bg-s-stats",
+  Skills: "bg-s-number",
+  Coasts: "bg-s-ratio",
+  Cities: "bg-s-algebra",
+  "Extreme Environments": "bg-s-geometry",
+  Population: "bg-s-stats",
 };
 
 const STRAND_BORDER: Record<Strand, string> = {
-  Number: "border-l-s-number",
-  "Ratio & Proportion": "border-l-s-ratio",
-  Algebra: "border-l-s-algebra",
-  "Geometry & Measure": "border-l-s-geometry",
-  "Statistics & Probability": "border-l-s-stats",
+  Skills: "border-l-s-number",
+  Coasts: "border-l-s-ratio",
+  Cities: "border-l-s-algebra",
+  "Extreme Environments": "border-l-s-geometry",
+  Population: "border-l-s-stats",
 };
 
 /** Same palette as LevelBadge (soft chip) plus a solid colour for the stacked bar. */

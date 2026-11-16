@@ -648,7 +648,7 @@ export function GuideView({ topic, extras, onPractise }: { topic: Topic; extras:
   const core = sections.filter((s) => !stretchIds.has(s.id));
   const coreRead = core.filter((s) => isRead(s.id)).length;
   const allCoreRead = core.length > 0 && coreRead === core.length;
-  const askContext = `Year 8 maths topic: ${topic.title}. Lesson sections: ${sections.map((s) => s.heading).join("; ")}.`;
+  const askContext = `Year 8 geography topic: ${topic.title}. Lesson sections: ${sections.map((s) => s.heading).join("; ")}.`;
   const didYouKnow = extras.didYouKnow ?? [];
   const activities = extras.activities ?? [];
   const bonus = extras.bonusDiagrams ?? [];
@@ -795,7 +795,7 @@ export function GuideView({ topic, extras, onPractise }: { topic: Topic; extras:
                     ) : null}
                     {a.maths ? (
                       <div className="mt-4 rounded-xl bg-brand-soft p-3 text-sm">
-                        <div className="font-extrabold text-brand">The maths</div>
+                        <div className="font-extrabold text-brand">The geography</div>
                         <Rich text={a.maths} className="mt-1" />
                       </div>
                     ) : null}
@@ -825,7 +825,7 @@ export function GuideView({ topic, extras, onPractise }: { topic: Topic; extras:
 
           {extras.history ? (
             <section aria-labelledby="gv-history" className="card p-4 sm:p-6">
-              <div className="text-xs font-black uppercase tracking-wider text-ink-2">📜 From the history of maths</div>
+              <div className="text-xs font-black uppercase tracking-wider text-ink-2">📜 From the history of geography &amp; exploration</div>
               <h2 id="gv-history" className="mt-1 text-lg font-extrabold">
                 <RichInline text={extras.history.title} />
               </h2>

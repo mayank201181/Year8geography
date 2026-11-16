@@ -91,7 +91,7 @@ const TIPS = [
 function CalcBadge({ calculator }: { calculator: boolean }) {
   return calculator ? (
     <span className="chip border-0 bg-info-soft text-info">
-      <span aria-hidden>🧮</span> Calculator
+      <span aria-hidden>🧮</span> Calculator allowed
     </span>
   ) : (
     <span className="chip border-0 bg-bad-soft text-bad">
@@ -263,7 +263,7 @@ export function ExamView({ papers, topicTitles, practiceTopics = [] }: ExamViewP
         <>
           <ol className="grid gap-3 sm:grid-cols-3" aria-label="How it works">
             {[
-              { n: 1, title: "Choose a paper", text: "Calculator or non-calculator, timed or not." },
+              { n: 1, title: "Choose a paper", text: "Human, physical, skills or the full mixed paper — timed or not." },
               { n: 2, title: "Answer everything", text: "Nothing is marked as you go — jump between questions freely." },
               { n: 3, title: "Mark & review", text: "Get your score, mark written answers, and see which topics to revise." },
             ].map((s) => (
@@ -344,7 +344,7 @@ export function ExamView({ papers, topicTitles, practiceTopics = [] }: ExamViewP
                             <Switch checked={useTimer && timerAvailable} onChange={setUseTimer} disabled={!timerAvailable} labelledBy={`${headingId}-timer`} describedBy={`${headingId}-timer-desc`} />
                           </div>
                           <ul className="mt-3 list-disc space-y-0.5 pl-5 text-sm text-ink-2">
-                            <li>{paper.calculator ? "You may use a calculator." : "No calculator — have scrap paper and a pencil ready."}</li>
+                            <li>{paper.calculator ? "You may use a calculator. Have a pencil and ruler ready for graphs and maps." : "No calculator — have scrap paper and a pencil ready."}</li>
                             <li>Answers are marked when you press “Finish & mark”. Written answers are marked by you against the mark scheme.</li>
                           </ul>
                           <div className="mt-4 flex flex-wrap gap-2">

@@ -9,16 +9,16 @@ import { PrintButton, PrintStyles } from "@/components/Certificate";
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {
-  title: "Formula & facts sheet",
-  description: "Every key Year 8 maths formula and fact in one place, grouped by strand and topic — print it for revision.",
+  title: "Key terms & facts",
+  description: "Every Year 8 geography key term and key fact in one place, grouped by strand and topic — print it for revision.",
 };
 
 const STRAND_STYLE: Record<string, { text: string; border: string; dot: string }> = {
-  Number: { text: "text-s-number", border: "border-s-number", dot: "bg-s-number" },
-  "Ratio & Proportion": { text: "text-s-ratio", border: "border-s-ratio", dot: "bg-s-ratio" },
-  Algebra: { text: "text-s-algebra", border: "border-s-algebra", dot: "bg-s-algebra" },
-  "Geometry & Measure": { text: "text-s-geometry", border: "border-s-geometry", dot: "bg-s-geometry" },
-  "Statistics & Probability": { text: "text-s-stats", border: "border-s-stats", dot: "bg-s-stats" },
+  Skills: { text: "text-s-number", border: "border-s-number", dot: "bg-s-number" },
+  Coasts: { text: "text-s-ratio", border: "border-s-ratio", dot: "bg-s-ratio" },
+  Cities: { text: "text-s-algebra", border: "border-s-algebra", dot: "bg-s-algebra" },
+  "Extreme Environments": { text: "text-s-geometry", border: "border-s-geometry", dot: "bg-s-geometry" },
+  Population: { text: "text-s-stats", border: "border-s-stats", dot: "bg-s-stats" },
 };
 
 const slug = (s: string) => s.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -39,12 +39,12 @@ export default function FormulasPage() {
       <PrintStyles orientation="portrait" margin="12mm" />
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div className="min-w-0">
-          <h1 className="text-2xl font-black tracking-tight sm:text-3xl print:text-xl">Formula &amp; facts sheet</h1>
-          <p className="mt-1 max-w-2xl text-ink-2 print:hidden">Every key formula and fact from the lessons in one place. Keep it open while you practise, or print it for revision.</p>
+          <h1 className="text-2xl font-black tracking-tight sm:text-3xl print:text-xl">Key terms &amp; facts</h1>
+          <p className="mt-1 max-w-2xl text-ink-2 print:hidden">Every key term and key fact from the lessons in one place — your knowledge organiser. Keep it open while you practise, or print it for revision.</p>
           {formulaCount ? (
             <p className="mt-1 text-sm font-bold text-ink-2 print:text-xs print:font-normal">
-              {formulaCount} formulas &amp; facts · {topicCount} topic{topicCount === 1 ? "" : "s"}
-              <span className="hidden print:inline"> · Year 8 Maths Lab</span>
+              {formulaCount} key terms &amp; facts · {topicCount} topic{topicCount === 1 ? "" : "s"}
+              <span className="hidden print:inline"> · Year 8 Geography Lab</span>
             </p>
           ) : null}
         </div>
@@ -67,7 +67,7 @@ export default function FormulasPage() {
           <div className="text-4xl" aria-hidden>
             📋
           </div>
-          <h2 className="mt-2 text-xl font-extrabold">The formula sheet is on its way</h2>
+          <h2 className="mt-2 text-xl font-extrabold">The key-terms sheet is on its way</h2>
           <p className="mx-auto mt-2 max-w-md text-ink-2">It fills up automatically as topic lessons are published. In the meantime, every lesson has its own key points.</p>
           <Link href="/topics" className="btn btn-primary mt-5">
             Browse topics

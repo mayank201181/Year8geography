@@ -53,7 +53,7 @@ export function WatchHub({ topics }: { topics: WatchTopicItem[] }) {
     }
   }
 
-  const strands = ["All", "Number", "Ratio & Proportion", "Algebra", "Geometry & Measure", "Statistics & Probability"];
+  const strands = ["All", "Skills", "Population", "Extreme Environments", "Coasts", "Cities"];
   const visible = strand === "All" ? topics : topics.filter((t) => t.strand === strand);
   const totalCompleted = Object.keys(mcDone).length + Object.keys(scDone).length;
 
@@ -63,9 +63,9 @@ export function WatchHub({ topics }: { topics: WatchTopicItem[] }) {
         <Link href="/episodes" className="card flex items-center gap-4 border-2 border-brand p-4 transition-colors hover:bg-brand-soft/40 sm:p-5">
           <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#7c3aed] text-3xl" aria-hidden>📺</span>
           <div className="min-w-0 flex-1">
-            <div className="text-lg font-black">Sitcom Episodes: &ldquo;Totally Raotional&rdquo;</div>
+            <div className="text-lg font-black">Sitcom Episodes: &ldquo;Totally Raotional: Off the Map&rdquo;</div>
             <p className="text-sm text-ink-2">
-              {SITCOM_EPISODES.length} animated episodes, one per topic. Sarcasm, a 100-eyed calculator monster and pause challenges. Binge mode included.
+              {SITCOM_EPISODES.length} animated episodes, one per topic. Sarcasm, a grumpy talking globe and pause challenges. Binge mode included.
             </p>
           </div>
           <span className="chip shrink-0">⭐ {Object.keys(epDone).length}/{SITCOM_EPISODES.length}</span>
@@ -75,15 +75,15 @@ export function WatchHub({ topics }: { topics: WatchTopicItem[] }) {
         <div className="grid items-center gap-5 md:grid-cols-12">
           <div className="space-y-3 md:col-span-7">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="chip border-0 bg-brand-soft text-brand">20 Studio Whiteboards</span>
-              <span className="chip border-0 bg-accent-soft text-warn">20 Beast-Mode Sitcoms</span>
-              <span className="chip">⭐ {totalCompleted}/40 Watched</span>
+              <span className="chip border-0 bg-brand-soft text-brand">17 Studio Whiteboards</span>
+              <span className="chip border-0 bg-accent-soft text-warn">17 Beast-Mode Sitcoms</span>
+              <span className="chip">⭐ {totalCompleted}/34 Watched</span>
             </div>
             <h1 className="text-2xl font-black leading-tight sm:text-3xl">
-              Maths Coaching Studio &amp; Beast-Mode Sitcom TV
+              Geography Coaching Studio &amp; Beast-Mode Sitcom TV
             </h1>
             <p className="text-sm text-ink-2 sm:text-base">
-              Learn every Year 8 concept visually with <strong>Professor Pi&apos;s Interactive Whiteboards</strong>, then binge-watch <strong>Zara, Groggle &amp; Pippa</strong> roasting classic exam traps in Season 1!
+              Learn every Year 8 concept visually with <strong>Professor Atlas&apos;s Interactive Whiteboards</strong>, then binge-watch <strong>Zara, Groggle &amp; Pippa</strong> roasting classic geography exam traps!
             </p>
             <div className="flex flex-wrap gap-2 pt-1">
               <a href="/season1/index.html" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
@@ -97,7 +97,7 @@ export function WatchHub({ topics }: { topics: WatchTopicItem[] }) {
           <div className="md:col-span-5">
             <Image
               src="/coaching/assets/hero.jpg"
-              alt="Beast Mode Maths Academy cast around a glowing geometry table"
+              alt="Geography Lab coaching cast"
               width={960}
               height={540}
               className="h-auto w-full rounded-2xl border border-line object-cover"

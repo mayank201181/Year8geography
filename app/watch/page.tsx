@@ -4,7 +4,7 @@ import { WatchHub } from "@/components/WatchHub";
 
 export const metadata: Metadata = {
   title: "Watch — Studio Masterclasses & Beast Sitcoms",
-  description: "20 interactive Studio Masterclass whiteboards and 20 Beast-Mode cartoon sitcom episodes for Year 8 Maths.",
+  description: "Interactive Studio Masterclass whiteboards, cartoon sitcoms and animated episodes for every Year 8 Geography topic.",
 };
 
 export default function WatchPage() {

@@ -131,7 +131,7 @@ export function WatchTab({
                 {episodeDone ? <span className="chip border-0 bg-good-soft text-good">Done ✓</span> : null}
               </div>
               <p className="mt-0.5 text-xs text-ink-2">
-                Totally Raotional Ep {episode.num}: &ldquo;{episode.title}&rdquo; · {formatDuration(episode.durationSec)} · perfect for dinner.
+                Off the Map Ep {episode.num}: &ldquo;{episode.title}&rdquo; · {formatDuration(episode.durationSec)} · perfect for dinner.
               </p>
             </div>
           </button>
@@ -152,7 +152,7 @@ export function WatchTab({
               {mcDone ? <span className="chip border-0 bg-good-soft text-good">Done ✓</span> : null}
             </div>
             <p className="mt-0.5 text-xs text-ink-2">
-              Professor Pi&apos;s interactive visual proof, live parameter slider &amp; checkpoint quiz.
+              Professor Atlas&apos;s interactive visual proof, live parameter slider &amp; checkpoint quiz.
             </p>
           </div>
         </button>

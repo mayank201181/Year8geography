@@ -14,15 +14,17 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+          background: "linear-gradient(135deg, #0e7490 0%, #0369a1 100%)",
           borderRadius: 8,
         }}
       >
         <svg width={24} height={24} viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style={{ marginTop: 1 }}>
           <g fill="none" stroke="#ffffff" strokeWidth={13} strokeLinecap="round" strokeLinejoin="round">
-            <path d="M17 37 C 20 28 26 25 34 25 L 84 25" />
-            <path d="M41 27 C 41 50 38 65 29 77" />
-            <path d="M65 27 L 65 64 C 65 74 70 77 79 73" />
+            <circle cx="50" cy="50" r="36" />
+            <ellipse cx="50" cy="50" rx="15" ry="36" />
+            <path d="M14 50 L 86 50" />
+            <path d="M21 31 L 79 31" />
+            <path d="M21 69 L 79 69" />
           </g>
         </svg>
       </div>
