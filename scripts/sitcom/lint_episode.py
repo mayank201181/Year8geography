@@ -14,7 +14,8 @@ def load(path):
 
 BAD_SPOKEN = [
     (r"[0-9]", "digits in spoken text — write numbers as words"),
-    (r"[%/×÷=^√π<>≤≥+]", "maths symbol in spoken text — say it in words"),
+    (r"[%/×÷=^√π<>≤≥+°£$&]", "symbol in spoken text — say it in words"),
+    (r"\b(km|mm|cm|kg)\b", "unit abbreviation in spoken text — write it out (kilometres, millimetres)"),
     (r"\bnought\b", "say 'zero', not 'nought' (TTS says 'not')"),
     (r"\b(Sigh|Ugh|Hmm+|Pfft|Tsk|Argh|Ahem)\b", "interjection TTS mangles — use a real word"),
     (r"(^|[.!?]\s+)(One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+(Per ?cent|Percent)", "'One. Percent' is heard as 'one percent'"),
