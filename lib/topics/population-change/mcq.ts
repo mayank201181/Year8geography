@@ -188,7 +188,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 0,
         explanation:
-          "A TFR of 0.97 means fewer than one child per woman on average — less than half of the 2.1 needed for each generation to replace itself. It does **not** prove the total population is falling: Singapore's population has kept growing because of immigration. TFR is an average number of children, not a percentage.",
+          "A TFR of 0.97 means fewer than one child per woman on average — less than half of the 2.1 needed for each generation to replace itself. It does **not** prove the total population is falling: Singapore's total population has grown over time, mainly because of immigration. TFR is an average number of children, not a percentage.",
         difficulty: "core",
         guideRef: "significance-of-factors",
         hints: ["TFR = average children per woman in her lifetime.", "Is a low TFR the only thing that decides whether a population grows?"],
@@ -264,7 +264,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 1,
         explanation:
           "The flood victims had no real choice (forced) and stayed in their own country (internal). The nurse and the student chose to move (voluntary) and crossed borders (international); the retired couple also moved voluntarily and internationally.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "migration",
         hints: ["Check two things for each option: choice or no choice? Same country or new country?", "Only one option is both 'no choice' and 'same country'."],
         strategy: "Eliminate options",
@@ -817,7 +817,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 0,
         explanation:
-          "With a TFR of about 0.97, each generation of residents is less than half the size of the one before. As the large older generations age, deaths would overtake births, so without migrants the population would shrink and the share of elderly people would rise. Fertility does not bounce back automatically — governments have found it very hard to raise.",
+          "With a TFR of about 0.97, each generation of residents is only about half the size of the one before (or less). As the large older generations age, deaths would overtake births, so without migrants the population would shrink and the share of elderly people would rise. Fertility does not bounce back automatically — governments have found it very hard to raise.",
         difficulty: "challenge",
         guideRef: "migration",
         hints: ["What does a TFR far below 2.1 do to each new generation?", "Who would fill the jobs left by retiring workers?"],

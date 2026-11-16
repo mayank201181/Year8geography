@@ -23,7 +23,7 @@ const paper1: Paper = {
         "It is one of the best single measures of a country's healthcare and living conditions.",
       ],
       difficulty: "warmup",
-      guideRef: "birth-rate-factors",
+      guideRef: "death-rate-factors",
       hints: ["'Infant' means a baby under one year old."],
     },
     {
@@ -280,7 +280,7 @@ const paper1: Paper = {
         { point: "Ageing population / more retirees to support", keywords: ["ageing", "aging", "elderly", "old", "retire", "dependency", "live longer"] },
         { point: "Migrants fill specific jobs (construction, healthcare, domestic work) / keep the economy growing", keywords: ["construction", "healthcare", "nurses", "domestic", "economy", "foreign workers", "migrants"] },
       ],
-      commonError: "Saying the population is falling — Singapore's total population has continued to grow, largely because of immigration.",
+      commonError: "Saying the population is falling — Singapore's total population has grown over the long term (apart from a dip during COVID-19), largely because of immigration.",
       difficulty: "core",
       guideRef: "significance-of-factors",
       hints: ["Compare 0.97 with the replacement level.", "What does that mean for the number of new workers in 20 years?", "Who will do jobs such as building and nursing, and look after an ageing population?"],
@@ -581,7 +581,7 @@ const paper2: Paper = {
         "How significant is migration, compared with natural change, in explaining population change in Singapore? [6 marks]",
       marks: 6,
       modelAnswer:
-        "Migration is the more significant factor. Singapore's resident TFR was only about 0.97 in 2023, less than half the replacement level of 2.1, so natural change adds very few people each year and is expected to turn negative as the population ages. Yet Singapore's total population has kept rising to about 6.0 million (2024), and nearly a third of the people living there are non-residents such as foreign workers and students. Immigrants and new citizens fill jobs in construction, healthcare and domestic work and replace retiring workers.\n\nHowever, natural change still matters. For now, resident births still slightly outnumber deaths, and the very low birth rate is the underlying reason Singapore needs migrants at all. The government also tries to change natural change directly with policies such as the Baby Bonus. Migration numbers can also go up or down quickly — for example, when borders closed during COVID-19 the non-resident population fell.\n\nOverall, migration is the most significant factor in Singapore's population growth in the short term, because natural change is close to zero. But the low birth rate is the root cause that makes migration so important, so the two factors are linked.",
+        "Migration is the more significant factor. Singapore's resident TFR was only about 0.97 in 2023, less than half the replacement level of 2.1, so natural change adds very few people each year and is expected to turn negative as the population ages. Yet Singapore's total population has grown over the long term to about 6.0 million (2024), and nearly a third of the people living there are non-residents such as foreign workers and students. Immigrants and new citizens fill jobs in construction, healthcare and domestic work and replace retiring workers.\n\nHowever, natural change still matters. For now, resident births still slightly outnumber deaths, and the very low birth rate is the underlying reason Singapore needs migrants at all. The government also tries to change natural change directly with policies such as the Baby Bonus. Migration numbers can also go up or down quickly — for example, when borders closed during COVID-19 the non-resident population fell.\n\nOverall, migration is the most significant factor in Singapore's population growth in the short term, because natural change is close to zero. But the low birth rate is the root cause that makes migration so important, so the two factors are linked.",
       markScheme: [
         { point: "Natural change is small: TFR about 0.97, far below 2.1", keywords: ["0.97", "2.1", "replacement", "low birth", "natural change", "small"] },
         { point: "Migration drives growth: total population still rising / about a third non-resident", keywords: ["immigration", "migrants", "non-resident", "foreign workers", "third", "30%", "6 million", "rising"] },

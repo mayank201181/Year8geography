@@ -255,7 +255,7 @@ export const mcqPapers: Paper[] = [
         answerIndex: 1,
         explanation:
           "One class of 25 students of the same age at an international school is not a fair picture of a whole country of about 6 million people — international schools have many internationally mobile families, and the class contains no adults or elderly people. Percentages can be worked out for any group size (12 ÷ 25 = 48%); the problem is what the group represents, not the maths.",
-        difficulty: "challenge",
+        difficulty: "core",
         guideRef: "class-census",
         hints: ["Who is in the class? Who is missing?", "Would every school and age group give the same answer?", "Think about how representative the sample is."],
         strategy: "Spot the misconception",

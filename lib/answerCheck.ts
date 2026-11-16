@@ -146,7 +146,25 @@ function checkNumber(spec: Extract<AnswerSpec, { type: "number" }>, input: strin
     }
     return { status: "incorrect" };
   }
-  const p = parseNumberAnswer(input);
+  {
+    // "8 billion" / "1.5 million" typed for a full-size answer.
+    const g = stripGeoUnits(input);
+    const q = g && g.mult !== 1 ? parseNumberAnswer(g.num) : null;
+    if (q && near(q.value * (g as { mult: number }).mult, spec.value, spec.tolerance)) return { status: "correct" };
+  }
+  let p = parseNumberAnswer(input);
+  if (!p) {
+    // Geography answers often carry units or hedges: "about 300 people per km²", "−6 °C",
+    // "2,235 mm", "8 billion", "S$1.5 million", "45 per 1000", "64.3%". Strip them and retry.
+    const g = stripGeoUnits(input);
+    if (g) {
+      const q = parseNumberAnswer(g.num);
+      if (q) {
+        const scaled = g.mult !== 1 && near(q.value * g.mult, spec.value, spec.tolerance) ? { ...q, value: q.value * g.mult } : q;
+        p = scaled;
+      }
+    }
+  }
   if (!p) {
     // Maybe they wrote a list or an expression.
     return { status: "invalid", feedback: "Type a single number, like 12, −3.5 or 3/4." };
@@ -452,4 +470,28 @@ export function specSample(spec: AnswerSpec): string {
 /** Self-check used by tests and the content validator: does the canonical answer pass its own spec? */
 export function specSelfCheck(spec: AnswerSpec): CheckResult {
   return checkAnswer(spec, specSample(spec));
+}
+
+/**
+ * Peel geography units, hedges and currency off a typed number:
+ * "about 300 people per km²" → "300"; "8 billion" → { num: "8", mult: 1e9 }.
+ * Returns null when nothing was stripped.
+ */
+export function stripGeoUnits(raw: string): { num: string; mult: number } | null {
+  let s = normalizeInput(raw).trim();
+  const orig = s;
+  s = s.replace(/^(about|approx\.?|approximately|around|roughly|nearly|almost|c\.|ca\.|~|≈)\s*/i, "");
+  s = s.replace(/^(s\$|a\$|us\$|£|€|₦|\$)\s*/i, "");
+  let mult = 1;
+  const unit = s.match(
+    /^([−\-+]?[\d.,\s]*\d(?:\s*\/\s*\d+)?)\s*(thousand|million|billion|bn|m(?=\s|$)|k(?=\s|$))?\s*(people|persons|inhabitants|residents)?\s*(per\s*(sq\.?\s*)?(km|kilomet(re|er))s?\s*(²|2|\^2|squared)?|\/\s*km\s*(²|2|\^2)?|per\s*square\s*kilomet(re|er)s?|per\s*1,?000|per\s*thousand|‰|per\s*cent|percent|%|°\s*c|degrees?\s*(c|celsius)?|°|mm|cm|km\/h|kph|km|m\/s|metres?|meters?|m|hpa|mb|millibars?|years?|yrs?|days?|hours?|hrs?|minutes?|mins?|tonnes?|t|litres?|l|people|times)?\s*\.?$/i,
+  );
+  if (!unit) return null;
+  const word = (unit[2] ?? "").toLowerCase();
+  if (word === "thousand" || word === "k") mult = 1e3;
+  else if (word === "million" || word === "m") mult = 1e6;
+  else if (word === "billion" || word === "bn") mult = 1e9;
+  const num = unit[1].replace(/\s+/g, "");
+  if (num === orig.replace(/\s+/g, "")) return null;
+  return { num, mult };
 }
