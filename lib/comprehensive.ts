@@ -592,10 +592,10 @@ const mcqPapers: Paper<MCQ>[] = [
       {
         id: "exam-mcq-p3-q22",
         question: "The world's ecological footprint is about 2.6 global hectares per person, but Earth's biocapacity is only about 1.6. What does this show?",
-        options: ["Humanity uses only about 60% of what Earth can provide", "Every country has exactly the same footprint", "Humanity is using about 1.6 Earths' worth of resources — more than the planet can renew", "Biocapacity is growing faster than the footprint"],
+        options: ["Humanity uses only about 60% of what Earth can provide", "Every country has exactly the same footprint", "Humanity is using about 1.6–1.7 Earths' worth of resources — more than the planet can renew", "Biocapacity is growing faster than the footprint"],
         answerIndex: 2,
         hint: "Divide the footprint by the biocapacity.",
-        explanation: "2.6 ÷ 1.6 ≈ 1.6, so we use resources about 1.6 times faster than Earth can renew them — 'overshoot'. The '60%' option reverses the comparison.",
+        explanation: "2.6 ÷ 1.6 ≈ 1.6, so we use resources about 1.6–1.7 times faster than Earth can renew them (often quoted as living on '1.7 Earths') — 'overshoot'. The '60%' option reverses the comparison.",
       },
       {
         id: "exam-mcq-p3-q23",
@@ -962,7 +962,7 @@ const qaPapers: Paper<QA>[] = [
         hint: "(Birth rate − death rate) ÷ 10 gives the percentage.",
         modelAnswer: "(a) 38 − 8 = 30 per 1,000, which is 3% a year. (b) Country B has a natural decrease of 5 per 1,000 (−0.5% a year) because deaths are higher than births, so its population is falling unless immigrants arrive. (c) Country B is most likely in Stage 5 of the DTM, like Japan.",
         markScheme: [
-          { point: "Calculates 3% (30 per 1,000)", keywords: ["3 percent", "30 per", "30"] },
+          { point: "Calculates 3% (30 per 1,000)", keywords: ["3 percent", "three percent", "30 per 1000"] },
           { point: "Country B: natural decrease / population falling", keywords: ["decrease", "falling", "declin", "shrink", "negative"] },
           { point: "Identifies Stage 5", keywords: ["stage 5", "stage five", "fifth stage"] },
         ],
@@ -1127,7 +1127,7 @@ const qaPapers: Paper<QA>[] = [
         question: "Data: Antarctic tourist numbers — 1992–93: about 6,700; 2022–23: about 105,000; 2023–24: about 122,000.\n(a) Describe the trend. (b) Calculate the percentage increase from 2022–23 to 2023–24.",
         marks: 3,
         hint: "% change = (new − old) ÷ old × 100.",
-        modelAnswer: "(a) Tourist numbers have risen steeply, from about 6,700 in 1992–93 to about 105,000 in 2022–23 — around 15 times more — and passed 100,000 for the first time. (b) (122,000 − 105,000) ÷ 105,000 × 100 ≈ 16%.",
+        modelAnswer: "(a) Tourist numbers have risen steeply, from about 6,700 in 1992–93 to about 105,000 in 2022–23 — more than 15 times as many — and passed 100,000 for the first time. (b) (122,000 − 105,000) ÷ 105,000 × 100 ≈ 16%.",
         markScheme: [
           { point: "Describes an increasing trend", keywords: ["increas", "rise", "rose", "grew", "went up"] },
           { point: "Quotes data from the table", keywords: ["6700", "105000", "122000", "100000"] },
@@ -1140,11 +1140,11 @@ const qaPapers: Paper<QA>[] = [
         question: "Explain how a country can have a natural decrease but still have a growing population. Use an example.",
         marks: 3,
         hint: "There are three components of population change.",
-        modelAnswer: "Population change = (births − deaths) + (immigrants − emigrants). If net migration is positive and larger than the natural decrease, the total population still grows. For example, Singapore's resident fertility rate is only about 0.97, but immigration of workers and new residents (about 1.9 million non-residents) keeps its population growing.",
+        modelAnswer: "Population change = (births − deaths) + (immigrants − emigrants). If net migration is positive and larger than the natural decrease, the total population still grows. For example, Germany has had more deaths than births every year for about 50 years, but immigration has been greater than this natural decrease, so its total population has still grown.",
         markScheme: [
           { point: "Immigration / net migration adds people", keywords: ["immigra", "migra", "move in", "arriv"] },
           { point: "Migration is greater than the natural decrease", keywords: ["more than", "outweigh", "greater", "exceed", "larger"] },
-          { point: "Names an example", keywords: ["singapore", "germany", "uk", "united kingdom"] },
+          { point: "Names an example", keywords: ["germany", "spain", "italy"] },
         ],
         commonError: "Forgetting that migration is part of population change.",
       },
@@ -1323,7 +1323,7 @@ const qaPapers: Paper<QA>[] = [
         question: "'Climate change is the biggest threat to the places studied in Year 8 Geography.' To what extent do you agree? Use examples from at least two units.",
         marks: 6,
         hint: "Use evidence from coasts, reefs and extreme environments, then consider other threats.",
-        modelAnswer: "Climate change is a serious threat across many places. Marine heatwaves caused mass bleaching on the Great Barrier Reef in 1998, 2016, 2017, 2020, 2022 and 2024, killing about 30% of shallow-water coral in 2016. Rising sea levels, up to about 1 m by 2100, threaten Singapore, where about 30% of land is under 5 m above sea level. In extreme environments Svalbard is warming several times faster than average, thawing permafrost. However, other threats are also important: land reclamation destroyed about 60% of Singapore's reefs, crown-of-thorns starfish, farm run-off and over-fishing damage the GBR, and tourism brings waste to Everest. Overall, I largely agree, because climate change affects every unit and local action cannot stop it, but local threats often do the damage first and make places less able to cope.",
+        modelAnswer: "Climate change is a serious threat across many places. Marine heatwaves caused mass bleaching on the Great Barrier Reef in 1998, 2002, 2016, 2017, 2020, 2022 and 2024, killing about 30% of shallow-water coral in 2016. Rising sea levels, up to about 1 m by 2100, threaten Singapore, where about 30% of land is under 5 m above sea level. In extreme environments Svalbard is warming several times faster than average, thawing permafrost. However, other threats are also important: land reclamation destroyed about 60% of Singapore's reefs, crown-of-thorns starfish, farm run-off and over-fishing damage the GBR, and tourism brings waste to Everest. Overall, I largely agree, because climate change affects every unit and local action cannot stop it, but local threats often do the damage first and make places less able to cope.",
         markScheme: [
           { point: "Coral reef evidence: bleaching", keywords: ["bleach", "coral", "reef"] },
           { point: "Coastal evidence: sea-level rise / flooding", keywords: ["sea level", "storm surge", "flood", "under 5"] },

@@ -32,6 +32,16 @@ export const SITCOM_EPISODES: SitcomEpisode[] = [
     "durationSec": 520,
     "src": "/videos/population-growth.mp4",
     "poster": "/videos/posters/population-growth.jpg"
+  },
+  {
+    "num": 15,
+    "topicId": "sustainable-cities",
+    "topicShort": "Sustainable Cities",
+    "title": "Green Day",
+    "logline": "Priya's class enters the inter-class Eco City competition and Dad volunteers his design: a car park with a fountain. Atlas spins the family to Curitiba and Freiburg, Nani remembers 1960s Singapore, and Mr Tan judges with the three pillars.",
+    "durationSec": 550,
+    "src": "/videos/sustainable-cities.mp4",
+    "poster": "/videos/posters/sustainable-cities.jpg"
   }
 ];
 
