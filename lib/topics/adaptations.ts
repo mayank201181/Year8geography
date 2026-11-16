@@ -7,14 +7,14 @@ export const adaptations: Topic = {
   icon: "🐪",
   summary: "How plants, animals and people cope where life is hardest.",
   intro:
-    "A camel can go a week without drinking, a saguaro cactus can soak up hundreds of litres of water in a single storm, and an emperor penguin can stand on an ice sheet at −40°C for two months without eating. People survive in these places too — from the Inuit of the Arctic and the Tuareg of the Sahara to the Sherpa of the Himalaya and scientists at the South Pole. In this topic you will learn the difficulties of living in hot deserts, polar lands and high mountains, and explain exactly how plants, animals and people have adapted to cope.",
+    "A camel can go a week without drinking, a saguaro cactus can soak up hundreds of litres of water in a single storm, and an emperor penguin can stand on Antarctic sea ice at −40°C for two months without eating. People survive in these places too — from the Inuit of the Arctic and the Tuareg of the Sahara to the Sherpa of the Himalaya and scientists at the South Pole. In this topic you will learn the difficulties of living in hot deserts, polar lands and high mountains, and explain exactly how plants, animals and people have adapted to cope.",
 
   guide: [
     {
       id: "what-is-extreme",
       heading: "What makes an environment extreme?",
       body:
-        "An **extreme environment** is a place where conditions are so harsh — very hot, very cold, very dry, very high or very remote — that it is difficult for plants, animals and people to survive there. Geographers usually group them into **hot deserts** (e.g. the Sahara), **polar and tundra environments** (the Arctic and Antarctica) and **high mountains** (e.g. the Himalaya).\n\nA **desert** is any place that receives less than about **250 mm of precipitation a year** — so deserts can be hot *or* cold. Antarctica is actually the largest desert on Earth (about 14 million km²) because so little snow falls there. Compare Singapore, which gets more than 2,000 mm of rain a year — roughly ten times the desert limit.\n\nThe same five difficulties appear again and again:\n\n- **Water** — too little rain (hot deserts) or water locked up as ice (polar regions).\n- **Food** — few plants grow, so food chains are short and animals must travel far to feed.\n- **Temperature extremes** — the Sahara can pass 45°C by day yet fall close to 0°C at night, because clear, cloudless skies let heat escape. Russia's Vostok Station in Antarctica recorded **−89.2°C** in 1983, the coldest air temperature ever measured.\n- **Isolation** — long distances to other people, shops, hospitals and help.\n- **Access** — no roads, shifting sand, sea ice, blizzards or steep slopes make travel slow, dangerous and expensive.\n\nAn **adaptation** is a feature or behaviour that helps a living thing survive in its environment. Plants and animals adapt over many generations through **natural selection** (individuals with useful features survive and breed more). People adapt mainly through **culture** (clothing, shelter, ways of life) and **technology** — and, over thousands of years, some groups have even adapted in their **bodies** (physiology).\n\nAdaptations come in two main types: **structural** (a body feature, e.g. a camel's wide feet) and **behavioural** (something the organism does, e.g. a fennec fox hunting at night).",
+        "An **extreme environment** is a place where conditions are so harsh — very hot, very cold, very dry, very high or very remote — that it is difficult for plants, animals and people to survive there. Geographers usually group them into **hot deserts** (e.g. the Sahara), **polar and tundra environments** (the Arctic and Antarctica) and **high mountains** (e.g. the Himalaya).\n\nA **desert** is any place that receives less than about **250 mm of precipitation a year** — so deserts can be hot *or* cold. Antarctica is actually the largest desert on Earth (about 14 million km²) because so little snow falls there. Compare Singapore, which gets more than 2,000 mm of rain a year — roughly ten times the desert limit.\n\nThe same five difficulties appear again and again:\n\n- **Water** — too little rain (hot deserts) or water locked up as ice (polar regions).\n- **Food** — few plants grow, so food chains are short and animals must travel far to feed.\n- **Temperature extremes** — the Sahara can pass 45°C on summer days, yet winter nights can fall close to 0°C, and the temperature often drops by 20–30°C between afternoon and dawn, because clear, cloudless skies let heat escape. Russia's Vostok Station in Antarctica recorded **−89.2°C** in 1983, the coldest air temperature ever measured.\n- **Isolation** — long distances to other people, shops, hospitals and help.\n- **Access** — no roads, shifting sand, sea ice, blizzards or steep slopes make travel slow, dangerous and expensive.\n\nAn **adaptation** is a feature or behaviour that helps a living thing survive in its environment. Plants and animals adapt over many generations through **natural selection** (individuals with useful features survive and breed more). People adapt mainly through **culture** (clothing, shelter, ways of life) and **technology** — and, over thousands of years, some groups have even adapted in their **bodies** (physiology).\n\nAdaptations come in two main types: **structural** (a body feature, e.g. a camel's wide feet) and **behavioural** (something the organism does, e.g. a fennec fox hunting at night).",
       diagram: `<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Climate graph for In Salah, Algeria, a hot desert: tiny rainfall bars and a temperature line rising from 13 degrees in January to 37 degrees in July"><rect width="320" height="220" fill="#fffbeb"/><text x="160" y="16" font-size="11" text-anchor="middle" fill="#78350f">In Salah, Algeria (approx.) — rain ≈ 17 mm/yr</text><line x1="40" y1="30" x2="40" y2="180" stroke="#7c2d12"/><line x1="280" y1="30" x2="280" y2="180" stroke="#1d4ed8"/><line x1="40" y1="180" x2="280" y2="180" stroke="#444"/><text x="36" y="183" font-size="10" text-anchor="end" fill="#7c2d12">0</text><text x="36" y="146" font-size="10" text-anchor="end" fill="#7c2d12">10</text><text x="36" y="108" font-size="10" text-anchor="end" fill="#7c2d12">20</text><text x="36" y="71" font-size="10" text-anchor="end" fill="#7c2d12">30</text><text x="36" y="33" font-size="10" text-anchor="end" fill="#7c2d12">40</text><text x="284" y="183" font-size="10" fill="#1d4ed8">0</text><text x="284" y="146" font-size="10" fill="#1d4ed8">10</text><text x="284" y="108" font-size="10" fill="#1d4ed8">20</text><text x="284" y="71" font-size="10" fill="#1d4ed8">30</text><text x="284" y="33" font-size="10" fill="#1d4ed8">40</text><text x="12" y="110" font-size="10" fill="#7c2d12" transform="rotate(-90 12 110)" text-anchor="middle">Temp °C</text><text x="310" y="110" font-size="10" fill="#1d4ed8" transform="rotate(90 310 110)" text-anchor="middle">Rain mm</text><g fill="#3b82f6"><rect x="42" y="172" width="16" height="8"/><rect x="62" y="172" width="16" height="8"/><rect x="82" y="172" width="16" height="8"/><rect x="102" y="176" width="16" height="4"/><rect x="122" y="176" width="16" height="4"/><rect x="182" y="176" width="16" height="4"/><rect x="202" y="176" width="16" height="4"/><rect x="222" y="172" width="16" height="8"/><rect x="242" y="169" width="16" height="11"/><rect x="262" y="172" width="16" height="8"/></g><polyline points="50,131 70,120 90,105 110,86 130,71 150,49 170,41 190,45 210,60 230,83 250,109 270,128" fill="none" stroke="#dc2626" stroke-width="2.5"/><g font-size="10" text-anchor="middle" fill="#333"><text x="50" y="194">J</text><text x="70" y="194">F</text><text x="90" y="194">M</text><text x="110" y="194">A</text><text x="130" y="194">M</text><text x="150" y="194">J</text><text x="170" y="194">J</text><text x="190" y="194">A</text><text x="210" y="194">S</text><text x="230" y="194">O</text><text x="250" y="194">N</text><text x="270" y="194">D</text></g><text x="160" y="212" font-size="10" text-anchor="middle" fill="#333">Red line = mean temperature; blue bars = rainfall</text></svg>`,
       diagramCaption:
         "A hot desert climate graph. Mean temperature rises from about 13°C (January) to 37°C (July), a range of about 24°C, while total rainfall is only about 17 mm a year.",
@@ -24,10 +24,10 @@ export const adaptations: Topic = {
         "Adaptations can be structural (body features) or behavioural (actions); people also use culture and technology.",
       ],
       thinkDeeper:
-        "Antarctica is covered in ice up to 4 km thick, yet it is called a desert. If there is so much frozen water there, why is it still so hard for living things to get the water they need?",
+        "Antarctica is covered in ice up to about 4.8 km thick, yet it is called a desert. If there is so much frozen water there, why is it still so hard for living things to get the water they need?",
       discovery: {
         problem:
-          "A traveller in the Sahara records 44°C at 3 pm and 4°C at 5 am the next morning. Singapore's temperature barely changes by 8°C between day and night. Why might the desert swing by 40°C when Singapore hardly moves?",
+          "A traveller in the Sahara records 42°C at 3 pm and 12°C at 5 am the next morning. Singapore's temperature changes by only about 7–8°C between day and night. Why might the desert swing by 30°C when Singapore hardly moves?",
         idea:
           "Deserts have dry air and almost no cloud. By day, nothing blocks the Sun, so the ground heats fast; at night, nothing traps the heat, so it escapes straight back to space. Humid, cloudy Singapore keeps a 'blanket' of moisture overhead. This huge daily (diurnal) range is one reason deserts are extreme.",
       },
@@ -112,12 +112,12 @@ export const adaptations: Topic = {
       id: "polar-animals",
       heading: "Polar animals: penguins, polar bears and Arctic foxes",
       body:
-        "The two polar regions are very different. The **Arctic** (around the North Pole) is mostly a frozen **ocean** surrounded by land in Canada, Alaska, Greenland, Norway and Russia. **Antarctica** (around the South Pole) is a frozen **continent** covered by an ice sheet up to about 4.8 km thick.\n\n**Watch out — a classic exam trap:** **polar bears live only in the Arctic** and **penguins live only in the Southern Hemisphere** (Antarctica and southern oceans). They never meet in the wild. A tip: *Arctic* comes from the Greek *arktos*, 'bear' — and *Ant-arctic* means 'opposite the bear'.\n\n**Emperor penguin (Antarctica):**\n\n- **Blubber** — a thick layer of fat under the skin insulates the body and stores energy.\n- **Densely packed, overlapping feathers** with fluffy down beneath trap a layer of warm air and are waterproof.\n- **Huddling** (behavioural) — thousands of penguins pack together in winter, slowly shuffling so each bird takes a turn on the cold outside. Inside a huddle the temperature can rise above 20°C even when the air is −40°C.\n- **Counter-current heat exchange** — warm blood flowing to the feet passes cold blood returning, so heat is passed back to the body instead of lost through the feet.\n- Males **balance the egg on their feet** under a warm fold of skin (the brood pouch) for about two months through the dark winter, eating nothing and losing up to about 40% of their body weight.\n\n**Polar bear (Arctic):**\n\n- **Fur** — two layers: dense underfur plus long **guard hairs** that are actually **transparent and hollow**; they look white because they scatter light. The fur traps warm air and gives camouflage on snow and ice.\n- **Black skin** under the fur absorbs heat from the sun.\n- **Blubber** up to about 10 cm thick insulates the body and helps it float when swimming.\n- **Small ears and a short tail** reduce surface area, so less heat is lost.\n- **Huge paws** (up to about 30 cm wide) spread its weight on thin ice and act as paddles; small bumps and fur on the soles give grip.\n- It hunts seals from the **sea ice**, so melting sea ice is its biggest threat.\n\n**Arctic fox (Arctic tundra):**\n\n- Some of the warmest fur of any mammal, including **furry soles**; it can survive about −50°C.\n- **Coat changes colour** — white in winter, brown-grey in summer — for camouflage all year.\n- **Short ears, short muzzle and short legs** give a small surface area compared with body volume, reducing heat loss.\n- It wraps its **bushy tail** around its face like a scarf, and buries spare food to eat in winter (behavioural).",
+        "The two polar regions are very different. The **Arctic** (around the North Pole) is mostly a frozen **ocean** surrounded by land in Canada, Alaska, Greenland, Norway and Russia. **Antarctica** (around the South Pole) is a frozen **continent** covered by an ice sheet up to about 4.8 km thick.\n\n**Watch out — a classic exam trap:** **polar bears live only in the Arctic** and **penguins live in the Southern Hemisphere** (Antarctica and southern oceans — only the Galápagos penguin reaches just north of the equator). They never meet in the wild. A tip: *Arctic* comes from the Greek *arktos*, 'bear' — and *Ant-arctic* means 'opposite the bear'.\n\n**Emperor penguin (Antarctica):**\n\n- **Blubber** — a thick layer of fat under the skin insulates the body and stores energy.\n- **Densely packed, overlapping feathers** with fluffy down beneath trap a layer of warm air and are waterproof.\n- **Huddling** (behavioural) — thousands of penguins pack together in winter, slowly shuffling so each bird takes a turn on the cold outside. Inside a huddle the temperature can rise above 20°C even when the air is −40°C.\n- **Counter-current heat exchange** — warm blood flowing to the feet passes cold blood returning, so heat is passed back to the body instead of lost through the feet.\n- Males **balance the egg on their feet** under a warm fold of skin (the brood pouch) for about two months through the dark winter, eating nothing and losing up to about 40% of their body weight.\n\n**Polar bear (Arctic):**\n\n- **Fur** — two layers: dense underfur plus long **guard hairs** that are actually **transparent and hollow**; they look white because they scatter light. The fur traps warm air and gives camouflage on snow and ice.\n- **Black skin** under the fur absorbs heat from the sun.\n- **Blubber** up to about 10 cm thick insulates the body and helps it float when swimming.\n- **Small ears and a short tail** reduce surface area, so less heat is lost.\n- **Huge paws** (up to about 30 cm wide) spread its weight on thin ice and act as paddles; small bumps and fur on the soles give grip.\n- It hunts seals from the **sea ice**, so melting sea ice is its biggest threat.\n\n**Arctic fox (Arctic tundra):**\n\n- Some of the warmest fur of any mammal, including **furry soles**; it can survive about −50°C.\n- **Coat changes colour** — white in winter, brown-grey in summer — for camouflage all year.\n- **Short ears, short muzzle and short legs** give a small surface area compared with body volume, reducing heat loss.\n- It wraps its **bushy tail** around its face like a scarf, and buries spare food to eat in winter (behavioural).",
       diagram: `<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Globe showing the Arctic in the north with polar bears and Arctic foxes, and Antarctica in the south with emperor penguins, separated by the equator"><rect width="320" height="220" fill="#f0f9ff"/><circle cx="110" cy="110" r="90" fill="#bfdbfe" stroke="#1e3a8a"/><path d="M50 43 Q110 20 170 43 Q110 55 50 43 Z" fill="#ffffff" stroke="#64748b"/><path d="M42 172 Q110 205 178 172 Q110 160 42 172 Z" fill="#ffffff" stroke="#64748b"/><line x1="20" y1="110" x2="200" y2="110" stroke="#dc2626" stroke-dasharray="5 3"/><text x="110" y="105" font-size="10" text-anchor="middle" fill="#dc2626">Equator</text><text x="110" y="40" font-size="10" text-anchor="middle" fill="#1e3a8a">ARCTIC (ocean)</text><text x="110" y="186" font-size="10" text-anchor="middle" fill="#1e3a8a">ANTARCTICA (land)</text><g stroke="#1f2937"><line x1="170" y1="43" x2="210" y2="40"/><line x1="178" y1="172" x2="210" y2="170"/></g><g font-size="10" fill="#1f2937"><text x="212" y="30">North Pole region</text><text x="212" y="43">✔ polar bears</text><text x="212" y="56">✔ Arctic foxes</text><text x="212" y="69">✘ NO penguins</text><text x="212" y="160">South Pole region</text><text x="212" y="173">✔ emperor penguins</text><text x="212" y="186">✘ NO polar bears</text></g><text x="160" y="212" font-size="10" text-anchor="middle" fill="#334155">Arktos = bear; Ant-arctic = opposite the bear</text></svg>`,
       diagramCaption:
-        "Polar bears live only in the Arctic; penguins live only in the Southern Hemisphere. They are on opposite ends of the Earth.",
+        "Polar bears live only in the Arctic; penguins live in the Southern Hemisphere (apart from a few Galápagos penguins just north of the equator). They never meet in the wild.",
       keyPoints: [
-        "Polar bears = Arctic only; penguins = Southern Hemisphere only.",
+        "Polar bears = Arctic only; penguins = Southern Hemisphere (only the Galápagos penguin crosses just north of the equator).",
         "Blubber, dense fur or feathers and small extremities all reduce heat loss.",
         "Emperor penguins huddle and rotate — a behavioural adaptation to winter storms.",
       ],
@@ -244,13 +244,13 @@ export const adaptations: Topic = {
       id: "human-adaptations",
       heading: "How people adapt: indigenous knowledge and technology",
       body:
-        "People cannot grow fur or blubber in a lifetime, so we adapt mainly through **culture** (knowledge, clothing, shelter and ways of life passed down through generations) and **technology**. **Indigenous peoples** — the original inhabitants of a place — have developed brilliant solutions over thousands of years.\n\n**The Inuit (Arctic Canada, Greenland and Alaska):**\n\n- **Igloos** — temporary snow houses used on hunting trips. Snow is a good **insulator** because it is full of trapped air. The **dome** shape is strong and has a small surface area. The **entrance tunnel is lower than the sleeping platform**, so cold air sinks and stays in the tunnel while warm air rises to where people sleep. With just body heat and an oil lamp, the inside can be about 40°C warmer than outside.\n- **Clothing** of caribou skin in **two layers** (inner fur facing in, outer fur facing out) traps air; sealskin boots are waterproof. The words *anorak*, *parka* and *kayak* come from Arctic peoples.\n- **Diet** of seal, whale, fish and caribou is high in **fat** for energy and warmth; raw meat provides vitamins that plants cannot.\n- Today most Inuit live in modern settlements with snowmobiles, heated houses **raised on stilts** (so heat from the house does not thaw the permafrost) and food flown in at high cost.\n\n**The Tuareg and Bedouin (Sahara and Arabian deserts):**\n\n- **Nomadic pastoralism** — moving with herds of camels, goats and sheep between wells, oases and grazing areas, so no single place is overgrazed or drunk dry.\n- **Loose, flowing, layered robes** shade the skin, trap a layer of cooler air and slow sweat loss. Tuareg men wear the **tagelmust**, an indigo veil and turban that protects the face from sun and blowing sand.\n- The **Bedouin tent** (*bayt al-sha'ar*, 'house of hair') is woven from **black goat hair**. The dark cloth gives dense shade; the loose weave lets hot air escape and breezes through; when it rains the fibres **swell** and become nearly waterproof. Sides can be rolled up or let down depending on wind and sand, and it packs onto a camel.\n\n**The Sherpa (Khumbu region of Nepal, near Everest):** an ethnic group whose ancestors came from Tibet. Over many generations at altitude their **physiology** has adapted. Studies suggest Sherpas do **not** overproduce red blood cells (which would make blood thick and sluggish) but instead have **wider blood vessels and better blood flow** (more nitric oxide), and muscles whose **mitochondria use oxygen more efficiently**. Many Tibetans carry a variant of the *EPAS1* gene linked to this. Sherpas are famous as Everest guides and porters.\n\n**Technology:**\n\n- **Amundsen–Scott South Pole Station** (USA) — raised on stilts so wind blows snow underneath instead of burying it; can be jacked up as snow builds; triple-glazed, insulated walls; fuel flown in; water made by melting ice.\n- **Air conditioning** made fast-growing desert cities such as Dubai, Riyadh and Phoenix possible — Singapore's first prime minister, Lee Kuan Yew, called it one of the most important inventions of the 20th century. But it uses lots of electricity and pumps heat outside.\n- **Desalination** removes salt from seawater, usually by **reverse osmosis** (forcing water through very fine membranes at high pressure). It supplies much of the drinking water in Saudi Arabia, the UAE and Israel — and is one of Singapore's **Four National Taps**. Downsides: it uses a lot of energy and produces salty **brine** waste.",
+        "People cannot grow fur or blubber in a lifetime, so we adapt mainly through **culture** (knowledge, clothing, shelter and ways of life passed down through generations) and **technology**. **Indigenous peoples** — the original inhabitants of a place — have developed brilliant solutions over thousands of years.\n\n**The Inuit (Arctic Canada, Greenland and Alaska):**\n\n- **Igloos** — temporary snow houses used on hunting trips. Snow is a good **insulator** because it is full of trapped air. The **dome** shape is strong and has a small surface area. The **entrance tunnel is lower than the sleeping platform**, so cold air sinks and stays in the tunnel while warm air rises to where people sleep. With just body heat and an oil lamp, the inside can be about 40°C warmer than outside.\n- **Clothing** of caribou skin in **two layers** (inner fur facing in, outer fur facing out) traps air; sealskin boots are waterproof. The words *anorak*, *parka* and *kayak* come from Arctic peoples.\n- **Diet** of seal, whale, fish and caribou is high in **fat** for energy and warmth; raw meat provides vitamins that plants cannot.\n- Today most Inuit live in modern settlements with snowmobiles, heated houses **raised on stilts** (so heat from the house does not thaw the permafrost) and food flown in at high cost.\n\n**The Tuareg and Bedouin (Sahara and Arabian deserts):**\n\n- **Nomadic pastoralism** — moving with herds of camels, goats and sheep between wells, oases and grazing areas, so no single place is overgrazed or drunk dry.\n- **Loose, flowing, layered robes** shade the skin, trap a layer of cooler air and slow sweat loss. Tuareg men wear the **tagelmust**, an indigo veil and turban that protects the face from sun and blowing sand.\n- The **Bedouin tent** (*bayt al-sha'ar*, 'house of hair') is woven from **black goat hair**. The dark cloth gives dense shade; the loose weave lets hot air escape and breezes through; when it rains the fibres **swell** and become nearly waterproof. Sides can be rolled up or let down depending on wind and sand, and it packs onto a camel.\n\n**The Sherpa (Khumbu region of Nepal, near Everest):** an ethnic group whose ancestors came from Tibet. Over many generations at altitude their **physiology** has adapted. Studies suggest Sherpas do **not** overproduce red blood cells (which would make blood thick and sluggish) but instead have **wider blood vessels and better blood flow** (more nitric oxide), and muscles whose **mitochondria use oxygen more efficiently**. Many Tibetans carry a variant of the *EPAS1* gene linked to this. Sherpas are famous as Everest guides and porters.\n\n**Technology:**\n\n- **Amundsen–Scott South Pole Station** (USA) — raised on stilts so wind blows snow underneath instead of burying it; can be jacked up as snow builds; triple-glazed, insulated walls; fuel flown in; water made by melting ice.\n- **Air conditioning** made fast-growing desert cities such as Dubai, Riyadh and Phoenix possible — Singapore's first prime minister, Lee Kuan Yew, called it 'one of the signal inventions of history'. But it uses lots of electricity and pumps heat outside.\n- **Desalination** removes salt from seawater, usually by **reverse osmosis** (forcing water through very fine membranes at high pressure). It supplies much of the drinking water in Saudi Arabia, the UAE and Israel — and is one of Singapore's **Four National Taps**. Downsides: it uses a lot of energy and produces salty **brine** waste.",
       diagram: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of an igloo: snow dome, raised sleeping platform where warm air collects, lower entrance tunnel where cold air sinks, and a small vent hole"><defs><marker id="hum-warm" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker><marker id="hum-cold" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker></defs><rect width="320" height="210" fill="#f1f5f9"/><rect x="0" y="170" width="320" height="40" fill="#e2e8f0"/><path d="M60 170 A85 85 0 0 1 230 170 Z" fill="#ffffff" stroke="#64748b" stroke-width="6"/><rect x="80" y="140" width="130" height="30" fill="#cbd5e1"/><rect x="230" y="152" width="70" height="26" fill="#ffffff" stroke="#64748b" stroke-width="4"/><rect x="226" y="160" width="12" height="18" fill="#f1f5f9"/><rect x="141" y="82" width="8" height="6" fill="#f1f5f9"/><path d="M120 130 C125 115 135 105 142 92" stroke="#dc2626" stroke-width="2" fill="none" marker-end="url(#hum-warm)"/><path d="M290 160 L250 172" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#hum-cold)"/><g font-size="10" fill="#0f172a"><text x="98" y="158">Raised sleeping platform</text><text x="60" y="110" fill="#b91c1c">Warm air rises</text><text x="152" y="80">Vent hole</text><text x="236" y="146">Low entrance tunnel:</text><text x="236" y="196" fill="#1d4ed8">cold air sinks here</text><text x="6" y="30">Snow blocks: trapped air</text><text x="6" y="42">= good insulator</text><text x="6" y="200">Dome: strong, small surface area</text></g></svg>`,
       diagramCaption:
         "An Inuit igloo: trapped air in the snow insulates, and the low entrance tunnel traps sinking cold air below the raised sleeping platform.",
       keyPoints: [
         "Indigenous peoples adapt through culture: shelter, clothing, diet and nomadic ways of life.",
-        "Sherpas' bodies have adapted to altitude: better blood flow and more efficient oxygen use, not extra-thick blood.",
+        "Research suggests Sherpas' bodies have adapted to altitude: better blood flow and more efficient oxygen use, not extra-thick blood.",
         "Technology (polar stations, air conditioning, desalination) helps but often uses lots of energy.",
       ],
       thinkDeeper:
@@ -311,7 +311,7 @@ export const adaptations: Topic = {
 
   misconceptions: [
     { wrong: "Camels store water in their humps.", right: "The hump stores fat (an energy reserve). Camels survive drought by losing up to about a quarter of their body water safely and then drinking around 100 litres in minutes." },
-    { wrong: "Polar bears hunt penguins.", right: "Polar bears live only in the Arctic and penguins only in the Southern Hemisphere, so they never meet in the wild." },
+    { wrong: "Polar bears hunt penguins.", right: "Polar bears live only in the Arctic and penguins live in the Southern Hemisphere (only the Galápagos penguin reaches just north of the equator, far from any bears), so they never meet in the wild." },
     { wrong: "All deserts are hot and sandy.", right: "A desert is defined by low precipitation (under about 250 mm a year). Antarctica is the biggest desert, and most of the Sahara is rock and gravel, not dunes." },
     { wrong: "Polar bears have white fur and white skin.", right: "Their guard hairs are transparent and hollow (they look white because they scatter light) and their skin is black, which absorbs heat." },
     { wrong: "Inuit people live in igloos all year round.", right: "Igloos were traditionally temporary shelters for winter hunting trips. Most Inuit today live in modern heated houses in settlements." },
@@ -358,7 +358,7 @@ export const adaptations: Topic = {
     { front: "Hypothermia vs heatstroke", back: "Hypothermia: core temperature below 35°C. Heatstroke: core temperature about 40°C or more — cooling system fails." },
     { front: "Altitude sickness", back: "Caused by low oxygen (low air pressure), usually above 2,500 m: headache, nausea, dizziness. Prevent by ascending slowly; cure by descending." },
     { front: "Bedouin tent", back: "Black goat-hair 'house of hair': dense shade, loose weave lets hot air out, fibres swell to shed rain, easy to move by camel." },
-    { front: "Sherpa physiology", back: "Better blood flow (more nitric oxide), efficient mitochondria, no overproduction of red blood cells; EPAS1 gene variant in Tibetan ancestry." },
+    { front: "Sherpa physiology", back: "Studies suggest: better blood flow (more nitric oxide), efficient mitochondria, no overproduction of red blood cells; many carry an EPAS1 gene variant from Tibetan ancestry." },
   ],
 
   mustKnow: [
@@ -436,10 +436,10 @@ export const adaptations: Topic = {
         hint: "Name a feature, then say 'which means that…' to explain how it saves or stores water.",
         modelAnswer: "A cactus has spines instead of leaves. Spines have a very small surface area, which means that much less water is lost by transpiration. It also has a thick, swollen stem that expands after rain, so it can store large amounts of water to survive long dry periods. (Other valid points: waxy skin reduces evaporation; shallow, wide roots absorb rain quickly before it evaporates; CAM — stomata open at night when it is cooler.)",
         markScheme: [
-          { point: "Identifies a first adaptation (e.g. spines / waxy skin / shallow roots)", keywords: ["spine", "wax", "shallow root", "wide root", "cam"] },
+          { point: "Identifies a first adaptation (e.g. spines / waxy skin / shallow roots)", keywords: ["spine", "wax", "shallow root", "wide root", "crassulacean", "stomata"] },
           { point: "Explains it, e.g. small surface area so less transpiration / water loss", keywords: ["surface area", "less water", "transpiration", "evaporat", "water loss"] },
           { point: "Identifies a second adaptation (e.g. water-storing stem)", keywords: ["stem", "store", "swell", "pleat", "expand"] },
-          { point: "Explains it, e.g. stores water for long dry periods / absorbs rain quickly", keywords: ["dry period", "drought", "months", "survive", "rain quickly", "absorb"] },
+          { point: "Explains it, e.g. stores water for long dry periods / absorbs rain quickly", keywords: ["dry period", "drought", "months", "long dry", "rain quickly", "absorb"] },
         ],
         commonError: "Listing features without explaining how each one helps the plant save, collect or store water.",
         guideRef: "desert-plants",
@@ -452,7 +452,7 @@ export const adaptations: Topic = {
         modelAnswer: "An extreme environment is a place where conditions such as very high or low temperatures, very little rain or high altitude make it difficult for plants, animals and people to survive. One difficulty is a shortage of water, for example in the Sahara where it can rain less than 25 mm a year. Another is isolation — communities in Nunavut, Canada have no road links, so food and medical help must be flown in.",
         markScheme: [
           { point: "Definition: harsh conditions that make survival difficult", keywords: ["difficult", "harsh", "hard to survive", "survive", "hostile"] },
-          { point: "First difficulty (water/food/temperature)", keywords: ["water", "food", "temperature", "hot", "cold"] },
+          { point: "First difficulty (water/food/temperature)", keywords: ["water", "food", "temperature", "heat", "cold"] },
           { point: "Second difficulty (isolation/access/health)", keywords: ["isolat", "access", "remote", "road", "health"] },
         ],
         commonError: "Naming an environment (e.g. 'the desert') instead of defining what makes an environment extreme.",
@@ -481,7 +481,7 @@ export const adaptations: Topic = {
         modelAnswer: "The station is raised on stilts with a sloping underside, so wind blows snow underneath rather than burying the building, and hydraulic jacks can raise it as the snow builds up. Thick insulated walls and triple-glazed windows keep heat in against temperatures that fall below −60°C in winter. Water is made by melting ice, solving the lack of liquid water, and fuel and food are flown in during summer and stored for the winter, when there are no flights for about eight months.",
         markScheme: [
           { point: "Raised on stilts so snow blows underneath / does not bury it", keywords: ["stilt", "raised", "elevat", "blows underneath", "bury"] },
-          { point: "Can be jacked up as snow builds", keywords: ["jack", "raise", "lifted", "adjust"] },
+          { point: "Can be jacked up as snow builds", keywords: ["jack", "hydraulic", "lifted", "raise it", "adjust"] },
           { point: "Insulation / triple glazing keeps heat in", keywords: ["insulat", "triple", "glaz", "heat in", "warm"] },
           { point: "Water from melting ice / supplies stored for isolated winter", keywords: ["melt", "fuel", "flown", "store", "supplies"] },
         ],
@@ -1288,10 +1288,10 @@ export const adaptations: Topic = {
             question: "Explain why hot deserts have a large difference between day and night temperatures. (3 marks)",
             marks: 3,
             hint: "Think about clouds and moisture in the air — by day and by night.",
-            modelAnswer: "Hot deserts have very dry air and few clouds. By day, nothing blocks the Sun's rays, so the ground heats up rapidly and temperatures can pass 40°C. At night there are no clouds to trap the heat, so it radiates back into space and temperatures can fall close to freezing.",
+            modelAnswer: "Hot deserts have very dry air and few clouds. By day, nothing blocks the Sun's rays, so the ground heats up rapidly and temperatures can pass 40°C. At night there are no clouds to trap the heat, so it radiates back into space and temperatures can drop by 20–30°C, sometimes close to freezing in winter.",
             markScheme: [
               { point: "Few clouds / dry air", keywords: ["cloud", "dry air", "clear sk", "little moisture", "humidity"] },
-              { point: "By day strong sun heats the ground quickly", keywords: ["day", "sun", "heat up", "heats", "intense"] },
+              { point: "By day strong sun heats the ground quickly", keywords: ["by day", "during the day", "daytime", "heats up", "heat up", "strong sun"] },
               { point: "At night heat escapes / radiates as nothing traps it", keywords: ["night", "escape", "radiat", "lost", "trap"] },
             ],
             commonError: "Saying the Sun 'goes further away' at night, or describing the temperatures without explaining the role of clouds.",
@@ -1320,7 +1320,7 @@ export const adaptations: Topic = {
             modelAnswer: "In CAM photosynthesis, a cactus opens its stomata at night to take in carbon dioxide, which it stores. During the hot day it keeps its stomata closed and uses the stored carbon dioxide for photosynthesis. Because the night air is cooler and less drying, much less water is lost by transpiration than if the stomata opened in the day.",
             markScheme: [
               { point: "Stomata open at night (take in carbon dioxide)", keywords: ["night", "open at night", "dark"] },
-              { point: "Stomata closed during the hot day / stored CO2 used", keywords: ["closed", "day", "store", "carbon dioxide", "co2"] },
+              { point: "Stomata closed during the hot day / stored CO2 used", keywords: ["close", "shut", "during the day", "hot day", "stored"] },
               { point: "Less water lost by transpiration because night is cooler", keywords: ["less water", "transpiration", "cooler", "water loss", "evaporat"] },
             ],
             commonError: "Saying cacti 'photosynthesise at night' — light is needed; they only take in CO2 at night and photosynthesise by day.",
@@ -1362,7 +1362,7 @@ export const adaptations: Topic = {
             modelAnswer: "The hump actually stores fat (up to about 35 kg), which is used for energy when food is scarce. Camels cope with lack of water because they can lose about 25% of their body weight in water and survive, and they lose little water in the first place (dry dung, concentrated urine, sweating only when hot). When they find water they can drink about 100 litres in around 10 minutes.",
             markScheme: [
               { point: "Hump stores fat, not water", keywords: ["fat", "energy store", "not water", "35 kg"] },
-              { point: "Tolerates large water loss / saves water", keywords: ["25", "quarter", "lose", "tolerat", "dry dung", "concentrated"] },
+              { point: "Tolerates large water loss / saves water", keywords: ["25", "quarter", "body weight", "tolerat", "dry dung", "concentrated"] },
               { point: "Drinks large amounts quickly", keywords: ["100", "drink", "quickly", "litre"] },
             ],
             commonError: "Correcting the myth (fat) but not explaining how camels actually survive without water.",
@@ -1375,10 +1375,10 @@ export const adaptations: Topic = {
             hint: "Ears, feet, fur, behaviour — explain each.",
             modelAnswer: "The fennec fox has enormous ears (up to about 15 cm) full of blood vessels, which radiate heat to keep it cool and let it hear prey moving underground. Its feet have furry soles that protect it from burning sand and give grip. Its sandy-coloured fur camouflages it and keeps it warm on cold desert nights. It is nocturnal, sheltering in a cool burrow by day and hunting at night, and it gets most of its water from its food.",
             markScheme: [
-              { point: "Large ears lose heat / hear prey", keywords: ["ear", "radiat", "lose heat", "hear", "prey"] },
-              { point: "Furry soles protect from hot sand", keywords: ["sole", "feet", "foot", "paw"] },
-              { point: "Fur for camouflage / warmth at night", keywords: ["camouflag", "sandy", "fur", "cold night"] },
-              { point: "Nocturnal / burrows / water from food", keywords: ["nocturnal", "night", "burrow", "food"] },
+              { point: "Large ears lose heat / hear prey", keywords: ["ears", "radiat", "lose heat", "hear", "prey"] },
+              { point: "Furry soles protect from hot sand", keywords: ["sole", "furry feet", "furry paw", "hot sand", "burning sand"] },
+              { point: "Fur for camouflage / warmth at night", keywords: ["camouflag", "sandy", "blend", "warm at night", "cold night"] },
+              { point: "Nocturnal / burrows / water from food", keywords: ["nocturnal", "hunts at night", "hunt at night", "burrow", "water from its food", "water from food"] },
             ],
             commonError: "Saying the ears 'catch the wind to cool down' without mentioning heat loss from blood vessels/surface area.",
             guideRef: "desert-animals",
@@ -1390,9 +1390,9 @@ export const adaptations: Topic = {
             hint: "Body part vs something the organism does.",
             modelAnswer: "A structural adaptation is a physical feature of the body, such as a camel's wide, padded feet, which stop it sinking into soft sand. A behavioural adaptation is something the organism does, such as emperor penguins huddling together in winter, which reduces heat loss because each penguin is sheltered by others.",
             markScheme: [
-              { point: "Structural = physical / body feature", keywords: ["body", "physical", "feature", "part"] },
-              { point: "Valid structural example", keywords: ["feet", "hump", "spine", "ear", "blubber", "fur"] },
-              { point: "Behavioural = something the organism does / an action", keywords: ["does", "action", "behav", "act"] },
+              { point: "Structural = physical / body feature", keywords: ["body", "physical", "feature", "shape"] },
+              { point: "Valid structural example", keywords: ["feet", "hump", "spine", "ears", "blubber", "fur"] },
+              { point: "Behavioural = something the organism does / an action", keywords: ["does", "action", "acts", "what it do", "something it do"] },
               { point: "Valid behavioural example", keywords: ["huddl", "nocturnal", "migrat", "burrow", "night"] },
             ],
             commonError: "Giving two structural examples (e.g. fur and ears) and calling one of them behavioural.",
@@ -1421,8 +1421,8 @@ export const adaptations: Topic = {
             modelAnswer: "A camel can lose about 25% of its body weight in water — roughly twice what a human can safely lose (10–15%) — so it can travel for days between water sources. When it reaches water it can rehydrate very quickly, drinking about 100 litres in 10 minutes, and its oval red blood cells can swell without bursting. A human would need to carry large amounts of water and drink regularly.",
             markScheme: [
               { point: "Compares 25% with 10–15% (about twice)", keywords: ["25", "twice", "double", "10", "15"] },
-              { point: "Can travel longer between water sources", keywords: ["longer", "days", "between", "without water", "travel"] },
-              { point: "Rehydrates quickly (100 litres)", keywords: ["100", "quickly", "rehydrat", "drink"] },
+              { point: "Can travel longer between water sources", keywords: ["longer", "days", "between water", "without water", "further"] },
+              { point: "Rehydrates quickly (100 litres)", keywords: ["100", "quickly", "rehydrat", "fast"] },
             ],
             commonError: "Copying the data without explaining what advantage it gives.",
             guideRef: "desert-animals",
@@ -1450,10 +1450,10 @@ export const adaptations: Topic = {
             modelAnswer: "Plants such as the saguaro cactus of the Sonoran Desert are adapted to save and store water. Its leaves are reduced to spines, which have a tiny surface area, so less water is lost by transpiration. Its shallow, wide roots (about 10 cm deep) soak up rare rain quickly, and its pleated stem swells to store several hundred litres. It also uses CAM photosynthesis, opening its stomata only at night when it is cooler. Animals such as the dromedary camel cope with heat, drought and sand. Its hump stores fat for energy, and it can lose about 25% of its body weight in water and then drink around 100 litres in 10 minutes. Long eyelashes and closable nostrils keep out sand, and wide padded feet stop it sinking. The fennec fox avoids the heat by being nocturnal and loses heat through its huge ears. Overall, desert plants mainly adapt to save water, while animals adapt to heat and water shortage through both body features and behaviour.",
             markScheme: [
               { point: "Named plant example", keywords: ["saguaro", "cactus", "cacti", "mesquite"] },
-              { point: "Plant water-saving adaptation explained (spines / wax / CAM)", keywords: ["spine", "wax", "cam", "transpiration", "stomata"] },
+              { point: "Plant water-saving adaptation explained (spines / wax / CAM)", keywords: ["spine", "wax", "crassulacean", "transpiration", "stomata"] },
               { point: "Plant water collection / storage explained (roots / stem)", keywords: ["root", "stem", "store", "swell"] },
               { point: "Named animal example", keywords: ["camel", "fennec", "dromedary"] },
-              { point: "Animal adaptation to water shortage / heat explained", keywords: ["fat", "25", "drink", "ear", "nocturnal", "dehydrat"] },
+              { point: "Animal adaptation to water shortage / heat explained", keywords: ["fat", "25", "drink", "ears", "nocturnal", "dehydrat"] },
               { point: "Animal adaptation to sand / overall link or judgement", keywords: ["eyelash", "nostril", "feet", "sand", "overall"] },
             ],
             commonError: "Writing only about animals (or only plants), or listing features without explaining them.",
@@ -1500,7 +1500,7 @@ export const adaptations: Topic = {
             modelAnswer: "Emperor penguins have a thick layer of blubber that insulates them and stores energy, letting males go about two months without eating. Their densely packed, overlapping feathers with down underneath trap warm air and are waterproof. They huddle in groups of thousands, constantly rotating so each bird spends time in the centre, where temperatures can exceed 20°C. Counter-current blood flow in their legs means warm blood heats returning cold blood, so little heat is lost through their feet on the ice.",
             markScheme: [
               { point: "Blubber insulates / stores energy", keywords: ["blubber", "fat", "insulat", "energy store"] },
-              { point: "Dense feathers / down trap warm air", keywords: ["feather", "down", "trap"] },
+              { point: "Dense feathers / down trap warm air", keywords: ["feather", "downy", "fluffy down", "trap warm", "waterproof"] },
               { point: "Huddling and rotating", keywords: ["huddl", "rotat", "group", "together"] },
               { point: "Counter-current heat exchange / egg on feet in brood pouch", keywords: ["counter", "feet", "blood", "brood", "pouch"] },
             ],
@@ -1584,7 +1584,7 @@ export const adaptations: Topic = {
             modelAnswer: "(a) 7 − (−15) = 22°C. (b) Four months (June to September) are above 0°C. (c) This means the growing season is very short, so plants must grow, flower and produce seeds quickly. Plants are small and low-growing and many reproduce by runners because seeds may not ripen in time.",
             markScheme: [
               { point: "Range = 22°C", keywords: ["22", "22°c", "twenty-two", "twenty two"] },
-              { point: "Four months (Jun–Sep)", keywords: ["four", "4 month", "june", "jun"] },
+              { point: "Four months (Jun–Sep)", keywords: ["four", "4 month", "june", "jun sep", "jun to sep"] },
               { point: "Very short growing season", keywords: ["short", "growing season", "brief"] },
               { point: "Plants grow/flower quickly or stay small", keywords: ["quick", "fast", "small", "low", "runner"] },
             ],
@@ -1642,7 +1642,7 @@ export const adaptations: Topic = {
             markScheme: [
               { point: "First behaviour explained (e.g. huddling)", keywords: ["huddl", "rotat", "together"] },
               { point: "Second behaviour explained (e.g. food caching / tail wrapping)", keywords: ["bury", "store food", "cache", "tail", "wrap"] },
-              { point: "Third behaviour explained (e.g. denning / migration)", keywords: ["den", "migrat", "shelter", "move south"] },
+              { point: "Third behaviour explained (e.g. denning / migration)", keywords: ["snow den", "denning", "dig a den", "migrat", "move south"] },
             ],
             commonError: "Giving structural features such as fur or blubber, which are not behaviours.",
             guideRef: "polar-animals",
@@ -1656,7 +1656,7 @@ export const adaptations: Topic = {
             markScheme: [
               { point: "Agrees cold is a major challenge with evidence (temperature figure)", keywords: ["−40", "-40", "−89", "-89", "cold", "freez"] },
               { point: "Food shortage as another challenge", keywords: ["food", "prey", "scarce"] },
-              { point: "Water locked as ice / desert", keywords: ["water", "ice", "desert", "precipitation"] },
+              { point: "Water locked as ice / desert", keywords: ["water", "locked", "desert", "precipitation"] },
               { point: "Darkness / short growing season / wind", keywords: ["dark", "growing season", "wind", "short summer"] },
               { point: "Named adaptation example linked to a challenge", keywords: ["penguin", "polar bear", "arctic fox", "lichen", "blubber"] },
               { point: "Clear overall judgement", keywords: ["overall", "partly", "to some extent", "conclusion", "agree"] },
@@ -1671,7 +1671,7 @@ export const adaptations: Topic = {
             hint: "Think about ground cover, temperature, water and light.",
             modelAnswer: "About 98% of Antarctica is covered by an ice sheet, so there is very little bare ground or soil for plants to root in. Temperatures are below freezing for most of the year and the growing season is extremely short. Liquid water is scarce because it is a desert and most water is frozen, and there are months of darkness in winter when photosynthesis cannot happen.",
             markScheme: [
-              { point: "Little bare ground / soil (ice-covered)", keywords: ["ice", "soil", "bare ground", "covered"] },
+              { point: "Little bare ground / soil (ice-covered)", keywords: ["ice sheet", "covered in ice", "soil", "bare ground", "covered"] },
               { point: "Very cold / short growing season", keywords: ["cold", "freez", "growing season", "short"] },
               { point: "Little liquid water / darkness / wind", keywords: ["water", "dark", "light", "wind", "dry"] },
             ],
@@ -1705,7 +1705,7 @@ export const adaptations: Topic = {
             modelAnswer: "Height difference = 4,000 − 1,000 = 3,000 m. Temperature drop = 3 × 6.5 = 19.5°C. Temperature at the pass = 20 − 19.5 = 0.5°C.",
             markScheme: [
               { point: "Correct working: 3,000 m difference / 19.5°C drop", keywords: ["3000", "3,000", "19.5"] },
-              { point: "Correct answer 0.5°C", keywords: ["0.5", "0.5°c", "half a degree", "½"] },
+              { point: "Correct answer 0.5°C", keywords: ["0.5", "0.5°c", "half a degree", "zero point five"] },
             ],
             commonError: "Using 4,000 m instead of the 3,000 m difference, giving −6°C.",
             guideRef: "mountain-life",
@@ -1734,8 +1734,8 @@ export const adaptations: Topic = {
             markScheme: [
               { point: "Long tail: balance / warmth", keywords: ["tail", "balance", "scarf", "wrap"] },
               { point: "Wide furry paws act as snowshoes", keywords: ["paw", "snowshoe", "spread", "feet"] },
-              { point: "Thick fur: warmth / camouflage", keywords: ["fur", "camouflag", "grey", "thick"] },
-              { point: "Small ears / large nasal cavity / powerful legs", keywords: ["ear", "nasal", "nose", "leg", "leap"] },
+              { point: "Thick fur: warmth / camouflage", keywords: ["thick fur", "camouflag", "grey", "smoky", "fur keeps"] },
+              { point: "Small ears / large nasal cavity / powerful legs", keywords: ["small ear", "ears", "nasal", "nose", "legs", "leap"] },
             ],
             commonError: "Saying the long tail 'keeps it cool' or is used for swimming.",
             guideRef: "mountain-life",
@@ -1791,7 +1791,7 @@ export const adaptations: Topic = {
             markScheme: [
               { point: "Ascend slowly / acclimatise", keywords: ["slow", "acclimati", "gradual"] },
               { point: "Limit sleeping height gain / rest days / climb high sleep low", keywords: ["sleep low", "rest day", "300", "500", "sleep"] },
-              { point: "Descend if symptoms / bottled oxygen", keywords: ["descend", "go down", "lower", "bottled", "oxygen"] },
+              { point: "Descend if symptoms / bottled oxygen", keywords: ["descend", "go down", "lower altitude", "bottled", "oxygen tank", "turn back"] },
             ],
             commonError: "Suggesting warm clothing, which helps with cold but not with low oxygen.",
             guideRef: "health-risks",
@@ -1806,7 +1806,7 @@ export const adaptations: Topic = {
               { point: "Hypothermia = core temperature below 35°C", keywords: ["35", "core", "body temperature", "below 35"] },
               { point: "Hypothermia symptoms / whole body", keywords: ["shiver", "confus", "whole body", "unconscious", "slurred"] },
               { point: "Frostbite = tissue / skin freezes", keywords: ["freez", "tissue", "skin"] },
-              { point: "Frostbite affects extremities (fingers, toes, nose, ears)", keywords: ["finger", "toe", "nose", "ear", "extremit"] },
+              { point: "Frostbite affects extremities (fingers, toes, nose, ears)", keywords: ["finger", "toes", "nose", "ears", "extremit"] },
             ],
             commonError: "Treating them as the same thing, or saying frostbite is 'when you get very cold'.",
             guideRef: "health-risks",
@@ -1821,7 +1821,7 @@ export const adaptations: Topic = {
               { point: "Dehydration: high sweat loss / dry air", keywords: ["sweat", "dehydrat", "water loss", "litre"] },
               { point: "Heatstroke: body cannot cool / core 40°C+", keywords: ["40", "cool", "overheat", "heatstroke"] },
               { point: "Prevention: drink water / shade", keywords: ["drink", "water", "shade"] },
-              { point: "Prevention: avoid midday / loose clothing / head cover", keywords: ["midday", "morning", "evening", "loose", "cloth", "hat"] },
+              { point: "Prevention: avoid midday / loose clothing / head cover", keywords: ["midday", "morning", "evening", "loose", "cloth", "head cover"] },
             ],
             commonError: "Giving prevention only, with no explanation of why the risks are serious.",
             guideRef: "health-risks",
@@ -1845,7 +1845,7 @@ export const adaptations: Topic = {
             question: "Oxygen in each breath compared with sea level (approx.): 0 m 100%; 2,000 m 78%; 4,000 m 61%; 6,000 m 47%; 8,849 m 33%. Describe the trend shown and explain how it affects the human body. (4 marks)",
             marks: 4,
             hint: "Trend + data (TEA), then effects on the body.",
-            modelAnswer: "As altitude increases, the oxygen in each breath decreases: from 100% at sea level to 61% at 4,000 m and only 33% — about a third — on the summit of Everest at 8,849 m. The fall is steady, roughly 10 percentage points or more for each 2,000 m. With less oxygen reaching the blood, people breathe faster and their heart rate rises, and above about 2,500 m they may suffer altitude sickness (headaches, nausea, dizziness). At extreme heights the body cannot acclimatise, which is why above 8,000 m is called the 'death zone'.",
+            modelAnswer: "As altitude increases, the oxygen in each breath decreases: from 100% at sea level to 61% at 4,000 m and only 33% — about a third — on the summit of Everest at 8,849 m. The fall is fastest low down (22 percentage points between 0 and 2,000 m) and slightly smaller with each further 2,000 m, but oxygen keeps falling all the way up. With less oxygen reaching the blood, people breathe faster and their heart rate rises, and above about 2,500 m they may suffer altitude sickness (headaches, nausea, dizziness). At extreme heights the body cannot acclimatise, which is why above 8,000 m is called the 'death zone'.",
             markScheme: [
               { point: "Trend: oxygen decreases as altitude increases", keywords: ["decrease", "falls", "less", "drops", "lower"] },
               { point: "Quotes data (e.g. 100% to 33%)", keywords: ["33", "61", "78", "47", "third"] },
@@ -1876,9 +1876,9 @@ export const adaptations: Topic = {
             modelAnswer: "In Singapore an ambulance can usually reach a hospital within minutes. At the Amundsen–Scott South Pole Station, however, there are no flights for about eight months of winter, so a seriously ill person may have to be treated by the station's small medical team with limited equipment. Even in summer, evacuation means a long flight, and blizzards or extreme cold can ground aircraft for days. Delays allow conditions such as hypothermia, altitude sickness or injuries to become life-threatening.",
             markScheme: [
               { point: "Named extreme location", keywords: ["south pole", "antarctic", "everest", "nunavut", "sahara", "himalaya"] },
-              { point: "Isolation / distance from hospitals", keywords: ["isolat", "far", "distance", "hospital", "remote"] },
+              { point: "Isolation / distance from hospitals", keywords: ["isolat", "far away", "distance", "hospital", "remote"] },
               { point: "Access problems: no flights / no roads / weather", keywords: ["flight", "road", "weather", "blizzard", "evacuat", "helicopter"] },
-              { point: "Delay makes condition worse / limited equipment", keywords: ["delay", "worse", "limited", "equipment", "life-threat", "die"] },
+              { point: "Delay makes condition worse / limited equipment", keywords: ["delay", "worse", "limited", "equipment", "life-threat", "fatal"] },
             ],
             commonError: "Explaining the danger of the environment itself instead of why getting medical help is harder.",
             guideRef: "health-risks",
@@ -1895,7 +1895,7 @@ export const adaptations: Topic = {
               { point: "Polar risk: hypothermia explained (below 35°C)", keywords: ["hypotherm", "35", "core temperature", "too cold"] },
               { point: "Polar risk: frostbite / wind chill explained", keywords: ["frostbite", "wind chill", "freez"] },
               { point: "Comparative language / differing prevention", keywords: ["whereas", "however", "while", "in contrast", "unlike"] },
-              { point: "Similarity identified (isolation / sun / dry air)", keywords: ["both", "similar", "isolat", "snow blind", "sun"] },
+              { point: "Similarity identified (isolation / sun / dry air)", keywords: ["both", "similar", "isolat", "snow blind", "sunburn"] },
             ],
             commonError: "Writing two separate descriptions with no comparison words or similarities.",
             guideRef: "health-risks",
@@ -1927,7 +1927,7 @@ export const adaptations: Topic = {
             hint: "Material, shape, tunnel, platform.",
             modelAnswer: "Snow is full of trapped air, which is a poor conductor of heat, so the walls act as insulation. The dome shape is strong and has a small surface area for its volume, so less heat is lost. The entrance tunnel is built lower than the sleeping platform, so cold, dense air sinks into the tunnel while warm air rises to the platform where people sleep. Body heat and an oil lamp warm the inside to around 40°C warmer than outside, and a small vent lets out stale air.",
             markScheme: [
-              { point: "Snow / trapped air insulates", keywords: ["trapped air", "insulat", "air"] },
+              { point: "Snow / trapped air insulates", keywords: ["trapped air", "insulat", "poor conductor", "air pockets"] },
               { point: "Dome: small surface area / strong", keywords: ["dome", "surface area", "round", "strong"] },
               { point: "Low tunnel: cold air sinks", keywords: ["tunnel", "sink", "lower", "entrance"] },
               { point: "Raised platform: warm air rises / body heat / lamp", keywords: ["platform", "rises", "body heat", "lamp"] },
@@ -1943,7 +1943,7 @@ export const adaptations: Topic = {
             modelAnswer: "The Bedouin tent (bayt al-sha'ar) is woven from black goat hair. The dark, dense cloth casts deep shade, keeping people out of direct sunlight. Its loose weave lets hot air rise out and breezes pass through, so it does not trap heat. When it rains, the goat-hair fibres swell and close the gaps, making it almost waterproof. The sides can be raised or lowered to suit the wind and sand, and the tent is light enough to pack on a camel for a nomadic life.",
             markScheme: [
               { point: "Black goat hair gives dense shade", keywords: ["shade", "black", "goat"] },
-              { point: "Loose weave lets hot air out / breeze through", keywords: ["weave", "air", "breeze", "ventilat"] },
+              { point: "Loose weave lets hot air out / breeze through", keywords: ["weave", "hot air", "breeze", "ventilat", "airflow"] },
               { point: "Fibres swell when wet / waterproof", keywords: ["swell", "waterproof", "rain", "wet"] },
               { point: "Adjustable sides / portable for nomadic life", keywords: ["side", "portable", "camel", "move", "pack", "nomad"] },
             ],
@@ -2059,7 +2059,7 @@ export const adaptations: Topic = {
             modelAnswer: "Only about 40–50 people stay for the winter, and there are no flights for about eight months, so they are completely isolated and must deal with any emergency themselves. The Sun sets for about six months, giving continuous darkness, which can affect sleep and mental health. Temperatures often fall below −60°C, so going outside risks frostbite and hypothermia, and all food and fuel must be stored before the winter begins.",
             markScheme: [
               { point: "Isolation: no flights / small team", keywords: ["isolat", "flight", "no plane", "alone", "small team"] },
-              { point: "Months of darkness / mental health", keywords: ["dark", "sun", "mental", "sleep"] },
+              { point: "Months of darkness / mental health", keywords: ["dark", "no sun", "sun sets", "mental", "sleep"] },
               { point: "Extreme cold / supplies must be stored", keywords: ["cold", "−60", "-60", "frostbite", "supplies", "fuel"] },
             ],
             commonError: "Describing the station's design rather than the difficulties the people face.",
@@ -2100,7 +2100,7 @@ export const adaptations: Topic = {
             question: "'Technology is more important than traditional knowledge for people living in extreme environments.' To what extent do you agree? Use named examples. (6 marks)",
             marks: 6,
             hint: "PEEL for each side: technology (South Pole station, air conditioning, desalination) vs tradition (Inuit, Bedouin/Tuareg, Sherpa). Finish with a judgement.",
-            modelAnswer: "Technology is clearly vital in some extreme places. The Amundsen–Scott South Pole Station lets about 150 people live where winter temperatures fall below −60°C, using a raised design, insulation and stored fuel; no traditional knowledge exists for Antarctica because no one lived there. Similarly, air conditioning and desalination allow millions to live in Dubai and Riyadh. However, traditional knowledge has supported people for thousands of years using local, sustainable resources. The Inuit igloo uses trapped air and a low entrance tunnel to keep warm without fuel, and the Bedouin goat-hair tent gives shade and ventilation and can be moved by camel. Sherpas' physiological adaptations and local knowledge make Everest expeditions possible at all. Technology also has costs: it uses huge amounts of energy, often from fossil fuels, which worsens climate change. Overall, I partly agree: technology is more important for supporting large, modern populations and places like Antarctica, but traditional knowledge is more sustainable, and the best results come from combining them — for example Arctic houses on stilts built using an understanding of permafrost.",
+            modelAnswer: "Technology is clearly vital in some extreme places. The Amundsen–Scott South Pole Station lets up to about 150 people (40–50 in winter) live where winter temperatures fall below −60°C, using a raised design, insulation and stored fuel; no traditional knowledge exists for Antarctica because no one lived there. Similarly, air conditioning and desalination allow millions to live in Dubai and Riyadh. However, traditional knowledge has supported people for thousands of years using local, sustainable resources. The Inuit igloo uses trapped air and a low entrance tunnel to keep warm without fuel, and the Bedouin goat-hair tent gives shade and ventilation and can be moved by camel. Sherpas' physiological adaptations and local knowledge make Everest expeditions possible at all. Technology also has costs: it uses huge amounts of energy, often from fossil fuels, which worsens climate change. Overall, I partly agree: technology is more important for supporting large, modern populations and places like Antarctica, but traditional knowledge is more sustainable, and the best results come from combining them — for example Arctic houses on stilts built using an understanding of permafrost.",
             markScheme: [
               { point: "Technology example explained (South Pole station / AC / desalination)", keywords: ["south pole", "air condition", "desalinat", "station", "dubai"] },
               { point: "Technology supports large populations / places with no tradition", keywords: ["million", "large population", "no one lived", "permanent", "antarctic"] },
@@ -2119,7 +2119,7 @@ export const adaptations: Topic = {
             hint: "Borrow ideas from the South Pole station, igloos and mountain health advice.",
             modelAnswer: "For water, the team could melt snow and ice using waste heat from the generators, as the South Pole station does. For warmth, the base should be raised on stilts so blowing snow passes underneath, with thick insulation and triple glazing, and staff should wear layered, windproof clothing like the Inuit's layered skins. Because 3,200 m is high, staff should arrive gradually to acclimatise and be monitored for altitude sickness, with oxygen available. To reduce the effects of isolation, the base needs a trained medic, stored supplies of food and fuel for winter, satellite communication and an emergency evacuation plan for when flights are possible.",
             markScheme: [
-              { point: "Water: melt snow / ice", keywords: ["melt", "snow", "ice"] },
+              { point: "Water: melt snow / ice", keywords: ["melt", "melting snow", "melting ice", "snow melter"] },
               { point: "Warmth: insulation / raised building / layered clothing", keywords: ["insulat", "stilt", "raised", "layer", "glazing"] },
               { point: "Health: acclimatise / altitude sickness / frostbite precautions", keywords: ["acclimati", "altitude", "oxygen", "frostbite", "hypotherm"] },
               { point: "Isolation: stored supplies / medic", keywords: ["supplies", "store", "medic", "doctor", "fuel"] },

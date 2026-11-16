@@ -182,7 +182,7 @@ export const citiesMegacities: Topic = {
           "Megacities have multiplied, and the growth has shifted away from rich countries towards Asia, Africa and Latin America, where urbanisation is happening fastest. Asia now has the large majority of megacities.",
       },
       body:
-        "A **megacity** is an urban area with a population of **more than 10 million people**.\n\n**How the number has grown (UN figures):**\n- **1950: 2** megacities — New York and Tokyo.\n- **1975: 3** — Mexico City joined them.\n- **1990: 10**\n- **2018: 33**\n- **2030: about 43** projected. Newer UN estimates count more than 2018, though the exact total depends on how city boundaries are drawn.\n\n**Examples (rounded metro populations — sources differ by several million):**\n- **Tokyo, Japan — about 37 million** (Greater Tokyo); the UN's largest city in 2018. Its population has now peaked and is slowly falling as Japan ages.\n- **Delhi, India — about 30 million+**, growing fast and expected to become the largest.\n- **Shanghai, China — about 25–30 million.**\n- **Dhaka, Bangladesh — over 20 million.**\n- **Cairo, Egypt — about 20–22 million**, the largest city in the Arab world.\n- **Lagos, Nigeria — about 15–17 million in the city, 20 million+ in the wider metro area.**\n- **São Paulo, Brazil — about 22 million**, the largest city in South America.\n- **Mumbai, India — about 20 million+**, India's financial capital.\n\nBe aware: a 2025 UN report using a new, wider way of drawing city boundaries ranked **Jakarta** first (about 42 million), with Dhaka second and Tokyo third. Rankings depend on **where you draw the line** around a city.\n\n**Describing the distribution using TEA:**\n- **T (Trend)** — the overall pattern: most megacities are in **Asia** (about 20 of the 33 in 2018), mostly in the **Northern Hemisphere**, and many are on **coasts or major rivers** (ports and trade).\n- **E (Example)** — give named cities and data: e.g. Tokyo (about 37 million), Delhi, Shanghai, Dhaka, Mumbai.\n- **A (Anomaly)** — exceptions: e.g. Southern Hemisphere megacities such as **São Paulo, Buenos Aires and Lima**; very few in **Europe** (Moscow, Paris) and **none in Oceania**.\n\n**The shift:** in 1950 megacities were in HICs. Today most are in **LICs and NEEs**, and the fastest-growing big cities are in **Africa** (Lagos, Kinshasa, and soon Luanda and Dar es Salaam) and **South Asia**.",
+        "A **megacity** is an urban area with a population of **more than 10 million people**.\n\n**How the number has grown (UN figures):**\n- **1950: 2** megacities — New York and Tokyo.\n- **1975: 3** — Mexico City joined them.\n- **1990: 10**\n- **2018: 33**\n- **2030: about 43** projected. Newer UN estimates use different methods, so the exact total depends on how city boundaries are drawn.\n\n**Examples (rounded metro populations — sources differ by several million):**\n- **Tokyo, Japan — about 37 million** (Greater Tokyo); the UN's largest city in 2018. Its population has now roughly peaked and is expected to fall slowly as Japan ages.\n- **Delhi, India — about 30 million+**, growing fast and expected to become the largest.\n- **Shanghai, China — about 25–30 million.**\n- **Dhaka, Bangladesh — over 20 million.**\n- **Cairo, Egypt — about 20–22 million**, the largest city in the Arab world.\n- **Lagos, Nigeria — about 15–17 million in the city, 20 million+ in the wider metro area.**\n- **São Paulo, Brazil — about 22 million**, the largest city in South America.\n- **Mumbai, India — about 20 million+**, India's financial capital.\n\nBe aware: a 2025 UN report using a new, wider way of drawing city boundaries ranked **Jakarta** first (about 42 million), with Dhaka second and Tokyo third. Those newer figures are not directly comparable with the 2018 list used in this topic — rankings depend on **where you draw the line** around a city.\n\n**Describing the distribution using TEA:**\n- **T (Trend)** — the overall pattern: most megacities are in **Asia** (about 20 of the 33 in 2018), mostly in the **Northern Hemisphere**, and many are on **coasts or major rivers** (ports and trade).\n- **E (Example)** — give named cities and data: e.g. Tokyo (about 37 million), Delhi, Shanghai, Dhaka, Mumbai.\n- **A (Anomaly)** — exceptions: e.g. Southern Hemisphere megacities such as **São Paulo, Buenos Aires and Lima**; very few in **Europe** (Moscow, Paris) and **none in Oceania**.\n\n**The shift:** in 1950 megacities were in HICs. Today most are in **LICs and NEEs**, and the fastest-growing big cities are in **Africa** (Lagos, Kinshasa, and soon Luanda and Dar es Salaam) and **South Asia**.",
       diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart of the number of megacities in each world region in 2018"><text x="160" y="14" font-size="11" text-anchor="middle" font-weight="bold" fill="#1e293b">Megacities by region, 2018 (UN): 33 total</text><text x="102" y="42" font-size="10" text-anchor="end" fill="#1e293b">Asia</text><rect x="106" y="32" width="180" height="14" fill="#7c3aed"/><text x="290" y="43" font-size="10" fill="#1e293b">20</text><text x="102" y="68" font-size="10" text-anchor="end" fill="#1e293b">Latin America</text><rect x="106" y="58" width="54" height="14" fill="#a78bfa"/><text x="164" y="69" font-size="10" fill="#1e293b">6</text><text x="102" y="94" font-size="10" text-anchor="end" fill="#1e293b">Africa</text><rect x="106" y="84" width="27" height="14" fill="#a78bfa"/><text x="137" y="95" font-size="10" fill="#1e293b">3</text><text x="102" y="120" font-size="10" text-anchor="end" fill="#1e293b">Europe</text><rect x="106" y="110" width="18" height="14" fill="#c4b5fd"/><text x="128" y="121" font-size="10" fill="#1e293b">2</text><text x="102" y="146" font-size="10" text-anchor="end" fill="#1e293b">North America</text><rect x="106" y="136" width="18" height="14" fill="#c4b5fd"/><text x="128" y="147" font-size="10" fill="#1e293b">2</text><text x="102" y="168" font-size="10" text-anchor="end" fill="#1e293b">Oceania</text><text x="110" y="168" font-size="10" fill="#1e293b">0</text><text x="160" y="190" font-size="10" text-anchor="middle" fill="#b91c1c">In 1950 there were only 2: New York and Tokyo</text></svg>`,
       diagramCaption:
         "In 2018, about 20 of the world's 33 megacities were in Asia (including Istanbul, which the UN counts as Western Asia). In 1950 there were only two, both in high-income countries.",
@@ -192,7 +192,7 @@ export const citiesMegacities: Topic = {
         "Most are now in Asia; growth has shifted from HICs to LICs and NEEs in Asia and Africa. Describe distributions with TEA.",
       ],
       thinkDeeper:
-        "Tokyo has been the world's biggest city for decades, yet its population is now falling, while Lagos and Kinshasa are growing by hundreds of thousands a year. Using what you know about natural increase and migration, explain why the 'top ten' list of 2050 will look very different from 1950's.",
+        "Tokyo has been the world's biggest city for decades, yet its population has stopped growing, while Lagos and Kinshasa are growing by hundreds of thousands a year. Using what you know about natural increase and migration, explain why the 'top ten' list of 2050 will look very different from 1950's.",
       caseStudy: {
         place: "Tokyo, Japan",
         facts: [
@@ -214,7 +214,7 @@ export const citiesMegacities: Topic = {
           "A world (global) city is defined by its CONNECTIONS and INFLUENCE — finance, headquarters, transport hubs, media and culture — not by its population. A megacity is about size; a world city is about global power.",
       },
       body:
-        "A **world city** (or **global city**) is a city that has a major influence on the **global economy, politics and culture**. It is a key **hub** in the networks of money, people, goods and information that link the world together.\n\n**Typical features of a world city:**\n- **Finance** — a major stock exchange, international banks and insurance companies.\n- **Headquarters** of large **transnational corporations (TNCs)** — companies that operate in many countries.\n- **Transport hub** — a huge international airport and often a major port.\n- **Politics** — international organisations or government headquarters (e.g. the United Nations in New York).\n- **Culture and media** — global news, arts, fashion and universities; a very **diverse** population speaking hundreds of languages.\n\n**The top world cities:** London and New York are usually ranked as the two most connected world cities (the 'Alpha++' cities in the Globalization and World Cities (GaWC) ranking). Singapore, Hong Kong, Tokyo, Paris, Shanghai and Dubai are also in the top tier.\n\n**Singapore — a world city without being a megacity:**\n- One of the world's leading **financial centres** (usually in the top four with New York, London and Hong Kong).\n- One of the world's **two busiest container ports**.\n- **Changi Airport** handles tens of millions of passengers a year (around 65–70 million), connecting to about 150 cities.\n- Hundreds of TNCs base their **Asia-Pacific regional headquarters** here.\n\n**Megacity vs world city:** some cities are both (Tokyo, New York, Shanghai). Some megacities have huge populations but less global influence (e.g. Kinshasa or Dhaka). Some world cities are not megacities (Singapore; London, with about 9 million in Greater London, depending on the boundary used).",
+        "A **world city** (or **global city**) is a city that has a major influence on the **global economy, politics and culture**. It is a key **hub** in the networks of money, people, goods and information that link the world together.\n\n**Typical features of a world city:**\n- **Finance** — a major stock exchange, international banks and insurance companies.\n- **Headquarters** of large **transnational corporations (TNCs)** — companies that operate in many countries.\n- **Transport hub** — a huge international airport and often a major port.\n- **Politics** — international organisations or government headquarters (e.g. the United Nations in New York).\n- **Culture and media** — global news, arts, fashion and universities; a very **diverse** population speaking hundreds of languages.\n\n**The top world cities:** London and New York are usually ranked as the two most connected world cities (the 'Alpha++' cities in the Globalization and World Cities (GaWC) ranking). Singapore, Hong Kong, Tokyo, Paris, Shanghai and Dubai are also in the top tier.\n\n**Singapore — a world city without being a megacity:**\n- One of the world's leading **financial centres** (usually in the top four with New York, London and Hong Kong).\n- One of the world's **two busiest container ports**.\n- **Changi Airport** handles tens of millions of passengers a year (around 65–70 million), connecting to more than 150 cities.\n- Hundreds of TNCs base their **Asia-Pacific regional headquarters** here.\n\n**Megacity vs world city:** some cities are both (Tokyo, New York, Shanghai). Some megacities have huge populations but less global influence (e.g. Kinshasa or Dhaka). Some world cities are not megacities (Singapore; London, with about 9 million in Greater London, depending on the boundary used).",
       diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Network diagram linking world cities London, New York and Singapore by finance, flights and trade"><text x="160" y="14" font-size="11" text-anchor="middle" font-weight="bold" fill="#1e293b">World cities = global hubs</text><line x1="60" y1="110" x2="160" y2="50" stroke="#2563eb" stroke-width="3"/><line x1="160" y1="50" x2="260" y2="120" stroke="#2563eb" stroke-width="3"/><line x1="60" y1="110" x2="260" y2="120" stroke="#2563eb" stroke-width="3"/><line x1="160" y1="50" x2="160" y2="160" stroke="#94a3b8" stroke-width="2"/><line x1="260" y1="120" x2="160" y2="160" stroke="#94a3b8" stroke-width="2"/><line x1="60" y1="110" x2="160" y2="160" stroke="#94a3b8" stroke-width="2"/><circle cx="160" cy="50" r="18" fill="#1d4ed8"/><text x="160" y="54" font-size="10" text-anchor="middle" fill="#ffffff">London</text><circle cx="60" cy="110" r="22" fill="#1d4ed8"/><text x="60" y="114" font-size="10" text-anchor="middle" fill="#ffffff">New York</text><circle cx="260" cy="120" r="24" fill="#1d4ed8"/><text x="260" y="124" font-size="10" text-anchor="middle" fill="#ffffff">Singapore</text><circle cx="160" cy="160" r="14" fill="#64748b"/><text x="160" y="190" font-size="10" text-anchor="middle" fill="#334155">other cities</text><text x="98" y="72" font-size="10" fill="#1e3a8a">finance</text><text x="222" y="78" font-size="10" fill="#1e3a8a">flights</text><text x="150" y="128" font-size="10" fill="#1e3a8a">trade, data</text></svg>`,
       diagramCaption:
         "World cities are the busiest junctions in global networks of money, flights, trade and information — what matters is connection, not population.",
@@ -1445,7 +1445,7 @@ export const citiesMegacities: Topic = {
               "There are exactly 10 megacities and the number never changes",
               "There were more megacities in 1950 than today",
               "All megacities are in Europe",
-              "There were about 33 in 2018 and more today, but the exact number depends on how boundaries are drawn",
+              "There were about 33 in 2018 and more are projected, but the exact number depends on how boundaries are drawn",
             ],
             answerIndex: 3,
             hint: "Good geographers hedge with 'about'.",
@@ -1676,7 +1676,7 @@ export const citiesMegacities: Topic = {
             hint: "It is a share, not a number, and it is about a change.",
             modelAnswer: "Urbanisation is the increase in the proportion (percentage) of a population living in urban areas such as towns and cities.",
             markScheme: [
-              { point: "An increase / growth over time", keywords: ["increase", "rise", "grow", "more"] },
+              { point: "An increase / growth over time", keywords: ["increase", "rise", "grow", "go up"] },
               { point: "In the proportion/percentage living in urban areas", keywords: ["proportion", "percentage", "share", "%"] },
             ],
             commonError: "Writing 'cities getting bigger' — that is urban growth.",
@@ -1702,8 +1702,8 @@ export const citiesMegacities: Topic = {
             hint: "Density = population ÷ area.",
             modelAnswer: "6,000,000 ÷ 735 = about 8,163 people per km² (roughly 8,200 per km²).",
             markScheme: [
-              { point: "Correct method: population divided by area", keywords: ["÷", "divide", "/735", "/ 735", "6,000,000 / 735", "6000000/735"] },
-              { point: "Correct answer with units (about 8,160–8,200 per km²)", keywords: ["8,163", "8163", "8,16", "8,200", "8200", "8,2"] },
+              { point: "Correct method: population divided by area", keywords: ["divide", "/735", "6,000,000 ÷ 735", "6,000,000 / 735", "6000000/735"] },
+              { point: "Correct answer with units (about 8,160–8,200 per km²)", keywords: ["8,163", "8,164", "8,160", "8,170", "8,200"] },
             ],
             commonError: "Multiplying instead of dividing, or leaving out the units (people per km²).",
             guideRef: "what-is-a-city",
@@ -1831,7 +1831,7 @@ export const citiesMegacities: Topic = {
             hint: "Think about homes, services, land and legal rights.",
             modelAnswer: "Homes are built from scrap materials such as corrugated iron, wood and plastic. There is little clean water or sanitation — many people share taps and toilets, and drains are open. Houses are overcrowded and close together. Residents usually have no legal right to the land, so they can be evicted, and settlements are often on hazardous land such as steep slopes or river banks.",
             markScheme: [
-              { point: "Makeshift building materials", keywords: ["scrap", "corrugated", "tin", "wood", "plastic", "makeshift"] },
+              { point: "Makeshift building materials", keywords: ["scrap", "corrugated", "cardboard", "wood", "plastic", "makeshift"] },
               { point: "Lack of water/sanitation", keywords: ["water", "toilet", "sanitation", "drain", "sewage"] },
               { point: "Overcrowding / high density", keywords: ["overcrowd", "crowded", "dense", "close together", "per room"] },
               { point: "No legal tenure or hazardous location", keywords: ["illegal", "tenure", "evict", "permission", "slope", "flood"] },
@@ -1924,7 +1924,7 @@ export const citiesMegacities: Topic = {
             modelAnswer: "In the CBD buildings are tall offices and shops on very expensive land. Moving out into the inner city there are older terraced houses and old factories, many now regenerated. The suburbs have newer, larger semi-detached and detached houses with gardens at a lower density. At the rural–urban fringe land is cheaper, with business parks, out-of-town shopping centres, airports and farmland. Overall, building height and land value fall, while houses get newer and green space increases.",
             markScheme: [
               { point: "CBD: tall offices/shops, high land value", keywords: ["tall", "office", "high-rise", "skyscraper", "expensive"] },
-              { point: "Inner city: old terraced housing/factories", keywords: ["terrace", "factor", "old", "warehouse", "regenerat"] },
+              { point: "Inner city: old terraced housing/factories", keywords: ["terrace", "factor", "1800s", "warehouse", "regenerat"] },
               { point: "Suburbs: larger/newer houses with gardens", keywords: ["semi-detached", "detached", "garden", "suburb", "lower density"] },
               { point: "Fringe: business parks, shopping centres, farmland / overall trend", keywords: ["business park", "out-of-town", "shopping centre", "farm", "airport", "falls"] },
             ],
@@ -1952,9 +1952,9 @@ export const citiesMegacities: Topic = {
             hint: "(33 − 10) ÷ 10 × 100.",
             modelAnswer: "(a) The number of megacities has increased, slowly at first (from 2 in 1950 to 3 in 1975) and then very rapidly since 1975, reaching 33 in 2018 with 43 projected for 2030. (b) (33 − 10) ÷ 10 × 100 = 230% increase.",
             markScheme: [
-              { point: "Overall increase", keywords: ["increas", "rise", "grow", "more"] },
+              { point: "Overall increase", keywords: ["increas", "rise", "grow", "went up"] },
               { point: "Rate: slow then rapid, with data", keywords: ["slow", "rapid", "fast", "accelerat", "1975", "since"] },
-              { point: "Correct method", keywords: ["33 - 10", "33 − 10", "23", "÷ 10", "/10"] },
+              { point: "Correct method", keywords: ["33 - 10", "23", "23 ÷ 10", "23/10", "subtract"] },
               { point: "Correct answer 230%", keywords: ["230", "2.3 times", "two hundred and thirty"] },
             ],
             commonError: "Giving 23% (dividing by 100) or 330% (dividing 33 by 10 without subtracting).",
@@ -1995,7 +1995,7 @@ export const citiesMegacities: Topic = {
             question: "Explain why Singapore is described as a world city.",
             marks: 4,
             hint: "Finance, transport, companies — with evidence.",
-            modelAnswer: "Singapore has huge global influence even though it has only about 6 million people. It is one of the world's top four financial centres, alongside New York, London and Hong Kong. Its port is one of the two busiest container ports in the world, and Changi Airport connects it to around 150 cities. Hundreds of transnational corporations have their Asia-Pacific headquarters there, so decisions made in Singapore affect the whole region.",
+            modelAnswer: "Singapore has huge global influence even though it has only about 6 million people. It is one of the world's top four financial centres, alongside New York, London and Hong Kong. Its port is one of the two busiest container ports in the world, and Changi Airport connects it to more than 150 cities. Hundreds of transnational corporations have their Asia-Pacific headquarters there, so decisions made in Singapore affect the whole region.",
             markScheme: [
               { point: "World city = global influence/connections", keywords: ["influence", "global", "connect", "hub"] },
               { point: "Finance evidence", keywords: ["financ", "bank", "stock", "money"] },
@@ -2013,7 +2013,7 @@ export const citiesMegacities: Topic = {
             modelAnswer: "First, there is little clean water or sanitation: many families share a toilet and drains are open, so diseases such as cholera and typhoid spread quickly. Second, homes are often built on hazardous land such as river banks and steep slopes, so they can be destroyed by floods or landslides, and because residents have no legal tenure they may also be evicted and lose everything.",
             markScheme: [
               { point: "Problem 1 identified (e.g. poor sanitation)", keywords: ["water", "sanitation", "toilet", "drain", "sewage"] },
-              { point: "Problem 1 explained (disease)", keywords: ["disease", "cholera", "typhoid", "diarrhoea", "ill"] },
+              { point: "Problem 1 explained (disease)", keywords: ["disease", "cholera", "typhoid", "diarrhoea", "illness"] },
               { point: "Problem 2 identified (hazards/eviction/fire/informal jobs)", keywords: ["flood", "landslide", "fire", "evict", "tenure", "informal job"] },
               { point: "Problem 2 explained (effect on people)", keywords: ["destroy", "lose", "homeless", "injur", "unsafe", "death"] },
             ],
@@ -2029,7 +2029,7 @@ export const citiesMegacities: Topic = {
             markScheme: [
               { point: "Countries use different criteria/thresholds", keywords: ["different", "own rules", "threshold", "criteria", "definition"] },
               { point: "Example with data", keywords: ["200", "50,000", "denmark", "japan", "5,000", "1,000"] },
-              { point: "Effect: the same place could be urban in one country and rural in another, distorting percentages", keywords: ["more urban", "less urban", "rural in", "higher percentage", "look", "unfair"] },
+              { point: "Effect: the same place could be urban in one country and rural in another, distorting percentages", keywords: ["more urban", "less urban", "rural in", "higher percentage", "look more", "unfair"] },
             ],
             commonError: "Saying definitions differ but not explaining the effect on the statistics.",
             guideRef: "what-is-a-city",
@@ -2055,9 +2055,9 @@ export const citiesMegacities: Topic = {
             hint: "(new − old) ÷ old × 100; check the megacity threshold.",
             modelAnswer: "(15 − 5) ÷ 5 × 100 = 200% increase. City Y is now a megacity because it has more than 10 million people.",
             markScheme: [
-              { point: "Correct method", keywords: ["15 - 5", "15 − 5", "10 ÷ 5", "10/5", "÷ 5"] },
+              { point: "Correct method", keywords: ["15 - 5", "10 ÷ 5", "10/5", "subtract", "minus"] },
               { point: "Correct answer 200%", keywords: ["200", "tripled", "three times"] },
-              { point: "Yes — over 10 million", keywords: ["10 million", "ten million", "yes", "megacity"] },
+              { point: "Yes — over 10 million", keywords: ["10 million", "ten million", "is a megacity", "is now a megacity", "over 10"] },
             ],
             commonError: "Answering 300% (dividing 15 by 5) instead of using the change.",
             guideRef: "megacities",
@@ -2124,7 +2124,7 @@ export const citiesMegacities: Topic = {
               { point: "Industrial Revolution in the 1800s", keywords: ["industrial revolution", "1800s", "19th century", "industrialis"] },
               { point: "Factory jobs pulled workers to cities", keywords: ["factor", "jobs", "pull", "industry"] },
               { point: "Farm mechanisation pushed workers out", keywords: ["machine", "mechanis", "fewer workers", "push"] },
-              { point: "LICs industrialised later / urbanising now", keywords: ["later", "now", "recent", "20th century", "today", "since"] },
+              { point: "LICs industrialised later / urbanising now", keywords: ["later", "recent", "20th century", "today", "happening now", "only began"] },
             ],
             commonError: "Saying HICs urbanised earlier 'because they are rich' without explaining industrialisation.",
             guideRef: "causes-of-urbanisation",
@@ -2138,7 +2138,7 @@ export const citiesMegacities: Topic = {
             markScheme: [
               { point: "Correct method for range", keywords: ["92 - 14", "92 − 14", "92-14", "highest minus lowest"] },
               { point: "Correct range 78", keywords: ["78", "seventy-eight", "78 percentage"] },
-              { point: "HICs most urbanised / LIC least", keywords: ["japan", "uk", "high-income", "hic", "burundi", "low-income"] },
+              { point: "HICs most urbanised / LIC least", keywords: ["japan", "most urban", "high-income", "hic", "burundi", "low-income"] },
               { point: "Link: more developed = more urban, with data or anomaly", keywords: ["develop", "richer", "wealth", "anomaly", "india", "nigeria"] },
             ],
             commonError: "Writing '78%' and then describing countries one by one without identifying the overall link with development.",
@@ -2153,7 +2153,7 @@ export const citiesMegacities: Topic = {
             markScheme: [
               { point: "Limitation 1: physical features / transport distort rings", keywords: ["river", "coast", "hill", "transport", "railway", "road"] },
               { point: "Explains effect (wedges/sectors, not circles)", keywords: ["wedge", "sector", "hoyt", "not circle", "not a circle", "stretch"] },
-              { point: "Limitation 2: based on one old city / one centre", keywords: ["chicago", "1920", "1925", "one centre", "single centre", "old"] },
+              { point: "Limitation 2: based on one old city / one centre", keywords: ["chicago", "1920s", "1925", "one centre", "single centre", "outdated"] },
               { point: "Explains with modern example", keywords: ["regional centre", "tampines", "jurong", "out-of-town", "several centres", "multiple"] },
             ],
             commonError: "Describing the model instead of criticising it.",
@@ -2169,7 +2169,7 @@ export const citiesMegacities: Topic = {
               { point: "Fits: CBD with tall buildings/high land value", keywords: ["raffles", "marina bay", "downtown", "cbd", "tall", "land value"] },
               { point: "Does not fit: planned regional centres/new towns", keywords: ["regional centre", "tampines", "jurong", "woodlands", "new town", "hdb"] },
               { point: "Explains role of planning", keywords: ["plan", "ura", "government", "decentralis"] },
-              { point: "Judgement", keywords: ["partly", "overall", "to some extent", "only", "mostly"] },
+              { point: "Judgement", keywords: ["partly", "overall", "to some extent", "fits only", "mostly"] },
             ],
             commonError: "Only saying 'it does not fit' without any evidence of where it does.",
             guideRef: "urban-land-use",
@@ -2182,7 +2182,7 @@ export const citiesMegacities: Topic = {
             modelAnswer: "Land at the edge of the city is cheaper than in the centre and there is lots of space, so developers want to build housing estates, business parks and out-of-town shopping centres there. It is also near motorways and ring roads, so it is easy to reach by car. This puts pressure on farmland and green belt land, causing conflict with people who want to protect the countryside.",
             markScheme: [
               { point: "Cheaper land / more space", keywords: ["cheap", "space", "lower cost", "large sites"] },
-              { point: "Good road access", keywords: ["motorway", "ring road", "m25", "access", "car"] },
+              { point: "Good road access", keywords: ["motorway", "ring road", "m25", "access", "by car"] },
               { point: "Conflict with farmland/green belt", keywords: ["farmland", "green belt", "greenfield", "countryside", "conflict", "sprawl"] },
             ],
             commonError: "Describing the fringe without explaining why developers want the land.",
@@ -2210,7 +2210,7 @@ export const citiesMegacities: Topic = {
             hint: "Compare natural increase and migration in Japan and Nigeria.",
             modelAnswer: "Japan has a low birth rate and an ageing population, so there are now more deaths than births and natural increase is negative. Japan is also already about 92% urban, so there are few rural people left to move to Tokyo. In contrast, Nigeria has a young population with a high birth rate, so natural increase in Lagos is high. Many young Nigerians also migrate from rural areas to Lagos for jobs, so the city grows from both causes.",
             markScheme: [
-              { point: "Japan: low birth rate / ageing", keywords: ["low birth", "ageing", "aging", "elderly", "old"] },
+              { point: "Japan: low birth rate / ageing", keywords: ["low birth", "ageing", "aging", "elderly", "older people"] },
               { point: "Japan already highly urban / little migration left", keywords: ["92%", "already urban", "few rural", "little migration"] },
               { point: "Nigeria: young population / high birth rate", keywords: ["young", "high birth", "natural increase", "youthful"] },
               { point: "Rural–urban migration to Lagos", keywords: ["migrat", "rural", "move to lagos", "jobs"] },
@@ -2225,7 +2225,7 @@ export const citiesMegacities: Topic = {
             hint: "(21 − 7) ÷ 7 × 100. Then one reason about migration and one about births.",
             modelAnswer: "(a) (21 − 7) ÷ 7 × 100 = 200% increase. (b) First, rural–urban migration: people are pushed from the countryside by floods and river-bank erosion and pulled by garment factory jobs. Second, natural increase: many migrants are young adults, so the birth rate is higher than the death rate.",
             markScheme: [
-              { point: "Correct method", keywords: ["21 - 7", "21 − 7", "14 ÷ 7", "14/7", "÷ 7"] },
+              { point: "Correct method", keywords: ["21 - 7", "14 ÷ 7", "14/7", "subtract", "minus"] },
               { point: "Correct answer 200%", keywords: ["200", "tripled", "three times"] },
               { point: "Migration reason", keywords: ["migrat", "garment", "flood", "erosion", "jobs"] },
               { point: "Natural increase reason", keywords: ["natural increase", "birth", "young"] },
@@ -2400,9 +2400,9 @@ export const citiesMegacities: Topic = {
             hint: "Number, location and type of country — at each date.",
             modelAnswer: "In 1950 there were only 2 megacities, New York and Tokyo, both in high-income countries in the Northern Hemisphere. By 2018 there were 33, and most were in Asia (about 20), with others in Latin America (6) and Africa (3) — mainly in LICs and NEEs. By 2030 the UN expects about 43, with most of the new ones in Asia and Africa, such as Luanda and Dar es Salaam.",
             markScheme: [
-              { point: "1950: 2 megacities in HICs (New York, Tokyo)", keywords: ["1950", "two", "2 megacities", "new york", "tokyo"] },
+              { point: "1950: 2 megacities in HICs (New York, Tokyo)", keywords: ["1950", "only two", "2 megacities", "new york", "tokyo"] },
               { point: "2018: 33, mostly in Asia", keywords: ["33", "asia", "20"] },
-              { point: "Shift to LICs/NEEs, Africa, Latin America", keywords: ["lic", "nee", "africa", "latin america", "developing", "shift"] },
+              { point: "Shift to LICs/NEEs, Africa, Latin America", keywords: ["lics", "nees", "low income", "africa", "latin america", "developing"] },
               { point: "2030: about 43, new ones in Asia/Africa", keywords: ["43", "2030", "luanda", "dar es salaam"] },
             ],
             commonError: "Describing only one date, so no change is shown.",
@@ -2431,7 +2431,7 @@ export const citiesMegacities: Topic = {
             modelAnswer: "Land value is highest in the CBD because it is the most accessible point, where transport routes meet. Many businesses compete for this small area, pushing prices up. Only offices, banks and large shops earn enough to pay these prices, so they occupy the centre. To make the most of expensive land, they build upwards, creating skyscrapers. Further out, land is cheaper, so housing can afford it and houses become larger with gardens; at the edge, cheap land suits space-hungry uses such as out-of-town shopping centres and airports.",
             markScheme: [
               { point: "Highest land value in CBD because most accessible", keywords: ["accessib", "transport", "routes meet", "centre"] },
-              { point: "Competition pushes prices up", keywords: ["compet", "demand", "bid", "prices up"] },
+              { point: "Competition pushes prices up", keywords: ["compet", "demand", "outbid", "prices up"] },
               { point: "Commercial uses can afford central land", keywords: ["office", "shop", "bank", "business", "commercial"] },
               { point: "Build upwards / high-rise", keywords: ["upward", "tall", "high-rise", "skyscraper"] },
               { point: "Cheaper land outward allows housing/large sites", keywords: ["cheaper", "suburb", "garden", "out-of-town", "airport", "fringe"] },
@@ -2462,7 +2462,7 @@ export const citiesMegacities: Topic = {
             modelAnswer: "Singapore can build upwards, with high-rise HDB flats of 40 storeys or more, which house many people on little land. It can create new land through land reclamation, which has already increased its area by about a quarter since the 1960s. It can redevelop older or brownfield sites, and plan new towns such as Tengah and Punggol with regional centres so that jobs are spread across the island. It can also move some uses, such as storage and utilities, underground.",
             markScheme: [
               { point: "Build upwards / high-rise", keywords: ["high-rise", "upward", "tall", "storey", "hdb"] },
-              { point: "Land reclamation", keywords: ["reclam", "new land", "sea"] },
+              { point: "Land reclamation", keywords: ["reclam", "new land", "from the sea"] },
               { point: "Planned new towns / regional centres / redevelopment", keywords: ["new town", "tengah", "punggol", "regional centre", "redevelop", "ura"] },
               { point: "Underground or other creative use of space", keywords: ["underground", "cavern", "rooftop", "mixed use", "brownfield"] },
             ],
@@ -2478,7 +2478,7 @@ export const citiesMegacities: Topic = {
             markScheme: [
               { point: "Definition: movement out of cities to rural areas/smaller towns", keywords: ["out of", "leave", "move to rural", "countryside", "village"] },
               { point: "Push from city problems", keywords: ["congestion", "pollution", "crime", "house price", "noise", "stress"] },
-              { point: "Enabled by transport/technology", keywords: ["internet", "work from home", "commut", "car", "road", "remote"] },
+              { point: "Enabled by transport/technology", keywords: ["internet", "work from home", "commut", "cars", "road", "remote"] },
             ],
             commonError: "Confusing counter-urbanisation with suburbanisation within the same city, or with rural–urban migration.",
             guideRef: "urbanisation",
@@ -2521,8 +2521,8 @@ export const citiesMegacities: Topic = {
             hint: "Mean = total ÷ number of cities. Range = largest − smallest.",
             modelAnswer: "(a) 37 + 29 + 26 + 22 + 22 + 20 = 156; 156 ÷ 6 = 26 million. (b) 37 − 20 = 17 million. (c) The figures are rounded estimates, and different sources draw city boundaries differently, so another source could give quite different numbers or a different ranking.",
             markScheme: [
-              { point: "Correct total or method for mean", keywords: ["156", "÷ 6", "/6", "/ 6"] },
-              { point: "Mean = 26 million", keywords: ["26", "26 million", "twenty-six"] },
+              { point: "Correct total or method for mean", keywords: ["156", "156 ÷ 6", "156/6", "divided by 6"] },
+              { point: "Mean = 26 million", keywords: ["26 million", "mean is 26", "mean of 26", "twenty-six"] },
               { point: "Range = 17 million", keywords: ["17", "17 million", "seventeen"] },
               { point: "Limitation: estimates/boundaries/date", keywords: ["estimate", "boundar", "round", "definition", "source", "out of date"] },
             ],
@@ -2550,7 +2550,7 @@ export const citiesMegacities: Topic = {
             hint: "Use 'whereas' and 'both'. Housing, planning, land and services.",
             modelAnswer: "Both Singapore and a megacity such as Lagos face pressure on space, housing and transport as their populations grow. However, Singapore's main challenge is a shortage of land — it is a small island of about 735 km² — so it builds high-rise HDB flats and reclaims land from the sea. Whereas Lagos's main challenge is that it grows faster than the government can provide housing and services, so many people live in informal settlements such as Makoko without clean water or sanitation. Singapore also has a wealthy, well-funded government that plans the whole island through the URA, whereas Lagos has less money for roads, drains and public transport, leading to severe congestion and flooding.",
             markScheme: [
-              { point: "Similarity: both face pressure on housing/transport/space", keywords: ["both", "similar", "pressure", "also"] },
+              { point: "Similarity: both face pressure on housing/transport/space", keywords: ["both", "similar", "pressure", "in common"] },
               { point: "Singapore: land shortage, managed by high-rise/reclamation", keywords: ["land shortage", "735", "reclam", "high-rise", "hdb"] },
               { point: "Megacity: growth faster than housing/services", keywords: ["faster", "informal", "slum", "makoko", "dharavi", "kibera"] },
               { point: "Difference in money/planning", keywords: ["wealth", "money", "fund", "plan", "ura", "govern"] },

@@ -175,7 +175,7 @@ export const coastalProcesses: Topic = {
       id: "geology",
       heading: "Geology: hard rock, soft rock and the shape of the coast",
       body:
-        "**Geology** means the rocks a place is made of and how they are arranged. It strongly controls how fast a coast erodes and what landforms appear.\n\n- **Hard (resistant) rocks** such as granite, limestone and chalk erode slowly and form high, steep cliffs and **headlands** (areas of land sticking out into the sea).\n- **Soft (less resistant) rocks** such as clay, sands and boulder clay erode quickly, forming **bays** (curved inlets of sea between headlands) and low, slumping cliffs.\n- **Joints and faults** (cracks and lines of weakness) let hydraulic action and abrasion attack even hard rock.\n\nThe direction of the rock bands compared with the coastline matters:\n\n- A **discordant coast** has bands of hard and soft rock running **at right angles (perpendicular)** to the coastline. The soft rock erodes back into bays while the hard rock is left standing out as headlands. This is **differential erosion** — different rocks eroding at different rates.\n- A **concordant coast** has bands of rock running **parallel** to the coastline. A band of hard rock along the front protects the softer rock behind it. If the sea breaks through the hard rock (often along a weakness), it can scoop out the soft rock behind to form a round **cove**.\n\nThe **Jurassic Coast** in Dorset (a UNESCO World Heritage Site since 2001, about 150 km long) shows both. Around **Swanage** the coast is discordant: chalk (Old Harry Rocks headland), soft clays and sands (Swanage Bay) and limestone (Durlston Head). A few kilometres west at **Lulworth Cove** the coast is concordant: the sea broke through a narrow band of hard Portland limestone and scooped out the soft clays behind it, until it reached the harder chalk at the back.",
+        "**Geology** means the rocks a place is made of and how they are arranged. It strongly controls how fast a coast erodes and what landforms appear.\n\n- **Hard (resistant) rocks** such as granite, limestone and chalk erode slowly and form high, steep cliffs and **headlands** (areas of land sticking out into the sea).\n- **Soft (less resistant) rocks** such as clay, sands and boulder clay erode quickly, forming **bays** (curved inlets of sea between headlands) and low, slumping cliffs.\n- **Joints and faults** (cracks and lines of weakness) let hydraulic action and abrasion attack even hard rock.\n\nThe direction of the rock bands compared with the coastline matters:\n\n- A **discordant coast** has bands of hard and soft rock running **at right angles (perpendicular)** to the coastline. The soft rock erodes back into bays while the hard rock is left standing out as headlands. This is **differential erosion** — different rocks eroding at different rates.\n- A **concordant coast** has bands of rock running **parallel** to the coastline. A band of hard rock along the front protects the softer rock behind it. If the sea breaks through the hard rock (often along a weakness), it can scoop out the soft rock behind to form a round **cove**.\n\nThe **Jurassic Coast** in Dorset (a UNESCO World Heritage Site since 2001, about 150 km long) shows both. Around **Swanage** the coast is discordant: chalk (Old Harry Rocks headland), soft clays and sands (Swanage Bay) and limestone (Durlston Head). About 20 km west at **Lulworth Cove** the coast is concordant: the sea broke through a narrow band of hard Portland limestone and scooped out the soft clays behind it, until it reached the harder chalk at the back.",
       diagram: `<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch maps comparing a discordant coast with headlands and bays and a concordant coast with a cove"><rect width="320" height="170" fill="#ffffff"/><text x="78" y="14" font-size="11" text-anchor="middle" font-weight="bold" fill="#334155">Discordant</text><text x="238" y="14" font-size="11" text-anchor="middle" font-weight="bold" fill="#334155">Concordant</text><rect x="5" y="20" width="150" height="140" fill="#7dd3fc"/><path d="M5,20 L45,20 L45,110 L5,110 Z" fill="#a8a29e"/><path d="M45,20 L95,20 L95,70 Q70,82 45,70 Z" fill="#fde68a"/><path d="M95,20 L155,20 L155,115 L95,115 Z" fill="#a8a29e"/><text x="25" y="64" font-size="9" text-anchor="middle" fill="#1c1917">hard</text><text x="70" y="50" font-size="9" text-anchor="middle" fill="#713f12">soft</text><text x="125" y="64" font-size="9" text-anchor="middle" fill="#1c1917">hard</text><text x="25" y="126" font-size="9" text-anchor="middle" fill="#0c4a6e">headland</text><text x="70" y="96" font-size="9" text-anchor="middle" fill="#0c4a6e">bay</text><text x="125" y="130" font-size="9" text-anchor="middle" fill="#0c4a6e">headland</text><rect x="165" y="20" width="150" height="140" fill="#7dd3fc"/><rect x="165" y="20" width="150" height="40" fill="#cbd5e1"/><rect x="165" y="60" width="150" height="40" fill="#fde68a"/><path d="M165,100 L315,100 L315,125 L250,125 L250,100 L230,100 L230,125 L165,125 Z" fill="#a8a29e"/><path d="M230,125 L230,85 Q240,62 250,85 L250,125 Z" fill="#7dd3fc"/><text x="290" y="44" font-size="9" text-anchor="middle" fill="#1c1917">chalk</text><text x="290" y="84" font-size="9" text-anchor="middle" fill="#713f12">soft clay</text><text x="290" y="117" font-size="9" text-anchor="middle" fill="#1c1917">hard limestone</text><text x="240" y="145" font-size="10" text-anchor="middle" fill="#0c4a6e">cove</text><text x="305" y="160" font-size="10" text-anchor="middle" fill="#334155">N↑</text></svg>`,
       diagramCaption: "Left: rock bands at right angles to the coast erode into headlands and bays. Right: bands parallel to the coast; once the hard outer band is breached, a cove forms in the soft rock behind.",
       keyPoints: [
@@ -207,14 +207,14 @@ export const coastalProcesses: Topic = {
       id: "singapore-coast",
       heading: "Singapore's coast: reclaimed land, seawalls and rising seas",
       body:
-        "Singapore is a low-lying island nation, so coastal processes are not just theory here. About **30% of the land is less than 5 m above mean sea level**.\n\n**A coast built by people.** Through **land reclamation** (creating new land by filling the sea with sand and soil), Singapore has grown from about **581 km² in the 1960s to about 735 km² today** — an increase of roughly a quarter. **East Coast Park**, about **15 km long**, sits entirely on land reclaimed from the late 1960s onwards and opened in the 1970s. Marine Parade Road was once on the seafront; the shore is now hundreds of metres further out.\n\n**A coast armoured against the sea.** Reclaimed sand is loose and easily eroded by hydraulic action and backwash, so it must be protected. Today **more than 70% of Singapore's coastline** is lined with **seawalls** (vertical or sloping concrete walls) and **rock revetments** (sloping banks of large boulders that absorb wave energy). At East Coast Park, **offshore breakwaters** and short headland breakwaters create a string of small bays where waves lose energy and sand is deposited, keeping the beach in place. Elsewhere, especially on Pulau Ubin and in Sungei Buloh, **mangroves** act as a natural buffer.\n\n**The threat of sea-level rise.** As the climate warms, seawater expands and land ice melts. Singapore's Centre for Climate Research projects that mean sea level could rise by **up to about 1 m by 2100**, and when high tides and storm surges are added, sea levels could reach **4–5 m above today's mean sea level**. Higher seas mean waves reach further inland, more erosion of reclaimed land and more flooding.\n\n**PUB's plans.** In 2020 **PUB**, Singapore's national water agency, became the **national coastal protection agency**. The government has estimated that protecting the coast could cost about **S$100 billion or more over 50–100 years**, and set up a **Coastal and Flood Protection Fund** (first S$5 billion) in 2020. PUB is carrying out site-by-site studies, starting with the **City–East Coast** stretch and the **North-West coast** (Lim Chu Kang and Sungei Kadut). Ideas include raising and extending seawalls, tidal gates and polders, and the **Long Island** concept — reclaiming about **800 hectares** off East Coast, which could protect the coast and create a new reservoir.",
+        "Singapore is a low-lying island nation, so coastal processes are not just theory here. About **30% of the land is less than 5 m above mean sea level**.\n\n**A coast built by people.** Through **land reclamation** (creating new land by filling the sea with sand and soil), Singapore has grown from about **581 km² in the 1960s to about 735 km² today** — an increase of roughly a quarter. **East Coast Park**, about **15 km long**, sits entirely on land reclaimed from the late 1960s onwards and opened in the 1970s. Marine Parade Road was once on the seafront; the shore is now hundreds of metres further out.\n\n**A coast armoured against the sea.** Reclaimed sand is loose and easily eroded by hydraulic action and backwash, so it must be protected. Today **more than 70% of Singapore's coastline** is lined with **seawalls** (vertical or sloping concrete walls) and **rock revetments** (sloping banks of large boulders that absorb wave energy). At East Coast Park, **offshore breakwaters** and short headland breakwaters create a string of small bays where waves lose energy and sand is deposited, keeping the beach in place. Elsewhere, especially on Pulau Ubin and in Sungei Buloh, **mangroves** act as a natural buffer.\n\n**The threat of sea-level rise.** As the climate warms, seawater expands and land ice melts. Singapore's Centre for Climate Research projects that mean sea level could rise by **up to about 1 m by 2100** (the 2024 projections give a range of roughly 0.2–1.15 m), and when high tides and storm surges are added, sea levels could reach **4–5 m above today's mean sea level**. Higher seas mean waves reach further inland, more erosion of reclaimed land and more flooding.\n\n**PUB's plans.** In 2020 **PUB**, Singapore's national water agency, became the **national coastal protection agency**. The government has estimated that protecting the coast could cost about **S$100 billion or more over 100 years**, and set up a **Coastal and Flood Protection Fund** (first S$5 billion) in 2020. PUB is carrying out site-by-site studies, starting with the **City–East Coast** stretch and the **North-West coast** (Lim Chu Kang and Sungei Kadut). Ideas include raising and extending seawalls, tidal gates and polders, and the **Long Island** concept — reclaiming about **800 hectares** off East Coast, which could protect the coast and create a new reservoir.",
       diagram: `<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of East Coast Park showing reclaimed land, rock revetment, breakwater and future sea level"><rect width="320" height="170" fill="#f0f9ff"/><path d="M0,95 L120,95 L150,120 L150,170 L0,170 Z" fill="#fde68a" stroke="#ca8a04"/><path d="M0,95 L60,95 L60,170 L0,170 Z" fill="#d9f99d" stroke="#65a30d"/><text x="30" y="88" font-size="9" text-anchor="middle" fill="#365314">old coast</text><text x="92" y="88" font-size="9" text-anchor="middle" fill="#713f12">park</text><text x="92" y="140" font-size="9" text-anchor="middle" fill="#713f12">reclaimed sand</text><path d="M120,95 L140,95 L172,132 L150,132 Z" fill="#78716c" stroke="#44403c"/><text x="168" y="108" font-size="9" fill="#44403c">rock revetment</text><rect x="150" y="132" width="170" height="38" fill="#7dd3fc"/><path d="M240,132 L252,116 L266,116 L278,132 Z" fill="#78716c" stroke="#44403c"/><text x="259" y="110" font-size="9" text-anchor="middle" fill="#44403c">breakwater</text><line x1="140" y1="132" x2="320" y2="132" stroke="#0369a1" stroke-width="1.5"/><text x="300" y="146" font-size="9" text-anchor="end" fill="#0c4a6e">today's sea level</text><line x1="130" y1="118" x2="320" y2="118" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 3"/><text x="318" y="160" font-size="9" text-anchor="end" fill="#dc2626">+1 m by 2100 (up to)</text><line x1="0" y1="20" x2="40" y2="20" stroke="#334155"/><text x="45" y="24" font-size="10" fill="#334155">Not to scale</text></svg>`,
       diagramCaption: "East Coast Park sits on reclaimed sand protected by a rock revetment and offshore breakwaters; a sea-level rise of up to about 1 m by 2100 would let waves reach higher up the defences.",
       keyPoints: [
         "East Coast Park (about 15 km) is built on land reclaimed from the late 1960s.",
         "More than 70% of Singapore's coastline is protected by seawalls and rock revetments.",
         "Sea level could rise by up to about 1 m by 2100; 30% of land is under 5 m above sea level.",
-        "PUB has been the national coastal protection agency since 2020; costs could reach S$100 billion over 50–100 years.",
+        "PUB has been the national coastal protection agency since 2020; costs could reach S$100 billion over 100 years.",
       ],
       thinkDeeper:
         "Hard seawalls stop erosion directly behind them, but the backwash bouncing off a vertical wall can scour away the beach in front. Why might Singapore choose sloping rock revetments, breakwaters and mangroves instead of plain vertical walls in some places?",
@@ -370,7 +370,7 @@ export const coastalProcesses: Topic = {
     { front: "Traction, saltation, suspension, solution", back: "Rolled; bounced; carried in the water; dissolved." },
     { front: "Longshore drift", back: "Swash carries sediment up the beach at the angle of the prevailing wind; backwash returns it straight down under gravity; sediment zig-zags along the coast." },
     { front: "Discordant vs concordant coast", back: "Discordant: rock bands at right angles to the coast → headlands and bays. Concordant: bands parallel → coves if breached." },
-    { front: "Singapore's coast in numbers", back: "Over 70% armoured by seawalls/revetments; sea level up to about 1 m higher by 2100; ~30% of land under 5 m; PUB coastal agency since 2020; ~S$100 billion over 50–100 years." },
+    { front: "Singapore's coast in numbers", back: "Over 70% armoured by seawalls/revetments; sea level up to about 1 m higher by 2100; ~30% of land under 5 m; PUB coastal agency since 2020; ~S$100 billion over 100 years." },
   ],
 
   mustKnow: [
@@ -482,7 +482,7 @@ export const coastalProcesses: Topic = {
           "Weathering is the breakdown of rock in place (in situ) by the weather, chemicals or living things — the material is not moved. Erosion is the wearing away of rock and the removal of the material by a moving force such as waves.",
         markScheme: [
           { point: "Weathering is breakdown of rock in place / not moved", keywords: ["in place", "in situ", "not moved", "without moving", "stays", "no movement"] },
-          { point: "Erosion involves wearing away and removal/movement by an agent such as waves", keywords: ["remov", "moved", "carried away", "transport", "moving force", "by waves"] },
+          { point: "Erosion involves wearing away and removal/movement by an agent such as waves", keywords: ["remov", "moved away", "carried away", "transport", "moving force", "by waves"] },
         ],
         commonError: "Writing that both 'break down rock' without stating that erosion involves movement.",
         guideRef: "weathering",
@@ -497,7 +497,7 @@ export const coastalProcesses: Topic = {
         markScheme: [
           { point: "Constructive: strong swash / weak backwash", keywords: ["strong swash", "swash is stronger", "swash stronger", "weak backwash"] },
           { point: "Destructive: strong backwash / weak swash", keywords: ["strong backwash", "backwash is stronger", "backwash stronger", "weak swash"] },
-          { point: "Difference in frequency or height", keywords: ["frequen", "per minute", "tall", "steep", "low", "10–14"] },
+          { point: "Difference in frequency or height", keywords: ["frequen", "per minute", "tall", "steep", "wavelength", "10–14"] },
           { point: "Constructive build beaches; destructive remove material", keywords: ["build", "deposit", "remov", "erode", "drag"] },
         ],
         commonError: "Describing each wave separately without using comparative words such as 'whereas' or 'while'.",
@@ -511,7 +511,7 @@ export const coastalProcesses: Topic = {
         modelAnswer:
           "The prevailing wind drives waves towards the beach at an angle. The swash carries sand and pebbles up the beach at that same angle. The backwash then pulls the sediment straight back down the beach, at right angles to the shore, because of gravity. This process repeats, so sediment zig-zags along the coast in the direction of the prevailing wind.",
         markScheme: [
-          { point: "Prevailing wind makes waves approach at an angle", keywords: ["prevailing wind", "at an angle", "angle", "diagonal"] },
+          { point: "Prevailing wind makes waves approach at an angle", keywords: ["prevailing wind", "at an angle", "diagonal", "oblique"] },
           { point: "Swash carries sediment up the beach at an angle", keywords: ["swash", "up the beach", "carries sediment up", "moves sediment up"] },
           { point: "Backwash returns sediment straight down / at right angles due to gravity", keywords: ["backwash", "straight down", "right angle", "gravity", "perpendicular", "90"] },
           { point: "Repeated, so sediment zig-zags along the coast", keywords: ["zig", "repeat", "along the coast", "along the beach", "over and over"] },
@@ -525,14 +525,14 @@ export const coastalProcesses: Topic = {
         marks: 6,
         hint: "Think about how low the land is, what the coast is made of, and what is happening to sea levels. Give numbers.",
         modelAnswer:
-          "Singapore is very low-lying: about 30% of its land is less than 5 m above mean sea level, so even a small rise in sea level puts a large area at risk. Much of the coast, such as East Coast Park, is built on reclaimed land made of loose sand, which is easily eroded by waves through hydraulic action and strong backwash. Sea level is projected to rise by up to about 1 m by 2100 as the climate warms, and with high tides and storm surges water levels could reach 4–5 m above today's mean sea level. This would let waves reach further inland, increasing erosion and flooding of homes, parks and infrastructure such as Changi Airport. That is why more than 70% of the coastline is already protected by seawalls and rock revetments, and PUB, the national coastal protection agency, is planning defences that could cost about S$100 billion over 50–100 years.",
+          "Singapore is very low-lying: about 30% of its land is less than 5 m above mean sea level, so even a small rise in sea level puts a large area at risk. Much of the coast, such as East Coast Park, is built on reclaimed land made of loose sand, which is easily eroded by waves through hydraulic action and strong backwash. Sea level is projected to rise by up to about 1 m by 2100 as the climate warms, and with high tides and storm surges water levels could reach 4–5 m above today's mean sea level. This would let waves reach further inland, increasing erosion and flooding of homes, parks and infrastructure such as Changi Airport. That is why more than 70% of the coastline is already protected by seawalls and rock revetments, and PUB, the national coastal protection agency, is planning defences that could cost about S$100 billion over 100 years.",
         markScheme: [
           { point: "Low-lying land (about 30% under 5 m)", keywords: ["low-lying", "low lying", "30%", "5 m", "5m", "below 5"] },
           { point: "Reclaimed land made of loose sand is easily eroded", keywords: ["reclaim", "loose sand", "sand", "easily erod"] },
           { point: "Sea-level rise of up to about 1 m by 2100", keywords: ["1 m", "1m", "2100", "sea level rise", "sea-level rise", "rising sea"] },
           { point: "Storm surges / high tides could add more (4–5 m)", keywords: ["storm surge", "high tide", "4-5", "4–5", "surge"] },
           { point: "Consequence: flooding / erosion of valuable land or infrastructure", keywords: ["flood", "homes", "airport", "changi", "infrastructure", "valuable"] },
-          { point: "Uses data on current/planned protection (70%, PUB, S$100 billion)", keywords: ["70%", "pub", "100 billion", "seawall", "revetment"] },
+          { point: "Uses data on current/planned protection (70%, PUB, S$100 billion)", keywords: ["70%", "coastal protection agency", "100 billion", "seawall", "revetment"] },
         ],
         commonError: "Giving a general answer about 'climate change' without any Singapore figures or explaining why reclaimed land is vulnerable.",
         guideRef: "singapore-coast",
@@ -984,7 +984,7 @@ export const coastalProcesses: Topic = {
             answerIndex: 3,
             hint: "The rock bands there run parallel to the coastline.",
             explanation:
-              "At Lulworth Cove the rock bands run parallel to the coast; the sea breached the hard limestone and scooped out the soft rock behind. Swanage Bay, a few kilometres east, is the discordant example.",
+              "At Lulworth Cove the rock bands run parallel to the coast; the sea breached the hard limestone and scooped out the soft rock behind. Swanage Bay, about 20 km east, is the discordant example.",
             guideRef: "geology",
           },
           {
@@ -1506,7 +1506,7 @@ export const coastalProcesses: Topic = {
             answerIndex: 3,
             hint: "Rolled, bounced, carried, dissolved.",
             explanation:
-              "Traction moves boulders, saltation pebbles and coarse sand, suspension fine particles and solution dissolved minerals. Option B is the correct list but in reverse order.",
+              "Traction moves boulders, saltation pebbles and coarse sand, suspension fine particles and solution dissolved minerals. 'Solution, suspension, saltation, traction' is the correct list but in reverse order.",
             guideRef: "transport-and-drift",
           },
           {
@@ -1700,7 +1700,7 @@ export const coastalProcesses: Topic = {
               "Rainwater seeps into cracks in the rock. When temperatures fall below 0 °C the water freezes and expands by about 9%, putting pressure on the rock and widening the crack. When the ice thaws, more water enters, and after many cycles pieces of rock break off.",
             markScheme: [
               { point: "Water enters cracks in rock", keywords: ["crack", "seeps", "joint", "enters"] },
-              { point: "Water freezes and expands (about 9%), exerting pressure", keywords: ["expand", "9%", "pressure", "freez"] },
+              { point: "Water freezes and expands (about 9%), exerting pressure", keywords: ["expand", "9%", "pressure", "ice"] },
               { point: "Repeated cycles widen crack until rock breaks off", keywords: ["repeat", "cycle", "break off", "breaks off", "over and over", "widen"] },
             ],
             commonError: "Forgetting that it needs repeated cycles of freezing AND thawing.",
@@ -1728,7 +1728,7 @@ export const coastalProcesses: Topic = {
             modelAnswer:
               "Constructive waves are low in height with a long wavelength. They have a low frequency of about 6–8 waves per minute. Their swash is stronger than their backwash, so they carry material up the beach and deposit it, building the beach up.",
             markScheme: [
-              { point: "Low height / long wavelength", keywords: ["low", "long wavelength", "gentle", "flat"] },
+              { point: "Low height / long wavelength", keywords: ["low height", "low in height", "long wavelength", "gentle", "flat"] },
               { point: "Low frequency (6–8 per minute)", keywords: ["6-8", "6–8", "low frequency", "infrequent", "per minute"] },
               { point: "Strong swash, weak backwash / build beaches", keywords: ["strong swash", "weak backwash", "swash is stronger", "build", "deposit"] },
             ],
@@ -1759,7 +1759,7 @@ export const coastalProcesses: Topic = {
             modelAnswer:
               "In a sheltered bay waves spread out and lose energy because they are protected by headlands and the water is shallower. With less energy, the waves can no longer carry their load, so they deposit sand and shingle, forming a beach.",
             markScheme: [
-              { point: "Waves lose energy / are weaker in a bay", keywords: ["lose energy", "less energy", "loses energy", "weaker", "calm", "sheltered"] },
+              { point: "Waves lose energy / are weaker in a bay", keywords: ["lose energy", "less energy", "loses energy", "weaker", "calm", "spread out"] },
               { point: "So they cannot carry their load and drop it", keywords: ["drop", "deposit", "cannot carry", "can't carry", "load"] },
             ],
             commonError: "Saying deposition happens because the bay is 'calm' without linking it to losing energy and dropping the load.",
@@ -1830,7 +1830,7 @@ export const coastalProcesses: Topic = {
             hint: "Time = distance ÷ rate.",
             modelAnswer: "54 ÷ 1.8 = 30. The cliff edge will reach the farmhouse in about 30 years.",
             markScheme: [
-              { point: "Correct method: distance divided by rate", keywords: ["54 ÷ 1.8", "54/1.8", "54 / 1.8", "divide", "÷"] },
+              { point: "Correct method: distance divided by rate", keywords: ["54 ÷ 1.8", "54/1.8", "54 / 1.8", "divide", "divided by"] },
               { point: "Correct answer: 30 years", keywords: ["30 years", "30 yrs", "= 30", "thirty"] },
             ],
             commonError: "Multiplying 54 × 1.8 (97.2) instead of dividing.",
@@ -1845,7 +1845,7 @@ export const coastalProcesses: Topic = {
               "A discordant coast has alternating bands of hard and soft rock running at right angles (perpendicular) to the coastline. The soft rock erodes faster than the hard rock (differential erosion), so it forms bays, while the resistant rock sticks out as headlands — for example Swanage Bay in Dorset.",
             markScheme: [
               { point: "Bands of rock at right angles to the coast", keywords: ["right angle", "perpendicular", "90", "at angles to"] },
-              { point: "Soft rock erodes faster than hard (differential erosion)", keywords: ["soft", "faster", "differential", "different rates", "less resistant"] },
+              { point: "Soft rock erodes faster than hard (differential erosion)", keywords: ["soft rock erodes", "faster", "differential", "different rates", "less resistant"] },
               { point: "Forms headlands and bays", keywords: ["headland", "bay", "inlet", "jut out"] },
             ],
             commonError: "Saying the rock bands are parallel to the coast (that is concordant).",
@@ -1877,7 +1877,7 @@ export const coastalProcesses: Topic = {
             markScheme: [
               { point: "Rock revetments / boulders absorb wave energy", keywords: ["revetment", "boulder", "rock armour", "rock slope", "absorb"] },
               { point: "Breakwaters reduce wave energy offshore", keywords: ["breakwater", "offshore", "reduce wave"] },
-              { point: "Small bays / sand deposited, keeping the beach", keywords: ["bays", "deposit", "trap sand", "keep the beach", "beach"] },
+              { point: "Small bays / sand deposited, keeping the beach", keywords: ["bays", "deposit", "trap sand", "keep the beach", "beach stays"] },
               { point: "Seawalls / beach top-ups / data (over 70%)", keywords: ["seawall", "sea wall", "70%", "nourish", "top up", "topped up"] },
             ],
             commonError: "Writing about groynes in general terms without describing what is actually used at East Coast Park.",
@@ -1897,8 +1897,8 @@ export const coastalProcesses: Topic = {
             modelAnswer:
               "Swash is the water that rushes up the beach after a wave breaks, pushed by the wave's energy. Backwash is the water that drains back down the beach towards the sea, pulled by gravity.",
             markScheme: [
-              { point: "Swash moves up the beach after a wave breaks", keywords: ["swash", "up the beach", "rushes up", "forward"] },
-              { point: "Backwash returns down the beach (gravity)", keywords: ["backwash", "back down", "drains", "gravity", "towards the sea"] },
+              { point: "Swash moves up the beach after a wave breaks", keywords: ["up the beach", "rushes up", "moves up", "forward"] },
+              { point: "Backwash returns down the beach (gravity)", keywords: ["back down", "down the beach", "drains", "gravity", "towards the sea"] },
             ],
             commonError: "Reversing the two terms.",
             guideRef: "wave-types",
@@ -1912,8 +1912,8 @@ export const coastalProcesses: Topic = {
               "Destructive waves are tall, steep and frequent (about 10–14 per minute). They plunge down onto the beach, so the swash is weak but the backwash is strong. Because waves arrive so frequently, the backwash meets the next incoming wave and drags sand and shingle out to sea, so the beach loses material.",
             markScheme: [
               { point: "High frequency / tall and steep", keywords: ["frequen", "10-14", "10–14", "tall", "steep", "plunge"] },
-              { point: "Backwash stronger than swash", keywords: ["strong backwash", "backwash is stronger", "backwash stronger", "weak swash"] },
-              { point: "Sediment dragged offshore / removed", keywords: ["drag", "offshore", "out to sea", "remov", "take"] },
+              { point: "Backwash stronger than swash", keywords: ["strong backwash", "backwash is strong", "backwash stronger", "weak swash", "swash is weak"] },
+              { point: "Sediment dragged offshore / removed", keywords: ["drag", "offshore", "out to sea", "remov", "carried out"] },
             ],
             commonError: "Saying destructive waves erode because they are 'strong' without mentioning backwash.",
             guideRef: "wave-types",
@@ -2006,7 +2006,7 @@ export const coastalProcesses: Topic = {
               { point: "Describes pattern: softer rock retreats faster", keywords: ["softer", "faster", "fastest", "slowest", "pattern"] },
               { point: "Uses data / comparison with figures", keywords: ["1.8", "0.3", "0.001", "six times", "1,800", "1800"] },
               { point: "Explains granite is hard/resistant", keywords: ["granite is hard", "resistant", "hard rock", "igneous"] },
-              { point: "Explains clay is soft / easily eroded / slumps", keywords: ["clay is soft", "soft", "easily eroded", "slump", "weak"] },
+              { point: "Explains clay is soft / easily eroded / slumps", keywords: ["clay is soft", "soft clay", "easily eroded", "slump", "unconsolidated"] },
             ],
             commonError: "Describing the data without explaining it, or explaining without quoting any figures.",
             guideRef: "geology",
@@ -2022,7 +2022,7 @@ export const coastalProcesses: Topic = {
               { point: "Rock bands parallel to the coast", keywords: ["parallel", "concordant", "same direction as the coast"] },
               { point: "Hard outer band breached (along a weakness)", keywords: ["breach", "break through", "broke through", "weakness", "gap"] },
               { point: "Soft rock behind eroded quickly", keywords: ["soft", "clay", "erode quickly", "eroded rapidly", "scoop"] },
-              { point: "Erosion slowed by resistant rock at back / round shape", keywords: ["chalk", "back", "round", "circular", "resistant"] },
+              { point: "Erosion slowed by resistant rock at back / round shape", keywords: ["chalk", "at the back", "round", "circular", "resistant"] },
             ],
             commonError: "Describing headlands and bays (discordant) instead of a cove.",
             guideRef: "geology",
@@ -2052,7 +2052,7 @@ export const coastalProcesses: Topic = {
               "Reclaimed land is made of loose sand, which is easily eroded by waves and backwash. It is also low-lying, so rising sea levels and storm surges could flood it.",
             markScheme: [
               { point: "Loose sand is easily eroded", keywords: ["loose", "sand", "easily erod", "unconsolidated"] },
-              { point: "Low-lying / threatened by sea-level rise or flooding", keywords: ["low", "sea level", "sea-level", "flood", "storm surge"] },
+              { point: "Low-lying / threatened by sea-level rise or flooding", keywords: ["low-lying", "sea level", "sea-level", "flood", "storm surge"] },
             ],
             commonError: "Giving two versions of the same reason.",
             guideRef: "singapore-coast",
@@ -2092,7 +2092,7 @@ export const coastalProcesses: Topic = {
             modelAnswer:
               "During the Northeast Monsoon, from about December to March, steady winds blow from the north-east for weeks at a time. They blow across the South China Sea, which gives a much longer fetch than at other times of year. The east coast faces into these winds, so it receives larger, more powerful waves that can erode beaches.",
             markScheme: [
-              { point: "Steady north-east winds for a long duration", keywords: ["north-east", "northeast", "steady", "duration", "weeks"] },
+              { point: "Steady north-east winds for a long duration", keywords: ["from the north-east", "north-easterly", "northeasterly", "steady", "duration", "weeks"] },
               { point: "Longer fetch across South China Sea", keywords: ["fetch", "south china sea", "open water", "longer distance"] },
               { point: "East coast faces the wind so gets bigger waves", keywords: ["faces", "exposed", "bigger waves", "larger waves", "more powerful"] },
             ],
@@ -2105,9 +2105,9 @@ export const coastalProcesses: Topic = {
             marks: 6,
             hint: "Give arguments for, arguments against, Singapore evidence, and a justified conclusion.",
             modelAnswer:
-              "I partly agree. Seawalls and rock revetments give reliable protection for valuable, low-lying reclaimed land: more than 70% of Singapore's coastline is already protected this way, guarding places such as Marina Bay, Changi Airport and East Coast Park. They take up little space, which matters in a small, crowded country. However, they are expensive — coastal protection may cost about S$100 billion over 50–100 years — and they will need raising as sea level rises by up to about 1 m by 2100. Vertical walls can also reflect wave energy, scouring the beach in front, and they provide little habitat. Nature-based options such as mangroves at Sungei Buloh absorb wave energy and trap sediment while supporting wildlife, but they need space and may not keep pace with rapid sea-level rise. Overall, seawalls are essential for the most valuable areas, but a mix of hard defences, breakwaters and nature-based solutions is the best approach.",
+              "I partly agree. Seawalls and rock revetments give reliable protection for valuable, low-lying reclaimed land: more than 70% of Singapore's coastline is already protected this way, guarding places such as Marina Bay, Changi Airport and East Coast Park. They take up little space, which matters in a small, crowded country. However, they are expensive — coastal protection may cost about S$100 billion over 100 years — and they will need raising as sea level rises by up to about 1 m by 2100. Vertical walls can also reflect wave energy, scouring the beach in front, and they provide little habitat. Nature-based options such as mangroves at Sungei Buloh absorb wave energy and trap sediment while supporting wildlife, but they need space and may not keep pace with rapid sea-level rise. Overall, seawalls are essential for the most valuable areas, but a mix of hard defences, breakwaters and nature-based solutions is the best approach.",
             markScheme: [
-              { point: "Advantage of seawalls: reliable protection of valuable land", keywords: ["reliable", "protect", "valuable", "airport", "marina"] },
+              { point: "Advantage of seawalls: reliable protection of valuable land", keywords: ["reliable", "valuable", "airport", "marina", "changi"] },
               { point: "Evidence: over 70% coastline already protected / space-saving", keywords: ["70%", "little space", "land-short", "space"] },
               { point: "Disadvantage: cost (S$100 billion) / need raising", keywords: ["cost", "expensive", "100 billion", "raise", "maintenance"] },
               { point: "Disadvantage: reflect energy, scour beach, little habitat", keywords: ["reflect", "scour", "habitat", "beach loss", "wildlife"] },
@@ -2177,7 +2177,7 @@ export const coastalProcesses: Topic = {
               "Waves break on the beach and lose much of their energy crossing it, so they have less energy left when they reach the cliff. This reduces hydraulic action and abrasion at the cliff foot.",
             markScheme: [
               { point: "Waves lose energy crossing / breaking on beach", keywords: ["lose energy", "absorb", "less energy", "energy is reduced", "dissipat"] },
-              { point: "Less erosion of cliff foot", keywords: ["less erosion", "protect", "fewer waves reach", "reduces hydraulic", "reduces abrasion", "cliff"] },
+              { point: "Less erosion of cliff foot", keywords: ["less erosion", "protect", "fewer waves reach", "reduces hydraulic", "reduces abrasion", "erodes less"] },
             ],
             commonError: "Saying the beach 'blocks' the sea without mentioning energy.",
             guideRef: "erosion-processes",
@@ -2190,7 +2190,7 @@ export const coastalProcesses: Topic = {
             modelAnswer:
               "Wednesday (13 per minute) and Thursday (12 per minute) had destructive waves, because they fall in the 10–14 range; the other days (6–8) had constructive waves. On Wednesday and Thursday the backwash would be stronger than the swash, so sand would be dragged offshore and the beach would become narrower and lose material. On the other days constructive waves would start to rebuild it.",
             markScheme: [
-              { point: "Identifies Wednesday and Thursday", keywords: ["wednesday", "thursday", "wed", "thu"] },
+              { point: "Identifies Wednesday and Thursday", keywords: ["wednesday", "thursday", "wed", "thurs"] },
               { point: "Uses frequency range 10–14 as justification", keywords: ["10-14", "10–14", "13", "12", "more than 10"] },
               { point: "Strong backwash", keywords: ["backwash", "strong backwash", "backwash stronger"] },
               { point: "Beach loses sand / sediment taken offshore", keywords: ["offshore", "remov", "lose", "narrower", "erode", "out to sea"] },
@@ -2225,7 +2225,7 @@ export const coastalProcesses: Topic = {
               { point: "Longshore drift carries sediment along the coast", keywords: ["longshore drift", "carried south", "along the coast", "holderness"] },
               { point: "Coast changes direction but drift continues", keywords: ["changes direction", "continues", "keeps going", "estuary", "humber"] },
               { point: "Water loses energy (sheltered/river meets sea)", keywords: ["lose energy", "loses energy", "sheltered", "calm", "less energy"] },
-              { point: "Sediment deposited building a spit (~5 km)", keywords: ["spit", "deposit", "5 km", "builds up", "spurn"] },
+              { point: "Sediment deposited building a spit (~5 km)", keywords: ["spit", "deposit", "5 km", "builds up", "built up"] },
             ],
             commonError: "Describing what Spurn Head looks like without explaining why deposition happens there.",
             guideRef: "transport-and-drift",
@@ -2254,7 +2254,7 @@ export const coastalProcesses: Topic = {
             modelAnswer:
               "The prevailing wind drives waves towards the beach at an angle from its direction. The swash carries sediment up the beach at that angle, so each zig-zag moves sediment along the coast in the same direction that the prevailing wind is blowing.",
             markScheme: [
-              { point: "Waves approach at angle set by prevailing wind", keywords: ["angle", "prevailing", "direction of the wind", "diagonal"] },
+              { point: "Waves approach at angle set by prevailing wind", keywords: ["angle", "direction of the wind", "diagonal", "oblique"] },
               { point: "Swash moves sediment in that direction along the coast", keywords: ["swash", "same direction", "along the coast", "zig"] },
             ],
             commonError: "Stating the direction without explaining the role of the angled swash.",
@@ -2300,7 +2300,7 @@ export const coastalProcesses: Topic = {
               "Freeze–thaw needs water in cracks and temperatures that repeatedly rise above and fall below 0 °C. In northern England, winter temperatures often fall below freezing at night and rise above it in the day, so many cycles occur. Singapore's temperature stays around 25–32 °C all year and never reaches 0 °C, so water never freezes and freeze–thaw cannot happen.",
             markScheme: [
               { point: "Needs temperatures fluctuating around 0 °C", keywords: ["0°c", "0 °c", "zero", "freezing point", "fluctuat", "above and below"] },
-              { point: "England has winter freeze-thaw cycles", keywords: ["winter", "cold", "below freezing", "england", "night"] },
+              { point: "England has winter freeze-thaw cycles", keywords: ["winter", "cold", "below freezing", "night", "many cycles"] },
               { point: "Singapore is always warm, never freezes", keywords: ["never", "always warm", "hot", "25", "30", "equatorial"] },
             ],
             commonError: "Saying Singapore has no freeze–thaw because it has no rain — it is the temperature that matters.",
@@ -2331,7 +2331,7 @@ export const coastalProcesses: Topic = {
               "Much of the Dorset coast is chalk and limestone, which are made of calcium carbonate. Weak acids in seawater dissolve calcium carbonate, so solution weakens these rocks and widens joints, helping other processes erode them.",
             markScheme: [
               { point: "Dorset has chalk/limestone (calcium carbonate)", keywords: ["chalk", "limestone", "calcium carbonate"] },
-              { point: "Weak acids dissolve these rocks", keywords: ["acid", "dissolv", "solution", "corrosion"] },
+              { point: "Weak acids dissolve these rocks", keywords: ["acid", "dissolv", "corrosion", "carbonic"] },
             ],
             commonError: "Saying solution affects all rocks equally.",
             guideRef: "erosion-processes",
@@ -2348,7 +2348,7 @@ export const coastalProcesses: Topic = {
               { point: "Evidence: about 1.8 m/yr or 29 villages lost", keywords: ["1.8", "29", "villages", "fastest"] },
               { point: "Explains marine erosion (hydraulic action/abrasion, destructive waves)", keywords: ["hydraulic", "abrasion", "destructive", "storm", "north sea"] },
               { point: "Explains mass movement / slumping when saturated", keywords: ["slump", "saturat", "mass movement", "rain"] },
-              { point: "Narrow beaches due to longshore drift removing sediment", keywords: ["narrow", "longshore", "spurn", "little protection", "beach"] },
+              { point: "Narrow beaches due to longshore drift removing sediment", keywords: ["narrow", "longshore", "spurn", "little protection", "carried south"] },
               { point: "Link back to the question", keywords: ["therefore", "so the coast", "this explains", "which is why", "overall"] },
             ],
             commonError: "Listing facts without explaining the processes, or forgetting the linking sentence.",
@@ -2369,7 +2369,7 @@ export const coastalProcesses: Topic = {
               "The edge of the sea moves constantly with the tides and waves, so there is no single fixed line. The coast includes a strip of land and sea — the backshore, foreshore and offshore zone — where coastal processes all interact.",
             markScheme: [
               { point: "Water's edge moves with tides/waves", keywords: ["tide", "moves", "changes", "not fixed"] },
-              { point: "Includes backshore, foreshore and offshore areas", keywords: ["backshore", "foreshore", "offshore", "strip", "area"] },
+              { point: "Includes backshore, foreshore and offshore areas", keywords: ["backshore", "foreshore", "offshore", "strip", "land and sea"] },
             ],
             commonError: "Defining the coastline instead of explaining why the coast is a zone.",
             guideRef: "coast-and-waves",
@@ -2380,10 +2380,10 @@ export const coastalProcesses: Topic = {
             marks: 3,
             hint: "Only one factor is changing.",
             modelAnswer:
-              "Z (6,000 km) has the most energetic waves, then Y (900 km), then X (50 km). Since wind speed and duration are the same, fetch is the only difference. A longer fetch gives the wind a greater distance over which to transfer energy to the water, so waves grow larger and more powerful.",
+              "The ranking is Z, Y, X. Z (6,000 km) has the most energetic waves, then Y (900 km), then X (50 km). Since wind speed and duration are the same, fetch is the only difference. A longer fetch gives the wind a greater distance over which to transfer energy to the water, so waves grow larger and more powerful.",
             markScheme: [
-              { point: "Correct ranking Z, Y, X", keywords: ["z, y, x", "z y x", "z > y > x", "z then y then x", "z,y,x"] },
-              { point: "Recognises fetch is the only variable", keywords: ["only", "same wind", "fetch is the difference", "controlled", "fetch"] },
+              { point: "Correct ranking Z, Y, X", keywords: ["z y x", "z then y then x", "z has the most", "z is the highest", "z highest", "zyx"] },
+              { point: "Recognises fetch is the only variable", keywords: ["only difference", "only variable", "only thing", "same wind", "fetch is the difference", "controlled"] },
               { point: "Longer fetch = more energy transferred", keywords: ["more energy", "longer distance", "transfer", "bigger waves", "larger waves"] },
             ],
             commonError: "Ranking correctly but not explaining why fetch increases energy.",
@@ -2448,7 +2448,7 @@ export const coastalProcesses: Topic = {
               { point: "Explains erosion processes at cliff foot", keywords: ["hydraulic", "abrasion", "notch", "undercut"] },
               { point: "Uses evidence (e.g. Holderness 1.8 m/yr)", keywords: ["holderness", "1.8", "dorset", "chalk", "boulder clay"] },
               { point: "Shows interaction / mass movement link", keywords: ["together", "interact", "mass movement", "collapse", "weaker"] },
-              { point: "Justified judgement", keywords: ["overall", "disagree", "agree", "conclusion", "more important"] },
+              { point: "Justified judgement", keywords: ["overall", "disagree", "agree", "conclusion", "on balance"] },
             ],
             commonError: "Treating weathering and erosion as the same thing, or giving no final judgement.",
             guideRef: "weathering",
@@ -2552,13 +2552,13 @@ export const coastalProcesses: Topic = {
             marks: 6,
             hint: "Benefits, limits, evidence from Singapore, and a clear judgement.",
             modelAnswer:
-              "Nature-based defences have clear benefits. Mangroves, such as those at Sungei Buloh and on Pulau Ubin, slow waves, absorb energy and trap sediment, so the shore can build up naturally as sea level rises. They also store carbon, provide habitats for wildlife and are cheaper to maintain than concrete. However, Singapore is land-short and more than 70% of its coast is already lined with seawalls and revetments protecting valuable land such as Changi Airport and Marina Bay, where there is no room for wide mangrove belts. Mangroves take years to grow and may not protect against the 4–5 m extreme sea levels possible by 2100. Hard defences give more certain protection for high-value areas, but cost billions (around S$100 billion over 50–100 years). Overall, Singapore should use more nature-based defences where space allows, such as the north-west coast, but combine them with hard defences in hybrid schemes for the most valuable areas.",
+              "Nature-based defences have clear benefits. Mangroves, such as those at Sungei Buloh and on Pulau Ubin, slow waves, absorb energy and trap sediment, so the shore can build up naturally as sea level rises. They also store carbon, provide habitats for wildlife and are cheaper to maintain than concrete. However, Singapore is land-short and more than 70% of its coast is already lined with seawalls and revetments protecting valuable land such as Changi Airport and Marina Bay, where there is no room for wide mangrove belts. Mangroves take years to grow and may not protect against the 4–5 m extreme sea levels possible by 2100. Hard defences give more certain protection for high-value areas, but cost billions (around S$100 billion over 100 years). Overall, Singapore should use more nature-based defences where space allows, such as the north-west coast, but combine them with hard defences in hybrid schemes for the most valuable areas.",
             markScheme: [
               { point: "Benefit: mangroves absorb energy / trap sediment", keywords: ["absorb", "slow", "trap", "sediment", "energy"] },
               { point: "Benefit: habitat / carbon / lower maintenance", keywords: ["habitat", "wildlife", "carbon", "cheaper", "biodiversity"] },
               { point: "Limit: lack of space / valuable land already walled (70%)", keywords: ["space", "land-short", "70%", "valuable", "airport"] },
-              { point: "Limit: slow to grow / may not cope with extreme sea levels", keywords: ["slow", "years", "4-5", "4–5", "extreme"] },
-              { point: "Uses Singapore evidence (Sungei Buloh, Pulau Ubin, S$100 billion)", keywords: ["sungei buloh", "pulau ubin", "100 billion", "pub", "east coast"] },
+              { point: "Limit: slow to grow / may not cope with extreme sea levels", keywords: ["take years", "slow to grow", "4-5", "4–5", "extreme"] },
+              { point: "Uses Singapore evidence (Sungei Buloh, Pulau Ubin, S$100 billion)", keywords: ["sungei buloh", "pulau ubin", "100 billion", "north-west", "east coast"] },
               { point: "Justified judgement / hybrid approach", keywords: ["overall", "hybrid", "combine", "mix", "conclusion"] },
             ],
             commonError: "Listing advantages of mangroves without weighing them against Singapore's lack of space.",

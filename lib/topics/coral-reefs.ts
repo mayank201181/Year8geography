@@ -464,7 +464,7 @@ export const coralReefs: Topic = {
           "Bleaching is caused by heat stress, for example a marine heatwave when the sea stays about 1°C above the normal summer maximum for around four weeks. The stressed coral expels the zooxanthellae algae that live in its tissue. Because the algae give coral its colour, the white calcium carbonate skeleton shows through the clear tissue, so the coral looks bleached; it is also starving because it has lost its main food source.",
         markScheme: [
           { point: "Cause: sea water too warm / marine heatwave / heat stress", keywords: ["heat", "warm", "temperature", "hot"] },
-          { point: "Coral expels / loses its zooxanthellae algae", keywords: ["expel", "algae", "zooxanthellae", "lose", "lost"] },
+          { point: "Coral expels / loses its zooxanthellae algae", keywords: ["expel", "algae", "zooxanthellae", "expuls", "eject"] },
           { point: "White skeleton shows through / algae gave colour / coral starves", keywords: ["white", "skeleton", "colour", "color", "starv", "food"] },
         ],
         commonError: "Saying the coral is dead. Bleached coral is alive but starving; it can recover if the water cools quickly.",
@@ -479,8 +479,8 @@ export const coralReefs: Topic = {
           "Corals need warm water, typically between 23°C and 29°C, which is why reefs are mostly found between about 30°N and 30°S. They also need shallow water, usually less than about 50 m deep, because the algae in their tissue need sunlight to photosynthesise and light fades with depth.",
         markScheme: [
           { point: "Names warm water as a condition", keywords: ["warm", "temperature", "hot"] },
-          { point: "Gives a figure, e.g. 23–29°C", keywords: ["23", "29", "°c", "degrees"] },
-          { point: "Names shallow / clear / sunny water as a condition", keywords: ["shallow", "depth", "deep", "light", "clear", "sun"] },
+          { point: "Gives a figure, e.g. 23–29°C", keywords: ["23", "29", "celsius", "degrees"] },
+          { point: "Names shallow / clear / sunny water as a condition", keywords: ["shallow", "depth", "deep", "light", "clear", "sunlight"] },
           { point: "Gives a figure, e.g. under 50 m or 30°N–30°S", keywords: ["50", "30", "metre", "latitude"] },
         ],
         commonError: "Naming conditions without any numbers, or giving salinity/sediment without explaining what level is needed.",
@@ -496,7 +496,7 @@ export const coralReefs: Topic = {
         markScheme: [
           { point: "Identifies a first value (e.g. coastal protection, fisheries)", keywords: ["protect", "wave", "fish", "food", "coast"] },
           { point: "Explains the first value (how it helps people)", keywords: ["erosion", "flood", "breakwater", "protein", "income", "97"] },
-          { point: "Identifies a second value (e.g. tourism, medicines)", keywords: ["touris", "medic", "drug", "div", "snorkel"] },
+          { point: "Identifies a second value (e.g. tourism, medicines)", keywords: ["touris", "medic", "drug", "diver", "diving", "snorkel"] },
           { point: "Explains / supports the second value with detail", keywords: ["job", "money", "64,000", "billion", "cure", "econom"] },
         ],
         commonError: "Listing several values with no explanation. Two developed points score more than five bare words.",
@@ -511,7 +511,7 @@ export const coralReefs: Topic = {
           "The Great Barrier Reef Marine Park Authority divides the Marine Park into zones with different rules. Green zones are no-take areas where fishing and collecting are banned; since 2004 they cover about 33% of the park. Fish populations recover in green zones (studies find more and bigger coral trout there), and fish and larvae spill over into neighbouring fished zones, while other zones still allow fishing and tourism.",
         markScheme: [
           { point: "Park divided into zones with different rules / managed by GBRMPA", keywords: ["zone", "gbrmpa", "rules", "divid", "area"] },
-          { point: "Green zones are no-take, about 33%", keywords: ["green", "no-take", "no take", "33", "ban"] },
+          { point: "Green zones are no-take, about 33%", keywords: ["green", "no-take", "no take", "33", "banned"] },
           { point: "Effect: fish recover / spill over / reef more resilient", keywords: ["recover", "spill", "more fish", "trout", "resilien", "breed"] },
         ],
         commonError: "Saying zoning bans all fishing on the reef. Only green (and pink) zones are no-take; other zones allow some fishing.",
@@ -1586,7 +1586,7 @@ export const coralReefs: Topic = {
               "Corals need warm water of about 23–29°C; shallow, clear water (usually less than about 50 m deep) so that sunlight reaches the algae; and normal salinity with little sediment, so not too close to river mouths.",
             markScheme: [
               { point: "Warm water (23–29°C)", keywords: ["warm", "23", "29", "temperature"] },
-              { point: "Shallow / sunlit water (under ~50 m)", keywords: ["shallow", "50", "sunlight", "light", "sun"] },
+              { point: "Shallow / sunlit water (under ~50 m)", keywords: ["shallow", "50", "sunlight", "light", "sunny"] },
               { point: "Clear water / low sediment / normal salinity", keywords: ["clear", "sediment", "salin", "salt", "mud", "pollut"] },
             ],
             commonError: "Writing 'warm and sunny' as one condition and stopping, or giving the same idea three times.",
@@ -1630,7 +1630,7 @@ export const coralReefs: Topic = {
             markScheme: [
               { point: "Very high biodiversity / many species", keywords: ["biodivers", "species", "variety", "many"] },
               { point: "Quotes figures: under 1% of ocean floor, ~25% of marine species", keywords: ["25", "1%", "quarter", "less than 1"] },
-              { point: "Reason: many habitats / complex structure / food all year", keywords: ["habitat", "hid", "shelter", "structure", "all year", "food"] },
+              { point: "Reason: many habitats / complex structure / food all year", keywords: ["habitat", "hiding", "shelter", "structure", "all year", "food"] },
             ],
             commonError: "Saying reefs are like rainforests because they are green or full of plants.",
             guideRef: "biodiversity-value",
@@ -1659,7 +1659,7 @@ export const coralReefs: Topic = {
             markScheme: [
               { point: "Water becomes cloudy / murky / turbid", keywords: ["cloud", "murk", "turbid", "dirty", "visib"] },
               { point: "Less light, so algae photosynthesise less / less food", keywords: ["light", "photosynth", "food", "sun"] },
-              { point: "Sediment settles on and smothers / buries polyps", keywords: ["smother", "settle", "bur", "cover", "block"] },
+              { point: "Sediment settles on and smothers / buries polyps", keywords: ["smother", "settle", "buri", "bury", "cover"] },
             ],
             commonError: "Writing only 'it pollutes the water' without explaining the effect on light or polyps.",
             guideRef: "local-threats",
@@ -1672,7 +1672,7 @@ export const coralReefs: Topic = {
             modelAnswer:
               "Divers and snorkellers can break coral by touching, kicking or standing on it. Boats can drop anchors that smash coral, and some tourists collect coral as souvenirs.",
             markScheme: [
-              { point: "Physical damage by touching / standing / kicking coral", keywords: ["touch", "stand", "kick", "step", "break", "fin"] },
+              { point: "Physical damage by touching / standing / kicking coral", keywords: ["touch", "stand", "kick", "step", "break", "fins"] },
               { point: "A second way: anchors / souvenirs / sunscreen / resorts", keywords: ["anchor", "souvenir", "sunscreen", "resort", "hotel", "collect"] },
             ],
             commonError: "Giving the same idea twice (e.g. 'touching coral' and 'standing on coral').",
@@ -1746,7 +1746,7 @@ export const coralReefs: Topic = {
               "The ocean absorbs about a quarter of the carbon dioxide released by burning fossil fuels. The CO2 dissolves to form a weak acid, so sea water becomes more acidic (pH has fallen from about 8.2 to 8.1). This makes it harder for corals to build their calcium carbonate skeletons, so they grow more slowly and become brittle.",
             markScheme: [
               { point: "Ocean absorbs CO2 from the atmosphere / fossil fuels", keywords: ["co2", "carbon dioxide", "absorb", "fossil"] },
-              { point: "Sea water becomes more acidic / pH falls", keywords: ["acid", "ph", "8.1", "8.2"] },
+              { point: "Sea water becomes more acidic / pH falls", keywords: ["acid", "8.1", "8.2", "lower ph", "ph fall"] },
               { point: "Harder to build calcium carbonate skeletons / slower growth / brittle", keywords: ["skeleton", "calcium carbonate", "brittle", "slow", "weak", "dissolv"] },
             ],
             commonError: "Saying acidification is caused by people pouring acid into the sea.",
@@ -1800,7 +1800,7 @@ export const coralReefs: Topic = {
               { point: "Fresh water lowers salinity", keywords: ["fresh", "salin", "salt", "dilut"] },
               { point: "River carries sediment / mud", keywords: ["sediment", "mud", "silt", "soil"] },
               { point: "Cloudy water blocks light / less photosynthesis", keywords: ["light", "photosynth", "cloud", "murk", "turbid"] },
-              { point: "Sediment smothers polyps / temperature alone not enough", keywords: ["smother", "bur", "warm enough", "temperature", "settle"] },
+              { point: "Sediment smothers polyps / temperature alone not enough", keywords: ["smother", "buri", "bury", "warm enough", "settle"] },
             ],
             commonError: "Saying the Amazon makes the sea too cold. The water near the Equator is warm; the problem is salinity and sediment.",
             guideRef: "growth-conditions",
@@ -1893,7 +1893,7 @@ export const coralReefs: Topic = {
             modelAnswer:
               "Singapore has expanded its land area by about 25% through land reclamation, which buried many reefs directly; about 60% of the original reef area has been lost. Dredging and reclamation also stirred up sediment, making the water murky so less light reaches the corals. Heavy shipping traffic adds further risks such as anchor damage and oil spills.",
             markScheme: [
-              { point: "Land reclamation buried reefs (about 60% lost)", keywords: ["reclam", "60", "bur", "land"] },
+              { point: "Land reclamation buried reefs (about 60% lost)", keywords: ["reclam", "60", "buri", "bury"] },
               { point: "Dredging / sediment makes water murky, less light", keywords: ["sediment", "dredg", "murk", "light", "cloud"] },
               { point: "Other pressure: shipping / oil spills / bleaching", keywords: ["ship", "oil", "anchor", "bleach", "port"] },
             ],
@@ -1910,7 +1910,7 @@ export const coralReefs: Topic = {
             markScheme: [
               { point: "Figure for money (about A$6 billion a year)", keywords: ["6 billion", "billion", "a$6", "$6"] },
               { point: "Figure for jobs (about 64,000)", keywords: ["64,000", "64000", "64 000", "jobs"] },
-              { point: "Source: tourism / fishing explained", keywords: ["touris", "div", "snorkel", "fish", "cairns", "visitor"] },
+              { point: "Source: tourism / fishing explained", keywords: ["touris", "diving", "snorkel", "fish", "cairns", "visitor"] },
             ],
             commonError: "Giving no figures, or confusing the reef's length (2,300 km) with an economic figure.",
             guideRef: "gbr-management",
@@ -2067,7 +2067,7 @@ export const coralReefs: Topic = {
             markScheme: [
               { point: "CO2 causes warming / marine heatwaves", keywords: ["warm", "heatwave", "greenhouse", "temperature", "climate change"] },
               { point: "Leads to bleaching (algae expelled)", keywords: ["bleach", "expel", "algae", "white"] },
-              { point: "Ocean absorbs CO2 and becomes more acidic", keywords: ["acid", "ph", "absorb", "dissolv"] },
+              { point: "Ocean absorbs CO2 and becomes more acidic", keywords: ["acid", "absorb", "dissolv", "lower ph"] },
               { point: "Weakens skeletons / slows growth", keywords: ["skeleton", "calcium carbonate", "brittle", "slow", "weak"] },
             ],
             commonError: "Explaining warming twice, or mentioning acidification without saying how it affects the coral.",
@@ -2115,7 +2115,7 @@ export const coralReefs: Topic = {
             markScheme: [
               { point: "Definition: unusually warm sea for a long period", keywords: ["unusual", "warm", "hot", "period", "weeks", "long"] },
               { point: "Algae become stressed / produce harmful chemicals", keywords: ["stress", "harm", "toxic", "chemical"] },
-              { point: "Coral expels algae and turns white", keywords: ["expel", "white", "lose", "lost", "bleach"] },
+              { point: "Coral expels algae and turns white", keywords: ["expel", "white", "eject", "colour", "color"] },
             ],
             commonError: "Defining a heatwave as hot air over land — it refers to sea temperatures.",
             guideRef: "bleaching-climate",
@@ -2174,7 +2174,7 @@ export const coralReefs: Topic = {
             modelAnswer:
               "Living coral creates a complex 3-D structure with many habitats and hiding places. When coral dies, the skeleton is covered in seaweed and gradually breaks down into rubble, so these habitats are lost. Fish and other animals that depend on coral for food or shelter leave or die, and the food web collapses, so the number of species falls.",
             markScheme: [
-              { point: "Coral provides habitat / shelter / 3-D structure", keywords: ["habitat", "shelter", "home", "hid", "structure"] },
+              { point: "Coral provides habitat / shelter / 3-D structure", keywords: ["habitat", "shelter", "home", "hiding", "structure"] },
               { point: "Dead coral breaks down / covered by seaweed / habitat lost", keywords: ["rubble", "break", "seaweed", "lost", "collapse"] },
               { point: "Species that depend on coral leave or die / food web affected", keywords: ["food web", "food chain", "leave", "die", "species", "fewer"] },
             ],
@@ -2190,7 +2190,7 @@ export const coralReefs: Topic = {
             modelAnswer:
               "February (30.2°C) and March (30.4°C) were above the normal summer maximum of 29.0°C. These months were 1.2°C and 1.4°C above normal. Bleaching can be triggered when the sea stays about 1°C above the summer maximum for around four weeks; here the water was more than 1°C above normal for about two months. So the risk of bleaching was high, and some corals may have died if they could not recover once the water cooled in April.",
             markScheme: [
-              { point: "Identifies February and March", keywords: ["february", "march", "feb", "mar"] },
+              { point: "Identifies February and March", keywords: ["february", "march", "30.2", "30.4"] },
               { point: "Calculates how far above: 1.2°C and 1.4°C", keywords: ["1.2", "1.4", "above by", "degrees above"] },
               { point: "Uses threshold: about 1°C for about 4 weeks", keywords: ["1°c", "1 degree", "4 weeks", "four weeks", "threshold"] },
               { point: "Concludes risk is high / bleaching likely", keywords: ["high", "likely", "probabl", "severe"] },
@@ -2222,8 +2222,8 @@ export const coralReefs: Topic = {
             markScheme: [
               { point: "Harm: physical damage from tourists / anchors", keywords: ["touch", "stand", "anchor", "break", "trampl", "kick"] },
               { point: "Harm: pollution / development / resorts", keywords: ["pollut", "resort", "sewage", "sunscreen", "development", "hotel"] },
-              { point: "Help: fees / money fund protection", keywords: ["fee", "fund", "money", "pay", "income"] },
-              { point: "Help: jobs give reason to protect / eco-tourism / education", keywords: ["job", "eco", "educat", "aware", "reason to protect", "mooring"] },
+              { point: "Help: fees / money fund protection", keywords: ["fees", "fund", "money", "pay", "income"] },
+              { point: "Help: jobs give reason to protect / eco-tourism / education", keywords: ["job", "eco-tourism", "ecotourism", "educat", "reason to protect", "mooring"] },
             ],
             commonError: "Writing only about harm. The question asks for both sides.",
             guideRef: "local-threats",
@@ -2240,8 +2240,8 @@ export const coralReefs: Topic = {
               { point: "Evidence: named place or river (GBR, Burdekin, Fitzroy, Singapore)", keywords: ["great barrier", "burdekin", "fitzroy", "queensland", "singapore"] },
               { point: "Explains sediment blocks light / smothers polyps", keywords: ["sediment", "light", "smother", "murk", "cloud"] },
               { point: "Explains fertiliser → nutrients → plankton blooms", keywords: ["fertiliser", "fertilizer", "nutrient", "plankton", "bloom"] },
-              { point: "Explains starfish outbreaks or reclamation burying reefs", keywords: ["starfish", "cots", "outbreak", "reclam", "bur"] },
-              { point: "Link: concludes land activities harm reefs / need management on land", keywords: ["therefore", "so ", "this shows", "link", "water quality", "manage"] },
+              { point: "Explains starfish outbreaks or reclamation burying reefs", keywords: ["starfish", "cots", "outbreak", "reclam", "buri", "bury"] },
+              { point: "Link: concludes land activities harm reefs / need management on land", keywords: ["therefore", "this shows", "link", "water quality", "manage"] },
             ],
             commonError: "Writing about fishing or tourism (activities in the sea) instead of activities on land.",
             guideRef: "local-threats",
@@ -2278,7 +2278,7 @@ export const coralReefs: Topic = {
             modelAnswer:
               "The Sisters' Islands Marine Park (2014) protects about 40 hectares of reef from collecting and physical damage, and its guided walks and dive trails raise public awareness, which can build support for conservation. Coral nurseries and research help restore damaged areas and study how Singapore's corals cope with murky, hot water. However, the park is very small compared with Singapore's total reef area, and it cannot control threats that come from outside it, such as sediment from dredging and reclamation elsewhere, shipping and oil spills. Most importantly, it cannot prevent marine heatwaves, and Singapore's reefs bleached in 2016 and 2024. Overall, it is successful as a protected 'core' and for education, but its success depends on wider controls on sediment and global action on climate change.",
             markScheme: [
-              { point: "Strength: legal protection from collecting / damage", keywords: ["protect", "ban", "law", "collect", "damage"] },
+              { point: "Strength: legal protection from collecting / damage", keywords: ["protect", "banned", "law", "collect", "damage"] },
               { point: "Strength: education / awareness (walks, dive trails)", keywords: ["educat", "aware", "walk", "trail", "public"] },
               { point: "Strength: research / nurseries / restoration", keywords: ["research", "nurser", "restor", "replant", "scien"] },
               { point: "Limitation: small size / cannot control sediment, shipping, reclamation", keywords: ["small", "40", "sediment", "ship", "reclam", "outside"] },
@@ -2381,7 +2381,7 @@ export const coralReefs: Topic = {
             markScheme: [
               { point: "Islands made of coral sand / reef supplies sediment", keywords: ["sand", "made of coral", "rubble", "build", "supply"] },
               { point: "Reef absorbs wave energy; without it, erosion / flooding", keywords: ["wave", "erosion", "flood", "energy", "breakwater"] },
-              { point: "Low-lying land / sea-level rise worsens risk", keywords: ["low", "3 m", "sea level", "sea-level", "submerg"] },
+              { point: "Low-lying land / sea-level rise worsens risk", keywords: ["low-lying", "low island", "3 m", "sea level", "submerg"] },
               { point: "Food / income from reef fish", keywords: ["fish", "food", "income", "protein", "job"] },
             ],
             commonError: "Treating Tuvalu like a high volcanic island. Atolls are low and are built by the reef itself.",
@@ -2464,7 +2464,7 @@ export const coralReefs: Topic = {
               { point: "Measure for overfishing: zoning / no-take areas / fishing limits", keywords: ["zon", "no-take", "no take", "ban fish", "limit", "green"] },
               { point: "Explains benefit: fish recover / spillover / seaweed grazed", keywords: ["recover", "spill", "parrotfish", "graz", "breed"] },
               { point: "Measure for sewage: treatment works / pollution control", keywords: ["sewage", "treatment", "waste water", "pollution control", "pipe"] },
-              { point: "Measure for tourists: moorings / no-touch rules / fees / education", keywords: ["mooring", "no-touch", "rule", "fee", "educat", "guide"] },
+              { point: "Measure for tourists: moorings / no-touch rules / fees / education", keywords: ["mooring", "no-touch", "rule", "reef fee", "educat", "guide"] },
               { point: "Explains benefit of sewage/tourist measures or monitoring", keywords: ["nutrient", "less damage", "fund", "monitor", "aware", "fewer"] },
             ],
             commonError: "Listing measures without explaining how each one reduces a specific threat.",

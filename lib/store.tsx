@@ -103,6 +103,10 @@ interface StoreContextValue extends StoreData {
   deleteProfile: (profileId: string) => Promise<{ ok: boolean; error?: string }>;
   selectProfile: (profileId: string) => Promise<void>;
   switchProfile: () => void;
+  /** Start (or resume) device-only mode: no account, progress saved in this browser only. */
+  useDevice: () => void;
+  /** Whether the server has cloud storage configured (accounts + sync). */
+  cloudAvailable: boolean;
   // progress actions
   award: (key: string, amount: number) => number;
   hasAward: (key: string) => boolean;
@@ -120,6 +124,17 @@ interface StoreContextValue extends StoreData {
 const StoreContext = createContext<StoreContextValue | null>(null);
 
 const cacheKey = (acc: string, prof: string) => `y8cache:${acc}:${prof}`;
+/** Device-only "guest" account: profiles and progress live in this browser's localStorage only. */
+export const GUEST_ID = "guest-device";
+const GUEST_KEY = "y8g:guest-account";
+const isGuest = (id: string | undefined | null) => id === GUEST_ID;
+function readGuest(): PublicAccount | null {
+  try { const raw = localStorage.getItem(GUEST_KEY); return raw ? (JSON.parse(raw) as PublicAccount) : null; } catch { return null; }
+}
+function writeGuest(acc: PublicAccount | null) {
+  try { if (acc) localStorage.setItem(GUEST_KEY, JSON.stringify(acc)); else localStorage.removeItem(GUEST_KEY); } catch {}
+}
+const newId = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
 const lastProfileKey = (acc: string) => `y8last:${acc}`;
 
 function currentTopicId(): string | undefined {
@@ -133,6 +148,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const [account, setAccount] = useState<PublicAccount | null>(null);
   const [activeProfile, setActiveProfile] = useState<Profile | null>(null);
   const [data, setData] = useState<StoreData>(emptyProgress());
+  const [cloudAvailable, setCloudAvailable] = useState(true);
 
   const dataRef = useRef(data);
   dataRef.current = data;
@@ -146,6 +162,10 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const saver = useRef<ReturnType<typeof createProgressSaveQueue> | null>(null);
   if (!saver.current) saver.current = createProgressSaveQueue(async (snapshot) => {
     if (accountRef.current?.id !== snapshot.accountId) throw new Error("Account changed before save");
+    if (isGuest(snapshot.accountId)) {
+      try { if (localStorage.getItem(`${snapshot.cacheKey}:dirty`) === snapshot.revision) localStorage.removeItem(`${snapshot.cacheKey}:dirty`); } catch {}
+      return;
+    }
     const response = await withProgressTimeout((signal) => fetch("/api/progress", {
       method: "POST", headers: { "Content-Type": "application/json" }, body: snapshot.body, signal,
       // Lets a save started as the app is closed finish; browsers cap keepalive bodies at 64 KB.
@@ -184,6 +204,11 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       try {
         const r = await fetch("/api/auth/me", { cache: "no-store" });
         const j = await r.json();
+        setCloudAvailable(j.cloud !== false);
+        if (!j.account) {
+          const guest = readGuest();
+          if (guest) j.account = guest;
+        }
         if (j.account) {
           const acc: PublicAccount = { ...j.account, profiles: Array.isArray(j.account.profiles) ? j.account.profiles : [] };
           setAccount(acc);
@@ -199,6 +224,8 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
           setStatus("anon");
         }
       } catch {
+        const guest = readGuest();
+        if (guest) { setAccount(guest); setStatus("no-profile"); return; }
         setStatus("anon");
       }
     })();
@@ -231,6 +258,15 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     } catch {}
     let doc = cached ?? emptyProgress();
     setData(doc); // A fresh/offline profile must never inherit the prior learner's state.
+    if (isGuest(accountId)) {
+      if (version !== loadVersion.current) return;
+      doc = { ...doc, analytics: pushLog({ ...doc.analytics, sessionCount: doc.analytics.sessionCount + 1 }, "start") };
+      setData(doc);
+      try { localStorage.setItem(lastProfileKey(accountId), prof.id); } catch {}
+      canSaveRef.current = true;
+      setStatus("ready");
+      return;
+    }
     try {
       const j = await withProgressTimeout(async (signal) => {
         const r = await fetch(`/api/progress?profileId=${prof.id}`, { cache: "no-store", signal });
@@ -317,7 +353,8 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     canSaveRef.current = false;
     setStatus("loading");
     await saver.current!.flush().catch(() => {});
-    await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+    if (isGuest(accountRef.current?.id)) writeGuest(null);
+    else await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
     setAccount(null);
     setActiveProfile(null);
     setData(emptyProgress());
@@ -326,6 +363,15 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const createProfile = useCallback(async (name: string, emoji: string) => {
+    if (isGuest(accountRef.current?.id)) {
+      const clean = name.trim().slice(0, 30);
+      if (!clean) return { ok: false, error: "Please enter a name." };
+      const prof = { id: newId(), name: clean, emoji, createdAt: Date.now() } as Profile;
+      const acc = { ...accountRef.current!, profiles: [...accountRef.current!.profiles, prof] };
+      writeGuest(acc); setAccount(acc); accountRef.current = acc;
+      await selectLoaded(acc.id, prof);
+      return { ok: true };
+    }
     const { ok, data } = await postJson("/api/profiles", "POST", { name, emoji });
     if (!ok || !data.profile) return { ok: false, error: errorOf(data) };
     const prof = data.profile as Profile;
@@ -337,6 +383,12 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const updateProfile = useCallback(async (profileId: string, name: string, emoji: string) => {
+    if (isGuest(accountRef.current?.id)) {
+      const acc = { ...accountRef.current!, profiles: accountRef.current!.profiles.map((p) => (p.id === profileId ? { ...p, name: name.trim().slice(0, 30) || p.name, emoji } : p)) };
+      writeGuest(acc); setAccount(acc);
+      setActiveProfile((p) => (p && p.id === profileId ? acc.profiles.find((x) => x.id === profileId) ?? p : p));
+      return { ok: true };
+    }
     const { ok, data } = await postJson("/api/profiles", "PATCH", { profileId, name, emoji });
     if (!ok || !data.profile) return { ok: false, error: errorOf(data) };
     const prof = data.profile as Profile;
@@ -346,8 +398,14 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const deleteProfile = useCallback(async (profileId: string) => {
-    const { ok, data } = await postJson("/api/profiles", "DELETE", { profileId });
-    if (!ok) return { ok: false, error: errorOf(data) };
+    if (isGuest(accountRef.current?.id)) {
+      const acc = { ...accountRef.current!, profiles: accountRef.current!.profiles.filter((p) => p.id !== profileId) };
+      writeGuest(acc);
+      try { localStorage.removeItem(cacheKey(acc.id, profileId)); } catch {}
+    } else {
+      const { ok, data } = await postJson("/api/profiles", "DELETE", { profileId });
+      if (!ok) return { ok: false, error: errorOf(data) };
+    }
     setAccount((a) => (a ? { ...a, profiles: a.profiles.filter((p) => p.id !== profileId) } : a));
     if (activeRef.current?.id === profileId) {
       canSaveRef.current = false;
@@ -363,6 +421,14 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     const prof = acc?.profiles.find((p) => p.id === profileId);
     if (acc && prof) await selectLoaded(acc.id, prof);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const useDevice = useCallback(() => {
+    const acc: PublicAccount = readGuest() ?? { id: GUEST_ID, displayName: "This device", profiles: [] };
+    writeGuest(acc);
+    setAccount(acc);
+    accountRef.current = acc;
+    setStatus("no-profile");
   }, []);
 
   const switchProfile = useCallback(() => {
@@ -505,6 +571,8 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       deleteProfile,
       selectProfile,
       switchProfile,
+      useDevice,
+      cloudAvailable,
       award,
       hasAward,
       saveAttempt,
@@ -517,7 +585,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       touchStreak,
       resetAll,
     }),
-    [data, status, account, activeProfile, signup, login, logout, createProfile, updateProfile, deleteProfile, selectProfile, switchProfile, award, hasAward, saveAttempt, getAttempt, markGuideRead, setLast, recordResult, setChallengeBest, setGoalMinutes, touchStreak, resetAll],
+    [data, status, account, activeProfile, signup, login, logout, createProfile, updateProfile, deleteProfile, selectProfile, switchProfile, useDevice, cloudAvailable, award, hasAward, saveAttempt, getAttempt, markGuideRead, setLast, recordResult, setChallengeBest, setGoalMinutes, touchStreak, resetAll],
   );
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;

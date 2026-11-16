@@ -2420,7 +2420,7 @@ export const sustainableCities: Topic = {
             modelAnswer:
               "Residents know their own needs best, so involving them leads to designs that actually work for them. People who help plan a place feel ownership, so they are more likely to follow rules (like car-free streets) and look after it. For example, Forum Vauban and the Baugruppen helped make Vauban's car-free design successful.",
             markScheme: [
-              { point: "Residents know local needs", keywords: ["needs", "know", "local knowledge", "what they want"] },
+              { point: "Residents know local needs", keywords: ["needs", "know best", "local knowledge", "what they want"] },
               { point: "Ownership / support for rules / look after place", keywords: ["ownership", "pride", "look after", "follow", "accept", "stick to"] },
               { point: "Example (Vauban / Forum Vauban / Baugruppen)", keywords: ["vauban", "forum", "baugruppen", "freiburg"] },
             ],

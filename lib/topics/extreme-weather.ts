@@ -14,7 +14,7 @@ export const extremeWeather: Topic = {
       id: "weather-vs-climate",
       heading: "Weather, climate and what makes weather 'extreme'",
       body:
-        "**Weather** is the day-to-day condition of the atmosphere at a particular place and time — its temperature, rainfall (precipitation), wind, cloud cover, air pressure and humidity. Weather changes from hour to hour: a sunny Singapore morning can become a thunderstorm by 3 pm.\n\n**Climate** is the average weather of a place measured over a long period, usually **30 years**. Singapore has an **equatorial climate**: hot all year (daily averages of about 26–28°C), humid, and wet in every month, with about 2,500 mm of rain a year. A useful saying is: *climate is what you expect; weather is what you get.*\n\n**Extreme weather** is weather that is much more severe than is normal for that place and time of year — far hotter, colder, wetter, drier or windier. What counts as extreme depends on the place: 35°C is a normal summer day in Dubai but a record-breaking heatwave in London. When extreme weather threatens people and property it becomes a **natural hazard**.\n\nExtreme weather events include:\n\n- **Tropical cyclones** (hurricanes, typhoons and cyclones)\n- **Tornadoes** — violent spinning columns of air\n- **Blizzards** — snowstorms with strong winds and very low visibility\n- **Heatwaves** — long spells of unusually hot weather\n- **Droughts** — long periods with much less rain than normal\n- **Sandstorms and dust storms** — strong winds lifting sand and dust in dry regions\n\nGeographers show climate on a **climate graph**: rainfall as **bars** (left axis, mm) and temperature as a **line** (right axis, °C). A single day's weather cannot be read from a climate graph — it shows averages, not what happened on one day.",
+        "**Weather** is the day-to-day condition of the atmosphere at a particular place and time — its temperature, rainfall (precipitation), wind, cloud cover, air pressure and humidity. Weather changes from hour to hour: a sunny Singapore morning can become a thunderstorm by 3 pm.\n\n**Climate** is the average weather of a place measured over a long period, usually **30 years**. Singapore has an **equatorial climate**: hot all year (daily averages of about 26–28°C), humid, and wet in every month, with about 2,500 mm of rain a year. A useful saying is: *climate is what you expect; weather is what you get.*\n\n**Extreme weather** is weather that is much more severe than is normal for that place and time of year — far hotter, colder, wetter, drier or windier. What counts as extreme depends on the place: 35°C is a normal summer day in Dubai but a severe heatwave in London. When extreme weather threatens people and property it becomes a **natural hazard**.\n\nExtreme weather events include:\n\n- **Tropical cyclones** (hurricanes, typhoons and cyclones)\n- **Tornadoes** — violent spinning columns of air\n- **Blizzards** — snowstorms with strong winds and very low visibility\n- **Heatwaves** — long spells of unusually hot weather\n- **Droughts** — long periods with much less rain than normal\n- **Sandstorms and dust storms** — strong winds lifting sand and dust in dry regions\n\nGeographers show climate on a **climate graph**: rainfall as **bars** (left axis, mm) and temperature as a **line** (right axis, °C). A single day's weather cannot be read from a climate graph — it shows averages, not what happened on one day.",
       diagram: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Climate graph of Singapore showing rainfall bars highest in November and December and an almost flat temperature line around 27 degrees"><rect x="0" y="0" width="320" height="210" fill="#f8fafc"/><text x="160" y="16" font-size="12" text-anchor="middle" fill="#0f172a" font-weight="bold">Singapore climate graph (approx. averages)</text><line x1="40" y1="30" x2="40" y2="170" stroke="#334155"/><line x1="40" y1="170" x2="282" y2="170" stroke="#334155"/><line x1="282" y1="30" x2="282" y2="170" stroke="#334155"/><g fill="#60a5fa"><rect x="43" y="81" width="14" height="89"/><rect x="63" y="124" width="14" height="46"/><rect x="83" y="102" width="14" height="68"/><rect x="103" y="104" width="14" height="66"/><rect x="123" y="104" width="14" height="66"/><rect x="143" y="116" width="14" height="54"/><rect x="163" y="108" width="14" height="62"/><rect x="183" y="101" width="14" height="69"/><rect x="203" y="115" width="14" height="55"/><rect x="223" y="103" width="14" height="67"/><rect x="243" y="68" width="14" height="102"/><rect x="263" y="44" width="14" height="126"/></g><polyline fill="none" stroke="#dc2626" stroke-width="2.5" points="50,109 70,104 90,99 110,94 130,91 150,91 170,94 190,95 210,97 230,98 250,106 270,110"/><g font-size="10" fill="#334155" text-anchor="middle"><text x="50" y="182">J</text><text x="70" y="182">F</text><text x="90" y="182">M</text><text x="110" y="182">A</text><text x="130" y="182">M</text><text x="150" y="182">J</text><text x="170" y="182">J</text><text x="190" y="182">A</text><text x="210" y="182">S</text><text x="230" y="182">O</text><text x="250" y="182">N</text><text x="270" y="182">D</text></g><g font-size="10" fill="#1d4ed8" text-anchor="end"><text x="37" y="173">0</text><text x="37" y="103">175</text><text x="37" y="34">350</text></g><g font-size="10" fill="#b91c1c"><text x="285" y="173">20</text><text x="285" y="103">27.5</text><text x="285" y="34">35</text></g><text x="12" y="120" font-size="10" fill="#1d4ed8" transform="rotate(-90 12 120)">Rainfall (mm)</text><text x="312" y="80" font-size="10" fill="#b91c1c" transform="rotate(90 312 80)">Temp (°C)</text><text x="160" y="200" font-size="10" text-anchor="middle" fill="#0f172a">Wettest: Dec (NE monsoon) · Driest: Feb</text></svg>`,
       diagramCaption:
         "A climate graph shows CLIMATE (30-year averages): rain as bars, temperature as a line. Singapore's line is almost flat (about 26–28.5°C) while rainfall peaks in November–December.",
@@ -24,7 +24,7 @@ export const extremeWeather: Topic = {
         "Climate graph: rainfall = bars (mm, left axis); temperature = line (°C, right axis).",
       ],
       thinkDeeper:
-        "Singapore's highest recorded temperature is about 37°C. London's is 40.3°C (2022). Does that mean London is a 'hotter place' than Singapore? What is the difference between a record and an average — and which one describes climate?",
+        "Singapore's highest recorded temperature is about 37°C. London's is 40.2°C (Heathrow, 2022). Does that mean London is a 'hotter place' than Singapore? What is the difference between a record and an average — and which one describes climate?",
       discovery: {
         problem:
           "Two statements: (A) 'It rained 120 mm at Changi yesterday.' (B) 'December is Singapore's wettest month, with about 300 mm of rain.' Which statement could change tomorrow, and which would take decades to change?",
@@ -61,7 +61,7 @@ export const extremeWeather: Topic = {
       id: "cyclone-hazards",
       heading: "Cyclone hazards and Typhoon Haiyan (2013)",
       body:
-        "Tropical cyclones bring several hazards at once. The **primary hazards** come directly from the storm; **secondary hazards** follow from them.\n\n- **Strong winds** — over 250 km/h in a Category 5 storm: roofs ripped off, trees and power lines flattened, flying debris.\n- **Storm surge** — a rise in sea level of several metres, caused by the low pressure (which lets the sea 'bulge' upwards) and strong winds piling water onto the coast. Storm surges usually cause **most cyclone deaths**, especially on low, flat coasts and in funnel-shaped bays.\n- **Heavy rain and flooding** — often 200–500 mm or more in a day or two, causing river and flash flooding.\n- **Landslides** — heavy rain saturates steep slopes, which then collapse.\n- **Secondary effects** — contaminated water and disease, power and communication cuts, food shortages, loss of homes and jobs.\n\n**Case study: Typhoon Haiyan (called Yolanda in the Philippines)**\n\nThe Philippines is an archipelago of over 7,000 islands in the north-west Pacific — the world's most active cyclone zone — and is hit by about 20 typhoons a year. On **8 November 2013** Super Typhoon Haiyan made landfall near Guiuan in Eastern Samar with sustained winds of about **315 km/h**, one of the strongest storms ever recorded at landfall.\n\n- **Storm surge**: up to about **5–7 m** swept into **Tacloban** city (Leyte), which sits at the end of a narrowing bay. Most deaths were caused by the surge.\n- **Deaths**: about **6,300**; around **4 million people displaced** and over **14 million affected**.\n- **Damage**: about 1 million homes damaged or destroyed; estimates of total losses vary from roughly US$2 billion to over US$5 billion.\n- **Warnings**: forecasts were accurate and about 800,000 people were evacuated, but many residents did not understand the term 'storm surge' — some said a 'tsunami' warning would have made them flee. Some evacuation centres were themselves flooded.\n- **Response**: international aid from the UN, the UK (including HMS Daring and HMS Illustrious), the USA and many others; Singapore's armed forces sent C-130 aircraft with relief supplies. Rebuilding included a 'no-build zone' along parts of the coast and a storm-surge barrier and tree planting at Tacloban.\n\nThe lesson: a good forecast only saves lives if warnings are **understood, trusted and acted on**, and people have safe places to go.",
+        "Tropical cyclones bring several hazards at once. The **primary hazards** come directly from the storm; **secondary hazards** follow from them.\n\n- **Strong winds** — over 250 km/h in a Category 5 storm: roofs ripped off, trees and power lines flattened, flying debris.\n- **Storm surge** — a rise in sea level of several metres, caused by the low pressure (which lets the sea 'bulge' upwards) and strong winds piling water onto the coast. Storm surges usually cause **most cyclone deaths**, especially on low, flat coasts and in funnel-shaped bays.\n- **Heavy rain and flooding** — often 200–500 mm or more in a day or two, causing river and flash flooding.\n- **Landslides** — heavy rain saturates steep slopes, which then collapse.\n- **Secondary effects** — contaminated water and disease, power and communication cuts, food shortages, loss of homes and jobs.\n\n**Case study: Typhoon Haiyan (called Yolanda in the Philippines)**\n\nThe Philippines is an archipelago of over 7,000 islands in the north-west Pacific — the world's most active cyclone zone — and about 20 typhoons enter its area each year. On **8 November 2013** Super Typhoon Haiyan made landfall near Guiuan in Eastern Samar with sustained winds of about **315 km/h**, one of the strongest storms ever recorded at landfall.\n\n- **Storm surge**: up to about **5–7 m** swept into **Tacloban** city (Leyte), which sits at the end of a narrowing bay. Most deaths were caused by the surge.\n- **Deaths**: about **6,300**; around **4 million people displaced** and over **14 million affected**.\n- **Damage**: about 1 million homes damaged or destroyed; estimates of total losses vary from roughly US$2 billion to over US$5 billion.\n- **Warnings**: forecasts were accurate and about 800,000 people were evacuated, but many residents did not understand the term 'storm surge' — some said a 'tsunami' warning would have made them flee. Some evacuation centres were themselves flooded.\n- **Response**: international aid from the UN, the UK (including HMS Daring and HMS Illustrious), the USA and many others; Singapore's armed forces sent C-130 aircraft with relief supplies. Rebuilding included a 'no-build zone' along parts of the coast and a storm-surge barrier and tree planting at Tacloban.\n\nThe lesson: a good forecast only saves lives if warnings are **understood, trusted and acted on**, and people have safe places to go.",
       diagram: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch map of the central Philippines showing Typhoon Haiyan's track westward across Samar and Leyte, with Tacloban marked"><defs><marker id="ch-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b91c1c"/></marker></defs><rect x="0" y="0" width="320" height="210" fill="#e0f2fe"/><path d="M60,20 L95,25 L100,60 L80,70 L70,50 Z" fill="#bbf7d0" stroke="#15803d"/><text x="80" y="45" font-size="10" text-anchor="middle" fill="#14532d">Luzon</text><path d="M215,80 L250,85 L255,115 L225,120 L210,100 Z" fill="#bbf7d0" stroke="#15803d"/><text x="232" y="103" font-size="10" text-anchor="middle" fill="#14532d">Samar</text><path d="M195,122 L218,124 L215,160 L195,165 L188,140 Z" fill="#bbf7d0" stroke="#15803d"/><text x="203" y="150" font-size="10" text-anchor="middle" fill="#14532d">Leyte</text><path d="M110,120 L150,118 L160,140 L130,150 L105,140 Z" fill="#bbf7d0" stroke="#15803d"/><text x="132" y="136" font-size="10" text-anchor="middle" fill="#14532d">Panay</text><path d="M140,175 L200,172 L205,195 L145,198 Z" fill="#bbf7d0" stroke="#15803d"/><text x="172" y="189" font-size="10" text-anchor="middle" fill="#14532d">Mindanao</text><circle cx="210" cy="124" r="4" fill="#0f172a"/><text x="160" y="116" font-size="10" fill="#0f172a">Tacloban</text><polyline points="310,135 262,123 218,124 170,128 120,128 40,110" fill="none" stroke="#b91c1c" stroke-width="2.5" stroke-dasharray="6 3" marker-end="url(#ch-arrow)"/><text x="262" y="145" font-size="10" fill="#7f1d1d">landfall 8 Nov 2013</text><text x="250" y="160" font-size="10" fill="#7f1d1d">~315 km/h winds</text><g transform="translate(290,30)"><line x1="0" y1="15" x2="0" y2="-5" stroke="#0f172a" stroke-width="2"/><path d="M-4,0 L0,-8 L4,0 Z" fill="#0f172a"/><text x="0" y="28" font-size="10" text-anchor="middle" fill="#0f172a">N</text></g><line x1="20" y1="195" x2="80" y2="195" stroke="#0f172a" stroke-width="2"/><text x="50" y="190" font-size="10" text-anchor="middle" fill="#0f172a">≈ 200 km</text><text x="20" y="100" font-size="10" fill="#0f172a">South China Sea</text><text x="250" y="190" font-size="10" fill="#0f172a">Pacific Ocean</text></svg>`,
       diagramCaption:
         "Sketch map (not to exact scale): Haiyan travelled westward from the Pacific, crossing Samar and Leyte. Tacloban sits at the head of a narrow bay that funnelled the storm surge.",
@@ -94,7 +94,7 @@ export const extremeWeather: Topic = {
       id: "other-extremes",
       heading: "Other extremes: tornadoes, blizzards, heatwaves, droughts and sandstorms",
       body:
-        "**Tornadoes** are violently rotating columns of air reaching from a thunderstorm cloud (usually a giant rotating **supercell** cumulonimbus) down to the ground. They are small — often under 1 km wide — and short-lived, but winds can exceed 300 km/h. They form where **warm, moist air** near the ground meets **cold, dry air** above, with winds changing direction with height, which sets the air spinning. The USA's Great Plains ('**Tornado Alley**') has about 1,200 tornadoes a year — more than anywhere else. Tornadoes are rated on the **Enhanced Fujita (EF) scale** from EF0 to EF5. Example: the EF5 tornado at **Moore, Oklahoma (20 May 2013)** killed 24 people.\n\n**Blizzards** are severe snowstorms with strong winds (about 56 km/h or more) and blowing snow that cuts visibility to under about 400 m for several hours. Hazards include **frostbite and hypothermia**, people stranded in cars, blocked roads and power cuts. Example: the '**Beast from the East**' in the UK (February–March 2018), when cold easterly winds from Siberia brought heavy snow and closed roads, schools and airports.\n\n**Heatwaves** are long spells (usually several days) of unusually high temperatures for that place. They cause **heatstroke** and dehydration, especially among the elderly, and strain electricity and water supplies. Examples: the **2003 European heatwave**, linked to about 70,000 extra deaths; the **UK record of 40.3°C** at Coningsby, Lincolnshire, on 19 July 2022. Singapore equalled its own record of about **37°C** in May 2023. Cities suffer most because of the **urban heat island** effect — concrete and tarmac store heat.\n\n**Droughts** are long periods of much lower rainfall than normal, so water supplies run short. Unlike other extremes they develop slowly — a 'creeping hazard'. Effects: crop failure, livestock deaths, famine, wildfires and conflict over water. Example: the **Horn of Africa drought (2020–2023)** — five failed rainy seasons in a row in Somalia, Kenya and Ethiopia left over 20 million people short of food.\n\n**Sandstorms and dust storms** happen when strong winds lift loose sand and dust from dry, bare ground — in deserts such as the Sahara and Gobi, or on over-grazed farmland. Visibility can fall to a few metres and dust damages lungs, crops and engines. A towering wall of dust ahead of a thunderstorm is called a **haboob**. Example: in **March 2021** Beijing had its worst sandstorm in a decade, blown in from the Gobi Desert.",
+        "**Tornadoes** are violently rotating columns of air reaching from a thunderstorm cloud (usually a giant rotating **supercell** cumulonimbus) down to the ground. They are small — often under 1 km wide — and short-lived, but winds can exceed 300 km/h. They form where **warm, moist air** near the ground meets **cold, dry air** above, with winds changing direction with height, which sets the air spinning. The USA has about 1,200 tornadoes a year — more than any other country — many of them on the Great Plains ('**Tornado Alley**'). Tornadoes are rated on the **Enhanced Fujita (EF) scale** from EF0 to EF5. Example: the EF5 tornado at **Moore, Oklahoma (20 May 2013)** killed 24 people.\n\n**Blizzards** are severe snowstorms with strong winds (about 56 km/h or more) and blowing snow that cuts visibility to under about 400 m for several hours. Hazards include **frostbite and hypothermia**, people stranded in cars, blocked roads and power cuts. Example: the '**Beast from the East**' in the UK (February–March 2018), when cold easterly winds from Siberia brought heavy snow and closed roads, schools and airports.\n\n**Heatwaves** are long spells (usually several days) of unusually high temperatures for that place. They cause **heatstroke** and dehydration, especially among the elderly, and strain electricity and water supplies. Examples: the **2003 European heatwave**, linked to about 70,000 extra deaths; the **UK record of 40.3°C** at Coningsby, Lincolnshire, on 19 July 2022. Singapore equalled its own record of about **37°C** in May 2023. Cities suffer most because of the **urban heat island** effect — concrete and tarmac store heat.\n\n**Droughts** are long periods of much lower rainfall than normal, so water supplies run short. Unlike other extremes they develop slowly — a 'creeping hazard'. Effects: crop failure, livestock deaths, famine, wildfires and conflict over water. Example: the **Horn of Africa drought (2020–2023)** — five failed rainy seasons in a row in Somalia, Kenya and Ethiopia left over 20 million people short of food.\n\n**Sandstorms and dust storms** happen when strong winds lift loose sand and dust from dry, bare ground — in deserts such as the Sahara and Gobi, or on over-grazed farmland. Visibility can fall to a few metres and dust damages lungs, crops and engines. A towering wall of dust ahead of a thunderstorm is called a **haboob**. Example: in **March 2021** Beijing had its worst sandstorm in a decade, blown in from the Gobi Desert.",
       diagram: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram of tornado formation: warm moist air flowing in near the ground, cold dry air above, a rotating supercell cloud and a funnel reaching the ground"><defs><marker id="ox-red" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#dc2626"/></marker><marker id="ox-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#2563eb"/></marker></defs><rect x="0" y="0" width="320" height="210" fill="#f1f5f9"/><rect x="0" y="185" width="320" height="25" fill="#a3e635"/><path d="M60,70 Q70,30 130,25 Q170,10 220,25 Q280,30 285,70 Z" fill="#64748b"/><text x="175" y="50" font-size="11" text-anchor="middle" fill="#ffffff">Supercell (cumulonimbus)</text><path d="M150,70 L175,70 L168,120 L164,160 L160,185 L156,185 L152,150 L150,110 Z" fill="#475569"/><ellipse cx="162" cy="100" rx="22" ry="5" fill="none" stroke="#f8fafc" stroke-width="1.5"/><ellipse cx="160" cy="140" rx="14" ry="4" fill="none" stroke="#f8fafc" stroke-width="1.5"/><line x1="20" y1="170" x2="135" y2="170" stroke="#dc2626" stroke-width="2.5" marker-end="url(#ox-red)"/><text x="20" y="162" font-size="10" fill="#991b1b">warm, moist air (low level)</text><line x1="310" y1="90" x2="200" y2="90" stroke="#2563eb" stroke-width="2.5" marker-end="url(#ox-blue)"/><text x="215" y="105" font-size="10" fill="#1e40af">cold, dry air above</text><text x="185" y="150" font-size="10" fill="#0f172a">rotating funnel</text><text x="185" y="162" font-size="10" fill="#0f172a">winds up to 300+ km/h</text><text x="10" y="18" font-size="10" fill="#0f172a">Tornado (EF0–EF5)</text></svg>`,
       diagramCaption:
         "Tornadoes form beneath rotating supercell thunderstorms where warm, moist air near the ground meets cold, dry air above.",
@@ -478,7 +478,7 @@ export const extremeWeather: Topic = {
           "A sea surface temperature of at least 26.5°C; a location roughly 5–30° north or south of the Equator so that the Coriolis effect is strong enough to make the storm spin; and low wind shear so the storm's tall clouds are not torn apart (with plenty of warm, moist rising air).",
         markScheme: [
           { point: "Warm sea of at least 26.5°C", keywords: ["26", "27", "warm sea", "warm ocean", "warm water"] },
-          { point: "Latitude about 5–30° / Coriolis effect to make it spin", keywords: ["coriolis", "latitude", "spin", "rotat", "equator", "tropic"] },
+          { point: "Latitude about 5–30° / Coriolis effect to make it spin", keywords: ["coriolis", "latitude", "spin", "rotat", "equator", "5 30"] },
           { point: "Low wind shear / rising moist air / low pressure", keywords: ["shear", "rising", "moist", "humid", "low pressure", "evaporat"] },
         ],
         commonError: "Writing 'hot weather' instead of a sea temperature, or saying cyclones form on the Equator.",
@@ -492,10 +492,10 @@ export const extremeWeather: Topic = {
         modelAnswer:
           "A storm surge is a rise in sea level of several metres caused by the very low pressure, which lets the sea bulge upwards, and by strong onshore winds piling water against the coast. It floods low-lying coastal land very quickly, so people have little time to escape and many drown. Surges are worst in funnel-shaped bays, as at Tacloban in the Philippines, where Typhoon Haiyan's surge of 5–7 m caused most of the ~6,300 deaths. Many coastal communities are densely populated and poor, with weak housing.",
         markScheme: [
-          { point: "Low pressure lets sea level rise", keywords: ["low pressure", "pressure", "bulge", "rise"] },
-          { point: "Strong winds push water onto the coast", keywords: ["wind", "push", "pile", "onshore", "driven"] },
+          { point: "Low pressure lets sea level rise", keywords: ["low pressure", "bulge", "dome", "sea level ris", "rise in sea level"] },
+          { point: "Strong winds push water onto the coast", keywords: ["onshore", "push", "pile", "piling", "wind-driven", "driven"] },
           { point: "Floods low-lying coasts quickly / people drown", keywords: ["low-lying", "low lying", "drown", "quick", "flat", "flood"] },
-          { point: "Example with data (e.g. Haiyan 5–7 m at Tacloban)", keywords: ["haiyan", "tacloban", "bhola", "metre", "6,300", "6300"] },
+          { point: "Example with data (e.g. Haiyan 5–7 m at Tacloban)", keywords: ["haiyan", "yolanda", "tacloban", "bhola", "6,300", "7 m"] },
         ],
         commonError: "Confusing storm surge with a tsunami or with rain flooding, and giving no example.",
         guideRef: "cyclone-hazards",
@@ -525,10 +525,10 @@ export const extremeWeather: Topic = {
           "In 1970 the Bhola cyclone killed 300,000–500,000 people in East Pakistan (now Bangladesh) because there were few warnings and almost no shelters. Today satellites and supercomputer models track cyclones days in advance, and ensemble forecasts show where landfall is likely. Warnings are spread by trained volunteers (Bangladesh's Cyclone Preparedness Programme has over 70,000), radio and mobile phones, and people move to raised concrete cyclone shelters. When Cyclone Fani hit Odisha in 2019, about 1.2 million people were evacuated and fewer than 100 died there. So better forecasts only save lives because they are linked to warnings, shelters and evacuation plans.",
         markScheme: [
           { point: "Bhola 1970 high death toll with little warning", keywords: ["bhola", "1970", "300,000", "500,000", "300000"] },
-          { point: "Satellites / models give earlier, more accurate forecasts", keywords: ["satellite", "supercomputer", "model", "ensemble", "track", "radar"] },
-          { point: "Warnings spread to people (volunteers, phones, radio)", keywords: ["volunteer", "warning", "phone", "radio", "megaphone", "alert"] },
-          { point: "Shelters and evacuation", keywords: ["shelter", "evacuat", "moved", "safe"] },
-          { point: "Modern example with data (Fani/Phailin/Amphan)", keywords: ["fani", "phailin", "amphan", "odisha", "1.2 million", "million"] },
+          { point: "Satellites / models give earlier, more accurate forecasts", keywords: ["satellite", "supercomputer", "computer model", "ensemble", "radar"] },
+          { point: "Warnings spread to people (volunteers, phones, radio)", keywords: ["volunteer", "phone", "radio", "megaphone", "sms", "alert"] },
+          { point: "Shelters and evacuation", keywords: ["shelter", "evacuat", "moved", "relocat"] },
+          { point: "Modern example with data (Fani/Phailin/Amphan)", keywords: ["fani", "phailin", "amphan", "odisha", "1.2 million"] },
         ],
         commonError: "Only describing technology without explaining how people acted on the warnings — or giving no figures.",
         guideRef: "forecasting-warnings",
@@ -607,7 +607,7 @@ export const extremeWeather: Topic = {
             options: ["the Great Plains of the USA", "the Sahara Desert", "the Bay of Bengal", "northern Siberia"],
             answerIndex: 0,
             hint: "Think of flat land where warm, moist air from the Gulf of Mexico meets cold, dry air.",
-            explanation: "The US Great Plains has about 1,200 tornadoes a year because warm, moist Gulf air meets cold, dry air from the north and west. The Bay of Bengal is famous for cyclones, not tornadoes.",
+            explanation: "The USA has about 1,200 tornadoes a year, more than any other country, and many strike the Great Plains, where warm, moist Gulf air meets cold, dry air from the north and west. The Bay of Bengal is famous for cyclones, not tornadoes.",
             guideRef: "other-extremes",
           },
           {
@@ -1486,7 +1486,7 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Weather is the day-to-day condition of the atmosphere at a place — its temperature, rainfall, wind, cloud and pressure. Climate is the average weather of a place measured over a long period, usually 30 years.",
             markScheme: [
-              { point: "Weather = day-to-day / short-term condition of the atmosphere", keywords: ["day-to-day", "day to day", "short", "daily", "hour", "at a particular time"] },
+              { point: "Weather = day-to-day / short-term condition of the atmosphere", keywords: ["day-to-day", "short term", "short period", "daily", "hour", "at a particular time"] },
               { point: "Climate = average weather over a long period (about 30 years)", keywords: ["average", "30", "long period", "long-term", "long term"] },
             ],
             commonError: "Defining climate as 'the weather in a season' or forgetting the word 'average'.",
@@ -1513,9 +1513,9 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "At the centre is the eye, about 20–60 km wide, where air sinks so it is calm with few clouds and the lowest pressure. Around it is the eye wall, a ring of towering cumulonimbus cloud with the strongest winds and heaviest rain. Spiralling outwards for hundreds of kilometres are rain bands of cloud and heavy showers.",
             markScheme: [
-              { point: "Eye: calm, sinking air, lowest pressure", keywords: ["eye", "calm", "sinking", "clear"] },
+              { point: "Eye: calm, sinking air, lowest pressure", keywords: ["calm", "sinking", "sinks", "clear", "lowest pressure", "light wind"] },
               { point: "Eye wall: strongest winds, heaviest rain", keywords: ["eye wall", "eyewall", "strongest", "heaviest", "towering"] },
-              { point: "Rain bands spiral outwards", keywords: ["rain band", "spiral", "outer", "bands"] },
+              { point: "Rain bands spiral outwards", keywords: ["rain band", "rainband", "spiral", "outer", "bands"] },
             ],
             commonError: "Saying the eye has the strongest winds.",
             guideRef: "cyclone-formation",
@@ -1593,7 +1593,7 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "A Sumatra squall is a line of thunderstorms that forms at night over Sumatra or the Strait of Malacca and moves east to Singapore, usually arriving before dawn or in the early morning. It brings sudden strong gusts (about 40–80 km/h) and heavy rain, mainly during the Southwest Monsoon.",
             markScheme: [
-              { point: "Line of thunderstorms from Sumatra / Strait of Malacca", keywords: ["line of thunderstorm", "thunderstorm", "sumatra", "malacca", "squall line"] },
+              { point: "Line of thunderstorms from Sumatra / Strait of Malacca", keywords: ["line of thunderstorm", "thunderstorm", "over sumatra", "malacca", "squall line", "forms at night"] },
               { point: "Arrives early morning with strong gusts and heavy rain", keywords: ["morning", "dawn", "gust", "strong wind", "heavy rain"] },
             ],
             commonError: "Confusing squalls with haze or saying they come from the South China Sea.",
@@ -1607,7 +1607,7 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "(a) The wettest month is December (316 mm) and the driest is February (115 mm). (b) The range is 316 − 115 = 201 mm. (c) December is in the wet phase of the Northeast Monsoon, when moist winds from the South China Sea bring long spells of heavy rain.",
             markScheme: [
-              { point: "Wettest December, driest February", keywords: ["december", "dec", "february", "feb", "316"] },
+              { point: "Wettest December, driest February", keywords: ["december", "february", "316", "115"] },
               { point: "Range = 201 mm", keywords: ["201", "201 mm", "201mm", "two hundred and one"] },
               { point: "Explains with Northeast Monsoon wet phase", keywords: ["northeast", "north-east", "north east", "ne monsoon", "monsoon"] },
             ],
@@ -1639,7 +1639,7 @@ export const extremeWeather: Topic = {
               "The haze was caused by forest and peatland fires in Sumatra and Kalimantan, Indonesia, many lit deliberately to clear land for oil palm and pulpwood plantations. A strong El Niño made the region unusually dry, so the peat burned for weeks and was hard to put out. Southwest Monsoon winds then carried the smoke to Singapore and Malaysia.",
             markScheme: [
               { point: "Fires in Sumatra/Kalimantan, Indonesia", keywords: ["sumatra", "kalimantan", "indonesia", "fire", "burn"] },
-              { point: "Land clearing for plantations / peat", keywords: ["palm", "plantation", "clear", "peat", "slash"] },
+              { point: "Land clearing for plantations / peat", keywords: ["palm", "plantation", "clearing", "clear land", "peat", "slash"] },
               { point: "El Niño dryness or SW Monsoon winds carrying smoke", keywords: ["el nino", "el niño", "drought", "dry", "southwest", "south-west"] },
             ],
             commonError: "Blaming Singapore's own traffic or factories.",
@@ -1653,9 +1653,9 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Geostationary satellites stay above the same spot about 36,000 km up and send images every few minutes, so forecasters can track a typhoon's position and growth over the ocean days before it reaches land. Polar-orbiting satellites give detailed measurements of temperature and moisture across the globe, which are fed into computer models. Weather radar bounces radio waves off raindrops to show exactly where heavy rain is falling and which way it is moving, so warnings of thunderstorms, squalls and flash floods can be given a few hours ahead.",
             markScheme: [
-              { point: "Satellites image/track storms over oceans", keywords: ["satellite", "track", "image", "geostationary", "himawari"] },
-              { point: "Gives days of warning / data fed into models", keywords: ["days", "in advance", "model", "early warning", "ahead"] },
-              { point: "Radar detects rain location and intensity", keywords: ["radar", "raindrop", "bounce", "radio wave", "intensity"] },
+              { point: "Satellites image/track storms over oceans", keywords: ["track", "image", "geostationary", "himawari", "36,000", "position"] },
+              { point: "Gives days of warning / data fed into models", keywords: ["days", "in advance", "model", "early warning", "computer"] },
+              { point: "Radar detects rain location and intensity", keywords: ["raindrop", "bounce", "radio wave", "intensity", "where rain", "heavy rain"] },
               { point: "Short-term warnings of storms/floods (hours)", keywords: ["hours", "short-term", "short term", "flash flood", "nowcast", "thunderstorm"] },
             ],
             commonError: "Saying satellites measure rainfall in rain gauges, or not explaining HOW the data leads to warnings.",
@@ -1670,7 +1670,7 @@ export const extremeWeather: Topic = {
               "A blizzard is a severe snowstorm with strong winds (about 56 km/h or more) and blowing snow that reduces visibility to under about 400 m for several hours. Hazards include hypothermia and frostbite for people caught outside, and roads and railways blocked by snowdrifts, stranding drivers — as in the UK's 'Beast from the East' in 2018.",
             markScheme: [
               { point: "Definition: strong wind + snow + poor visibility", keywords: ["visibility", "blowing snow", "strong wind", "snowstorm", "400"] },
-              { point: "Hazard to health: hypothermia/frostbite", keywords: ["hypothermia", "frostbite", "freez", "cold"] },
+              { point: "Hazard to health: hypothermia/frostbite", keywords: ["hypothermia", "frostbite", "freez", "exposure"] },
               { point: "Hazard to transport/services: roads blocked, power cuts, stranded", keywords: ["road", "stranded", "transport", "power cut", "drift", "closed"] },
             ],
             commonError: "Describing any snowfall as a blizzard without mentioning wind and visibility.",
@@ -1701,9 +1701,9 @@ export const extremeWeather: Topic = {
               { point: "Agrees: technology (satellites/models) gives earlier forecasts", keywords: ["satellite", "supercomputer", "model", "radar", "ensemble"] },
               { point: "Evidence: Bhola 1970 with little warning", keywords: ["bhola", "1970", "300,000", "500,000"] },
               { point: "Counter: accurate forecast still failed (Haiyan)", keywords: ["haiyan", "tacloban", "storm surge", "did not understand", "misunderstood"] },
-              { point: "Counter: warnings/volunteers/education", keywords: ["volunteer", "warning", "education", "cpp", "preparedness"] },
+              { point: "Counter: warnings/volunteers/education", keywords: ["volunteer", "megaphone", "education", "cpp", "preparedness"] },
               { point: "Evidence: shelters/evacuation (Fani/Phailin)", keywords: ["fani", "phailin", "evacuat", "shelter", "1.2 million"] },
-              { point: "Judgement: necessary but not sufficient", keywords: ["overall", "conclusion", "extent", "not enough", "both", "however"] },
+              { point: "Judgement: necessary but not sufficient", keywords: ["overall", "conclusion", "not enough", "not sufficient", "on balance", "necessary but"] },
             ],
             commonError: "Agreeing completely without considering warnings and preparedness, or giving no final judgement.",
             guideRef: "forecasting-warnings",
@@ -1754,7 +1754,7 @@ export const extremeWeather: Topic = {
               { point: "Category 4 on Day 3", keywords: ["category 4", "cat 4", "category four", "cat. 4"] },
               { point: "Describes increase to a peak on Day 3 with data", keywords: ["increase", "strengthen", "rose", "peak", "230"] },
               { point: "Describes decrease on Day 4 with data", keywords: ["decrease", "weaken", "fell", "dropped", "130"] },
-              { point: "Explains: cut off from warm moist air / friction", keywords: ["moist", "warm sea", "warm water", "energy", "friction", "landfall"] },
+              { point: "Explains: cut off from warm moist air / friction", keywords: ["moist", "warm sea", "warm water", "energy", "friction", "cut off"] },
             ],
             commonError: "Not quoting figures in the description, or saying the storm 'ran out of wind'.",
             guideRef: "cyclone-formation",
@@ -1767,7 +1767,7 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Tacloban sits on low-lying land at the head of a narrowing bay, which funnelled the storm surge to about 5–7 m. Haiyan was extremely powerful, with winds of about 315 km/h. Many residents did not understand what a 'storm surge' was, so some did not evacuate, and some evacuation centres were themselves flooded. Many homes were lightly built, so they were destroyed by the wind and water.",
             markScheme: [
-              { point: "Low-lying location / funnel-shaped bay", keywords: ["low-lying", "low lying", "bay", "funnel", "coast"] },
+              { point: "Low-lying location / funnel-shaped bay", keywords: ["low-lying", "bay", "funnel", "narrow", "flat"] },
               { point: "Very strong storm/surge (315 km/h, 5–7 m)", keywords: ["315", "surge", "metre", "category 5", "super typhoon"] },
               { point: "Warnings misunderstood / did not evacuate", keywords: ["understand", "warning", "evacuat", "tsunami"] },
               { point: "Weak housing / shelters flooded / poverty", keywords: ["housing", "homes", "poor", "shelter", "flimsy", "poverty"] },
@@ -1784,7 +1784,7 @@ export const extremeWeather: Topic = {
               "Tornadoes form beneath large, rotating thunderstorm clouds called supercells. Warm, moist air near the ground meets cold, dry air above, making the air very unstable so it rises violently. Winds that change speed and direction with height set the air spinning, and the rotating column stretches down from the cloud to the ground as a funnel.",
             markScheme: [
               { point: "Forms from supercell / cumulonimbus thunderstorm", keywords: ["supercell", "cumulonimbus", "thunderstorm", "storm cloud"] },
-              { point: "Warm moist air meets cold dry air", keywords: ["warm", "cold", "moist", "dry air", "meet"] },
+              { point: "Warm moist air meets cold dry air", keywords: ["warm moist", "warm, moist", "cold dry", "cold, dry", "meet", "unstable"] },
               { point: "Wind shear causes rotation; funnel reaches ground", keywords: ["rotat", "spin", "funnel", "shear", "twist"] },
             ],
             commonError: "Saying tornadoes form over warm oceans like hurricanes.",
@@ -1799,7 +1799,7 @@ export const extremeWeather: Topic = {
               "Heatwaves cause heatstroke and dehydration because the body cannot cool down. Elderly people are more vulnerable because their bodies regulate temperature less well, they often have health conditions and may live alone, so nobody notices when they become ill. Cities are hotter because of the urban heat island effect — concrete and tarmac store heat and release it at night, so there is no relief. For example, the 2003 European heatwave was linked to about 70,000 extra deaths.",
             markScheme: [
               { point: "Health effects: heatstroke/dehydration", keywords: ["heatstroke", "heat stroke", "dehydrat", "exhaustion", "overheat"] },
-              { point: "Elderly vulnerable (weaker bodies/alone)", keywords: ["elderly", "old", "alone", "isolated", "health condition"] },
+              { point: "Elderly vulnerable (weaker bodies/alone)", keywords: ["older", "weaker", "alone", "isolated", "health condition", "regulate"] },
               { point: "Urban heat island effect", keywords: ["urban heat island", "concrete", "tarmac", "heat island", "buildings"] },
               { point: "Example with data (2003 Europe ~70,000)", keywords: ["2003", "70,000", "70000", "europe", "40.3"] },
             ],
@@ -1846,7 +1846,7 @@ export const extremeWeather: Topic = {
               "A south-westerly wind blows FROM the south-west towards the north-east. The arrow of a wind vane points into the wind, towards the direction it is coming from. In Singapore, south-westerly winds blow during the Southwest Monsoon.",
             markScheme: [
               { point: "Wind comes FROM the south-west", keywords: ["from the south-west", "from the southwest", "from south-west", "from southwest", "comes from"] },
-              { point: "Blows towards the north-east / vane points into the wind", keywords: ["north-east", "northeast", "towards", "into the wind"] },
+              { point: "Blows towards the north-east / vane points into the wind", keywords: ["north-east", "northeast", "into the wind", "points into", "where it comes from"] },
             ],
             commonError: "Saying the wind is blowing towards the south-west.",
             guideRef: "measuring-weather",
@@ -1859,7 +1859,7 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "(a) Northern Scotland will be much windier because the isobars are close together, showing a steep pressure gradient, so air moves quickly from high to low pressure. (b) Under the 1030 hPa high in France the air is sinking, so skies will be clear, winds light and the weather hot, dry and sunny.",
             markScheme: [
-              { point: "Scotland windier", keywords: ["scotland", "the low", "968", "north"] },
+              { point: "Scotland windier", keywords: ["scotland", "the low", "968", "low pressure"] },
               { point: "Close isobars = steep pressure gradient", keywords: ["close", "gradient", "tightly", "packed", "near together"] },
               { point: "France: high pressure, sunny/dry/light winds", keywords: ["sunny", "dry", "clear", "light wind", "calm", "hot"] },
             ],
@@ -1889,10 +1889,10 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Bhola killed at least 300,000 people, whereas Fani killed fewer than 100 in Odisha — thousands of times fewer. The difference is not because Fani was weak: it was an extremely severe cyclone. In 1970 there were few warnings and almost no shelters. By 2019 satellites and computer models tracked Fani days in advance, warnings were spread by phone, radio and volunteers, and about 1.2 million people were moved into cyclone shelters and safe buildings in about two days.",
             markScheme: [
-              { point: "Uses data to compare death tolls", keywords: ["300,000", "500,000", "100", "fewer", "thousands of times"] },
+              { point: "Uses data to compare death tolls", keywords: ["300,000", "500,000", "fewer than 100", "thousands of times", "times fewer"] },
               { point: "Better forecasting (satellites/models)", keywords: ["satellite", "model", "forecast", "track", "supercomputer"] },
-              { point: "Warnings spread / volunteers", keywords: ["warning", "volunteer", "phone", "radio", "alert"] },
-              { point: "Evacuation and shelters", keywords: ["evacuat", "shelter", "1.2 million", "moved"] },
+              { point: "Warnings spread / volunteers", keywords: ["volunteer", "phone", "radio", "alert", "megaphone", "warnings were spread"] },
+              { point: "Evacuation and shelters", keywords: ["cyclone shelter", "moved", "evacuation plan", "concrete", "safe building"] },
             ],
             commonError: "Assuming the 2019 storm must have been weaker.",
             guideRef: "forecasting-warnings",
@@ -1903,9 +1903,9 @@ export const extremeWeather: Topic = {
             marks: 3,
             hint: "% decrease = (old − new) ÷ old × 100.",
             modelAnswer:
-              "(a) (10,000 − 45) ÷ 10,000 × 100 = 99.55%, so deaths fell by about 99.6%. (b) After 1999 Odisha built cyclone shelters and an evacuation plan, so about 1 million people were moved to safety before Phailin struck.",
+              "(a) 10,000 − 45 = 9,955; 9,955 ÷ 10,000 × 100 = 99.55%, so deaths fell by about 99.6%. (b) After 1999 Odisha built cyclone shelters and an evacuation plan, so about 1 million people were moved to safety before Phailin struck.",
             markScheme: [
-              { point: "Correct method (difference ÷ original × 100)", keywords: ["9955", "9,955", "÷ 10,000", "/10000", "/ 10000", "divided"] },
+              { point: "Correct method (difference ÷ original × 100)", keywords: ["9955", "divided", "divide", "x 100", "times 100", "multiplied by 100"] },
               { point: "Answer about 99.5–99.6%", keywords: ["99.5", "99.6", "99.55", "99%"] },
               { point: "Reason: shelters/evacuation/warnings", keywords: ["shelter", "evacuat", "warning", "1 million", "prepar"] },
             ],
@@ -1920,8 +1920,8 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Drought develops slowly over months or years as rainfall stays below normal, so there is no clear start and it 'creeps up' on people. In the Horn of Africa (Somalia, Kenya, Ethiopia), five rainy seasons failed in a row between 2020 and 2023, so crops failed and millions of livestock died. Over 20 million people faced food shortages, and many had to leave their homes to find water and food.",
             markScheme: [
-              { point: "Develops slowly / no clear start", keywords: ["slow", "months", "years", "gradual", "creep"] },
-              { point: "Example: Horn of Africa / failed rains", keywords: ["horn of africa", "somalia", "kenya", "ethiopia", "five", "failed"] },
+              { point: "Develops slowly / no clear start", keywords: ["slow", "months", "years", "gradual", "no clear start"] },
+              { point: "Example: Horn of Africa / failed rains", keywords: ["horn of africa", "somalia", "kenya", "ethiopia", "five"] },
               { point: "Effects: crop failure, livestock deaths, hunger, migration", keywords: ["crop", "livestock", "famine", "hunger", "food", "migrat"] },
             ],
             commonError: "Defining drought as 'no rain' rather than 'much less rain than normal for a long period'.",
@@ -1935,12 +1935,12 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Singapore is at low risk from tropical cyclones because it lies about 1°N, where the Coriolis effect is too weak for them to form, and it has no tornadoes or blizzards. However, it does face other extreme weather. Intense Northeast Monsoon rain and thunderstorms cause flash floods, which PUB manages with drains, canals and the Marina Barrage. Sumatra squalls bring gusts of up to about 80 km/h that can fell trees. Transboundary haze is a serious hazard: in 2015 the PSI rose above 300 and schools closed on 25 September. Heat is increasing too — Singapore equalled its 37°C record in 2023, made worse by the urban heat island. Overall I disagree: Singapore is not at risk from the most violent storms, but it faces real risks from floods, haze and heat that are likely to grow with climate change.",
             markScheme: [
-              { point: "Agrees: low cyclone risk near Equator / Coriolis", keywords: ["coriolis", "equator", "typhoon", "cyclone", "1°"] },
+              { point: "Agrees: low cyclone risk near Equator / Coriolis", keywords: ["coriolis", "equator", "typhoon", "cyclone", "1 degree", "1 n"] },
               { point: "Flash floods from heavy rain/monsoon", keywords: ["flash flood", "flood", "heavy rain", "monsoon", "pub"] },
               { point: "Sumatra squalls / thunderstorms / lightning", keywords: ["squall", "lightning", "thunderstorm", "gust"] },
               { point: "Haze with evidence (2015, PSI 300, schools)", keywords: ["haze", "psi", "2015", "school"] },
               { point: "Heat / urban heat island / record temperatures", keywords: ["heat", "37", "urban heat island", "temperature", "climate change"] },
-              { point: "Clear overall judgement", keywords: ["overall", "conclusion", "extent", "disagree", "agree"] },
+              { point: "Clear overall judgement", keywords: ["overall", "conclusion", "i disagree", "i agree", "on balance", "largely"] },
             ],
             commonError: "Only writing about typhoons, or only one side.",
             guideRef: "singapore-weather",
@@ -1990,8 +1990,8 @@ export const extremeWeather: Topic = {
             markScheme: [
               { point: "Rain bands: increasing wind and showers, pressure falling", keywords: ["rain band", "showers", "pressure fall", "increasing", "gusty"] },
               { point: "Eye wall: strongest winds and heaviest rain", keywords: ["eye wall", "eyewall", "strongest", "heaviest", "violent"] },
-              { point: "Eye: calm, clear, lowest pressure", keywords: ["calm", "eye", "clear", "lowest pressure", "stops"] },
-              { point: "Second eye wall: winds from the opposite direction", keywords: ["opposite", "other side", "again", "returns", "second"] },
+              { point: "Eye: calm, clear, lowest pressure", keywords: ["calm", "clear", "lowest pressure", "stops", "wind drops"] },
+              { point: "Second eye wall: winds from the opposite direction", keywords: ["opposite", "other side", "returns", "second", "reverse"] },
             ],
             commonError: "Thinking the storm is over when the eye arrives.",
             guideRef: "cyclone-formation",
@@ -2051,7 +2051,7 @@ export const extremeWeather: Topic = {
               "(a) 40.3 − 37.1 = 3.2°C increase. (b) The UK's record temperature has been broken repeatedly and has risen steadily over about 30 years, with the biggest jump (1.6°C) between 2019 and 2022.",
             markScheme: [
               { point: "Correct increase of 3.2°C", keywords: ["3.2", "3.2°c", "3.2 degrees", "3.2c"] },
-              { point: "Describes rising trend with data", keywords: ["increas", "rising", "upward", "risen", "higher"] },
+              { point: "Describes rising trend with data", keywords: ["rising", "upward", "risen", "steadily", "broken repeatedly", "higher"] },
             ],
             commonError: "Forgetting the unit or describing without using numbers.",
             guideRef: "other-extremes",
@@ -2064,7 +2064,7 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Squall lines form at night over Sumatra and the Strait of Malacca, where land and sea breezes meet and moist air is forced to rise. The south-westerly winds then push the line of thunderstorms east across the strait, so it reaches Singapore before dawn or early in the morning. They bring sudden gusts of about 40–80 km/h that can bring down trees, plus heavy rain and lightning that can cause flash floods and disrupt the morning commute.",
             markScheme: [
-              { point: "Form overnight over Sumatra / Strait of Malacca", keywords: ["night", "overnight", "sumatra", "malacca"] },
+              { point: "Form overnight over Sumatra / Strait of Malacca", keywords: ["night", "overnight", "malacca", "land breeze", "sea breeze"] },
               { point: "Pushed east by south-westerly winds", keywords: ["south-west", "southwest", "east", "pushed", "carried", "travel"] },
               { point: "Hazards: strong gusts, fallen trees, heavy rain, floods", keywords: ["gust", "tree", "heavy rain", "flood", "lightning", "80"] },
             ],
@@ -2096,7 +2096,7 @@ export const extremeWeather: Topic = {
               "(a) Pressure fell by 25 hPa (1020 − 995). (b) Falling pressure shows a low-pressure system (depression) approaching. In a low, air rises, cools and condenses, so by Thursday I would expect cloudy, wet and windy weather.",
             markScheme: [
               { point: "Fall of 25 hPa", keywords: ["25", "25 hpa", "twenty-five", "fell by 25"] },
-              { point: "Identifies approaching low pressure/depression", keywords: ["low pressure", "depression", "low", "falling"] },
+              { point: "Identifies approaching low pressure/depression", keywords: ["low pressure", "depression", "a low", "low is approaching", "low approach"] },
               { point: "Expects cloud, rain, wind because air rises", keywords: ["rain", "cloud", "wind", "storm", "rising", "wet"] },
             ],
             commonError: "Thinking falling pressure means fine weather.",
@@ -2141,8 +2141,8 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "The sea heats up slowly through the summer, so it reaches its highest temperatures in late summer and autumn. This is when the most ocean is above 26.5°C, providing the heat and moisture that power cyclones.",
             markScheme: [
-              { point: "Sea temperature highest in late summer/autumn", keywords: ["sea", "ocean", "warmest", "highest", "heats slowly"] },
-              { point: "Above 26.5°C providing energy/moisture", keywords: ["26", "energy", "moisture", "evaporat", "heat"] },
+              { point: "Sea temperature highest in late summer/autumn", keywords: ["warmest", "highest", "heats slowly", "heats up slowly", "takes months", "peak"] },
+              { point: "Above 26.5°C providing energy/moisture", keywords: ["26", "energy", "moisture", "evaporat", "fuel", "power"] },
             ],
             commonError: "Saying 'because it is hottest in summer' without mentioning the sea.",
             guideRef: "cyclone-formation",
@@ -2153,7 +2153,7 @@ export const extremeWeather: Topic = {
             marks: 5,
             hint: "Location, geography, then people, homes and wealth.",
             modelAnswer:
-              "Physically, the Philippines lies in the north-west Pacific between about 5° and 20°N, the most active tropical cyclone zone in the world, so it is hit by about 20 typhoons a year. It is an archipelago of over 7,000 islands with long, low-lying coastlines exposed to storm surges, and steep, deforested slopes prone to landslides. Human factors make it worse: many people live in crowded coastal cities such as Tacloban; many homes are made of light materials; and poverty means some people cannot afford to rebuild or evacuate. Warnings are not always understood, as with 'storm surge' during Haiyan.",
+              "Physically, the Philippines lies in the north-west Pacific between about 5° and 20°N, the most active tropical cyclone zone in the world, so about 20 typhoons enter its area each year. It is an archipelago of over 7,000 islands with long, low-lying coastlines exposed to storm surges, and steep, deforested slopes prone to landslides. Human factors make it worse: many people live in crowded coastal cities such as Tacloban; many homes are made of light materials; and poverty means some people cannot afford to rebuild or evacuate. Warnings are not always understood, as with 'storm surge' during Haiyan.",
             markScheme: [
               { point: "Location in the NW Pacific typhoon zone / ~20 per year", keywords: ["pacific", "20", "typhoon belt", "zone", "latitude"] },
               { point: "Islands/long low-lying coasts exposed to surge", keywords: ["island", "7,000", "coast", "low-lying", "low lying"] },
@@ -2172,12 +2172,12 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "There is strong evidence that haze is mainly human-made. Most fires in Sumatra and Kalimantan are lit deliberately to clear land cheaply for oil palm and pulpwood plantations. Draining peat swamps for farming dries out the peat, so it burns underground for weeks. Demand for cheap palm oil from consumers around the world also drives the clearing. However, natural factors make it much worse: a strong El Niño in 2015 brought drought, so fires spread and were hard to put out, and the Southwest Monsoon winds carry the smoke to Singapore, where the PSI rose above 300 and schools closed on 25 September 2015. Overall, the haze is best described as a human-made hazard made worse by natural weather patterns — without the burning there would be little haze, even in an El Niño year.",
             markScheme: [
-              { point: "Human: deliberate burning to clear land", keywords: ["burn", "clear", "slash", "deliberate", "lit"] },
+              { point: "Human: deliberate burning to clear land", keywords: ["burn", "clear", "slash", "deliberate", "set fire"] },
               { point: "Human: palm oil / plantations / peat drainage", keywords: ["palm", "plantation", "peat", "drain", "pulp"] },
               { point: "Natural: El Niño drought", keywords: ["el nino", "el niño", "drought", "dry"] },
               { point: "Natural: monsoon winds carry smoke", keywords: ["monsoon", "wind", "south-west", "southwest", "blown"] },
               { point: "Evidence: 2015 data (PSI 300, schools closed)", keywords: ["2015", "psi", "300", "school"] },
-              { point: "Judgement", keywords: ["overall", "conclusion", "mainly", "extent", "agree"] },
+              { point: "Judgement", keywords: ["overall", "conclusion", "to some extent", "on balance", "best described"] },
             ],
             commonError: "Arguing only one side, or not reaching a clear judgement.",
             guideRef: "singapore-weather",
@@ -2196,8 +2196,8 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Singapore is only about 1° north of the Equator, so the sun is high in the sky all year and day length hardly changes (about 12 hours). It therefore receives similar, intense heating every month, so there are no warm and cold seasons. The surrounding warm sea also keeps temperatures steady.",
             markScheme: [
-              { point: "Near the Equator / sun high all year", keywords: ["equator", "1°", "sun high", "overhead", "latitude"] },
-              { point: "Similar heating / day length all year, no seasons; sea moderates", keywords: ["12 hours", "day length", "no seasons", "same", "sea", "all year"] },
+              { point: "Near the Equator / sun high all year", keywords: ["equator", "1 north", "1 degree", "sun high", "high in the sky", "overhead"] },
+              { point: "Similar heating / day length all year, no seasons; sea moderates", keywords: ["12 hours", "day length", "no seasons", "similar heating", "warm sea", "surrounding sea"] },
             ],
             commonError: "Saying 'because it is hot' without explaining why the temperature hardly changes.",
             guideRef: "weather-vs-climate",
@@ -2228,7 +2228,7 @@ export const extremeWeather: Topic = {
               { point: "Air spirals inward at the surface", keywords: ["inward", "spiral", "towards the centre", "drawn in", "converge"] },
               { point: "Rises in the eye wall", keywords: ["rises", "rising", "eye wall", "eyewall", "ascend"] },
               { point: "Flows outwards at the top", keywords: ["outward", "outflow", "top", "diverge", "spreads out"] },
-              { point: "Sinks in the eye", keywords: ["sink", "descend", "eye", "down"] },
+              { point: "Sinks in the eye", keywords: ["sink", "sank", "descend", "downward", "subsid"] },
             ],
             commonError: "Saying air rises in the eye.",
             guideRef: "cyclone-formation",
@@ -2241,8 +2241,8 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "(a) 4 ÷ 14 × 100 ≈ 28.6%, so about 29% of affected people were displaced. (b) Strong winds and the storm surge destroyed or damaged about 1 million homes, so millions lost their shelter even though they survived — many had evacuated or found higher ground.",
             markScheme: [
-              { point: "Correct method", keywords: ["4 ÷ 14", "4/14", "divided", "4 / 14", "÷ 14"] },
-              { point: "Answer about 29%", keywords: ["28.6", "29", "28.5", "28.57"] },
+              { point: "Correct method", keywords: ["4 ÷ 14", "4/14", "divided", "4 out of 14"] },
+              { point: "Answer about 29%", keywords: ["28.6", "29", "28.57"] },
               { point: "Reason: homes destroyed while people survived/evacuated", keywords: ["home", "house", "destroyed", "evacuat", "shelter", "survived"] },
             ],
             commonError: "Dividing 14 by 4, giving over 100%.",
@@ -2259,7 +2259,7 @@ export const extremeWeather: Topic = {
               { point: "Small size / form quickly", keywords: ["small", "quick", "minutes", "sudden", "short"] },
               { point: "Cyclones trackable for days, tornadoes not by models/satellite", keywords: ["days", "satellite", "track", "model", "exact location"] },
               { point: "Radar detects rotation; watches/warnings issued", keywords: ["radar", "doppler", "watch", "rotation"] },
-              { point: "Warnings via sirens/phones; people shelter", keywords: ["siren", "phone", "alert", "basement", "shelter", "minutes"] },
+              { point: "Warnings via sirens/phones; people shelter", keywords: ["siren", "phone", "alert", "basement", "shelter", "interior room"] },
             ],
             commonError: "Saying tornadoes cannot be warned about at all.",
             guideRef: "other-extremes",
@@ -2287,8 +2287,8 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Countries can cooperate through the ASEAN Agreement on Transboundary Haze Pollution, sharing satellite hotspot data and helping fight fires quickly. Singapore's Transboundary Haze Pollution Act (2014) allows companies that cause haze to be fined. Indonesia can stop burning to clear land, protect and re-wet drained peatlands so they do not catch fire. Consumers and companies can buy only certified sustainable palm oil, so plantations that burn land lose customers.",
             markScheme: [
-              { point: "International cooperation / ASEAN agreement", keywords: ["asean", "cooperat", "agreement", "together", "neighbours"] },
-              { point: "Laws and fines (Transboundary Haze Pollution Act)", keywords: ["law", "fine", "act", "punish", "prosecut"] },
+              { point: "International cooperation / ASEAN agreement", keywords: ["asean", "cooperat", "agreement", "together", "share"] },
+              { point: "Laws and fines (Transboundary Haze Pollution Act)", keywords: ["law", "fine", "haze pollution act", "transboundary", "punish", "prosecut"] },
               { point: "Stop burning / protect or re-wet peatland", keywords: ["peat", "re-wet", "rewet", "ban burning", "stop burning", "firefight"] },
               { point: "Sustainable palm oil / consumer action / monitoring", keywords: ["sustainable", "certif", "consumer", "boycott", "satellite", "monitor"] },
             ],
@@ -2317,9 +2317,9 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "It has two thermometers: one ordinary (dry bulb) and one with its bulb wrapped in wet muslin (wet bulb). Water evaporates from the wet bulb, cooling it. In dry air evaporation is fast, so the wet bulb is much cooler than the dry bulb; in humid air evaporation is slow, so the difference is small. The difference is looked up in a table to find the relative humidity as a percentage.",
             markScheme: [
-              { point: "Two thermometers, one with a wet bulb", keywords: ["two thermometers", "wet bulb", "dry bulb", "muslin"] },
+              { point: "Two thermometers, one with a wet bulb", keywords: ["two thermometers", "wet bulb", "muslin", "wet cloth", "wick"] },
               { point: "Evaporation cools the wet bulb", keywords: ["evaporat", "cool", "colder", "lower reading"] },
-              { point: "Bigger difference = drier air; read from table as %", keywords: ["difference", "table", "percent", "%", "drier", "humid"] },
+              { point: "Bigger difference = drier air; read from table as %", keywords: ["difference", "table", "percent", "drier", "humid air"] },
             ],
             commonError: "Confusing humidity with rainfall.",
             guideRef: "measuring-weather",
@@ -2348,9 +2348,9 @@ export const extremeWeather: Topic = {
             modelAnswer:
               "Weather balloons carry a radiosonde — a small instrument package — up to about 30 km, measuring temperature, humidity and pressure, while their drift shows wind speed and direction. They are released twice a day from hundreds of sites and send data by radio. Ocean buoys, both moored and drifting, measure sea surface temperature, air pressure, wind and waves, and send readings by satellite from remote oceans where there are no weather stations.",
             markScheme: [
-              { point: "Balloons carry radiosondes high into the atmosphere", keywords: ["radiosonde", "balloon", "30 km", "upper", "high"] },
+              { point: "Balloons carry radiosondes high into the atmosphere", keywords: ["radiosonde", "30 km", "upper", "instrument package", "rise"] },
               { point: "Measure temperature/humidity/pressure/wind with height", keywords: ["temperature", "humidity", "pressure", "wind"] },
-              { point: "Buoys measure sea temperature/pressure over oceans", keywords: ["buoy", "sea temperature", "ocean", "wave", "remote"] },
+              { point: "Buoys measure sea temperature/pressure over oceans", keywords: ["sea temperature", "sea surface", "wave", "remote", "moored", "drifting"] },
             ],
             commonError: "Saying balloons take photographs like satellites.",
             guideRef: "forecasting-warnings",
@@ -2409,14 +2409,14 @@ export const extremeWeather: Topic = {
             marks: 6,
             hint: "Heatwaves, cyclone intensity, sea-level rise, rain — then uncertainties and human factors. End with a judgement.",
             modelAnswer:
-              "A warmer world is making some extreme weather more dangerous. Heatwaves are becoming more frequent and intense — the UK passed 40°C for the first time in 2022 and Singapore equalled its 37°C record in 2023. Warmer seas give tropical cyclones more energy and moisture, so scientists expect the strongest storms to become more intense and wetter. Rising sea levels mean storm surges reach further inland, threatening low coasts such as Tacloban and Bangladesh. However, scientists are less sure that there will be more cyclones overall, and danger also depends on people: better forecasts, ensembles, warnings and shelters have cut deaths in Bangladesh and Odisha by over 99% even as storms continue. Overall, climate change will make the hazards stronger, but whether they become more DEADLY depends on how well countries prepare and adapt.",
+              "A warmer world is making some extreme weather more dangerous. Heatwaves are becoming more frequent and intense — the UK passed 40°C for the first time in 2022 and Singapore equalled its 37°C record in 2023. Warmer seas give tropical cyclones more energy and moisture, so scientists expect the strongest storms to become more intense and wetter. Rising sea levels mean storm surges reach further inland, threatening low coasts such as Tacloban and Bangladesh. However, scientists are less sure that there will be more cyclones overall (the number may not increase), and danger also depends on people: better forecasts, ensembles, warnings and shelters have cut deaths in Bangladesh and Odisha by over 99% even as storms continue. Overall, climate change will make the hazards stronger, but whether they become more DEADLY depends on how well countries prepare and adapt.",
             markScheme: [
               { point: "More frequent/intense heatwaves with evidence", keywords: ["heatwave", "40.3", "2022", "37", "hotter"] },
               { point: "Warmer seas → more intense/wetter cyclones", keywords: ["warmer sea", "intense", "stronger", "wetter", "more energy"] },
               { point: "Sea-level rise worsens storm surges", keywords: ["sea level", "sea-level", "surge", "coast"] },
-              { point: "Uncertainty: number of cyclones may not increase", keywords: ["uncertain", "not sure", "number", "frequency", "may not"] },
+              { point: "Uncertainty: number of cyclones may not increase", keywords: ["uncertain", "not sure", "less sure", "frequency", "may not", "more cyclones"] },
               { point: "Human factors: preparedness reduces danger (Bangladesh/Odisha)", keywords: ["preparedness", "warning", "shelter", "bangladesh", "odisha", "forecast"] },
-              { point: "Judgement", keywords: ["overall", "conclusion", "extent", "depends", "agree"] },
+              { point: "Judgement", keywords: ["overall", "conclusion", "extent", "depends", "on balance"] },
             ],
             commonError: "Assuming every extreme event is caused by climate change, or ignoring how preparation changes the risk.",
             guideRef: "forecasting-warnings",

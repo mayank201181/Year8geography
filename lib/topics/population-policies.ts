@@ -36,7 +36,7 @@ export const populationPolicies: Topic = {
         facts: [
           "Population about 6 million (2024) on about 735 km² of land.",
           "Density about 8,000 people per km², among the highest of any country.",
-          "Imports over 90% of its food; the '30 by 30' goal aims to produce 30% of nutritional needs locally.",
+          "Imports over 90% of its food; it has set goals to grow more locally, such as the '30 by 30' aim (30% of nutritional needs by 2030).",
           "NEWater (recycled water) and desalination can meet a large share of water demand, reducing reliance on Malaysia.",
           "About 80% of residents live in high-rise HDB public housing.",
         ],
@@ -545,8 +545,8 @@ export const populationPolicies: Topic = {
           "First, raising children in Singapore is very expensive: housing, education and tuition cost far more over a lifetime than the Baby Bonus gives, so the incentive is too small to change decisions. Second, many people now marry later or not at all and women want careers; long working hours make it hard to balance work and family. As a result the resident TFR fell to 0.97 in 2023 despite the policies.",
             markScheme: [
           { point: "Reason 1: high cost of raising children", keywords: ["cost", "expensive", "housing", "tuition", "education"] },
-          { point: "Developed: bonus small compared with lifetime costs", keywords: ["small", "not enough", "lifetime", "outweigh"] },
-          { point: "Reason 2: careers / long hours / marrying later", keywords: ["career", "work", "hours", "later", "single", "marr"] },
+          { point: "Developed: bonus small compared with lifetime costs", keywords: ["too small", "small compared", "not enough", "lifetime", "outweigh"] },
+          { point: "Reason 2: careers / long hours / marrying later", keywords: ["career", "working hours", "long hours", "marry later", "single", "marr"] },
           { point: "Evidence: TFR about 0.97 (2023) or below 1", keywords: ["0.97", "below 1", "lowest", "under 1"] },
         ],
         commonError: "Saying 'people don't want children' without explaining why, or giving no evidence of the low TFR.",
@@ -1014,7 +1014,7 @@ export const populationPolicies: Topic = {
             answerIndex: 3,
             hint: "% change = (new − old) ÷ old × 100.",
             explanation:
-              "(2.1 − 4.7) ÷ 4.7 × 100 = −55%, a 55% fall. 45% comes from dividing by the wrong number; 124% from dividing 2.6 by 2.1.",
+              "(2.1 − 4.7) ÷ 4.7 × 100 = −55%, a 55% fall. 45% is 2.1 ÷ 4.7 (the new value as a percentage of the old), not the fall; 124% comes from dividing 2.6 by 2.1.",
             guideRef: "singapore-policies",
           },
           {
@@ -1604,8 +1604,8 @@ export const populationPolicies: Topic = {
             modelAnswer:
               "Optimum population is the number of people which, with the resources and technology available, gives the highest possible standard of living per person.",
             markScheme: [
-              { point: "Highest/best standard of living per person", keywords: ["highest standard", "best standard", "standard of living", "quality of life", "best"] },
-              { point: "Linked to available resources and technology", keywords: ["resource", "technology", "available"] },
+              { point: "Highest/best standard of living per person", keywords: ["highest standard", "best standard", "standard of living", "quality of life", "highest possible"] },
+              { point: "Linked to available resources and technology", keywords: ["resource", "technolog", "available resources", "land"] },
             ],
             commonError: "Saying it is 'the maximum number of people a country can hold'.",
             guideRef: "over-under-optimum",
@@ -1649,7 +1649,7 @@ export const populationPolicies: Topic = {
             modelAnswer:
               "By the late 1970s China had almost 1 billion people, about a fifth of the world's population, after fast growth encouraged under Mao. The new leader Deng Xiaoping wanted rapid economic development, and the government feared that continued growth would mean shortages of food, jobs, housing and schools. Because there were so many young people about to become parents, leaders believed strict limits were needed to slow growth quickly.",
             markScheme: [
-              { point: "Very large/fast-growing population (data)", keywords: ["billion", "970", "fifth", "fast", "rapid growth", "large population"] },
+              { point: "Very large/fast-growing population (data)", keywords: ["billion", "970", "fifth", "fast growth", "rapid growth", "large population"] },
               { point: "Fear of shortages of food/jobs/housing", keywords: ["food", "job", "housing", "shortage", "resource", "school"] },
               { point: "Aim of economic development / modernisation", keywords: ["econom", "develop", "deng", "richer", "poverty", "moderni"] },
             ],
@@ -1728,7 +1728,7 @@ export const populationPolicies: Topic = {
             markScheme: [
               { point: "Below replacement → population will shrink/age", keywords: ["replacement", "shrink", "declin", "ageing", "aging", "fall"] },
               { point: "Fewer workers / taxpayers / labour shortage", keywords: ["worker", "workforce", "labour", "tax", "job"] },
-              { point: "More elderly needing pensions/health care (dependency)", keywords: ["pension", "elderly", "old", "dependen", "health care"] },
+              { point: "More elderly needing pensions/health care (dependency)", keywords: ["pension", "elderly", "older", "dependen", "health care"] },
             ],
             commonError: "Saying 'to make the population bigger' without explaining why that matters.",
             guideRef: "policy-types",
@@ -1887,9 +1887,9 @@ export const populationPolicies: Topic = {
             modelAnswer:
               "In the 1970s China encouraged people to marry later, leave longer gaps between children and have fewer children overall. It was mostly voluntary. It was very effective: the TFR fell from about 5.8 in 1970 to about 2.7 by 1979, before the One Child Policy started.",
             markScheme: [
-              { point: "Later marriage", keywords: ["marry later", "later marriage", "marr"] },
-              { point: "Longer gaps / fewer children", keywords: ["gap", "spac", "longer", "fewer"] },
-              { point: "Effect with data (5.8 → 2.7)", keywords: ["5.8", "2.7", "halved", "fell"] },
+              { point: "Later marriage", keywords: ["marry later", "marrying later", "later marriage", "marriage age"] },
+              { point: "Longer gaps / fewer children", keywords: ["gap", "spac", "fewer children", "fewer overall"] },
+              { point: "Effect with data (5.8 → 2.7)", keywords: ["5.8", "2.7", "halved", "tfr fell"] },
             ],
             commonError: "Saying this campaign was the One Child Policy itself.",
             guideRef: "china-one-child",
@@ -1902,7 +1902,7 @@ export const populationPolicies: Topic = {
             modelAnswer:
               "With fewer babies born each year, the proportion of young people fell while people continued to live longer, so the share of older people rose quickly — about 297 million Chinese (21%) were aged 60+ in 2023. This means fewer working-age people are available to fill jobs and pay taxes, while more pensioners need pensions and health care. The dependency ratio rises, putting pressure on families (the 4-2-1 problem) and on the government, which began raising the retirement age in 2025.",
             markScheme: [
-              { point: "Fewer births → smaller young population", keywords: ["fewer birth", "fewer children", "fewer young", "low birth"] },
+              { point: "Fewer births → smaller young population", keywords: ["fewer birth", "fewer babies", "fewer children", "fewer young", "low birth"] },
               { point: "Longer life expectancy → larger share of elderly (data)", keywords: ["297", "21%", "life expectancy", "longer", "older"] },
               { point: "Fewer workers / taxpayers", keywords: ["worker", "workforce", "tax", "labour"] },
               { point: "More cost of pensions/health care / dependency ratio", keywords: ["pension", "health", "dependen", "4-2-1", "care"] },
@@ -1934,7 +1934,7 @@ export const populationPolicies: Topic = {
               "(9.0 − 17.9) ÷ 17.9 × 100 = about −50%, so births roughly halved. Reasons: the cost of housing, education and childcare in Chinese cities is very high, so couples choose one child or none; and after decades of the One Child Policy small families have become normal, while many young people marry later or not at all. There are also fewer women of child-bearing age because of the low births and the gender imbalance of earlier decades.",
             markScheme: [
               { point: "Correct calculation (about −50% / fall of ~50%)", keywords: ["50", "49.7", "-50", "halved", "half"] },
-              { point: "Correct working shown", keywords: ["8.9", "17.9", "÷", "divid"] },
+              { point: "Correct working shown", keywords: ["8.9", "17.9", "100", "divid"] },
               { point: "Reason 1: high costs of raising children", keywords: ["cost", "expensive", "housing", "education", "childcare"] },
               { point: "Reason 2: small families normal / later marriage / fewer women", keywords: ["normal", "later", "fewer women", "single", "career", "attitude"] },
             ],
@@ -1949,7 +1949,7 @@ export const populationPolicies: Topic = {
             modelAnswer:
               "'Stop at Two' had worked very well: the TFR fell below replacement (2.1) by 1975 and to about 1.4 by 1986. The government realised this would lead to a shrinking, ageing population with too few workers to support the economy and the elderly. So in 1987 it launched 'Have Three or More, if you can afford it' to raise the birth rate.",
             markScheme: [
-              { point: "TFR fell below replacement (data)", keywords: ["below replacement", "1.4", "2.1", "1975", "low"] },
+              { point: "TFR fell below replacement (data)", keywords: ["below replacement", "1.4", "2.1", "1975", "fell below"] },
               { point: "Concern about ageing/shrinking workforce", keywords: ["ageing", "aging", "workforce", "worker", "shrink", "labour"] },
               { point: "New policy named ('Three or More')", keywords: ["three or more", "have three", "1987", "pro-natalist"] },
             ],
@@ -2044,7 +2044,7 @@ export const populationPolicies: Topic = {
             markScheme: [
               { point: "Definition: growth continues after fertility falls", keywords: ["keeps growing", "continu", "even after", "still grow"] },
               { point: "Because of many young people/future parents", keywords: ["young", "child-bearing", "parents", "youthful"] },
-              { point: "Effects take decades → judge over long term", keywords: ["decade", "long time", "long term", "delay", "lag", "years"] },
+              { point: "Effects take decades → judge over long term", keywords: ["decade", "long time", "long term", "delay", "lag", "30 years"] },
             ],
             commonError: "Confusing momentum with the speed of migration.",
             guideRef: "evaluating-policies",
@@ -2078,8 +2078,8 @@ export const populationPolicies: Topic = {
               "The optimum depends on the resources and technology available. If new technology is developed (such as high-yield crops or desalination) or trade increases, the same land can support more people well, so the optimum rises. If resources are used up or damaged, for example by soil erosion or falling water tables, the optimum falls, so a country could become over-populated without its population changing.",
             markScheme: [
               { point: "Optimum depends on resources/technology", keywords: ["resource", "technology", "depends on", "land"] },
-              { point: "New technology/trade raises it", keywords: ["new technology", "invent", "desalination", "trade", "rise", "increase"] },
-              { point: "Resource depletion/damage lowers it", keywords: ["erosion", "used up", "depletion", "run out", "fall", "decrease"] },
+              { point: "New technology/trade raises it", keywords: ["new technology", "invent", "desalination", "trade", "high-yield", "optimum rises"] },
+              { point: "Resource depletion/damage lowers it", keywords: ["erosion", "used up", "depletion", "run out", "damage", "water table"] },
             ],
             commonError: "Saying the optimum changes only when the population changes.",
             guideRef: "over-under-optimum",
@@ -2246,8 +2246,8 @@ export const populationPolicies: Topic = {
               "Target: the aim was to raise fertility towards replacement level, but the TFR rose only briefly (about 2.0 in 1988) and then fell to 0.97 in 2023, so the target has clearly not been met. Impacts: the policies have few harmful side effects and do reduce the cost of childcare and housing for families. Money: they are very expensive — cash gifts of S$11,000–13,000 per child plus CDA grants, subsidies and leave — for a small effect. Ethics: today's measures are fair and voluntary, although the 1984 Graduate Mothers' Scheme was criticised as elitist. Sustainability: Singapore relies on immigration to sustain its workforce, which is not a long-term solution to ageing on its own. Overall the policies have been largely unsuccessful at raising births, though they may have stopped the TFR falling even faster.",
             markScheme: [
               { point: "Target not met — TFR data", keywords: ["0.97", "below 1", "target", "not met", "fell"] },
-              { point: "Brief rise in 1988 or short-term effect", keywords: ["1988", "brief", "2.0", "dragon", "short"] },
-              { point: "Money: expensive (Baby Bonus amounts)", keywords: ["cost", "expensive", "11,000", "13,000", "money", "billion"] },
+              { point: "Brief rise in 1988 or short-term effect", keywords: ["1988", "brief", "2.0", "dragon", "temporar"] },
+              { point: "Money: expensive (Baby Bonus amounts)", keywords: ["cost", "expensive", "11,000", "13,000", "value for money", "billion"] },
               { point: "Ethics: voluntary/fair now vs Graduate Mothers' criticism", keywords: ["ethic", "fair", "voluntary", "graduate mothers", "elitis"] },
               { point: "Sustainability: reliance on immigration / ageing", keywords: ["immigra", "foreign", "ageing", "aging", "sustain"] },
               { point: "Clear overall judgement", keywords: ["overall", "largely", "unsuccessful", "partly", "conclusion"] },
@@ -2264,7 +2264,7 @@ export const populationPolicies: Topic = {
               "Natural increase = (12 − 9) ÷ 10 = 0.3% a year. This is very slow growth, close to zero, suggesting a low birth rate and an ageing population. Country P is therefore more likely to need a pro-natalist policy (or immigration) than an anti-natalist one.",
             markScheme: [
               { point: "Correct answer 0.3%", keywords: ["0.3", "0.3%", "0.30", "3 per 1,000"] },
-              { point: "Recognises slow growth / low births / ageing", keywords: ["slow", "low", "ageing", "aging", "near zero", "small"] },
+              { point: "Recognises slow growth / low births / ageing", keywords: ["slow", "ageing", "aging", "near zero", "close to zero", "low birth"] },
               { point: "Pro-natalist (or immigration) chosen", keywords: ["pro-natalist", "pro natalist", "immigra", "encourage birth"] },
             ],
             commonError: "Giving the answer as 3% by forgetting to divide by 10.",
@@ -2423,7 +2423,7 @@ export const populationPolicies: Topic = {
             markScheme: [
               { point: "Population momentum (many young parents)", keywords: ["momentum", "young", "baby boom", "1950s", "1960s"] },
               { point: "Gender imbalance shows at marriage age", keywords: ["marriage age", "marry", "20", "grew up", "adult"] },
-              { point: "Ageing/workforce effects appear when generations age", keywords: ["ageing", "aging", "retire", "workforce", "decade"] },
+              { point: "Ageing/workforce effects appear when generations age", keywords: ["ageing", "aging", "retire", "workforce", "working age", "pension"] },
             ],
             commonError: "Saying the policy was not enforced at first.",
             guideRef: "evaluating-policies",
@@ -2468,8 +2468,8 @@ export const populationPolicies: Topic = {
             modelAnswer:
               "After independence in 1965 Singapore had a high TFR (about 4.7) and a fast-growing population on a very small island. There were shortages of housing and jobs, and many people lived in crowded conditions. The government feared rapid growth would slow economic development and overwhelm schools and services, so it introduced 'Stop at Two' to reduce births.",
             markScheme: [
-              { point: "High fertility / fast growth (4.7)", keywords: ["4.7", "high birth", "fast", "rapid", "high fertility", "baby boom"] },
-              { point: "Shortages of housing/jobs/small land", keywords: ["housing", "job", "unemploy", "small", "land", "crowd"] },
+              { point: "High fertility / fast growth (4.7)", keywords: ["4.7", "high birth", "fast-growing", "rapid", "high fertility", "baby boom"] },
+              { point: "Shortages of housing/jobs/small land", keywords: ["housing", "job", "unemploy", "small island", "land", "crowd"] },
               { point: "Aim: support economic development", keywords: ["econom", "develop", "poor", "growth"] },
             ],
             commonError: "Confusing 'Stop at Two' (1972) with 'Three or More' (1987).",
@@ -2484,7 +2484,7 @@ export const populationPolicies: Topic = {
               "Both were anti-natalist policies designed to slow population growth and support economic development. However, China's was far stricter: most urban couples could have only one child, and enforcement included heavy fines and, in places, forced abortions and sterilisations. Singapore allowed two children and relied mainly on disincentives such as higher delivery fees and school-registration priority. Both cut fertility below replacement and later had to be reversed (Singapore in 1987, China in 2016) because of ageing.",
             markScheme: [
               { point: "Similarity: both anti-natalist / same aim", keywords: ["both", "anti-natalist", "reduce", "slow growth"] },
-              { point: "Difference: China one child vs Singapore two", keywords: ["one child", "two", "stricter", "limit"] },
+              { point: "Difference: China one child vs Singapore two", keywords: ["one child", "two children", "stricter", "only one"] },
               { point: "Difference in methods: coercion vs disincentives", keywords: ["forced", "coerc", "disincentive", "delivery fee", "fine", "school"] },
               { point: "Outcome: both reversed / below replacement / ageing", keywords: ["reversed", "1987", "2016", "ageing", "aging", "below replacement"] },
             ],

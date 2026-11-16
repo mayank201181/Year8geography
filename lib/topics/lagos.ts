@@ -530,7 +530,7 @@ export const lagos: Topic = {
           "One pull factor is jobs. Lagos has Nigeria's main port and many businesses, so even informal jobs like street trading pay more than subsistence farming. A second pull factor is the tech industry in 'Yabacon Valley', where start-ups such as Paystack offer well-paid work to educated young Nigerians, so ambitious graduates move there to build careers.",
         markScheme: [
           { point: "Names first pull factor (e.g. jobs / port)", keywords: ["job", "work", "employ", "port"] },
-          { point: "Explains it (higher income than farming)", keywords: ["more money", "higher wage", "earn", "income", "better pay"] },
+          { point: "Explains it (higher income than farming)", keywords: ["more money", "higher wage", "earn", "income", "better pay", "pay more"] },
           { point: "Names second pull factor (Nollywood / Yabacon Valley / education / family)", keywords: ["nollywood", "yabacon", "tech", "universit", "family"] },
           { point: "Explains second factor's attraction", keywords: ["career", "opportunit", "qualification", "place to stay", "help find"] },
         ],
@@ -824,7 +824,7 @@ export const lagos: Topic = {
             answerIndex: 0,
             hint: "(new − old) ÷ old × 100.",
             explanation:
-              "(14.4 − 0.3) ÷ 0.3 × 100 = 14.1 ÷ 0.3 × 100 = 4,700%. 47% comes from forgetting to multiply by 100 after dividing — the city grew 47 times, not by 47%.",
+              "(14.4 − 0.3) ÷ 0.3 × 100 = 14.1 ÷ 0.3 × 100 = 4,700%. 47% comes from forgetting to multiply by 100 after dividing — the increase was 47 times the 1950 population (Lagos became about 48 times bigger), not 47%.",
             guideRef: "growth",
           },
         ],
@@ -1107,7 +1107,7 @@ export const lagos: Topic = {
             answerIndex: 2,
             hint: "Lagos is only about 6.5° north of the Equator.",
             explanation:
-              "Lagos has a hot, wet tropical climate with a rainy season. A hot desert climate describes Las Vegas or northern Nigeria's Sahel edge, not the coast.",
+              "Lagos has a hot, wet tropical climate with a rainy season. A hot desert climate describes Las Vegas, not coastal Lagos; even Nigeria's dry far north is semi-arid (the Sahel) rather than true desert.",
             guideRef: "location",
           },
           {
@@ -1668,7 +1668,7 @@ export const lagos: Topic = {
               "A megacity is an urban area with more than 10 million people. Lagos is a megacity because it has an estimated 15–20+ million people.",
             markScheme: [
               { point: "Defines megacity as over 10 million people", keywords: ["10 million", "ten million", "10m", "10,000,000"] },
-              { point: "Lagos is a megacity, with an estimate of 15–20+ million", keywords: ["15", "20 million", "14", "20m", "yes"] },
+              { point: "Lagos is a megacity, with an estimate of 15–20+ million", keywords: ["15", "20 million", "14", "20m", "estimat"] },
             ],
             commonError: "Defining a megacity as 'a very big city' without giving the 10 million threshold.",
             guideRef: "location",
@@ -1802,7 +1802,7 @@ export const lagos: Topic = {
             markScheme: [
               { point: "Large amount of waste / Olusosun is a huge landfill", keywords: ["landfill", "tonnes", "40 hectare", "dump", "huge"] },
               { point: "Pollution: methane, toxic smoke, fire (2018)", keywords: ["methane", "smoke", "fire", "2018", "toxic"] },
-              { point: "Uncollected waste blocks drains / spreads disease", keywords: ["drain", "flood", "disease", "uncollected", "rat"] },
+              { point: "Uncollected waste blocks drains / spreads disease", keywords: ["drain", "flood", "disease", "uncollected", "rats"] },
             ],
             commonError: "Not mentioning Olusosun by name, or giving no figures.",
             guideRef: "urban-problems",
@@ -1815,7 +1815,7 @@ export const lagos: Topic = {
             modelAnswer:
               "Eko Atlantic is a new city district being built on about 10 km² of land reclaimed from the Atlantic Ocean next to Victoria Island. It is protected by an 8.5 km sea wall called the 'Great Wall of Lagos'. One benefit is that the wall protects Victoria Island from storm surges and erosion. One criticism is that its homes are so expensive that it is an enclave for the rich, doing nothing for slums like Makoko.",
             markScheme: [
-              { point: "Built on land reclaimed from the Atlantic / next to Victoria Island", keywords: ["reclaim", "atlantic", "victoria island", "sea", "sand"] },
+              { point: "Built on land reclaimed from the Atlantic / next to Victoria Island", keywords: ["reclaim", "atlantic", "victoria island", "seabed", "sand"] },
               { point: "Size or sea wall detail (10 km², 8.5 km wall)", keywords: ["10 km", "8.5", "great wall", "sea wall", "250,000"] },
               { point: "Benefit: coastal protection / investment / jobs", keywords: ["protect", "investment", "jobs", "erosion", "storm"] },
               { point: "Criticism: for the rich / increases erosion elsewhere", keywords: ["rich", "wealthy", "expensive", "enclave", "apartheid", "erosion elsewhere"] },
@@ -1956,7 +1956,7 @@ export const lagos: Topic = {
             marks: 4,
             hint: "Economic = linked to money, jobs and industries.",
             modelAnswer:
-              "One pull factor is oil wealth. Although oil is pumped in the Niger Delta, many oil companies, banks and service firms are based in Lagos, creating office, driving and security jobs. A second is the creative and tech economy: Nollywood makes thousands of films a year and Yabacon Valley start-ups such as Paystack, bought by Stripe in 2020, offer well-paid jobs, attracting young, educated Nigerians who want careers.",
+              "One pull factor is oil wealth. Although oil is pumped in the Niger Delta, many oil companies, banks and service firms are based in Lagos, and they employ thousands of office workers, drivers and security guards. A second is the creative and tech economy: Nollywood makes thousands of films a year and Yabacon Valley start-ups such as Paystack, bought by Stripe in 2020, offer well-paid jobs, attracting young, educated Nigerians who want careers.",
             markScheme: [
               { point: "Names first economic pull factor (oil wealth / port / jobs)", keywords: ["oil", "port", "job", "bank"] },
               { point: "Explains how it creates jobs or income", keywords: ["create job", "employ", "work", "income", "wage", "money"] },
@@ -2021,7 +2021,7 @@ export const lagos: Topic = {
               "Nigeria's national grid generates only around 4,000–5,000 MW for over 200 million people, and Lagos's demand has grown with its population, so there are frequent power cuts. As a result homes and businesses rely on diesel and petrol generators, which are expensive to run, noisy and polluting. Businesses lose money when machines stop, which discourages investment.",
             markScheme: [
               { point: "Supply far below demand / unreliable grid", keywords: ["grid", "megawatt", "mw", "not enough", "demand", "unreliable"] },
-              { point: "Frequent power cuts", keywords: ["power cut", "blackout", "outage", "cut"] },
+              { point: "Frequent power cuts", keywords: ["power cut", "blackout", "outage", "no electricity"] },
               { point: "Use of generators (expensive, noisy)", keywords: ["generator", "diesel", "petrol", "expensive", "noisy"] },
               { point: "Effects on business or pollution/health", keywords: ["business", "pollut", "fumes", "investment", "lose money"] },
             ],
@@ -2083,10 +2083,10 @@ export const lagos: Topic = {
             modelAnswer:
               "Governor, how many hours did you lose in traffic this week? For millions of Lagosians the answer is ten, fifteen, even twenty. In a city of an estimated 15–20 million people, the Blue Line runs just 13 km. I am here to argue that Lagos must invest urgently in more rail and BRT lanes — for our economy, our health and our children's future.",
             markScheme: [
-              { point: "Hook (question, story or striking fact)", keywords: ["?", "imagine", "how many", "picture"] },
-              { point: "Uses accurate Lagos evidence or statistic", keywords: ["million", "km", "2023", "2008", "blue line", "brt"] },
+              { point: "Hook (question, story or striking fact)", keywords: ["imagine", "how many", "picture", "would you", "what if"] },
+              { point: "Uses accurate Lagos evidence or statistic", keywords: ["million", "13 km", "2023", "2008", "blue line", "brt"] },
               { point: "Clear position stated", keywords: ["argue", "must", "should", "need to", "urge"] },
-              { point: "Persuasive technique (rule of three, direct address, emotive language)", keywords: ["you", "our", "we", "children", "future"] },
+              { point: "Persuasive technique (rule of three, direct address, emotive language)", keywords: ["your", "our", "children", "future", "emotive", "rule of three"] },
             ],
             commonError: "Writing a balanced essay instead of a one-sided persuasive speech.",
             guideRef: "lagos-speech",
@@ -2101,7 +2101,7 @@ export const lagos: Topic = {
             markScheme: [
               { point: "Jobs in tourism / casinos / construction", keywords: ["tourism", "casino", "hotel", "construction", "job"] },
               { point: "Cheaper housing / no state income tax", keywords: ["cheap", "housing", "tax", "california", "afford"] },
-              { point: "Climate / retirees / Hoover Dam water and power", keywords: ["sun", "retire", "climate", "hoover", "warm"] },
+              { point: "Climate / retirees / Hoover Dam water and power", keywords: ["sunny", "sunshine", "retire", "climate", "hoover", "warm"] },
             ],
             commonError: "Explaining Lagos's pull factors instead of Las Vegas's.",
             guideRef: "las-vegas",
@@ -2274,7 +2274,7 @@ export const lagos: Topic = {
             modelAnswer:
               "When a city grows faster than its economy, there are not enough formal jobs, so some young people turn to crime to earn money. Poverty and overcrowding in informal settlements can create tension. Police and services struggle to keep up with the population, so some areas are poorly policed and gangs such as 'area boys' can operate.",
             markScheme: [
-              { point: "Unemployment / not enough jobs", keywords: ["unemploy", "no job", "not enough job", "jobless"] },
+              { point: "Unemployment / not enough jobs", keywords: ["unemploy", "no job", "not enough job", "formal job", "jobless"] },
               { point: "Poverty / inequality / overcrowding", keywords: ["poverty", "poor", "inequal", "overcrowd", "rich and poor"] },
               { point: "Policing can't keep up / gangs", keywords: ["police", "gang", "area boys", "law enforcement", "security"] },
             ],
@@ -2318,7 +2318,7 @@ export const lagos: Topic = {
             modelAnswer:
               "Rhetorical question: 'Would you let your child drink lagoon water?' Statistic: 'Lagos has grown from 300,000 people in 1950 to over 15 million today.' Rule of three: 'Lagos needs cleaner water, faster trains and safer homes.'",
             markScheme: [
-              { point: "First technique with example (e.g. rhetorical question)", keywords: ["rhetorical", "question", "?"] },
+              { point: "First technique with example (e.g. rhetorical question)", keywords: ["rhetorical", "question", "would you", "how can"] },
               { point: "Second technique with example (e.g. statistic/fact)", keywords: ["statistic", "fact", "million", "number"] },
               { point: "Third technique with example (e.g. rule of three, emotive language, direct address)", keywords: ["rule of three", "triple", "emotive", "direct address", "repetition", "alliteration"] },
             ],
@@ -2334,7 +2334,7 @@ export const lagos: Topic = {
               "Las Vegas relies on Lake Mead for about 90% of its water, but a long drought has lowered the lake to record lows in 2022. The city also uses huge amounts of energy for air-conditioning in a desert where summers exceed 40 °C. In response, it pays residents to replace grass lawns, has banned decorative grass by 2027, recycles almost all indoor water back into Lake Mead and built a deeper 'third straw' intake. It is also expanding solar power.",
             markScheme: [
               { point: "Concern: water supply from shrinking Lake Mead / drought", keywords: ["lake mead", "drought", "water", "colorado"] },
-              { point: "Concern: energy / heat / air-conditioning", keywords: ["energy", "air-condition", "air condition", "heat", "hot"] },
+              { point: "Concern: energy / heat / air-conditioning", keywords: ["energy", "air-condition", "air condition", "heat", "temperature"] },
               { point: "Response: lawn removal / grass ban / water recycling", keywords: ["grass", "lawn", "recycl", "cash for grass", "2027"] },
               { point: "Response: third straw / solar power", keywords: ["third straw", "intake", "solar", "renewable"] },
             ],
@@ -2423,7 +2423,7 @@ export const lagos: Topic = {
               { point: "Death rate falls: healthcare / vaccines / hospitals", keywords: ["healthcare", "vaccin", "hospital", "medicine", "doctor"] },
               { point: "Birth rate stays high: tradition / young population / large families", keywords: ["tradition", "large famil", "young", "culture", "want children"] },
               { point: "Gap between births and deaths widens", keywords: ["gap", "difference", "more births than deaths", "widen"] },
-              { point: "Effect: high natural increase / rapid growth", keywords: ["natural increase", "grow", "rapid", "increase"] },
+              { point: "Effect: high natural increase / rapid growth", keywords: ["natural increase", "grow", "rapid", "population rise"] },
             ],
             commonError: "Explaining the fall in the death rate but not why the birth rate stays high.",
             guideRef: "growth",
@@ -2535,7 +2535,7 @@ export const lagos: Topic = {
             markScheme: [
               { point: "High cost / lack of funding", keywords: ["cost", "expensive", "money", "fund", "afford"] },
               { point: "Political change / cancellation (1985)", keywords: ["government", "politic", "cancel", "1985", "military"] },
-              { point: "Construction difficulty: crowded land, wet ground", keywords: ["crowd", "land", "swamp", "wet", "difficult", "space"] },
+              { point: "Construction difficulty: crowded land, wet ground", keywords: ["crowd", "clear", "swamp", "wet", "difficult", "space"] },
             ],
             commonError: "Giving one vague reason such as 'it is hard' without explaining.",
             guideRef: "solutions",
@@ -2553,7 +2553,7 @@ export const lagos: Topic = {
               { point: "Evidence: population or history of Makoko", keywords: ["100,000", "40,000", "fishing", "19th century", "tens of thousands"] },
               { point: "Evidence: past evictions (2012 / Otodo-Gbame 2017)", keywords: ["2012", "2017", "otodo", "evict", "demolish"] },
               { point: "Explanation: benefits of upgrading (health, jobs, cost)", keywords: ["disease", "health", "jobs", "cheaper", "cost", "sanitation"] },
-              { point: "Persuasive technique (rhetorical question, emotive language, direct address)", keywords: ["?", "governor", "families", "we", "you"] },
+              { point: "Persuasive technique (rhetorical question, emotive language, direct address)", keywords: ["governor", "families", "your", "is that the", "imagine", "rhetorical"] },
               { point: "Link / call to action", keywords: ["urge", "that is why", "therefore", "call", "so i ask"] },
             ],
             commonError: "Writing emotionally without any Lagos evidence, or forgetting to link back to the main argument.",

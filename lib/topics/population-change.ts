@@ -17,7 +17,7 @@ export const populationChange: Topic = {
       id: "components",
       heading: "The three components of population change",
       body:
-        "A country's population can only change in three ways: **births** add people, **deaths** remove people, and **migration** (people moving in or out) can do either. These are called the three **components of population change**.\n\n**Natural change** is births minus deaths. If there are more births than deaths there is **natural increase**; if there are more deaths than births there is **natural decrease**. **Net migration** is immigrants minus emigrants. An **immigrant** is someone who moves *into* a country to live; an **emigrant** is someone who moves *out* of a country to live elsewhere. If more people arrive than leave, net migration is positive (a **net migration gain**).\n\nPut together:\n\n- **Population change = (births − deaths) + (immigrants − emigrants)**\n- or: population change = natural change + net migration\n\nGeographers often compare countries using **rates per 1,000 people** so that big and small countries can be compared fairly. The **crude birth rate (CBR)** is the number of live births per 1,000 people per year; the **crude death rate (CDR)** is deaths per 1,000 people per year. The **rate of natural increase** = (CBR − CDR) ÷ 10, giving a percentage. For example, a CBR of 30 and a CDR of 10 gives (30 − 10) ÷ 10 = 2% natural increase per year.\n\nThe balance between the components is very different from place to place:\n\n- In **Niger**, the CBR is above 40 per 1,000 — natural increase drives very fast growth.\n- In **Japan**, deaths have outnumbered births every year since the mid-2000s, so the population is shrinking.\n- In **Germany** and **Singapore**, natural change is very low (or negative), but **immigration** keeps the population growing.\n\nSo to explain why a population is changing, you must ask: *which component is doing most of the work?*",
+        "A country's population can only change in three ways: **births** add people, **deaths** remove people, and **migration** (people moving in or out) can do either. These are called the three **components of population change**.\n\n**Natural change** is births minus deaths. If there are more births than deaths there is **natural increase**; if there are more deaths than births there is **natural decrease**. **Net migration** is immigrants minus emigrants. An **immigrant** is someone who moves *into* a country to live; an **emigrant** is someone who moves *out* of a country to live elsewhere. If more people arrive than leave, net migration is positive (a **net migration gain**).\n\nPut together:\n\n- **Population change = (births − deaths) + (immigrants − emigrants)**\n- or: population change = natural change + net migration\n\nGeographers often compare countries using **rates per 1,000 people** so that big and small countries can be compared fairly. The **crude birth rate (CBR)** is the number of live births per 1,000 people per year; the **crude death rate (CDR)** is deaths per 1,000 people per year. The **rate of natural increase** = (CBR − CDR) ÷ 10, giving a percentage. For example, a CBR of 30 and a CDR of 10 gives (30 − 10) ÷ 10 = 2% natural increase per year.\n\nThe balance between the components is very different from place to place:\n\n- In **Niger**, the CBR is above 40 per 1,000 — natural increase drives very fast growth.\n- In **Japan**, deaths have outnumbered births every year since 2007, so the population is shrinking.\n- In **Germany** and **Singapore**, natural change is very low (or negative), but **immigration** keeps the population growing.\n\nSo to explain why a population is changing, you must ask: *which component is doing most of the work?*",
       diagram: `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Population drawn as a water tank: births and immigrants flow in, deaths and emigrants flow out"><defs><marker id="components-ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#334155"/></marker></defs><text x="160" y="16" font-size="12" text-anchor="middle" fill="#0f172a" font-weight="bold">Change = (B − D) + (I − E)</text><rect x="105" y="55" width="110" height="90" rx="6" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/><rect x="107" y="92" width="106" height="51" fill="#7dd3fc"/><text x="160" y="122" font-size="12" text-anchor="middle" fill="#0c4a6e" font-weight="bold">POPULATION</text><text x="40" y="38" font-size="11" text-anchor="middle" fill="#166534">Births (B)</text><line x1="45" y1="44" x2="108" y2="68" stroke="#334155" stroke-width="2" marker-end="url(#components-ah)"/><text x="280" y="38" font-size="11" text-anchor="middle" fill="#166534">Immigrants (I)</text><line x1="275" y1="44" x2="212" y2="68" stroke="#334155" stroke-width="2" marker-end="url(#components-ah)"/><line x1="108" y1="135" x2="52" y2="158" stroke="#334155" stroke-width="2" marker-end="url(#components-ah)"/><text x="40" y="172" font-size="11" text-anchor="middle" fill="#991b1b">Deaths (D)</text><line x1="212" y1="135" x2="268" y2="158" stroke="#334155" stroke-width="2" marker-end="url(#components-ah)"/><text x="280" y="172" font-size="11" text-anchor="middle" fill="#991b1b">Emigrants (E)</text></svg>`,
       diagramCaption:
         "Think of a population as a tank of water: births and immigrants are the taps filling it; deaths and emigrants are the drains emptying it.",
@@ -51,7 +51,7 @@ export const populationChange: Topic = {
       id: "migration-types",
       heading: "Types of migration",
       body:
-        "**Migration** is the movement of people from one place to another to live, either permanently or for a long period (international statistics usually count a move of at least a year). A **migrant** is the person who moves. Short trips such as holidays or commuting are *not* migration.\n\nGeographers classify migration in several ways:\n\n- **Internal migration** — moving within the same country (for example from rural Sichuan to the city of Shenzhen in China).\n- **International migration** — moving from one country to another, crossing a national border (for example from the Philippines to Singapore).\n- **Voluntary migration** — the person *chooses* to move, usually for a better job, education or family reasons.\n- **Forced migration** — the person has little or no choice because of war, persecution or disaster.\n- **Rural–urban migration** — moving from the countryside to towns and cities. This is the main reason cities in Asia and Africa are growing so fast. The reverse, moving from cities to the countryside, is called **counter-urbanisation**.\n- **Temporary or seasonal migration** — moving for a fixed time, such as fruit pickers who return home after harvest, or workers on two-year contracts.\n\nSome special types of migrant have precise meanings:\n\n- An **economic migrant** moves voluntarily to find work or better pay.\n- A **refugee** is someone forced to flee their country because of a well-founded fear of persecution, war or violence, who has crossed an international border. Refugees are protected by the **1951 Refugee Convention**, which says they must not be sent back to danger.\n- An **asylum seeker** has fled to another country and *applied* for protection as a refugee, but is still waiting for a decision.\n- An **internally displaced person (IDP)** has been forced from home but has *not* crossed an international border.\n\nAround 300 million people (about 3.7% of the world's population) are international migrants, and the UN refugee agency (UNHCR) counts well over 100 million people forcibly displaced worldwide — the majority of them displaced inside their own country.",
+        "**Migration** is the movement of people from one place to another to live, either permanently or for a long period (international statistics usually count a move of at least a year). A **migrant** is the person who moves. Short trips such as holidays or commuting are *not* migration.\n\nGeographers classify migration in several ways:\n\n- **Internal migration** — moving within the same country (for example from rural Sichuan to the city of Shenzhen in China).\n- **International migration** — moving from one country to another, crossing a national border (for example from the Philippines to Singapore).\n- **Voluntary migration** — the person *chooses* to move, usually for a better job, education or family reasons.\n- **Forced migration** — the person has little or no choice because of war, persecution or disaster.\n- **Rural–urban migration** — moving from the countryside to towns and cities. This is the main reason cities in Asia and Africa are growing so fast. The reverse, moving from cities to the countryside, is called **counter-urbanisation**.\n- **Temporary or seasonal migration** — moving for a fixed time, such as fruit pickers who return home after harvest, or workers on two-year contracts.\n\nSome special types of migrant have precise meanings:\n\n- An **economic migrant** moves voluntarily to find work or better pay.\n- A **refugee** is someone forced to flee their country because of persecution, war or violence, who has crossed an international border. The **1951 Refugee Convention** protects people with a well-founded fear of persecution and says refugees must not be sent back to danger (UNHCR also protects people fleeing war and violence).\n- An **asylum seeker** has fled to another country and *applied* for protection as a refugee, but is still waiting for a decision.\n- An **internally displaced person (IDP)** has been forced from home but has *not* crossed an international border.\n\nAround 300 million people (about 3.7% of the world's population) are international migrants, and the UN refugee agency (UNHCR) counts well over 100 million people forcibly displaced worldwide — the majority of them displaced inside their own country.",
       diagram: `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Classification of migration: by distance into internal and international, and by choice into voluntary and forced"><rect x="115" y="6" width="90" height="26" rx="6" fill="#fef3c7" stroke="#b45309"/><text x="160" y="23" font-size="12" text-anchor="middle" fill="#78350f" font-weight="bold">Migration</text><line x1="140" y1="32" x2="80" y2="52" stroke="#475569" stroke-width="1.5"/><line x1="180" y1="32" x2="240" y2="52" stroke="#475569" stroke-width="1.5"/><text x="80" y="64" font-size="11" text-anchor="middle" fill="#334155" font-weight="bold">By distance</text><text x="240" y="64" font-size="11" text-anchor="middle" fill="#334155" font-weight="bold">By choice</text><rect x="10" y="74" width="66" height="24" rx="4" fill="#dbeafe" stroke="#1d4ed8"/><text x="43" y="90" font-size="10" text-anchor="middle" fill="#1e3a8a">Internal</text><rect x="84" y="74" width="72" height="24" rx="4" fill="#dbeafe" stroke="#1d4ed8"/><text x="120" y="90" font-size="10" text-anchor="middle" fill="#1e3a8a">International</text><rect x="168" y="74" width="68" height="24" rx="4" fill="#dcfce7" stroke="#15803d"/><text x="202" y="90" font-size="10" text-anchor="middle" fill="#14532d">Voluntary</text><rect x="244" y="74" width="66" height="24" rx="4" fill="#fee2e2" stroke="#b91c1c"/><text x="277" y="90" font-size="10" text-anchor="middle" fill="#7f1d1d">Forced</text><text x="43" y="114" font-size="10" text-anchor="middle" fill="#334155">rural–urban</text><text x="43" y="128" font-size="10" text-anchor="middle" fill="#334155">IDPs</text><text x="120" y="114" font-size="10" text-anchor="middle" fill="#334155">refugees</text><text x="120" y="128" font-size="10" text-anchor="middle" fill="#334155">asylum seekers</text><text x="202" y="114" font-size="10" text-anchor="middle" fill="#334155">economic</text><text x="202" y="128" font-size="10" text-anchor="middle" fill="#334155">migrants</text><text x="277" y="114" font-size="10" text-anchor="middle" fill="#334155">war, persecution,</text><text x="277" y="128" font-size="10" text-anchor="middle" fill="#334155">disaster</text><text x="160" y="164" font-size="10" text-anchor="middle" fill="#475569">Every move can be classified BOTH ways,</text><text x="160" y="177" font-size="10" text-anchor="middle" fill="#475569">e.g. a Syrian refugee = international + forced</text></svg>`,
       diagramCaption:
         "Migration can be classified by distance (internal or international) and by choice (voluntary or forced). Every migrant fits somewhere in both.",
@@ -168,7 +168,7 @@ export const populationChange: Topic = {
       id: "syria",
       heading: "Case study: Syrian refugees — forced international migration",
       body:
-        "The **Syrian civil war**, which began in **2011** after anti-government protests were violently put down, caused the largest refugee crisis of the early 21st century.\n\nBefore the war Syria had about **21–22 million** people. At the peak, more than **half** had been forced from their homes: around **6–7 million** became **internally displaced persons** inside Syria and over **6 million** fled abroad as **refugees**.\n\n**Push factors** were overwhelmingly political and violent: bombing of cities such as Aleppo and Homs, persecution, forced military service, and the collapse of hospitals, schools, electricity and jobs. Some researchers also point to a severe **drought (2006–2010)** that had already pushed farmers into cities, although how much it contributed is debated.\n\n**Where did they go?** Most refugees stayed in **neighbouring countries** — close by, reachable over land, and hoping to return:\n\n- **Turkey** hosted about **3.6 million** at the peak, the largest refugee population in the world.\n- **Lebanon** took in about **1.5 million** (government estimate) — roughly one person in every four or five living in Lebanon.\n- **Jordan** registered about **650,000**; the **Zaatari camp**, opened in 2012, housed around 80,000 people and became one of Jordan's largest settlements.\n- In **2015–16**, over a million asylum seekers reached Europe, many crossing the Aegean Sea to Greece and walking the **Balkan route**; **Germany** received the most, and over 900,000 Syrians now live there.\n\n**Intervening obstacles** were dangerous: dangerous sea crossings in overcrowded boats, smugglers' fees, closed borders and fences, and the **EU–Turkey deal (2016)**, which aimed to stop boats reaching Greece.\n\n**Impacts on host countries:** pressure on water, housing, schools (Lebanese schools ran double shifts), healthcare and jobs; rents rose; tensions grew. But refugees also brought skills, opened businesses, and in Germany helped fill labour shortages — thousands of Syrian doctors work in German hospitals.\n\n**Impacts on Syria:** loss of young people and skilled workers (brain drain), destroyed families and communities, and a much smaller workforce for rebuilding.\n\nIn **December 2024** the Assad government fell. Since then large numbers of refugees and displaced people have begun to return — UNHCR estimated over a million refugees had gone back by late 2025 — but many homes are destroyed and millions remain abroad.",
+        "The **Syrian civil war**, which began in **2011** after anti-government protests were violently put down, caused the largest refugee crisis of the early 21st century.\n\nBefore the war Syria had about **21–22 million** people. At the peak, more than **half** had been forced from their homes: around **6–7 million** became **internally displaced persons** inside Syria and over **6 million** fled abroad as **refugees**.\n\n**Push factors** were overwhelmingly political and violent: bombing of cities such as Aleppo and Homs, persecution, forced military service, and the collapse of hospitals, schools, electricity and jobs. Some researchers also point to a severe **drought (2006–2010)** that had already pushed farmers into cities, although how much it contributed is debated.\n\n**Where did they go?** Most refugees stayed in **neighbouring countries** — close by, reachable over land, and hoping to return:\n\n- **Turkey** hosted about **3.6 million** at the peak, the largest refugee population in the world.\n- **Lebanon** took in about **1.5 million** (government estimate) — roughly one person in every four or five living in Lebanon.\n- **Jordan** registered about **650,000**; the **Zaatari camp**, opened in 2012, housed over 100,000 people at its 2013 peak (about 80,000 in later years) and became one of Jordan's largest settlements.\n- In **2015** alone, over a million asylum seekers and migrants reached Europe by sea — about half of them Syrians — many crossing the Aegean Sea to Greece and walking the **Balkan route**; **Germany** received the most, and over 900,000 Syrians now live there.\n\n**Intervening obstacles** were dangerous: dangerous sea crossings in overcrowded boats, smugglers' fees, closed borders and fences, and the **EU–Turkey deal (2016)**, which aimed to stop boats reaching Greece.\n\n**Impacts on host countries:** pressure on water, housing, schools (Lebanese schools ran double shifts), healthcare and jobs; rents rose; tensions grew. But refugees also brought skills, opened businesses, and in Germany helped fill labour shortages — thousands of Syrian doctors work in German hospitals.\n\n**Impacts on Syria:** loss of young people and skilled workers (brain drain), destroyed families and communities, and a much smaller workforce for rebuilding.\n\nIn **December 2024** the Assad government fell. Since then large numbers of refugees and displaced people have begun to return — UNHCR estimated over a million refugees had gone back by late 2025 — but many homes are destroyed and millions remain abroad.",
       diagram: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch map showing refugees moving from Syria to Turkey, Lebanon, Jordan, Iraq and Europe"><defs><marker id="syria-ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#b91c1c"/></marker></defs><rect x="0" y="0" width="320" height="190" fill="#f8fafc"/><polygon points="130,80 210,72 222,110 180,140 132,128" fill="#fde68a" stroke="#92400e" stroke-width="1.5"/><text x="176" y="108" font-size="12" text-anchor="middle" fill="#78350f" font-weight="bold">SYRIA</text><rect x="110" y="16" width="130" height="30" rx="4" fill="#e2e8f0" stroke="#64748b"/><text x="175" y="35" font-size="11" text-anchor="middle" fill="#0f172a">TURKEY ~3.6m (peak)</text><line x1="175" y1="76" x2="175" y2="50" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#syria-ah)"/><rect x="8" y="104" width="86" height="26" rx="4" fill="#e2e8f0" stroke="#64748b"/><text x="51" y="121" font-size="10" text-anchor="middle" fill="#0f172a">LEBANON ~1.5m</text><line x1="132" y1="110" x2="98" y2="116" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#syria-ah)"/><rect x="110" y="156" width="110" height="26" rx="4" fill="#e2e8f0" stroke="#64748b"/><text x="165" y="173" font-size="10" text-anchor="middle" fill="#0f172a">JORDAN ~0.65m reg.</text><line x1="160" y1="136" x2="162" y2="152" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#syria-ah)"/><rect x="238" y="118" width="74" height="26" rx="4" fill="#e2e8f0" stroke="#64748b"/><text x="275" y="135" font-size="10" text-anchor="middle" fill="#0f172a">IRAQ ~0.25m</text><line x1="218" y1="114" x2="236" y2="124" stroke="#b91c1c" stroke-width="2.5" marker-end="url(#syria-ah)"/><rect x="8" y="16" width="86" height="40" rx="4" fill="#e2e8f0" stroke="#64748b"/><text x="51" y="32" font-size="10" text-anchor="middle" fill="#0f172a">EUROPE</text><text x="51" y="47" font-size="10" text-anchor="middle" fill="#0f172a">(Germany ~0.9m)</text><path d="M135,82 Q110,70 98,52" fill="none" stroke="#b91c1c" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#syria-ah)"/><text x="292" y="22" font-size="11" text-anchor="middle" fill="#0f172a" font-weight="bold">N</text><line x1="292" y1="52" x2="292" y2="28" stroke="#0f172a" stroke-width="2" marker-end="url(#syria-ah)"/><text x="276" y="72" font-size="10" fill="#475569">Not to scale</text></svg>`,
       diagramCaption:
         "Sketch map (not to scale) of the main destinations of Syrian refugees. Most stayed in neighbouring countries; a smaller share travelled on to Europe.",
@@ -193,7 +193,7 @@ export const populationChange: Topic = {
           "At the peak, over 6 million Syrians were refugees abroad and 6–7 million were internally displaced.",
           "Turkey hosted about 3.6 million Syrian refugees at the peak — the largest refugee population in any country.",
           "Lebanon hosted about 1.5 million Syrians — roughly 1 in 4 or 5 of its population.",
-          "Jordan's Zaatari camp opened in 2012 and housed around 80,000 people.",
+          "Jordan's Zaatari camp opened in 2012; it held over 100,000 people at its 2013 peak and about 80,000 in later years.",
           "The Assad government fell in December 2024; over a million refugees had returned by late 2025 (UNHCR estimate).",
         ],
       },
@@ -511,7 +511,7 @@ export const populationChange: Topic = {
         markScheme: [
           { point: "Natural change of +20,000 (births − deaths)", keywords: ["20,000", "20000", "20 000", "natural increase of 20"] },
           { point: "Net migration of −8,000 (immigrants − emigrants)", keywords: ["-8,000", "−8,000", "-8000", "8,000", "8000", "net loss"] },
-          { point: "Total change +12,000 — population grew", keywords: ["12,000", "12000", "12 000", "grew", "increase"] },
+          { point: "Total change +12,000 — population grew", keywords: ["12,000", "12 000", "grew", "grow", "increased by"] },
         ],
         commonError: "Adding emigrants instead of subtracting them, giving 50,000 − 30,000 + 12,000 + 20,000.",
         guideRef: "components",
@@ -539,7 +539,7 @@ export const populationChange: Topic = {
           "First, Singapore has a very low birth rate — the resident total fertility rate was about 0.97 in 2023, far below the replacement level of 2.1 — so not enough young Singaporeans are entering the workforce. Second, the population is ageing, so there are more elderly people needing care and fewer working-age people; foreign workers, including about 300,000 migrant domestic workers, provide care and fill jobs in construction and shipyards that many Singaporeans do not want to do.",
         markScheme: [
           { point: "Identifies low birth rate / low fertility", keywords: ["birth rate", "fertility", "tfr", "0.97", "few babies"] },
-          { point: "Develops: not enough young workers entering workforce", keywords: ["workforce", "workers", "labour", "shortage", "working age"] },
+          { point: "Develops: not enough young workers entering workforce", keywords: ["workforce", "labour", "shortage", "working age", "not enough", "young singaporeans"] },
           { point: "Identifies ageing population", keywords: ["ageing", "aging", "elderly", "old", "65"] },
           { point: "Develops: jobs in care/construction that locals avoid", keywords: ["construction", "care", "domestic", "shipyard", "do not want", "don't want"] },
         ],
@@ -559,7 +559,7 @@ export const populationChange: Topic = {
           { point: "Evidence: named country/figure for remittances", keywords: ["mexico", "nepal", "india", "philippines", "billion", "65"] },
           { point: "Counter-argument: brain drain", keywords: ["brain drain", "skilled", "doctor", "nurse", "engineer"] },
           { point: "Counter-argument: ageing / loss of young people / families split", keywords: ["ageing", "aging", "elderly", "young", "famil", "dependen"] },
-          { point: "Uses connectives to weigh up both sides", keywords: ["however", "on the other hand", "but", "although", "whereas"] },
+          { point: "Uses connectives to weigh up both sides", keywords: ["however", "on the other hand", "although", "whereas", "despite"] },
           { point: "Reaches a justified overall judgement", keywords: ["overall", "conclusion", "partly", "to some extent", "largely", "i think"] },
         ],
         commonError: "Writing only about the benefits of remittances and never reaching a judgement.",
@@ -1283,7 +1283,7 @@ export const populationChange: Topic = {
             answerIndex: 2,
             hint: "Think about living conditions.",
             explanation:
-              "Crowded dormitories with up to a dozen men per room and shared kitchens and toilets let the virus spread quickly. Singapore later introduced improved dormitory standards.",
+              "Crowded dormitories, often with a dozen or more men per room and shared kitchens and toilets let the virus spread quickly. Singapore later introduced improved dormitory standards.",
             guideRef: "singapore",
           },
           {
@@ -1374,7 +1374,7 @@ export const populationChange: Topic = {
             answerIndex: 1,
             hint: "Natural increase = (15 − 10) per 1,000 of 2,000,000.",
             explanation:
-              "Natural increase = 5 × 2,000 = 10,000. Adding net migration of 5,000 gives +15,000. +10,000 forgets migration; +25,000 multiplies the birth rate alone.",
+              "Natural increase = (15 − 10) × 2,000 = 10,000. Adding net migration of 5,000 gives +15,000. +10,000 forgets migration; +5,000 counts only migration; +25,000 wrongly adds the natural increase twice.",
             guideRef: "components",
           },
           {
@@ -1394,7 +1394,7 @@ export const populationChange: Topic = {
           },
           {
             id: "pchange-mcq-p4-q03",
-            question: "Latvia's population has fallen by about a quarter since 1990. Which combination best explains this?",
+            question: "Latvia's population has fallen by nearly a third since 1990. Which combination best explains this?",
             options: [
               "Natural decrease and a net migration loss",
               "Natural increase and a net migration gain",
@@ -1429,7 +1429,7 @@ export const populationChange: Topic = {
             answerIndex: 1,
             hint: "Did he cross a border? What kind of factor is salt-water flooding?",
             explanation:
-              "Moving within Bangladesh is internal, and flooding is environmental. He is not a refugee under the 1951 Convention, which covers persecution and conflict across borders, not environmental change.",
+              "Moving within Bangladesh is internal, and flooding is environmental. He is not a refugee: he has not crossed a border, and refugee protection covers people fleeing persecution, war or violence, not environmental change.",
             guideRef: "migration-types",
           },
           {
@@ -1604,7 +1604,7 @@ export const populationChange: Topic = {
             answerIndex: 3,
             hint: "1,000,000 ÷ 60,000.",
             explanation:
-              "1,000,000 ÷ 60,000 ≈ 16.7, so about 16 times larger. 1.6 times is an error of one decimal place.",
+              "1,000,000 ÷ 60,000 ≈ 16.7, so roughly 16–17 times larger — the closest option is about 16 times. 1.6 times is an error of one decimal place.",
             guideRef: "economic-migration",
           },
           {
@@ -1667,7 +1667,7 @@ export const populationChange: Topic = {
             modelAnswer:
               "Natural increase is when the number of births is greater than the number of deaths in a population, so the population grows without counting migration. It can be calculated as the birth rate minus the death rate.",
             markScheme: [
-              { point: "Births are greater than deaths", keywords: ["more births", "births exceed", "births are greater", "births than deaths", "more babies"] },
+              { point: "Births are greater than deaths", keywords: ["more births", "births exceed", "births is greater", "births are greater", "outnumber", "more babies"] },
               { point: "Calculated as birth rate minus death rate / ignores migration", keywords: ["minus", "subtract", "birth rate - death rate", "birth rate − death rate", "not including migration", "without migration"] },
             ],
             commonError: "Saying 'when the population increases' — that could be due to migration, so it is not a definition of NATURAL increase.",
@@ -1711,7 +1711,7 @@ export const populationChange: Topic = {
               "An asylum seeker is someone who has fled to another country and applied for protection, but whose claim has not yet been decided. A refugee is someone who has been forced to flee persecution or war across a border and is recognised as needing protection.",
             markScheme: [
               { point: "Asylum seeker has applied and is waiting for a decision", keywords: ["waiting", "applied", "not yet", "decision", "pending", "claim"] },
-              { point: "Refugee is recognised as fleeing persecution/war and needing protection", keywords: ["recognised", "recognized", "granted", "accepted", "persecut", "protection"] },
+              { point: "Refugee is recognised as fleeing persecution/war and needing protection", keywords: ["recognised", "recognized", "granted", "accepted", "persecut", "refugee status"] },
             ],
             commonError: "Thinking asylum seekers are 'illegal' — applying for asylum is a legal right.",
             guideRef: "migration-types",
@@ -1743,7 +1743,7 @@ export const populationChange: Topic = {
               { point: "Origin has positive/negative/neutral factors", keywords: ["origin", "where they live", "home area", "source"] },
               { point: "Destination has positive/negative/neutral factors", keywords: ["destination", "where they move to", "host"] },
               { point: "Intervening obstacles between the two", keywords: ["intervening", "obstacle", "barrier", "distance", "cost"] },
-              { point: "Personal factors", keywords: ["personal", "age", "family", "individual", "personality"] },
+              { point: "Personal factors", keywords: ["personal", "family", "skills", "individual", "personality"] },
             ],
             commonError: "Only describing push and pull factors and missing the obstacles and personal factors that make Lee's model special.",
             guideRef: "push-pull",
@@ -1788,7 +1788,7 @@ export const populationChange: Topic = {
               "(a) 1.9 ÷ 6.0 × 100 = about 32%. (b) Two work passes are the Employment Pass (for professionals and managers) and the Work Permit (for lower-wage workers such as construction workers). The S Pass for mid-skilled workers is another.",
             markScheme: [
               { point: "About 32% (accept 31–32%)", keywords: ["32", "31", "31.7", "a third"] },
-              { point: "Names one work pass", keywords: ["work permit", "employment pass", "s pass", "ep"] },
+              { point: "Names one work pass", keywords: ["work permit", "employment pass", "s pass", "permit"] },
               { point: "Names a second, different work pass", keywords: ["work permit", "s pass", "employment pass"] },
             ],
             commonError: "Dividing by the citizen number (3.6) instead of the total population (6.0).",
@@ -1803,7 +1803,7 @@ export const populationChange: Topic = {
               "Most Syrian refugees fled to neighbouring countries such as Turkey (about 3.6 million at the peak), Lebanon and Jordan because they were close and could be reached quickly over land when fleeing danger. Travelling to Europe meant large intervening obstacles: expensive smugglers, dangerous sea crossings and closed borders. Many families had little money left. Also, staying close to Syria meant they could return home more easily when the fighting stopped, and some had relatives or shared language and culture in these countries.",
             markScheme: [
               { point: "Neighbouring countries were close / reachable by land", keywords: ["close", "near", "neighbour", "short distance", "by land", "border"] },
-              { point: "Intervening obstacles to Europe (cost, danger, sea, borders)", keywords: ["expensive", "cost", "dangerous", "sea", "smuggl", "boat"] },
+              { point: "Intervening obstacles to Europe (cost, danger, sea, borders)", keywords: ["expensive", "cost", "dangerous", "sea crossing", "smuggl", "boat"] },
               { point: "Hoped to return home soon", keywords: ["return", "go back", "go home", "temporary"] },
               { point: "Uses evidence (named country/figure)", keywords: ["turkey", "lebanon", "jordan", "3.6", "1.5 million"] },
             ],
@@ -1818,7 +1818,7 @@ export const populationChange: Topic = {
             modelAnswer:
               "In 2004 Poland joined the EU, which gave Polish people the legal right to work in the UK — one of only three countries to open its labour market straight away. There were strong push factors in Poland, where unemployment was about 19% and wages were low. The UK had pull factors such as jobs in construction, farming and hospitality, with wages several times higher. Cheap flights also reduced the cost of moving.",
             markScheme: [
-              { point: "Poland joined EU in 2004 — legal right to work", keywords: ["eu", "european union", "2004", "free movement", "right to work"] },
+              { point: "Poland joined EU in 2004 — legal right to work", keywords: ["joined the eu", "european union", "2004", "free movement", "right to work"] },
               { point: "Push: high unemployment/low wages in Poland", keywords: ["unemploy", "19", "low wage", "low pay", "few jobs"] },
               { point: "Pull: jobs/higher wages in UK", keywords: ["higher wage", "better pay", "jobs", "construction", "farm", "hospitality"] },
               { point: "Reduced obstacles e.g. cheap flights / UK opened labour market", keywords: ["cheap flight", "budget airline", "flights", "only three", "ireland and sweden"] },
@@ -1889,8 +1889,8 @@ export const populationChange: Topic = {
             hint: "It has two brackets — one for natural change and one for migration.",
             modelAnswer: "Population change = (births − deaths) + (immigrants − emigrants).",
             markScheme: [
-              { point: "Births minus deaths", keywords: ["births - deaths", "births − deaths", "births minus deaths", "b - d", "b − d"] },
-              { point: "Plus immigrants minus emigrants", keywords: ["immigrants - emigrants", "immigrants − emigrants", "immigrants minus emigrants", "i - e", "i − e", "net migration"] },
+              { point: "Births minus deaths", keywords: ["births - deaths", "births minus deaths", "births take away deaths", "b - d", "natural change"] },
+              { point: "Plus immigrants minus emigrants", keywords: ["immigrants - emigrants", "immigrants minus emigrants", "immigration - emigration", "immigration minus emigration", "net migration"] },
             ],
             commonError: "Writing emigrants − immigrants, which reverses the effect of migration.",
             guideRef: "components",
@@ -1919,8 +1919,8 @@ export const populationChange: Topic = {
             modelAnswer:
               "Japan has very few births because many people marry later or not at all, raising children is expensive, housing in cities is small and many women face difficulties combining careers with family. At the same time it has a very old population — about 29% of people are 65 or over — so even though life expectancy is high, many elderly people die each year. In 2024 there were only about 0.69 million births but about 1.6 million deaths, a natural decrease of roughly 900,000.",
             markScheme: [
-              { point: "Reason for low births (cost, late marriage, careers)", keywords: ["cost", "expensive", "late marriage", "marry later", "career", "work"] },
-              { point: "Develops low birth rate / low fertility", keywords: ["low birth", "fewer babies", "fertility", "few children"] },
+              { point: "Reason for low births (cost, late marriage, careers)", keywords: ["cost", "expensive", "late marriage", "marry later", "career", "childcare"] },
+              { point: "Develops low birth rate / low fertility", keywords: ["low birth", "few births", "fewer births", "fewer babies", "fertility", "few children"] },
               { point: "Ageing population means many deaths", keywords: ["ageing", "aging", "elderly", "old", "65"] },
               { point: "Uses evidence (births/deaths figures or %)", keywords: ["0.69", "1.6 million", "900,000", "29", "686"] },
             ],
@@ -1981,9 +1981,9 @@ export const populationChange: Topic = {
             modelAnswer:
               "Intervening obstacles are barriers between the origin and destination that make migration more difficult. For example, the cost of travel and agent fees may be too high for poor families to afford, so they cannot leave. Immigration laws and visas may refuse entry, as the end of free movement after Brexit did for many EU citizens wishing to move to the UK.",
             markScheme: [
-              { point: "Definition: barriers between origin and destination", keywords: ["between", "barrier", "make it harder", "difficult", "stop"] },
-              { point: "First obstacle explained (e.g. cost/distance)", keywords: ["cost", "expensive", "distance", "far", "fee"] },
-              { point: "Second obstacle explained (e.g. laws/visas/borders/physical)", keywords: ["visa", "law", "border", "wall", "sea", "desert"] },
+              { point: "Definition: barriers between origin and destination", keywords: ["between", "barrier", "harder", "difficult", "in the way"] },
+              { point: "First obstacle explained (e.g. cost/distance)", keywords: ["cost", "expensive", "distance", "far away", "fees", "afford"] },
+              { point: "Second obstacle explained (e.g. laws/visas/borders/physical)", keywords: ["visa", "law", "border", "wall", "sea crossing", "desert"] },
             ],
             commonError: "Giving push factors (such as war) as obstacles — obstacles are between places, not reasons to leave.",
             guideRef: "push-pull",
@@ -2061,7 +2061,7 @@ export const populationChange: Topic = {
             markScheme: [
               { point: "Remittances identified", keywords: ["remittance", "money sent", "send money", "sent home"] },
               { point: "Evidence: about US$65 billion", keywords: ["65", "billion", "us$65", "$65"] },
-              { point: "Loss of young workers / ageing villages", keywords: ["young", "men", "village", "elderly", "worker", "labour"] },
+              { point: "Loss of young workers / ageing villages", keywords: ["young", "village", "elderly", "older people", "fewer workers", "labour"] },
               { point: "Social impact: families separated / reduced unemployment", keywords: ["famil", "separat", "unemploy", "children"] },
             ],
             commonError: "Writing about impacts on the USA instead of Mexico.",
@@ -2163,7 +2163,7 @@ export const populationChange: Topic = {
             markScheme: [
               { point: "Rural push: few jobs/low incomes", keywords: ["few jobs", "lack of jobs", "low income", "low wage", "poverty", "farm"] },
               { point: "Rural push: poor services or environmental problems", keywords: ["school", "hospital", "service", "drought", "flood", "electric"] },
-              { point: "Urban pull: jobs/higher wages", keywords: ["factory", "jobs", "higher wage", "work", "employment"] },
+              { point: "Urban pull: jobs/higher wages", keywords: ["factory", "factories", "jobs", "higher wage", "pay more", "employment"] },
               { point: "Example with evidence", keywords: ["china", "shenzhen", "300 million", "dhaka", "lagos", "mumbai"] },
             ],
             commonError: "Only listing pull factors of cities and ignoring what pushes people out of the countryside.",
@@ -2194,8 +2194,8 @@ export const populationChange: Topic = {
             markScheme: [
               { point: "Origin negative factors (low wages, few jobs, floods)", keywords: ["low wage", "few jobs", "poverty", "flood", "unemploy", "low pay"] },
               { point: "Destination positive factors (higher wages, jobs)", keywords: ["higher wage", "better pay", "several times", "jobs in singapore", "construction"] },
-              { point: "Intervening obstacles (agent fees, work permit, cost)", keywords: ["agent", "fee", "work permit", "cost", "visa", "obstacle"] },
-              { point: "Personal factors (young, healthy, family to support)", keywords: ["young", "personal", "family", "healthy", "support", "age"] },
+              { point: "Intervening obstacles (agent fees, work permit, cost)", keywords: ["agent", "fees", "work permit", "cost", "visa", "obstacle"] },
+              { point: "Personal factors (young, healthy, family to support)", keywords: ["young", "personal", "family", "healthy", "support", "responsib"] },
               { point: "Recognises negatives at destination or positives at origin", keywords: ["dormitor", "far from family", "lonely", "miss", "positive factors at home", "friends"] },
               { point: "Judgement: benefits outweigh obstacles for him", keywords: ["outweigh", "overall", "therefore", "worth", "decides"] },
             ],
@@ -2210,7 +2210,7 @@ export const populationChange: Topic = {
             modelAnswer:
               "Push and pull factors depend on economic, social and political conditions, which change. For example, between about 2009 and 2014 net migration from Mexico to the USA fell to around zero. Mexico's birth rate had fallen, so there were fewer young adults looking for work, and Mexico's economy had improved, weakening the push. At the same time the 2008 financial crisis destroyed many US construction jobs and border enforcement increased, weakening the pull and raising obstacles.",
             markScheme: [
-              { point: "Conditions in places change (economy/politics/population)", keywords: ["change", "economy", "conditions", "improve", "laws"] },
+              { point: "Conditions in places change (economy/politics/population)", keywords: ["conditions", "economy", "improv", "weaken", "laws", "policy"] },
               { point: "Named example", keywords: ["mexic", "poland", "brexit", "2009", "2014"] },
               { point: "Weaker push explained (falling birth rate/economy improved)", keywords: ["birth rate", "fewer young", "economy improved", "stronger economy", "wages rose"] },
               { point: "Weaker pull or more obstacles (2008 crisis, enforcement, Brexit)", keywords: ["2008", "financial crisis", "fewer jobs", "border", "enforcement", "brexit"] },
@@ -2246,7 +2246,7 @@ export const populationChange: Topic = {
               { point: "Evidence of benefit (HDB/MRT/Changi, 1.5m, 300,000 MDWs)", keywords: ["hdb", "mrt", "changi", "1.5 million", "300,000", "domestic"] },
               { point: "Problem: crowding/pressure on housing or transport", keywords: ["crowd", "housing", "transport", "pressure", "white paper", "6.9"] },
               { point: "Problem: competition for jobs or worker welfare (dormitories)", keywords: ["compet", "dormitor", "covid", "welfare", "exploit"] },
-              { point: "Balanced use of connectives", keywords: ["however", "on the other hand", "although", "but", "whereas"] },
+              { point: "Balanced use of connectives", keywords: ["however", "on the other hand", "although", "despite", "whereas"] },
               { point: "Justified judgement", keywords: ["overall", "essential", "in conclusion", "outweigh", "depends"] },
             ],
             commonError: "Writing only about benefits, or only about problems, and never weighing them up.",
@@ -2323,7 +2323,7 @@ export const populationChange: Topic = {
               "You write nine factors on cards and arrange them in a diamond: one most significant at the top, then rows of two, three and two, and one least significant at the bottom. It is useful because it forces you to compare factors and make decisions about which matter most, which you then have to justify with evidence — the basis of an evaluation answer.",
             markScheme: [
               { point: "Nine cards in a 1–2–3–2–1 shape", keywords: ["nine", "9", "1-2-3-2-1", "1–2–3–2–1", "diamond"] },
-              { point: "Most significant at top, least at bottom", keywords: ["top", "most significant", "least", "bottom"] },
+              { point: "Most significant at top, least at bottom", keywords: ["at the top", "most significant", "least significant", "bottom", "most important"] },
               { point: "Useful because it forces comparison/justification", keywords: ["compare", "justif", "decide", "prioriti", "judge"] },
             ],
             commonError: "Describing the shape but not explaining why it helps.",
@@ -2392,7 +2392,7 @@ export const populationChange: Topic = {
             modelAnswer:
               "Refugees are protected by international law — the 1951 Refugee Convention — which says they must not be returned to a country where they face persecution or serious danger (non-refoulement). Economic migrants chose to move, so governments can decide whether to let them in, for example through visas and work passes such as Singapore's Work Permits. That is why asylum claims are assessed carefully, to decide whether each person needs protection.",
             markScheme: [
-              { point: "Refugees protected by 1951 Convention/international law", keywords: ["1951", "convention", "international law", "legal protection", "un"] },
+              { point: "Refugees protected by 1951 Convention/international law", keywords: ["1951", "convention", "international law", "legal protection", "united nations", "unhcr"] },
               { point: "Cannot be sent back to danger (non-refoulement)", keywords: ["sent back", "returned", "non-refoulement", "danger", "deport"] },
               { point: "Economic migrants' entry is controlled by the state (visas/work passes)", keywords: ["visa", "work pass", "permit", "choose who", "control", "chose to"] },
             ],
@@ -2491,7 +2491,7 @@ export const populationChange: Topic = {
               "Net migration fell to about zero because several factors changed at once. In Mexico, the birth rate had fallen sharply since the 1970s, so there were fewer young adults looking for work, and the economy had improved, weakening the push. In the USA, the 2008 financial crisis caused a recession and a collapse in construction jobs, weakening the pull. At the same time border enforcement increased, raising the intervening obstacles and costs of crossing.",
             markScheme: [
               { point: "Falling Mexican birth rate / fewer young people", keywords: ["birth rate", "fertility", "fewer young", "fewer children"] },
-              { point: "Improving Mexican economy", keywords: ["economy improved", "stronger economy", "more jobs in mexico", "better economy", "growth"] },
+              { point: "Improving Mexican economy", keywords: ["economy improved", "economy had improved", "stronger economy", "better economy", "more jobs in mexico", "economic growth"] },
               { point: "US recession/2008 crisis reduced jobs", keywords: ["2008", "recession", "financial crisis", "fewer jobs", "construction"] },
               { point: "Tougher border enforcement / higher obstacles", keywords: ["border", "enforcement", "wall", "patrol", "obstacle"] },
             ],

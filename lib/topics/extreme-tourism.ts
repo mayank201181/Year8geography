@@ -534,7 +534,7 @@ export const extremeTourism: Topic = {
           "A positive economic impact is income: Sherpa guides can earn US$4,000–10,000 a season, several times Nepal's average income, which pays for schooling and better homes. A negative environmental impact is waste: tents, oxygen bottles and human waste are left high on the mountain, especially at the South Col, because it is exhausting and dangerous to carry them down.",
         markScheme: [
           { point: "Identifies a positive impact (jobs/income/permit fees/schools)", keywords: ["job", "income", "earn", "money", "permit", "school"] },
-          { point: "Develops the positive with explanation or evidence", keywords: ["us$", "$", "average", "pays for", "afford", "multiplier"] },
+          { point: "Develops the positive with explanation or evidence", keywords: ["4,000", "10,000", "dollar", "average", "pays for", "multiplier"] },
           { point: "Identifies a negative impact (waste/crowding/deaths/risk)", keywords: ["waste", "rubbish", "litter", "crowd", "death", "risk"] },
           { point: "Develops the negative with explanation or evidence", keywords: ["oxygen bottle", "south col", "queue", "8,000", "death zone", "avalanche"] },
         ],
@@ -854,7 +854,7 @@ export const extremeTourism: Topic = {
             answerIndex: 3,
             hint: "(new − old) ÷ old × 100.",
             explanation:
-              "(105,000 − 74,000) ÷ 74,000 × 100 = 31,000 ÷ 74,000 × 100 ≈ 42%. 31% is the trap of dividing by about 100,000 instead of the original value.",
+              "(105,000 − 74,000) ÷ 74,000 × 100 = 31,000 ÷ 74,000 × 100 ≈ 42%. 31% is the trap of mistaking the 31,000 rise for a percentage; dividing by the new value (105,000) instead of the original gives about 30%, which is also wrong.",
             guideRef: "why-extreme-tourism",
           },
           {
@@ -1701,7 +1701,7 @@ export const extremeTourism: Topic = {
             marks: 3,
             hint: "Overall trend + data + anomaly (TEA).",
             modelAnswer:
-              "Visitor numbers have increased rapidly overall, from about 6,700 in 1992–93 to about 105,000 in 2022–23 — more than 15 times higher. The growth sped up after 2010. The anomaly is 2020–21, when numbers fell to almost zero because of the COVID-19 pandemic, before recovering to a new record.",
+              "Visitor numbers have increased rapidly overall, from about 6,700 in 1992–93 to about 105,000 in 2022–23 — more than 15 times as many. The growth sped up after 2010. The anomaly is 2020–21, when numbers fell to almost zero because of the COVID-19 pandemic, before recovering to a new record.",
             markScheme: [
               { point: "Identifies overall increasing trend", keywords: ["increas", "rise", "rose", "grow", "upward"] },
               { point: "Uses data to support", keywords: ["6,700", "105,000", "6700", "105000", "74,000"] },
@@ -1719,7 +1719,7 @@ export const extremeTourism: Topic = {
               "105,000 − 6,700 = 98,300. 98,300 ÷ 6,700 = 14.67. × 100 = about 1,467% increase (about 1,470%).",
             markScheme: [
               { point: "Correct method shown (difference divided by original)", keywords: ["98,300", "98300", "÷ 6,700", "/6700", "/ 6700", "÷6700"] },
-              { point: "Correct answer about 1,467%", keywords: ["1,467", "1467", "1,470", "1470", "1,46"] },
+              { point: "Correct answer about 1,467%", keywords: ["1,467", "1467", "1,470", "1470", "1,466"] },
             ],
             commonError: "Dividing by 105,000 instead of the original value 6,700.",
             guideRef: "why-extreme-tourism",
@@ -1734,7 +1734,7 @@ export const extremeTourism: Topic = {
             markScheme: [
               { point: "Peaceful use / no military or nuclear activity", keywords: ["peace", "military", "nuclear", "weapon"] },
               { point: "Scientific research and cooperation", keywords: ["scien", "research", "share", "cooperat"] },
-              { point: "Territorial claims frozen", keywords: ["claim", "frozen", "freez", "territor", "own"] },
+              { point: "Territorial claims frozen", keywords: ["claim", "frozen", "freez", "territor", "sovereign"] },
             ],
             commonError: "Saying the Treaty bans mining — that was the 1991 Madrid Protocol.",
             guideRef: "antarctic-rules",
@@ -1809,7 +1809,7 @@ export const extremeTourism: Topic = {
             markScheme: [
               { point: "High demand / bucket list / highest mountain", keywords: ["highest", "bucket", "demand", "famous", "popular"] },
               { point: "Many permits / commercial guiding / income for Nepal", keywords: ["permit", "commercial", "company", "income", "478"] },
-              { point: "Short weather window in May", keywords: ["weather window", "may", "jet stream", "monsoon", "window"] },
+              { point: "Short weather window in May", keywords: ["weather window", "in may", "jet stream", "monsoon", "calm"] },
               { point: "Narrow route / single fixed rope causes queues", keywords: ["queue", "narrow", "rope", "ridge", "bottleneck"] },
             ],
             commonError: "Describing the queue photo without explaining the causes of crowding.",
@@ -1840,7 +1840,7 @@ export const extremeTourism: Topic = {
             markScheme: [
               { point: "Landscape/dunes", keywords: ["dune", "landscape", "scenery", "sand", "erg"] },
               { point: "Adventure activities", keywords: ["camel", "4x4", "4×4", "sandboard", "trek", "marathon"] },
-              { point: "Culture or stargazing", keywords: ["culture", "amazigh", "berber", "oasis", "star", "kasbah"] },
+              { point: "Culture or stargazing", keywords: ["culture", "amazigh", "berber", "oasis", "stargaz", "kasbah"] },
             ],
             commonError: "Writing 'to see the desert' without saying what is attractive about it.",
             guideRef: "sahara-deserts",
@@ -1854,7 +1854,7 @@ export const extremeTourism: Topic = {
               "Base layer: wicks sweat away from the skin to keep it dry. Mid layer (fleece or down): insulates by trapping warm air. Outer shell: windproof and waterproof, protecting against wind chill, rain and snow.",
             markScheme: [
               { point: "Base layer wicks sweat", keywords: ["wick", "sweat", "moisture", "dry"] },
-              { point: "Mid layer insulates/traps air", keywords: ["insulat", "trap", "fleece", "down"] },
+              { point: "Mid layer insulates/traps air", keywords: ["insulat", "trap", "fleece", "warm air"] },
               { point: "Outer shell windproof/waterproof", keywords: ["windproof", "waterproof", "shell", "wind", "rain"] },
             ],
             commonError: "Naming the layers but not stating what each one does.",
@@ -1871,7 +1871,7 @@ export const extremeTourism: Topic = {
               { point: "Identifies hazards", keywords: ["hazard", "identif", "danger"] },
               { point: "Judges likelihood and severity / prioritises", keywords: ["likelihood", "severity", "likely", "prioriti", "score"] },
               { point: "Sets control measures", keywords: ["control", "reduce", "measure", "prevent", "mitigat"] },
-              { point: "Rescue is slow/remote, so prevention matters", keywords: ["rescue", "remote", "far", "help", "isolated"] },
+              { point: "Rescue is slow/remote, so prevention matters", keywords: ["rescue", "remote", "isolated", "evacuat", "emergenc"] },
             ],
             commonError: "Listing hazards without explaining how the assessment reduces them.",
             guideRef: "planning-expedition",
@@ -1908,7 +1908,7 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "Sustainable tourism meets the needs of today's tourists and host communities without damaging the environment, economy or culture so that future generations can still benefit.",
             markScheme: [
-              { point: "Meets present needs of tourists/hosts", keywords: ["present", "today", "now", "current", "needs"] },
+              { point: "Meets present needs of tourists/hosts", keywords: ["present", "today", "current", "needs of", "meets"] },
               { point: "Without harming the future / future generations", keywords: ["future", "generation", "long term", "long-term"] },
             ],
             commonError: "Defining it only as 'eco-friendly' without the idea of the future.",
@@ -1937,7 +1937,7 @@ export const extremeTourism: Topic = {
               "Tourism creates jobs for guides, porters, cooks and lodge owners in the Khumbu region. Climbing Sherpas can earn US$4,000–10,000 a season, several times the national average income. The government earns money from permits (about US$15,000 per foreign Everest climber from 2025), which can be spent on services. Money spent in lodges and shops is re-spent locally — the multiplier effect — helping to pay for schools, clinics and small hydro-electric schemes.",
             markScheme: [
               { point: "Jobs for local people", keywords: ["job", "employ", "guide", "porter", "lodge"] },
-              { point: "High earnings with evidence", keywords: ["us$", "$", "earn", "4,000", "average"] },
+              { point: "High earnings with evidence", keywords: ["earn", "4,000", "10,000", "dollar", "average"] },
               { point: "Government income from permits", keywords: ["permit", "government", "fee", "15,000", "11,000"] },
               { point: "Multiplier effect / infrastructure", keywords: ["multiplier", "school", "clinic", "hydro", "re-spent"] },
             ],
@@ -1984,7 +1984,7 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "The number of permits increased steadily from 381 in 2019 to a record 478 in 2023. Percentage increase = (478 − 381) ÷ 381 × 100 = 97 ÷ 381 × 100 ≈ 25%.",
             markScheme: [
-              { point: "Describes increasing trend", keywords: ["increas", "rise", "rose", "grew", "up"] },
+              { point: "Describes increasing trend", keywords: ["increas", "rise", "rose", "grew", "upward"] },
               { point: "Quotes data", keywords: ["381", "478", "408"] },
               { point: "Correct % increase (about 25%)", keywords: ["25", "25.5", "25.4"] },
             ],
@@ -2063,7 +2063,7 @@ export const extremeTourism: Topic = {
               "The body burns extra energy to keep warm in extreme cold and wind. Pulling a heavy sledge or skiing for many hours is very hard physical work. As a result a man-hauling expedition member may need 5,000–6,000+ kcal a day compared with about 2,000–2,500 kcal at home, so food must be high-energy, such as fats, nuts and chocolate.",
             markScheme: [
               { point: "Energy needed to keep warm in cold", keywords: ["warm", "cold", "heat", "temperature"] },
-              { point: "Hard physical work (man-hauling, skiing)", keywords: ["haul", "pull", "sledge", "ski", "exercise", "work"] },
+              { point: "Hard physical work (man-hauling, skiing)", keywords: ["haul", "pull", "sledge", "ski", "exercise", "physical"] },
               { point: "Uses figures (5,000–6,000 vs 2,000)", keywords: ["5,000", "6,000", "5000", "6000", "kcal", "calorie"] },
             ],
             commonError: "Saying 'they get hungry' without explaining where the energy goes.",
@@ -2077,9 +2077,9 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "4 people × 5 days × 5 litres = 100 litres. Water weighs 1 kg per litre, so 100 kg is too heavy to carry on foot — they will need camels or a vehicle, or must plan a route via reliable wells/oases, with a safety reserve in case of delays or extra heat.",
             markScheme: [
-              { point: "Correct method", keywords: ["4 x 5", "4 × 5", "4x5", "× 5", "x 5"] },
+              { point: "Correct method", keywords: ["4 × 5 × 5", "4 x 5 x 5", "4x5x5", "4 people", "5 days", "20 litres"] },
               { point: "Correct answer 100 litres", keywords: ["100", "hundred", "100 l", "100 litres"] },
-              { point: "Other water factor (weight, resupply, reserve, purification)", keywords: ["weight", "heavy", "camel", "well", "oasis", "reserve"] },
+              { point: "Other water factor (weight, resupply, reserve, purification)", keywords: ["weight", "heavy", "camel", "wells", "oases", "reserve"] },
             ],
             commonError: "Calculating for one person only (25 litres).",
             guideRef: "planning-expedition",
@@ -2123,7 +2123,7 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "Everest tourism does a lot of economic good. Sherpa guides can earn US$4,000–10,000 a season, several times Nepal's average income of about US$1,400, and permits (about US$15,000 each) bring government revenue. This money has helped build schools and clinics in the Khumbu. However, the harm is serious: crowding in the death zone has caused deaths (11 in 2019), Sherpas carry the greatest risk (16 killed in the 2014 avalanche), and oxygen bottles, tents and human waste pollute the mountain. Management is improving — the 8 kg rubbish deposit and compulsory poo bags since 2024 reduce waste. On balance, tourism does more good than harm economically, but only if crowding is controlled and guides are better protected.",
             markScheme: [
-              { point: "Economic benefit with figures", keywords: ["us$", "$", "earn", "income", "permit"] },
+              { point: "Economic benefit with figures", keywords: ["earn", "income", "permit", "4,000", "15,000", "revenue"] },
               { point: "Social benefit (schools, clinics)", keywords: ["school", "clinic", "health", "educat"] },
               { point: "Harm: crowding/deaths with evidence", keywords: ["death", "died", "crowd", "queue", "2019", "2014"] },
               { point: "Harm: waste/environment", keywords: ["waste", "rubbish", "oxygen bottle", "litter", "pollut"] },
@@ -2191,7 +2191,7 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "Last chance tourism is travelling to see places before they disappear or change, such as Antarctic sea ice or Himalayan glaciers that are shrinking due to climate change. It is a paradox because the long-haul flights and ship voyages needed to reach these places release large amounts of greenhouse gases, adding to the climate change that is destroying them. So the more people rush to see them, the faster they may be lost.",
             markScheme: [
-              { point: "Definition: visiting before places are lost/changed", keywords: ["before", "disappear", "lost", "chang", "last chance"] },
+              { point: "Definition: visiting before places are lost/changed", keywords: ["before they", "disappear", "lost", "too late", "last chance"] },
               { point: "Link to climate change (melting ice/glaciers)", keywords: ["climate", "melt", "glacier", "sea ice", "warming"] },
               { point: "Travel emits greenhouse gases", keywords: ["flight", "emission", "carbon", "greenhouse", "ship"] },
               { point: "Explains the paradox (adds to the cause)", keywords: ["paradox", "contribut", "adds to", "faster", "worse"] },
@@ -2284,7 +2284,7 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "6,300 ÷ 1,400 = 4.5, so the guide earns about 4.5 times the average annual income in one season. Many accept the risk because there are few other well-paid jobs in the mountains — farming yields little at high altitude. The money pays for children's education, better housing and family needs, and experienced guides gain status and can start their own businesses, such as lodges or trekking companies.",
             markScheme: [
-              { point: "Correct calculation (4.5 times)", keywords: ["4.5", "4 and a half", "four and a half", "4½"] },
+              { point: "Correct calculation (4.5 times)", keywords: ["4.5", "4 and a half", "four and a half", "4.50"] },
               { point: "Few alternative jobs / farming poor", keywords: ["few other", "alternative", "farming", "no other", "limited"] },
               { point: "Money used for education/housing/family", keywords: ["school", "educat", "house", "family", "children"] },
               { point: "Status / business opportunities / tradition", keywords: ["status", "business", "lodge", "respect", "tradition"] },
@@ -2315,7 +2315,7 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "Likelihood 3, severity 4, so risk score = 3 × 4 = 12 (high). Control measures: wear insulated mitts, face masks and goggles so no skin is exposed; do buddy checks of each other's faces every hour and warm any white patches immediately; shelter in the tent when wind chill is extreme.",
             markScheme: [
-              { point: "Scores and correct multiplication", keywords: ["×", " x ", "12", "multipl", "score"] },
+              { point: "Scores and correct multiplication", keywords: ["12", "3 × 4", "3 x 4", "multipl", "risk score"] },
               { point: "Control measure 1 (clothing)", keywords: ["mitt", "glove", "mask", "goggle", "cover"] },
               { point: "Control measure 2 (checks/shelter/limit exposure)", keywords: ["buddy", "check", "shelter", "tent", "limit"] },
             ],
@@ -2383,12 +2383,12 @@ export const extremeTourism: Topic = {
             marks: 4,
             hint: "Think about recovery time, isolation and where wildlife and visitors meet.",
             modelAnswer:
-              "Antarctica's short, cold growing season means mosses and lichens grow extremely slowly, so trampled areas can take decades to recover. Its isolation means it has very few native species, so invasive species could spread with little competition. Only about 2% of Antarctica is ice-free, mostly on the coast, so tourists and breeding wildlife are concentrated in the same small areas. Cold temperatures also slow the breakdown of oil and waste, so pollution lasts longer.",
+              "Antarctica's short, cold growing season means mosses and lichens grow extremely slowly, so trampled areas can take decades to recover. Its isolation means it has very few native species, so invasive species could spread with little competition. Less than 2% of Antarctica is ice-free, mostly on the coast, so tourists and breeding wildlife are concentrated in the same small areas. Cold temperatures also slow the breakdown of oil and waste, so pollution lasts longer.",
             markScheme: [
               { point: "Slow growth/recovery", keywords: ["slow", "recover", "decade", "growing season"] },
               { point: "Isolation / few native species — invasive risk", keywords: ["isolat", "invasive", "few native", "competition", "non-native"] },
               { point: "Wildlife and visitors concentrated on small ice-free coast", keywords: ["ice-free", "coast", "concentrat", "same areas", "2%"] },
-              { point: "Pollution breaks down slowly in cold", keywords: ["break down", "pollut", "oil", "persist", "last"] },
+              { point: "Pollution breaks down slowly in cold", keywords: ["break down", "pollut", "oil", "persist", "lasts longer"] },
             ],
             commonError: "Saying 'it is cold' without linking the cold to slow recovery.",
             guideRef: "antarctic-rules",
@@ -2401,10 +2401,10 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "Ship A (120) may land passengers; it needs 2 groups because only 100 can be ashore at once. Ship B (480) may land passengers because it is under 500; it needs 5 groups (480 ÷ 100 = 4.8, rounded up). Ship C (900) carries more than 500 passengers, so it cannot land anyone and may only cruise and view from the ship.",
             markScheme: [
-              { point: "Ship A may land, 2 groups", keywords: ["2 groups", "two groups", "120", "ship a"] },
-              { point: "Ship B may land, 5 groups", keywords: ["5 groups", "five groups", "4.8"] },
-              { point: "Ship C cannot land", keywords: ["cannot", "can't", "not allowed", "no landing", "cruise"] },
-              { point: "Correctly applies the 500 and 100 rules", keywords: ["500", "100 ashore", "100 at", "limit"] },
+              { point: "Ship A may land, 2 groups", keywords: ["2 groups", "two groups", "2 trips", "two trips"] },
+              { point: "Ship B may land, 5 groups", keywords: ["5 groups", "five groups", "4.8", "5 trips"] },
+              { point: "Ship C cannot land", keywords: ["cannot land", "can't land", "not allowed", "no landing", "cruise"] },
+              { point: "Correctly applies the 500 and 100 rules", keywords: ["500", "100 ashore", "100 at", "100 can"] },
             ],
             commonError: "Rounding 4.8 down to 4 groups — that would leave 80 people unable to land.",
             guideRef: "antarctic-rules",
@@ -2450,7 +2450,7 @@ export const extremeTourism: Topic = {
             markScheme: [
               { point: "Tourism emits greenhouse gases/soot", keywords: ["flight", "emission", "carbon", "co2", "soot"] },
               { point: "Climate change alters destinations (glaciers, sea ice)", keywords: ["glacier", "melt", "sea ice", "unstable", "retreat"] },
-              { point: "Last chance tourism", keywords: ["last chance", "before", "disappear"] },
+              { point: "Last chance tourism", keywords: ["last chance", "before they", "disappear", "too late"] },
               { point: "Feedback/link between the two", keywords: ["feedback", "cycle", "loop", "more visitors", "worse"] },
             ],
             commonError: "Only explaining one direction of the relationship.",
@@ -2496,7 +2496,7 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "Water: about 5 litres per person per day plus a reserve, carried by camels and topped up at known wells. Clothing: loose, light-coloured, long-sleeved clothes, a wide hat or headscarf, sunglasses and sun cream to prevent sunburn and heatstroke, plus a warm fleece and sleeping bag for cold nights. Navigation and communication: a local Amazigh guide, GPS and a satellite phone, as mobile coverage is poor. Health: a first-aid kit and oral rehydration salts, and a risk assessment with rest during the hottest hours. Leave no trace: carry out all rubbish because it decomposes very slowly in the desert.",
             markScheme: [
-              { point: "Water quantity/supply with justification", keywords: ["water", "litre", "well", "dehydrat", "reserve"] },
+              { point: "Water quantity/supply with justification", keywords: ["water", "litre", "wells", "dehydrat", "reserve"] },
               { point: "Sun/heat clothing", keywords: ["hat", "scarf", "loose", "sun cream", "sunscreen", "long sleeve"] },
               { point: "Warm layer for cold nights", keywords: ["night", "warm", "fleece", "sleeping bag", "cold"] },
               { point: "Navigation/communication (guide, GPS, sat phone)", keywords: ["guide", "gps", "satellite", "compass", "map"] },
@@ -2513,7 +2513,7 @@ export const extremeTourism: Topic = {
             modelAnswer:
               "In Antarctica I would use the full three-layer system: a wicking merino base layer, an insulating fleece or down mid layer and a windproof, waterproof shell to resist wind chill, plus insulated mitts, a face mask and goggles against frostbite and snow glare. In the Sahara the priority is staying cool and avoiding sunburn, so I would wear loose, light-coloured, breathable long sleeves and a wide hat or headscarf. Both trips need layers that can be added or removed, because Saharan nights can be near freezing and effort in Antarctica causes sweating.",
             markScheme: [
-              { point: "Antarctic layering detail", keywords: ["base", "mid", "shell", "layer", "down", "fleece"] },
+              { point: "Antarctic layering detail", keywords: ["base layer", "mid layer", "shell", "three-layer", "fleece", "merino"] },
               { point: "Antarctic extremities protection (mitts/mask/goggles)", keywords: ["mitt", "glove", "mask", "goggle", "frostbite"] },
               { point: "Sahara: loose, light-coloured, sun protection", keywords: ["loose", "light-colour", "light colour", "hat", "scarf", "sun"] },
               { point: "Common principle: adjustable layers / cold desert nights", keywords: ["night", "both", "adjust", "add or remove", "remove"] },
@@ -2530,7 +2530,7 @@ export const extremeTourism: Topic = {
               "Total energy = 3 × 20 × 5,500 = 330,000 kcal. 500 kcal per 100 g means 5 kcal per gram, so mass = 330,000 ÷ 5 = 66,000 g = 66 kg of food (22 kg per person).",
             markScheme: [
               { point: "Total energy 330,000 kcal", keywords: ["330,000", "330000", "330 000"] },
-              { point: "Correct method for mass (÷ 5 or × 100/500)", keywords: ["÷ 5", "/5", "/ 5", "5 kcal per g", "÷5"] },
+              { point: "Correct method for mass (÷ 5 or × 100/500)", keywords: ["330,000 ÷ 5", "330,000 / 5", "5 kcal per g", "per gram", "330,000 ÷ 500"] },
               { point: "Answer 66 kg", keywords: ["66 kg", "66kg", "66,000", "66000", "66"] },
             ],
             commonError: "Forgetting to multiply by both the number of people and the number of days.",
@@ -2560,7 +2560,7 @@ export const extremeTourism: Topic = {
               "Local Amazigh guides keep tourist money in the community, reducing leakage and creating a multiplier effect in villages with few other jobs. They know the desert well, improving safety and keeping groups on routes that limit damage. They share their culture and knowledge of the environment, educating visitors and giving local people a reason to value and protect their heritage.",
             markScheme: [
               { point: "Money stays local / reduces leakage", keywords: ["local", "leakage", "multiplier", "income", "community"] },
-              { point: "Safety/environmental knowledge", keywords: ["safe", "know", "route", "damage", "environment"] },
+              { point: "Safety/environmental knowledge", keywords: ["safe", "knowledge", "route", "damage", "environment"] },
               { point: "Cultural benefit/education", keywords: ["culture", "educat", "heritage", "amazigh", "berber", "learn"] },
             ],
             commonError: "Only mentioning jobs, without linking to the three pillars of sustainability.",
@@ -2609,7 +2609,7 @@ export const extremeTourism: Topic = {
               { point: "Limitation: carrying capacity / popularity", keywords: ["carrying capacity", "popular", "too many", "success", "numbers"] },
               { point: "Limitation: greenwashing", keywords: ["greenwash", "fake", "label", "claim"] },
               { point: "Alternative: regulation in Antarctica (IAATO/Madrid)", keywords: ["iaato", "madrid", "100", "500", "regulat"] },
-              { point: "Alternative: Everest rules (deposit, poo bags)", keywords: ["deposit", "8 kg", "poo", "permit", "everest"] },
+              { point: "Alternative: Everest rules (deposit, poo bags)", keywords: ["deposit", "8 kg", "poo", "permit", "rubbish"] },
               { point: "Justified judgement", keywords: ["overall", "partly", "on balance", "extent", "conclude"] },
             ],
             commonError: "Agreeing completely without considering regulation-based approaches like IAATO.",

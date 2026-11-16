@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { rankFor, useStore } from "@/lib/store";
+import { GUEST_ID, rankFor, useStore } from "@/lib/store";
 
 export function SiteHeader() {
-  const { stars, streak, srs, activeProfile, switchProfile, logout } = useStore();
+  const { stars, streak, srs, activeProfile, switchProfile, logout, account } = useStore();
+  const guest = account?.id === GUEST_ID;
   const rank = rankFor(stars);
   const today = new Date().toISOString().slice(0, 10);
   const missedCount = Object.values(srs).filter((s) => s.due <= today).length;
@@ -97,8 +98,8 @@ export function SiteHeader() {
                   <Link href="/exam" onClick={() => setMenu(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 sm:hidden">Big Exam</Link>
                   <Link href="/progress" onClick={() => setMenu(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 sm:hidden">My Progress</Link>
                   <button onClick={() => { setMenu(false); switchProfile(); }} className="block w-full px-4 py-2 text-left text-sm text-slate-700 hover:bg-slate-50">🔄 Switch learner</button>
-                  <Link href="/parent" onClick={() => setMenu(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">🔒 Parent dashboard</Link>
-                  <button onClick={() => { setMenu(false); logout(); }} className="block w-full px-4 py-2 text-left text-sm text-rose-600 hover:bg-rose-50">Log out</button>
+                  {!guest && <Link href="/parent" onClick={() => setMenu(false)} className="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">🔒 Parent dashboard</Link>}
+                  {!guest && <button onClick={() => { setMenu(false); logout(); }} className="block w-full px-4 py-2 text-left text-sm text-rose-600 hover:bg-rose-50">Log out</button>}
                 </div>
               )}
             </div>

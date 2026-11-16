@@ -137,7 +137,7 @@ export const extremeEnvironments: Topic = {
       heading: "High mountains: why altitude makes it cold",
       discovery: {
         problem:
-          "Mount Kilimanjaro in Tanzania is only about 3° south of the Equator, about as close to the Equator as Singapore is — yet its summit (5,895 m) has snow and glaciers. How can the same latitude be tropical at the bottom and freezing at the top?",
+          "Mount Kilimanjaro in Tanzania is only about 3° south of the Equator, not much further from it than Singapore (1°N) — yet its summit (5,895 m) has snow and glaciers. How can the same latitude be tropical at the bottom and freezing at the top?",
         idea:
           "Temperature falls as you go higher — on average by about 6.5°C for every 1,000 m. Climb 5,000 m and it is over 30°C colder than at sea level, even on the Equator.",
       },
@@ -222,7 +222,7 @@ export const extremeEnvironments: Topic = {
           "Comparing real data shows that 'extreme' can mean very different things: Cairo and Arica are hot and almost rainless; McMurdo and Vostok are bitterly cold and also very dry; Singapore is hot but extremely wet and steady all year.",
       },
       body:
-        "A **comparison** must talk about **both** places in the same sentence, using comparative words such as **whereas**, **however**, **while**, **higher than**, **x times more**. Quote figures for each place.\n\n**Approximate climate data (rounded long-term averages):**\n\n- **Singapore (1°N, sea level)** — about 27–28°C every month; annual range only about **2°C**; rainfall about **2,400 mm** a year, with the wettest months during the **Northeast Monsoon** (November–January). Rising air at the Equator brings rain every month.\n- **Cairo, Egypt (30°N)** — about 14°C in January to 28°C in July/August; range about **14°C**; rainfall only about **25 mm** a year. Hot desert under the subtropical high.\n- **Arica, Atacama, Chile (18°S)** — about 17–23°C all year (mild because of the cold Humboldt Current); rainfall about **1 mm** a year. Coastal desert.\n- **McMurdo Station, Antarctica (78°S, coast)** — about −3°C in January to about −27°C in August; range about **24°C**; precipitation about **200 mm** (water equivalent) a year, falling as snow.\n- **Vostok, Antarctica (78°S, about 3,500 m)** — about −32°C in summer to about −68°C in winter; range about **36°C**; precipitation only about **20–25 mm** a year.\n- **Everest Base Camp, Nepal (28°N, about 5,364 m)** — cold all year because of altitude: daytime highs may reach a few degrees above freezing in late spring, but nights fall to about −10°C to −20°C, and in winter much lower. Most precipitation (as snow) falls in the **summer monsoon** (June–September).\n\n**Useful comparisons to practise:**\n\n- Singapore gets about **100 times** more rain than Cairo (2,400 ÷ 25 ≈ 96).\n- Cairo's annual range (14°C) is about **7 times** Singapore's (2°C).\n- McMurdo is warmer than Vostok all year, mainly because it is on the **coast** at sea level, while Vostok is at **3,500 m** inland — altitude and distance from the sea both matter.\n- Everest Base Camp and Cairo are at almost the same latitude (28–30°N), yet Base Camp is over 30°C colder on average — proof that **altitude** can matter more than latitude.\n\nNotice that the **driest** places in this list are a hot desert (Arica) and a cold desert (Vostok). Low precipitation, not heat, is what makes a desert.",
+        "A **comparison** must talk about **both** places in the same sentence, using comparative words such as **whereas**, **however**, **while**, **higher than**, **x times more**. Quote figures for each place.\n\n**Approximate climate data (rounded long-term averages):**\n\n- **Singapore (1°N, sea level)** — about 27–28°C every month; annual range only about **2°C**; rainfall about **2,400 mm** a year, with the wettest months during the **Northeast Monsoon** (November–January). Rising air at the Equator brings rain every month.\n- **Cairo, Egypt (30°N)** — about 14°C in January to 28°C in July/August; range about **14°C**; rainfall only about **25 mm** a year. Hot desert under the subtropical high.\n- **Arica, Atacama, Chile (18°S)** — about 17–23°C all year (mild because of the cold Humboldt Current); rainfall about **1 mm** a year. Coastal desert.\n- **McMurdo Station, Antarctica (78°S, coast)** — about −3°C in January to about −27°C in August; range about **24°C**; precipitation about **200 mm** (water equivalent) a year, falling as snow.\n- **Vostok, Antarctica (78°S, about 3,500 m)** — about −32°C in summer to about −68°C in winter; range about **36°C**; precipitation only about **20–25 mm** a year.\n- **Everest Base Camp, Nepal (28°N, about 5,364 m)** — cold all year because of altitude: daytime highs may reach a few degrees above freezing in late spring, but nights fall to about −10°C to −20°C, and in winter much lower. Most precipitation (as snow) falls in the **summer monsoon** (June–September).\n\n**Useful comparisons to practise:**\n\n- Singapore gets about **100 times** more rain than Cairo (2,400 ÷ 25 ≈ 96).\n- Cairo's annual range (14°C) is about **7 times** Singapore's (2°C).\n- McMurdo is warmer than Vostok all year, mainly because it is on the **coast** at sea level, while Vostok is at **3,500 m** inland — altitude and distance from the sea both matter.\n- Everest Base Camp and Cairo are at almost the same latitude (28–30°N), yet Base Camp is nearly 30°C colder on average (about −6°C versus about 22°C) — proof that **altitude** can matter more than latitude.\n\nNotice that the **driest** places in this list are a hot desert (Arica) and a cold desert (Vostok). Low precipitation, not heat, is what makes a desert.",
       diagram: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart comparing approximate mean annual temperatures of Singapore, Cairo, Arica, McMurdo and Vostok, with a zero line"><rect width="320" height="210" fill="#ffffff"/><text x="160" y="14" font-size="11" text-anchor="middle" fill="#0f172a" font-weight="bold">Approximate mean annual temperature (°C)</text><line x1="40" y1="70" x2="310" y2="70" stroke="#0f172a" stroke-width="1.5"/><text x="36" y="74" font-size="10" text-anchor="end" fill="#0f172a">0</text><text x="36" y="34" font-size="10" text-anchor="end" fill="#0f172a">+30</text><text x="36" y="146" font-size="10" text-anchor="end" fill="#0f172a">−60</text><line x1="40" y1="24" x2="40" y2="150" stroke="#64748b"/><rect x="52" y="37" width="36" height="33" fill="#16a34a"/><text x="70" y="33" font-size="10" text-anchor="middle" fill="#14532d">27.5</text><rect x="102" y="44" width="36" height="26" fill="#ea580c"/><text x="120" y="40" font-size="10" text-anchor="middle" fill="#7c2d12">22</text><rect x="152" y="47" width="36" height="23" fill="#f59e0b"/><text x="170" y="43" font-size="10" text-anchor="middle" fill="#78350f">19</text><rect x="202" y="70" width="36" height="22" fill="#60a5fa"/><text x="220" y="104" font-size="10" text-anchor="middle" fill="#1e3a8a">−18</text><rect x="252" y="70" width="36" height="66" fill="#1d4ed8"/><text x="270" y="148" font-size="10" text-anchor="middle" fill="#1e3a8a">−55</text><g font-size="10" fill="#0f172a" text-anchor="middle"><text x="70" y="86">Singapore</text><text x="120" y="86">Cairo</text><text x="170" y="86">Arica</text><text x="220" y="62">McMurdo</text><text x="270" y="62">Vostok</text></g><text x="160" y="190" font-size="10" text-anchor="middle" fill="#334155">Rainfall: Singapore ~2,400 mm, McMurdo ~200 mm,</text><text x="160" y="203" font-size="10" text-anchor="middle" fill="#334155">Cairo ~25 mm, Vostok ~20–25 mm, Arica ~1 mm</text></svg>`,
       diagramCaption:
         "Mean annual temperatures (rounded): tropical Singapore is warmest; inland Vostok is about 80°C colder. The two driest places are a hot desert and a cold one.",
@@ -527,7 +527,7 @@ export const extremeEnvironments: Topic = {
         markScheme: [
           { point: "Correct total of 25 mm", keywords: ["25 mm", "25mm", "= 25", "total of 25", "twenty-five"] },
           { point: "States Cairo is a desert", keywords: ["desert", "yes", "arid"] },
-          { point: "Reason: below the 250 mm threshold", keywords: ["250", "less than", "below", "under"] },
+          { point: "Reason: below the 250 mm threshold", keywords: ["250", "threshold", "desert limit", "a tenth"] },
         ],
         commonError: "Dividing by 12 (giving an average monthly figure) when the question asks for the total.",
         guideRef: "climate-calculations",
@@ -1576,7 +1576,7 @@ export const extremeEnvironments: Topic = {
             modelAnswer:
               "A desert is a place that receives less than about 250 mm of precipitation a year. Antarctica is a desert because inland it receives less than 50 mm a year — the very cold air holds almost no moisture.",
             markScheme: [
-              { point: "Desert = less than about 250 mm of precipitation a year", keywords: ["250", "less than", "low precipitation", "little rain"] },
+              { point: "Desert = less than about 250 mm of precipitation a year", keywords: ["250", "low precipitation", "little precipitation", "little rain", "low rainfall"] },
               { point: "Antarctica receives very little precipitation (under 50 mm inland)", keywords: ["50 mm", "50mm", "very little", "cold air", "dry"] },
             ],
             commonError: "Saying Antarctica is a desert because it is 'empty' or 'cold'. A desert is about low precipitation.",
@@ -1622,8 +1622,8 @@ export const extremeEnvironments: Topic = {
             modelAnswer:
               "At the Equator, strong heating makes warm air rise, giving low pressure and rain. This air spreads out towards the poles high in the atmosphere and cools. At about 30°N and S it sinks back down (forming the Hadley cell), creating high pressure. As the air sinks it warms up and dries out, so clouds cannot form and there is very little rain — creating desert conditions.",
             markScheme: [
-              { point: "Air rises at the Equator", keywords: ["rise", "rising", "equator", "low pressure"] },
-              { point: "Air sinks at about 30° / Hadley cell", keywords: ["sink", "descend", "hadley", "30"] },
+              { point: "Air rises at the Equator", keywords: ["rise", "rising", "ascend", "low pressure", "convection"] },
+              { point: "Air sinks at about 30° / Hadley cell", keywords: ["sink", "descend", "hadley", "sank", "comes down"] },
               { point: "Sinking air creates high pressure", keywords: ["high pressure", "high-pressure", "subtropical high", "anticyclone"] },
               { point: "Air warms/dries so no clouds or rain form", keywords: ["no cloud", "clear sk", "dries", "warms", "no rain", "little rain"] },
             ],
@@ -1657,7 +1657,7 @@ export const extremeEnvironments: Topic = {
               "Hot deserts have very few clouds. By day, nothing blocks the Sun, so the ground heats up quickly and temperatures can exceed 40°C. At night there is no cloud cover to trap the heat, so it radiates straight back into space and temperatures can fall below 10°C. This creates a large diurnal temperature range of over 20°C.",
             markScheme: [
               { point: "Few or no clouds / clear skies", keywords: ["cloud", "clear sk", "cloudless", "no cover"] },
-              { point: "Strong sun heats ground quickly by day", keywords: ["sun", "heats", "day", "direct"] },
+              { point: "Strong sun heats ground quickly by day", keywords: ["heats up", "heat up", "sun heats", "strong sun", "intense sun", "direct sun"] },
               { point: "Heat escapes/radiates into space at night (no insulating blanket)", keywords: ["escape", "radiat", "lost", "blanket", "trap"] },
             ],
             commonError: "Saying 'the Sun goes down so it gets cold' without explaining the role of cloud cover.",
@@ -1804,7 +1804,7 @@ export const extremeEnvironments: Topic = {
               "Albedo is the proportion of sunlight a surface reflects. Fresh snow and ice have a very high albedo, reflecting about 80–90% of sunlight. This means most of the Sun's energy is sent back into space instead of being absorbed, so the ground and air stay cold.",
             markScheme: [
               { point: "Definition: how much sunlight a surface reflects", keywords: ["reflect", "bounces", "proportion of sunlight"] },
-              { point: "Snow/ice has a high albedo (about 80–90%)", keywords: ["80", "90", "high albedo", "white", "snow", "ice"] },
+              { point: "Snow/ice has a high albedo (about 80–90%)", keywords: ["80", "90", "high albedo", "very reflective", "white"] },
               { point: "Less energy absorbed, so it stays cold", keywords: ["less absorbed", "absorb", "back into space", "less heat", "stays cold"] },
             ],
             commonError: "Defining albedo as 'how cold something is' rather than how much light it reflects.",
@@ -1961,7 +1961,7 @@ export const extremeEnvironments: Topic = {
               "Temperature falls about 6.5°C for every 1,000 m. The summit is almost 5,900 m high, so it is about 5.9 × 6.5 ≈ 38°C colder than sea level. Even if the base is around 25–27°C, the summit is well below freezing, so snow and glaciers can survive despite being near the Equator.",
             markScheme: [
               { point: "Temperature falls with altitude / lapse rate", keywords: ["altitude", "lapse rate", "6.5", "height"] },
-              { point: "Calculation: about 38°C colder", keywords: ["38", "37", "5.9", "colder"] },
+              { point: "Calculation: about 38°C colder", keywords: ["38", "37", "5.9", "38 degrees", "thirty-eight"] },
               { point: "Summit below freezing so ice survives despite latitude", keywords: ["freez", "below 0", "below zero", "despite", "even though"] },
             ],
             commonError: "Suggesting the snow is caused by cold winds from Antarctica.",
@@ -2002,7 +2002,7 @@ export const extremeEnvironments: Topic = {
             marks: 6,
             hint: "Find examples where altitude wins (same latitude, different heights) and where latitude wins (same height, different latitudes). Then judge.",
             modelAnswer:
-              "There is strong evidence for the statement. Everest Base Camp (about 28°N, 5,364 m) and Cairo (30°N, near sea level) are at almost the same latitude, yet Base Camp is over 30°C colder on average because temperature falls about 6.5°C per 1,000 m. Kilimanjaro has glaciers only 3° from the Equator for the same reason. However, latitude is also very powerful: McMurdo, on the Antarctic coast at sea level, averages about −18°C, whereas Singapore, also at sea level, averages about 27°C — a 45°C difference caused by sun angle and polar night alone. Inland Antarctica is coldest of all because high latitude AND high altitude combine at Vostok (3,500 m). Overall, altitude matters more within a small area, but at a global scale latitude has the bigger effect, and the most extreme cold happens where both work together.",
+              "There is strong evidence for the statement. Everest Base Camp (about 28°N, 5,364 m) and Cairo (30°N, near sea level) are at almost the same latitude, yet Base Camp is nearly 30°C colder on average because temperature falls about 6.5°C per 1,000 m. Kilimanjaro has glaciers only 3° from the Equator for the same reason. However, latitude is also very powerful: McMurdo, on the Antarctic coast at sea level, averages about −18°C, whereas Singapore, also at sea level, averages about 27°C — a 45°C difference caused by sun angle and polar night alone. Inland Antarctica is coldest of all because high latitude AND high altitude combine at Vostok (3,500 m). Overall, altitude matters more within a small area, but at a global scale latitude has the bigger effect, and the most extreme cold happens where both work together.",
             markScheme: [
               { point: "Evidence for altitude: same latitude, different temperatures (e.g. Base Camp vs Cairo)", keywords: ["base camp", "cairo", "kilimanjaro", "same latitude"] },
               { point: "Uses lapse rate to explain", keywords: ["6.5", "lapse rate", "per 1,000", "per 1000"] },
@@ -2046,7 +2046,7 @@ export const extremeEnvironments: Topic = {
               { point: "Rainfall shown as bars", keywords: ["rainfall bar", "rain as bar", "bars for rain", "bar", "precipitation"] },
               { point: "Rainfall in millimetres", keywords: ["mm", "millimetre", "millimeter"] },
               { point: "Temperature shown as a line", keywords: ["line", "temperature line", "line graph"] },
-              { point: "Temperature in degrees Celsius", keywords: ["°c", "celsius", "degrees"] },
+              { point: "Temperature in degrees Celsius", keywords: ["celsius", "degrees", "centigrade"] },
             ],
             commonError: "Swapping them round — rainfall as a line and temperature as bars.",
             guideRef: "climate-graphs",
@@ -2303,7 +2303,7 @@ export const extremeEnvironments: Topic = {
               { point: "Compares range (36°C vs 24°C)", keywords: ["36", "24", "range"] },
               { point: "Compares precipitation (200 mm vs 20–25 mm)", keywords: ["200", "drier", "20 mm", "25 mm"] },
               { point: "Explains altitude using lapse rate", keywords: ["altitude", "3,500", "3500", "6.5", "lapse rate", "23"] },
-              { point: "Explains coast vs inland (ocean heat and moisture)", keywords: ["coast", "ocean", "inland", "sea", "moisture"] },
+              { point: "Explains coast vs inland (ocean heat and moisture)", keywords: ["coast", "ocean", "inland", "moisture", "from the sea"] },
               { point: "Links: same latitude, so these factors explain the difference", keywords: ["same latitude", "78", "overall", "therefore", "so vostok"] },
             ],
             commonError: "Saying Vostok is colder because it is 'nearer the South Pole' — both stations are at 78°S.",
@@ -2336,7 +2336,7 @@ export const extremeEnvironments: Topic = {
             modelAnswer:
               "Both places are hot deserts with far less than 250 mm of rain, but Arica is even drier (about 1 mm) than Cairo (about 25 mm). Arica's annual range is only about 6°C (17–23°C), whereas Cairo's is about 14°C. Arica's temperatures vary less because it is on the coast next to the cold Humboldt Current, and the ocean keeps temperatures mild and steady. It is also closer to the Equator (18°S vs 30°N), so the sun angle changes less through the year.",
             markScheme: [
-              { point: "Both very dry; Arica drier with figures", keywords: ["1 mm", "1mm", "25", "drier", "both"] },
+              { point: "Both very dry; Arica drier with figures", keywords: ["1 mm", "1mm", "drier", "25 mm", "25mm"] },
               { point: "Compares ranges (about 6°C vs 14°C)", keywords: ["6°c", "6 °c", "6 degrees", "14", "range"] },
               { point: "Ocean/coastal/cold current moderates Arica", keywords: ["ocean", "coast", "humboldt", "current", "sea"] },
               { point: "Closer to the Equator/latitude", keywords: ["equator", "latitude", "18", "sun angle"] },
@@ -2407,7 +2407,7 @@ export const extremeEnvironments: Topic = {
               { point: "Subtropical high pressure / sinking air at about 23°S", keywords: ["high pressure", "sinking", "subtropical", "tropic", "descend"] },
               { point: "Cold ocean current offshore (Benguela)", keywords: ["cold current", "benguela", "ocean current", "cold ocean", "cold water"] },
               { point: "Cool air is stable — fog forms but not rain", keywords: ["fog", "stable", "cannot rise", "can't rise", "too cold to rise"] },
-              { point: "Links to Atacama / west coast similarity", keywords: ["atacama", "similar", "west coast", "like", "same"] },
+              { point: "Links to Atacama / west coast similarity", keywords: ["atacama", "similar", "west coast", "just like", "same as"] },
             ],
             commonError: "Saying 'it is near the Equator so it is hot and dry' — Walvis Bay is mild, and the Equator is wet.",
             guideRef: "hot-deserts-why",
@@ -2517,7 +2517,7 @@ export const extremeEnvironments: Topic = {
             modelAnswer:
               "Cairo's temperature line is an upside-down U, peaking at about 28°C in July–August, whereas McMurdo's is a U shape, peaking at about −3°C in December–January. This is because Cairo is in the Northern Hemisphere and McMurdo in the Southern Hemisphere, so their seasons are reversed: in July the Northern Hemisphere is tilted towards the Sun (summer) while the Southern Hemisphere is tilted away (winter).",
             markScheme: [
-              { point: "Cairo peaks in July/August (upside-down U)", keywords: ["july", "august", "upside", "hump", "∩"] },
+              { point: "Cairo peaks in July/August (upside-down U)", keywords: ["july", "august", "upside", "hump", "n shape"] },
               { point: "McMurdo peaks in December/January (U shape)", keywords: ["december", "january", "u shape", "u-shape"] },
               { point: "Different hemispheres — seasons reversed by tilt", keywords: ["hemisphere", "reversed", "opposite", "tilt"] },
             ],

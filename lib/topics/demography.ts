@@ -467,8 +467,8 @@ export const demography: Topic = {
           "The pyramid has a very wide base because the birth rate is high (about half of Niger's population is under 15). The sides slope inwards steeply (concave) because many people die at each age, so the death rate is still fairly high. The top is very narrow because few people live to old age — under 3% are over 65.",
         markScheme: [
           { point: "Wide base / many children (high birth rate)", keywords: ["wide base", "broad base", "many children", "high birth", "young"] },
-          { point: "Concave / steeply sloping sides (high death rate)", keywords: ["concave", "slope", "steep", "high death", "die"] },
-          { point: "Narrow top / few elderly (low life expectancy)", keywords: ["narrow top", "few elderly", "few old", "low life expectancy", "small top", "narrow apex"] },
+          { point: "Concave / steeply sloping sides (high death rate)", keywords: ["concave", "slope", "steep", "high death", "people die"] },
+          { point: "Narrow top / few elderly (low life expectancy)", keywords: ["narrow top", "top is very narrow", "top is narrow", "few elderly", "few people live to old age", "low life expectancy"] },
         ],
         commonError: "Describing only the base and forgetting the sides and top, or giving no link between the shape and birth/death rates.",
         guideRef: "comparing-pyramids",
@@ -1616,7 +1616,7 @@ export const demography: Topic = {
             modelAnswer:
               "Demography is the study of human populations — their size, structure and how they change over time. One measure is the birth rate (the number of live births per 1,000 people per year).",
             markScheme: [
-              { point: "Study of human population size/structure/change", keywords: ["study of", "population", "people", "structure"] },
+              { point: "Study of human population size/structure/change", keywords: ["study of", "studying", "human population", "structure", "population change", "change over time"] },
               { point: "Names a measure (birth rate, death rate, natural increase, TFR, migration, life expectancy)", keywords: ["birth rate", "death rate", "natural increase", "fertility", "migration", "life expectancy"] },
             ],
             commonError: "Confusing demography with democracy, or naming a measure without saying what it measures.",
@@ -1676,7 +1676,7 @@ export const demography: Topic = {
             markScheme: [
               { point: "Closed = fixed/limited choice of answers", keywords: ["fixed", "choose", "options", "limited", "tick", "set answers"] },
               { point: "Valid closed example", keywords: ["how many", "yes/no", "yes or no", "which country", "0 / 1", "tick"] },
-              { point: "Open = answer in own words / detailed", keywords: ["own words", "any answer", "detail", "free", "opinion", "explain"] },
+              { point: "Open = answer in own words / detailed", keywords: ["own words", "any answer", "detail", "open-ended", "opinion", "richer"] },
               { point: "Valid open example", keywords: ["why", "describe", "what do you think", "how do you feel", "tell"] },
             ],
             commonError: "Giving examples without explaining the difference, or giving a leading question as an example.",
@@ -1721,7 +1721,7 @@ export const demography: Topic = {
             markScheme: [
               { point: "Vertical = age groups/cohorts, young at bottom", keywords: ["age group", "cohort", "age", "5-year", "five year"] },
               { point: "Horizontal = % or number of population", keywords: ["percent", "%", "number", "million", "proportion"] },
-              { point: "Males left, females right", keywords: ["male", "female", "men", "women", "left", "sex"] },
+              { point: "Males left, females right", keywords: ["male", "female", "women", "left side", "left", "sex"] },
             ],
             commonError: "Thinking the horizontal axis shows time or years.",
             guideRef: "population-pyramids",
@@ -1734,7 +1734,7 @@ export const demography: Topic = {
             modelAnswer:
               "It could be caused by a baby boom 30–39 years earlier, when many more babies were born. It could also be caused by immigration of working-age people, such as foreign workers moving in for jobs.",
             markScheme: [
-              { point: "Baby boom / high births 30–39 years ago", keywords: ["baby boom", "more births", "high birth", "boom", "born"] },
+              { point: "Baby boom / high births 30–39 years ago", keywords: ["baby boom", "more births", "high birth", "boom", "more babies"] },
               { point: "Immigration of working-age people", keywords: ["immigra", "migrant", "foreign worker", "moved in", "migration"] },
             ],
             commonError: "Suggesting a war or famine — those cause indents, not bulges.",
@@ -1779,7 +1779,7 @@ export const demography: Topic = {
             markScheme: [
               { point: "Birth rate stays high", keywords: ["birth rate stays high", "birth rate remains high", "high birth", "birth rate high", "births stay"] },
               { point: "Death rate falls rapidly", keywords: ["death rate falls", "death rate drops", "falling death", "death rate decreases", "deaths fall"] },
-              { point: "Population grows rapidly", keywords: ["grow", "increase", "rapid", "rises", "expand"] },
+              { point: "Population grows rapidly", keywords: ["population grows", "population increases", "grows rapidly", "rapid growth", "population rises", "expand"] },
             ],
             commonError: "Saying the birth rate falls in Stage 2 — it falls in Stage 3.",
             guideRef: "dtm",
@@ -1808,7 +1808,7 @@ export const demography: Topic = {
               "An ageing population is one in which the proportion of older people (65+) is increasing and the median age is rising. One cause is a falling birth rate, so there are fewer young people. Another is rising life expectancy, due to better healthcare and diets, so more people live into old age.",
             markScheme: [
               { point: "Definition: rising proportion of older people / rising median age", keywords: ["proportion", "percentage", "median age", "more older", "share"] },
-              { point: "Cause: falling birth rate", keywords: ["birth rate", "fewer babies", "fertility", "fewer children", "low birth"] },
+              { point: "Cause: falling birth rate", keywords: ["falling birth", "birth rate falls", "fewer babies", "fertility", "fewer children", "low birth"] },
               { point: "Cause: rising life expectancy", keywords: ["life expectancy", "live longer", "healthcare", "medic", "longer lives"] },
             ],
             commonError: "Defining it as 'lots of old people' without mentioning proportion or change over time.",
@@ -1822,7 +1822,7 @@ export const demography: Topic = {
             modelAnswer:
               "A census shows how many older people there are and where they live, for example which HDB estates have many residents aged 65+. This helps the government plan where to build new eldercare facilities, polyclinics and Active Ageing Centres. It also shows how many working-age people there will be, which helps plan the workforce and decisions such as raising the re-employment age. Comparing censuses (e.g. 2010 and 2020) shows how fast ageing is happening, so services can be ready in time.",
             markScheme: [
-              { point: "Census shows number/age/location of older people", keywords: ["how many", "number of", "where", "location", "estate", "age"] },
+              { point: "Census shows number/age/location of older people", keywords: ["how many", "number of", "where they live", "location", "estate", "aged 65"] },
               { point: "Plan healthcare/eldercare facilities", keywords: ["eldercare", "hospital", "polyclinic", "nursing", "healthcare", "active ageing"] },
               { point: "Plan workforce/pensions/retirement policy", keywords: ["workforce", "worker", "retirement", "re-employment", "pension", "cpf"] },
               { point: "Compares censuses to show trends/speed of change", keywords: ["compare", "trend", "2010", "change over time", "faster", "predict"] },
@@ -1860,7 +1860,7 @@ export const demography: Topic = {
             markScheme: [
               { point: "X = 3.2%", keywords: ["3.2", "3.2%", "32 per"] },
               { point: "X grows rapidly / Stage 2", keywords: ["rapid", "grow quickly", "fast", "stage 2", "increase quickly"] },
-              { point: "Y = −0.2%", keywords: ["-0.2", "−0.2", "0.2"] },
+              { point: "Y = −0.2%", keywords: ["0.2", "2 per 1,000", "minus 0.2", "negative"] },
               { point: "Y shrinks / natural decrease / Stage 5", keywords: ["shrink", "decrease", "decline", "stage 5", "fall"] },
             ],
             commonError: "Giving 32% and −2% — forgetting to divide by 10.",
@@ -1905,7 +1905,7 @@ export const demography: Topic = {
             modelAnswer:
               "Hypothesis: 'Most students in our class travel to school by public transport.' Question 1: 'How do you usually travel to school? MRT / bus / car / school bus / walk.' Question 2: 'How long is your journey? Under 15 min / 15–30 min / 30–45 min / over 45 min.'",
             markScheme: [
-              { point: "Testable hypothesis statement", keywords: ["most", "majority", "more than", "hypothesis", "will"] },
+              { point: "Testable hypothesis statement", keywords: ["most", "majority", "more than", "hypothesis", "more students"] },
               { point: "First closed question with options", keywords: ["mrt", "bus", "car", "walk", "school bus"] },
               { point: "Second closed question with options", keywords: ["how long", "minutes", "min", "distance", "how many", "km"] },
             ],
@@ -1950,9 +1950,9 @@ export const demography: Topic = {
             modelAnswer:
               "A percentage pyramid shows each cohort as a share of the total population, so it shows the structure (proportions). It is most useful for comparing countries of very different sizes, such as Niger and India. A pyramid with actual numbers (e.g. millions) shows the real size of each cohort, which is most useful for planning, such as how many school places a country needs.",
             markScheme: [
-              { point: "Percentage shows structure/proportions", keywords: ["proportion", "structure", "share", "percent", "%"] },
+              { point: "Percentage shows structure/proportions", keywords: ["proportion", "structure", "share of", "percentage of", "shape"] },
               { point: "Percentage useful for comparing different-sized countries", keywords: ["compare", "different size", "different-sized", "niger", "india"] },
-              { point: "Numbers show real size / useful for planning", keywords: ["actual", "real", "size", "million", "plan", "how many"] },
+              { point: "Numbers show real size / useful for planning", keywords: ["actual number", "real size", "real number", "million", "planning", "how many"] },
             ],
             commonError: "Thinking both show the same thing, or that a % pyramid shows total population.",
             guideRef: "population-pyramids",
@@ -1981,7 +1981,7 @@ export const demography: Topic = {
               "(1.2 + 0.9) ÷ 3.5 × 100 = 2.1 ÷ 3.5 × 100 = 60. There are 60 dependants for every 100 working-age people.",
             markScheme: [
               { point: "Working: 2.1 ÷ 3.5", keywords: ["2.1", "2.1/3.5", "2.1 ÷ 3.5", "1.2 + 0.9"] },
-              { point: "Answer 60", keywords: ["60", "60 dependants", "= 60"] },
+              { point: "Answer 60", keywords: ["60", "60 dependants", "60 per 100"] },
             ],
             commonError: "Dividing by the total population (5.6 million) instead of the working-age group.",
             guideRef: "dependency-ratio",
@@ -1996,7 +1996,7 @@ export const demography: Topic = {
             markScheme: [
               { point: "Niger: many children / youth dependency", keywords: ["children", "under 15", "young", "youth", "half"] },
               { point: "Niger spending: schools/education/vaccinations", keywords: ["school", "educat", "vaccin", "teacher", "maternal"] },
-              { point: "Japan: many elderly / old-age dependency", keywords: ["elderly", "old", "65", "29%", "aged"] },
+              { point: "Japan: many elderly / old-age dependency", keywords: ["elderly", "older", "old-age", "65+", "29%", "ageing"] },
               { point: "Japan spending: pensions/healthcare/eldercare", keywords: ["pension", "hospital", "eldercare", "care home", "healthcare", "nursing"] },
             ],
             commonError: "Saying both countries have the same problem because their ratios are both high.",
@@ -2026,8 +2026,8 @@ export const demography: Topic = {
               "In Stage 3 the birth rate falls quickly while the death rate continues to fall more slowly; the population keeps growing, but at a slower rate. In Stage 4 both birth and death rates are low (about 10–15 per 1,000) and fluctuate; the population is high and fairly stable, growing only slowly.",
             markScheme: [
               { point: "Stage 3: birth rate falls rapidly", keywords: ["birth rate falls", "birth rate drops", "falling birth", "birth rate decreases", "births fall"] },
-              { point: "Stage 3: population still grows but more slowly", keywords: ["slower", "still grow", "still increase", "slowing"] },
-              { point: "Stage 4: both rates low", keywords: ["both low", "low birth", "low death", "both rates are low"] },
+              { point: "Stage 3: population still grows but more slowly", keywords: ["slower", "still grow", "still increase", "slowing", "keeps growing"] },
+              { point: "Stage 4: both rates low", keywords: ["both low", "rates are low", "low birth", "low death", "both rates are low"] },
               { point: "Stage 4: population high and stable", keywords: ["stable", "high population", "steady", "levels off", "constant"] },
             ],
             commonError: "Mixing up which stage the birth rate falls in, or not mentioning the total population.",
@@ -2055,7 +2055,7 @@ export const demography: Topic = {
             marks: 6,
             hint: "Point, Evidence, Explain, Link — and consider both sides before concluding.",
             modelAnswer:
-              "I mostly disagree. Point: the Baby Bonus has not reversed the fall in births. Evidence: it was introduced in 2001, yet the resident TFR has kept falling, reaching 0.97 in 2023 — far below the replacement level of 2.1. Explanation: cash payments do not remove deeper causes of low fertility, such as high housing and education costs, long working hours and couples marrying later. On the other hand, the scheme and related support (parental leave, childcare places, HDB priority for families) may help families who already want children, and the TFR might have fallen even further without them. Link: so the policies may have slowed the decline, but they have not solved Singapore's low birth rate, which is why the government also relies on immigration and on people working longer.",
+              "I mostly disagree. Point: the Baby Bonus has not reversed the fall in births. Evidence: it was introduced in 2001, yet the resident TFR has kept falling, reaching 0.97 in 2023 — far below the replacement level of 2.1. Explanation: cash payments do not remove deeper causes of low fertility, such as high housing and education costs, long working hours and couples marrying later. On the other hand, the scheme and related support (parental leave, childcare places, HDB priority for families) may help families who already want children, and the TFR might have fallen even further without them. Link: overall, the policies may have slowed the decline, but they have not solved Singapore's low birth rate, which is why the government also relies on immigration and on people working longer.",
             markScheme: [
               { point: "Clear point / judgement", keywords: ["disagree", "agree", "not solved", "to some extent", "partly"] },
               { point: "Evidence: Baby Bonus since 2001 / TFR 0.97", keywords: ["2001", "0.97", "below 1", "2.1", "tfr"] },
@@ -2097,7 +2097,7 @@ export const demography: Topic = {
               "Change = 4.04 − 3.77 = 0.27 million. 0.27 ÷ 3.77 × 100 = 7.2% increase (to 1 d.p.).",
             markScheme: [
               { point: "Working: 0.27 ÷ 3.77", keywords: ["0.27", "270,000", "270 000", "4.04 - 3.77", "4.04 − 3.77"] },
-              { point: "Answer about 7.2%", keywords: ["7.2", "7.16", "7.1", "7%"] },
+              { point: "Answer about 7.2%", keywords: ["7.2", "7.16", "7%", "7.2 percent"] },
             ],
             commonError: "Dividing by the new value (4.04) instead of the old value, giving 6.7%.",
             guideRef: "census",
@@ -2140,7 +2140,7 @@ export const demography: Topic = {
             modelAnswer:
               "1. Ask an enquiry question and write a hypothesis, e.g. 'Most students were born outside Singapore.' 2. Collect data using an anonymous questionnaire with mainly closed questions, asking everyone in the class (or a fair sample). 3. Record the answers in a tally chart and present them using bar charts or pie charts. 4. Analyse the results by identifying the most and least common answers and calculating percentages. 5. Conclude whether the hypothesis is accepted or rejected, and evaluate the method, e.g. the sample is small so results may not represent Singapore.",
             markScheme: [
-              { point: "Question / hypothesis", keywords: ["hypothesis", "question", "aim"] },
+              { point: "Question / hypothesis", keywords: ["hypothesis", "enquiry question", "aim", "research question", "key question"] },
               { point: "Collect data with questionnaire / sample", keywords: ["questionnaire", "survey", "sample", "collect", "ask"] },
               { point: "Record/present: tally, bar or pie chart", keywords: ["tally", "bar chart", "pie chart", "graph", "present"] },
               { point: "Analyse: most/least common, percentages", keywords: ["analys", "most common", "percent", "%", "pattern"] },
@@ -2203,7 +2203,7 @@ export const demography: Topic = {
             modelAnswer:
               "Most migrants who move for work are young adults, so immigration creates a bulge in the working-age cohorts (about 20–40), while emigration creates an indent in the same ages in the place they leave. If mostly one sex migrates, one side of the pyramid becomes much wider. For example, Qatar has a huge bulge of males aged 25–40 because of male migrant workers from South Asia; Singapore's total population pyramid also widens in the working ages because of foreign workers.",
             markScheme: [
-              { point: "Migrants are mostly young adults / working age", keywords: ["young adult", "working age", "20", "economically active", "workers"] },
+              { point: "Migrants are mostly young adults / working age", keywords: ["young adult", "working age", "20–40", "economically active", "young men", "young people"] },
               { point: "Creates bulge (immigration) or indent (emigration) / uneven sides", keywords: ["bulge", "indent", "wider", "uneven", "one side"] },
               { point: "Named example", keywords: ["qatar", "uae", "dubai", "singapore", "gulf"] },
             ],
@@ -2353,7 +2353,7 @@ export const demography: Topic = {
             markScheme: [
               { point: "Cheaper / faster processing", keywords: ["cheaper", "faster", "quicker", "cost", "process"] },
               { point: "COVID-19 / less contact / convenience", keywords: ["covid", "pandemic", "contact", "convenien", "safer"] },
-              { point: "Disadvantage: digital exclusion (older people/no internet)", keywords: ["older", "elderly", "internet", "no computer", "digital", "online access"] },
+              { point: "Disadvantage: digital exclusion (older people/no internet)", keywords: ["older", "elderly", "internet", "no computer", "digital exclusion", "online access"] },
             ],
             commonError: "Giving only advantages and forgetting the disadvantage.",
             guideRef: "census",
@@ -2381,7 +2381,7 @@ export const demography: Topic = {
             modelAnswer:
               "The class is a small sample from an international school, which mainly serves families who have moved to Singapore from abroad for work, so it is not representative of Singapore's population. The census covers all residents (citizens and permanent residents), most of whom were born in Singapore. The two data sets also measure different populations — many international school families are non-residents, who are not included in the resident figures.",
             markScheme: [
-              { point: "International school = many expatriate/foreign families", keywords: ["expat", "foreign", "abroad", "international", "moved"] },
+              { point: "International school = many expatriate/foreign families", keywords: ["expat", "foreign", "abroad", "moved", "overseas", "non-singaporean"] },
               { point: "Small / unrepresentative / biased sample", keywords: ["small", "representative", "bias", "sample", "one class"] },
               { point: "Census covers all residents / different population (non-residents)", keywords: ["all residents", "whole population", "non-resident", "citizens", "everyone"] },
             ],
@@ -2461,7 +2461,7 @@ export const demography: Topic = {
             modelAnswer:
               "Niger's TFR is about 6. Many families are subsistence farmers, so children are valued as workers on the land and as security to care for parents in old age, because there are few pensions. Infant mortality is still high, so families have more children in case some die. Many girls marry young and have limited access to education, and contraception is not widely available or used. Cultural and religious traditions also value large families.",
             markScheme: [
-              { point: "Children as farm workers / income", keywords: ["farm", "work", "labour", "income", "help"] },
+              { point: "Children as farm workers / income", keywords: ["farm", "work", "labour", "income", "land"] },
               { point: "Security in old age / no pensions", keywords: ["old age", "pension", "look after", "care for parents", "security"] },
               { point: "High infant mortality", keywords: ["infant mortality", "children die", "die young", "replace", "survive"] },
               { point: "Early marriage / limited education or contraception / culture", keywords: ["marr", "educat", "contracepti", "tradition", "religio", "culture"] },
@@ -2477,11 +2477,11 @@ export const demography: Topic = {
             modelAnswer:
               "The DTM is useful because it shows a general pattern that most countries have followed: death rates fall first, then birth rates. It allows countries to be compared — Niger (Stage 2), India (Stage 3), the UK (Stage 4) and Japan (Stage 5) — and helps predict future challenges, such as ageing. However, it is based on the experience of Europe, so it may not fit all countries. It ignores migration, which is very important in places like Singapore and the UK. It also has no timescale: the UK took about 200 years to pass through, while Singapore and South Korea took about 50. Some countries' death rates have risen again because of conflict or disease, which the model does not predict. Overall, the DTM is a useful starting point for describing and comparing countries, but it should be used alongside real data rather than as a strict prediction.",
             markScheme: [
-              { point: "Strength: shows general pattern / sequence", keywords: ["general pattern", "most countries", "sequence", "pattern", "useful"] },
+              { point: "Strength: shows general pattern / sequence", keywords: ["general pattern", "most countries", "sequence", "pattern", "death rates fall first"] },
               { point: "Strength: allows comparison / prediction with named examples", keywords: ["compare", "predict", "niger", "japan", "india"] },
               { point: "Weakness: based on Europe", keywords: ["europe", "western", "european", "britain"] },
               { point: "Weakness: ignores migration", keywords: ["migration", "immigra", "migrant"] },
-              { point: "Weakness: no timescale / speeds differ", keywords: ["timescale", "200 years", "50 years", "speed", "faster", "time"] },
+              { point: "Weakness: no timescale / speeds differ", keywords: ["timescale", "200 years", "50 years", "speed", "faster", "no time"] },
               { point: "Supported judgement", keywords: ["overall", "in conclusion", "starting point", "to some extent", "therefore"] },
             ],
             commonError: "Describing the five stages instead of evaluating how useful the model is.",
@@ -2527,10 +2527,10 @@ export const demography: Topic = {
             modelAnswer:
               "In the 1970s Singapore's 'Stop at Two' campaign was anti-natalist: it discouraged large families because the government worried that rapid population growth would cause unemployment and housing shortages. The policy worked too well — fertility fell below the replacement level of 2.1 by the mid-1970s and kept falling. In 1987 the government switched to 'Have Three or More (if you can afford it)', and later introduced pro-natalist measures such as the Baby Bonus in 2001, because low birth rates threatened a shrinking workforce and a rapidly ageing population.",
             markScheme: [
-              { point: "1970s 'Stop at Two' anti-natalist campaign", keywords: ["stop at two", "anti-natalist", "two children", "1970s", "1972"] },
+              { point: "1970s 'Stop at Two' anti-natalist campaign", keywords: ["stop at two", "two children", "1972", "small families", "discourag"] },
               { point: "Reason: fears of rapid growth / unemployment / housing", keywords: ["unemploy", "housing", "overpopulat", "rapid growth", "too many"] },
               { point: "Fertility fell below replacement (2.1)", keywords: ["below replacement", "2.1", "fell", "too well", "dropped"] },
-              { point: "Switch to pro-natalist (1987 'Have Three', Baby Bonus 2001) because of ageing/workforce", keywords: ["have three", "1987", "baby bonus", "2001", "pro-natalist", "ageing"] },
+              { point: "Switch to pro-natalist (1987 'Have Three', Baby Bonus 2001) because of ageing/workforce", keywords: ["have three", "1987", "baby bonus", "2001", "encourag", "ageing"] },
             ],
             commonError: "Not explaining WHY the policy changed — the key is that fertility fell further than intended.",
             guideRef: "ageing-populations",

@@ -155,7 +155,7 @@ export const coastalLandforms: Topic = {
           "Longshore drift carries sediment along the coast. Where the coast suddenly changes direction, the drift keeps going and drops sediment into the sheltered water, building a spit; changing winds and wave refraction curl its end.",
       },
       body:
-        "A **spit** is a long, narrow ridge of sand or shingle that is **attached to the land at one end** and sticks out into the sea or across a river mouth. Spits are made by **deposition**.\n\n**How a spit forms:**\n\n- **Longshore drift** moves sediment along the coast. The **prevailing wind** (the most common wind direction) makes waves approach at an angle: the **swash** carries sediment up the beach at that angle, and the **backwash** drags it straight back down the slope under gravity. Repeated, this zig-zag moves sediment along the shore.\n- Where the coastline **changes direction** (for example at a bend or a river estuary), longshore drift continues in the same direction, carrying sediment out into the sea.\n- In the more **sheltered, shallower water**, waves lose energy and **deposit** the sediment. Over many years a ridge builds up and grows longer.\n- A **change in wind direction** (a secondary wind) and **wave refraction** around the tip bend the end inwards, forming a **recurved (hooked) end**. Several old recurves can show earlier positions of the tip.\n- Behind the spit the water is calm and low-energy, so fine **silt and mud** settle out. Salt-tolerant plants colonise it, forming a **salt marsh**.\n- A spit cannot grow all the way across an estuary, because the **river's current** carries sediment out to sea.\n\n**Hurst Castle Spit** (Hampshire) is a shingle spit about 2 km long, fed by longshore drift from west to east along Christchurch Bay. Its recurved end points into the western Solent, and the Keyhaven salt marshes lie behind it. Henry VIII built Hurst Castle at its tip in 1544 to guard the Solent; in February 2021 part of the castle's east wing collapsed after the sea undermined its foundations. After storm damage in 1989, rock armour was added and shingle recharged in the 1990s to keep the spit in place.",
+        "A **spit** is a long, narrow ridge of sand or shingle that is **attached to the land at one end** and sticks out into the sea or across a river mouth. Spits are made by **deposition**.\n\n**How a spit forms:**\n\n- **Longshore drift** moves sediment along the coast. The **prevailing wind** (the most common wind direction) makes waves approach at an angle: the **swash** carries sediment up the beach at that angle, and the **backwash** drags it straight back down the slope under gravity. Repeated, this zig-zag moves sediment along the shore.\n- Where the coastline **changes direction** (for example at a bend or a river estuary), longshore drift continues in the same direction, carrying sediment out into the sea.\n- In the more **sheltered, shallower water**, waves lose energy and **deposit** the sediment. Over many years a ridge builds up and grows longer.\n- A **change in wind direction** (a secondary wind) and **wave refraction** around the tip bend the end inwards, forming a **recurved (hooked) end**. Several old recurves can show earlier positions of the tip.\n- Behind the spit the water is calm and low-energy, so fine **silt and mud** settle out. Salt-tolerant plants colonise it, forming a **salt marsh**.\n- A spit cannot grow all the way across an estuary, because the **river's current** carries sediment out to sea.\n\n**Hurst Castle Spit** (Hampshire) is a shingle spit about 2.4 km long, fed by longshore drift from west to east along Christchurch Bay. Its recurved end points into the western Solent, and the Keyhaven salt marshes lie behind it. Henry VIII built Hurst Castle at its tip in 1544 to guard the Solent; in February 2021 part of the castle's east wing collapsed after the sea undermined its foundations. After storm damage in 1989, rock armour was added and shingle recharged in the 1990s to keep the spit in place.",
       diagram: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan view of a spit growing across an estuary, with longshore drift, a recurved end and salt marsh behind"><defs><marker id="sp-arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0c4a6e"/></marker></defs><rect x="0" y="0" width="320" height="210" fill="#bae6fd"/><path d="M0 120 L150 120 L170 210 L0 210 Z" fill="#bbf7d0" stroke="#166534"/><path d="M245 210 L255 178 L320 172 L320 210 Z" fill="#bbf7d0" stroke="#166534"/><ellipse cx="205" cy="142" rx="30" ry="10" fill="#4ade80"/><text x="205" y="146" font-size="10" text-anchor="middle" fill="#14532d">salt marsh</text><path d="M150 120 Q210 110 255 122 Q272 132 262 152" fill="none" stroke="#eab308" stroke-width="9" stroke-linecap="round"/><text x="200" y="100" font-size="10" text-anchor="middle" fill="#713f12">spit (sand/shingle)</text><text x="272" y="150" font-size="10" fill="#713f12">recurved</text><text x="272" y="162" font-size="10" fill="#713f12">end</text><path d="M10 112 L22 100 L30 112 L42 100 L50 112 L62 100 L70 112 L82 100 L90 112 L102 100 L110 112 L122 100 L130 112" fill="none" stroke="#0c4a6e" stroke-width="1.5" marker-end="url(#sp-arr)"/><text x="20" y="92" font-size="10" fill="#0c4a6e">longshore drift →</text><line x1="15" y1="25" x2="60" y2="65" stroke="#0c4a6e" stroke-width="2" marker-end="url(#sp-arr)"/><text x="15" y="18" font-size="10" fill="#0c4a6e">prevailing wind (SW)</text><text x="60" y="170" font-size="11" font-weight="bold" fill="#14532d">LAND</text><text x="205" y="196" font-size="10" text-anchor="middle" fill="#0c4a6e">river</text><line x1="205" y1="185" x2="205" y2="160" stroke="#0c4a6e" stroke-width="1.5" marker-end="url(#sp-arr)"/><line x1="300" y1="50" x2="300" y2="22" stroke="#0c4a6e" stroke-width="2" marker-end="url(#sp-arr)"/><text x="300" y="62" font-size="10" text-anchor="middle" fill="#0c4a6e">N</text></svg>`,
       diagramCaption:
         "Longshore drift carries sediment past the bend in the coast; it is deposited in sheltered water to build a spit. Changing winds curve the end, and mud settles into a salt marsh behind.",
@@ -170,7 +170,7 @@ export const coastalLandforms: Topic = {
       caseStudy: {
         place: "Spurn Head, East Yorkshire (UK)",
         facts: [
-          "A curved sand and shingle spit about 5 km (3.5 miles) long across the mouth of the Humber Estuary; in places it is only about 50 m wide.",
+          "A curved sand and shingle spit about 5 km (just over 3 miles) long across the mouth of the Humber Estuary; in places it is only about 50 m wide.",
           "Its sediment comes mainly from the Holderness coast to the north, where soft boulder-clay cliffs erode about 2 m per year on average and longshore drift carries material south.",
           "Its tip is recurved into the estuary, and mudflats and salt marsh have built up in the sheltered water behind it.",
           "The December 2013 storm surge breached the narrow 'neck', so Spurn is now cut off from the mainland at the highest tides (a tidal island).",
@@ -464,8 +464,8 @@ export const coastalLandforms: Topic = {
         modelAnswer:
           "A stack is a tall, isolated pillar of rock that stands above the sea even at high tide, while a stump is a low remnant that is covered by the sea at high tide. A stump forms later in the sequence, when the base of a stack has been undercut and the stack has collapsed.",
         markScheme: [
-          { point: "Stack is tall / stands above high tide; stump is low / covered at high tide", keywords: ["high tide", "covered", "taller", "low", "short", "submerged"] },
-          { point: "Stump forms later, when a stack collapses", keywords: ["collapse", "later", "after", "remains of a stack", "falls"] },
+          { point: "Stack is tall / stands above high tide; stump is low / covered at high tide", keywords: ["high tide", "covered", "submerged", "underwater", "tall"] },
+          { point: "Stump forms later, when a stack collapses", keywords: ["collapse", "later", "undercut", "remains of a stack", "falls"] },
         ],
         commonError: "Saying a stump is 'a small stack' without explaining that it is covered at high tide or forms when a stack collapses.",
         guideRef: "caves-arches-stacks",
@@ -512,7 +512,7 @@ export const coastalLandforms: Topic = {
           "Rock armour is large boulders piled at the foot of a cliff. It absorbs and breaks up wave energy, so less erosion happens at the cliff base and the notch is not cut so quickly. It is relatively cheap compared with a sea wall (roughly £1,000–£3,000 per metre) and quick to build. However, the rock is often imported and looks out of place, it can be shifted by large storms and needs maintenance, and it can make the beach dangerous or hard to use. Overall it is a good-value short-to-medium-term option where a whole sea wall would be too expensive.",
         markScheme: [
           { point: "How it works: absorbs/breaks wave energy, reducing erosion at the base", keywords: ["absorb", "energy", "break", "reduce erosion", "dissipat"] },
-          { point: "Benefit: cheaper than a sea wall / quick to build", keywords: ["cheap", "cost", "quick", "£"] },
+          { point: "Benefit: cheaper than a sea wall / quick to build", keywords: ["cheap", "cost", "quick", "less expensive"] },
           { point: "Drawback: ugly / imported / moved by storms / access problems", keywords: ["ugly", "unnatural", "import", "storm", "moved", "access"] },
           { point: "Reaches a judgement", keywords: ["overall", "conclusion", "worth", "good value", "effective", "depends"] },
         ],
@@ -1652,7 +1652,7 @@ export const coastalLandforms: Topic = {
               "A discordant coastline has alternating bands of hard (resistant) and soft (less resistant) rock that run at right angles to the coastline, such as the coast around Swanage in Dorset.",
             markScheme: [
               { point: "Alternating bands of hard and soft rock", keywords: ["hard", "soft", "alternat", "resistant", "band"] },
-              { point: "Bands run at right angles / perpendicular to the coast", keywords: ["right angle", "perpendicular", "90", "across the coast", "at an angle"] },
+              { point: "Bands run at right angles / perpendicular to the coast", keywords: ["right angle", "perpendicular", "90", "across the coast"] },
             ],
             commonError: "Saying the bands run parallel to the coast; that is a concordant coastline.",
             guideRef: "headlands-bays",
@@ -1666,8 +1666,8 @@ export const coastalLandforms: Topic = {
               "Headlands and bays form on a discordant coast, where bands of hard and soft rock run at right angles to the sea. The soft rock, such as clay, is less resistant, so it is eroded quickly by hydraulic action and abrasion and retreats to form a bay, such as Swanage Bay. The hard rock, such as chalk, resists erosion and is left jutting out as a headland, such as the Foreland. This is called differential erosion.",
             markScheme: [
               { point: "Discordant coast: bands of rock at right angles to the coast", keywords: ["discordant", "right angle", "perpendicular", "alternat"] },
-              { point: "Soft rock eroded faster, retreats to form a bay", keywords: ["bay", "eroded faster", "erodes faster", "erode quickly", "retreat"] },
-              { point: "Hard rock resists erosion and forms a headland", keywords: ["headland", "resist", "hard rock", "chalk", "limestone"] },
+              { point: "Soft rock eroded faster, retreats to form a bay", keywords: ["eroded faster", "erodes faster", "eroded quickly", "erode quickly", "retreat", "less resistant"] },
+              { point: "Hard rock resists erosion and forms a headland", keywords: ["resists", "hard rock", "jutting", "sticks out", "chalk", "limestone"] },
               { point: "Names an erosion process or 'differential erosion'", keywords: ["hydraulic", "abrasion", "corrasion", "differential"] },
             ],
             commonError: "Only saying 'soft rock erodes and hard rock doesn't'. Hard rock does erode, just more slowly; name the processes too.",
@@ -1758,7 +1758,7 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "Shingle is made of large pebbles with big gaps between them. When a wave breaks, much of the water percolates (soaks) down into these gaps instead of flowing back over the surface. This makes the backwash weak, so it cannot drag the pebbles back down, and they pile up into a steep slope.",
             markScheme: [
-              { point: "Pebbles are large with big gaps between them", keywords: ["large", "gaps", "spaces", "coarse", "big"] },
+              { point: "Pebbles are large with big gaps between them", keywords: ["large", "gaps", "spaces", "coarse", "big gaps"] },
               { point: "Water percolates / soaks into the gaps", keywords: ["percolat", "soak", "drain", "infiltrat", "seep"] },
               { point: "Weak backwash leaves pebbles at the top, so the slope is steep", keywords: ["weak backwash", "backwash is weak", "less backwash", "backwash weak", "pile", "stay"] },
             ],
@@ -1819,7 +1819,7 @@ export const coastalLandforms: Topic = {
               "The stack lies in grid square 2542. The easting (the number along the bottom of the map) is always given first, then the northing.",
             markScheme: [
               { point: "Correct square 2542", keywords: ["2542", "25 42", "25/42"] },
-              { point: "Easting given first", keywords: ["easting", "along the corridor", "across first", "first"] },
+              { point: "Easting given first", keywords: ["easting", "along the corridor", "across first"] },
             ],
             commonError: "Writing 4225 (northing first) or 2543 (rounding 425 up instead of using the bottom-left line).",
             guideRef: "os-map-skills",
@@ -1849,7 +1849,7 @@ export const coastalLandforms: Topic = {
             markScheme: [
               { point: "Total retreat 28 m", keywords: ["28", "twenty-eight", "twenty eight"] },
               { point: "Average rate 1.4 m per year", keywords: ["1.4", "1.40", "one point four"] },
-              { point: "Rate slowed (1.6 then 1.2 m per year)", keywords: ["slow", "1.6", "1.2", "decreas", "less"] },
+              { point: "Rate slowed (1.6 then 1.2 m per year)", keywords: ["slow", "1.6", "1.2", "decreas"] },
             ],
             commonError: "Dividing by the wrong number of years, or describing the change without quoting figures.",
             guideRef: "cliffs-platforms",
@@ -1869,7 +1869,7 @@ export const coastalLandforms: Topic = {
               "A bay is a curved inlet of the sea between two headlands. It forms in softer, less resistant rock such as clay, and often has a beach.",
             markScheme: [
               { point: "A curved inlet / indentation of the coast", keywords: ["inlet", "curved", "indent", "cove", "sweep"] },
-              { point: "Between two headlands / in softer rock", keywords: ["between", "two headlands", "soft", "less resistant", "clay"] },
+              { point: "Between two headlands / in softer rock", keywords: ["two headlands", "soft", "less resistant", "clay"] },
             ],
             commonError: "Defining a bay only as 'where the beach is' without its shape or position.",
             guideRef: "headlands-bays",
@@ -1898,7 +1898,7 @@ export const coastalLandforms: Topic = {
               "On a discordant coast the bands of hard and soft rock run at right angles to the coast, so the soft rock is eroded into bays and the hard rock forms headlands, as at Swanage Bay and the Foreland in Dorset. On a concordant coast the bands run parallel to the coast, so a hard outer band protects the soft rock; where it is breached, the soft rock behind is scooped out into a cove, as at Lulworth Cove.",
             markScheme: [
               { point: "Discordant: rock bands at right angles to the coast", keywords: ["right angle", "perpendicular", "across", "90"] },
-              { point: "Concordant: rock bands parallel to the coast", keywords: ["parallel", "same direction", "along the coast", "concordant"] },
+              { point: "Concordant: rock bands parallel to the coast", keywords: ["parallel", "same direction", "along the coast"] },
               { point: "Discordant produces headlands and bays, e.g. Swanage", keywords: ["swanage", "foreland", "studland", "old harry", "headlands and bays"] },
               { point: "Concordant produces coves where breached, e.g. Lulworth", keywords: ["lulworth", "cove", "breach", "stair hole"] },
             ],
@@ -1930,7 +1930,7 @@ export const coastalLandforms: Topic = {
             markScheme: [
               { point: "Chalk cliffs, up to about 77 m high", keywords: ["chalk", "77", "haven brow", "white"] },
               { point: "Retreating (about 0.5 m a year) through sudden collapses", keywords: ["retreat", "0.5", "half a metre", "collapse", "erod"] },
-              { point: "Not defended: too costly / low value / natural process", keywords: ["cost", "expensive", "natural", "value", "not worth", "few"] },
+              { point: "Not defended: too costly / low value / natural process", keywords: ["cost", "expensive", "natural", "value", "not worth", "few buildings"] },
             ],
             commonError: "Saying the cliffs are 'not important'. Give the real reasons: cost compared with value, and a policy of letting nature run.",
             guideRef: "cliffs-platforms",
@@ -1945,7 +1945,7 @@ export const coastalLandforms: Topic = {
             markScheme: [
               { point: "Waves erode / widen the base of the arch", keywords: ["base", "widen", "undercut", "hydraulic", "abrasion"] },
               { point: "Roof weakened by weathering", keywords: ["weather", "freeze", "salt", "carbonation", "chemical"] },
-              { point: "Roof collapses under gravity when unsupported", keywords: ["gravity", "unsupported", "weight", "heavy", "collapse"] },
+              { point: "Roof collapses under gravity when unsupported", keywords: ["gravity", "unsupported", "weight", "heavy", "too thin"] },
             ],
             commonError: "Saying waves hit the top of the arch. They erode the base; weathering attacks the roof.",
             guideRef: "caves-arches-stacks",
@@ -1960,7 +1960,7 @@ export const coastalLandforms: Topic = {
             markScheme: [
               { point: "Waves erode a notch at the base of the stack", keywords: ["notch", "base", "undercut", "bottom"] },
               { point: "Names hydraulic action or abrasion", keywords: ["hydraulic", "abrasion", "corrasion"] },
-              { point: "Stack collapses leaving a low stump covered at high tide", keywords: ["collapse", "high tide", "covered", "low", "stump"] },
+              { point: "Stack collapses leaving a low stump covered at high tide", keywords: ["collapse", "high tide", "covered", "topple", "falls"] },
             ],
             commonError: "Saying the stack 'wears down from the top'. It is undercut at the base and topples.",
             guideRef: "caves-arches-stacks",
@@ -2005,9 +2005,9 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "Constructive waves are low and flat, while destructive waves are tall and steep. Constructive waves are less frequent (about 6–8 per minute) than destructive waves (about 13–15 per minute). Constructive waves have a strong swash and weak backwash, but destructive waves have a weak swash and a strong backwash. As a result constructive waves build beaches up by deposition, while destructive waves remove sediment and erode the coast.",
             markScheme: [
-              { point: "Shape: low/flat vs tall/steep", keywords: ["low", "flat", "tall", "steep", "high"] },
+              { point: "Shape: low/flat vs tall/steep", keywords: ["flat", "tall", "steep", "gentle", "low and flat"] },
               { point: "Frequency: about 6–8 vs 13–15 per minute", keywords: ["per minute", "frequen", "6-8", "13-15", "fewer"] },
-              { point: "Strong swash/weak backwash vs weak swash/strong backwash", keywords: ["swash", "backwash", "runs up", "runs back"] },
+              { point: "Strong swash/weak backwash vs weak swash/strong backwash", keywords: ["strong swash", "weak backwash", "strong backwash", "weak swash", "runs back"] },
               { point: "Effect: build/deposit vs remove/erode", keywords: ["build", "deposit", "erode", "remove", "destroy"] },
             ],
             commonError: "Describing each wave separately without using comparative words (whereas, while, but).",
@@ -2051,8 +2051,8 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "The land rises very steeply to high cliffs, shown by the close contours and cliff symbol. At the foot of the cliffs there is a sandy beach (yellow stipple). The beach lies in the foreshore, so it is covered at high tide and exposed at low tide.",
             markScheme: [
-              { point: "Steep land / high cliffs", keywords: ["steep", "cliff", "high"] },
-              { point: "A sandy beach below the cliffs", keywords: ["sand", "beach", "yellow"] },
+              { point: "Steep land / high cliffs", keywords: ["steep", "high cliff", "sheer", "rises sharply"] },
+              { point: "A sandy beach below the cliffs", keywords: ["sand", "beach", "shore"] },
               { point: "Beach is in the foreshore: covered at high tide, exposed at low tide", keywords: ["low tide", "foreshore", "intertidal", "covered at high", "between the tide"] },
             ],
             commonError: "Listing the symbols ('there are brown lines') instead of describing the landscape they show.",
@@ -2066,7 +2066,7 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "Beach nourishment adds sand or shingle, often dredged from offshore, to widen a beach so that it absorbs more wave energy. It looks natural and a wider beach attracts tourists. However, the new sediment is gradually washed away, so the work must be repeated every few years, which is costly over time. Dredging can also damage sea-bed habitats where the sand is taken from.",
             markScheme: [
-              { point: "How it works: adds sediment, wider beach absorbs energy", keywords: ["add", "wider", "absorb", "energy", "dredg"] },
+              { point: "How it works: adds sediment, wider beach absorbs energy", keywords: ["adds", "adding", "wider", "absorb", "dredg"] },
               { point: "Advantage: natural appearance / tourism", keywords: ["natural", "touris", "attract", "looks"] },
               { point: "Disadvantage: must be repeated / ongoing cost", keywords: ["repeat", "replen", "ongoing", "every few years", "washed away"] },
               { point: "Disadvantage: dredging harms sea-bed habitats", keywords: ["habitat", "sea bed", "seabed", "ecosystem", "wildlife", "marine"] },
@@ -2118,7 +2118,7 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "A spit is a long, narrow ridge of sand or shingle that is attached to the land at one end and extends out into the sea or across a river mouth, such as Spurn Head.",
             markScheme: [
-              { point: "Long, narrow ridge of sand/shingle", keywords: ["ridge", "narrow", "sand", "shingle", "long"] },
+              { point: "Long, narrow ridge of sand/shingle", keywords: ["ridge", "narrow", "finger", "long narrow", "bank"] },
               { point: "Attached to land at one end, extending into the sea/estuary", keywords: ["attached", "one end", "joined", "into the sea", "estuary", "river mouth"] },
             ],
             commonError: "Forgetting that a spit is attached at only one end (attached at both ends would be a bar or tombolo).",
@@ -2194,7 +2194,7 @@ export const coastalLandforms: Topic = {
               { point: "Sea levels rose after the last ice age", keywords: ["ice age", "sea level", "sea-level", "melt", "rising"] },
               { point: "Waves pushed shingle landwards / onshore", keywords: ["pushed", "landward", "onshore", "roll", "swept"] },
               { point: "Links Portland; Fleet Lagoon behind", keywords: ["portland", "fleet", "lagoon", "tombolo"] },
-              { point: "Pebbles graded: small in the west, large in the east", keywords: ["graded", "grading", "larger", "bigger", "west", "east"] },
+              { point: "Pebbles graded: small in the west, large in the east", keywords: ["graded", "grading", "larger", "bigger", "sorted", "pea"] },
             ],
             commonError: "Explaining Chesil only as an ordinary spit, missing the role of rising sea levels after the ice age.",
             guideRef: "bars-tombolos",
@@ -2269,8 +2269,8 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "First find the grid square using the easting and northing lines at its bottom-left corner, giving the easting first ('along the corridor, then up the stairs'). Then imagine the square divided into tenths in each direction. Add the number of tenths east after the easting, and the number of tenths north after the northing, e.g. 254 426.",
             markScheme: [
-              { point: "Eastings first, then northings", keywords: ["easting", "along the corridor", "across", "first"] },
-              { point: "Use the bottom-left corner lines of the square", keywords: ["bottom left", "bottom-left", "corner", "square"] },
+              { point: "Eastings first, then northings", keywords: ["easting", "along the corridor", "eastings first", "along then up"] },
+              { point: "Use the bottom-left corner lines of the square", keywords: ["bottom left", "bottom-left", "corner", "lower left"] },
               { point: "Divide the square into tenths and add the extra digit to each", keywords: ["tenth", "10 parts", "ten parts", "estimate", "divide"] },
             ],
             commonError: "Forgetting to estimate the tenths, so the answer is just a four-figure reference.",
@@ -2352,7 +2352,7 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "A salt marsh is an area of flat, low-lying mud and silt in a sheltered coastal area (for example behind a spit), flooded by the tide and colonised by salt-tolerant plants.",
             markScheme: [
-              { point: "Flat area of mud/silt (wetland)", keywords: ["mud", "silt", "wetland", "flat", "marsh"] },
+              { point: "Flat area of mud/silt (wetland)", keywords: ["mud", "silt", "wetland", "flat", "mudflat"] },
               { point: "Colonised by salt-tolerant plants / in sheltered water", keywords: ["salt-tolerant", "salt tolerant", "plant", "vegetation", "halophyte", "sheltered"] },
             ],
             commonError: "Describing it as a lagoon (open water) rather than a vegetated mudflat.",
@@ -2366,7 +2366,7 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "Differential erosion is when different rock types are eroded at different rates. Soft, less resistant rock such as clay erodes quickly and retreats to form bays. Hard, resistant rock such as chalk or limestone erodes slowly and is left jutting out as headlands.",
             markScheme: [
-              { point: "Different rocks erode at different rates", keywords: ["different rates", "different speed", "faster", "slower", "differential"] },
+              { point: "Different rocks erode at different rates", keywords: ["different rate", "different speed", "faster", "slower", "more quickly"] },
               { point: "Soft rock erodes quickly to form bays", keywords: ["soft", "clay", "bay", "less resistant", "weak"] },
               { point: "Hard rock resists to form headlands", keywords: ["hard", "resistant", "headland", "chalk", "limestone"] },
             ],
@@ -2399,7 +2399,7 @@ export const coastalLandforms: Topic = {
             markScheme: [
               { point: "Change in wind direction / secondary wind", keywords: ["wind direction", "secondary wind", "change in wind", "different wind", "wind changes"] },
               { point: "Wave refraction around the tip", keywords: ["refract", "bend", "wrap", "curve round"] },
-              { point: "Sediment carried inwards, making a hook", keywords: ["hook", "recurv", "inward", "landward", "curl"] },
+              { point: "Sediment carried inwards, making a hook", keywords: ["hook", "inward", "landward", "curl", "curves round"] },
             ],
             commonError: "Saying the river 'bends' the spit: rivers limit its length but do not form the hook.",
             guideRef: "spits",
@@ -2412,7 +2412,7 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "The river's current (and tidal currents) flow out through the estuary. They carry sediment away and stop it being deposited in the channel, so the spit cannot close the river mouth.",
             markScheme: [
-              { point: "River (or tidal) current flows through the estuary", keywords: ["river", "current", "flow", "tidal"] },
+              { point: "River (or tidal) current flows through the estuary", keywords: ["current", "flow", "tidal", "discharge"] },
               { point: "It carries sediment away / keeps a channel open", keywords: ["carr", "wash away", "channel", "remove", "prevent"] },
             ],
             commonError: "Saying the spit 'runs out of sand' with no mention of the river's current.",
@@ -2442,7 +2442,7 @@ export const coastalLandforms: Topic = {
             modelAnswer:
               "The west side is up-drift, so sand carried by longshore drift is trapped against the groyne and builds up to 3.5 m. The east side is down-drift, so it is starved of sand and only has 1.2 m, a difference of 2.3 m. The thinner beach on the east side gives less protection, so erosion there may increase.",
             markScheme: [
-              { point: "West (up-drift) side traps sand", keywords: ["trap", "up-drift", "updrift", "builds up", "blocked", "west"] },
+              { point: "West (up-drift) side traps sand", keywords: ["trap", "up-drift", "updrift", "builds up", "blocked"] },
               { point: "Quotes the 2.3 m difference", keywords: ["2.3", "2.30", "2,3"] },
               { point: "East (down-drift) side starved, more erosion", keywords: ["starv", "down-drift", "downdrift", "less sand", "eros"] },
             ],
@@ -2455,12 +2455,12 @@ export const coastalLandforms: Topic = {
             marks: 4,
             hint: "Multiply each cost by 500, then think about how long each lasts.",
             modelAnswer:
-              "Sea wall: 500 × £6,000 = £3 million. Rock armour: 500 × £2,000 = £1 million. Beach nourishment: 500 × £3,000 = £1.5 million, but repeated every 10 years that is about £7.5 million over 50 years. I recommend rock armour: even replaced once after 20 years it costs about £2–3 million over 50 years, less than the sea wall, and it is far cheaper than repeated nourishment, although it looks less natural.",
+              "Sea wall: 500 × £6,000 = £3 million. Rock armour: 500 × £2,000 = £1 million. Beach nourishment: 500 × £3,000 = £1.5 million, but repeated every 10 years that is about £7.5 million over 50 years. I recommend the sea wall: rock armour is cheapest at first, but if it is rebuilt every 20 years (in years 0, 20 and 40) it also costs about £3 million over 50 years, so the sea wall gives stronger, longer-lasting protection for the same long-term cost, and both are far cheaper than repeated nourishment. However, the sea wall looks unnatural and can scour the beach in front.",
             markScheme: [
               { point: "Sea wall £3 million", keywords: ["3 million", "3,000,000", "3000000", "£3m", "3m"] },
               { point: "Rock armour £1 million", keywords: ["1 million", "1,000,000", "1000000", "£1m", "1m"] },
               { point: "Nourishment £1.5 million each time (more over time)", keywords: ["1.5 million", "1,500,000", "1500000", "1.5m", "7.5"] },
-              { point: "Justified recommendation", keywords: ["recommend", "best", "choose", "because", "value"] },
+              { point: "Justified recommendation", keywords: ["recommend", "best", "choose", "same long-term cost", "value"] },
             ],
             commonError: "Comparing only the first payment and ignoring how long each option lasts.",
             guideRef: "coastal-management",
@@ -2518,7 +2518,7 @@ export const coastalLandforms: Topic = {
               "I largely agree. Singapore already protects roughly 70–80% of its coastline with seawalls and stone revetments, because about 30% of its land is less than 5 m above sea level and very valuable places such as the CBD and Changi Airport lie near the coast. As a small, densely populated island with scarce land, it cannot retreat inland, so strong, reliable defences make sense, even at a cost of S$100 billion or more over 100 years. However, hard engineering is expensive, must be raised as sea levels rise, and destroys habitats. Nature-based solutions such as restored mangroves and the Pulau Tekong polder can absorb wave energy, adapt to rising seas and support wildlife. Overall, hard engineering should remain the backbone, but the best approach is a hybrid that adds nature-based defences wherever space allows.",
             markScheme: [
               { point: "Hard engineering already dominant (seawalls/revetments, 70–80%)", keywords: ["seawall", "sea wall", "revetment", "70", "80", "hard engineering"] },
-              { point: "Evidence: low-lying (30% under 5 m) / S$100 billion", keywords: ["30", "5 m", "100 billion", "s$100", "$100"] },
+              { point: "Evidence: low-lying (30% under 5 m) / S$100 billion", keywords: ["30", "5 m", "100 billion", "s$100", "billion"] },
               { point: "Explains why retreat is impossible: small, dense, land-scarce", keywords: ["small", "dense", "scarce", "cannot retreat", "limited land", "no space"] },
               { point: "Counter-argument: nature-based options (mangroves, polder)", keywords: ["mangrove", "polder", "tekong", "nature-based", "nature based", "soft"] },
               { point: "Drawbacks of hard engineering (cost, habitat loss, raising)", keywords: ["cost", "expensive", "habitat", "maintain", "raise"] },

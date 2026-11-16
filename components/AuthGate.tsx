@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useStore } from "@/lib/store";
 
 export function AuthGate() {
-  const { login, signup } = useStore();
+  const { login, signup, useDevice, cloudAvailable } = useStore();
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -25,13 +25,26 @@ export function AuthGate() {
     <div className="grid min-h-screen place-items-center bg-gradient-to-br from-indigo-50 via-white to-emerald-50 px-4">
       <div className="w-full max-w-sm">
         <div className="mb-6 text-center">
-          <div className="text-5xl">🔬</div>
+          <div className="text-5xl">🌏</div>
           <h1 className="mt-2 text-2xl font-extrabold text-slate-900">Year 8 Geography Lab</h1>
           <p className="mt-1 text-sm text-slate-500">
             {mode === "login" ? "Sign in to continue your progress." : "Create a family account to save progress across devices."}
           </p>
         </div>
 
+        <button
+          type="button"
+          onClick={useDevice}
+          className={`mb-4 w-full rounded-2xl px-4 py-3 text-left shadow-sm ${cloudAvailable ? "border border-slate-200 bg-white hover:bg-slate-50" : "bg-emerald-600 text-white hover:bg-emerald-700"}`}
+        >
+          <span className="block font-bold">{cloudAvailable ? "📱 Just use this device" : "▶ Start learning"}</span>
+          <span className={`block text-xs ${cloudAvailable ? "text-slate-500" : "text-emerald-50"}`}>
+            No account needed. Progress is saved in this browser only.
+          </span>
+        </button>
+
+        {!cloudAvailable ? null : (
+        <>
         <form onSubmit={submit} className="space-y-3 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
           <label className="block">
             <span className="text-sm font-semibold text-slate-700">Account name</span>
@@ -89,6 +102,8 @@ export function AuthGate() {
             {mode === "login" ? "Create a family account" : "Sign in"}
           </button>
         </p>
+        </>
+        )}
       </div>
     </div>
   );
