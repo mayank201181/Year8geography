@@ -334,3 +334,25 @@ test("expressions: harmless brackets in a simplified answer", () => {
   assert.equal(st(sim("10x+8"), "2(5x+4)"), "close");
   assert.equal(st(sim("3y^2-2y"), "y(3y-2)"), "close");
 });
+
+test("text: typos forgiven, opposite terms never", () => {
+  const t = (accept: string[], input: string) => st({ type: "text", accept }, input);
+  // Genuine misspellings are still accepted.
+  assert.equal(t(["hydraulic action"], "hydrolic action"), "correct");
+  assert.equal(t(["natural increase"], "natural increse"), "correct");
+  assert.equal(t(["longshore drift"], "longshore drfit"), "correct");
+  assert.equal(t(["immigration"], "imigration"), "correct");
+  assert.equal(t(["urbanisation"], "urbanisaton"), "correct");
+  // A different (often opposite) term is wrong, however few letters change.
+  assert.equal(t(["natural increase"], "natural decrease"), "incorrect");
+  assert.equal(t(["natural decrease"], "natural increase"), "incorrect");
+  assert.equal(t(["immigration"], "emigration"), "incorrect");
+  assert.equal(t(["emigrant"], "immigrant"), "incorrect");
+  assert.equal(t(["voluntary migration"], "involuntary migration"), "incorrect");
+  assert.equal(t(["involuntary migration"], "voluntary migration"), "incorrect");
+  assert.equal(t(["push factor"], "pull factor"), "incorrect");
+  assert.equal(t(["pro-natalist policy"], "anti-natalist policy"), "incorrect");
+  assert.equal(t(["constructive wave"], "destructive wave"), "incorrect");
+  assert.equal(t(["internal migration"], "international migration"), "incorrect");
+  assert.equal(t(["1980"], "1981"), "incorrect");
+});

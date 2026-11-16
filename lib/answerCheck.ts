@@ -382,29 +382,75 @@ function checkText(spec: Extract<AnswerSpec, { type: "text" }>, input: string): 
   const ns = soft(input);
   if (!ns) return { status: "incorrect" };
   for (const a of spec.accept) {
-    const as = soft(a);
-    if (as === ns) return { status: "correct" };
-    // Only allow a typo when there are letters (never for numbers like "1804").
-    if (/[a-z]/.test(as) && !/\d/.test(as) && as.length >= 6 && editDistance(as, ns) <= (as.length >= 12 ? 2 : 1)) {
-      return { status: "correct", feedback: `Accepted — check the spelling: “${a}”.` };
-    }
+    if (soft(a) === ns) return { status: "correct" };
+  }
+  for (const a of spec.accept) {
+    if (isTypoOf(a, input)) return { status: "correct", feedback: `Accepted — check the spelling: “${a}”.` };
   }
   return { status: "incorrect" };
 }
 
-function editDistance(a: string, b: string): number {
+/**
+ * Word pairs where a one- or two-letter change flips the meaning. A typo match is
+ * never allowed to turn one of these into its partner ("natural decrease" must not
+ * pass as "natural increase", "emigrant" must not pass as "immigrant").
+ */
+const OPPOSITE_WORDS = new Set([
+  "increase", "decrease", "immigration", "emigration", "immigrant", "emigrant", "immigrate", "emigrate",
+  "push", "pull", "internal", "international", "voluntary", "involuntary", "pro", "anti", "pronatalist", "antinatalist",
+  "higher", "lower", "high", "low", "rise", "fall", "birth", "death", "gain", "loss", "inflow", "outflow",
+  "positive", "negative", "constructive", "destructive", "import", "export", "maximum", "minimum",
+  "urbanisation", "counterurbanisation", "urbanization", "counterurbanization", "suburbanisation", "suburbanization",
+  "north", "south", "east", "west", "upper", "inner", "outer", "before", "after", "more", "less",
+]);
+
+function words(s: string): string[] {
+  return normalizeInput(s)
+    .toLowerCase()
+    .replace(/[“”"'.,!?;:()/-]/g, " ")
+    .replace(/\b(the|a|an)\b/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => w.replace(/(es|s)$/, ""));
+}
+
+/**
+ * Is `input` a small misspelling of the accepted answer `a`? Compared word by word:
+ * each word must match, or differ by a small edit that keeps its first two letters
+ * (real typos sit inside a word; changing the start — in/de, im/e, pro/anti — usually
+ * makes a different word). Numbers and known opposite words are never "typos".
+ */
+function isTypoOf(a: string, input: string): boolean {
+  const aw = words(a);
+  const iw = words(input);
+  if (aw.length === 0 || aw.length !== iw.length) return false;
+  if (aw.join("").length < 6) return false;
+  let budget = aw.join("").length >= 12 ? 2 : 1;
+  for (let k = 0; k < aw.length; k++) {
+    const x = aw[k], y = iw[k];
+    if (x === y) continue;
+    if (/\d/.test(x) || /\d/.test(y) || !/[a-z]/.test(x)) return false;
+    if (OPPOSITE_WORDS.has(y)) return false; // y is itself a real, different key word
+    if (x.length < 4 || x.slice(0, 2) !== y.slice(0, 2)) return false;
+    const d = typoDistance(x, y);
+    if (d > (x.length >= 8 ? 2 : 1) || d > budget) return false;
+    budget -= d;
+  }
+  return true;
+}
+
+/** Edit distance where swapping two neighbouring letters ("drfit") counts as one edit. */
+function typoDistance(a: string, b: string): number {
   if (Math.abs(a.length - b.length) > 2) return 99;
-  const prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+  const d: number[][] = Array.from({ length: a.length + 1 }, (_, i) => Array.from({ length: b.length + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0)));
   for (let i = 1; i <= a.length; i++) {
-    let diag = prev[0];
-    prev[0] = i;
     for (let j = 1; j <= b.length; j++) {
-      const tmp = prev[j];
-      prev[j] = Math.min(prev[j] + 1, prev[j - 1] + 1, diag + (a[i - 1] === b[j - 1] ? 0 : 1));
-      diag = tmp;
+      const c = a[i - 1] === b[j - 1] ? 0 : 1;
+      d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + c);
+      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) d[i][j] = Math.min(d[i][j], d[i - 2][j - 2] + 1);
     }
   }
-  return prev[b.length];
+  return d[a.length][b.length];
 }
 
 /** Check an answer, then (if wrong) look for a matching trap to give targeted feedback. */
