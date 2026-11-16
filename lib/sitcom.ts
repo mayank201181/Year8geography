@@ -134,6 +134,16 @@ export const SITCOM_EPISODES: SitcomEpisode[] = [
     "poster": "/videos/posters/cities-megacities.jpg"
   },
   {
+    "num": 14,
+    "topicId": "lagos",
+    "topicShort": "Lagos",
+    "title": "Go-Slow Your Roll",
+    "logline": "Priya volunteers for the optional Lagos speech, and Dad claims he can cross Lagos in ten minutes. Atlas spins them into a go-slow, where a Yaba tech founder and a Makoko teacher show them the city's problems and its energy.",
+    "durationSec": 518,
+    "src": "/videos/lagos.mp4",
+    "poster": "/videos/posters/lagos.jpg"
+  },
+  {
     "num": 15,
     "topicId": "sustainable-cities",
     "topicShort": "Sustainable Cities",
