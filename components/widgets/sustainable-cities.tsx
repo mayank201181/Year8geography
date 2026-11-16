@@ -65,20 +65,22 @@ function TapsMixer() {
   const W = 440;
   const barW = W - 40;
 
-  let x = 20;
-  const planBars = TAPS.map((t) => {
+  const planSegments = TAPS.reduce<{ key: string; x: number; width: number; colour: string }[]>((acc, t) => {
+    const prevEnd = acc.length > 0 ? acc[acc.length - 1].x + acc[acc.length - 1].width : 20;
     const width = (share(t.key) / 100) * barW;
-    const el = <rect key={t.key} x={x} y={40} width={width} height={34} fill={t.colour} className="stroke-ink" strokeWidth={0.5} />;
-    x += width;
-    return el;
-  });
-  let x2 = 20;
-  const gotBars = delivered.map((d) => {
+    return [...acc, { key: t.key, x: prevEnd, width, colour: t.colour }];
+  }, []);
+  const planBars = planSegments.map((s) => (
+    <rect key={s.key} x={s.x} y={40} width={s.width} height={34} fill={s.colour} className="stroke-ink" strokeWidth={0.5} />
+  ));
+  const gotSegments = delivered.reduce<{ key: string; x: number; width: number; colour: string }[]>((acc, d) => {
+    const prevEnd = acc.length > 0 ? acc[acc.length - 1].x + acc[acc.length - 1].width : 20;
     const width = (d.got / 100) * barW;
-    const el = <rect key={d.t.key} x={x2} y={118} width={width} height={34} fill={d.t.colour} className="stroke-ink" strokeWidth={0.5} />;
-    x2 += width;
-    return el;
-  });
+    return [...acc, { key: d.t.key, x: prevEnd, width, colour: d.t.colour }];
+  }, []);
+  const gotBars = gotSegments.map((s) => (
+    <rect key={s.key} x={s.x} y={118} width={s.width} height={34} fill={s.colour} className="stroke-ink" strokeWidth={0.5} />
+  ));
 
   const verdict =
     total === 0

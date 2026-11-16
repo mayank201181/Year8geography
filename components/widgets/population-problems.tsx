@@ -286,7 +286,7 @@ function FamilyTree() {
           })}
         </svg>
         <p className="text-center text-xs text-ink-2">
-          <span className="font-bold text-accent">●</span> retired elders · <span className="font-bold text-ink-2">○</span> parents' generation (your 2 parents are elders too in the sums) · <span className="font-bold text-brand">●</span> you
+          <span className="font-bold text-accent">●</span> retired elders · <span className="font-bold text-ink-2">○</span> parents&apos; generation (your 2 parents are elders too in the sums) · <span className="font-bold text-brand">●</span> you
         </p>
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           <Readout label="Elders per young person" value={eldersPerYoung.toFixed(2)} tone={eldersPerYoung > 3 ? "bad" : eldersPerYoung > 1.5 ? "ink" : "good"} />

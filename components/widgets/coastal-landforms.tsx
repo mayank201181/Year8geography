@@ -364,7 +364,7 @@ function LongshoreDrift() {
           <Readout label="Pebble moved" value={`${Math.abs(moved).toFixed(1)} m`} />
           <Readout label="Direction" value={dir} tone={sim.blocked ? "bad" : "good"} />
         </div>
-        {sim.blocked ? <p className="text-sm font-semibold text-bad">The pebble is trapped against a groyne — that's exactly how groynes build up the beach.</p> : null}
+        {sim.blocked ? <p className="text-sm font-semibold text-bad">The pebble is trapped against a groyne — that&apos;s exactly how groynes build up the beach.</p> : null}
       </div>
     </WidgetFrame>
   );

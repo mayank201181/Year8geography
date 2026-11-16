@@ -155,7 +155,7 @@ function GridRefFinder() {
           <p>
             Find the <b>{tf.name}</b>, then tap anywhere in its grid square. Remember: <b>along the corridor</b> (eastings, numbers along the bottom) <b>then up the stairs</b> (northings, numbers up the side).
             {found === true ? <> ✅ Yes — the {tf.name} is in square <b>{targetSquare}</b>.</> : null}
-            {found === false ? <> ❌ That's square <b>{four}</b>. Is the {tf.name} to the right of easting {p2(eSq)} and above northing {p2(nSq)}?</> : null}
+            {found === false ? <> ❌ That&apos;s square <b>{four}</b>. Is the {tf.name} to the right of easting {p2(eSq)} and above northing {p2(nSq)}?</> : null}
           </p>
         ) : mode === "four" ? (
           <p>

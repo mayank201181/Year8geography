@@ -237,7 +237,7 @@ function CommuteCalculator() {
             {rail.t < car.t
               ? `Rail beats the car by ${car.t - rail.t} minutes: its fixed walk-and-wait time (${MODES[4].access} min) is outweighed by never meeting a jam.`
               : `The car beats rail by ${rail.t - car.t} minutes here: on short trips or clear roads, rail's fixed walk-and-wait time (${MODES[4].access} min) costs too much.`}{" "}
-            This is why mass transit with its own lane or track is Lagos's main answer to congestion. Simplified model: speeds are illustrative assumptions, not measured Lagos data.
+            This is why mass transit with its own lane or track is Lagos&apos;s main answer to congestion. Simplified model: speeds are illustrative assumptions, not measured Lagos data.
           </p>
         </>
       }

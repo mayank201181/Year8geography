@@ -5,6 +5,8 @@ the Year 8 units **8 Billion ++**, **Extreme Environments**, **Cracking Coasts**
 plus the map and graph skills every unit uses — with Art of Problem Solving-style teaching throughout
 (puzzle first, explain why, hint ladders, genuine challenge problems).
 
+**Live:** https://year8geography.vercel.app
+
 ## What's inside
 
 - **17 topics** (see `lib/topics/meta.ts`): Geographer's Toolkit · Where Do People Live? · Population
