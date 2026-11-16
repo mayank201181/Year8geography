@@ -54,6 +54,16 @@ export const SITCOM_EPISODES: SitcomEpisode[] = [
     "poster": "/videos/posters/population-change.jpg"
   },
   {
+    "num": 5,
+    "topicId": "population-policies",
+    "topicShort": "Population Policies",
+    "title": "One Is The Loneliest Number",
+    "logline": "Dad declares the family officially 'anti-natalist' because Priya is an only child. Nani remembers Singapore's 'Stop at Two' posters and the U-turn that followed, and Atlas spins everyone to Shanghai, where a demographer explains China's One Child Policy and the 4-2-1 problem.",
+    "durationSec": 528,
+    "src": "/videos/population-policies.mp4",
+    "poster": "/videos/posters/population-policies.jpg"
+  },
+  {
     "num": 6,
     "topicId": "extreme-environments",
     "topicShort": "Extreme Environments",
@@ -62,6 +72,26 @@ export const SITCOM_EPISODES: SitcomEpisode[] = [
     "durationSec": 517,
     "src": "/videos/extreme-environments.mp4",
     "poster": "/videos/posters/extreme-environments.jpg"
+  },
+  {
+    "num": 7,
+    "topicId": "extreme-weather",
+    "topicShort": "Extreme Weather",
+    "title": "Under Pressure",
+    "logline": "Dad appoints his left knee as the family weather forecaster and books a sunrise picnic in June. A Sumatra squall disagrees. Atlas spins the family to the typhoon coast of the Philippines to meet a real meteorologist.",
+    "durationSec": 523,
+    "src": "/videos/extreme-weather.mp4",
+    "poster": "/videos/posters/extreme-weather.jpg"
+  },
+  {
+    "num": 8,
+    "topicId": "adaptations",
+    "topicShort": "Adaptations",
+    "title": "Survival Of The Fluffiest",
+    "logline": "Dad buys a documentary called Polar Bear Versus Penguin and insists they are neighbours. Atlas spins the family to Antarctica, where there are no bears at all, then to the Sahara, where the camel's hump is not what Dad thinks.",
+    "durationSec": 518,
+    "src": "/videos/adaptations.mp4",
+    "poster": "/videos/posters/adaptations.jpg"
   },
   {
     "num": 9,
