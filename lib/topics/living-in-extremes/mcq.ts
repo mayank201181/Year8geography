@@ -1,0 +1,762 @@
+import type { Paper } from "../../types.ts";
+
+const DL = "difficulties-of-living";
+const ET = "extreme-tourism";
+const AT = "antarctica-tourism";
+const PE = "planning-an-expedition";
+
+export const mcqPapers: Paper[] = [
+  // ============================== MCQ PAPER 1 ==============================
+  {
+    id: "living-in-extremes-m1",
+    title: "MCQ Paper 1",
+    questions: [
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q01",
+        question: "Why are many buildings in Arctic towns raised up on stilts or piles?",
+        options: [
+          "To stop heat from the building thawing the permafrost underneath",
+          "To keep polar bears from reaching the doors",
+          "To catch more sunlight during the polar winter",
+          "Because summer rain turns the soil into deep mud every year",
+        ],
+        answerIndex: 0,
+        explanation:
+          "A heated building sitting on frozen ground slowly melts the ice in the **permafrost**, so the ground sinks and the building cracks. Raising it on piles lets cold air flow underneath and keeps the ground frozen. Polar bears and sunlight have nothing to do with the design — the problem is the ground itself.",
+        difficulty: "warmup",
+        guideRef: DL,
+        hints: ["Think about what is under the building and what heat does to ice."],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q02",
+        question: "In which year was the **Antarctic Treaty** signed?",
+        options: ["1912", "1959", "1991", "2001"],
+        answerIndex: 1,
+        explanation:
+          "The Antarctic Treaty was signed in **1959** by 12 countries. 1991 is a tempting trap: that is when the Madrid Protocol (extra environmental protection, including a ban on mining) was signed — it added to the Treaty, it did not start it.",
+        difficulty: "warmup",
+        guideRef: AT,
+        hints: ["It was signed during the Cold War, just after the International Geophysical Year of 1957–58."],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q03",
+        question: "On a cold-weather expedition, which layer of clothing goes next to your skin and moves sweat away from your body?",
+        options: ["A waterproof outer shell", "A fleece mid-layer", "A wicking base layer", "A down jacket"],
+        answerIndex: 2,
+        explanation:
+          "The **base layer** sits against the skin and *wicks* sweat away so you stay dry — wet skin loses heat fast. The fleece mid-layer traps warm air (insulation) and the shell keeps wind and rain out; neither is designed to move sweat off your skin.",
+        difficulty: "warmup",
+        guideRef: PE,
+        hints: ["Layers go base → mid → outer. Which one touches you?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q04",
+        question: "Which of these is a positive **economic** impact of tourism in the Everest (Khumbu) region of Nepal?",
+        options: [
+          "Litter left at high camps",
+          "Erosion of popular trekking paths",
+          "Visitors learning about Sherpa culture",
+          "Jobs for local guides, porters and lodge owners",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Economic impacts are about **money and jobs** — guiding, carrying loads and running teahouses bring income. Visitors learning about Sherpa culture is a *social* (cultural) impact, and litter and erosion are negative *environmental* impacts.",
+        difficulty: "warmup",
+        guideRef: ET,
+        hints: ["Economic = money and jobs."],
+        strategy: "Social / economic / environmental (SEE)",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q05",
+        question:
+          "Which group of people traditionally live as **nomadic herders** in the deserts of the Arabian Peninsula and North Africa, moving camels and goats between pastures and water sources?",
+        options: ["Inuit", "Bedouin", "Sherpa", "Sámi"],
+        answerIndex: 1,
+        explanation:
+          "The **Bedouin** are desert peoples of the Arabian Peninsula and North Africa, traditionally moving with their herds to find grazing and water. The Sámi are also herders, but of reindeer in the Arctic of northern Europe — a cold environment, not a hot desert.",
+        difficulty: "core",
+        guideRef: DL,
+        hints: ["Which environment is described — hot or cold?", "Inuit and Sámi live in the Arctic; Sherpa live in the Himalayas."],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q06",
+        question: "Under IAATO guidelines, what is the **maximum number of visitors** allowed ashore at one landing site at the same time?",
+        options: ["100", "500", "50", "1,000"],
+        answerIndex: 0,
+        explanation:
+          "No more than **100** visitors may be ashore at one site at once. 500 is a different IAATO rule: ships carrying **more than 500 passengers** may not land anyone at all.",
+        difficulty: "core",
+        guideRef: AT,
+        hints: ["There are two famous IAATO numbers — one is about people on land, one is about the size of the ship.", "The one about people on land is the smaller number."],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q07",
+        question:
+          "The table shows approximate average temperatures for a town in the Sahara.\n\n| Month | Jan | Apr | Jul | Oct |\n|---|---|---|---|---|\n| Average maximum (°C) | 21 | 32 | 43 | 33 |\n| Average minimum (°C) | 6 | 15 | 26 | 17 |\n\nWhat is the **daily (diurnal) temperature range** in July?",
+        options: ["69 °C", "26 °C", "43 °C", "17 °C"],
+        answerIndex: 3,
+        explanation:
+          "Range = maximum − minimum = 43 − 26 = **17 °C**. 69 °C comes from adding the two values instead of subtracting; 43 °C and 26 °C are just the single readings, not the range.",
+        difficulty: "core",
+        guideRef: DL,
+        hints: ["Range is a difference, not a total.", "Use the July column only: maximum − minimum."],
+        strategy: "Use figures from the source",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q08",
+        question: "What does **carrying capacity** mean for a tourist site such as a trekking route?",
+        options: [
+          "The number of passengers a cruise ship or plane can carry",
+          "The weight of kit a porter is allowed to carry",
+          "The maximum number of visitors a place can take before the environment is damaged or the experience is spoilt",
+          "The number of hotel beds available in the region",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Carrying capacity is the **most visitors a place can cope with** before damage (erosion, litter, disturbed wildlife) or overcrowding spoils it. Despite the word 'carrying', it is nothing to do with how much a ship or a porter carries.",
+        difficulty: "core",
+        guideRef: ET,
+        hints: ["Think of the place itself 'carrying' people.", "What happens when too many people visit a fragile place?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q09",
+        question:
+          "An expedition risk assessment scores each hazard from 1 to 5 for **likelihood** and 1 to 5 for **severity**, then uses: risk score = likelihood × severity.\n\nFalling on an icy path has likelihood 3 and severity 4. What is its risk score?",
+        options: ["12", "7", "1", "34"],
+        answerIndex: 0,
+        explanation:
+          "Risk score = 3 × 4 = **12**. Adding (3 + 4 = 7) is the classic slip — the method multiplies, so a hazard that is both likely *and* serious scores much higher.",
+        difficulty: "core",
+        guideRef: PE,
+        hints: ["Read the formula: which operation does it use?", "3 × 4"],
+        strategy: "Use figures from the source",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q10",
+        question: "Why do Antarctic tour operators ask visitors to vacuum their outer clothing and scrub their boots before going ashore?",
+        options: [
+          "To keep the ship's cabins clean",
+          "To stop people slipping on wet rocks",
+          "To avoid carrying seeds, soil or microbes from other places onto the continent",
+          "To remove salt that damages waterproof clothing",
+        ],
+        answerIndex: 2,
+        explanation:
+          "This is **biosecurity**: seeds caught in Velcro or soil on boots could introduce non-native species or diseases to Antarctica's fragile ecosystems. It is about protecting Antarctica, not about keeping the ship or the clothing clean.",
+        difficulty: "core",
+        guideRef: AT,
+        hints: ["Who is being protected — the visitors or Antarctica?", "What tiny living things could hitch a ride on a boot?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q11",
+        question: "Singapore and many Gulf states use **desalination** to supply water. What is a major disadvantage of it?",
+        options: [
+          "It only works in cold climates",
+          "It uses a lot of energy and produces very salty waste water (brine)",
+          "It makes the water unsafe to drink",
+          "It can only produce a few litres a day",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Removing salt from sea water needs a lot of **energy** (expensive and often linked to fossil fuels) and leaves **brine** that must be disposed of carefully. The water produced is safe to drink, and modern plants produce very large amounts — so the problem is cost and impacts, not quality or quantity.",
+        difficulty: "core",
+        guideRef: DL,
+        hints: ["Think about cost and what is left over.", "Where does the removed salt go?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q12",
+        question: "Which action follows the **Leave No Trace** principles on an expedition?",
+        options: [
+          "Burying food scraps deep in the snow",
+          "Taking one small stone home as a souvenir",
+          "Making a new path beside a muddy section of trail",
+          "Carrying all your rubbish out with you",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Leave No Trace says **pack it in, pack it out**. Buried food scraps resurface or attract animals, taking stones breaks 'leave what you find', and making new paths widens erosion — so they all leave a trace.",
+        difficulty: "core",
+        guideRef: PE,
+        hints: ["The aim is that the place looks as if you were never there.", "Which option leaves nothing behind and takes nothing away?"],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q13",
+        question:
+          "A town at **1,000 m** has a temperature of **20 °C**. Temperature falls by about **6.5 °C for every 1,000 m** you climb. Estimate the temperature at **4,000 m** on the same mountain.",
+        options: ["−6 °C", "39.5 °C", "0.5 °C", "13.5 °C"],
+        answerIndex: 2,
+        explanation:
+          "The climb is 4,000 − 1,000 = 3,000 m. Fall = 3 × 6.5 = 19.5 °C. So 20 − 19.5 = **0.5 °C**. −6 °C comes from using the whole 4,000 m instead of the height *gained*; 13.5 °C only allows for 1,000 m of climbing.",
+        difficulty: "challenge",
+        guideRef: DL,
+        hints: ["How much higher is 4,000 m than the town?", "How many lots of 1,000 m is that? Multiply by 6.5.", "Subtract the fall from 20 °C."],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q14",
+        question:
+          "A trekking company says: *'More tourists in the Himalayas always means more benefits for local people.'* Which piece of evidence **best challenges** this claim?",
+        options: [
+          "On some package trips, much of the money goes to companies based outside the region",
+          "Lodges in the Khumbu employ local people",
+          "Tourists buy locally made crafts",
+          "Guiding can pay more than many other jobs in rural Nepal",
+        ],
+        answerIndex: 0,
+        explanation:
+          "If much of the money **leaks** to companies elsewhere (international tour firms, imported goods), more tourists do not automatically mean more local benefit. The other three options all *support* the company's claim rather than challenge it.",
+        difficulty: "challenge",
+        guideRef: ET,
+        hints: ["Three options agree with the company. Which one doesn't?", "Think about where the money from a holiday actually ends up."],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m1-q15",
+        question: "A cruise ship carrying **520 passengers** arrives at the Antarctic Peninsula. Following IAATO rules, which statement is correct?",
+        options: [
+          "It can land everyone, as long as they go ashore in groups of 100",
+          "It may not land any passengers; they can only view Antarctica from the ship",
+          "It can land everyone if it splits them between two different sites",
+          "It can land 500 passengers and keep 20 on board",
+        ],
+        answerIndex: 1,
+        explanation:
+          "IAATO rules say ships carrying **more than 500 passengers** may not make landings at all — they are 'cruise-only'. The 100-at-a-time rule applies only to smaller ships that *are* allowed to land, so splitting into groups or sites does not help a 520-passenger ship.",
+        difficulty: "challenge",
+        guideRef: AT,
+        hints: ["Is 520 above or below the ship-size limit?", "The groups-of-100 rule only applies to ships that are allowed to land in the first place."],
+        strategy: "Spot the misconception",
+      },
+    ],
+  },
+  // ============================== MCQ PAPER 2 ==============================
+  {
+    id: "living-in-extremes-m2",
+    title: "MCQ Paper 2",
+    questions: [
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q01",
+        question: "Which people have traditionally lived in the Arctic regions of Canada, Greenland and Alaska?",
+        options: ["Bedouin", "Tuareg", "Inuit", "Maasai"],
+        answerIndex: 2,
+        explanation:
+          "The **Inuit** are the Indigenous peoples of the Arctic in Canada, Greenland and Alaska. Bedouin and Tuareg live in hot deserts, and the Maasai live in the savanna of Kenya and Tanzania.",
+        difficulty: "warmup",
+        guideRef: DL,
+        hints: ["Which group lives in a cold environment?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q02",
+        question: "Which of these is a negative **environmental** impact of climbing tourism on Everest?",
+        options: [
+          "Rubbish and human waste left at high camps",
+          "Extra money for local schools",
+          "Changes to traditional ways of life",
+          "Higher prices in village shops",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Rubbish and human waste damage the **physical environment** — they do not rot quickly in the cold. Changes to traditional life are a *social* impact and higher prices are an *economic* impact.",
+        difficulty: "warmup",
+        guideRef: ET,
+        hints: ["Environmental = the natural surroundings: land, water, wildlife."],
+        strategy: "Social / economic / environmental (SEE)",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q03",
+        question: "You are trekking in a remote area with no mobile signal. What is the most reliable way to navigate?",
+        options: [
+          "A map app that needs a 4G connection",
+          "Following another group of tourists",
+          "Guessing direction from where the sun is",
+          "A map and compass, with the skills to use them",
+        ],
+        answerIndex: 3,
+        explanation:
+          "A **map and compass** need no signal or battery. A 4G map app fails without signal, and other groups may be going somewhere else. A GPS unit or satellite device is a useful back-up, but you still need map-and-compass skills if batteries die.",
+        difficulty: "warmup",
+        guideRef: PE,
+        hints: ["Which option still works with no signal and flat batteries?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q04",
+        question: "Who lives in Antarctica?",
+        options: [
+          "Indigenous Antarctic peoples who have lived there for centuries",
+          "Scientists and support staff at research stations, most staying only for a season or a year",
+          "Farmers growing crops along the coast",
+          "Nobody — no one is allowed to stay overnight",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Antarctica has **no Indigenous population**. People living there are scientists and support staff at research stations — a few thousand in summer and far fewer in winter — and they rotate home. People *do* stay overnight: stations operate all year.",
+        difficulty: "warmup",
+        guideRef: AT,
+        hints: ["Think about why people go to Antarctica at all."],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q05",
+        question: "Why do traditional Bedouin and Tuareg clothes cover most of the body and hang loosely?",
+        options: [
+          "To look smart when meeting visitors",
+          "To keep sand out of tents",
+          "Because thin, tight clothing is hard to make",
+          "To shade the skin from strong sun and let air circulate, keeping the body cooler",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Covering up blocks the **intense sun** (and blowing sand), and loose fabric lets **air move** next to the skin so sweat can evaporate. It seems odd to wear more in a hot place — that is exactly why it is a well-adapted solution, not a fashion choice.",
+        difficulty: "core",
+        guideRef: DL,
+        hints: ["What would bare skin suffer in the desert sun?", "Why might loose cloth feel cooler than tight cloth?"],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q06",
+        question: "Which of these does the **Antarctic Treaty** ban?",
+        options: [
+          "Scientific research",
+          "Sharing scientific results between countries",
+          "Military activity, such as weapons testing",
+          "Visits by tourists",
+        ],
+        answerIndex: 2,
+        explanation:
+          "The Treaty keeps Antarctica for **peaceful purposes**, so military activity such as weapons testing is banned. It actively *encourages* science and sharing results. It does not ban tourism — that is why tourism needs other rules, such as IAATO's guidelines.",
+        difficulty: "core",
+        guideRef: AT,
+        hints: ["The Treaty was signed during the Cold War. What were countries worried about?", "It promotes science, so two options can be ruled out."],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q07",
+        question: "Why is a cotton T-shirt a poor base layer in a cold, wet environment?",
+        options: [
+          "Cotton soaks up sweat and water and stays wet, so it pulls heat from your body",
+          "Cotton is far too warm and causes overheating",
+          "Cotton is waterproof, so it traps rain against you",
+          "Cotton is too heavy to fit in a rucksack",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Cotton **absorbs water and dries slowly**; wet fabric against the skin conducts heat away and can lead to hypothermia. Expedition base layers use wool or synthetic fabrics that wick moisture. Cotton is not waterproof — that is the opposite of the problem.",
+        difficulty: "core",
+        guideRef: PE,
+        hints: ["What happens to cotton when you sweat?", "Wet skin loses heat much faster than dry skin."],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q08",
+        question: "Which of these is a **social** impact of tourism in an extreme environment?",
+        options: [
+          "Litter along trekking trails",
+          "Traditional festivals being changed or staged to suit tourists",
+          "Income from climbing permits",
+          "Erosion around campsites",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Social impacts affect **people, culture and communities** — festivals being changed for tourists is a cultural change. Permit income is economic; litter and erosion are environmental.",
+        difficulty: "core",
+        guideRef: ET,
+        hints: ["Social = people and culture.", "Sort each option into S, E (economic) or E (environmental)."],
+        strategy: "Social / economic / environmental (SEE)",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q09",
+        question: "Many Sherpa people cope unusually well with the thin air of the high Himalayas. What is the best explanation?",
+        options: [
+          "They spend every winter living at sea level",
+          "They need far less water than other people",
+          "Generations living at high altitude mean their bodies use oxygen very efficiently",
+          "They avoid all physical work above 3,000 m",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Research suggests that, after many generations living high up, Sherpa people's bodies are especially **efficient at using oxygen**. This is why many work as high-altitude guides. Avoiding work at altitude is the opposite of what Sherpa guides do.",
+        difficulty: "core",
+        guideRef: DL,
+        hints: ["What is in short supply in thin mountain air?", "Think about adaptation over many generations."],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q10",
+        question:
+          "Part of a risk assessment for an Arctic trek (scores out of 5; risk score = likelihood × severity):\n\n| Hazard | Likelihood | Severity |\n|---|---|---|\n| Sunburn | 4 | 2 |\n| Frostbite | 2 | 4 |\n| Avalanche | 1 | 5 |\n| Slipping on ice | 3 | 3 |\n\nWhich hazard has the **highest risk score**?",
+        options: ["Sunburn", "Frostbite", "Avalanche", "Slipping on ice"],
+        answerIndex: 3,
+        explanation:
+          "Scores: sunburn 4 × 2 = 8, frostbite 2 × 4 = 8, avalanche 1 × 5 = 5, slipping on ice 3 × 3 = **9**. Avalanche has the highest *severity* and sunburn the highest *likelihood*, but neither has the highest overall risk — you must multiply.",
+        difficulty: "core",
+        guideRef: PE,
+        hints: ["Work out the score for every hazard before choosing.", "Don't just pick the scariest hazard — multiply likelihood by severity."],
+        strategy: "Use figures from the source",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q11",
+        question: "Why are fresh fruit and vegetables very expensive in remote Arctic communities such as those in Nunavut, northern Canada?",
+        options: [
+          "The growing season is too short and cold, so food must be flown or shipped in over long distances",
+          "Local people prefer not to eat them",
+          "The government bans growing vegetables near the Arctic Circle",
+          "Permafrost soils are so fertile that farmers charge high prices",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Long, freezing winters and frozen ground mean little can be grown locally, so fresh food is **transported long distances**, often by air — and the transport cost is passed on. Permafrost soils are poor and frozen, not fertile.",
+        difficulty: "core",
+        guideRef: DL,
+        hints: ["Can crops grow well on frozen ground in a short summer?", "How does food reach a place with no roads?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q12",
+        question: "What is meant by the **'ambassador effect'** of tourism in Antarctica?",
+        options: [
+          "Government officials visiting research stations",
+          "Visitors returning home as supporters of protecting Antarctica",
+          "Penguins becoming used to people",
+          "Countries using tourism to claim territory",
+        ],
+        answerIndex: 1,
+        explanation:
+          "The idea is that people who **see Antarctica for themselves** go home and speak up for its protection — they become 'ambassadors'. It has nothing to do with diplomats or territorial claims (which the Treaty sets aside).",
+        difficulty: "core",
+        guideRef: AT,
+        hints: ["An ambassador represents and speaks up for something.", "Who comes back from Antarctica with stories to tell?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q13",
+        question:
+          "A team of **4 people** plans a **5-day** desert trek. Each person needs **4 litres** of water per day, and the leader wants to add **10% extra** as a safety margin. How much water should they plan for?",
+        options: ["80 litres", "20 litres", "84 litres", "88 litres"],
+        answerIndex: 3,
+        explanation:
+          "4 people × 5 days × 4 litres = 80 litres. 10% of 80 = 8, so 80 + 8 = **88 litres**. 80 litres forgets the safety margin; 84 litres adds 4 litres rather than 10%; 20 litres is only one person's water.",
+        difficulty: "challenge",
+        guideRef: PE,
+        hints: ["First find the basic total: people × days × litres.", "Then find 10% of that total and add it on."],
+        strategy: "Use figures from the source",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q14",
+        question:
+          "Since 2014, Nepal has asked Everest climbing teams to pay a **deposit** that is returned only if each climber brings down about **8 kg of rubbish**. Which statement is the **best evaluation** of this scheme?",
+        options: [
+          "It gives climbers a money reason to remove rubbish, but it only works if what they bring down is properly checked",
+          "It will remove all the rubbish on Everest within one year",
+          "It harms the local economy because it stops all tourism",
+          "It is not needed, because rubbish on Everest rots away quickly in the cold",
+        ],
+        answerIndex: 0,
+        explanation:
+          "A good evaluation weighs **strengths and limits**: the deposit is an incentive, but it depends on enforcement. Rubbish does *not* rot quickly in the cold — low temperatures slow decay, which is why old waste builds up. Claims of 'all rubbish in a year' or 'stops all tourism' are exaggerations.",
+        difficulty: "challenge",
+        guideRef: ET,
+        hints: ["An evaluation usually mentions a strength *and* a limitation.", "Does cold speed up or slow down rotting?"],
+        strategy: "Weigh both sides then judge",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m2-q15",
+        question:
+          "Kathmandu, at about **1,400 m**, has a temperature of **24 °C**. Using a fall of **6.5 °C per 1,000 m**, estimate the temperature at the same moment at Everest Base Camp, about **5,400 m**.",
+        options: ["−11.1 °C", "50 °C", "−2 °C", "17.5 °C"],
+        answerIndex: 2,
+        explanation:
+          "Height gained = 5,400 − 1,400 = 4,000 m. Fall = 4 × 6.5 = 26 °C. 24 − 26 = **−2 °C**. −11.1 °C comes from using the full 5,400 m instead of the height gained; 50 °C adds the fall instead of subtracting it.",
+        difficulty: "challenge",
+        guideRef: DL,
+        hints: ["Start with the height *difference*, not the height of Base Camp.", "Each 1,000 m = 6.5 °C colder.", "4 × 6.5 = 26. Now subtract from 24."],
+      },
+    ],
+  },
+  // ============================== MCQ PAPER 3 ==============================
+  {
+    id: "living-in-extremes-m3",
+    title: "MCQ Paper 3",
+    questions: [
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q01",
+        question: "What is **IAATO**?",
+        options: [
+          "A United Nations peacekeeping force for Antarctica",
+          "An association of tour operators that sets guidelines for safe, responsible Antarctic tourism",
+          "The largest research station in Antarctica",
+          "A type of ice-strengthened cruise ship",
+        ],
+        answerIndex: 1,
+        explanation:
+          "IAATO is the **International Association of Antarctica Tour Operators**, founded in 1991. Its members agree to follow guidelines such as limits on how many people go ashore. It is an industry body, not a military force or a research station.",
+        difficulty: "warmup",
+        guideRef: AT,
+        hints: ["The last letters stand for 'Tour Operators'."],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q02",
+        question: "In which extreme environment do the **Tuareg** people traditionally live?",
+        options: ["The Himalayas", "Arctic Canada", "The Amazon rainforest", "The Sahara Desert"],
+        answerIndex: 3,
+        explanation:
+          "The Tuareg live in the **Sahara**, in countries such as Niger, Mali, Algeria and Libya, and are known for camel caravans and indigo head-wraps. Arctic Canada is home to the Inuit; the Himalayas to the Sherpa.",
+        difficulty: "warmup",
+        guideRef: DL,
+        hints: ["Think of camel caravans crossing sand dunes."],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q03",
+        question: "When do almost all tourist trips to Antarctica take place?",
+        options: [
+          "November to March, the southern summer",
+          "June to August, the southern winter",
+          "May to September, when sea ice is spreading furthest",
+          "Evenly throughout the year",
+        ],
+        answerIndex: 0,
+        explanation:
+          "The tourist season is the **southern summer (roughly November to March)**, when there is long daylight, less sea ice and wildlife is breeding. June–August is the southern *winter* — it is easy to forget the seasons are reversed in the southern hemisphere.",
+        difficulty: "warmup",
+        guideRef: PE,
+        hints: ["Antarctica is in the southern hemisphere — when is its summer?"],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q04",
+        question: "Which of these is the best example of **adventure tourism** in an extreme environment?",
+        options: [
+          "A beach holiday in Bali",
+          "A shopping trip along Orchard Road",
+          "Trekking to Everest Base Camp",
+          "A day at a theme park",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Trekking to **Everest Base Camp** (about 5,400 m) means thin air, cold and remote terrain — an extreme environment. The other options are tourism, but not in extreme environments.",
+        difficulty: "warmup",
+        guideRef: ET,
+        hints: ["Which place is cold, high and remote?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q05",
+        question: "Which statement about Inuit homes is **accurate**?",
+        options: [
+          "Most Inuit today live in modern houses; igloos were traditionally temporary shelters, especially for hunting trips",
+          "Most Inuit still live in igloos all year round",
+          "Igloos were traditionally built from driftwood",
+          "Igloos are only built for tourists",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Today most Inuit live in **modern houses in settled communities**. Snow-block igloos were traditionally used mainly as temporary shelters when travelling or hunting in winter. Imagining that Inuit 'live in igloos' is a stereotype — ways of life change over time.",
+        difficulty: "core",
+        guideRef: DL,
+        hints: ["Be careful of stereotypes.", "Ways of life change: think about snowmobiles, schools and towns in the Arctic today."],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q06",
+        question: "The **Madrid Protocol** (signed 1991) added extra environmental protection to the Antarctic Treaty system. What did it ban?",
+        options: [
+          "All tourism",
+          "All scientific research",
+          "All ships in the Southern Ocean",
+          "Mining and other mineral resource activities, except for scientific research",
+        ],
+        answerIndex: 3,
+        explanation:
+          "The Protocol on Environmental Protection bans **mineral resource activities (mining)** other than scientific research, and treats Antarctica as a natural reserve. It did not ban tourism or science — both still happen under strict rules.",
+        difficulty: "core",
+        guideRef: AT,
+        hints: ["Science and tourism still happen today, so they were not banned.", "What could do huge, permanent damage to Antarctica's land?"],
+        strategy: "Eliminate options",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q07",
+        question: "A group is packing for a day trek in the Sahara with a night in a desert camp. Which item is **least suitable**?",
+        options: [
+          "A wide-brimmed sun hat",
+          "A heavy black waterproof jacket to wear while walking at midday",
+          "A warm fleece for the evening",
+          "A light, loose, long-sleeved shirt",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A heavy **black** jacket absorbs heat and stops sweat evaporating — a heatstroke risk at midday. The fleece is a sensible item, not a mistake: clear desert skies let heat escape at night, so temperatures can fall sharply.",
+        difficulty: "core",
+        guideRef: PE,
+        hints: ["Think about the hottest time of day.", "Deserts are not hot all the time — check before ruling out the fleece."],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q08",
+        question: "Which management strategy would best reduce **footpath erosion** on a busy trekking route?",
+        options: [
+          "Opening lots of new paths so walkers spread out",
+          "Removing all limits on visitor numbers",
+          "Laying stone steps and asking walkers to stay on the marked trail",
+          "Allowing mountain bikes on every slope",
+        ],
+        answerIndex: 2,
+        explanation:
+          "Stone steps make a **hard-wearing surface** and keeping people on one trail protects the vegetation either side. Opening new paths spreads the damage over more ground — it does not reduce it.",
+        difficulty: "core",
+        guideRef: ET,
+        hints: ["Erosion happens where feet wear away soil and plants.", "Is it better to damage one path or many?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q09",
+        question: "Why do traditional houses in hot deserts often have **thick walls and small windows**?",
+        options: [
+          "To keep out heavy rain in the wet season",
+          "Because glass is too expensive to use",
+          "To make the rooms dark for sleeping",
+          "Thick walls heat up slowly by day and release heat at night, and small windows let in less sun",
+        ],
+        answerIndex: 3,
+        explanation:
+          "Thick walls of stone or mud brick **absorb heat slowly**, so rooms stay cooler during the scorching day and the stored heat warms them during cold nights. Small windows reduce direct sunshine. Hot deserts get very little rain, so rain is not the main design problem.",
+        difficulty: "core",
+        guideRef: DL,
+        hints: ["Hot days, cold nights — what would help with both?", "How quickly does a thick wall warm up compared with a thin one?"],
+        strategy: "Cause → process → effect",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q10",
+        question: "An expedition ship with **180 passengers** visits a landing site in Antarctica. Following IAATO's rule on visitors ashore, what is the **smallest number of separate groups** the passengers must be split into so that everyone can land?",
+        options: ["1", "2", "3", "None — the ship is not allowed to land anyone"],
+        answerIndex: 1,
+        explanation:
+          "No more than 100 may be ashore at once, so 180 people need **2 groups** (for example 100 then 80). The ship is allowed to land people because it carries fewer than 500 passengers.",
+        difficulty: "core",
+        guideRef: AT,
+        hints: ["What is the limit ashore at one time?", "Is 180 above the 500-passenger landing limit?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q11",
+        question: "Which is a **positive environmental** impact that tourism can bring to an extreme environment?",
+        options: [
+          "Entry and permit fees paying for conservation work, such as rangers and clean-ups",
+          "More flights carrying visitors",
+          "New roads built through wilderness",
+          "Extra litter along trails",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Fees can be **reinvested in protecting the environment** — paying for rangers, rubbish removal and repairs. More flights, new roads and litter all harm the environment.",
+        difficulty: "core",
+        guideRef: ET,
+        hints: ["Positive *and* environmental — which option helps nature?", "Where can tourist money go?"],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q12",
+        question: "A trekker at 4,500 m has a bad headache, feels sick and is getting worse. What is the **safest** action?",
+        options: [
+          "Keep climbing quickly to reach the top sooner",
+          "Take off warm layers to cool down",
+          "Descend to a lower altitude",
+          "Drink alcohol to warm up and relax",
+        ],
+        answerIndex: 2,
+        explanation:
+          "These are signs of **altitude sickness**. If symptoms get worse, the most effective treatment is to **go down**. Climbing higher makes it worse, and alcohol dehydrates you and hides symptoms.",
+        difficulty: "core",
+        guideRef: PE,
+        hints: ["What causes the illness — and how do you remove the cause?", "The air holds more oxygen lower down."],
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q13",
+        question:
+          "The table gives approximate climate data for two places.\n\n| | Place X | Place Y |\n|---|---|---|\n| Average January temperature | −30 °C | 13 °C |\n| Average July temperature | 8 °C | 34 °C |\n| Annual precipitation | 100 mm | 80 mm |\n\nWhich statement is **supported** by the data?",
+        options: [
+          "Only Place Y is a desert, because deserts are hot",
+          "Both places are deserts, because both receive less than 250 mm of precipitation a year",
+          "Place X receives more precipitation, so it must be a rainforest",
+          "Neither place is a desert, because both have a winter",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A desert is defined by **very low precipitation (under about 250 mm a year)**, not by heat. Both places qualify: X is a cold desert (like parts of the Arctic) and Y a hot desert. 'Deserts are always hot' is a common misconception.",
+        difficulty: "challenge",
+        guideRef: DL,
+        hints: ["What actually defines a desert — temperature or precipitation?", "Compare both rainfall figures with 250 mm."],
+        strategy: "Spot the misconception",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q14",
+        question:
+          "Antarctic tourist numbers rose from about **74,000** (2019–20 season) to about **122,000** (2023–24 season). These are approximate figures. What is the approximate **percentage increase**?",
+        options: ["48%", "39%", "165%", "About 65%"],
+        answerIndex: 3,
+        explanation:
+          "Increase = 122,000 − 74,000 = 48,000. Percentage increase = 48,000 ÷ 74,000 × 100 ≈ **65%**. 39% divides by the *new* value instead of the original; 165% is the new value as a percentage of the old one, not the increase.",
+        difficulty: "challenge",
+        guideRef: AT,
+        hints: ["Find the increase first.", "Divide the increase by the ORIGINAL value, then × 100."],
+        strategy: "Use figures from the source",
+      },
+      {
+        kind: "mcq",
+        id: "living-in-extremes-m3-q15",
+        question:
+          "A school group plans a winter trek in Svalbard (about 78° N) in **early January**. What is the **strongest** reason to rethink the date?",
+        options: [
+          "It is the polar night — the sun does not rise — and it is extremely cold, making navigation and rescue much harder",
+          "January is the hottest month in the Arctic",
+          "All polar bears hibernate in January, so there is no wildlife to see",
+          "Tourism is banned in Svalbard during winter",
+        ],
+        answerIndex: 0,
+        explanation:
+          "At 78° N the sun stays below the horizon for weeks around midwinter (**polar night**). Darkness plus severe cold makes navigation, spotting hazards and rescues much harder. January is midwinter, not the hottest month; and only pregnant female polar bears den — the rest stay active, which is itself a hazard.",
+        difficulty: "challenge",
+        guideRef: PE,
+        hints: ["What happens to daylight far north of the Arctic Circle in midwinter?", "Which option links the date to safety?"],
+        strategy: "Use the command word",
+      },
+    ],
+  },
+];
