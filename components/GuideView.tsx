@@ -1,0 +1,229 @@
+"use client";
+
+import { useEffect } from "react";
+import type { Topic } from "@/lib/types";
+import { useStore } from "@/lib/store";
+import Link from "next/link";
+import { getExtras } from "@/lib/extras";
+import { ListenButton } from "./ListenButton";
+import { AskAI } from "./AskAI";
+import { MarkdownLite } from "./MarkdownLite";
+import { sitcomEpisodeFor } from "@/lib/sitcom";
+import { formatDuration } from "./EpisodePlayer";
+
+export function GuideView({ topic, onWatch }: { topic: Topic; onWatch?: () => void }) {
+  const { guidesRead, markGuideRead, award } = useStore();
+  const read = !!guidesRead[topic.id];
+  const extras = getExtras(topic.id);
+  const hasInteractive = !!(extras.interactive || extras.interactives?.length);
+  const episode = sitcomEpisodeFor(topic.id);
+
+  const fullText = () =>
+    `${topic.title}. ${topic.intro} ` +
+    topic.guide.map((s) => `${s.heading}. ${s.body.replace(/[*`#-]/g, " ")}`).join(" ");
+
+  // Scroll to a section if the URL has a matching hash (deep-link from a question).
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const el = document.getElementById(`guide-${hash}`);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+    }
+  }, []);
+
+  function markRead() {
+    markGuideRead(topic.id);
+    award(`guide:${topic.id}`, 5);
+  }
+
+  return (
+    <div className="space-y-6">
+      {extras.hook && (
+        <div className="rounded-2xl border-l-4 border-amber-400 bg-amber-50 p-4">
+          <p className="text-xs font-bold uppercase tracking-wide text-amber-600">🤔 Mystery to solve</p>
+          <p className="mt-1 font-medium text-amber-900">{extras.hook}</p>
+        </div>
+      )}
+
+      {episode && onWatch && (
+        <button
+          type="button"
+          onClick={onWatch}
+          className="flex w-full items-center gap-4 rounded-2xl border-2 border-sky-200 bg-sky-50/70 p-4 text-left transition hover:bg-sky-100"
+        >
+          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-sky-600 text-white" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5.5v13l11-6.5z" fill="currentColor" /></svg>
+          </span>
+          <span className="flex-1">
+            <span className="block font-bold text-sky-900">Watch the Claude Sitcom: &ldquo;{episode.title}&rdquo;</span>
+            <span className="block text-sm text-sky-800">Off The Map · Episode {episode.num} · {formatDuration(episode.durationSec)} · funny, with captions and pause challenges</span>
+          </span>
+          <span className="font-semibold text-sky-800" aria-hidden="true">→</span>
+        </button>
+      )}
+
+      <div className="flex items-center justify-between gap-3">
+        <p className="flex-1 rounded-2xl border border-indigo-100 bg-indigo-50/60 p-4 text-slate-700">{topic.intro}</p>
+      </div>
+      <div className="-mt-2 flex flex-wrap gap-2">
+        <ListenButton getText={fullText} label="Read this guide aloud" />
+        <AskAI
+          topic={topic.title}
+          context={`${topic.intro} ${topic.guide.map((s) => s.heading).join(", ")}`}
+          presets={[
+            { kind: "explain", label: "Explain simply" },
+            { kind: "example", label: "Give an example" },
+          ]}
+        />
+      </div>
+
+      {hasInteractive && (
+        <Link href={`/topic/${topic.id}?tab=interactive`} className="flex items-center gap-3 rounded-2xl border-2 border-indigo-200 bg-indigo-50/70 p-4 transition hover:bg-indigo-100">
+          <span className="text-3xl">🧪</span>
+          <span className="flex-1 font-semibold text-indigo-800">Try the interactive for this topic — change things and see what happens →</span>
+        </Link>
+      )}
+
+      {topic.guide.map((s) => (
+        <section
+          key={s.id}
+          id={`guide-${s.id}`}
+          className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+        >
+          <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
+            <h3 className="text-xl font-bold text-slate-900">{s.heading}</h3>
+            {s.skill && <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">🧭 Skill: {s.skill}</span>}
+          </div>
+          {s.discovery && (
+            <details className="mb-4 rounded-xl border-2 border-dashed border-amber-300 bg-amber-50/70 p-4">
+              <summary className="cursor-pointer list-none">
+                <span className="text-xs font-bold uppercase tracking-wide text-amber-700">🔎 Try this first</span>
+                <span className="mt-1 block font-medium text-amber-950">{s.discovery.problem}</span>
+                <span className="mt-2 inline-block text-xs font-semibold text-amber-700 underline">I&apos;ve had a think — reveal the idea</span>
+              </summary>
+              <p className="mt-3 rounded-lg bg-white/80 p-3 text-sm text-slate-800">💡 {s.discovery.idea}</p>
+            </details>
+          )}
+          <MarkdownLite text={s.body} />
+
+          {s.diagram && (
+            <figure className="my-5">
+              <div
+                className="diagram rounded-xl border border-slate-100 bg-slate-50 p-4"
+                // Inline SVG authored in-repo (trusted content, no user input).
+                dangerouslySetInnerHTML={{ __html: s.diagram }}
+              />
+              {s.diagramCaption && (
+                <figcaption className="mt-2 text-center text-sm italic text-slate-500">
+                  {s.diagramCaption}
+                </figcaption>
+              )}
+            </figure>
+          )}
+
+          {s.keyPoints && s.keyPoints.length > 0 && (
+            <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+              <p className="mb-2 text-sm font-bold text-emerald-800">🔑 Key points</p>
+              <ul className="space-y-1.5">
+                {s.keyPoints.map((k, i) => (
+                  <li key={i} className="flex gap-2 text-sm text-emerald-900">
+                    <span>•</span>
+                    <span>{k}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {s.caseStudy && (
+            <div className="mt-4 rounded-xl border border-sky-200 bg-sky-50 p-4">
+              <p className="mb-2 text-sm font-bold text-sky-800">📍 Case study: {s.caseStudy.place}</p>
+              <ul className="space-y-1.5">
+                {s.caseStudy.facts.map((f, i) => (
+                  <li key={i} className="flex gap-2 text-sm text-sky-950">
+                    <span>▸</span>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {s.thinkDeeper && (
+            <div className="mt-4 rounded-xl border-l-4 border-violet-400 bg-violet-50 p-4">
+              <p className="text-sm font-bold text-violet-800">🧠 Think deeper</p>
+              <p className="mt-1 text-sm text-violet-900">{s.thinkDeeper}</p>
+            </div>
+          )}
+        </section>
+      ))}
+
+      {extras.bonusDiagrams && extras.bonusDiagrams.length > 0 && (
+        <div className="space-y-4">
+          {extras.bonusDiagrams.map((d, i) => (
+            <figure key={i} className="rounded-2xl border border-slate-200 bg-white p-5">
+              <figcaption className="mb-2 font-bold text-slate-900">{d.title}</figcaption>
+              <div className="diagram rounded-xl border border-slate-100 bg-slate-50 p-4" dangerouslySetInnerHTML={{ __html: d.svg }} />
+              {d.caption && <p className="mt-2 text-center text-sm italic text-slate-500">{d.caption}</p>}
+            </figure>
+          ))}
+        </div>
+      )}
+
+      {extras.didYouKnow && extras.didYouKnow.length > 0 && (
+        <section>
+          <h3 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-900">💡 Did you know?</h3>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {extras.didYouKnow.map((f, i) => (
+              <div key={i} className="rounded-2xl border border-sky-200 bg-sky-50/60 p-4 text-sm text-sky-900">{f}</div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {extras.experiments && extras.experiments.length > 0 && (
+        <section>
+          <h3 className="mb-3 flex items-center gap-2 text-lg font-bold text-slate-900">🧭 Try this at home / fieldwork</h3>
+          <div className="space-y-4">
+            {extras.experiments.map((ex, i) => (
+              <div key={i} className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-5">
+                <p className="text-lg font-bold text-slate-900">{ex.emoji} {ex.title}</p>
+                <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">You need</p>
+                    <ul className="mt-1 space-y-1 text-sm text-slate-700">
+                      {ex.materials.map((m, j) => (<li key={j} className="flex gap-2"><span>•</span>{m}</li>))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wide text-emerald-700">Steps</p>
+                    <ol className="mt-1 space-y-1 text-sm text-slate-700">
+                      {ex.steps.map((s, j) => (<li key={j} className="flex gap-2"><span className="font-semibold text-emerald-600">{j + 1}.</span>{s}</li>))}
+                    </ol>
+                  </div>
+                </div>
+                <p className="mt-3 rounded-lg bg-white/70 p-3 text-sm text-slate-700"><span className="font-bold text-emerald-700">The geography: </span>{ex.science}</p>
+                {ex.safety && <p className="mt-2 text-sm text-rose-600">⚠️ {ex.safety}</p>}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <div className="flex items-center justify-center pt-2">
+        {read ? (
+          <span className="inline-flex items-center gap-2 rounded-xl border border-emerald-300 bg-emerald-50 px-5 py-2.5 font-semibold text-emerald-700">
+            ✅ Guide completed
+          </span>
+        ) : (
+          <button
+            onClick={markRead}
+            className="rounded-xl bg-emerald-600 px-6 py-2.5 font-semibold text-white shadow-sm hover:bg-emerald-700"
+          >
+            ✔ I&apos;ve read this — give me ⭐5
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}

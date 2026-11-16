@@ -1,0 +1,60 @@
+import type { TopicExtras } from "../types";
+
+export const demographyExtras: TopicExtras = {
+  hook:
+    "Line up everyone in Niger from youngest to oldest and the person in the middle is about 15 years old; do the same in Japan and the middle person is nearly 49. How can two countries in the same century be so different — and which one is Singapore starting to look like?",
+  didYouKnow: [
+    "The world population passed 8 billion on 15 November 2022 (UN estimate) — it was only 4 billion in 1974.",
+    "In 2023 India overtook China as the most populous country, with over 1.42 billion people (UN estimate).",
+    "Singapore's resident total fertility rate fell to 0.97 in 2023 — the first time it dropped below 1 child per woman, far below the replacement level of 2.1.",
+    "In Japan almost 3 in every 10 people (about 29%) are aged 65 or over — the highest share of any large country — and adult nappies outsell baby nappies there.",
+    "Britain's first national census in 1801 counted about 8.9 million people in England and Wales; Singapore's Census 2020 mostly used government records instead of knocking on every door.",
+  ],
+  experiments: [
+    {
+      title: "Your family's own demographic transition",
+      emoji: "👪",
+      materials: ["Paper and pen (or a spreadsheet)", "Parents, grandparents or older relatives to interview"],
+      steps: [
+        "Ask each grandparent how many brothers and sisters they had, and whether any died as babies or children.",
+        "Ask each parent the same question, then count your own siblings.",
+        "Draw a bar chart: family size for the grandparent, parent and your own generation.",
+        "Ask WHY families changed: cost of housing and school, mothers working, health care, HDB flat size, government campaigns such as 'Stop at Two' (1970s) and later 'Have Three or More (if you can afford it)'.",
+        "Match each generation to a stage of the Demographic Transition Model.",
+      ],
+      science:
+        "Most Singapore families show the DTM in miniature: grandparents often had 5–8 siblings (stage 2–3), parents 2–3 (stage 3–4) and today 1–2 (stage 4–5). Falling child deaths came first, then families chose to have fewer children — exactly the order the model predicts.",
+      safety: "Be sensitive — some relatives may not want to talk about family members who died. Let them skip any question.",
+    },
+    {
+      title: "Mini-census: build a class population pyramid",
+      emoji: "📊",
+      materials: ["Anonymous slips of paper or an online form (ask your teacher)", "Squared paper", "Two coloured pens"],
+      steps: [
+        "With your teacher's permission, ask each classmate to write the age and sex of everyone living in their home — no names.",
+        "Tally the people into 10-year age bands (0–9, 10–19 … 80+) for males and females.",
+        "Turn each tally into a percentage of the total, then draw a pyramid: males left, females right, youngest at the bottom.",
+        "Work out the dependency ratio: (under-15s + over-64s) ÷ (15–64s) × 100.",
+        "Compare your pyramid with Singapore's national one from SingStat. Is your sample's shape similar? Why might it differ?",
+      ],
+      science:
+        "This is how a real census works: count everyone, group by age and sex, then look at the shape. Your pyramid will probably bulge at 10–19 (you and your classmates) and 40–59 (your parents) — a reminder that a sample can be biased. Real censuses try to count everyone to avoid that bias.",
+      safety: "Keep the survey anonymous and voluntary, and never collect names, addresses or NRIC numbers.",
+    },
+  ],
+  bonusDiagrams: [
+    {
+      title: "Three pyramid shapes",
+      svg: `<svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three population pyramid shapes: expansive with a wide base, stationary with straight sides, constrictive with a narrow base" font-family="sans-serif"><rect x="8" y="130" width="52" height="15" fill="#93c5fd"/><rect x="60" y="130" width="52" height="15" fill="#f9a8d4"/><rect x="19" y="112" width="41" height="15" fill="#93c5fd"/><rect x="60" y="112" width="41" height="15" fill="#f9a8d4"/><rect x="29" y="94" width="31" height="15" fill="#93c5fd"/><rect x="60" y="94" width="31" height="15" fill="#f9a8d4"/><rect x="38" y="76" width="22" height="15" fill="#93c5fd"/><rect x="60" y="76" width="22" height="15" fill="#f9a8d4"/><rect x="46" y="58" width="14" height="15" fill="#93c5fd"/><rect x="60" y="58" width="14" height="15" fill="#f9a8d4"/><rect x="53" y="40" width="7" height="15" fill="#93c5fd"/><rect x="60" y="40" width="7" height="15" fill="#f9a8d4"/><line x1="60" y1="38" x2="60" y2="145" stroke="#475569" stroke-width="1"/><text x="60" y="163" text-anchor="middle" font-size="13" font-weight="700" fill="#e11d48">Expansive</text><text x="60" y="179" text-anchor="middle" font-size="11" fill="#475569">e.g. Niger</text><rect x="146" y="130" width="34" height="15" fill="#93c5fd"/><rect x="180" y="130" width="34" height="15" fill="#f9a8d4"/><rect x="146" y="112" width="34" height="15" fill="#93c5fd"/><rect x="180" y="112" width="34" height="15" fill="#f9a8d4"/><rect x="147" y="94" width="33" height="15" fill="#93c5fd"/><rect x="180" y="94" width="33" height="15" fill="#f9a8d4"/><rect x="149" y="76" width="31" height="15" fill="#93c5fd"/><rect x="180" y="76" width="31" height="15" fill="#f9a8d4"/><rect x="154" y="58" width="26" height="15" fill="#93c5fd"/><rect x="180" y="58" width="26" height="15" fill="#f9a8d4"/><rect x="165" y="40" width="15" height="15" fill="#93c5fd"/><rect x="180" y="40" width="15" height="15" fill="#f9a8d4"/><line x1="180" y1="38" x2="180" y2="145" stroke="#475569" stroke-width="1"/><text x="180" y="163" text-anchor="middle" font-size="13" font-weight="700" fill="#d97706">Stationary</text><text x="180" y="179" text-anchor="middle" font-size="11" fill="#475569">e.g. UK</text><rect x="278" y="130" width="22" height="15" fill="#93c5fd"/><rect x="300" y="130" width="22" height="15" fill="#f9a8d4"/><rect x="273" y="112" width="27" height="15" fill="#93c5fd"/><rect x="300" y="112" width="27" height="15" fill="#f9a8d4"/><rect x="269" y="94" width="31" height="15" fill="#93c5fd"/><rect x="300" y="94" width="31" height="15" fill="#f9a8d4"/><rect x="267" y="76" width="33" height="15" fill="#93c5fd"/><rect x="300" y="76" width="33" height="15" fill="#f9a8d4"/><rect x="270" y="58" width="30" height="15" fill="#93c5fd"/><rect x="300" y="58" width="30" height="15" fill="#f9a8d4"/><rect x="276" y="40" width="24" height="15" fill="#93c5fd"/><rect x="300" y="40" width="24" height="15" fill="#f9a8d4"/><line x1="300" y1="38" x2="300" y2="145" stroke="#475569" stroke-width="1"/><text x="300" y="163" text-anchor="middle" font-size="13" font-weight="700" fill="#0284c7">Constrictive</text><text x="300" y="179" text-anchor="middle" font-size="11" fill="#475569">e.g. Japan</text><text x="4" y="24" font-size="11" fill="#475569">Old ↑</text><text x="4" y="146" font-size="11" fill="#475569">Young</text><text x="180" y="18" text-anchor="middle" font-size="11" fill="#475569">blue = male · pink = female</text></svg>`,
+      caption:
+        "Expansive = high birth rate, short life expectancy (stage 2–3). Stationary = low birth and death rates, straight sides (stage 4). Constrictive = birth rate below replacement, many elderly (stage 5).",
+    },
+    {
+      title: "The Demographic Transition Model",
+      svg: `<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Demographic transition model: birth and death rates over five stages with total population rising then levelling off" font-family="sans-serif"><line x1="94" y1="20" x2="94" y2="150" stroke="#cbd5e1" stroke-dasharray="3 3"/><line x1="158" y1="20" x2="158" y2="150" stroke="#cbd5e1" stroke-dasharray="3 3"/><line x1="222" y1="20" x2="222" y2="150" stroke="#cbd5e1" stroke-dasharray="3 3"/><line x1="286" y1="20" x2="286" y2="150" stroke="#cbd5e1" stroke-dasharray="3 3"/><line x1="30" y1="150" x2="350" y2="150" stroke="#475569"/><line x1="30" y1="20" x2="30" y2="150" stroke="#475569"/><path d="M30,43 L33,41 L36,39 L40,39 L43,41 L46,43 L49,46 L52,47 L56,47 L59,46 L62,43 L65,41 L68,39 L72,39 L75,41 L78,43 L81,46 L84,47 L88,47 L91,46 L94,43 L97,43 L100,43 L104,43 L107,43 L110,43 L113,43 L116,43 L120,43 L123,43 L126,43 L129,43 L132,43 L136,43 L139,43 L142,43 L145,43 L148,43 L152,43 L155,43 L158,43 L161,44 L164,45 L168,47 L171,50 L174,53 L177,57 L180,61 L184,65 L187,70 L190,75 L193,80 L196,84 L200,89 L203,93 L206,97 L209,100 L212,103 L216,105 L219,106 L222,107 L225,107 L228,107 L232,107 L235,108 L238,108 L241,109 L244,109 L248,110 L251,110 L254,111 L257,112 L260,112 L264,113 L267,113 L270,114 L273,114 L276,115 L280,115 L283,115 L286,115 L289,115 L292,116 L296,116 L299,117 L302,117 L305,118 L308,119 L312,119 L315,120 L318,121 L321,122 L324,123 L328,124 L331,124 L334,125 L337,126 L340,126 L344,127 L347,127 L350,127" fill="none" stroke="#e11d48" stroke-width="2.5"/><path d="M30,52 L33,42 L36,41 L40,48 L43,59 L46,63 L49,59 L52,48 L56,41 L59,42 L62,52 L65,61 L68,63 L72,55 L75,45 L78,40 L81,45 L84,55 L88,63 L91,61 L94,52 L97,52 L100,53 L104,55 L107,57 L110,60 L113,64 L116,67 L120,71 L123,75 L126,79 L129,83 L132,87 L136,91 L139,95 L142,98 L145,101 L148,103 L152,105 L155,106 L158,107 L161,107 L164,107 L168,108 L171,108 L174,109 L177,110 L180,111 L184,112 L187,113 L190,114 L193,115 L196,116 L200,117 L203,118 L206,119 L209,120 L212,120 L216,121 L219,121 L222,121 L225,121 L228,121 L232,121 L235,121 L238,121 L241,121 L244,121 L248,121 L251,121 L254,121 L257,121 L260,121 L264,121 L267,121 L270,121 L273,121 L276,121 L280,121 L283,121 L286,121 L289,121 L292,121 L296,121 L299,121 L302,120 L305,120 L308,119 L312,119 L315,119 L318,118 L321,118 L324,117 L328,117 L331,117 L334,116 L337,116 L340,116 L344,115 L347,115 L350,115" fill="none" stroke="#0f172a" stroke-width="2.5"/><path d="M30,148 L33,148 L36,148 L40,148 L43,148 L46,148 L49,148 L52,148 L56,148 L59,148 L62,148 L65,148 L68,148 L72,148 L75,148 L78,148 L81,148 L84,148 L88,148 L91,147 L94,147 L97,147 L100,147 L104,147 L107,147 L110,147 L113,147 L116,147 L120,147 L123,146 L126,146 L129,146 L132,145 L136,145 L139,144 L142,144 L145,143 L148,142 L152,141 L155,139 L158,138 L161,136 L164,134 L168,132 L171,129 L174,126 L177,123 L180,119 L184,116 L187,112 L190,109 L193,105 L196,101 L200,98 L203,94 L206,91 L209,88 L212,85 L216,83 L219,80 L222,78 L225,76 L228,73 L232,71 L235,68 L238,66 L241,63 L244,61 L248,58 L251,56 L254,54 L257,52 L260,50 L264,48 L267,46 L270,44 L273,42 L276,41 L280,39 L283,38 L286,36 L289,35 L292,33 L296,32 L299,31 L302,30 L305,29 L308,28 L312,28 L315,28 L318,29 L321,29 L324,30 L328,32 L331,34 L334,36 L337,38 L340,40 L344,43 L347,45 L350,48" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="6 3"/><text x="62" y="164" text-anchor="middle" font-size="11" fill="#334155">Stage 1</text><text x="126" y="164" text-anchor="middle" font-size="11" fill="#334155">Stage 2</text><text x="190" y="164" text-anchor="middle" font-size="11" fill="#334155">Stage 3</text><text x="254" y="164" text-anchor="middle" font-size="11" fill="#334155">Stage 4</text><text x="318" y="164" text-anchor="middle" font-size="11" fill="#334155">Stage 5</text><text x="26" y="14" font-size="11" fill="#64748b">per 1000</text><rect x="30" y="181" width="12" height="4" fill="#e11d48"/><text x="46" y="187" font-size="11" fill="#334155">Birth rate</text><rect x="120" y="181" width="12" height="4" fill="#0f172a"/><text x="136" y="187" font-size="11" fill="#334155">Death rate</text><rect x="212" y="181" width="12" height="4" fill="#7c3aed"/><text x="228" y="187" font-size="11" fill="#334155">Total population</text></svg>`,
+      caption:
+        "Death rate falls first (stage 2), then birth rate follows (stage 3). The gap between the lines is natural increase — that is when total population rises fastest. Idealised model: migration is ignored.",
+    },
+  ],
+  interactives: ["demography:PyramidExplorer", "demography:DTMExplorer"],
+};

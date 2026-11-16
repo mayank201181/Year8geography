@@ -1,0 +1,183 @@
+"use client";
+
+import Link from "next/link";
+import { useMemo } from "react";
+import { TOPIC_META, ACCENT, SUBJECTS, SUBJECT_ICON, type TopicMeta } from "@/lib/topics/_meta";
+import { SITCOM_EPISODES } from "@/lib/sitcom";
+import { rankFor, useStore } from "@/lib/store";
+
+
+export default function Home() {
+  const { stars, last, guidesRead, attempts, streak, srs, goalMinutes, analytics, setGoalMinutes } = useStore();
+  const rank = rankFor(stars);
+  const today = new Date().toISOString().slice(0, 10);
+  const missedCount = Object.values(srs).filter((s) => s.due <= today).length;
+  const todayStat = analytics.days[today] ?? { timeMs: 0, answered: 0, correct: 0 };
+  const minsToday = Math.floor(todayStat.timeMs / 60000);
+  const goalPct = Math.min(100, Math.round((minsToday / goalMinutes) * 100));
+
+  // total "pieces" of a topic: guide + 2 quiz runners + 8 bank papers = 11
+  const topicProgress = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const m of TOPIC_META) {
+      let done = guidesRead[m.id] ? 1 : 0;
+      const prefixes = [`quiz-mcq:${m.id}`, `quiz-qa:${m.id}`, `bank:${m.id}:`];
+      for (const key of Object.keys(attempts)) {
+        if (prefixes.some((p) => key.startsWith(p)) && (attempts[key] as { completed?: boolean }).completed) done++;
+      }
+      map[m.id] = Math.min(100, Math.round((done / 11) * 100));
+    }
+    return map;
+  }, [guidesRead, attempts]);
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-8">
+      {/* hero */}
+      <section className="overflow-hidden rounded-3xl border border-indigo-100 bg-gradient-to-br from-indigo-50 via-white to-sky-50 p-6 sm:p-10">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="max-w-xl">
+            <p className="mb-2 inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-100">
+              🎓 Year 8 Geography · Tanglin Middle School curriculum
+            </p>
+            <h1 className="text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">
+              Welcome to your <span className="text-indigo-600">Geography Lab</span>
+            </h1>
+            <p className="mt-3 text-slate-600">
+              {TOPIC_META.length} topics across all four Year 8 units — 8 Billion++, Extreme Environments, Cracking Coasts and
+              Future Cities. Each has an illustrated guide with case studies, interactive explorers, a Claude Sitcom episode,
+              flashcards, quizzes and full practice papers.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              {last ? (
+                <Link
+                  href={last.href}
+                  className="rounded-xl bg-indigo-600 px-5 py-2.5 font-semibold text-white shadow-sm hover:bg-indigo-700"
+                >
+                  ▶ Resume: {last.label}
+                </Link>
+              ) : (
+                <Link
+                  href="/topic/population-distribution"
+                  className="rounded-xl bg-indigo-600 px-5 py-2.5 font-semibold text-white shadow-sm hover:bg-indigo-700"
+                >
+                  Start with Unit 1: Where We Live →
+                </Link>
+              )}
+              <Link
+                href="/exam"
+                className="rounded-xl border border-slate-200 bg-white px-5 py-2.5 font-semibold text-slate-700 hover:bg-slate-50"
+              >
+                🏁 The Big Exam
+              </Link>
+              {SITCOM_EPISODES.length > 0 && (
+                <Link
+                  href="/episodes"
+                  className="rounded-xl bg-gradient-to-r from-sky-600 to-emerald-500 px-5 py-2.5 font-semibold text-white shadow-sm hover:opacity-95"
+                >
+                  🎬 Watch the Claude Sitcom
+                </Link>
+              )}
+            </div>
+          </div>
+
+          <div className="flex shrink-0 flex-col items-center rounded-2xl bg-white p-5 text-center shadow-sm ring-1 ring-slate-100">
+            <div className="animate-floaty text-5xl">{rank.emoji}</div>
+            <div className="mt-2 text-3xl font-extrabold tabular-nums text-amber-500">⭐ {stars}</div>
+            <div className="text-sm font-medium text-slate-500">{rank.name}</div>
+            <Link href="/progress" className="mt-3 text-xs font-semibold text-indigo-600 hover:underline">
+              View achievements →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* daily strip */}
+      <section className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-bold uppercase tracking-wide text-emerald-700">🎯 Today&apos;s goal</span>
+            <select
+              value={goalMinutes}
+              onChange={(e) => setGoalMinutes(Number(e.target.value))}
+              className="rounded-md border border-emerald-200 bg-white px-1 py-0.5 text-xs font-semibold text-emerald-700"
+              aria-label="Daily goal in minutes"
+            >
+              {[5, 10, 15, 20, 30].map((m) => (
+                <option key={m} value={m}>{m} min</option>
+              ))}
+            </select>
+          </div>
+          <p className="mt-1 text-right text-xs font-semibold text-emerald-700/80">{minsToday}/{goalMinutes} min today</p>
+          <div className="mt-2 h-2.5 overflow-hidden rounded-full bg-emerald-100">
+            <div className="h-full rounded-full bg-emerald-500 transition-all" style={{ width: `${goalPct}%` }} />
+          </div>
+          <p className="mt-2 text-xs font-medium text-emerald-700/80">{goalPct >= 100 ? "Goal smashed today! 🎉" : "Keep going — you've got this!"}</p>
+        </div>
+        <div className="flex items-center gap-3 rounded-2xl border border-orange-200 bg-orange-50 p-4">
+          <span className="text-3xl">🔥</span>
+          <div>
+            <p className="text-2xl font-extrabold tabular-nums text-orange-600">{streak.count} day{streak.count === 1 ? "" : "s"}</p>
+            <p className="text-xs font-medium text-orange-700/80">Daily streak{streak.best > 0 ? ` · best ${streak.best}` : ""}</p>
+          </div>
+        </div>
+        <Link href="/review" className="flex items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 p-4 transition hover:bg-rose-100">
+          <span className="text-3xl">🔁</span>
+          <div>
+            <p className="text-2xl font-extrabold tabular-nums text-rose-600">{missedCount}</p>
+            <p className="text-xs font-medium text-rose-700/80">{missedCount === 0 ? "Nothing due — nice!" : "Due for review →"}</p>
+          </div>
+        </Link>
+        <Link href="/progress" className="flex items-center gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 transition hover:bg-amber-100">
+          <span className="text-3xl">⭐</span>
+          <div>
+            <p className="text-2xl font-extrabold tabular-nums text-amber-600">{stars}</p>
+            <p className="text-xs font-medium text-amber-700/80">Stars · {rank.name} →</p>
+          </div>
+        </Link>
+      </section>
+
+      {/* topics by subject */}
+      {SUBJECTS.map((subject, ui) => (
+        <section key={subject} className="mt-10">
+          <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-900">
+            <span>{SUBJECT_ICON[subject]}</span> Unit {ui + 1}: {subject}
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
+            {TOPIC_META.filter((m) => m.subject === subject).map((m) => (
+              <TopicCard key={m.id} meta={m} progress={topicProgress[m.id] ?? 0} />
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function TopicCard({ meta, progress }: { meta: TopicMeta; progress: number }) {
+  const a = ACCENT[meta.accent];
+  return (
+    <Link
+      href={`/topic/${meta.id}`}
+      className={`group relative flex flex-col rounded-2xl border bg-gradient-to-br p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md ${a.card}`}
+    >
+      <div className="flex items-start gap-4">
+        <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-white text-3xl shadow-sm">
+          {meta.icon}
+        </div>
+        <div className="min-w-0">
+          <h3 className="font-bold text-slate-900">{meta.title}</h3>
+          <p className="mt-0.5 text-sm text-slate-600">{meta.summary}</p>
+        </div>
+      </div>
+      <div className="mt-4">
+        <div className="mb-1 flex items-center justify-between text-xs font-medium text-slate-500">
+          <span>Progress</span>
+          <span className="tabular-nums">{progress}%</span>
+        </div>
+        <div className="h-2 overflow-hidden rounded-full bg-white/70">
+          <div className={`h-full rounded-full ${a.bar} transition-all`} style={{ width: `${progress}%` }} />
+        </div>
+      </div>
+    </Link>
+  );
+}
