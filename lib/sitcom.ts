@@ -34,6 +34,76 @@ export const SITCOM_EPISODES: SitcomEpisode[] = [
     "poster": "/videos/posters/population-growth.jpg"
   },
   {
+    "num": 3,
+    "topicId": "demography",
+    "topicShort": "Demography",
+    "title": "Pyramid Scheme",
+    "logline": "Dad joins a 'pyramid scheme' and Mum runs a household census that Nani refuses to answer. Atlas spins them to the Pyramids of Giza, where a demographer draws the only pyramids worth investing in: population pyramids.",
+    "durationSec": 533,
+    "src": "/videos/demography.mp4",
+    "poster": "/videos/posters/demography.jpg"
+  },
+  {
+    "num": 4,
+    "topicId": "population-change",
+    "topicShort": "Migration",
+    "title": "Push Comes To Shove",
+    "logline": "Dad loses the aircon war and threatens to 'emigrate' to Tampines. Nani tells the real story of her family's migration, and Atlas spins everyone to London to meet a Polish builder and a Syrian doctor.",
+    "durationSec": 523,
+    "src": "/videos/population-change.mp4",
+    "poster": "/videos/posters/population-change.jpg"
+  },
+  {
+    "num": 6,
+    "topicId": "extreme-environments",
+    "topicShort": "Extreme Environments",
+    "title": "Hot Stuff, Cold Feet",
+    "logline": "Dad walks six minutes from the MRT and declares Singapore the most extreme environment on Earth. Atlas spins him to the Sahara, Vostok Station and Everest Base Camp to recalibrate, while Mum puts a climate graph on the fridge.",
+    "durationSec": 517,
+    "src": "/videos/extreme-environments.mp4",
+    "poster": "/videos/posters/extreme-environments.jpg"
+  },
+  {
+    "num": 9,
+    "topicId": "extreme-tourism",
+    "topicShort": "Extreme Tourism",
+    "title": "Penguins Don't Do Selfies",
+    "logline": "Dad books a 3,000-passenger cruise to Antarctica to take a selfie with a penguin. Atlas spins the family to the Antarctic Peninsula, where an expedition guide enforces the rules, then to Everest Base Camp, where a Sherpa guide hands Dad a poo bag.",
+    "durationSec": 530,
+    "src": "/videos/extreme-tourism.mp4",
+    "poster": "/videos/posters/extreme-tourism.jpg"
+  },
+  {
+    "num": 10,
+    "topicId": "coastal-processes",
+    "topicShort": "Coastal Processes",
+    "title": "Shore Thing",
+    "logline": "Dad builds a sandcastle 'with foundations' at East Coast Park and swears it will last a week. Atlas spins the family to the crumbling Holderness coast, Mum and Nani race flip-flops by longshore drift, and Atlas fails Mr Tan's erosion quiz.",
+    "durationSec": 525,
+    "src": "/videos/coastal-processes.mp4",
+    "poster": "/videos/posters/coastal-processes.jpg"
+  },
+  {
+    "num": 12,
+    "topicId": "coral-reefs",
+    "topicShort": "Coral Reefs",
+    "title": "Bleached Out",
+    "logline": "Dad decides coral is a pretty rock and wants a lump of it for the living-room shelf. Atlas spins the family to the Great Barrier Reef, where a marine scientist explains that the 'rock' is an animal with flatmates, and that the white bits are not dead yet.",
+    "durationSec": 518,
+    "src": "/videos/coral-reefs.mp4",
+    "poster": "/videos/posters/coral-reefs.jpg"
+  },
+  {
+    "num": 13,
+    "topicId": "cities-megacities",
+    "topicShort": "Cities & Megacities",
+    "title": "Mega Problems",
+    "logline": "Dad counts the same twelve neighbours in the lift all morning and declares their HDB block a megacity. Atlas spins the family to Tokyo to meet a real one, and to find out why the giant cities of the future are in Asia and Africa.",
+    "durationSec": 519,
+    "src": "/videos/cities-megacities.mp4",
+    "poster": "/videos/posters/cities-megacities.jpg"
+  },
+  {
     "num": 15,
     "topicId": "sustainable-cities",
     "topicShort": "Sustainable Cities",
