@@ -252,8 +252,8 @@ export const drills: Drill[] = [
         prompt: stem,
         answer: isLocal ? text("local") : text("global"),
         solution: isLocal
-          ? [`${t[0].toUpperCase() + t.slice(1)} starts in or near the reef, so Australian rules (zoning, farm limits, permits) can control it — a **local** threat.`]
-          : [`${t[0].toUpperCase() + t.slice(1)} comes from greenhouse gases released worldwide, so no local rule can stop it — a **global** threat.`, "This is why climate change limits what local management can achieve."],
+          ? [`"${t[0].toUpperCase() + t.slice(1)}": the cause starts in or near the reef, so Australian rules (zoning, farm limits, permits) can control it — a **local** threat.`]
+          : [`"${t[0].toUpperCase() + t.slice(1)}": the cause is greenhouse gases released all over the world, so no local rule can stop it — a **global** threat.`, "This is why climate change limits what local management can achieve."],
         hint: "Ask: does the cause start in Queensland, or from emissions all over the world?",
         traps: [{ spec: isLocal ? text("global") : text("local"), feedback: isLocal ? "The cause starts in or near the reef, so local rules can reach it." : "Australia alone cannot stop this — it comes from worldwide emissions." }],
       };

@@ -260,7 +260,7 @@ const STORM_FACTS: Fact[] = [
   { clues: ["the change of state as rising water vapour turns into cloud droplets, releasing the heat that powers a tropical storm"], accept: ["condensation", "condensing"], level: 2, why: "**Condensation** releases latent heat, warming the air so it rises even faster — the storm's engine.", traps: [tt(["evaporation", "evaporating"], "Evaporation takes water INTO the air from the warm sea. The heat is released when vapour turns back to droplets: condensation.")] },
   { clues: ["the process that takes huge amounts of water vapour from the warm ocean surface into the air, fuelling a tropical storm"], accept: ["evaporation", "evaporating"], level: 2, why: "**Evaporation** from sea water above about 26.5 °C supplies the moisture and energy the storm needs.", traps: [tt(["condensation"], "Condensation happens higher up, in the clouds. Water leaving the warm sea surface is evaporation.")] },
   { clues: ["the earliest stage of a tropical storm system, with sustained winds below about 63 km/h"], accept: ["tropical depression", "depression"], level: 3, why: "A **tropical depression** becomes a named tropical storm at about 63 km/h, and a hurricane/typhoon/cyclone at 119 km/h." },
-  { clues: ["what happens to the name of a tropical storm that was so deadly or destructive that it will never be used again"], accept: ["retired", "it is retired", "retirement", "name is retired"], level: 3, why: "The World Meteorological Organization **retires** names of especially deadly storms, such as Katrina (2005) and Haiyan (2013)." },
+  { clues: ["the word for what happens to the name of a tropical storm that was so deadly or destructive that it will never be used again"], accept: ["retired", "it is retired", "retirement", "name is retired"], level: 3, why: "The World Meteorological Organization **retires** names of especially deadly storms, such as Katrina (2005) and Haiyan (2013)." },
   { clues: ["the direction a tropical storm spins in the northern hemisphere (clockwise or anticlockwise)"], accept: ["anticlockwise", "anti-clockwise", "counterclockwise", "counter-clockwise", "anti clockwise", "counter clockwise"], level: 2, why: "Northern-hemisphere storms spin **anticlockwise**; southern-hemisphere storms spin clockwise — both because of the Coriolis effect.", traps: [tt(["clockwise"], "That's the southern hemisphere. In the northern hemisphere air spirals in anticlockwise.")] },
   { clues: ["the direction a tropical cyclone spins in the southern hemisphere, for example near Australia (clockwise or anticlockwise)"], accept: ["clockwise"], level: 3, why: "Southern-hemisphere cyclones spin **clockwise**, the opposite way to northern-hemisphere storms.", traps: [tt(["anticlockwise", "anti-clockwise", "counterclockwise", "counter-clockwise"], "Anticlockwise is the northern hemisphere. The Coriolis effect reverses south of the equator.")] },
   { clues: ["the country hit by Typhoon Haiyan in November 2013, where a huge storm surge devastated the city of Tacloban"], accept: ["philippines", "the philippines"], level: 2, why: "Typhoon Haiyan hit the **Philippines** in 2013; more than 6,000 people died, many in the storm surge." },
@@ -488,11 +488,12 @@ export const drills: Drill[] = [
       const [lo, hi] = SS_BANDS[cat - 1];
       let kmh = rng.int(lo, hi);
       if (tier === 1) kmh = Math.min(hi, Math.max(lo, Math.round(kmh / 5) * 5));
-      const named = rng.pick(["A hurricane", "A tropical storm", "A powerful storm"]);
+      // Not "a tropical storm": in Saffir–Simpson terms that name means winds BELOW hurricane strength.
+      const named = rng.pick(["A hurricane", "A powerful hurricane", "A storm"]);
       return {
         prompt: `${named} ${where} has sustained winds of **${kmh} km/h**.\n\n${SS_TABLE}\n\nWhat category is it on the Saffir–Simpson scale?`,
         answer: { type: "number", value: cat },
-        solution: [`${kmh} km/h is between ${lo} and ${cat === 5 ? "anything higher" : hi} km/h.`, `So it is **Category ${cat}**${cat >= 3 ? " — a 'major' hurricane" : ""}.`],
+        solution: [cat === 5 ? `${kmh} km/h is ${lo} km/h or more.` : `${kmh} km/h is between ${lo} and ${hi} km/h.`, `So it is **Category ${cat}**${cat >= 3 ? " — a 'major' hurricane" : ""}.`],
         hint: "Find the row whose range contains the wind speed — check both ends of the band.",
       };
     },

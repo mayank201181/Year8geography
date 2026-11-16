@@ -967,7 +967,7 @@ export const drills: Drill[] = [
           answer: { type: "number", value: years },
           solution: [
             `Cover to regain = ${a} − ${b} = ${a - b} percentage points.`,
-            `${a - b} ÷ ${r} = ${num(roundTo((a - b) / r, 2))}, so round UP: **${years} years**.`,
+            (a - b) % r === 0 ? `${a - b} ÷ ${r} = **${years} years**.` : `${a - b} ÷ ${r} = ${num(roundTo((a - b) / r, 2))}, so round UP: **${years} years**.`,
             "On the Great Barrier Reef bleaching struck in 2016, 2017, 2020, 2022 and 2024 — often only 2–3 years apart, too soon for full recovery.",
           ],
           hint: "Find the gap to make up, divide by the yearly recovery, then think about rounding.",

@@ -786,7 +786,7 @@ export const drills: Drill[] = [
       const s = rng.pick(HARD_SOFT);
       const label = tier === 1 ? `**${s.name}**` : `${s.desc}`;
       const stem = rng.pick([
-        `Is ${label} an example of hard engineering or soft engineering?`,
+        tier === 1 ? `Is ${label} an example of hard engineering or soft engineering?` : `Is this an example of hard engineering or soft engineering: ${label}?`,
         `A council plans ${label}. Is this hard or soft engineering?`,
         `Classify this coastal defence as hard or soft engineering: ${label}.`,
       ]);

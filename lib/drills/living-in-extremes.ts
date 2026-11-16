@@ -295,7 +295,7 @@ export const drills: Drill[] = [
         solution: [
           `Height gained = ${big(top)} − ${big(s.h)} = ${big(climb)} m.`,
           `Cooling = {{${climb}/1000}} × 6.5 = ${num(drop)} °C.`,
-          `Temperature = ${num(t0)} − ${num(drop)} = ${clean(t0 - drop) === t1 ? num(t1) : `${num(clean(t0 - drop))} ≈ ${num(t1)}`} °C.`,
+          `Temperature = ${num(t0)} − ${num(drop)} = ${clean(t0 - drop) === t1 ? num(t1) : `${num(clean(t0 - drop))} ≈ ${t1.toFixed(1).replace("-", "−")}`} °C.`,
         ],
         hint: "First find the height GAINED (not the camp's height), then work out how many thousands of metres that is.",
         traps: [
@@ -523,14 +523,16 @@ export const drills: Drill[] = [
       const l = rng.pick([5, 6, 7, 8]);
       const reserve = rng.pick([10, 20, 25, 50]);
       const base = people * days * l;
-      const total = roundTo(base * (1 + reserve / 100), 1);
+      // Exact answer (it can have 2 decimal places, e.g. 131.25); ±0.05 also accepts it rounded to 1 d.p.
+      const reserveL = clean((base * reserve) / 100);
+      const total = clean(base + reserveL);
       return {
         prompt: `A team of ${people} people will spend ${days} days in a hot desert. Each person needs ${l} litres of water a day, and the leader adds an extra ${reserve}% as an emergency reserve. Water weighs 1 kg per litre. What is the total mass of water, in kg, the team must plan to carry or cache?`,
-        answer: { type: "number", value: total, display: `${big(total)} kg` },
+        answer: { type: "number", value: total, tolerance: 0.05, display: `${big(total)} kg` },
         solution: [
           `Basic need: ${people} × ${days} × ${l} = ${big(base)} litres.`,
-          `Reserve: ${reserve}% of ${big(base)} = ${big(roundTo((base * reserve) / 100, 1))} litres.`,
-          `Total = ${big(base)} + ${big(roundTo((base * reserve) / 100, 1))} = ${big(total)} litres = ${big(total)} kg.`,
+          `Reserve: ${reserve}% of ${big(base)} = ${big(reserveL)} litres.`,
+          `Total = ${big(base)} + ${big(reserveL)} = ${big(total)} litres = ${big(total)} kg.`,
         ],
         hint: "Work out the basic total first, then add the reserve percentage of it.",
         traps: base !== total ? [{ spec: { type: "number", value: base }, feedback: `That is the basic need — don't forget the ${reserve}% reserve.` }] : undefined,
