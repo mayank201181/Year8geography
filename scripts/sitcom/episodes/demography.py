@@ -27,7 +27,7 @@ D_SAMPLE = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 170">
 <g fill="#fdba74"><circle cx="396" cy="104" r="6"/><circle cx="416" cy="104" r="6"/></g>
 <g fill="#34d399"><circle cx="436" cy="72" r="6"/><circle cx="456" cy="72" r="6"/><circle cx="436" cy="104" r="6"/></g>
 <text x="87" y="150" font-family="sans-serif" font-size="14" fill="#e2e8f0" text-anchor="middle">equal chance</text>
-<text x="260" y="150" font-family="sans-serif" font-size="14" fill="#e2e8f0" text-anchor="middle">every 5th on a list</text>
+<text x="260" y="150" font-family="sans-serif" font-size="14" fill="#e2e8f0" text-anchor="middle">regular intervals</text>
 <text x="433" y="150" font-family="sans-serif" font-size="14" fill="#e2e8f0" text-anchor="middle">in proportion</text>
 </svg>"""
 
@@ -98,7 +98,7 @@ L("dad", "It feels personal. I am a very countable man. On a good day, I'm one a
 scene("living", [("tara", 260), ("mum", 600), ("dad", 960)])
 L("mum", "Good news! A survey company will pay us five dollars in vouchers for fifty questions!", mood="excited", shot="close", prop="phone")
 L("tara", "That's ten cents a question, Mum.", mood="deadpan", shot="close")
-L("mum", "Ten cents for my opinions! Your father gives his away for free!", mood="smug", shot="close")
+L("mum", "Your father gives his opinions away for free!", mood="smug", shot="close")
 L("dad", "Enough. If the government won't count me, I will count everyone. Starting with the hawker centre.", mood="determined", shot="close", prop="book")
 freeze("THE RAO CENSUS", 2.4, narrator="Narrator: Population of the Rao Census so far: one. Him.")
 confess("tara", "TARA RAO · 12 · Only Sane Person In This House")
@@ -160,8 +160,6 @@ L("dad", "Question three. What is your salary, your weight, and your Singpass pa
 sfx("buzzer")
 L("globo", "Ethics. Ask for consent. Let people skip. Keep it anonymous, and store it safely.", mood="shock", shot="close",
   boardClear=True, board="ETHICS: consent · anonymous · safe")
-L("uncle", "My password is one, two, three, four. Don't tell anyone.", mood="happy", shot="close")
-L("tara", "Uncle. Please change it.", mood="deadpan", shot="close", gap=0.4)
 
 card("NEXT DAY, CLASS 8C", "Tara's census, done properly", 2.2)
 scene("classroom", [("teacher", 300), ("tara", 640)])
@@ -175,8 +173,6 @@ poof("globo", 960)
 L("globo", "And can you say that thirty two percent of all students in Singapore take the MRT?", mood="smug", shot="close")
 L("tara", "No. Twenty eight people, one class, one day. A small sample can't be generalised to the whole school, let alone Singapore.", mood="deadpan", shot="close",
   boardClear=True, board="Small sample ≠ whole country")
-L("teacher", "Excellent. Also, why is there a globe in my classroom?", mood="worried", shot="close")
-L("globo", "I used to work here. Same chewing gum.", mood="bored", shot="close", gap=0.4)
 
 # ---------------- ACT 3: PYRAMIDS AND DEPENDENCY ----------------
 card("THAT EVENING", "Mum has discovered pyramids", 2.2)
@@ -195,10 +191,7 @@ L("globo", "Then look for bulges and notches. A bulge is a baby boom, or immigra
   boardClear=True, board="BULGE: baby boom or immigration")
 L("globo", "A notch comes from war, famine, emigration or a sudden drop in births. In Japan in nineteen sixty six, a superstition cut births by about a quarter.", mood="teach", shot="close",
   board="NOTCH: war · famine · emigration · births ↓")
-L("tara", "Dad's pyramid would just be one very confident bar.", mood="deadpan", shot="close", gap=0.4)
 
-confess("mum", "MUM · Deal Hunter · Has Never Paid Full Price")
-L("mum", "A narrow base means fewer children. Fewer school shoes. Sounds like a saving.", mood="smug", gap=0.5)
 
 scene("living", [("tara", 260), ("dad", 600), ("globo", 960)])
 L("dad", "I've been thinking. I support this family. So I'm the dependant.", mood="smug", shot="close")
@@ -244,8 +237,8 @@ challenge(1, "What is a register-based census?", "RECORDS+SURVEY", "births, deat
   "One that uses government records, like births, deaths and addresses, plus a large sample survey.")
 challenge(2, "A pyramid has a wide base and a narrow top. Youthful or ageing?", "YOUTHFUL", "many births, shorter lives → e.g. Niger",
   "Question two. A pyramid has a wide base and a narrow top. Is that population youthful, or ageing?",
-  "Youthful. An expansive pyramid, like Niger. Lots of births, and fewer people reaching old age.")
+  "Youthful. An expansive pyramid, like Niger.")
 challenge(3, "3,000 aged 0–14, 10,000 aged 15–64, 2,000 aged 65+. Dependency ratio?", "50", "(3,000 + 2,000) ÷ 10,000 × 100 = 50",
   "Question three. A town has three thousand children, ten thousand people of working age, and two thousand people aged sixty five or over. What is its dependency ratio?",
-  "Fifty. Five thousand dependants, divided by ten thousand, times one hundred. Fifty dependants for every hundred workers.")
+  "Fifty. Five thousand dependants, divided by ten thousand, times one hundred.")
 end_card()
