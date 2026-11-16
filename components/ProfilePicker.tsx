@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { useStore } from "@/lib/store";
+import { GUEST_ID, useStore } from "@/lib/store";
 
-const EMOJIS = ["🧑‍🎓", "👦", "👧", "🧒", "👨‍🎓", "👩‍🎓", "👩‍🔬", "🧑‍🚀", "🦊", "🐼", "🐱", "🐶", "🦁", "🐯", "🦄", "🐧", "🚀", "⭐", "🌟", "🧠"];
+const EMOJIS = ["🧑‍🎓", "👦", "👧", "🧒", "👨‍🎓", "👩‍🎓", "🧭", "🧑‍🚀", "🦊", "🐼", "🐱", "🐶", "🦁", "🐯", "🦄", "🐧", "🚀", "⭐", "🌟", "🧠"];
 
 export function ProfilePicker() {
   const { account, selectProfile, createProfile, updateProfile, deleteProfile, logout } = useStore();
@@ -63,7 +63,7 @@ export function ProfilePicker() {
   return (
     <div className="grid min-h-screen place-items-center bg-gradient-to-br from-indigo-50 via-white to-emerald-50 px-4">
       <div className="w-full max-w-lg text-center">
-        <div className="text-4xl">🔬</div>
+        <div className="text-4xl">🌏</div>
         <h1 className="mt-2 text-2xl font-extrabold text-slate-900">Who&apos;s studying?</h1>
         <p className="mt-1 text-sm text-slate-500">Pick your name to load your own progress.</p>
 
@@ -162,9 +162,9 @@ export function ProfilePicker() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate-500">
           <span>Signed in as <strong className="text-slate-700">{account?.displayName}</strong></span>
           <span className="hidden sm:inline">·</span>
-          <Link href="/parent" className="font-semibold text-indigo-600 hover:underline">Parent dashboard 🔒</Link>
+          {account?.id !== GUEST_ID && <Link href="/parent" className="font-semibold text-indigo-600 hover:underline">Parent dashboard 🔒</Link>}
           <span className="hidden sm:inline">·</span>
-          <button onClick={logout} className="font-semibold text-slate-500 hover:text-rose-600 hover:underline">Log out</button>
+          <button onClick={logout} className="font-semibold text-slate-500 hover:text-rose-600 hover:underline">{account?.id === GUEST_ID ? "Use a family account instead" : "Log out"}</button>
         </div>
       </div>
     </div>

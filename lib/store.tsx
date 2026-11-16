@@ -128,6 +128,7 @@ const cacheKey = (acc: string, prof: string) => `y8cache:${acc}:${prof}`;
 export const GUEST_ID = "guest-device";
 const GUEST_KEY = "y8g:guest-account";
 const isGuest = (id: string | undefined | null) => id === GUEST_ID;
+function guestPaused(): boolean { try { return !!localStorage.getItem(GUEST_KEY + ":paused"); } catch { return false; } }
 function readGuest(): PublicAccount | null {
   try { const raw = localStorage.getItem(GUEST_KEY); return raw ? (JSON.parse(raw) as PublicAccount) : null; } catch { return null; }
 }
@@ -206,7 +207,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
         const j = await r.json();
         setCloudAvailable(j.cloud !== false);
         if (!j.account) {
-          const guest = readGuest();
+          const guest = guestPaused() ? null : readGuest();
           if (guest) j.account = guest;
         }
         if (j.account) {
@@ -224,7 +225,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
           setStatus("anon");
         }
       } catch {
-        const guest = readGuest();
+        const guest = guestPaused() ? null : readGuest();
         if (guest) { setAccount(guest); setStatus("no-profile"); return; }
         setStatus("anon");
       }
@@ -353,7 +354,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     canSaveRef.current = false;
     setStatus("loading");
     await saver.current!.flush().catch(() => {});
-    if (isGuest(accountRef.current?.id)) writeGuest(null);
+    if (isGuest(accountRef.current?.id)) { try { localStorage.setItem(GUEST_KEY + ":paused", "1"); } catch {} }
     else await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
     setAccount(null);
     setActiveProfile(null);
@@ -426,6 +427,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   const useDevice = useCallback(() => {
     const acc: PublicAccount = readGuest() ?? { id: GUEST_ID, displayName: "This device", profiles: [] };
     writeGuest(acc);
+    try { localStorage.removeItem(GUEST_KEY + ":paused"); } catch {}
     setAccount(acc);
     accountRef.current = acc;
     setStatus("no-profile");

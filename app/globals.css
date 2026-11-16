@@ -52,3 +52,6 @@ body {
 body.lesson-watching [data-mascot] {
   display: none;
 }
+
+/* Interactive widgets: keep diagrams readable on wide screens (SVG text scales with width). */
+.widget-body svg[class*="w-full"] { display: block; max-width: 680px; margin-left: auto; margin-right: auto; }

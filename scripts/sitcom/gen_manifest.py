@@ -14,8 +14,15 @@ for num, topic, short, title in ns["SEASON"]:
     mp4 = os.path.join(ROOT, "public", "videos", f"{topic}.mp4")
     if not os.path.exists(mp4):
         continue
-    dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", mp4],
-                               capture_output=True, text=True, check=True).stdout.strip())
+    try:
+        dur = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", mp4],
+                                   capture_output=True, text=True, check=True).stdout.strip())
+    except (subprocess.CalledProcessError, ValueError):
+        print(f"skip {topic}: video unreadable (still rendering?)")
+        continue
+    if not os.path.exists(os.path.join(ROOT, "public", "videos", "posters", f"{topic}.jpg")):
+        print(f"skip {topic}: no poster yet")
+        continue
     ep_ns = {}
     exec(open(os.path.join(HERE, "common.py")).read(), ep_ns)
     exec(open(os.path.join(HERE, "episodes", f"{topic}.py")).read(), ep_ns)

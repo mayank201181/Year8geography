@@ -129,7 +129,7 @@ L("atlas", "Soft clay and sand erode fast, into bays. Hard chalk and limestone s
 L("dad", "So headlands are the soft bits. Squishy. Like me.", mood="thinking", shot="close")
 L("priya", "Other way round. Headlands are hard. The soft rock either side got eroded away.", mood="deadpan", shot="close",
   board="Differential erosion")
-L("atlas", "Then waves bend round the headlands. Refraction. Energy focuses on headlands and spreads out in bays, so bays get beaches.", mood="teach", shot="close",
+L("atlas", "Waves bend round headlands. Refraction. Energy focuses on headlands and spreads out in bays, so bays get beaches.", mood="teach", shot="close",
   boardClear=True, board="Refraction: energy hits headlands")
 L("priya", "And if the bands run parallel, it's concordant. The sea breaks through and scoops out a cove. Lulworth Cove.", mood="thinking", shot="close",
   board="Concordant (parallel) → Lulworth Cove")
@@ -143,28 +143,25 @@ L("dad", "So my stack will retreat? Towards England? Free upgrade!", mood="excit
 L("atlas", "Towards the bottom of the sea.", mood="deadpan", shot="close", gap=0.4)
 
 confess("atlas", "ATLAS · Desk Globe · Dropped Eleven Times")
-L("atlas", "Dropped eleven times. Usually on Australia. I now have my own wave cut notch, in the Great Australian Bight.", mood="bored")
+L("atlas", "Dropped eleven times. Usually on Australia. I now have a wave cut notch in the Great Australian Bight.", mood="bored")
 L("atlas", "It is not damage. Collectors call it patina.", mood="smug", gap=0.5)
 
 # ---------------- ACT 2: OLD HARRY ROCKS, DORSET ----------------
 scene("living", [("priya", 260), ("dad", 520), ("atlas", 880)])
-L("dad", "Atlas, take me to my property.", mood="determined", shot="close")
-L("nani", "If anyone's going to England, I'm coming. I've got my cardigan.", mood="happy", shot="close", offstage=True)
+L("nani", "If anyone's going to England to see this rock, I'm coming. I've got my cardigan.", mood="happy", shot="close", offstage=True)
 L("atlas", "Hold on, everyone. Not to me. I chip.", mood="smug", shot="close")
 sfx("whoosh")
 scene("beach", [("priya", 260), ("dad", 500), ("nani", 740)], caption="OLD HARRY ROCKS · Dorset, England · chalk headland")
 L("dad", "There it is! My stack!", mood="excited", shot="close", prop="binoculars")
-L("atlas", "I'm in Nani's handbag. With a comb, three mints and receipts from nineteen eighty seven.", mood="bored", shot="close", offstage=True)
+L("atlas", "I'm in Nani's handbag. With three mints and receipts from nineteen eighty seven.", mood="bored", shot="close", offstage=True)
 L("nani", "Stay in there. It's windy, and you roll.", mood="smug", shot="close")
 sfx("door")
 poof("guest", 1000)
-L("guest", "Morning! I'm Doctor Okafor, geologist. You must be the gentleman who bought Old Harry.", mood="happy", shot="close")
+L("guest", "Morning! Doctor Okafor, geologist. You must be the man who bought Old Harry.", mood="happy", shot="close")
 L("guest", "It's a World Heritage Site, sir. Nobody can sell it. That picture shows it long ago, still joined on by an arch.", mood="neutral", shot="close")
-L("dad", "So I bought a memory.", mood="sad", shot="close")
 L("guest", "Every stack starts with a weakness. Joints are small cracks. Faults are bigger fractures.", mood="teach", shot="close",
   boardClear=True, board="1. Joints and faults = weaknesses")
-L("nani", "Ooh. A weakness. Every good drama starts with one.", mood="excited", shot="close")
-L("guest", "Hydraulic action forces water and air into the crack. Abrasion scrapes it wider. It becomes a cave.", mood="teach", shot="close",
+L("guest", "Hydraulic action forces water and air into the crack. Abrasion scrapes it wider. A cave.", mood="teach", shot="close",
   board="2. Hydraulic action + abrasion → cave")
 L("nani", "Previously, on Headland. Crack was small and lonely. Then the waves moved in.", mood="smug", shot="close")
 L("guest", "The cave breaks right through the headland. That's an arch, like Durdle Door, along the coast.", mood="teach", shot="close",
@@ -172,18 +169,18 @@ L("guest", "The cave breaks right through the headland. That's an arch, like Dur
 L("guest", "Waves erode the base, weathering weakens the roof, and gravity wins.", mood="teach", shot="close",
   boardClear=True, diagram=SEQ, board="4. Roof collapses → stack")
 L("nani", "Tonight's episode. The roof collapses! And the end of the headland is left all alone. A stack.", mood="excited", shot="close")
-L("guest", "Then the stack is undercut and falls to a stump, covered at high tide. Like Old Harry's Wife, who collapsed in eighteen ninety six.", mood="sad", shot="close",
+L("guest", "Then the stack is undercut and falls to a stump, covered at high tide. Old Harry's Wife fell in eighteen ninety six.", mood="sad", shot="close",
   board="5. Stump: Old Harry's Wife, fell 1896")
 L("nani", "Poor Harry. Still standing there, waiting for her to come back up.", mood="sad", shot="close")
 L("priya", "Crack, cave, arch, stack, stump. Clever Cats Always Sleep Soundly.", mood="smug", shot="close",
   board="Clever Cats Always Sleep Soundly")
 L("dad", "How long until my stack becomes a stump?", mood="worried", shot="close")
-L("guest", "Collapses are sudden. In Australia, one of the Twelve Apostles collapsed in two thousand and five. Eight stacks are left.", mood="teach", shot="close",
+L("guest", "Nobody knows. One of Australia's Twelve Apostles fell in two thousand and five. Eight are left.", mood="teach", shot="close",
   boardClear=True, board="Twelve Apostles: 1 fell in 2005, 8 left")
 L("priya", "And there were never twelve. They were renamed in the nineteen twenties, to attract tourists.", mood="smug", shot="close",
   board="Never 12! Renamed in the 1920s")
 L("dad", "Fine. I'll buy a beach. Beaches don't fall down.", mood="determined", shot="close")
-L("guest", "Beaches are built by deposition, where waves lose energy. Sand beaches are gentle. Shingle is steep, because water soaks between the pebbles, so the backwash is weak.", mood="teach", shot="close",
+L("guest", "Beaches are built by deposition, where waves lose energy. Shingle beaches are steep, because water soaks between the pebbles and the backwash is weak.", mood="teach", shot="close",
   boardClear=True, board="Beach = deposition · shingle = steep")
 L("priya", "And where the coast bends, longshore drift keeps going and drops sediment in sheltered water. A spit.", mood="thinking", shot="close",
   boardClear=True, diagram=DEP, board="Spit: attached to land at one end")
@@ -191,15 +188,12 @@ L("guest", "Spurn Head is about five kilometres long. Changing winds curl its ti
   board="Recurved end + salt marsh behind")
 L("guest", "A spit right across a bay is a bar, with a lagoon behind. A ridge joining an island to the mainland is a tombolo.", mood="teach", shot="close",
   board="Bar → lagoon · tombolo → island")
-L("guest", "Chesil Beach is about twenty nine kilometres of shingle, joining Portland to the mainland. Pebbles go from pea sized in the west to fist sized in the east.", mood="teach", shot="close",
+L("guest", "Chesil Beach is twenty nine kilometres of shingle, linking Portland to the mainland. Pebbles go from pea sized in the west to fist sized in the east.", mood="teach", shot="close",
   boardClear=True, board="Chesil Beach: 29 km, pebbles graded")
-L("guest", "Fishermen in fog could tell where they'd landed just by picking one up.", mood="happy", shot="close")
-L("dad", "Brilliant. I'm always lost. I'll keep a pebble in my pocket.", mood="excited", shot="close")
-L("guest", "Sir. Please leave the beach for everyone.", mood="deadpan", shot="close", gap=0.4)
 
 confess("dad", "DAD · Self-Declared Explorer · Owns Zero Stacks")
 L("dad", "Forty countries. Well. Forty airports. None of them fell into the sea.", mood="smug")
-L("dad", "Doctor Okafor made me put the pebble back. So I'm lost again. But in a heritage site.", mood="sad", gap=0.6)
+L("dad", "Doctor Okafor says I can't own Old Harry. But I can visit. Like everyone else.", mood="sad", gap=0.6)
 
 # ---------------- ACT 3: SINGAPORE'S COAST ----------------
 card("MEANWHILE, BACK IN SINGAPORE", "Dad is on the phone asking for his £99 back.", 2.4)
@@ -210,40 +204,38 @@ L("atlas", "Hard engineering resists the sea. Sea walls, rock armour, and groyne
   boardClear=True, board="HARD: sea walls · rock armour · groynes")
 L("priya", "Groynes trap sand from longshore drift. This beach grows, but beaches further down drift get starved.", mood="thinking", shot="close",
   board="Groynes starve beaches down-drift!")
-L("mum", "Protect yourself, ruin the neighbours. Like your father's karaoke.", mood="eyeroll", shot="close")
-L("atlas", "Soft engineering works with nature. Beach nourishment, dune planting, or managed retreat, letting low value land flood, like Medmerry in England.", mood="teach", shot="close",
+L("mum", "Protect yourself, ruin the neighbours. Like Dad's karaoke.", mood="eyeroll", shot="close")
+L("atlas", "Soft engineering works with nature. Adding sand, planting dunes, or managed retreat, letting low value land flood.", mood="teach", shot="close",
   board="SOFT: nourishment · dunes · retreat")
-L("mum", "Could Singapore let the sea in?", mood="thinking", shot="close")
-L("priya", "No room. About thirty percent of our land is under five metres above sea level. Most of our coast already has seawalls or rock slopes.", mood="worried", shot="close",
+L("priya", "We can't let the sea in. No room. About thirty percent of our land is under five metres above sea level.", mood="worried", shot="close",
   boardClear=True, board="SG: ~30% of land < 5 m above sea")
-L("atlas", "New reclaimed land must be at least four metres above mean sea level. The bill could be a hundred billion dollars or more, over a century.", mood="teach", shot="close",
+L("mum", "And most of our coast already has seawalls or rock slopes. I counted.", mood="smug", shot="close",
+  board="Most of SG coast = hard engineering")
+L("atlas", "New reclaimed land must be at least four metres above mean sea level. The bill? A hundred billion dollars or more, over a century.", mood="teach", shot="close",
   board="New land ≥ 4 m · S$100 bn+ / 100 yrs")
 L("mum", "But we're adding soft bits. Mangroves calm the waves. And Marina Barrage keeps high tides out of the city.", mood="smug", shot="close",
   board="Mangroves · Marina Barrage = hybrid")
-L("dad", "No refund. But they've offered me a bridge in London.", mood="excited", shot="close", offstage=True)
-L("priya", "Don't.", mood="deadpan", shot="close", gap=0.4)
 
 # ---------------- EXAM SKILLS ----------------
 scene("classroom", [("teacher", 300), ("priya", 640), ("atlas", 940)])
 L("teacher", "Six marks. Explain how a stack forms. Most of you write, the waves wear it away. That's zero processes.", mood="teach", shot="close",
   boardClear=True, board="6 marks: Explain how a stack forms")
-L("teacher", "Give the stages in order, with sequence words. First, then, as a result, eventually.", mood="teach", shot="close",
+L("teacher", "Stages in order, with sequence words. First, then, eventually.", mood="teach", shot="close",
   board="1. Stages in order + sequence words")
-L("priya", "Name a process at every stage. Hydraulic action, abrasion, weathering, gravity. Add a named example and a sequence diagram.", mood="thinking", shot="close",
+L("priya", "Name a process at every stage. Add a named example, and a sequence diagram.", mood="thinking", shot="close",
   board="2. A process at EVERY stage + example")
-L("atlas", "And never jump from cave to stack. The arch is not optional.", mood="eyeroll", shot="close")
-L("teacher", "Map skills. A six figure grid reference for this lighthouse. Along the corridor, then up the stairs.", mood="teach", shot="close",
+L("teacher", "Map skills. Six figure grid reference for this lighthouse. Along the corridor, then up the stairs.", mood="teach", shot="close",
   boardClear=True, diagram=GRID, board="Eastings first, then northings")
 L("teacher", "The bottom left corner gives the square. Two five four two.", mood="teach", shot="close",
   board="4-figure: 2542 (bottom-left corner)")
 L("priya", "Four tenths along, two five four. Six tenths up, four two six. Two five four, four two six.", mood="smug", shot="close",
   board="6-figure: 254 426 (within 100 m)")
-L("teacher", "Correct. Accurate to a hundred metres. Now, who brought a globe to class? Again?", mood="worried", shot="close")
+L("teacher", "Correct. Accurate to a hundred metres. Who brought a globe to class? Again?", mood="worried", shot="close")
 L("priya", "He followed me.", mood="deadpan", shot="close", gap=0.4)
 
 # ---------------- RECAP ----------------
 confess("atlas", "ATLAS · Recap Globe · Smells Of Nani's Handbag")
-L("atlas", "Recap. First. On a discordant coast, soft rock erodes into bays and hard rock stays as headlands.", mood="teach",
+L("atlas", "Recap. First. Soft rock erodes into bays. Hard rock stays as headlands.", mood="teach",
   boardClear=True, board="1. Hard rock headlands, soft rock bays")
 L("atlas", "Second. Notch, overhang, collapse, retreat. That leaves a wave cut platform.", mood="teach",
   board="2. Notch → overhang → collapse → platform")
@@ -269,7 +261,7 @@ card("PAUSE CHALLENGE", "Atlas gives you 5 seconds. Nani gives you 3.", 3.0)
 challenge(1, "A crack in a headland grows. Put in order: arch, stump, cave, stack.", "Cave, arch, stack, stump",
   "Cave breaks through → arch; roof falls → stack",
   "Question one. Put these in order. Arch, stump, cave, stack.",
-  "Cave, arch, stack, stump. The cave breaks through into an arch. The roof falls, leaving a stack. Then a stump.")
+  "Cave, arch, stack, stump. The cave breaks through into an arch. The roof falls, leaving a stack.")
 challenge(2, "A church is 3/10 across and 2/10 up square 2341. Give its 6-figure grid reference.", "233 412",
   "Eastings 23 + 3 tenths → 233; northings 41 + 2 → 412",
   "Question two. A church is three tenths across and two tenths up square two three four one. Give its six figure grid reference.",

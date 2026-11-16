@@ -33,7 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <main className="flex-1">{children}</main>
             <ErrorBoundary silent><Mascot /></ErrorBoundary>
             <footer className="border-t border-slate-200 bg-white py-6 text-center text-sm text-slate-500">
-              Year 8 Geography Lab · Built for curious explorers 🌏 · Progress syncs across devices.
+              Year 8 Geography Lab · Built for curious explorers 🌏 · Progress saves automatically.
             </footer>
           </AppGate>
         </ProgressProvider>

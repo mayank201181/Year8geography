@@ -12,7 +12,7 @@ export function Frame({ title, children, caption }: { title: string; children: R
       <p className="mb-3 flex items-center gap-2 text-sm font-bold text-indigo-700">
         <span>🕹️</span> {title}
       </p>
-      {children}
+      <div className="widget-body">{children}</div>
       {caption ? <div className="mt-3 text-sm text-slate-600">{caption}</div> : null}
     </div>
   );
