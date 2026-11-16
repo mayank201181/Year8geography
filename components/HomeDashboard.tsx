@@ -22,7 +22,7 @@ const GUEST_NOTE_KEY = "y8m2:guestNote:dismissed";
 const TIP_PREFIX = "y8m2:tip:";
 
 const QUICK_LINKS = [
-  { href: "/sprint", icon: "⚡", label: "Fluency sprint", blurb: "Quick-fire questions — beat your best" },
+  { href: "/sprint", icon: "⚡", label: "Key-term sprint", blurb: "Quick-fire key terms — beat your best" },
   { href: "/skills", icon: "🧩", label: "Skills", blurb: "Your mastery map, skill by skill" },
   { href: "/exam", icon: "📝", label: "Big Exam", blurb: "Mixed papers across every topic" },
   { href: "/formulas", icon: "📋", label: "Key terms", blurb: "Your knowledge organiser on one page" },
@@ -285,8 +285,8 @@ function chooseTip(data: ProgressDoc, summaries: TopicSummary[], focusIds: strin
 
   return {
     id: "sprint",
-    title: "Try a fluency sprint",
-    body: "Quick, accurate number skills free up your brain for the interesting part of every problem.",
+    title: "Try a key-term sprint",
+    body: "When key terms come instantly, your brain is free for the interesting part — explaining, linking and evaluating.",
     href: "/sprint",
     cta: "Start a sprint",
   };

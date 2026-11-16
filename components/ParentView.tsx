@@ -114,7 +114,7 @@ function dateOf(iso: string): Date {
 }
 
 const BEST_NAMES: Record<string, string> = {
-  sprint: "Fluency sprint",
+  sprint: "Key-term sprint",
   challenge: "Challenge problems",
   exam: "Big Exam",
   daily: "Daily 5",

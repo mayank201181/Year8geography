@@ -105,7 +105,7 @@ export function SiteHeader() {
                   🧩 Skills &amp; mastery
                 </Link>
                 <Link role="menuitem" href="/sprint" className="block rounded-lg px-3 py-2 hover:bg-surface-2">
-                  ⚡ Fluency sprint
+                  ⚡ Key-term sprint
                 </Link>
                 <Link role="menuitem" href="/exam" className="block rounded-lg px-3 py-2 hover:bg-surface-2">
                   📝 The Big Exam
