@@ -113,12 +113,12 @@ export interface Rank {
 
 export const RANKS: Rank[] = [
   { min: 0, name: "Explorer", emoji: "🧭" },
-  { min: 40, name: "Apprentice", emoji: "🔢" },
-  { min: 120, name: "Problem Solver", emoji: "🧩" },
-  { min: 300, name: "Pattern Hunter", emoji: "🔍" },
-  { min: 600, name: "Proof Builder", emoji: "📐" },
-  { min: 1000, name: "Theorem Tamer", emoji: "🦉" },
-  { min: 1600, name: "Grandmaster", emoji: "♾️" },
+  { min: 40, name: "Map Reader", emoji: "🗺️" },
+  { min: 120, name: "Field Scout", emoji: "🔎" },
+  { min: 300, name: "Pathfinder", emoji: "🥾" },
+  { min: 600, name: "Expedition Leader", emoji: "🏔️" },
+  { min: 1000, name: "Cartographer", emoji: "📜" },
+  { min: 1600, name: "Globetrotter", emoji: "🌏" },
   { min: 2500, name: "Legend", emoji: "🏆" },
 ];
 

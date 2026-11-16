@@ -192,7 +192,7 @@ function CertificateSheet({ heading, name, verb, subject, icon, strand, stats, d
 
         <div className="relative flex items-center gap-2 text-sm font-black tracking-tight text-ink-2">
           <span aria-hidden className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-brand-2 text-base text-brand-ink">
-            π
+            🌍
           </span>
           Year 8 Geography Lab
         </div>

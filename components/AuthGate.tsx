@@ -27,7 +27,7 @@ export function AuthGate() {
     <div className="mx-auto max-w-lg py-8">
       <div className="text-center">
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-br from-brand to-brand-2 text-4xl text-white shadow-lg" aria-hidden>
-          π
+          🌍
         </div>
         <h1 className="mt-4 text-3xl font-black tracking-tight">Year 8 Geography Lab</h1>
         <p className="mt-2 text-ink-2">Problem-first lessons, auto-marked practice, skill drills and a Daily 5 — built to make you a confident problem solver.</p>

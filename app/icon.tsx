@@ -1,4 +1,4 @@
-// Browser-tab icon: a rounded indigo → violet square with a bold white π.
+// Browser-tab icon: a rounded teal square with a white line-drawn globe.
 import { ImageResponse } from "next/og";
 
 export const size = { width: 32, height: 32 };

@@ -59,7 +59,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-14 max-w-5xl items-center gap-3 px-4">
         <Link href="/" className="flex items-center gap-2 font-black tracking-tight">
           <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-lg text-white" aria-hidden>
-            π
+            🌍
           </span>
           <span className="hidden sm:inline">Geography Lab</span>
         </Link>
