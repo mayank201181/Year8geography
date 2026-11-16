@@ -57,7 +57,7 @@ test("adaptive tier", () => {
 
 test("ranks", () => {
   assert.equal(rankFor(0).rank.name, "Explorer");
-  assert.equal(rankFor(130).rank.name, "Problem Solver");
+  assert.equal(rankFor(130).rank.name, "Field Scout");
   assert.ok(rankFor(80).progress > 0 && rankFor(80).progress < 1);
   assert.equal(rankFor(99999).next, undefined);
 });
