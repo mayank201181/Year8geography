@@ -167,7 +167,7 @@ card("NEXT DAY, CLASS 8C", "Tara's census, done properly", 2.2)
 scene("classroom", [("teacher", 300), ("tara", 640)])
 L("teacher", "Tara, show us your class census. This is primary data. You collected it yourself.", mood="happy", shot="close",
   boardClear=True, board="PRIMARY = collect it · SECONDARY = published")
-L("tara", "Twenty eight students, tallied in five bar gates. MRT nine, bus seven, walk six, car four, other two.", mood="teach", shot="close",
+L("tara", "Twenty eight students. I counted with five bar gates. MRT nine, bus seven, walk six, car four, other two.", mood="teach", shot="close",
   board="Tally → frequency table → chart", diagram=D_TALLY)
 L("tara", "Nine divided by twenty eight, times one hundred, is about thirty two point one percent who take the MRT.", mood="happy", shot="close",
   board="MRT: 9 ÷ 28 × 100 ≈ 32.1%")
@@ -202,7 +202,7 @@ L("mum", "A narrow base means fewer children. Fewer school shoes. Sounds like a 
 
 scene("living", [("tara", 260), ("dad", 600), ("globo", 960)])
 L("dad", "I've been thinking. I support this family. So I'm the dependant.", mood="smug", shot="close")
-L("globo", "No. You are the depend-ON. Or so you claim.", mood="eyeroll", shot="close")
+L("globo", "No. You're the one they all depend on. Or so you claim.", mood="eyeroll", shot="close")
 L("globo", "Young dependants are aged zero to fourteen. Working age is fifteen to sixty four. Elderly dependants are sixty five and over.", mood="teach", shot="close",
   boardClear=True, board="Young 0–14 · Working 15–64 · Elderly 65+")
 L("globo", "The dependency ratio is young plus elderly, divided by working age, times one hundred. Dependants per hundred workers.", mood="teach", shot="close",
