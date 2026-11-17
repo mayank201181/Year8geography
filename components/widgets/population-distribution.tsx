@@ -1,315 +1,375 @@
 "use client";
+// Interactive explorables for "Where Do People Live?" (population-distribution).
+import { useState } from "react";
+import { Readout, Segmented, Slider, WidgetFrame, type WidgetDef } from "./kit";
 
-import { useMemo, useState } from "react";
-import { Frame, Choice, Stat } from "./kit";
+// ---------------------------------------------------------------------------
+// 1. Density calculator with a 1 km² dot square
+// ---------------------------------------------------------------------------
 
-/* ------------------------------------------------------------------ */
-/* Shared helpers                                                      */
-/* ------------------------------------------------------------------ */
+type PresetId = "custom" | "singapore" | "bangladesh" | "india" | "uk" | "australia" | "mongolia";
 
-/** Deterministic pseudo-random number in [0, 1) from an integer seed (no Math.random). */
-function hash(i: number): number {
-  const s = Math.sin(i * 12.9898 + 78.233) * 43758.5453;
-  return s - Math.floor(s);
-}
-
-function fmtNum(n: number): string {
-  if (n >= 1e9) return `${(n / 1e9).toFixed(n >= 1e10 ? 0 : 1)} billion`;
-  if (n >= 1e6) return `${(n / 1e6).toFixed(n >= 1e7 ? 0 : 1)} million`;
-  if (n >= 1e4) return Math.round(n).toLocaleString("en-GB");
-  if (n >= 100) return Math.round(n).toLocaleString("en-GB");
-  if (n >= 10) return n.toFixed(0);
-  if (n >= 1) return n.toFixed(1);
-  if (n > 0 && n < 0.01) return "< 0.01";
-  return n.toFixed(2);
-}
-
-/* ------------------------------------------------------------------ */
-/* Widget 1: Population density calculator & comparer                  */
-/* ------------------------------------------------------------------ */
-
-type Place = { id: string; name: string; pop: number; area: number; note: string };
-
-// Approximate 2024 figures (rounded). Area = total land area in km².
-const PLACES: Place[] = [
-  { id: "mongolia", name: "Mongolia", pop: 3.5e6, area: 1_564_116, note: "Vast cold, dry steppe and desert. Nearly half of all Mongolians live in one city, Ulaanbaatar, so most of the land is almost empty." },
-  { id: "australia", name: "Australia", pop: 27.2e6, area: 7_692_000, note: "Most Australians live along the wetter south-east and south-west coasts. The hot, dry interior (the Outback) is very sparsely populated." },
-  { id: "world", name: "World (land)", pop: 8.1e9, area: 134_700_000, note: "The world average, using all land except Antarctica. Averages hide huge differences: some places are empty, others are packed." },
-  { id: "bangladesh", name: "Bangladesh", pop: 173e6, area: 130_170, note: "Flat, fertile land on the Ganges–Brahmaputra delta plus monsoon rain lets farmland feed a huge population — one of the most crowded large countries on Earth." },
-  { id: "hongkong", name: "Hong Kong", pop: 7.5e6, area: 1_110, note: "Steep hills and country parks cover most of Hong Kong, so people pack into high-rise towers on the small areas of flat land. Real density where people live is far higher than this average." },
-  { id: "singapore", name: "Singapore", pop: 6.04e6, area: 735, note: "A city-state: almost the whole country is urban. Land is scarce, so about 8 in 10 residents live in high-rise HDB flats." },
-  { id: "tampines", name: "Tampines HDB town", pop: 270_000, area: 20.9, note: "An HDB town (approximate figures for the whole planning area, including parks and industry). Housing estates are denser than Singapore's average because nature reserves, the airport and ports lower the national figure." },
-  { id: "monaco", name: "Monaco", pop: 38_000, area: 2.08, note: "A tiny, wealthy city-state on the Mediterranean coast — the most densely populated country in the world." },
-];
-
-const PITCH_KM2 = 0.105 * 0.068; // a 105 m × 68 m football pitch ≈ 0.00714 km²
-
-function LogSlider({ label, value, min, max, onChange, display }: { label: string; value: number; min: number; max: number; onChange: (n: number) => void; display: string }) {
-  const lo = Math.log10(min), hi = Math.log10(max);
-  return (
-    <label className="block">
-      <span className="flex items-center justify-between gap-2 text-sm font-medium text-slate-700">
-        <span>{label}</span>
-        <span className="font-bold tabular-nums text-indigo-700">{display}</span>
-      </span>
-      <input type="range" min={0} max={1000} value={Math.round(((Math.log10(value) - lo) / (hi - lo)) * 1000)}
-        onChange={(e) => onChange(Math.pow(10, lo + (+e.target.value / 1000) * (hi - lo)))}
-        className="mt-1 w-full" style={{ accentColor: "#4f46e5" }} aria-label={label} />
-    </label>
-  );
-}
-
-export function DensityCalculator() {
-  const [mode, setMode] = useState<"place" | "custom">("place");
-  const [placeId, setPlaceId] = useState("singapore");
-  const [pop, setPop] = useState(6.04e6);
-  const [area, setArea] = useState(735);
-  const [guess, setGuess] = useState<string | null>(null);
-
-  const chosen: Place = mode === "place"
-    ? PLACES.find((p) => p.id === placeId)!
-    : { id: "custom", name: "Your place", pop, area, note: "" };
-  const density = chosen.pop / chosen.area;
-  const perPitch = density * PITCH_KM2;
-  const world = 8.1e9 / 134_700_000;
-
-  const rows = useMemo(() => {
-    const list = PLACES.map((p) => ({ id: p.id, name: p.name, d: p.pop / p.area }));
-    if (mode === "custom") list.push({ id: "custom", name: "Your place", d: pop / area });
-    return list.sort((a, b) => a.d - b.d);
-  }, [mode, pop, area]);
-
-  // log scale: 1 → 100,000 people per km²
-  const W = 340, X0 = 112, barW = W - X0 - 6, rowH = 22;
-  const xOf = (d: number) => X0 + (Math.min(Math.max(Math.log10(Math.max(d, 1)), 0), 5) / 5) * barW;
-  const H = rows.length * rowH + 26;
-
-  const band = density < 10 ? "sparsely populated (fewer than 10 people per km²)"
-    : density < 100 ? "moderately populated (10–100 people per km²)"
-    : density < 1000 ? "densely populated (100–1,000 people per km²)"
-    : "very densely populated (over 1,000 people per km² — city-like)";
-
-  // dots on the pitch (capped for drawing)
-  const dots = Math.min(Math.max(Math.round(perPitch), 1), 150);
-
-  return (
-    <Frame title="Population density: how crowded is it?" caption={
-      <>
-        <p><b>Density = number of people ÷ land area (km²).</b> {chosen.name} has about <b>{fmtNum(density)} people per km²</b>, so it is {band}.</p>
-        {chosen.note ? <p className="mt-1">{chosen.note}</p> : null}
-        <p className="mt-1">Notice: density is an <b>average</b>. It tells you how crowded a place is overall, but not how people are <b>distributed</b> inside it — Australia and Mongolia have big empty areas and a few crowded cities.</p>
-      </>
-    }>
-      <div className="mb-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">
-        <p className="font-semibold">Predict first: Bangladesh has about 6× as many people as Australia. How many times more crowded is it?</p>
-        <div className="mt-2 flex flex-wrap gap-2">
-          {["About 6×", "About 30×", "About 300×"].map((g) => (
-            <button key={g} type="button" onClick={() => setGuess(g)} className={`rounded-full px-3 py-1 font-semibold ring-1 ${guess === g ? "bg-amber-600 text-white ring-amber-600" : "bg-white ring-amber-300"}`}>{g}</button>
-          ))}
-        </div>
-        {guess ? <p className="mt-2">{guess === "About 300×" ? "Yes! " : "Not quite — "}Bangladesh has ~1,330 people/km², Australia ~3.5, so it is <b>over 300× more crowded</b>. Bangladesh squeezes its people into a land area less than 1/50 the size of Australia.</p> : null}
-      </div>
-
-      <Choice label="Choose" value={mode} onChange={setMode} options={[{ id: "place", label: "Real places" }, { id: "custom", label: "Make your own" }]} />
-      <div className="mt-3">
-        {mode === "place" ? (
-          <div className="flex flex-wrap gap-1.5">
-            {PLACES.map((p) => (
-              <button key={p.id} type="button" onClick={() => setPlaceId(p.id)} className={`rounded-lg px-2.5 py-1 text-xs font-semibold ring-1 ${placeId === p.id ? "bg-indigo-600 text-white ring-indigo-600" : "bg-white text-slate-700 ring-slate-200"}`}>{p.name}</button>
-            ))}
-          </div>
-        ) : (
-          <div className="space-y-2">
-            <LogSlider label="Population" value={pop} min={1000} max={2e9} onChange={setPop} display={fmtNum(pop)} />
-            <LogSlider label="Land area" value={area} min={1} max={1e7} onChange={setArea} display={`${fmtNum(area)} km²`} />
-          </div>
-        )}
-      </div>
-
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <Stat label="Population" value={fmtNum(chosen.pop)} tone="sky" />
-        <Stat label="Area (km²)" value={fmtNum(chosen.area)} tone="emerald" />
-        <Stat label="People / km²" value={fmtNum(density)} tone="indigo" />
-        <Stat label="× world average" value={`${fmtNum(density / world)}×`} tone="amber" />
-      </div>
-
-      <div className="mt-3 grid items-center gap-3 sm:grid-cols-[1fr_1.4fr]">
-        <div>
-          <svg viewBox="0 0 160 110" className="w-full" role="img" aria-label={`Football pitch with about ${fmtNum(perPitch)} people on it`}>
-            <rect x="4" y="4" width="152" height="98" rx="3" fill="#4ade80" stroke="#fff" strokeWidth="2" />
-            <line x1="80" y1="4" x2="80" y2="102" stroke="#fff" strokeWidth="1.5" />
-            <circle cx="80" cy="53" r="13" fill="none" stroke="#fff" strokeWidth="1.5" />
-            <rect x="4" y="33" width="20" height="40" fill="none" stroke="#fff" strokeWidth="1.5" />
-            <rect x="136" y="33" width="20" height="40" fill="none" stroke="#fff" strokeWidth="1.5" />
-            {Array.from({ length: dots }, (_, i) => (
-              <circle key={i} cx={10 + hash(i * 3 + 1) * 140} cy={10 + hash(i * 7 + 2) * 86} r="2.4" fill="#1e293b" />
-            ))}
-          </svg>
-          <p className="text-center text-sm text-slate-700">
-            {perPitch >= 1
-              ? <>≈ <b>{fmtNum(perPitch)} people</b> per football pitch{perPitch > 150 ? " (150 drawn)" : ""}</>
-              : <>≈ <b>1 person</b> for every <b>{fmtNum(1 / perPitch)} football pitches</b></>}
-          </p>
-        </div>
-
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label="Bar chart comparing population density on a log scale">
-          {[1, 10, 100, 1000, 10000, 100000].map((t) => (
-            <g key={t}>
-              <line x1={xOf(t)} y1={4} x2={xOf(t)} y2={H - 18} stroke="#cbd5e1" strokeDasharray="2 3" />
-              <text x={xOf(t)} y={H - 5} fontSize="11" textAnchor="middle" fill="#64748b">{t >= 1000 ? `${t / 1000}k` : t}</text>
-            </g>
-          ))}
-          {rows.map((r, i) => {
-            const y = 6 + i * rowH;
-            const on = r.id === chosen.id;
-            return (
-              <g key={r.id}>
-                <text x={X0 - 4} y={y + 13} fontSize="11" textAnchor="end" fill={on ? "#4338ca" : "#334155"} fontWeight={on ? 700 : 400}>{r.name}</text>
-                <rect x={X0} y={y + 2} width={Math.max(xOf(r.d) - X0, 2)} height={rowH - 7} rx="3" fill={on ? "#4f46e5" : "#a5b4fc"} />
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-      <p className="mt-1 text-xs text-slate-500">Chart uses a log scale: each grid line is 10× more crowded than the one before. Figures are rounded 2024 estimates.</p>
-    </Frame>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Widget 2: "Where would you settle?" island explorer                  */
-/* ------------------------------------------------------------------ */
-
-type FactorId = "river" | "flat" | "soil" | "mountains" | "desert" | "port" | "jobs";
-const FACTORS: { id: FactorId; label: string; kind: "physical" | "human"; why: string }[] = [
-  { id: "river", label: "💧 River (fresh water)", kind: "physical", why: "a river gives drinking water, water for crops and a transport route" },
-  { id: "flat", label: "🟩 Flat lowland", kind: "physical", why: "flat land is easy to build on, farm and run roads across" },
-  { id: "soil", label: "🌾 Fertile soil", kind: "physical", why: "fertile floodplain soil grows plenty of food" },
-  { id: "mountains", label: "⛰️ Steep mountains", kind: "physical", why: "steep, cold mountains with thin soils push people away" },
-  { id: "desert", label: "🏜️ Desert", kind: "physical", why: "a dry desert with little water pushes people away" },
-  { id: "port", label: "⚓ Port & trade", kind: "human", why: "a sheltered port brings trade, ships and shops" },
-  { id: "jobs", label: "🏭 Jobs (factories & mine)", kind: "human", why: "jobs in factories and at the mine attract workers" },
-];
-
-const IW = 400, IH = 260, CX = 200, CY = 130, RX = 172, RY = 104;
-const shape = (t: number) => 1 + 0.07 * Math.sin(3 * t + 0.5) + 0.05 * Math.cos(5 * t);
-const coast = (t: number) => ({ x: CX + RX * shape(t) * Math.cos(t), y: CY + RY * shape(t) * Math.sin(t) });
-const insideIsland = (x: number, y: number) => {
-  const dx = (x - CX) / RX, dy = (y - CY) / RY;
-  return Math.hypot(dx, dy) < shape(Math.atan2(dy, dx)) * 0.93;
+/** Rounded, approximate figures (mid-2020s). Densities are national averages. */
+const PRESETS: Record<Exclude<PresetId, "custom">, { name: string; pop: number; area: number; note: string }> = {
+  singapore: { name: "Singapore", pop: 6_000_000, area: 735, note: "A city-state: almost the whole country is urban, with high-rise HDB towns." },
+  bangladesh: { name: "Bangladesh", pop: 172_000_000, area: 148_000, note: "A flat, fertile delta — one of the most crowded large countries on Earth." },
+  india: { name: "India", pop: 1_440_000_000, area: 3_287_000, note: "Very crowded on the Ganges plain, but far emptier in the Thar Desert and Himalayas." },
+  uk: { name: "United Kingdom", pop: 68_000_000, area: 244_000, note: "Dense in the south-east of England, sparse in the Scottish Highlands." },
+  australia: { name: "Australia", pop: 27_000_000, area: 7_690_000, note: "The average hides a pattern: most people live on the south-east and east coasts; the Outback is nearly empty." },
+  mongolia: { name: "Mongolia", pop: 3_500_000, area: 1_564_000, note: "Cold, dry steppe and desert — and about half the people live in one city, Ulaanbaatar." },
 };
-const PORT = coast(1.4);
-const MOUNT = { x: 118, y: 82 }, DESERT = { x: 305, y: 118 }, PLAIN = { x: 178, y: 170 };
-const MINE = { x: 100, y: 74 }, FACTORY = { x: PORT.x + 30, y: PORT.y - 26 };
-const RIVER = [{ x: 128, y: 92 }, { x: 150, y: 128 }, { x: 172, y: 160 }, { x: 186, y: 196 }, { x: PORT.x, y: PORT.y - 2 }];
 
-function distToRiver(x: number, y: number) {
-  let best = Infinity;
-  for (let i = 0; i < RIVER.length - 1; i++) {
-    const a = RIVER[i], b = RIVER[i + 1];
-    const vx = b.x - a.x, vy = b.y - a.y;
-    const t = Math.max(0, Math.min(1, ((x - a.x) * vx + (y - a.y) * vy) / (vx * vx + vy * vy)));
-    best = Math.min(best, Math.hypot(x - a.x - t * vx, y - a.y - t * vy));
-  }
-  return best;
+/** Log-slider helpers: slider value v ↦ 10^(v/10). */
+const fromLog = (v: number) => Math.round(Math.pow(10, v / 10));
+const toLog = (x: number) => Math.round(Math.log10(Math.max(1, x)) * 10);
+
+function fmt(n: number): string {
+  if (n >= 1e9) return (n / 1e9).toFixed(n >= 1e10 ? 0 : 2).replace(/\.?0+$/, "") + " billion";
+  if (n >= 1e6) return (n / 1e6).toFixed(n >= 1e8 ? 0 : 1).replace(/\.0$/, "") + " million";
+  return Math.round(n).toLocaleString("en-GB");
 }
-const near = (x: number, y: number, p: { x: number; y: number }, r: number) => Math.exp(-((x - p.x) ** 2 + (y - p.y) ** 2) / (r * r));
 
-// Candidate settlement sites on a grid (fixed, deterministic)
-const SITES = (() => {
-  const out: { x: number; y: number; k: number }[] = [];
-  let k = 0;
-  for (let gy = 8; gy < IH; gy += 14) for (let gx = 8; gx < IW; gx += 14) {
-    k++;
-    const x = gx + (hash(k) - 0.5) * 6, y = gy + (hash(k + 999) - 0.5) * 6;
-    if (insideIsland(x, y)) out.push({ x, y, k });
-  }
-  return out;
-})();
-const PEOPLE = 260;
+function fmtDensity(d: number): string {
+  if (d < 10) return d.toFixed(1);
+  return Math.round(d).toLocaleString("en-GB");
+}
 
-export function SettlementIsland() {
-  const [on, setOn] = useState<Record<FactorId, boolean>>({ river: false, flat: false, soil: false, mountains: false, desert: false, port: false, jobs: false });
-  const toggle = (id: FactorId) => setOn((s) => ({ ...s, [id]: !s[id] }));
+/** Deterministic scatter positions (no Math.random). */
+function scatter(i: number): [number, number] {
+  const a = Math.sin(i * 12.9898 + 78.233) * 43758.5453;
+  const b = Math.sin(i * 39.3468 + 11.135) * 24634.6345;
+  return [a - Math.floor(a), b - Math.floor(b)];
+}
 
-  const sim = useMemo(() => {
-    const w = SITES.map(({ x, y }) => {
-      const highland = near(x, y, MOUNT, 70);
-      let s = 1;
-      if (on.river) s *= 1 + 3 * Math.exp(-((distToRiver(x, y) / 16) ** 2));
-      if (on.flat) s *= 0.3 + 0.7 * (1 - Math.min(1, near(x, y, MOUNT, 95) * 1.2));
-      if (on.soil) s *= 1 + 2.5 * near(x, y, PLAIN, 45);
-      if (on.mountains) s *= 1 - 0.93 * highland;
-      if (on.desert) s *= 1 - 0.93 * near(x, y, DESERT, 62);
-      if (on.port) s *= 1 + 6 * near(x, y, PORT, 32);
-      if (on.jobs) s *= 1 + 7 * near(x, y, FACTORY, 26) + 5 * near(x, y, MINE, 16);
-      return s;
-    });
-    const total = w.reduce((a, b) => a + b, 0);
-    const expected = w.map((v) => (PEOPLE * v) / total);
-    const counts = expected.map((e, i) => Math.floor(e) + (hash(SITES[i].k * 13) < e - Math.floor(e) ? 1 : 0));
-    const sorted = [...expected].sort((a, b) => b - a);
-    const top10 = sorted.slice(0, Math.ceil(sorted.length / 10)).reduce((a, b) => a + b, 0) / PEOPLE;
-    const empty = counts.filter((c) => c === 0).length / counts.length;
-    return { counts, top10, empty };
-  }, [on]);
+function DensityExplorer() {
+  const [preset, setPreset] = useState<PresetId>("singapore");
+  const [pop, setPop] = useState(PRESETS.singapore.pop);
+  const [area, setArea] = useState(PRESETS.singapore.area);
 
-  const active = FACTORS.filter((f) => on[f.id]);
-  const phys = active.filter((f) => f.kind === "physical").length, human = active.length - phys;
-  const pattern = sim.top10 > 0.4 ? "very uneven: people crowd into a few dense clusters while large areas are sparse or empty"
-    : sim.top10 > 0.2 ? "uneven: some areas are clearly denser than others"
-    : "fairly even — but real populations are almost never spread like this";
-  const outline = Array.from({ length: 73 }, (_, i) => coast((i / 72) * Math.PI * 2)).map((p, i) => `${i ? "L" : "M"}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(" ") + "Z";
+  const choose = (p: PresetId) => {
+    setPreset(p);
+    if (p !== "custom") {
+      setPop(PRESETS[p].pop);
+      setArea(PRESETS[p].area);
+    }
+  };
+
+  const density = pop / area;
+  // Choose people-per-dot so the 1 km² square shows at most ~400 dots.
+  const perDot = [1, 10, 100, 1000].find((k) => density / k <= 400) ?? 1000;
+  const dotCount = Math.round(density / perDot);
+  const m2PerPerson = density > 0 ? 1_000_000 / density : Infinity;
+  const perPitch = density * 0.00714; // a 105 m × 68 m football pitch ≈ 0.00714 km²
+  const label = density >= 500 ? "very densely populated" : density >= 100 ? "densely populated" : density >= 10 ? "moderately populated" : "sparsely populated";
+  const tone = density >= 100 ? "bad" : density >= 10 ? "ink" : "good";
+
+  const S = 220;
+  const dots = Array.from({ length: dotCount }, (_, i) => {
+    const [u, v] = scatter(i + 1);
+    return <circle key={i} cx={10 + u * (S - 20)} cy={10 + v * (S - 20)} r={dotCount > 200 ? 2.2 : 3.2} className="fill-brand" />;
+  });
 
   return (
-    <Frame title="Where would you settle? Island explorer" caption={
-      <>
-        <p>Distribution is <b>{pattern}</b>. The busiest 10% of the land holds <b>{Math.round(sim.top10 * 100)}%</b> of the people.</p>
-        {active.length === 0
-          ? <p className="mt-1">Notice: with no factors switched on, people spread out evenly. Switch on factors one at a time and watch the dots move.</p>
-          : <p className="mt-1">Notice: {active.map((f) => f.why).join("; ")}.</p>}
-        <p className="mt-1">{phys > 0 && human === 0 ? "So far only physical (natural) factors are shaping where people live — like early farming settlements." : null}
-          {human > 0 && phys === 0 ? "Only human factors are on: jobs and trade can pull people even to places nature makes difficult (look at the mining town in the mountains!)." : null}
-          {human > 0 && phys > 0 ? "Physical and human factors work together: today's big cities usually grow where good land, water and trade routes meet — like Singapore's port." : null}
-          {" "}Simplified model: each dot ≈ a group of settlers; real places mix many more factors.</p>
-      </>
-    }>
-      <p className="mb-2 rounded-xl bg-amber-50 p-2 text-sm text-amber-900"><b>Predict first:</b> if settlers care about water, flat land and good soil, which part of the island fills up — and which stays empty?</p>
-      <div className="mb-2 flex flex-wrap gap-1.5">
-        {FACTORS.map((f) => (
-          <button key={f.id} type="button" aria-pressed={on[f.id]} onClick={() => toggle(f.id)}
-            className={`rounded-full px-2.5 py-1 text-xs font-semibold ring-1 transition ${on[f.id] ? (f.kind === "physical" ? "bg-emerald-600 text-white ring-emerald-600" : "bg-violet-600 text-white ring-violet-600") : "bg-white text-slate-700 ring-slate-200"}`}>
-            {f.label}
-          </button>
-        ))}
+    <WidgetFrame
+      title="Density calculator: what does one km² look like?"
+      tryThis={[
+        "Predict first: is Singapore's density about 10, 100 or 1,000 times Australia's? Then switch between them.",
+        "Pick Custom. Keep the population fixed and **double** the area. What happens to the density?",
+        "Australia's average is tiny — yet Sydney is crowded. Why can a single average hide the real **distribution**?",
+        "Find a setting where each person has about one football pitch of space.",
+      ]}
+      caption={
+        <>
+          <p>
+            <strong>Density = population ÷ area.</strong> {fmt(pop)} people ÷ {Math.round(area).toLocaleString("en-GB")} km² ≈{" "}
+            <strong>{fmtDensity(density)} people per km²</strong>, so the green square (1 km × 1 km) holds about {fmtDensity(density)} people on average —
+            {" "}{label}.
+          </p>
+          <p className="mt-2">
+            {preset !== "custom" ? PRESETS[preset].note + " " : ""}
+            A national density is an <em>average</em>: it tells you how crowded a country is overall, not <em>where</em> the people actually are. For that you need a
+            distribution map. (Figures are rounded, mid-2020s; the size labels are rough guides, not official categories.)
+          </p>
+        </>
+      }
+    >
+      <div className="space-y-4">
+        <Segmented<PresetId>
+          label="Choose a country"
+          value={preset}
+          onChange={choose}
+          options={[
+            { value: "singapore", label: "Singapore" },
+            { value: "bangladesh", label: "Bangladesh" },
+            { value: "india", label: "India" },
+            { value: "uk", label: "UK" },
+            { value: "australia", label: "Australia" },
+            { value: "mongolia", label: "Mongolia" },
+            { value: "custom", label: "Custom" },
+          ]}
+        />
+        <Slider
+          label="Population (people)"
+          min={20}
+          max={95}
+          value={toLog(pop)}
+          onChange={(v) => {
+            setPreset("custom");
+            setPop(fromLog(v));
+          }}
+          format={() => fmt(pop)}
+        />
+        <Slider
+          label="Area (km²)"
+          min={10}
+          max={70}
+          value={toLog(area)}
+          onChange={(v) => {
+            setPreset("custom");
+            setArea(fromLog(v));
+          }}
+          format={() => Math.round(area).toLocaleString("en-GB") + " km²"}
+        />
+        <div className="grid gap-4 sm:grid-cols-[240px_1fr] sm:items-start">
+          <svg
+            viewBox={`0 0 ${S} ${S + 26}`}
+            className="mx-auto h-auto w-full max-w-[260px]"
+            role="img"
+            aria-label={`One square kilometre containing ${dotCount} dots; each dot is ${perDot} ${perDot === 1 ? "person" : "people"}, so about ${fmtDensity(density)} people per square kilometre.`}
+          >
+            <rect x={0} y={0} width={S} height={S} fill="#bbf7d0" className="stroke-ink" strokeWidth={2} />
+            {dots}
+            <text x={S / 2} y={S + 18} textAnchor="middle" fontSize={12} className="fill-ink-2">
+              1 km × 1 km · each dot = {perDot.toLocaleString("en-GB")} {perDot === 1 ? "person" : "people"}
+            </text>
+          </svg>
+          <div className="grid grid-cols-2 gap-2">
+            <Readout label="People per km²" value={fmtDensity(density)} tone={tone} />
+            <Readout label="Space per person" value={m2PerPerson >= 10000 ? (m2PerPerson / 10000).toFixed(1) + " ha" : Math.round(m2PerPerson).toLocaleString("en-GB") + " m²"} tone="ink" />
+            <Readout label="People per football pitch" value={perPitch < 1 ? perPitch.toFixed(2) : Math.round(perPitch).toLocaleString("en-GB")} tone="ink" />
+            <Readout label="Rough label" value={<span className="text-base">{label}</span>} tone={tone} />
+          </div>
+        </div>
       </div>
-      <p className="mb-2 text-xs text-slate-500"><span className="font-semibold text-emerald-700">Green = physical factors</span> · <span className="font-semibold text-violet-700">purple = human factors</span></p>
-
-      <svg viewBox={`0 0 ${IW} ${IH}`} className="w-full rounded-xl" role="img" aria-label="Map of an island showing where settlers live">
-        <rect width={IW} height={IH} fill="#bae6fd" />
-        <path d={outline} fill="#d9f99d" stroke="#65a30d" strokeWidth="2" />
-        <ellipse cx={DESERT.x} cy={DESERT.y} rx="58" ry="44" fill="#fde68a" opacity="0.9" />
-        <ellipse cx={PLAIN.x} cy={PLAIN.y} rx="40" ry="28" fill="#4ade80" opacity="0.55" />
-        {[[100, 70], [124, 60], [140, 84], [96, 98], [118, 100]].map(([x, y], i) => (
-          <polygon key={i} points={`${x - 16},${y + 14} ${x},${y - 14} ${x + 16},${y + 14}`} fill="#a8a29e" stroke="#78716c" />
-        ))}
-        <polyline points={RIVER.map((p) => `${p.x},${p.y}`).join(" ")} fill="none" stroke="#2563eb" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-        <text x={DESERT.x} y={DESERT.y - 26} fontSize="11" textAnchor="middle" fill="#92400e">Desert</text>
-        <text x={MOUNT.x + 14} y={MOUNT.y - 44} fontSize="11" textAnchor="middle" fill="#57534e">Mountains</text>
-        <text x={PLAIN.x - 44} y={PLAIN.y + 4} fontSize="11" textAnchor="end" fill="#166534">Fertile plain</text>
-        <text x={PORT.x} y={PORT.y + 16} fontSize="12" textAnchor="middle">⚓</text>
-        <text x={FACTORY.x + 12} y={FACTORY.y} fontSize="12" textAnchor="middle">🏭</text>
-        <text x={MINE.x - 18} y={MINE.y - 8} fontSize="12" textAnchor="middle">⛏️</text>
-        {SITES.map((s, i) => Array.from({ length: Math.min(sim.counts[i], 12) }, (_, j) => (
-          <circle key={`${i}-${j}`} cx={s.x + (j === 0 ? 0 : (hash(s.k * 31 + j) - 0.5) * 12)} cy={s.y + (j === 0 ? 0 : (hash(s.k * 17 + j) - 0.5) * 12)} r="2.2" fill="#b91c1c" stroke="#fff" strokeWidth="0.5" />
-        )))}
-      </svg>
-
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
-        <Stat label="People on busiest 10% of land" value={`${Math.round(sim.top10 * 100)}%`} tone="rose" />
-        <Stat label="Empty land" value={`${Math.round(sim.empty * 100)}%`} tone="amber" />
-        <Stat label="Factors on (phys / human)" value={`${phys} / ${human}`} tone="emerald" />
-      </div>
-    </Frame>
+    </WidgetFrame>
   );
 }
+
+// ---------------------------------------------------------------------------
+// 2. Settlement suitability mixer (physical + human factors, technology)
+// ---------------------------------------------------------------------------
+
+interface Choice {
+  value: string;
+  label: string;
+  score: number;
+  /** Score when modern technology (irrigation, desalination, air-con, heating) is available. */
+  tech?: number;
+  why: string;
+}
+interface Factor {
+  id: string;
+  name: string;
+  kind: "physical" | "human";
+  choices: Choice[];
+}
+
+const FACTORS: Factor[] = [
+  { id: "relief", name: "Relief", kind: "physical", choices: [
+    { value: "flat", label: "Flat", score: 2, why: "flat land is easy to build on and farm" },
+    { value: "hilly", label: "Hilly", score: 0, why: "hills make building and transport harder" },
+    { value: "mountains", label: "Mountains", score: -2, why: "steep, high slopes are hard to build on, farm or cross" },
+  ] },
+  { id: "climate", name: "Climate", kind: "physical", choices: [
+    { value: "mild", label: "Mild", score: 2, why: "a mild climate has a long growing season" },
+    { value: "humid", label: "Hot & wet", score: 0, why: "hot and humid — crops grow but heat and disease are a challenge" },
+    { value: "dry", label: "Hot & dry", score: -2, tech: 0, why: "too hot and dry for most crops" },
+    { value: "cold", label: "Very cold", score: -3, tech: -2, why: "freezing winters and a short growing season" },
+  ] },
+  { id: "water", name: "Water supply", kind: "physical", choices: [
+    { value: "river", label: "River / lake", score: 2, why: "a reliable river or lake for drinking and irrigation" },
+    { value: "wells", label: "Wells only", score: 0, why: "some groundwater, but limited" },
+    { value: "none", label: "Very little", score: -3, tech: -1, why: "almost no fresh water" },
+  ] },
+  { id: "soil", name: "Soil", kind: "physical", choices: [
+    { value: "fertile", label: "Fertile", score: 2, why: "fertile soil (e.g. river silt) feeds many people" },
+    { value: "poor", label: "Poor", score: -1, tech: 0, why: "thin or poor soil limits farming" },
+  ] },
+  { id: "hazards", name: "Natural hazards", kind: "physical", choices: [
+    { value: "low", label: "Low risk", score: 0, why: "few natural hazards" },
+    { value: "floods", label: "Floods / storms", score: -1, why: "floods or tropical storms are a risk" },
+    { value: "quakes", label: "Quakes / volcanoes", score: -1, why: "earthquakes or eruptions are a risk" },
+  ] },
+  { id: "jobs", name: "Jobs", kind: "human", choices: [
+    { value: "many", label: "Many", score: 3, why: "plenty of jobs pull people in" },
+    { value: "few", label: "Few", score: -2, why: "few jobs push people away" },
+  ] },
+  { id: "transport", name: "Transport links", kind: "human", choices: [
+    { value: "good", label: "Good", score: 2, why: "good roads, rail or ports connect people to markets and work" },
+    { value: "poor", label: "Poor", score: -2, why: "remote, with few roads" },
+  ] },
+  { id: "services", name: "Services", kind: "human", choices: [
+    { value: "good", label: "Good", score: 1, why: "schools, hospitals and utilities attract families" },
+    { value: "poor", label: "Poor", score: -1, why: "few schools or hospitals" },
+  ] },
+  { id: "stability", name: "Political stability", kind: "human", choices: [
+    { value: "peace", label: "Peaceful", score: 1, why: "a stable, safe place to live" },
+    { value: "conflict", label: "Conflict", score: -3, why: "war or conflict drives people out" },
+  ] },
+];
+
+type Picks = Record<string, string>;
+
+const PLACES: Record<string, { name: string; picks: Picks; note: string }> = {
+  nile: { name: "Nile valley", note: "Egypt's Nile valley: desert climate, but the river and its silt make it one of the most crowded strips of land on Earth.", picks: { relief: "flat", climate: "dry", water: "river", soil: "fertile", hazards: "low", jobs: "many", transport: "good", services: "good", stability: "peace" } },
+  sahara: { name: "Sahara interior", note: "The central Sahara: no river, little rain and few jobs or roads — very sparsely populated.", picks: { relief: "flat", climate: "dry", water: "none", soil: "poor", hazards: "low", jobs: "few", transport: "poor", services: "poor", stability: "peace" } },
+  himalaya: { name: "High Himalayas", note: "Steep, cold and earthquake-prone, with few roads — only small villages in the valleys.", picks: { relief: "mountains", climate: "cold", water: "river", soil: "poor", hazards: "quakes", jobs: "few", transport: "poor", services: "poor", stability: "peace" } },
+  amazon: { name: "Amazon interior", note: "Plenty of water, but poor soils, dense forest and almost no roads keep numbers low.", picks: { relief: "flat", climate: "humid", water: "river", soil: "poor", hazards: "floods", jobs: "few", transport: "poor", services: "poor", stability: "peace" } },
+  singapore: { name: "Singapore", note: "Very little natural fresh water — but jobs, transport, planning and technology (NEWater, desalination) support about 8,000 people per km².", picks: { relief: "flat", climate: "humid", water: "none", soil: "poor", hazards: "low", jobs: "many", transport: "good", services: "good", stability: "peace" } },
+  siberia: { name: "Northern Siberia", note: "Permafrost and long freezing winters: even with oil and gas jobs in a few towns, most of the land is nearly empty.", picks: { relief: "flat", climate: "cold", water: "river", soil: "poor", hazards: "low", jobs: "few", transport: "poor", services: "poor", stability: "peace" } },
+};
+
+function SuitabilityMixer() {
+  const [picks, setPicks] = useState<Picks>(PLACES.nile.picks);
+  const [tech, setTech] = useState<"off" | "on">("off");
+  const [place, setPlace] = useState<string>("nile");
+
+  const rows = FACTORS.map((f) => {
+    const c = f.choices.find((x) => x.value === picks[f.id]) ?? f.choices[0];
+    const score = tech === "on" && c.tech !== undefined ? c.tech : c.score;
+    return { f, c, score, softened: tech === "on" && c.tech !== undefined };
+  });
+  const physical = rows.filter((r) => r.f.kind === "physical").reduce((s, r) => s + r.score, 0);
+  const human = rows.filter((r) => r.f.kind === "human").reduce((s, r) => s + r.score, 0);
+  const total = physical + human;
+  const verdict = total >= 8 ? "Densely populated" : total >= 0 ? "Moderately populated" : "Sparsely populated";
+  const tone = total >= 8 ? "good" : total >= 0 ? "ink" : "bad";
+  const best = [...rows].sort((a, b) => b.score - a.score)[0];
+  const worst = [...rows].sort((a, b) => a.score - b.score)[0];
+
+  const W = 320, rowH = 22, mid = 200, unit = 18;
+  const H = rows.length * rowH + 10;
+
+  return (
+    <WidgetFrame
+      title="Settlement suitability mixer"
+      tryThis={[
+        "Load **Singapore** with technology off, then switch technology on. Which negative factors shrink?",
+        "Start from the **Nile valley** and change only *Water supply* to \"Very little\". How far does the verdict fall?",
+        "Can you make a place densely populated even with **mountains** and a **very cold** climate? Which human factors do you need?",
+        "Load the **Amazon interior**. Which single change would help most — and is it physical or human?",
+      ]}
+      caption={
+        <>
+          <p>
+            <strong>{verdict}</strong> (score {total > 0 ? "+" : ""}{total}: physical {physical > 0 ? "+" : ""}{physical}, human {human > 0 ? "+" : ""}{human}). The biggest help here is{" "}
+            <strong>{best.f.name.toLowerCase()}</strong> ({best.c.why}); the biggest problem is <strong>{worst.f.name.toLowerCase()}</strong> ({worst.c.why}).
+          </p>
+          <p className="mt-2">
+            {place !== "custom" ? PLACES[place].note + " " : ""}
+            {tech === "on"
+              ? "With modern technology — irrigation, desalination, air-conditioning, heating, fertilisers — harsh physical factors matter less, so human factors decide more."
+              : "Without modern technology, physical factors such as water and climate limit where people can live."}
+          </p>
+          <p className="mt-2 text-ink-2">Simplified model: the scores are illustrative, not measured. Real places depend on many factors working together.</p>
+        </>
+      }
+    >
+      <div className="space-y-4">
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-sm font-semibold text-ink-2">Load a place:</span>
+          {Object.entries(PLACES).map(([id, p]) => (
+            <button
+              key={id}
+              type="button"
+              className={`btn btn-sm ${place === id ? "btn-primary" : "btn-secondary"}`}
+              onClick={() => {
+                setPlace(id);
+                setPicks(p.picks);
+              }}
+            >
+              {p.name}
+            </button>
+          ))}
+        </div>
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-sm font-semibold text-ink-2">Modern technology</span>
+          <Segmented<"off" | "on">
+            label="Modern technology"
+            value={tech}
+            onChange={setTech}
+            options={[
+              { value: "off", label: "Off" },
+              { value: "on", label: "On" },
+            ]}
+          />
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {FACTORS.map((f) => (
+            <div key={f.id} className="space-y-1">
+              <div className="text-xs font-bold uppercase tracking-wide text-ink-2">
+                {f.name} <span className={f.kind === "physical" ? "text-good" : "text-brand"}>· {f.kind}</span>
+              </div>
+              <Segmented<string>
+                label={f.name}
+                value={picks[f.id]}
+                onChange={(v) => {
+                  setPlace("custom");
+                  setPicks({ ...picks, [f.id]: v });
+                }}
+                options={f.choices.map((c) => ({ value: c.value, label: c.label }))}
+              />
+            </div>
+          ))}
+        </div>
+        <div className="grid gap-3 sm:grid-cols-[1fr_200px] sm:items-center">
+          <svg
+            viewBox={`0 0 ${W} ${H}`}
+            className="h-auto w-full"
+            role="img"
+            aria-label={`Bar chart of factor scores. ${rows.map((r) => `${r.f.name} ${r.score}`).join(", ")}. Total ${total}: ${verdict}.`}
+          >
+            <line x1={mid} x2={mid} y1={0} y2={H} className="stroke-ink-2" strokeWidth={1} />
+            {rows.map((r, i) => {
+              const y = 5 + i * rowH;
+              const w = Math.abs(r.score) * unit;
+              return (
+                <g key={r.f.id}>
+                  <text x={4} y={y + 14} fontSize={11} className="fill-ink">{r.f.name}{r.softened ? " *" : ""}</text>
+                  {r.score !== 0 ? (
+                    <rect x={r.score > 0 ? mid : mid - w} y={y + 3} width={w} height={rowH - 8} rx={3} className={r.score > 0 ? "fill-good" : "fill-bad"} />
+                  ) : (
+                    <rect x={mid - 1} y={y + 3} width={2} height={rowH - 8} className="fill-ink-2" />
+                  )}
+                  <text x={r.score >= 0 ? mid + w + 4 : mid - w - 4} y={y + 14} fontSize={10} textAnchor={r.score >= 0 ? "start" : "end"} className="fill-ink-2">
+                    {r.score > 0 ? "+" : ""}{r.score}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-1">
+            <Readout label="Suitability score" value={(total > 0 ? "+" : "") + total} tone={tone} />
+            <Readout label="Prediction" value={<span className="text-base">{verdict}</span>} tone={tone} />
+          </div>
+        </div>
+        {tech === "on" && rows.some((r) => r.softened) ? <p className="text-xs text-ink-2">* softened by modern technology</p> : null}
+      </div>
+    </WidgetFrame>
+  );
+}
+
+export const widgets: WidgetDef[] = [
+  {
+    id: "density-dot-square",
+    title: "Density calculator",
+    blurb: "Change the population and area — or pick a country — and see how crowded one square kilometre really is.",
+    Component: DensityExplorer,
+  },
+  {
+    id: "settlement-suitability",
+    title: "Settlement suitability mixer",
+    blurb: "Mix physical and human factors (and modern technology) to predict whether a place will be densely or sparsely populated.",
+    Component: SuitabilityMixer,
+  },
+];

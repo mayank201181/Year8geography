@@ -1,172 +1,168 @@
 "use client";
-
-import Link from "next/link";
+// "Who's studying?" — choose, add, edit or remove (PIN) a learner.
 import { useState } from "react";
-import { GUEST_ID, useStore } from "@/lib/store";
+import Link from "next/link";
+import { useStore } from "@/lib/store";
 
-const EMOJIS = ["🧑‍🎓", "👦", "👧", "🧒", "👨‍🎓", "👩‍🎓", "🧭", "🧑‍🚀", "🦊", "🐼", "🐱", "🐶", "🦁", "🐯", "🦄", "🐧", "🚀", "⭐", "🌟", "🧠"];
+const AVATARS = ["🦊", "🐼", "🦉", "🐯", "🐬", "🦄", "🐙", "🦁", "🐧", "🐢", "🦋", "🐝", "🌟", "🚀", "🎧", "🎨"];
 
 export function ProfilePicker() {
-  const { account, selectProfile, createProfile, updateProfile, deleteProfile, logout } = useStore();
-  const [formOpen, setFormOpen] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
+  const { account, selectProfile, createProfile, importGuest: importGuestInto, updateProfile, deleteProfile, guestHasProgress, logout } = useStore();
+  const [adding, setAdding] = useState(account?.profiles.length === 0);
+  const [editing, setEditing] = useState<string | null>(null);
   const [name, setName] = useState("");
-  const [emoji, setEmoji] = useState(EMOJIS[0]);
-  const [error, setError] = useState("");
+  const [avatar, setAvatar] = useState(AVATARS[0]);
+  const [importGuest, setImportGuest] = useState(true);
+  const [pin, setPin] = useState("");
   const [busy, setBusy] = useState(false);
-  const [confirmDel, setConfirmDel] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  if (!account) return null;
+  // Progress made in guest mode on this device (kept until it has been copied to a learner).
+  const guestProgress = guestHasProgress();
+  const hasGuest = account.profiles.length === 0 && guestProgress;
 
-  const profiles = account?.profiles ?? [];
-
-  function openAdd() {
-    setEditingId(null);
-    setName("");
-    setEmoji(EMOJIS[0]);
-    setError("");
-    setConfirmDel(false);
-    setFormOpen(true);
-  }
-  function openEdit(id: string, n: string, e: string) {
-    setEditingId(id);
-    setName(n);
-    setEmoji(e);
-    setError("");
-    setConfirmDel(false);
-    setFormOpen(true);
-  }
-
-  async function submit(ev: React.FormEvent) {
-    ev.preventDefault();
-    setError("");
+  async function run<R extends { ok: boolean; error?: string }>(f: () => Promise<R>, after?: (r: R) => void) {
     setBusy(true);
-    const res = editingId ? await updateProfile(editingId, name, emoji) : await createProfile(name, emoji);
+    setError(null);
+    const r = await f();
     setBusy(false);
-    if (!res.ok) {
-      setError(res.error || "Could not save.");
-      return;
-    }
-    setFormOpen(false); // create() navigates into the app; edit() returns here
+    if (!r.ok) setError(r.error ?? "Something went wrong.");
+    else after?.(r);
   }
 
-  async function remove() {
-    if (!editingId) return;
-    setBusy(true);
-    const res = await deleteProfile(editingId);
-    setBusy(false);
-    if (!res.ok) {
-      setError(res.error || "Could not delete.");
-      return;
-    }
-    setFormOpen(false);
-  }
+  const form = (mode: "add" | "edit", id?: string) => (
+    <form
+      className="card mt-4 space-y-4 p-5 text-left"
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (mode === "add") {
+          void run(
+            () => createProfile(name, avatar, hasGuest && importGuest),
+            (r) => {
+              // Added, but the guest progress didn't come across: say so and offer it again below.
+              if (r.importError) {
+                setAdding(false);
+                setError(r.importError);
+              }
+            },
+          );
+        }
+        else if (id) void run(() => updateProfile(id, name, avatar), () => setEditing(null));
+      }}
+    >
+      <h2 className="text-lg font-extrabold">{mode === "add" ? "Add a learner" : "Edit learner"}</h2>
+      <label className="block space-y-1">
+        <span className="text-sm font-bold text-ink-2">Name</span>
+        <input className="input" value={name} onChange={(e) => setName(e.target.value)} maxLength={24} required autoFocus />
+      </label>
+      <fieldset>
+        <legend className="text-sm font-bold text-ink-2">Avatar</legend>
+        <div className="mt-1 flex flex-wrap gap-1.5">
+          {AVATARS.map((a) => (
+            <button key={a} type="button" onClick={() => setAvatar(a)} aria-pressed={avatar === a} className={`h-11 w-11 rounded-xl text-2xl ${avatar === a ? "bg-brand-soft ring-2 ring-brand" : "bg-surface-2"}`}>
+              {a}
+            </button>
+          ))}
+        </div>
+      </fieldset>
+      {mode === "add" && hasGuest ? (
+        <label className="flex items-center gap-2 text-sm">
+          <input type="checkbox" className="h-5 w-5" checked={importGuest} onChange={(e) => setImportGuest(e.target.checked)} />
+          Bring across the progress made as a guest on this device
+        </label>
+      ) : null}
+      {mode === "edit" && id ? (
+        <details className="rounded-xl border border-line p-3">
+          <summary className="cursor-pointer text-sm font-bold text-bad">Remove this learner…</summary>
+          <p className="mt-2 text-sm text-ink-2">This deletes their progress for good. Enter the parent PIN to confirm.</p>
+          <div className="mt-2 flex gap-2">
+            <input className="input max-w-[10rem] tracking-[0.3em]" inputMode="numeric" value={pin} onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 8))} placeholder="PIN" aria-label="Parent PIN" />
+            <button type="button" className="btn btn-secondary text-bad" disabled={busy || pin.length < 4} onClick={() => void run(() => deleteProfile(id, pin), () => setEditing(null))}>
+              Remove
+            </button>
+          </div>
+        </details>
+      ) : null}
+      {error ? <p className="rounded-xl bg-bad-soft px-3 py-2 text-sm" role="alert">{error}</p> : null}
+      <div className="flex gap-2">
+        <button type="submit" className="btn btn-primary" disabled={busy || !name.trim()}>
+          {busy ? "Saving…" : mode === "add" ? "Add learner" : "Save"}
+        </button>
+        {account.profiles.length > 0 ? (
+          <button type="button" className="btn btn-ghost" onClick={() => { setAdding(false); setEditing(null); setError(null); }}>
+            Cancel
+          </button>
+        ) : null}
+      </div>
+    </form>
+  );
 
   return (
-    <div className="grid min-h-screen place-items-center bg-gradient-to-br from-indigo-50 via-white to-emerald-50 px-4">
-      <div className="w-full max-w-lg text-center">
-        <div className="text-4xl">🌏</div>
-        <h1 className="mt-2 text-2xl font-extrabold text-slate-900">Who&apos;s studying?</h1>
-        <p className="mt-1 text-sm text-slate-500">Pick your name to load your own progress.</p>
-
-        {!formOpen ? (
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
-            {profiles.map((p) => (
-              <div key={p.id} className="relative">
-                <button
-                  onClick={() => selectProfile(p.id)}
-                  className="group flex w-28 flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:border-indigo-300 hover:shadow-md"
-                >
-                  <span className="grid h-16 w-16 place-items-center rounded-full bg-indigo-50 text-4xl">{p.emoji}</span>
-                  <span className="w-full truncate text-sm font-semibold text-slate-800">{p.name}</span>
+    <div className="mx-auto max-w-xl py-8 text-center">
+      <h1 className="text-3xl font-black">Who&apos;s studying?</h1>
+      <p className="mt-1 text-ink-2">{account.name} family</p>
+      {adding ? (
+        form("add")
+      ) : editing ? (
+        form("edit", editing)
+      ) : (
+        <>
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {account.profiles.map((p) => (
+              <div key={p.id} className="card relative p-4">
+                <button type="button" className="flex w-full flex-col items-center gap-2" onClick={() => void selectProfile(p.id)}>
+                  <span className="text-5xl" aria-hidden>
+                    {p.avatar}
+                  </span>
+                  <span className="text-lg font-extrabold">{p.name}</span>
                 </button>
                 <button
-                  onClick={() => openEdit(p.id, p.name, p.emoji)}
+                  type="button"
+                  className="absolute right-2 top-2 rounded-lg px-2 py-1 text-xs text-ink-2 hover:bg-surface-2"
+                  onClick={() => { setEditing(p.id); setName(p.name); setAvatar(p.avatar); setPin(""); }}
                   aria-label={`Edit ${p.name}`}
-                  className="absolute -right-1.5 -top-1.5 grid h-7 w-7 place-items-center rounded-full border border-slate-200 bg-white text-sm shadow-sm hover:bg-slate-50"
                 >
                   ✏️
                 </button>
               </div>
             ))}
-            <button
-              onClick={openAdd}
-              className="flex w-28 flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-slate-300 bg-white/50 p-4 text-slate-500 transition hover:border-indigo-400 hover:text-indigo-600"
-            >
-              <span className="grid h-16 w-16 place-items-center rounded-full bg-slate-50 text-3xl">＋</span>
-              <span className="text-sm font-semibold">Add learner</span>
-            </button>
+            {account.profiles.length < 8 ? (
+              <button type="button" className="card flex flex-col items-center justify-center gap-2 border-dashed p-4 text-ink-2" onClick={() => { setAdding(true); setName(""); setAvatar(AVATARS[account.profiles.length % AVATARS.length]); }}>
+                <span className="text-4xl" aria-hidden>
+                  ＋
+                </span>
+                <span className="font-bold">Add learner</span>
+              </button>
+            ) : null}
           </div>
-        ) : (
-          <form onSubmit={submit} className="mx-auto mt-8 max-w-sm space-y-4 rounded-2xl border border-slate-200 bg-white p-6 text-left shadow-sm">
-            <p className="text-center text-lg font-bold text-slate-900">{editingId ? "Edit profile" : "New learner"}</p>
-            <div className="flex justify-center">
-              <span className="grid h-20 w-20 place-items-center rounded-full bg-indigo-50 text-5xl">{emoji}</span>
-            </div>
-            <label className="block">
-              <span className="text-sm font-semibold text-slate-700">Name</span>
-              <input
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Mayank"
-                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2.5 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100"
-              />
-            </label>
-            <div>
-              <span className="text-sm font-semibold text-slate-700">Choose an avatar</span>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {EMOJIS.map((e) => (
-                  <button
-                    type="button"
-                    key={e}
-                    onClick={() => setEmoji(e)}
-                    className={`grid h-10 w-10 place-items-center rounded-full text-xl ${emoji === e ? "bg-indigo-600 ring-2 ring-indigo-300" : "bg-slate-100 hover:bg-slate-200"}`}
-                  >
-                    {e}
+          {guestProgress && account.profiles.length > 0 ? (
+            <div className="card mt-6 p-4 text-left">
+              <h2 className="font-extrabold">Progress from guest mode</h2>
+              <p className="mt-1 text-sm text-ink-2">This device has stars and answers saved as a guest. Bring them across to:</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {account.profiles.map((p) => (
+                  <button key={p.id} type="button" className="btn btn-secondary btn-sm" disabled={busy} onClick={() => void run(() => importGuestInto(p.id))}>
+                    <span aria-hidden>{p.avatar}</span> {p.name}
                   </button>
                 ))}
               </div>
             </div>
-            {error && <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-600">{error}</p>}
-            <div className="flex gap-2">
-              <button type="submit" disabled={busy} className="flex-1 rounded-xl bg-indigo-600 px-4 py-2.5 font-bold text-white hover:bg-indigo-700 disabled:opacity-60">
-                {busy ? "Saving…" : editingId ? "Save changes" : "Start learning"}
-              </button>
-              <button type="button" onClick={() => setFormOpen(false)} className="rounded-xl border border-slate-200 px-4 py-2.5 font-semibold text-slate-600 hover:bg-slate-50">
-                Cancel
-              </button>
-            </div>
-
-            {editingId && (
-              <div className="border-t border-slate-100 pt-3">
-                {!confirmDel ? (
-                  <button type="button" onClick={() => setConfirmDel(true)} className="text-sm font-semibold text-rose-500 hover:underline">
-                    Delete this profile
-                  </button>
-                ) : (
-                  <div className="rounded-xl bg-rose-50 p-3 text-sm">
-                    <p className="text-rose-700">Delete this profile and all its progress? This can&apos;t be undone.</p>
-                    <div className="mt-2 flex gap-2">
-                      <button type="button" onClick={remove} disabled={busy} className="rounded-lg bg-rose-600 px-3 py-1.5 font-semibold text-white hover:bg-rose-700 disabled:opacity-60">
-                        Yes, delete
-                      </button>
-                      <button type="button" onClick={() => setConfirmDel(false)} className="rounded-lg border border-slate-200 px-3 py-1.5 font-semibold text-slate-600">
-                        Keep it
-                      </button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </form>
-        )}
-
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-slate-500">
-          <span>Signed in as <strong className="text-slate-700">{account?.displayName}</strong></span>
-          <span className="hidden sm:inline">·</span>
-          {account?.id !== GUEST_ID && <Link href="/parent" className="font-semibold text-indigo-600 hover:underline">Parent dashboard 🔒</Link>}
-          <span className="hidden sm:inline">·</span>
-          <button onClick={logout} className="font-semibold text-slate-500 hover:text-rose-600 hover:underline">{account?.id === GUEST_ID ? "Use a family account instead" : "Log out"}</button>
-        </div>
-      </div>
+          ) : null}
+          {error ? (
+            <p className="mt-4 rounded-xl bg-bad-soft px-3 py-2 text-sm" role="alert">
+              {error}
+            </p>
+          ) : null}
+          <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm">
+            <Link href="/parent" className="btn btn-ghost btn-sm">
+              👪 Parent dashboard
+            </Link>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => void logout()}>
+              Sign out
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

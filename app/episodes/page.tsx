@@ -3,13 +3,13 @@ import type { Metadata } from "next";
 import { EpisodesHub } from "@/components/EpisodesHub";
 
 export const metadata: Metadata = {
-  title: "Off The Map — a Claude Sitcom",
+  title: "Sitcom Episodes — Totally Raotional: Off the Map",
   description: "Animated sitcom episodes for every Year 8 Geography topic, with pause challenges.",
 };
 
 export default function EpisodesPage() {
   return (
-    <Suspense fallback={<p className="p-6 text-slate-600">Loading episodes…</p>}>
+    <Suspense fallback={<p className="p-6 text-ink-2">Loading episodes…</p>}>
       <EpisodesHub />
     </Suspense>
   );

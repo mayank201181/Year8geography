@@ -1,20 +1,28 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getTopic, topicIds } from "@/lib/topics";
+import { topicSummaries } from "@/lib/server/content";
+import { TOPIC_META, metaById } from "@/lib/topics/meta";
 import { Certificate } from "@/components/Certificate";
 
-export function generateStaticParams() {
-  return topicIds().map((id) => ({ id }));
+// One page per topic plus the whole-year certificate; anything else is a 404.
+export const dynamicParams = false;
+
+export function generateStaticParams(): { id: string }[] {
+  return [...TOPIC_META.map((t) => ({ id: t.id })), { id: "year8" }];
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const topic = getTopic(id);
-  return { title: topic ? `${topic.title} Certificate` : "Certificate" };
+  if (id === "year8") return { title: "Year 8 Geography certificate" };
+  const meta = metaById(id);
+  return { title: meta ? `${meta.title} certificate` : "Certificate" };
 }
 
 export default async function CertificatePage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const topic = getTopic(id);
+  const summaries = topicSummaries();
+  if (id === "year8") return <Certificate kind="year8" summaries={summaries} />;
+  const topic = summaries.find((s) => s.id === id);
   if (!topic) notFound();
-  return <Certificate topic={topic} />;
+  return <Certificate kind="topic" topic={topic} summaries={summaries} />;
 }

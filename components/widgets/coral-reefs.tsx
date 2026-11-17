@@ -1,323 +1,306 @@
 "use client";
+import { useState } from "react";
+import { WidgetFrame, Slider, Segmented, Readout, type WidgetDef } from "./kit";
 
-import { useMemo, useState } from "react";
-import { Frame, Slider, Choice, Stat } from "./kit";
+// ---------------------------------------------------------------------------
+// 1. Bleaching thermometer — sea temperature + duration → degree heating weeks
+// ---------------------------------------------------------------------------
 
-const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
-const mix = (a: string, b: string, t: number) => {
-  const pa = [1, 3, 5].map((i) => parseInt(a.slice(i, i + 2), 16));
-  const pb = [1, 3, 5].map((i) => parseInt(b.slice(i, i + 2), 16));
-  return "#" + pa.map((v, i) => Math.round(v + (pb[i] - v) * clamp(t, 0, 1)).toString(16).padStart(2, "0")).join("");
-};
-
-/* ------------------------------------------------------------------ */
-/* 1. Reef Health Simulator                                            */
-/* ------------------------------------------------------------------ */
-
-type Level = "low" | "med" | "high";
-const LV: Record<Level, number> = { low: 0, med: 1, high: 2 };
-const LEVELS: { id: Level; label: string }[] = [
-  { id: "low", label: "Low" },
-  { id: "med", label: "Medium" },
-  { id: "high", label: "High" },
-];
-
-const CORAL_X = [22, 50, 80, 108, 136, 164, 194, 222, 250, 278, 306, 334];
-const CORAL_COL = ["#f97316", "#ec4899", "#a855f7", "#eab308", "#14b8a6", "#ef4444"];
-// Fixed order in which corals are affected (so the picture is deterministic, not random).
-const ORDER = [3, 8, 0, 11, 5, 9, 1, 6, 10, 2, 7, 4];
-const FISH = [
-  [40, 60], [120, 45], [200, 70], [290, 50], [70, 100], [250, 105], [160, 95], [320, 85], [30, 130], [215, 130],
-];
-
-type CState = "healthy" | "bleached" | "dead" | "young";
-
-function Coral({ x, kind, state, color }: { x: number; kind: number; state: CState; color: string }) {
-  const fill = state === "bleached" ? "#f8fafc" : state === "dead" ? "#a8a29e" : color;
-  const stroke = state === "bleached" ? "#94a3b8" : state === "dead" ? "#57534e" : "#7c2d12";
-  const s = state === "young" ? 0.55 : 1;
-  const base = 182;
-  return (
-    <g transform={`translate(${x} ${base}) scale(${s}) translate(${-x} ${-base})`}>
-      {kind === 0 ? (
-        <g stroke={fill} strokeWidth={5} strokeLinecap="round">
-          <line x1={x} y1={base} x2={x} y2={base - 34} />
-          <line x1={x} y1={base - 14} x2={x - 11} y2={base - 30} />
-          <line x1={x} y1={base - 18} x2={x + 11} y2={base - 36} />
-        </g>
-      ) : kind === 1 ? (
-        <ellipse cx={x} cy={base - 12} rx={13} ry={12} fill={fill} stroke={stroke} strokeWidth={1} />
-      ) : (
-        <g>
-          <rect x={x - 2} y={base - 20} width={4} height={20} fill={fill} />
-          <ellipse cx={x} cy={base - 22} rx={15} ry={5} fill={fill} stroke={stroke} strokeWidth={1} />
-        </g>
-      )}
-      {state === "dead" ? (
-        <g fill="#65a30d">
-          <circle cx={x - 6} cy={base - 20} r={3} />
-          <circle cx={x + 5} cy={base - 26} r={3} />
-          <circle cx={x + 2} cy={base - 12} r={3} />
-        </g>
-      ) : null}
-    </g>
-  );
+function mix(a: [number, number, number], b: [number, number, number], t: number): string {
+  const c = a.map((v, i) => Math.round(v + (b[i] - v) * t));
+  return `rgb(${c[0]}, ${c[1]}, ${c[2]})`;
 }
 
-function Cots({ x, y }: { x: number; y: number }) {
-  const pts: string[] = [];
-  for (let i = 0; i < 28; i++) {
-    const r = i % 2 === 0 ? 9 : 4;
-    const a = (i * Math.PI) / 14;
-    pts.push(`${(x + r * Math.cos(a)).toFixed(1)},${(y + r * Math.sin(a)).toFixed(1)}`);
-  }
-  return <polygon points={pts.join(" ")} fill="#7c3aed" stroke="#3b0764" strokeWidth={0.8} />;
-}
-
-export function ReefHealthSimulator() {
-  const [anom, setAnom] = useState(1.5);
+function BleachingThermometer() {
+  const [mmm, setMmm] = useState<"27" | "28" | "29">("28");
+  const [temp, setTemp] = useState(29.5);
   const [weeks, setWeeks] = useState(4);
-  const [runoff, setRunoff] = useState<Level>("low");
-  const [fishing, setFishing] = useState<Level>("low");
-  const [cots, setCots] = useState<"no" | "yes">("no");
-  const [noTake, setNoTake] = useState(33);
-  const [when, setWhen] = useState<"now" | "later">("now");
-
-  const m = useMemo(() => {
-    // NOAA-style Degree Heating Weeks: only weeks >= 1 °C above the normal summer maximum count.
-    const dhw = anom >= 1 ? anom * weeks : 0;
-    const bleach = dhw >= 1 ? clamp((dhw - 1) * 14, 0, 100) : 0; // % of corals bleached
-    const mortHeat = clamp((dhw - 5) * 9, 0, 95); // % of corals killed by heat
-    const ro = LV[runoff], fi = LV[fishing];
-    const runLoss = [0, 5, 12][ro];
-    const cotsLoss = cots === "yes" ? 40 * (1 + 0.25 * ro) * (1 - noTake / 150) : 0;
-    const cover = (100 - mortHeat) * (1 - runLoss / 100) * (1 - cotsLoss / 100);
-    const fishBase = [100, 65, 35][fi];
-    const fish = (fishBase + ((100 - fishBase) * noTake) / 100) * (0.4 + (0.6 * cover) / 100);
-    const recCap = clamp(0.8 - 0.15 * ro - 0.12 * fi + (0.3 * noTake) / 60, 0.1, 0.95);
-    const cover10 = cover + (100 - cover) * recCap;
-    const liveBleach = mortHeat < 100 ? clamp((bleach - mortHeat) / (100 - mortHeat), 0, 1) : 0;
-    let state: string, tone: "emerald" | "amber" | "rose" | "sky";
-    if (when === "now") {
-      if (mortHeat >= 30 || cover < 50) [state, tone] = ["Dead — algae taking over", "rose"];
-      else if (bleach >= 40) [state, tone] = ["Bleached", "amber"];
-      else if (bleach > 0 || cover < 85 || fi === 2) [state, tone] = ["Stressed", "amber"];
-      else [state, tone] = ["Healthy", "emerald"];
-    } else {
-      if (cover10 >= 80) [state, tone] = ["Recovered", "emerald"];
-      else if (cover10 >= 55) [state, tone] = ["Recovering", "sky"];
-      else [state, tone] = ["Degraded (algae reef)", "rose"];
-    }
-    return { dhw, bleach, mortHeat, cover, cover10, fish, recCap, liveBleach, state, tone };
-  }, [anom, weeks, runoff, fishing, cots, noTake, when]);
-
-  const later = when === "later";
-  const nDeadNow = Math.round((12 * (100 - m.cover)) / 100);
-  const nDeadLater = Math.round((12 * (100 - m.cover10)) / 100);
-  const nBleach = Math.round((12 - nDeadNow) * m.liveBleach);
-  const states: CState[] = Array(12).fill("healthy");
-  ORDER.forEach((idx, r) => {
-    if (!later) states[idx] = r < nDeadNow ? "dead" : r < nDeadNow + nBleach ? "bleached" : "healthy";
-    else states[idx] = r < nDeadLater ? "dead" : r < nDeadNow ? "young" : "healthy";
-  });
-  const fishShown = Math.round((clamp(later ? m.fish * (0.4 + (0.6 * m.cover10) / 100) / (0.4 + (0.6 * m.cover) / 100) : m.fish, 0, 100) / 100) * 10);
-  const water = mix("#38bdf8", "#7c9a6b", LV[runoff] / 2);
-
-  let science: string;
-  if (!later && m.state.startsWith("Dead"))
-    science = "Without their zooxanthellae for too long, the coral polyps starve and die. Seaweed and turf algae quickly cover the bare limestone skeletons, and fish that fed or sheltered in the coral leave.";
-  else if (!later && m.bleach >= 40)
-    science = "The water has stayed at least 1 °C above the normal summer maximum for weeks, so the zooxanthellae (tiny algae living inside the coral) start making harmful chemicals and the coral pushes them out. The coral turns white because you now see its limestone skeleton through clear tissue. It is not dead yet — it is starving. If the water cools within a few weeks it can take algae back in.";
-  else if (later)
-    science = "Ten years on (assuming no new heatwave): surviving corals have taken back their zooxanthellae, and new baby corals (larvae) have settled on bare rock. Fast-growing corals need roughly 10–15 years to recover, and they recover fastest where the water is clean and plenty of plant-eating fish keep the seaweed down.";
-  else
-    science = "Coral polyps are animals, but up to about 90% of their food comes from zooxanthellae — tiny algae living in their tissue. The algae photosynthesise in the sunlight and pass sugars to the coral (and give it its colour); the coral gives them shelter, carbon dioxide and nutrients. Both partners win: this is called mutualism.";
-
-  const notice =
-    m.dhw === 0 && anom > 0
-      ? "warming of less than 1 °C above the normal summer maximum does not count as heat stress in this model — try 1 °C or more."
-      : !later && m.dhw >= 8
-        ? `${m.dhw.toFixed(0)} degree heating weeks is past the "severe bleaching, corals likely to die" level. Local actions like no-take zones cannot stop a marine heatwave — only cutting global warming can.`
-        : runoff === "high"
-          ? "farm run-off makes the water murky (less light for the algae) and its fertiliser feeds crown-of-thorns starfish larvae, so outbreaks are bigger."
-          : fishing === "high" && noTake < 20
-            ? "with heavy fishing there are few plant-eating fish, so after any damage seaweed wins the race for space and the reef recovers slowly."
-            : "the reef is in good shape. Raise the temperature or the number of weeks and watch the colour drain away.";
-
-  return (
-    <Frame
-      title="Reef Health Simulator"
-      caption={
-        <div className="space-y-1">
-          <p><b>The coral–algae partnership:</b> {science}</p>
-          <p><b>Notice:</b> {notice}</p>
-          <p className="text-xs text-slate-500">Simplified model. Degree heating weeks (DHW) = °C above the normal summer maximum × weeks (only counting 1 °C or more), as used by NOAA Coral Reef Watch: about 4 DHW → significant bleaching, 8+ DHW → severe bleaching and widespread death likely.</p>
-        </div>
-      }
-    >
-      <p className="mb-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">
-        <b>Predict first:</b> which is worse for the reef — 2 °C too hot for 4 weeks, or 1 °C too hot for 8 weeks? Test both.
-      </p>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Slider label="Sea temp above normal summer max" min={0} max={3} step={0.5} value={anom} onChange={setAnom} suffix=" °C" color="#dc2626" />
-        <Slider label="How long it lasts" min={0} max={12} value={weeks} onChange={setWeeks} suffix=" weeks" color="#dc2626" />
-        <Choice label="Farm run-off (mud & fertiliser)" options={LEVELS} value={runoff} onChange={setRunoff} />
-        <Choice label="Fishing pressure" options={LEVELS} value={fishing} onChange={setFishing} />
-        <Choice label="Crown-of-thorns starfish" options={[{ id: "no", label: "Normal" }, { id: "yes", label: "Outbreak" }]} value={cots} onChange={setCots} />
-        <Slider label="No-take (green) zones" min={0} max={60} value={noTake} onChange={setNoTake} suffix="%" color="#059669" />
-      </div>
-      <div className="mt-3">
-        <Choice options={[{ id: "now", label: "Right after the heatwave" }, { id: "later", label: "10 years later" }]} value={when} onChange={setWhen} />
-      </div>
-
-      <svg viewBox="0 0 360 215" className="mt-3 w-full rounded-xl" role="img" aria-label={`Reef cross-section: ${m.state}. ${fishShown} fish visible.`}>
-        <rect width="360" height="215" fill={water} />
-        <rect width="360" height="20" fill="#ffffff" opacity={0.25} />
-        <text x="8" y="14" fontSize="11" fill="#0f172a">
-          {later ? "10 years later" : `Heat stress: ${m.dhw.toFixed(0)} DHW`}
-        </text>
-        <path d="M0 182 Q90 172 180 180 T360 178 V215 H0 Z" fill="#fde68a" />
-        {CORAL_X.map((x, i) => (
-          <Coral key={i} x={x} kind={i % 3} state={states[i]} color={CORAL_COL[i % CORAL_COL.length]} />
-        ))}
-        {!later && cots === "yes" ? (
-          <g>
-            <Cots x={108} y={168} />
-            <Cots x={194} y={160} />
-            <Cots x={278} y={170} />
-          </g>
-        ) : null}
-        {FISH.slice(0, fishShown).map(([fx, fy], i) => (
-          <g key={i} transform={`translate(${fx} ${fy})`}>
-            <ellipse cx={0} cy={0} rx={9} ry={5} fill={i % 2 ? "#facc15" : "#fb923c"} stroke="#78350f" strokeWidth={0.6} />
-            <polygon points="-8,0 -15,-5 -15,5" fill={i % 2 ? "#facc15" : "#fb923c"} />
-            <circle cx={4} cy={-1} r={1.2} fill="#0f172a" />
-          </g>
-        ))}
-        <text x="352" y="14" fontSize="11" fill="#0f172a" textAnchor="end">{m.state}</text>
-        <g fontSize="11" fill="#0f172a">
-          <rect x="8" y="198" width="9" height="9" fill="#f97316" /><text x="20" y="206">healthy</text>
-          <rect x="70" y="198" width="9" height="9" fill="#f8fafc" stroke="#94a3b8" /><text x="82" y="206">bleached</text>
-          <rect x="140" y="198" width="9" height="9" fill="#a8a29e" /><text x="152" y="206">dead + algae</text>
-          {cots === "yes" && !later ? <><Cots x={238} y={202} /><text x="250" y="206">crown-of-thorns</text></> : null}
-        </g>
-      </svg>
-
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <Stat label="Reef state" value={<span className="text-base">{m.state}</span>} tone={m.tone} />
-        <Stat label="Corals bleached" value={later ? "0%" : `${Math.round(m.bleach)}%`} tone="amber" />
-        <Stat label="Live coral left" value={`${Math.round(later ? m.cover10 : m.cover)}%`} tone="emerald" />
-        <Stat label="Fish (relative)" value={`${fishShown * 10}%`} tone="sky" />
-      </div>
-    </Frame>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* 2. Reef Types Time Machine (Darwin's subsidence theory)             */
-/* ------------------------------------------------------------------ */
-
-const SEA = 120; // sea level (y)
-const M_PER_PX = 10; // vertical scale: 1 px = 10 m (vertical exaggeration)
-const K = 1.1; // horizontal px per vertical px of the volcano's slope
-const CX = 180;
-const PEAK0 = 1000; // summit height above sea level at time 0 (m)
-const SINK = 50; // subsidence, m per million years (≈ 0.05 mm/yr)
-const SHORE0 = (PEAK0 / M_PER_PX) * K + 8; // half-width of island at sea level at time 0
-const R_IN = SHORE0 - 4, R_OUT = SHORE0 + 16; // reef ring position (it grows straight up)
-
-export function ReefTypesTimeMachine() {
-  const [t, setT] = useState(0);
-  const [keepUp, setKeepUp] = useState<"yes" | "no">("yes");
-
-  const s = useMemo(() => {
-    const sunk = SINK * t; // m
-    const peak = PEAK0 - sunk; // m above sea level (negative = under water)
-    const ys = SEA - peak / M_PER_PX;
-    const shoreHalf = peak > 0 ? (peak / M_PER_PX) * K + 8 : 0;
-    const lagoonPx = peak > 0 ? R_IN - shoreHalf : 2 * R_IN;
-    // Slow coral keeps up with 80% of sinking until reefTopDepth exceeds 60 m (at sunk = 300 m, limestone = 240 m), then dies and stops growing.
-    const limestone = keepUp === "yes" ? sunk : Math.min(240, sunk * 0.8);
-    const reefTopDepth = sunk - limestone;
-    const drowned = reefTopDepth > 60;
-    let type: string;
-    if (drowned) type = "Drowned reef";
-    else if (peak <= 0) type = "Atoll";
-    else if (lagoonPx < 12) type = "Fringing reef";
-    else type = "Barrier reef";
-    return { sunk, peak, ys, shoreHalf, lagoonPx, limestone, reefTopDepth, drowned, type };
-  }, [t, keepUp]);
-
-  const coneY = (dx: number) => s.ys + Math.max(0, Math.abs(dx) - 8) / K; // volcano surface at horizontal offset dx
-  const reefTop = Math.min(226, SEA + s.reefTopDepth / M_PER_PX);
-  const volcano = `${CX - (300 - s.ys) * K - 8},300 ${CX - 8},${s.ys} ${CX + 8},${s.ys} ${CX + (300 - s.ys) * K + 8},300`;
-  const reefPoly = (side: 1 | -1) => {
-    const xi = CX + side * R_IN, xo = CX + side * R_OUT;
-    return `${xi},${reefTop} ${xo},${reefTop + 3} ${xo + side * 6},${Math.max(reefTop + 6, coneY(R_OUT + 6))} ${xi},${Math.max(reefTop + 4, coneY(R_IN))}`;
+  const usual = Number(mmm);
+  const excess = Math.round((temp - usual) * 10) / 10;
+  const counts = excess >= 1;
+  const dhw = counts ? Math.round(excess * weeks * 10) / 10 : 0;
+  const stage =
+    dhw >= 8 ? "severe" : dhw >= 4 ? "bleaching" : counts && weeks > 0 ? "stress" : "healthy";
+  const label: Record<string, string> = {
+    healthy: "Healthy",
+    stress: "Heat stress building",
+    bleaching: "Significant bleaching likely",
+    severe: "Severe bleaching — deaths likely",
   };
-  const kmLagoon = Math.max(0, s.lagoonPx) * 0.05; // illustrative horizontal scale: 1 px ≈ 50 m
+  const tone = stage === "healthy" ? "good" : stage === "stress" ? "brand" : "bad";
+  const pale = Math.min(dhw / 8, 1);
+  const coral = mix([194, 120, 60], [245, 245, 240], pale);
 
-  const notice =
-    s.type === "Fringing reef"
-      ? "coral grows in the warm, sunny, shallow water right at the island's edge, so the reef is attached to the shore with little or no lagoon. Slide time forward."
-      : s.type === "Barrier reef"
-        ? `the island is sinking, but the coral grows upward fast enough to stay near the sunlit surface. The shoreline has moved inward, leaving a lagoon about ${kmLagoon.toFixed(1)} km wide between the island and the reef.`
-        : s.type === "Atoll"
-          ? "the volcano has disappeared below the sea, but the reef kept growing up. Only a ring of reef (with sandy islets) is left around a lagoon — an atoll."
-          : "the coral could not grow upward as fast as the island sank. Once the reef was more than a few tens of metres deep there was too little light for the zooxanthellae, so the coral died. Many flat-topped seamounts (guyots) in the Pacific are drowned reefs like this.";
+  // DHW build-up chart: weeks 0..12 on x, DHW 0..24 on y
+  const W = 300, H = 170, L = 34, R = 10, T = 12, B = 28;
+  const maxW = 12, maxD = 24;
+  const px = (w: number) => L + (w / maxW) * (W - L - R);
+  const py = (d: number) => H - B - (Math.min(d, maxD) / maxD) * (H - T - B);
+  const pts = Array.from({ length: weeks + 1 }, (_, w) => `${px(w)},${py(counts ? excess * w : 0)}`).join(" ");
 
   return (
-    <Frame
-      title="Reef Types Time Machine"
+    <WidgetFrame
+      title="Bleaching thermometer"
+      tryThis={[
+        "Set the sea just **0.5 °C** above the usual maximum and leave it for 12 weeks. Why does nothing bleach?",
+        "Find two different heatwaves that both give **exactly 8 °C-weeks** — one short and hot, one long and mild.",
+        "Is 2 °C above normal for 2 weeks worse or better than 1 °C above normal for 6 weeks? Predict, then test.",
+      ]}
       caption={
-        <div className="space-y-1">
-          <p><b>Notice:</b> {notice}</p>
-          <p>Charles Darwin suggested this <b>subsidence theory</b> in 1842. It was confirmed in 1952 when drilling on Enewetak Atoll (Marshall Islands) went through about 1,300–1,400 m of coral limestone before hitting volcanic rock.</p>
-          <p className="text-xs text-slate-500">Simplified cross-section: vertical scale exaggerated; sinking rate 0.05 mm per year (50 m per million years). The Great Barrier Reef is a different kind of barrier reef — it grew on the edge of Australia&apos;s continental shelf, not around a volcano.</p>
-        </div>
+        <>
+          {counts ? (
+            <>
+              The sea is <b>{excess.toFixed(1)} °C</b> above this reef&apos;s usual summer maximum. Each week at least 1 °C too hot adds heat stress:{" "}
+              {excess.toFixed(1)} °C × {weeks} week{weeks === 1 ? "" : "s"} = <b>{dhw.toFixed(1)} °C-weeks</b>.{" "}
+            </>
+          ) : (
+            <>
+              The sea is {excess > 0 ? `only ${excess.toFixed(1)} °C above` : excess === 0 ? "at" : `${Math.abs(excess).toFixed(1)} °C below`} the usual summer maximum, so no heat stress builds up — corals are adapted to this.{" "}
+            </>
+          )}
+          {stage === "stress" && "Polyps are stressed, but this is below the 4 °C-week level where widespread bleaching usually starts."}
+          {stage === "bleaching" && "Past about 4 °C-weeks, many polyps expel their zooxanthellae and turn white. If the water cools soon, the algae can return and the coral can recover."}
+          {stage === "severe" && "Past about 8 °C-weeks, bleaching is severe and many corals starve and die — this is what happened on parts of the Great Barrier Reef in 2016."}
+          {stage === "healthy" && " Keep the algae, keep the colour."}{" "}
+          <i>Simplified model: real degree heating weeks use daily satellite temperatures over 12 weeks.</i>
+        </>
       }
     >
-      <p className="mb-3 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">
-        <b>Predict first:</b> if a volcanic island slowly sinks, does the coral reef around it sink and disappear too?
-      </p>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <Slider label="Time" min={0} max={30} value={t} onChange={setT} suffix=" million years" color="#0369a1" />
-        <Choice label="Coral growth" options={[{ id: "yes", label: "Keeps up with sinking" }, { id: "no", label: "Too slow" }]} value={keepUp} onChange={setKeepUp} />
-      </div>
+      <div className="space-y-4">
+        <div className="space-y-1">
+          <div className="text-sm font-semibold text-ink-2">This reef&apos;s usual summer maximum</div>
+          <Segmented
+            label="Usual summer maximum sea temperature"
+            value={mmm}
+            onChange={setMmm}
+            options={[
+              { value: "27", label: "27 °C" },
+              { value: "28", label: "28 °C" },
+              { value: "29", label: "29 °C" },
+            ]}
+          />
+        </div>
+        <Slider label="Heatwave sea temperature" value={temp} min={25} max={33} step={0.1} onChange={setTemp} format={(v) => `${v.toFixed(1)} °C`} />
+        <Slider label="How long it lasts" value={weeks} min={0} max={12} onChange={setWeeks} format={(v) => `${v} week${v === 1 ? "" : "s"}`} />
 
-      <svg viewBox="0 0 360 240" className="mt-3 w-full rounded-xl" role="img" aria-label={`Cross-section after ${t} million years: ${s.type}`}>
-        <rect width="360" height={SEA} fill="#e0f2fe" />
-        <rect y={SEA} width="360" height={240 - SEA} fill="#38bdf8" />
-        {/* lagoon-floor sediment (only shows in the water between a living reef ring) */}
-        <rect x={CX - R_IN} y={SEA + 4 + s.reefTopDepth / M_PER_PX} width={2 * R_IN} height={240} fill="#fef3c7" opacity={!s.drowned && (s.peak <= 0 || s.lagoonPx > 12) ? 1 : 0} />
-        <polygon points={volcano} fill="#57534e" />
-        {s.peak > 0 ? <polygon points={`${CX - s.shoreHalf},${SEA} ${CX - 8},${s.ys} ${CX + 8},${s.ys} ${CX + s.shoreHalf},${SEA}`} fill="#4d7c0f" /> : null}
-        {([-1, 1] as const).map((side) => (
-          <g key={side}>
-            <polygon points={reefPoly(side)} fill="#e7e5e4" stroke="#a8a29e" />
-            <rect x={side === 1 ? CX + R_IN : CX - R_OUT} y={reefTop - 2} width={R_OUT - R_IN} height={4} fill={s.drowned ? "#a8a29e" : "#f472b6"} />
-            {s.type === "Atoll" ? <ellipse cx={CX + side * (R_IN + 10)} cy={SEA - 2} rx={8} ry={3.5} fill="#fde68a" /> : null}
-          </g>
-        ))}
-        <line x1="0" y1={SEA} x2="360" y2={SEA} stroke="#0369a1" strokeWidth={1} strokeDasharray="4 3" />
-        <text x="4" y={SEA - 4} fontSize="11" fill="#0369a1">sea level</text>
-        <text x="352" y="16" fontSize="12" fontWeight="700" fill="#0f172a" textAnchor="end">{s.type}</text>
-        <text x="8" y="16" fontSize="11" fill="#0f172a">{t} million years</text>
-        {s.peak > 0 ? <text x={CX} y={Math.max(30, s.ys - 4)} fontSize="11" fill="#14532d" textAnchor="middle">volcanic island</text> : null}
-        {!s.drowned ? <text x={CX + R_OUT} y={SEA - 8} fontSize="11" fill="#be185d" textAnchor="middle">reef</text> : <text x={CX + R_OUT} y={reefTop > 218 ? reefTop - 6 : reefTop + 16} fontSize="11" fill="#0f172a" textAnchor="middle">dead reef</text>}
-        {s.lagoonPx > 12 && !s.drowned ? (
-          <text x={s.peak > 0 ? CX + (s.shoreHalf + R_IN) / 2 : CX} y={SEA + 16} fontSize="11" fill="#075985" textAnchor="middle">lagoon</text>
-        ) : null}
-        <text x="20" y="232" fontSize="11" fill="#f8fafc">open ocean</text>
-        {s.sunk >= 400 && !s.drowned ? <text x={CX - R_OUT + 10} y={SEA + 34} fontSize="11" fill="#0f172a" textAnchor="middle">limestone</text> : null}
-      </svg>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <Readout label="Above usual max" value={`${excess > 0 ? "+" : excess < 0 ? "−" : ""}${Math.abs(excess).toFixed(1)} °C`} tone="ink" />
+          <Readout label="Heat stress (DHW)" value={`${dhw.toFixed(1)} °C-wk`} tone={tone} />
+          <div className="col-span-2 sm:col-span-1">
+            <Readout label="Coral" value={label[stage]} tone={tone} />
+          </div>
+        </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <Stat label="Reef type" value={<span className="text-base">{s.type}</span>} tone="sky" />
-        <Stat label="Island summit" value={s.peak > 0 ? `${s.peak} m` : "under water"} tone="emerald" />
-        <Stat label="Lagoon width" value={s.drowned ? "—" : s.peak > 0 && s.lagoonPx < 12 ? "none" : `~${kmLagoon.toFixed(1)} km`} tone="indigo" />
-        <Stat label="Coral limestone" value={`${s.limestone.toFixed(0)} m thick`} tone="amber" />
+        <div className="grid gap-3 sm:grid-cols-2">
+          <svg viewBox="0 0 200 150" className="h-auto w-full rounded-xl border border-line" role="img" aria-label={`Coral colony looking ${label[stage].toLowerCase()}`}>
+            <rect x="0" y="0" width="200" height="150" fill="#bae6fd" />
+            <rect x="0" y="128" width="200" height="22" fill="#fde68a" />
+            <g fill={coral}>
+              <path d="M100 128 L100 80 M100 95 L78 62 M100 88 L124 55 M78 62 L70 40 M78 62 L88 38 M124 55 L118 32 M124 55 L140 36 M100 80 L100 50" stroke={coral} strokeWidth={11} strokeLinecap="round" fill="none" />
+              <ellipse cx="44" cy="120" rx="30" ry="18" />
+              <ellipse cx="160" cy="118" rx="26" ry="20" />
+            </g>
+            {stage === "severe" ? (
+              <g fill="#65a30d" opacity={0.75}>
+                <circle cx="36" cy="108" r="5" />
+                <circle cx="52" cy="112" r="4" />
+                <circle cx="152" cy="104" r="5" />
+                <circle cx="168" cy="110" r="4" />
+              </g>
+            ) : null}
+            <text x="8" y="16" fontSize="11" fill="#1f2937" fontFamily="sans-serif">
+              {stage === "severe" ? "White skeletons, seaweed moving in" : stage === "bleaching" ? "Algae expelled: coral turning white" : "Algae inside polyps give colour"}
+            </text>
+          </svg>
+
+          <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`Graph of heat stress building to ${dhw.toFixed(1)} degree heating weeks after ${weeks} weeks`}>
+            <rect x={L} y={py(maxD)} width={W - L - R} height={py(8) - py(maxD)} className="fill-bad-soft" />
+            <rect x={L} y={py(8)} width={W - L - R} height={py(4) - py(8)} className="fill-accent-soft" />
+            {[0, 4, 8, 12, 16, 20, 24].map((d) => (
+              <g key={d}>
+                <line x1={L} x2={W - R} y1={py(d)} y2={py(d)} className="stroke-line" strokeWidth={1} />
+                <text x={L - 4} y={py(d) + 3} fontSize={9} textAnchor="end" className="fill-ink-2">{d}</text>
+              </g>
+            ))}
+            {[0, 2, 4, 6, 8, 10, 12].map((w) => (
+              <text key={w} x={px(w)} y={H - B + 12} fontSize={9} textAnchor="middle" className="fill-ink-2">{w}</text>
+            ))}
+            <text x={(L + W - R) / 2} y={H - 3} fontSize={10} textAnchor="middle" className="fill-ink-2">weeks of heatwave</text>
+            <text x={10} y={(T + H - B) / 2} fontSize={10} textAnchor="middle" className="fill-ink-2" transform={`rotate(-90 10 ${(T + H - B) / 2})`}>°C-weeks</text>
+            <text x={W - R - 4} y={py(4) - 3} fontSize={9} textAnchor="end" className="fill-ink-2">4: bleaching likely</text>
+            <text x={W - R - 4} y={py(8) - 3} fontSize={9} textAnchor="end" className="fill-ink-2">8: deaths likely</text>
+            <polyline points={pts} fill="none" className="stroke-brand" strokeWidth={2.5} />
+            <circle cx={px(weeks)} cy={py(dhw)} r={4} className="fill-brand" />
+          </svg>
+        </div>
       </div>
-    </Frame>
+    </WidgetFrame>
   );
 }
+
+// ---------------------------------------------------------------------------
+// 2. Reef-conditions checker — temperature, depth, clarity, salinity
+// ---------------------------------------------------------------------------
+
+type Check = { name: string; ok: boolean; warn?: boolean; why: string };
+
+const PRESETS = {
+  lagoon: { temp: 27, depth: 8, vis: 25, sal: 35, label: "Clear tropical lagoon" },
+  murky: { temp: 29, depth: 12, vis: 3, sal: 32, label: "Murky tropical port" },
+  river: { temp: 28, depth: 6, vis: 2, sal: 15, label: "Tropical river mouth" },
+  slope: { temp: 26, depth: 90, vis: 30, sal: 35, label: "Deep ocean slope" },
+  cold: { temp: 13, depth: 10, vis: 15, sal: 35, label: "Coast with a cold current" },
+} as const;
+type PresetKey = keyof typeof PRESETS;
+
+function ReefConditions() {
+  const [temp, setTemp] = useState(27);
+  const [depth, setDepth] = useState(8);
+  const [vis, setVis] = useState(25);
+  const [sal, setSal] = useState(35);
+
+  // Light reaching the sea bed: simplified Beer–Lambert decay, with the
+  // attenuation estimated from visibility (k ≈ 1.7 ÷ visibility in m).
+  const k = 1.7 / Math.max(vis, 0.5);
+  const lightPct = 100 * Math.exp(-k * depth);
+  const lightOk = lightPct >= 5;
+
+  const checks: Check[] = [
+    temp < 18
+      ? { name: "Temperature", ok: false, why: `${temp} °C is below about 18 °C — too cold for reef-building corals.` }
+      : temp > 31
+        ? { name: "Temperature", ok: false, why: `${temp} °C all year is too hot — corals would be permanently bleached.` }
+        : temp > 29
+          ? { name: "Temperature", ok: true, warn: true, why: `${temp} °C is warm enough, but close to the limit: a small heatwave could cause bleaching.` }
+          : { name: "Temperature", ok: true, why: `${temp} °C is in the 18–29 °C comfort zone.` },
+    sal < 32
+      ? { name: "Salinity", ok: false, why: `${sal} parts per thousand is too fresh — like water near a river mouth.` }
+      : sal > 42
+        ? { name: "Salinity", ok: false, why: `${sal} parts per thousand is too salty.` }
+        : { name: "Salinity", ok: true, why: `${sal} parts per thousand is normal sea water (about 32–42).` },
+    vis < 2
+      ? { name: "Sediment", ok: false, why: `Seeing less than 2 m down means so much mud that it smothers the polyps.` }
+      : { name: "Sediment", ok: true, why: `Visibility of ${vis} m — not enough mud to smother polyps.` },
+    lightOk
+      ? { name: "Sunlight on the sea bed", ok: true, why: `About ${lightPct >= 10 ? Math.round(lightPct) : lightPct.toFixed(1)}% of surface light reaches ${depth} m — enough for the algae to photosynthesise.` }
+      : { name: "Sunlight on the sea bed", ok: false, why: `Only about ${lightPct < 0.1 ? "0" : lightPct.toFixed(1)}% of surface light reaches ${depth} m — too dark for the algae.` },
+  ];
+  const canGrow = checks.every((c) => c.ok);
+  const fails = checks.filter((c) => !c.ok).map((c) => c.name.toLowerCase());
+
+  // Deepest depth with ≥ 5% light at this clarity
+  const maxDepth = Math.log(100 / 5) / k;
+
+  const applyPreset = (p: PresetKey) => {
+    const s = PRESETS[p];
+    setTemp(s.temp);
+    setDepth(s.depth);
+    setVis(s.vis);
+    setSal(s.sal);
+  };
+
+  // Cross-section: 0–150 m depth mapped to y 24..206
+  const yOf = (d: number) => 24 + (Math.min(d, 150) / 150) * 182;
+  const bedY = yOf(depth);
+  const murk = Math.min(0.85, Math.max(0, (12 - vis) / 12) * 0.85);
+  const rayEnd = yOf(Math.min(150, maxDepth));
+
+  return (
+    <WidgetFrame
+      title="Can coral grow here?"
+      tryThis={[
+        "Start with the clear lagoon. How deep can you push the sea bed before the coral dies? Now make the water murkier — what happens to that depth?",
+        "Singapore's water is often murky (visibility 2–4 m). Use the sliders to explain why most of its corals grow in shallow water, less than about 10 m deep.",
+        "Pick the river-mouth preset. Which TWO problems does a river cause at once?",
+      ]}
+      caption={
+        canGrow ? (
+          <>
+            ✅ <b>Reef-building corals can grow here.</b> The water is warm, salty, clear and shallow enough for sunlight to reach the zooxanthellae. With this clarity,
+            enough light reaches down to about <b>{Math.round(maxDepth)} m</b>. <i>Simplified model: real limits vary between coral species and places.</i>
+          </>
+        ) : (
+          <>
+            ❌ <b>No reef here</b> — the problem{fails.length > 1 ? "s are" : " is"} <b>{fails.join(" and ")}</b>. Corals need all four conditions at once: if one fails, the reef
+            can&apos;t form. Light depends on depth <i>and</i> clarity: at this visibility, enough light only reaches about {Math.round(maxDepth)} m.{" "}
+            <i>Simplified model.</i>
+          </>
+        )
+      }
+    >
+      <div className="space-y-4">
+        <div className="flex flex-wrap gap-2">
+          {(Object.keys(PRESETS) as PresetKey[]).map((p) => (
+            <button key={p} type="button" onClick={() => applyPreset(p)} className="min-h-[40px] rounded-lg border border-line bg-surface-2 px-3 text-sm font-bold text-ink hover:bg-brand-soft">
+              {PRESETS[p].label}
+            </button>
+          ))}
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Slider label="Average sea temperature" value={temp} min={8} max={34} onChange={setTemp} format={(v) => `${v} °C`} />
+          <Slider label="Depth of sea bed" value={depth} min={1} max={150} onChange={setDepth} format={(v) => `${v} m`} />
+          <Slider label="Water clarity (visibility)" value={vis} min={0.5} max={40} step={0.5} onChange={setVis} format={(v) => `${v} m`} />
+          <Slider label="Salinity (parts per thousand)" value={sal} min={0} max={45} onChange={setSal} format={(v) => `${v}`} />
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-[1fr_1fr]">
+          <svg viewBox="0 0 240 220" className="h-auto w-full rounded-xl border border-line" role="img" aria-label={`Cross-section: sea bed at ${depth} metres, ${canGrow ? "coral growing" : "no coral"}`}>
+            <rect x="0" y="0" width="240" height="24" fill="#f0f9ff" />
+            <circle cx="210" cy="12" r="8" fill="#fbbf24" />
+            <rect x="0" y="24" width="240" height="196" fill="#bae6fd" />
+            <rect x="0" y="24" width="240" height="196" fill="#92400e" opacity={murk * 0.5} />
+            {[40, 90, 140, 190].map((x) => (
+              <line key={x} x1={x} y1={24} x2={x - 20} y2={rayEnd} stroke="#fde047" strokeWidth={3} opacity={0.6} />
+            ))}
+            {[0, 50, 100, 150].map((d) => (
+              <g key={d}>
+                <line x1={0} x2={8} y1={yOf(d)} y2={yOf(d)} stroke="#1f2937" />
+                <text x={10} y={yOf(d) + 4} fontSize="10" fill="#1f2937" fontFamily="sans-serif">{d} m</text>
+              </g>
+            ))}
+            <line x1="50" x2="240" y1={yOf(Math.min(150, maxDepth))} y2={yOf(Math.min(150, maxDepth))} stroke="#1f2937" strokeDasharray="4 3" />
+            <text x="236" y={Math.min(214, yOf(Math.min(150, maxDepth)) - 3)} fontSize="9" textAnchor="end" fill="#1f2937" fontFamily="sans-serif">
+              light limit ≈ {Math.round(maxDepth)} m
+            </text>
+            <rect x="60" y={bedY} width="180" height={Math.max(0, 220 - bedY)} fill="#fde68a" stroke="#334155" />
+            {canGrow ? (
+              <g fill="#f97316" stroke="#7c2d12" strokeWidth={1}>
+                <ellipse cx="110" cy={bedY - 6} rx="16" ry="9" />
+                <ellipse cx="160" cy={bedY - 8} rx="12" ry="11" />
+                <path d={`M200 ${bedY} L200 ${bedY - 22} M200 ${bedY - 12} L190 ${bedY - 26} M200 ${bedY - 14} L212 ${bedY - 28}`} stroke="#f97316" strokeWidth={5} strokeLinecap="round" fill="none" />
+              </g>
+            ) : (
+              <text x="150" y={Math.min(212, bedY + 14)} fontSize="11" textAnchor="middle" fill="#334155" fontFamily="sans-serif">bare sea bed</text>
+            )}
+          </svg>
+
+          <ul className="space-y-2">
+            {checks.map((c) => (
+              <li key={c.name} className={`rounded-xl px-3 py-2 text-sm ${!c.ok ? "bg-bad-soft" : c.warn ? "bg-accent-soft" : "bg-good-soft"}`}>
+                <div className={`font-extrabold ${!c.ok ? "text-bad" : c.warn ? "text-ink" : "text-good"}`}>
+                  {!c.ok ? "✗" : c.warn ? "!" : "✓"} {c.name}
+                </div>
+                <div className="text-ink">{c.why}</div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </WidgetFrame>
+  );
+}
+
+export const widgets: WidgetDef[] = [
+  {
+    id: "coral-reefs-bleaching-thermometer",
+    title: "Bleaching thermometer",
+    blurb: "Turn up the heat and stretch out the heatwave — watch heat stress build in degree heating weeks and see when corals bleach.",
+    Component: BleachingThermometer,
+  },
+  {
+    id: "coral-reefs-conditions-checker",
+    title: "Can coral grow here?",
+    blurb: "Change temperature, depth, clarity and salinity to find out where a reef can and can't form.",
+    Component: ReefConditions,
+  },
+];

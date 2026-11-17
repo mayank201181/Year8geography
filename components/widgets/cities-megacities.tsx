@@ -1,279 +1,279 @@
 "use client";
+// Interactive explorables for "Cities & Megacities".
+import { useState } from "react";
+import { WidgetFrame, Slider, Segmented, Readout, makePlane, type WidgetDef } from "./kit";
 
-import { useMemo, useState } from "react";
-import { Choice, Frame, Slider, Stat } from "./kit";
+// ---------------------------------------------------------------------------
+// 1. Urbanisation curve
+// ---------------------------------------------------------------------------
 
-/* ------------------------------------------------------------------ */
-/* 1. Urbanisation Curves                                              */
-/* ------------------------------------------------------------------ */
+// % of people living in urban areas, rounded from UN World Urbanization
+// Prospects 2018 (values from 2020 on are projections).
+const YEARS = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2030, 2040, 2050];
+const SERIES = [
+  { key: "hic", label: "Higher-income regions", values: [55, 61, 67, 70, 72, 74, 77, 79, 81, 84, 87], cls: "stroke-good", dot: "fill-good" },
+  { key: "world", label: "World", values: [30, 34, 37, 39, 43, 47, 52, 56, 60, 64, 68], cls: "stroke-brand", dot: "fill-brand" },
+  { key: "lic", label: "Lower-income regions", values: [18, 22, 25, 29, 35, 40, 46, 52, 56, 61, 66], cls: "stroke-bad", dot: "fill-bad" },
+] as const;
+const LAST_DATA_YEAR = 2018;
 
-// % of population living in urban areas, 1950–2050 every 10 years.
-// Approximate values based on UN World Urbanization Prospects (2018); 2030–2050 are projections.
-const U_YEARS = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2030, 2040, 2050];
-
-type CountryId = "world" | "uk" | "japan" | "china" | "india" | "nigeria" | "brazil" | "singapore";
-
-const COUNTRIES: { id: CountryId; name: string; color: string; data: number[] }[] = [
-  { id: "world", name: "World", color: "#0f172a", data: [30, 34, 37, 39, 43, 46.7, 51.7, 56, 60, 65, 68] },
-  { id: "uk", name: "UK", color: "#2563eb", data: [79, 78, 77, 78, 78, 79, 81, 84, 86, 88, 89] },
-  { id: "japan", name: "Japan", color: "#db2777", data: [53, 63, 72, 76, 77, 79, 91, 92, 93, 94, 95] },
-  { id: "china", name: "China", color: "#dc2626", data: [12, 16, 17, 19, 26, 36, 49, 61, 71, 76, 80] },
-  { id: "india", name: "India", color: "#ea580c", data: [17, 18, 20, 23, 26, 28, 31, 35, 40, 46, 53] },
-  { id: "nigeria", name: "Nigeria", color: "#16a34a", data: [9, 15, 18, 22, 30, 35, 44, 52, 60, 66, 70] },
-  { id: "brazil", name: "Brazil", color: "#ca8a04", data: [36, 46, 56, 66, 74, 81, 84, 87, 89, 91, 92] },
-  { id: "singapore", name: "Singapore", color: "#7c3aed", data: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100] },
-];
-
-function lerpSeries(years: number[], data: number[], year: number) {
-  if (year <= years[0]) return data[0];
-  for (let i = 1; i < years.length; i++) {
-    if (year <= years[i]) {
-      const t = (year - years[i - 1]) / (years[i] - years[i - 1]);
-      return data[i - 1] + t * (data[i] - data[i - 1]);
+function interp(values: readonly number[], year: number): number {
+  if (year <= YEARS[0]) return values[0];
+  for (let i = 0; i < YEARS.length - 1; i++) {
+    if (year <= YEARS[i + 1]) {
+      const t = (year - YEARS[i]) / (YEARS[i + 1] - YEARS[i]);
+      return values[i] + t * (values[i + 1] - values[i]);
     }
   }
-  return data[data.length - 1];
+  return values[values.length - 1];
 }
 
-/** First year (interpolated) a series reaches 50% urban, or null. */
-function cross50(data: number[]) {
-  if (data[0] >= 50) return "before 1950";
-  for (let i = 1; i < data.length; i++) {
-    if (data[i] >= 50) {
-      const t = (50 - data[i - 1]) / (data[i] - data[i - 1]);
-      return String(Math.round(U_YEARS[i - 1] + t * 10));
-    }
-  }
-  return null;
-}
+function UrbanisationCurve() {
+  const [year, setYear] = useState(1950);
+  const [show, setShow] = useState<"all" | "world">("all");
+  const W = 460, H = 260;
+  const plane = makePlane({ width: W, height: H, xMin: 1950, xMax: 2050, yMin: 0, yMax: 100, pad: 34 });
+  const { px, py } = plane;
+  const visible = show === "all" ? SERIES : SERIES.filter((s) => s.key === "world");
+  const world = interp(SERIES[1].values, year);
+  const hic = interp(SERIES[0].values, year);
+  const lic = interp(SERIES[2].values, year);
+  const projected = year > LAST_DATA_YEAR;
+  const urbanMajority = world >= 50;
+  const gap = hic - lic;
 
-export function UrbanisationCurves() {
-  const [on, setOn] = useState<CountryId[]>(["world", "uk", "china", "nigeria"]);
-  const [year, setYear] = useState(2020);
-  const [reveal, setReveal] = useState(false);
-
-  const W = 360, H = 230, L = 34, R = 10, T = 12, B = 30;
-  const x = (yr: number) => L + ((yr - 1950) / 100) * (W - L - R);
-  const y = (p: number) => T + (1 - p / 100) * (H - T - B);
-
-  const shown = useMemo(() => COUNTRIES.filter((c) => on.includes(c.id)), [on]);
-  const toggle = (id: CountryId) =>
-    setOn((o) => (o.includes(id) ? (o.length > 1 ? o.filter((v) => v !== id) : o) : [...o, id]));
-
-  const readouts = useMemo(
-    () => shown.map((c) => ({ ...c, now: lerpSeries(U_YEARS, c.data, year), rise: lerpSeries(U_YEARS, c.data, year) - c.data[0] })),
-    [shown, year],
+  const caption = (
+    <>
+      <p>
+        In <b>{year}</b>{projected ? " (UN projection)" : ""}, about <b>{Math.round(world)}%</b> of the world&apos;s people lived in towns and cities.{" "}
+        {urbanMajority
+          ? "That is more than half — urban dwellers now outnumber rural ones (the world passed 50% around 2007)."
+          : "That is less than half — most people still lived in the countryside."}
+      </p>
+      {show === "all" ? (
+        <p className="mt-2">
+          Higher-income regions were already about {Math.round(hic)}% urban, lower-income regions about {Math.round(lic)}% — a gap of about {Math.round(gap)} percentage points.{" "}
+          {year >= 2000
+            ? "Most of today's urbanisation is happening in lower-income countries in Asia and Africa: their curve is the steepest."
+            : "Richer countries urbanised first, during industrialisation; lower-income countries are catching up fast."}
+        </p>
+      ) : null}
+      <p className="mt-2 text-xs text-ink-2">Simplified: values rounded from UN World Urbanization Prospects 2018; each country defines &ldquo;urban&rdquo; differently, so figures are approximate.</p>
+    </>
   );
-
-  const caption = useMemo(() => {
-    if (readouts.length === 0) return null;
-    const sorted = [...readouts].sort((a, b) => b.now - a.now);
-    const fastest = [...readouts].sort((a, b) => b.rise - a.rise)[0];
-    const top = sorted[0], low = sorted[sorted.length - 1];
-    const anomalies: string[] = [];
-    if (on.includes("singapore")) anomalies.push("Singapore is a flat line at 100%: it is a city-state, so the UN counts everyone as urban.");
-    if (on.includes("uk")) anomalies.push("The UK barely changes: it urbanised in the 1800s during the Industrial Revolution, so by 1950 it was already about 80% urban.");
-    if (on.includes("japan") && year >= 2000) anomalies.push("Japan jumps between 2000 and 2010 partly because towns were merged into cities, so the definition of 'urban' changed, not just where people live.");
-    if (on.includes("india") && year >= 2020) anomalies.push("India is still mostly rural in 2020 (about 35% urban) and only passes 50% around 2050.");
-    return (
-      <>
-        <p><b>T (trend):</b> {year === 1950 ? "Move the slider to see the trend." : `Every selected line is rising or roughly flat: the share of people living in towns and cities grows over time.`}</p>
-        <p><b>E (example):</b> In {year}, {top.name} is about {Math.round(top.now)}% urban and {low.name} about {Math.round(low.now)}%. {fastest.rise > 1 ? `${fastest.name} has urbanised fastest since 1950 (+${Math.round(fastest.rise)} percentage points).` : ""}</p>
-        <p><b>A (anomaly):</b> {anomalies[0] ?? "Look for a line that behaves differently: try adding Singapore, the UK or Japan."}</p>
-        {year > 2020 ? <p className="mt-1 text-xs text-slate-500">After 2020 the lines are UN projections (shaded), not measurements.</p> : null}
-      </>
-    );
-  }, [readouts, on, year]);
 
   return (
-    <Frame title="Urbanisation curves: % of people living in urban areas" caption={caption}>
-      <div className="mb-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">
-        <b>Predict first:</b> in roughly which year did the world first have more people in cities than in the countryside?{" "}
-        <button type="button" onClick={() => setReveal(!reveal)} className="ml-1 rounded-full bg-white px-2 py-0.5 text-xs font-bold ring-1 ring-amber-300">
-          {reveal ? "Hide" : "Reveal"}
-        </button>
-        {reveal ? <span className="mt-1 block">About 2007. The World line crosses the dashed 50% line in the late 2000s. Find it on the chart!</span> : null}
+    <WidgetFrame
+      title="Urbanisation curve, 1950–2050"
+      tryThis={[
+        "Find the year when the world first became more than 50% urban.",
+        "In which decade did lower-income regions overtake the 1950 level of higher-income regions (about 55%)?",
+        "Which curve is steepest? What does a steep curve tell you about the rate of urbanisation?",
+        "Do the curves ever reach 100%? Suggest why not (think about farmers and counter-urbanisation).",
+      ]}
+      caption={caption}
+    >
+      <div className="space-y-3">
+        <Slider label="Year" value={year} min={1950} max={2050} step={1} onChange={setYear} />
+        <Segmented
+          label="Which lines to show"
+          value={show}
+          onChange={setShow}
+          options={[
+            { value: "all", label: "World + regions" },
+            { value: "world", label: "World only" },
+          ]}
+        />
+        <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`Line graph of percentage of people living in urban areas, 1950 to 2050. In ${year}: world about ${Math.round(world)}%, higher-income regions about ${Math.round(hic)}%, lower-income regions about ${Math.round(lic)}%.`}>
+          {/* projection shading */}
+          <rect x={px(LAST_DATA_YEAR)} y={py(100)} width={px(2050) - px(LAST_DATA_YEAR)} height={py(0) - py(100)} className="fill-surface-2" />
+          <text x={px(2034)} y={py(100) + 12} fontSize={10} textAnchor="middle" className="fill-ink-2">projection</text>
+          {[0, 25, 50, 75, 100].map((v) => (
+            <g key={v}>
+              <line x1={px(1950)} x2={px(2050)} y1={py(v)} y2={py(v)} className={v === 50 ? "stroke-ink-2" : "stroke-line"} strokeWidth={v === 50 ? 1.2 : 1} strokeDasharray={v === 50 ? "4 3" : undefined} />
+              <text x={px(1950) - 5} y={py(v) + 3} fontSize={10} textAnchor="end" className="fill-ink-2">{v}%</text>
+            </g>
+          ))}
+          {[1950, 1975, 2000, 2025, 2050].map((y) => (
+            <text key={y} x={px(y)} y={py(0) + 14} fontSize={10} textAnchor="middle" className="fill-ink-2">{y}</text>
+          ))}
+          <text x={12} y={py(50)} fontSize={10} transform={`rotate(-90 12 ${py(50)})`} textAnchor="middle" className="fill-ink-2">% urban</text>
+          {visible.map((s) => (
+            <polyline
+              key={s.key}
+              fill="none"
+              strokeWidth={2.5}
+              className={s.cls}
+              points={YEARS.map((y, i) => `${px(y)},${py(s.values[i])}`).join(" ")}
+            />
+          ))}
+          <line x1={px(year)} x2={px(year)} y1={py(0)} y2={py(100)} className="stroke-ink" strokeWidth={1.5} />
+          {visible.map((s) => (
+            <circle key={s.key} cx={px(year)} cy={py(interp(s.values, year))} r={5} className={`${s.dot} stroke-surface`} strokeWidth={1.5} />
+          ))}
+        </svg>
+        <div className="flex flex-wrap gap-3 text-xs font-semibold text-ink-2">
+          {visible.map((s) => (
+            <span key={s.key} className="flex items-center gap-1">
+              <svg width="18" height="8" aria-hidden><line x1="0" x2="18" y1="4" y2="4" strokeWidth={3} className={s.cls} /></svg>
+              {s.label}
+            </span>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+          <Readout label="World urban" value={`≈ ${Math.round(world)}%`} />
+          {show === "all" ? <Readout label="Higher-income" value={`≈ ${Math.round(hic)}%`} tone="good" /> : null}
+          {show === "all" ? <Readout label="Lower-income" value={`≈ ${Math.round(lic)}%`} tone="bad" /> : null}
+        </div>
       </div>
-
-      <div className="mb-2 flex flex-wrap gap-1.5" role="group" aria-label="Choose countries to plot">
-        {COUNTRIES.map((c) => {
-          const active = on.includes(c.id);
-          return (
-            <button key={c.id} type="button" aria-pressed={active} onClick={() => toggle(c.id)}
-              className={`rounded-full px-2.5 py-1 text-xs font-semibold ring-1 transition ${active ? "text-white" : "bg-white text-slate-600 ring-slate-200"}`}
-              style={active ? { background: c.color, boxShadow: `0 0 0 1px ${c.color}` } : undefined}>
-              {c.name}
-            </button>
-          );
-        })}
-      </div>
-
-      <svg viewBox={`0 0 ${W} ${H}`} className="w-full" role="img" aria-label={`Line chart of percentage urban from 1950 to 2050 for ${shown.map((c) => c.name).join(", ")}`}>
-        <rect x={x(2020)} y={T} width={x(2050) - x(2020)} height={H - T - B} fill="#f1f5f9" />
-        <text x={x(2035)} y={T + 12} fontSize={11} textAnchor="middle" fill="#64748b">projection</text>
-        {[0, 25, 50, 75, 100].map((p) => (
-          <g key={p}>
-            <line x1={L} x2={W - R} y1={y(p)} y2={y(p)} stroke={p === 50 ? "#f59e0b" : "#e2e8f0"} strokeWidth={p === 50 ? 1.5 : 1} strokeDasharray={p === 50 ? "5 4" : undefined} />
-            <text x={L - 4} y={y(p) + 4} fontSize={11} textAnchor="end" fill="#64748b">{p}%</text>
-          </g>
-        ))}
-        <text x={W - R - 2} y={y(50) - 4} fontSize={11} textAnchor="end" fill="#b45309">50% urban</text>
-        {[1950, 1975, 2000, 2025, 2050].map((yr) => (
-          <text key={yr} x={x(yr)} y={H - 10} fontSize={11} textAnchor="middle" fill="#64748b">{yr}</text>
-        ))}
-        {shown.map((c) => (
-          <polyline key={c.id} fill="none" stroke={c.color} strokeWidth={2.5} strokeLinejoin="round"
-            points={c.data.map((v, i) => `${x(U_YEARS[i])},${y(v)}`).join(" ")} />
-        ))}
-        <line x1={x(year)} x2={x(year)} y1={T} y2={H - B} stroke="#4f46e5" strokeWidth={1.5} />
-        {readouts.map((c) => (
-          <circle key={c.id} cx={x(year)} cy={y(c.now)} r={4} fill={c.color} stroke="#fff" strokeWidth={1.5} />
-        ))}
-      </svg>
-
-      <Slider label="Year" min={1950} max={2050} step={1} value={year} onChange={setYear} />
-
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        {readouts.map((c) => (
-          <div key={c.id} className="rounded-xl bg-white px-3 py-2 ring-1 ring-slate-200">
-            <p className="text-[11px] font-bold uppercase tracking-wide" style={{ color: c.color }}>{c.name}</p>
-            <p className="text-lg font-extrabold tabular-nums text-slate-800">{Math.round(c.now)}%</p>
-            <p className="text-[11px] text-slate-500">50% urban: {cross50(c.data) ?? "after 2050"}</p>
-          </div>
-        ))}
-      </div>
-      <p className="mt-2 text-xs text-slate-500">Approximate figures based on UN World Urbanization Prospects (2018). Each country defines &quot;urban&quot; differently.</p>
-    </Frame>
+    </WidgetFrame>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* 2. Megacity Race                                                    */
-/* ------------------------------------------------------------------ */
+// ---------------------------------------------------------------------------
+// 2. Megacity counter
+// ---------------------------------------------------------------------------
 
-// Urban agglomeration populations in millions. Approximate UN WUP (2018) estimates; 2030/2035 projected.
-const M_YEARS = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2030, 2035];
-
-type Continent = "Asia" | "N. America" | "S. America" | "Europe" | "Africa";
-const CONT_COLOR: Record<Continent, string> = {
-  Asia: "#dc2626", "N. America": "#2563eb", "S. America": "#ca8a04", Europe: "#7c3aed", Africa: "#16a34a",
+type Continent = "Asia" | "Africa" | "South America" | "North America" | "Europe";
+// UN World Urbanization Prospects 2018 estimates for 2018 (urban agglomerations), millions.
+const CITIES: Array<{ name: string; pop: number; c: Continent }> = [
+  { name: "Tokyo", pop: 37.5, c: "Asia" },
+  { name: "Delhi", pop: 28.5, c: "Asia" },
+  { name: "Shanghai", pop: 25.6, c: "Asia" },
+  { name: "São Paulo", pop: 21.7, c: "South America" },
+  { name: "Mexico City", pop: 21.6, c: "North America" },
+  { name: "Cairo", pop: 20.1, c: "Africa" },
+  { name: "Mumbai", pop: 20.0, c: "Asia" },
+  { name: "Beijing", pop: 19.6, c: "Asia" },
+  { name: "Dhaka", pop: 19.6, c: "Asia" },
+  { name: "Osaka", pop: 19.3, c: "Asia" },
+  { name: "New York", pop: 18.8, c: "North America" },
+  { name: "Karachi", pop: 15.4, c: "Asia" },
+  { name: "Buenos Aires", pop: 15.0, c: "South America" },
+  { name: "Chongqing", pop: 14.8, c: "Asia" },
+  { name: "Istanbul", pop: 14.8, c: "Asia" },
+  { name: "Kolkata", pop: 14.7, c: "Asia" },
+  { name: "Manila", pop: 13.5, c: "Asia" },
+  { name: "Lagos", pop: 13.5, c: "Africa" },
+  { name: "Rio de Janeiro", pop: 13.3, c: "South America" },
+  { name: "Tianjin", pop: 13.2, c: "Asia" },
+  { name: "Kinshasa", pop: 13.2, c: "Africa" },
+  { name: "Guangzhou", pop: 12.6, c: "Asia" },
+  { name: "Los Angeles", pop: 12.5, c: "North America" },
+  { name: "Moscow", pop: 12.4, c: "Europe" },
+  { name: "Shenzhen", pop: 11.9, c: "Asia" },
+  { name: "Lahore", pop: 11.7, c: "Asia" },
+  { name: "Bangalore", pop: 11.4, c: "Asia" },
+  { name: "Paris", pop: 10.9, c: "Europe" },
+  { name: "Bogotá", pop: 10.6, c: "South America" },
+  { name: "Jakarta", pop: 10.5, c: "Asia" },
+  { name: "Chennai", pop: 10.5, c: "Asia" },
+  { name: "Lima", pop: 10.4, c: "South America" },
+  { name: "Bangkok", pop: 10.2, c: "Asia" },
+  { name: "Seoul", pop: 9.96, c: "Asia" },
+  { name: "London", pop: 9.0, c: "Europe" },
+  { name: "Singapore", pop: 5.8, c: "Asia" },
+];
+const CONTINENTS: Continent[] = ["Asia", "Africa", "South America", "North America", "Europe"];
+const CONT_CLS: Record<Continent, string> = {
+  Asia: "fill-brand",
+  Africa: "fill-bad",
+  "South America": "fill-good",
+  "North America": "fill-accent",
+  Europe: "fill-ink-2",
 };
 
-const CITIES: { name: string; c: Continent; p: number[] }[] = [
-  { name: "Tokyo", c: "Asia", p: [11.3, 16.7, 23.3, 28.5, 32.5, 34.4, 36.8, 37.4, 36.6, 36.0] },
-  { name: "New York", c: "N. America", p: [12.3, 14.2, 16.2, 15.6, 16.1, 17.8, 18.4, 18.8, 19.9, 20.3] },
-  { name: "Osaka", c: "Asia", p: [7.0, 10.6, 15.3, 17.0, 18.4, 18.7, 19.3, 19.2, 18.7, 18.3] },
-  { name: "London", c: "Europe", p: [8.4, 8.2, 7.5, 6.8, 6.9, 7.3, 8.0, 9.3, 10.2, 10.6] },
-  { name: "Paris", c: "Europe", p: [6.3, 7.4, 8.2, 8.7, 9.3, 9.7, 10.5, 11.0, 11.7, 12.0] },
-  { name: "Moscow", c: "Europe", p: [5.4, 6.2, 7.1, 8.1, 9.0, 10.0, 11.5, 12.5, 12.8, 12.8] },
-  { name: "Buenos Aires", c: "S. America", p: [5.2, 6.8, 8.4, 9.9, 11.1, 12.4, 14.2, 15.2, 16.5, 17.1] },
-  { name: "Chicago", c: "N. America", p: [5.0, 6.2, 7.1, 7.2, 7.4, 8.3, 8.6, 8.9, 9.4, 9.6] },
-  { name: "Kolkata", c: "Asia", p: [4.6, 5.7, 7.3, 9.0, 10.9, 13.1, 14.0, 14.9, 17.6, 19.6] },
-  { name: "Shanghai", c: "Asia", p: [4.3, 6.8, 6.0, 6.0, 7.8, 13.6, 20.3, 27.1, 32.9, 34.3] },
-  { name: "Los Angeles", c: "N. America", p: [4.0, 6.5, 8.4, 9.5, 10.9, 11.8, 12.2, 12.5, 13.2, 13.6] },
-  { name: "Mexico City", c: "N. America", p: [3.4, 5.5, 8.8, 13.0, 15.6, 18.5, 20.1, 21.8, 24.1, 25.4] },
-  { name: "São Paulo", c: "S. America", p: [2.3, 4.0, 7.6, 12.1, 14.8, 17.0, 19.7, 22.0, 23.8, 24.5] },
-  { name: "Rio de Janeiro", c: "S. America", p: [3.0, 4.5, 6.8, 8.6, 9.7, 11.3, 12.4, 13.5, 14.4, 14.8] },
-  { name: "Mumbai", c: "Asia", p: [2.9, 4.1, 5.8, 8.7, 12.4, 16.4, 18.3, 20.4, 24.6, 27.3] },
-  { name: "Delhi", c: "Asia", p: [1.4, 2.3, 3.5, 5.6, 9.4, 15.7, 21.9, 30.3, 38.9, 43.3] },
-  { name: "Seoul", c: "Asia", p: [1.0, 2.4, 5.3, 8.3, 10.5, 9.9, 9.7, 10.0, 10.2, 10.3] },
-  { name: "Cairo", c: "Africa", p: [2.5, 3.7, 5.6, 7.3, 9.9, 13.6, 16.9, 20.9, 25.5, 28.5] },
-  { name: "Beijing", c: "Asia", p: [1.7, 3.2, 4.4, 5.4, 6.8, 10.2, 16.4, 20.5, 24.3, 25.4] },
-  { name: "Dhaka", c: "Asia", p: [0.3, 0.5, 1.4, 3.3, 6.6, 10.3, 14.7, 21.0, 28.1, 31.2] },
-  { name: "Karachi", c: "Asia", p: [1.0, 1.9, 3.1, 5.0, 7.1, 9.8, 13.0, 16.1, 20.4, 23.1] },
-  { name: "Lagos", c: "Africa", p: [0.3, 0.8, 1.4, 2.6, 4.8, 7.3, 10.4, 14.4, 20.6, 24.4] },
-  { name: "Kinshasa", c: "Africa", p: [0.2, 0.4, 1.1, 2.1, 3.7, 6.1, 9.4, 14.3, 21.9, 26.7] },
-  { name: "Manila", c: "Asia", p: [1.5, 2.3, 3.5, 5.9, 8.0, 10.0, 11.9, 13.9, 16.8, 18.6] },
-  { name: "Istanbul", c: "Asia", p: [1.0, 1.5, 2.8, 4.4, 6.6, 8.7, 12.7, 15.2, 17.1, 17.7] },
-];
+function MegacityCounter() {
+  const [threshold, setThreshold] = useState(10);
+  const [sort, setSort] = useState<"size" | "continent">("size");
+  const qualifying = CITIES.filter((c) => c.pop >= threshold);
+  const byCont = CONTINENTS.map((c) => ({ c, n: qualifying.filter((q) => q.c === c).length }));
+  const asia = byCont[0].n;
+  const asiaShare = qualifying.length ? Math.round((asia / qualifying.length) * 100) : 0;
+  const list = sort === "size" ? CITIES : [...CITIES].sort((a, b) => CONTINENTS.indexOf(a.c) - CONTINENTS.indexOf(b.c) || b.pop - a.pop);
 
-// Number of megacities (10 million+) in the WHOLE world, approximate UN estimates/projections.
-const MEGA_COUNT = [2, 3, 3, 5, 10, 17, 24, 34, 43, 48];
-
-export function MegacityRace() {
-  const [year, setYear] = useState(1950);
-  const [guess, setGuess] = useState<"" | "tokyo" | "delhi" | "lagos" | "ny">("");
-
-  const ranked = useMemo(
-    () => CITIES.map((c) => ({ ...c, now: lerpSeries(M_YEARS, c.p, year) })).sort((a, b) => b.now - a.now).slice(0, 10),
-    [year],
-  );
-  const megaCount = Math.round(lerpSeries(M_YEARS, MEGA_COUNT, year));
-  const inTop: Record<Continent, number> = { Asia: 0, "N. America": 0, "S. America": 0, Europe: 0, Africa: 0 };
-  ranked.forEach((c) => (inTop[c.c] += 1));
-  const richWorld = ranked.filter((c) => ["Tokyo", "New York", "Osaka", "London", "Paris", "Moscow", "Chicago", "Los Angeles", "Seoul"].includes(c.name)).length;
-  const africa = ranked.filter((c) => c.c === "Africa").map((c) => c.name);
-
-  const W = 360, rowH = 22, top = 8, L = 98, R = 44;
-  const H = top + rowH * 10 + 22;
-  const maxP = 45;
-  const bx = (v: number) => L + (v / maxP) * (W - L - R);
-
-  const notice =
-    year < 1975
-      ? `Most of the biggest cities are in richer, industrialised countries (${richWorld} of the top 10 are in Japan, the USA or Europe). They grew first because factories pulled people from the countryside.`
-      : year < 2005
-        ? `Cities in poorer, fast-growing countries are racing up: Mexico City, São Paulo, Mumbai and Delhi. Rural-urban migration plus high birth rates (natural increase) drive this growth.`
-        : `Asia dominates (${inTop.Asia} of the top 10). Older giants like New York and Osaka have stopped climbing, while ${africa.length ? africa.join(" and ") + " in Africa" : "Delhi, Dhaka and Shanghai"} ${africa.length === 1 ? "is" : "are"} growing fastest.`;
+  const W = 460, rowH = 13, top = 6;
+  const H = top + list.length * rowH + 8;
+  const left = 96, maxPop = 40;
+  const bx = (p: number) => left + (p / maxPop) * (W - left - 40);
 
   return (
-    <Frame
-      title="Megacity race: the world's 10 largest urban areas"
+    <WidgetFrame
+      title="Megacity counter"
+      tryThis={[
+        "Set the threshold to the official 10 million. How many megacities are there, and what share are in Asia?",
+        "Raise the threshold to 20 million. Which continents drop out first?",
+        "London and Seoul are not on the list at 10 million. How close are they?",
+        "Sort by continent. Why do you think so few megacities are in Europe today?",
+      ]}
       caption={
         <>
-          <p><b>Notice:</b> {notice}</p>
-          <p className="mt-1 text-xs text-slate-500">
-            Approximate UN World Urbanization Prospects (2018) estimates for whole urban agglomerations{year > 2020 ? "; after 2020 these are projections" : ""}. Only about 25 big cities are tracked here, and city-boundary definitions vary.
+          <p>
+            At a threshold of <b>{threshold} million</b>, <b>{qualifying.length}</b> of these cities qualify
+            {qualifying.length ? <>, and <b>{asia}</b> of them ({asiaShare}%) are in Asia</> : null}.
+            {threshold === 10 ? " This is the official megacity definition: an urban area of 10 million people or more." : null}
           </p>
+          <p className="mt-2">
+            Most megacities are in Asia, and many are in lower- and middle-income countries (e.g. Dhaka, Karachi, Lagos, Kinshasa) where rural–urban migration and natural increase make cities grow very fast. In 1950 only Tokyo and New York had passed 10 million.
+          </p>
+          <p className="mt-2 text-xs text-ink-2">Simplified: UN estimates for 2018 (millions, rounded). Where you draw a city&apos;s boundary changes its population, so other sources give different rankings.</p>
         </>
       }
     >
-      <div className="mb-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">
-        <Choice
-          label="Predict first: which city does the UN expect to be the world's largest in 2035?"
-          options={[{ id: "tokyo", label: "Tokyo" }, { id: "delhi", label: "Delhi" }, { id: "lagos", label: "Lagos" }, { id: "ny", label: "New York" }]}
-          value={guess}
-          onChange={setGuess}
+      <div className="space-y-3">
+        <Slider label="Megacity threshold" value={threshold} min={5} max={40} step={1} onChange={setThreshold} format={(v) => `${v} million`} />
+        <Segmented
+          label="Sort cities"
+          value={sort}
+          onChange={setSort}
+          options={[
+            { value: "size", label: "By size" },
+            { value: "continent", label: "By continent" },
+          ]}
         />
-        {guess ? (
-          <p className="mt-2">
-            {guess === "delhi" ? "Correct! " : "Not quite. "}UN projections put Delhi top (about 43 million) as Tokyo&apos;s ageing population slowly shrinks. Drag the slider to 2035 to check.
-          </p>
-        ) : null}
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <Readout label="Cities over threshold" value={qualifying.length} />
+          <Readout label="In Asia" value={`${asia} (${asiaShare}%)`} tone="ink" />
+          <Readout label="Largest" value="Tokyo ≈ 37.5 m" tone="good" />
+        </div>
+        <div className="flex flex-wrap gap-2 text-xs font-semibold text-ink-2">
+          {byCont.map(({ c, n }) => (
+            <span key={c} className="flex items-center gap-1 rounded-lg bg-surface-2 px-2 py-1">
+              <svg width="10" height="10" aria-hidden><rect width="10" height="10" rx="2" className={CONT_CLS[c]} /></svg>
+              {c}: {n}
+            </span>
+          ))}
+        </div>
+        <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`Bar chart of ${CITIES.length} large cities by population. ${qualifying.length} have at least ${threshold} million people, ${asia} of them in Asia.`}>
+          {list.map((city, i) => {
+            const y = top + i * rowH;
+            const on = city.pop >= threshold;
+            return (
+              <g key={city.name} opacity={on ? 1 : 0.3}>
+                <text x={left - 4} y={y + 9} fontSize={9.5} textAnchor="end" className="fill-ink">{city.name}</text>
+                <rect x={left} y={y + 1} width={bx(city.pop) - left} height={rowH - 3} rx={2} className={CONT_CLS[city.c]} />
+                <text x={bx(city.pop) + 3} y={y + 9} fontSize={9} className="fill-ink-2">{city.pop}</text>
+              </g>
+            );
+          })}
+          <line x1={bx(threshold)} x2={bx(threshold)} y1={0} y2={H} className="stroke-bad" strokeWidth={2} strokeDasharray="5 3" />
+        </svg>
       </div>
-
-      <Slider label="Year" min={1950} max={2035} step={5} value={year} onChange={setYear} />
-
-      <svg viewBox={`0 0 ${W} ${H}`} className="mt-2 w-full" role="img" aria-label={`Bar chart of the ten largest cities in ${year}: ${ranked.map((c) => `${c.name} ${c.now.toFixed(1)} million`).join(", ")}`}>
-        <line x1={bx(10)} x2={bx(10)} y1={top - 4} y2={top + rowH * 10} stroke="#f59e0b" strokeDasharray="4 3" strokeWidth={1.5} />
-        {ranked.map((c, i) => {
-          const yy = top + i * rowH;
-          return (
-            <g key={c.name}>
-              <text x={L - 5} y={yy + 15} fontSize={11} textAnchor="end" fill="#334155">{i + 1}. {c.name}</text>
-              <rect x={L} y={yy + 3} width={Math.max(1, bx(c.now) - L)} height={rowH - 6} rx={3} fill={CONT_COLOR[c.c]} opacity={c.now >= 10 ? 1 : 0.55} />
-              <text x={bx(c.now) + 4} y={yy + 15} fontSize={11} fill="#334155" fontWeight="bold">{c.now.toFixed(1)}m</text>
-            </g>
-          );
-        })}
-        {[0, 10, 20, 30, 40].map((v) => (
-          <text key={v} x={bx(v)} y={H - 6} fontSize={11} textAnchor="middle" fill={v === 10 ? "#b45309" : "#64748b"}>{v === 10 ? "10m" : `${v}m`}</text>
-        ))}
-      </svg>
-
-      <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-slate-600">
-        {(Object.keys(CONT_COLOR) as Continent[]).map((k) => (
-          <span key={k} className="flex items-center gap-1">
-            <span className="inline-block h-3 w-3 rounded-sm" style={{ background: CONT_COLOR[k] }} /> {k} ({inTop[k]})
-          </span>
-        ))}
-        <span className="flex items-center gap-1"><span className="inline-block h-3 w-3 rounded-sm bg-slate-400 opacity-55" /> paler = under 10m</span>
-      </div>
-
-      <div className="mt-3 grid grid-cols-2 gap-2">
-        <Stat label="Megacities (10m+) worldwide" value={`≈ ${megaCount}`} tone="amber" />
-        <Stat label={`Largest city in ${year}`} value={ranked[0].name} tone="indigo" />
-      </div>
-    </Frame>
+    </WidgetFrame>
   );
 }
+
+export const widgets: WidgetDef[] = [
+  {
+    id: "urbanisation-curve",
+    title: "Urbanisation curve",
+    blurb: "Slide through 1950–2050 and watch the share of people living in cities rise — fastest in lower-income regions.",
+    Component: UrbanisationCurve,
+  },
+  {
+    id: "megacity-counter",
+    title: "Megacity counter",
+    blurb: "Move the population threshold and see which of the world's biggest cities count as megacities — and where they are.",
+    Component: MegacityCounter,
+  },
+];

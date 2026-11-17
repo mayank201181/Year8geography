@@ -1,42 +1,49 @@
 "use client";
+// "Ask Professor Atlas" — AoPS-style AI tutor panel. Gives hints, not answers.
+import { useEffect, useRef, useState } from "react";
+import { useStore } from "@/lib/store";
+import { Rich } from "./Rich";
 
-import { useState } from "react";
-
-interface Preset {
-  kind: string;
-  label: string;
+interface Turn {
+  role: "user" | "assistant";
+  content: string;
 }
 
-export function AskAI({
-  topic,
-  context,
-  presets = [],
-  placeholder = "Ask Professor Atlas anything about this topic…",
-  buttonLabel = "✨ Ask the AI tutor",
-}: {
-  topic: string;
-  context?: string;
-  presets?: Preset[];
-  placeholder?: string;
-  buttonLabel?: string;
-}) {
-  const [open, setOpen] = useState(false);
-  const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [error, setError] = useState("");
-  const [busy, setBusy] = useState(false);
+const PRESETS: { label: string; prompt: string }[] = [
+  { label: "Give me a hint", prompt: "Can you give me a hint for the next step? Don't tell me the answer." },
+  { label: "Explain simply", prompt: "Can you explain this idea simply, with an example?" },
+  { label: "Why does it work?", prompt: "Why does this method work?" },
+  { label: "Another example", prompt: "Can you give me a similar example to try myself?" },
+];
 
-  async function ask(body: object) {
+export function AskAI({ context, compact }: { context: string; compact?: boolean }) {
+  const { mode } = useStore();
+  const [open, setOpen] = useState(false);
+  const [turns, setTurns] = useState<Turn[]>([]);
+  const [draft, setDraft] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ block: "nearest" });
+  }, [turns, busy]);
+
+  async function send(text: string) {
+    const q = text.trim();
+    if (!q || busy) return;
+    const next = [...turns, { role: "user" as const, content: q }];
+    setTurns(next);
+    setDraft("");
     setBusy(true);
-    setError("");
-    setAnswer("");
+    setError(null);
     try {
-      const r = await fetch("/api/ai", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ topic, ...body }) });
-      const j = await r.json();
-      if (!r.ok) setError(j.error || "Something went wrong.");
-      else setAnswer(j.text);
+      const r = await fetch("/api/ai", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: next, context }) });
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || typeof j.reply !== "string") setError(typeof j.error === "string" ? j.error : "Professor Atlas couldn't answer just now.");
+      else setTurns([...next, { role: "assistant", content: j.reply }]);
     } catch {
-      setError("Couldn't reach the tutor. Check your connection.");
+      setError("Couldn't reach Professor Atlas. Check your internet connection.");
     } finally {
       setBusy(false);
     }
@@ -44,61 +51,58 @@ export function AskAI({
 
   if (!open) {
     return (
-      <button
-        onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-1.5 rounded-lg border border-violet-200 bg-violet-50 px-3 py-1.5 text-sm font-semibold text-violet-700 hover:bg-violet-100"
-      >
-        {buttonLabel}
+      <button type="button" className={compact ? "btn btn-ghost btn-sm" : "btn btn-secondary"} onClick={() => setOpen(true)}>
+        🧭 Ask Professor Atlas
       </button>
     );
   }
 
   return (
-    <div className="my-3 rounded-2xl border-2 border-violet-200 bg-gradient-to-br from-violet-50/70 to-white p-4">
+    <div className="w-full basis-full rounded-2xl border border-line bg-surface p-3 sm:p-4" role="region" aria-label="Professor Atlas tutor">
       <div className="mb-2 flex items-center justify-between">
-        <p className="flex items-center gap-2 text-sm font-bold text-violet-700">🌏 Professor Atlas — AI tutor</p>
-        <button onClick={() => setOpen(false)} className="text-violet-300 hover:text-violet-500" aria-label="Close">✕</button>
-      </div>
-
-      {presets.length > 0 && (
-        <div className="mb-2 flex flex-wrap gap-2">
-          {presets.map((p) => (
-            <button
-              key={p.kind}
-              onClick={() => ask({ kind: p.kind, context })}
-              disabled={busy}
-              className="rounded-lg bg-violet-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-violet-700 disabled:opacity-60"
-            >
-              {p.label}
-            </button>
-          ))}
-        </div>
-      )}
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (question.trim()) ask({ kind: "ask", question, context });
-        }}
-        className="flex gap-2"
-      >
-        <input
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-          placeholder={placeholder}
-          className="flex-1 rounded-lg border border-violet-200 px-3 py-2 text-sm outline-none focus:border-violet-400 focus:ring-2 focus:ring-violet-100"
-        />
-        <button type="submit" disabled={busy || !question.trim()} className="rounded-lg bg-violet-600 px-3 py-2 text-sm font-semibold text-white hover:bg-violet-700 disabled:opacity-60">
-          Ask
+        <div className="font-extrabold">🧭 Professor Atlas</div>
+        <button type="button" className="btn btn-ghost btn-sm" onClick={() => setOpen(false)} aria-label="Close tutor">
+          ✕
         </button>
-      </form>
-
-      {busy && <p className="mt-3 animate-pulse text-sm text-violet-500">Professor Atlas is thinking… 💭</p>}
-      {error && <p className="mt-3 rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-600">{error}</p>}
-      {answer && (
-        <div className="mt-3 whitespace-pre-wrap rounded-xl border border-violet-100 bg-white p-3 text-sm text-slate-700">{answer}</div>
+      </div>
+      {mode === "guest" ? (
+        <p className="text-sm text-ink-2">Professor Atlas is available with a family account (so a grown-up can keep an eye on usage). Sign in from the menu to use it.</p>
+      ) : (
+        <>
+          <p className="text-xs text-ink-2">I give hints and explanations — you do the thinking! 🧠</p>
+          <div className="mt-2 max-h-80 space-y-2 overflow-y-auto">
+            {turns.map((t, i) => (
+              <div key={i} className={t.role === "user" ? "ml-8 rounded-xl bg-brand-soft px-3 py-2 text-sm" : "mr-4 rounded-xl bg-surface-2 px-3 py-2 text-sm"}>
+                {t.role === "assistant" ? <Rich text={t.content} /> : t.content}
+              </div>
+            ))}
+            {busy ? <div className="mr-4 rounded-xl bg-surface-2 px-3 py-2 text-sm text-ink-2">Professor Atlas is thinking…</div> : null}
+            {error ? <div className="rounded-xl bg-bad-soft px-3 py-2 text-sm">{error}</div> : null}
+            <div ref={endRef} />
+          </div>
+          {turns.length === 0 ? (
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {PRESETS.map((p) => (
+                <button key={p.label} type="button" className="chip hover:bg-brand-soft" onClick={() => send(p.prompt)}>
+                  {p.label}
+                </button>
+              ))}
+            </div>
+          ) : null}
+          <form
+            className="mt-2 flex gap-2"
+            onSubmit={(e) => {
+              e.preventDefault();
+              void send(draft);
+            }}
+          >
+            <input className="input text-sm" value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="Ask about this…" maxLength={500} aria-label="Your question" />
+            <button type="submit" className="btn btn-primary btn-sm" disabled={busy || !draft.trim()}>
+              Ask
+            </button>
+          </form>
+        </>
       )}
-      <p className="mt-2 text-[11px] text-slate-400">AI can make mistakes — always double-check with your guide.</p>
     </div>
   );
 }

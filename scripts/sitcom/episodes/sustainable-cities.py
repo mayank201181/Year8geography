@@ -1,247 +1,216 @@
-# "Off The Map" (a Claude Sitcom) S01E15 "Green Day" (Topic: Sustainable Cities & Eco-City Design) — season finale
-# Format and helpers: see common.py and EPISODE_GUIDE.md; check with lint_episode.py.
+# "Totally Raotional: Off The Map" S02E17 "Turn On All Four Taps" (Topic: Sustainable Cities) — SEASON FINALE
+# Format and helpers: see common.py and docs/SITCOM.md; check with lint_episode.py.
+# Sections taught: what-is-sustainable, singapore-success, las-vegas, eco-city-design.
 
-EP = dict(
-    topic="sustainable-cities",
-    logline="Priya's class enters the inter-class Eco City competition and Dad volunteers his design: a car park with a fountain. Atlas spins the family to Curitiba and Freiburg, Nani remembers 1960s Singapore, and Mr Tan judges with the three pillars.",
-    names={"guest": "RAFAEL", "guest2": "ANNA"},
-    display={"New Water": "NEWater", "H D B": "HDB", "M R T": "MRT", "E R P": "ERP", "C O E": "COE",
-             "S D G": "SDG", "B R T": "BRT", "U A E": "UAE"},
-)
+EP = dict(topic="sustainable-cities",
+          logline="Dad enters Tara's eco-city competition with 'Vikram Vegas', a desert city of lawns and fountains. Globo explains "
+                  "the three pillars, Singapore's Four National Taps, why Las Vegas pays people to rip up lawns, and how to score an eco-city.")
 
-PILLARS = (
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 240">'
-    '<circle cx="210" cy="88" r="72" fill="#f87171" fill-opacity="0.45" stroke="#fca5a5" stroke-width="2"/>'
-    '<circle cx="310" cy="88" r="72" fill="#60a5fa" fill-opacity="0.45" stroke="#7dd3fc" stroke-width="2"/>'
-    '<circle cx="260" cy="162" r="72" fill="#4ade80" fill-opacity="0.45" stroke="#86efac" stroke-width="2"/>'
-    '<text x="80" y="60" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#fca5a5">SOCIAL</text>'
-    '<text x="80" y="86" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#f8fafc">people</text>'
-    '<text x="445" y="60" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#7dd3fc">ECONOMIC</text>'
-    '<text x="445" y="86" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#f8fafc">jobs, money</text>'
-    '<text x="430" y="200" text-anchor="middle" font-family="sans-serif" font-size="22" fill="#86efac">ENVIRONMENTAL</text>'
-    '<text x="430" y="226" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#f8fafc">air, water, nature</text>'
-    '<text x="260" y="122" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="bold" fill="#fde047">SUSTAINABLE</text>'
-    '</svg>'
-)
+D_PILLARS = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">
+<circle cx="200" cy="80" r="66" fill="#f472b6" fill-opacity="0.45"/>
+<circle cx="320" cy="80" r="66" fill="#fbbf24" fill-opacity="0.45"/>
+<circle cx="260" cy="130" r="66" fill="#4ade80" fill-opacity="0.45"/>
+<text x="168" y="62" font-family="sans-serif" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle">SOCIAL</text>
+<text x="356" y="62" font-family="sans-serif" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle">ECONOMIC</text>
+<text x="260" y="182" font-family="sans-serif" font-size="17" font-weight="bold" fill="#fff" text-anchor="middle">ENVIRONMENTAL</text>
+<text x="260" y="104" font-family="sans-serif" font-size="13" font-weight="bold" fill="#fff" text-anchor="middle">SUSTAINABLE</text>
+<text x="70" y="150" font-family="sans-serif" font-size="14" fill="#e2e8f0" text-anchor="middle">people</text>
+<text x="450" y="150" font-family="sans-serif" font-size="14" fill="#e2e8f0" text-anchor="middle">money</text>
+<text x="450" y="190" font-family="sans-serif" font-size="14" fill="#e2e8f0" text-anchor="middle">all three at once</text>
+</svg>"""
 
-GREEN = (
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 170">'
-    '<text x="10" y="32" font-family="sans-serif" font-size="22" fill="#f8fafc">Curitiba: green space per person</text>'
-    '<text x="10" y="84" font-family="sans-serif" font-size="20" fill="#f8fafc">Early 1970s</text>'
-    '<rect x="150" y="62" width="6" height="32" fill="#fca5a5"/>'
-    '<text x="166" y="86" font-family="sans-serif" font-size="20" fill="#fca5a5">under 1 m²</text>'
-    '<text x="10" y="138" font-family="sans-serif" font-size="20" fill="#f8fafc">Today</text>'
-    '<rect x="150" y="116" width="350" height="32" fill="#86efac"/>'
-    '<text x="490" y="140" text-anchor="end" font-family="sans-serif" font-size="20" fill="#14532d">about 50 m²</text>'
-    '</svg>'
-)
+D_TAPS = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210">
+<text x="10" y="22" font-family="sans-serif" font-size="16" font-weight="bold" fill="#e0f2fe">THE FOUR NATIONAL TAPS</text>
+<text x="10" y="62" font-family="sans-serif" font-size="15" fill="#fff">1 Local catchment</text>
+<text x="200" y="62" font-family="sans-serif" font-size="14" fill="#7dd3fc">rain → drains → 17 reservoirs</text>
+<text x="10" y="98" font-family="sans-serif" font-size="15" fill="#fff">2 Imported water</text>
+<text x="200" y="98" font-family="sans-serif" font-size="14" fill="#7dd3fc">Johor · agreement to 2061</text>
+<text x="10" y="134" font-family="sans-serif" font-size="15" fill="#fff">3 NEWater</text>
+<rect x="200" y="120" width="240" height="18" fill="#22d3ee"/>
+<text x="448" y="134" font-family="sans-serif" font-size="14" fill="#fff">≤ ~40%</text>
+<text x="10" y="170" font-family="sans-serif" font-size="15" fill="#fff">4 Desalination</text>
+<rect x="200" y="156" width="150" height="18" fill="#a78bfa"/>
+<text x="358" y="170" font-family="sans-serif" font-size="14" fill="#fff">≤ ~25%</text>
+<text x="10" y="200" font-family="sans-serif" font-size="13" fill="#fde047">Taps 3 + 4 don't need rain → drought-proof</text>
+</svg>"""
 
-FOOTPRINT = (
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200">'
-    '<text x="10" y="32" font-family="sans-serif" font-size="22" fill="#f8fafc">Global hectares (gha) per person</text>'
-    '<text x="10" y="84" font-family="sans-serif" font-size="20" fill="#f8fafc">We use</text>'
-    '<rect x="170" y="62" width="312" height="32" fill="#fca5a5"/>'
-    '<text x="472" y="86" text-anchor="end" font-family="sans-serif" font-size="20" fill="#111827">about 2.6</text>'
-    '<text x="10" y="138" font-family="sans-serif" font-size="20" fill="#f8fafc">Earth supplies</text>'
-    '<rect x="170" y="116" width="192" height="32" fill="#86efac"/>'
-    '<text x="352" y="140" text-anchor="end" font-family="sans-serif" font-size="20" fill="#111827">about 1.6</text>'
-    '<text x="10" y="186" font-family="sans-serif" font-size="20" fill="#fde047">Overshoot: living like we have 1.7 Earths</text>'
-    '</svg>'
-)
+D_LOOP = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 210">
+<rect x="10" y="140" width="170" height="56" rx="10" fill="#0369a1"/>
+<text x="95" y="166" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">LAKE MEAD</text>
+<text x="95" y="186" font-family="sans-serif" font-size="13" fill="#e0f2fe" text-anchor="middle">~90% of the water</text>
+<rect x="300" y="20" width="200" height="50" rx="10" fill="#334155"/>
+<text x="400" y="50" font-family="sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">LAS VEGAS</text>
+<path d="M120 140 Q150 50 296 44" stroke="#7dd3fc" stroke-width="4" fill="none"/>
+<path d="M296 44 l-14 -6 l2 14z" fill="#7dd3fc"/>
+<path d="M360 72 Q300 160 186 168" stroke="#4ade80" stroke-width="4" fill="none"/>
+<path d="M186 168 l14 -8 l0 14z" fill="#4ade80"/>
+<text x="250" y="120" font-family="sans-serif" font-size="14" font-weight="bold" fill="#4ade80">INDOOR: treated, returned</text>
+<path d="M450 72 Q470 110 450 150" stroke="#f87171" stroke-width="4" fill="none" stroke-dasharray="6 5"/>
+<text x="505" y="176" font-family="sans-serif" font-size="14" font-weight="bold" fill="#f87171" text-anchor="end">OUTDOOR: evaporates</text>
+<text x="505" y="196" font-family="sans-serif" font-size="14" font-weight="bold" fill="#f87171" text-anchor="end">= LOST</text>
+</svg>"""
 
-MATRIX = (
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 240">'
-    '<text x="10" y="30" font-family="sans-serif" font-size="20" fill="#fde047">Criterion (weight)</text>'
-    '<text x="330" y="30" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#86efac">Class</text>'
-    '<text x="455" y="30" text-anchor="middle" font-family="sans-serif" font-size="20" fill="#fca5a5">Dad</text>'
-    '<line x1="10" y1="42" x2="510" y2="42" stroke="#f8fafc" stroke-width="2"/>'
-    '<text x="10" y="74" font-family="sans-serif" font-size="19" fill="#f8fafc">Environment ×3</text>'
-    '<text x="330" y="74" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">5 → 15</text>'
-    '<text x="455" y="74" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">1 → 3</text>'
-    '<text x="10" y="108" font-family="sans-serif" font-size="19" fill="#f8fafc">Social ×2</text>'
-    '<text x="330" y="108" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">4 → 8</text>'
-    '<text x="455" y="108" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">1 → 2</text>'
-    '<text x="10" y="142" font-family="sans-serif" font-size="19" fill="#f8fafc">Economic ×2</text>'
-    '<text x="330" y="142" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">4 → 8</text>'
-    '<text x="455" y="142" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">3 → 6</text>'
-    '<text x="10" y="176" font-family="sans-serif" font-size="19" fill="#f8fafc">Feasibility ×1</text>'
-    '<text x="330" y="176" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">3 → 3</text>'
-    '<text x="455" y="176" text-anchor="middle" font-family="sans-serif" font-size="19" fill="#f8fafc">5 → 5</text>'
-    '<line x1="10" y1="192" x2="510" y2="192" stroke="#f8fafc" stroke-width="2"/>'
-    '<text x="10" y="226" font-family="sans-serif" font-size="20" fill="#fde047">TOTAL (out of 40)</text>'
-    '<text x="330" y="226" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="bold" fill="#86efac">34</text>'
-    '<text x="455" y="226" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="bold" fill="#fca5a5">16</text>'
-    '</svg>'
-)
+D_RUBRIC = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 190">
+<text x="10" y="22" font-family="sans-serif" font-size="16" font-weight="bold" fill="#e0f2fe">8 CRITERIA × 0–3 = /24</text>
+<g font-family="sans-serif" font-size="15" fill="#fff">
+<text x="10" y="58">Transport</text><text x="140" y="58">Energy</text><text x="270" y="58">Water</text><text x="400" y="58">Waste</text>
+<text x="10" y="94">Housing</text><text x="140" y="94">Green space</text><text x="270" y="94">Community</text><text x="400" y="94">Economy</text>
+</g>
+<g font-family="sans-serif" font-size="14" fill="#fde047">
+<text x="10" y="130">0 not addressed · 1 vague · 2 explained</text>
+<text x="10" y="154">3 linked + real example + trade-off</text>
+<text x="10" y="180">% = score ÷ 24 × 100</text>
+</g>
+</svg>"""
 
 # ---------------- COLD OPEN ----------------
-scene("living", [("mum", 260), ("dad", 560), ("priya", 860)])
-L("dad", "Big news. Priya's class is in the Eco City competition, and I've volunteered my design.", mood="excited", shot="close", prop="tablet")
-L("priya", "Nobody asked you.", mood="deadpan", shot="close")
-L("mum", "I asked him. It was the only way to stop him helping with my checklist.", mood="smug", shot="close")
-L("dad", "Behold. A giant car park. Six thousand spaces. And right in the middle...", mood="smug", shot="close", prop="tablet")
-L("priya", "Please don't say fountain.", mood="worried", shot="close")
-L("dad", "A fountain.", mood="excited", shot="close", gap=0.3)
-freeze("DAD'S ECO CITY", 2.6, narrator="Narrator: The fountain is lit by forty floodlights. All diesel.")
-confess("priya", "PRIYA · 12 · Class Eco Rep · Related To Dad")
-L("priya", "Mr Tan is judging with a rubric. Dad's design would break the rubric.", mood="deadpan")
-L("priya", "I need someone older, wiser and rounder than Dad. Luckily, he lives on our bookshelf.", mood="smug", gap=0.6)
+scene("living", [("tara", 300), ("mum", 760)])
+L("tara", "Mum. The eco city competition is on Friday. My team needs a city that doesn't waste water.", mood="determined", shot="close", prop="tablet")
+L("mum", "Perfect! The water bill has a rebate if we use ten percent less. A discount, for using less!", mood="excited", shot="close", prop="phone")
+L("tara", "Mum. That is just a smaller bill.", mood="deadpan", shot="close", gap=0.4)
+scene("living", [("tara", 260), ("mum", 600), ("dad", 980)])
+sfx("door")
+L("dad", "Family. I'm entering the competition too. Parents' category. My city is called Vikram Vegas.", mood="smug", shot="close", prop="map")
+L("dad", "It's in a desert. Every home gets a lawn, a fountain and a pool.", mood="smug", shot="close")
+L("tara", "Where does the water come from?", mood="deadpan", shot="close")
+L("dad", "The tap, Tara. Honestly. What do they teach you?", mood="smug", shot="close")
+freeze("\"THE TAP, TARA.\"", 2.4, narrator="Narrator: The tap would like to be left out of this.")
+confess("tara", "TARA RAO · 12 · Only Sane Person In This House")
+L("tara", "Season finale. And my father is designing a desert full of lawns.", mood="deadpan", gap=0.6)
 
 title()
 
-# ---------------- ACT 1: WHAT IS SUSTAINABLE? ----------------
-scene("living", [("priya", 260), ("dad", 560)])
-L("priya", "Atlas! Emergency. Dad has designed a city.", mood="determined", shot="wide")
-sfx("whoosh")
-poof("atlas", 880)
-L("atlas", "A car park with a fountain. I have been dropped eleven times, and this hurts more.", mood="annoyed", shot="close")
-L("dad", "But it's green! Well, it will be. I'm going to paint it.", mood="smug", shot="close")
-L("atlas", "Green paint is not sustainability. Start with the Brundtland Report, nineteen eighty seven.", mood="teach", shot="close",
-  boardClear=True, board="Brundtland Report (UN, 1987)")
-L("atlas", "Meet the needs of the present without compromising the ability of future generations to meet their own needs.", mood="teach", shot="close",
-  board="Meet needs NOW, without harming the FUTURE")
-L("priya", "So use things today, but don't use them up. Unlike Dad and the last slice of cake.", mood="deadpan", shot="close")
-L("dad", "That slice was compromised. By me.", mood="smug", shot="close", gap=0.4)
-L("atlas", "We judge a city on three pillars. Social: people healthy, safe and housed. Economic: jobs and decent incomes.", mood="teach", shot="close",
-  boardClear=True, diagram=PILLARS)
-L("atlas", "Environmental: clean air and water, low carbon, green space. A sustainable city needs all three to overlap.", mood="teach", shot="close",
-  board="All three pillars must overlap")
-L("priya", "So a green city that only the rich can afford still fails.", mood="thinking", shot="close")
-L("atlas", "Correct. And in twenty fifteen, the United Nations set S D G eleven: inclusive, safe, resilient, sustainable cities.", mood="teach", shot="close",
-  board="SDG 11 (2015): inclusive, safe, resilient")
-L("atlas", "Now score the car park. Social? Nobody lives there. Environmental? Six thousand cars.", mood="eyeroll", shot="close")
-L("dad", "Economic? Parking fees!", mood="excited", shot="close")
-L("atlas", "One pillar out of three. A stool with one leg. Sit on it and see what happens.", mood="deadpan", shot="close", gap=0.4)
-L("atlas", "Planners use a toolkit. Public transport, cycling, green space, renewables, water recycling, less waste, affordable housing.", mood="teach", shot="close",
-  boardClear=True, board="Transport · cycling · green · energy")
-L("priya", "Most help more than one pillar. Cycling is low carbon, healthy and cheap.", mood="happy", shot="close",
-  board="Water · waste · housing · community")
-
-confess("atlas", "ATLAS · Desk Globe · Varnished For The Finale")
-L("atlas", "It is the season finale, so I had a fresh coat of varnish. Then Dad sneezed on me. Twice.", mood="bored")
-L("atlas", "Somewhere under that sneeze is Brazil. Let us go and find it.", mood="smug", gap=0.5)
-
-# ---------------- ACT 2: CURITIBA AND VAUBAN ----------------
-scene("living", [("priya", 260), ("dad", 560), ("atlas", 880)])
-L("dad", "Brazil? But only rich cities can afford eco stuff.", mood="thinking", shot="close")
-L("atlas", "A myth. Hold on. Not to my equator. It is still wet.", mood="smug", shot="close")
-sfx("whoosh")
-scene("city", [("priya", 220), ("dad", 460), ("atlas", 760)], caption="CURITIBA · Brazil · Bus Rapid Transit")
+# ---------------- ACT 1: WHAT MAKES A CITY SUSTAINABLE? ----------------
+scene("kitchen", [("tara", 380)])
+L("tara", "One last time. Opening the drawer.", mood="determined", shot="wide")
+sfx("drawer")
+poof("globo", 860)
+L("globo", "The season finale, and you still need me. Also, who keeps leaving chapati crumbs in my drawer?", mood="bored", shot="close")
+L("tara", "Globo, Dad's eco city is a desert full of lawns.", mood="worried", shot="two")
+L("globo", "Sustainable development. The Brundtland Report, nineteen eighty seven. Meeting the needs of the present, without compromising the ability of future generations to meet their own needs.", mood="teach", shot="close",
+  boardClear=True, board="SUSTAINABLE: meet today's needs without")
+L("tara", "Live well today, without leaving a mess for later.", mood="thinking", shot="close", board="harming future generations (Brundtland 1987)")
+L("globo", "Three pillars. Social, economic and environmental. People, money and nature. A sustainable city passes all three at once.", mood="teach", shot="close",
+  boardClear=True, board="3 PILLARS: social · economic · environmental", diagram=D_PILLARS)
 sfx("door")
-poof("guest", 1060)
-L("guest", "Welcome to Curitiba! I'm Rafael, a transport planner. We couldn't afford a metro. So we made buses behave like one.", mood="happy", shot="close")
-L("atlas", "Bus Rapid Transit. The world's first full system, nineteen seventy four, under Mayor Jaime Lerner.", mood="teach", shot="close",
-  boardClear=True, board="Curitiba: world's first full BRT (1974)")
-L("guest", "Own lanes. Tube stations from nineteen ninety one, where you pay first. Our longest buses carry about two hundred and fifty people.", mood="teach", shot="close",
-  board="Own lanes · tube stations (1991) · 250")
-L("guest", "Instead of concrete flood channels, we made river valleys into parks, with lakes that hold floodwater.", mood="teach", shot="close",
-  boardClear=True, diagram=GREEN)
-L("guest", "Green space rose from under one square metre per person to about fifty. Sheep mow some of the grass.", mood="smug", shot="close",
-  board="Flood parks: <1 m² → ~50 m² per person")
-L("atlas", "Sheep. Employed by a city. More useful than your fountain.", mood="deadpan", shot="close", gap=0.3)
-L("guest", "And since nineteen ninety one, the Green Exchange. Four kilos of recycling gets you one kilo of fresh food.", mood="teach", shot="close",
-  board="Green Exchange: 4 kg recycling = 1 kg food")
-L("priya", "All three pillars. Cleaner streets, food for poorer families, business for farmers.", mood="excited", shot="close")
-L("atlas", "Problems? Crowded buses at peak times. Always say so. Now, Germany.", mood="teach", shot="close")
-sfx("whoosh")
-scene("ecocity", [("priya", 220), ("dad", 460), ("atlas", 760)], caption="VAUBAN · Freiburg, Germany · Car-free district")
-poof("guest2", 1060)
-L("guest2", "Hello! I'm Anna, from Forum Vauban. Cars park at the edge, in an expensive solar garage. So about seventy percent of households have no car.", mood="smug", shot="close",
-  boardClear=True, board="Vauban: about 70% of homes have no car")
-L("guest2", "This was army barracks, a brownfield site. Now five and a half thousand people live here, some in houses making more power than they use.", mood="teach", shot="close",
-  board="Brownfield · ~5,500 people · plus-energy")
-L("guest2", "Our problem? Homes here are now expensive. That's the social pillar.", mood="neutral", shot="close", gap=0.3)
+scene("kitchen", [("tara", 260), ("globo", 640), ("dad", 980)])
+L("dad", "Vikram Vegas passes economic. A giant motorway. No traffic jams!", mood="smug", shot="close")
+L("globo", "For two years. Then more people drive and the jams come back worse. One pillar out of three is not sustainable.", mood="eyeroll", shot="close",
+  board="One pillar only → NOT sustainable")
+L("globo", "About fifty seven percent of people now live in urban areas. And UN estimates suggest cities produce roughly seventy percent of carbon dioxide emissions.", mood="teach", shot="close",
+  boardClear=True, board="~57% of people urban (2023)")
+L("tara", "Fix the cities, and you fix the planet.", mood="happy", shot="close", board="Cities: ~70% of CO₂ (UN estimate)")
+L("globo", "Your ecological footprint is the land and sea needed to supply what you use and absorb your waste. Humanity uses roughly one point seven Earths a year.", mood="teach", shot="close",
+  board="Footprint ÷ biocapacity: we use ~1.7 Earths")
+L("dad", "One point seven Earths? Is there a discount on the second one?", mood="happy", shot="close")
+L("tara", "Dad. There is no second one.", mood="deadpan", shot="close")
+sfx("trombone")
 
-confess("dad", "DAD · Forty Airports · Zero Bus Lanes")
-L("dad", "I have been to forty countries. Well. Forty airports. All of them had car parks. I thought that was culture.", mood="smug")
-L("dad", "Anna lent me a cargo bike. I rode it into a very sustainable hedge.", mood="sad", gap=0.6)
+confess("globo", "GLOBO · Retired Classroom Globe · Season Finale Guest Of Honour")
+L("globo", "I am the only Earth in this house. And they keep me with the takeaway menus.", mood="smug", gap=0.5)
 
-# ---------------- ACT 3: SINGAPORE THEN AND NOW ----------------
-card("MEANWHILE, BACK IN SINGAPORE", "Dad's knees have filed a complaint.", 2.4)
-scene("kitchen", [("nani", 220), ("priya", 440), ("dad", 660)])
-L("nani", "In the nineteen sixties, our rivers smelled like old socks. Then in nineteen sixty seven, Lee Kuan Yew launched the Garden City. Now, City in Nature.", mood="smug", shot="close",
-  boardClear=True, board="1967 Garden City → 2020 City in Nature")
-L("nani", "And about seventy seven to eighty percent of us live in H D B flats, with the M R T close by.", mood="teach", shot="close",
-  board="About 77–80% of residents live in HDB")
-L("priya", "And Tengah, the forest town. A forest corridor about a hundred metres wide, and town centre roads underground.", mood="excited", shot="close",
-  board="Tengah: ~100 m Forest Corridor")
-L("dad", "Roads underground! That's my car park. Upside down.", mood="excited", shot="close")
-L("nani", "No, beta. Yours had a fountain.", mood="deadpan", shot="close", gap=0.4)
-sfx("whoosh")
-poof("atlas", 980)
-L("atlas", "Cars. Nineteen ninety, the C O E: a quota on owning a car. Nineteen ninety eight, E R P: you pay to use busy roads at busy times.", mood="teach", shot="close",
-  boardClear=True, board="COE (1990) OWN · ERP (1998) USE")
-L("priya", "And water has Four National Taps. Local catchment, imports from Malaysia, New Water, and desalination.", mood="thinking", shot="close",
-  board="4 Taps: local · import · NEWater · desal")
-L("dad", "New Water is just seawater with the salt taken out.", mood="smug", shot="close")
-L("atlas", "That is desalination. New Water, from two thousand three, is recycled used water. Up to about forty percent of demand now.", mood="eyeroll", shot="close",
-  board="NEWater (2003): ~40% now, ~55% by 2060")
-L("nani", "And Marina Barrage, two thousand eight. Our fifteenth reservoir, flood control, and the best place to fly a kite.", mood="happy", shot="close",
-  board="Marina Barrage (2008): 15th reservoir")
-L("dad", "But Singapore is tiny. So our footprint is tiny.", mood="thinking", shot="close")
-L("atlas", "Wonderfully wrong. The ecological footprint is the land and sea needed to supply us and absorb our waste, worldwide.", mood="teach", shot="close",
-  boardClear=True, diagram=FOOTPRINT)
-L("atlas", "We use about two point six global hectares each. Earth supplies about one point six. Carbon footprint is different: tonnes of greenhouse gas.", mood="worried", shot="close",
-  board="Carbon footprint = tonnes CO₂e per year")
-L("nani", "So the footprint is bigger than the foot. Like your father's opinions.", mood="smug", shot="close", gap=0.4)
+# ---------------- ACT 2: SINGAPORE ----------------
+card("MEANWHILE, AT MARINA BARRAGE", "Mum has found a free water refill station", 2.4)
+scene("park", [("mum", 300), ("tara", 620), ("globo", 960)], "MARINA BARRAGE · Singapore · Flown In By Globo Airways")
+L("mum", "It rains here every afternoon! How can Singapore be short of water?", mood="thinking", shot="close", prop="umbrella")
+L("globo", "Rain only helps if you can store it. Singapore is tiny, with no big rivers or lakes. So P U B spread the risk across four sources.", mood="teach", shot="close",
+  boardClear=True, board="FOUR NATIONAL TAPS (PUB)", diagram=D_TAPS)
+L("tara", "Tap one, local catchment. Rain flows through drains into reservoirs, like this one.", mood="happy", shot="close",
+  board="1 Catchment · 2 Imported from Johor")
+L("globo", "Tap two, water imported from Johor, in Malaysia. The agreement from nineteen sixty two runs until twenty sixty one.", mood="teach", shot="close")
+L("mum", "Four taps? Buy three, get the fourth free?", mood="excited", shot="close")
+L("globo", "Tap three, new water. Used water, cleaned with membranes and ultraviolet light. Up to about forty percent of demand.", mood="teach", shot="close",
+  board="3 NEWater ~40% · 4 Desalination ~25%")
+L("mum", "Used water? From the toilet?", mood="shock", shot="close")
+L("globo", "Cleaner than your tea, madam. Tap four, desalination, taking salt out of seawater. Up to about twenty five percent, but energy hungry.", mood="smug", shot="close")
+L("tara", "And those two don't need rain, so they protect us in a drought.", mood="excited", shot="close")
+L("globo", "Transport. Electronic Road Pricing, since nineteen ninety eight. Busy road, busy time, the gantry charges you. And to own a car, you must win a pricey Certificate of Entitlement.", mood="teach", shot="close",
+  boardClear=True, board="ERP (1998): pay at gantries at busy times")
+L("mum", "Something I can't get a discount on? Fine. MRT it is.", mood="sad", shot="close", board="COE: bid to own a car → fewer cars")
+L("globo", "Price signals. And around eighty percent of residents live in H D B flats, in planned towns with schools, hawker centres and an MRT station.", mood="teach", shot="close",
+  board="~80% in HDB flats · planned new towns")
+L("tara", "And City in Nature. Over three hundred kilometres of park connectors.", mood="happy", shot="close",
+  board="City in Nature: 300+ km park connectors")
+L("globo", "The Green Plan twenty thirty wants a million more trees. And Tengah, the Forest Town, has a car free centre.", mood="teach", shot="close",
+  boardClear=True, board="Green Plan 2030: +1 million trees")
+L("globo", "But Singapore is not finished. It still imports most of its food and energy.", mood="teach", shot="close",
+  board="Tengah: car-free centre · ✘ imports food")
 
-# ---------------- THE JUDGING ----------------
-scene("classroom", [("teacher", 220), ("priya", 440), ("dad", 660)])
-L("teacher", "Eco City judging, with a weighted scoring matrix. Score out of five, times the weight, add up.", mood="teach", shot="close",
-  boardClear=True, diagram=MATRIX)
-L("teacher", "Entry one. A car park with a fountain. Sixteen out of forty. It only wins on feasibility.", mood="deadpan", shot="close")
-L("dad", "Because it's brilliant?", mood="excited", shot="close")
-L("teacher", "Because anyone could build it. That's the problem.", mood="deadpan", shot="close", gap=0.3)
-L("priya", "We covered all seven themes, zoning to community. Industry downwind, floodplain kept as a park.", mood="determined", shot="close",
-  board="7 themes · industry downwind")
-L("teacher", "Exam skill: don't just list. Explain how. Trams carry many people on less energy per person than cars, so emissions fall.", mood="teach", shot="close",
-  board="Don't list. Explain HOW it helps.")
-L("teacher", "And weigh up trade offs. Masdar City in the U A E planned zero carbon, then built only a small part. Class design: thirty four. You win!", mood="happy", shot="close")
-sfx("ding")
-poof("atlas", 980)
-L("teacher", "Also, who brought a globe to the judging?", mood="worried", shot="close")
-L("priya", "He followed me.", mood="deadpan", shot="close", gap=0.4)
+confess("mum", "MUM · Deal Hunter · Has Never Paid Full Price")
+L("mum", "Toilet water you can drink. The ultimate second hand bargain.", mood="smug", gap=0.5)
+
+# ---------------- ACT 3: LAS VEGAS ----------------
+card("MEANWHILE, IN THE DESERT", "Dad is scouting land for Vikram Vegas", 2.4)
+scene("desert", [("dad", 300), ("tara", 620), ("globo", 960)], "LAS VEGAS · Mojave Desert, Nevada, USA · Flown In By Globo Airways")
+L("dad", "Las Vegas! Fountains and pools, in a desert. My inspiration.", mood="excited", shot="close", prop="sunglasses")
+L("globo", "About a hundred millimetres of rain a year, summers over forty degrees, and over two million people.", mood="teach", shot="close",
+  boardClear=True, board="Mojave Desert: ~100 mm rain/yr, 40 °C+")
+L("tara", "So where does the water come from?", mood="thinking", shot="close", board="Fast growth: now 2 million+ people")
+L("globo", "About ninety percent from Lake Mead, behind the Hoover Dam, on the Colorado River. Which is in a record drought.", mood="teach", shot="close",
+  board="~90% of water from LAKE MEAD")
+L("tara", "In July twenty twenty two, Lake Mead was only about a quarter full.", mood="worried", shot="close",
+  boardClear=True, board="Drought: record low, July 2022")
+L("dad", "Then my plan is simple. More lawns. Green is eco.", mood="determined", shot="close")
+L("globo", "They pay people to rip lawns out and plant desert plants instead.", mood="eyeroll", shot="close",
+  boardClear=True, board="Rebates to rip out lawns", diagram=D_LOOP)
+L("tara", "Because indoor water is treated and returned to Lake Mead. Lawn water just evaporates.", mood="excited", shot="close",
+  board="Indoor water returned · outdoor LOST")
+L("dad", "So, is Las Vegas sustainable?", mood="worried", shot="close")
+L("globo", "Better than before, but still at serious risk. One shrinking river, and everyone drives.", mood="teach", shot="close",
+  board="Better, but still at serious risk")
+sfx("trombone")
+
+confess("dad", "VIKRAM RAO · Dad · Self-Described Urban Visionary")
+L("dad", "Vikram Vegas, version two. No lawns. Just one fountain. That you're not allowed to turn on.", mood="smug", gap=0.6)
+
+# ---------------- ACT 4: DESIGNING AN ECO-CITY ----------------
+card("FRIDAY", "The Inter-Class Eco-City Competition", 2.4)
+scene("classroom", [("tara", 240), ("teacher", 500), ("dad", 780)])
+L("teacher", "Each design scores zero to three on eight criteria, from transport and energy to housing and community.", mood="happy", shot="close",
+  boardClear=True, board="8 criteria × 0–3 → total /24", diagram=D_RUBRIC)
+L("dad", "Vikram Vegas has solar panels and a car park under every block.", mood="smug", shot="close")
+L("tara", "Dad, your city still makes everyone drive. Features must work together.", mood="deadpan", shot="close")
+poof("globo", 1040)
+L("globo", "Real examples. Curitiba, in Brazil, built one of the first bus rapid transit systems. And people swap recycling for fruit and vegetables.", mood="teach", shot="close",
+  boardClear=True, board="CURITIBA: bus rapid transit · Green Exchange")
+L("dad", "Free vegetables? Your mother would move there tomorrow.", mood="excited", shot="close")
+L("globo", "In Copenhagen, about half of trips to work or study are by bike. Vauban, in Freiburg, sits on old army barracks, a brownfield site.", mood="teach", shot="close",
+  board="COPENHAGEN: bikes · VAUBAN: brownfield")
+L("tara", "And Masdar City was scaled back after the two thousand eight crash. Fixing old cities often helps more.", mood="thinking", shot="close",
+  board="MASDAR: scaled back after 2008")
+L("teacher", "Results. Tara's team, eighteen out of twenty four.", mood="happy", shot="close",
+  boardClear=True, board="Tara's team: 18 ÷ 24 × 100 = 75%")
+L("tara", "Seventy five percent. Next, we fix our weakest one, waste.", mood="happy", shot="close")
+L("teacher", "And Vikram Vegas, four out of twenty four.", mood="neutral", shot="close", board="Vikram Vegas: 4/24 ≈ 17%")
+L("dad", "Four points! A personal best.", mood="excited", shot="close", gap=0.4)
 
 # ---------------- RECAP ----------------
-confess("atlas", "ATLAS · Recap Globe · Varnished, Sneezed On")
-L("atlas", "Recap. First. Brundtland. Meet today's needs without wrecking the future's.", mood="teach",
-  boardClear=True, board="1. Brundtland (1987): now AND future")
-L("atlas", "Second. Social, economic, environmental. All three pillars must overlap.", mood="teach",
-  board="2. Social + economic + environmental")
-L("atlas", "Third. Curitiba, cheap and clever. Vauban, car free on a brownfield site.", mood="teach",
-  board="3. Curitiba BRT · Vauban car-free")
-L("atlas", "Fourth. Singapore. C O E for owning, E R P for using, and New Water.", mood="teach",
-  board="4. SG: COE, ERP, NEWater, Barrage")
-L("atlas", "And finally. Footprints measure impact. Judge with weighted criteria. Explain how.", mood="smug",
-  board="5. Footprints · weighted matrix · HOW", gap=0.5)
+confess("globo", "GLOBO · Recap Globe · Spinning Slowly For Dad, One Last Time")
+L("globo", "Recap. One. Sustainable means all three pillars, now and for the future.", mood="teach", boardClear=True, board="1. Brundtland + 3 pillars, all at once")
+L("globo", "Two. Humanity's footprint is roughly one point seven Earths.", mood="teach", board="2. Footprint: humanity ≈ 1.7 Earths")
+L("globo", "Three. Singapore's Four National Taps, road pricing and H D B towns.", mood="teach", board="3. 4 Taps · ERP + COE · HDB · nature")
+L("globo", "Four. Las Vegas drinks from one shrinking lake. Water on lawns is lost.", mood="teach", board="4. Las Vegas: Lake Mead · rip out lawns")
+L("globo", "Five. A good eco city links its features. Use real examples.", mood="smug", board="5. Eco-city: 8 criteria · link features", gap=0.5)
 
-# ---------------- TAG: THE FINALE PICNIC ----------------
-scene("park", [("mum", 220), ("dad", 440), ("nani", 660), ("priya", 880)])
-L("mum", "Winners' picnic. Checklist. Reusable cups, sandwiches, one globe.", mood="happy", shot="wide", prop="book")
-L("atlas", "I am in the cooler bag. Very sustainable. Very cold.", mood="annoyed", offstage=True)
-L("dad", "My entry for next year. No cars. Just the fountain, on New Water, with trees all around.", mood="excited", shot="close")
-L("priya", "Dad. That's a park. We are sitting in it.", mood="deadpan", shot="close")
-L("dad", "Then I've already won.", mood="smug", shot="close", gap=0.3)
-sfx("trombone")
-L("nani", "Somebody planned all this for you. Now it's your turn to plan for the next ones.", mood="happy", shot="close")
-L("dad", "Forty airports. And the best place I've ever been is right here.", mood="happy", shot="wide")
-L("uncle", "Delivery! Chicken rice for the winners. Reusable boxes, ah.", mood="happy", offstage=True)
-L("teacher", "And full marks for the picnic. Nobody tell the rubric.", mood="happy", offstage=True)
-L("priya", "Group photo. Atlas too. Everyone say three pillars.", mood="happy", shot="wide")
-sfx("ding", gap=0.8)
+# ---------------- BUTTON ----------------
+card("THAT EVENING", "Back home. All four taps accounted for.", 2.2)
+scene("living", [("tara", 260), ("mum", 600), ("dad", 940)])
+L("mum", "We used twelve percent less water. We get the rebate!", mood="excited", shot="close", prop="phone")
+L("dad", "That was me. I turned off my fountain.", mood="smug", shot="close")
+L("tara", "Dad, the fountain was never on. It's a drawing.", mood="deadpan", shot="close")
+L("dad", "Exactly. Zero water, maximum vision.", mood="smug", shot="close")
+sfx("ding")
+L("globo", "And that's the season. Back in the drawer. And somebody, please, clear out the chapati crumbs.", mood="bored", shot="wide", offstage=True, gap=0.8)
 
 # ---------------- PAUSE CHALLENGE ----------------
-card("PAUSE CHALLENGE", "Atlas gives you 5 seconds. From a cooler bag.", 3.0)
-challenge(1, "In Singapore, what is the difference between ERP and COE?", "ERP: using · COE: owning",
-  "ERP (1998) charges for busy roads; COE (1990) caps cars",
-  "Question one. In Singapore, what is the difference between E R P and C O E?",
-  "E R P charges you for using busy roads. C O E is a quota on owning a car.")
-challenge(2, "Curitiba's green space rose from 0.5 m² to 50 m² per person. Calculate the % change.", "+9,900%",
-  "(50 − 0.5) ÷ 0.5 × 100 = 9,900%",
-  "Question two. Curitiba's green space rose from zero point five to fifty square metres per person. Calculate the percentage change.",
-  "Up nine thousand nine hundred percent. Divide the change by the old value, then times one hundred.")
-challenge(3, "Is NEWater the same as desalination? Explain.", "No: recycled wastewater",
-  "Desalination treats seawater; NEWater treats used water",
-  "Question three. Is New Water the same as desalination?",
-  "No. Desalination takes salt out of seawater. New Water is recycled used water.")
+card("PAUSE CHALLENGE", "Globo gives you 5 seconds. Then he sulks all holiday.", 3.0)
+challenge(1, "Which TWO National Taps don't depend on rain?", "NEWATER+DESAL", "both make water without rain → drought-proof",
+  "Question one. Which two of the Four National Taps do not depend on rain?",
+  "New water and desalination. They keep running in a drought.")
+challenge(2, "Why does Las Vegas pay people to rip out lawns?", "OUTDOOR = LOST", "indoor water → treated → back to Lake Mead",
+  "Question two. Why does Las Vegas pay people to rip out their lawns?",
+  "Lawn water evaporates and is lost. Indoor water is cleaned and returned to Lake Mead.")
+challenge(3, "An eco-city design scores 18 out of 24. What percentage is that?", "75%", "18 ÷ 24 = 0.75 → × 100 = 75%",
+  "Question three. An eco city design scores eighteen out of twenty four. What percentage is that?",
+  "Seventy five percent. Eighteen divided by twenty four is zero point seven five.")
 end_card()

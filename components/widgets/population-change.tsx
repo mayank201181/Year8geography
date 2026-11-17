@@ -1,295 +1,404 @@
 "use client";
+// Interactive explorables for "How and Why Do Populations Change?"
+import { useState } from "react";
+import { WidgetFrame, Slider, Segmented, Readout, type WidgetDef } from "./kit";
 
-import { useMemo, useState } from "react";
-import { Choice, Frame, Slider, Stat } from "./kit";
+// ---------------------------------------------------------------------------
+// 1. Population change balance
+// ---------------------------------------------------------------------------
 
-/* ------------------------------------------------------------------ */
-/* 1. Population Change Calculator                                     */
-/* ------------------------------------------------------------------ */
+type PresetId = "custom" | "youthful" | "ageing" | "immigration" | "emigration";
 
-type PresetId = "singapore" | "japan" | "nigeria" | "village" | "custom";
-
-interface Rates { births: number; deaths: number; immigrants: number; emigrants: number }
-
-const PRESETS: Record<Exclude<PresetId, "custom">, Rates & { note: string }> = {
-  singapore: { births: 7, deaths: 5, immigrants: 26, emigrants: 8, note: "Singapore-like (about 2024): few babies, but many people arrive to work and study." },
-  japan: { births: 6, deaths: 13, immigrants: 3, emigrants: 1, note: "Japan-like (about 2023): deaths are roughly double births in an ageing society." },
-  nigeria: { births: 36, deaths: 12, immigrants: 1, emigrants: 2, note: "Nigeria-like: a young population with many births, so natural increase is high." },
-  village: { births: 6, deaths: 14, immigrants: 5, emigrants: 25, note: "A rural village losing young people to the city (made-up but typical numbers)." },
+const PRESETS: Record<Exclude<PresetId, "custom">, { label: string; br: number; dr: number; im: number; em: number; note: string }> = {
+  youthful: { label: "Youthful", br: 44, dr: 8, im: 1, em: 2, note: "Roughly like Niger: very high birth rate, low death rate, little migration." },
+  ageing: { label: "Ageing", br: 6, dr: 13, im: 3, em: 1, note: "Roughly like Japan: very low birth rate, rising death rate from an old population, a little immigration." },
+  immigration: { label: "Low births + immigration", br: 7, dr: 5, im: 18, em: 8, note: "A Singapore-style pattern: fertility far below replacement, with immigration making up the difference (illustrative numbers — Singapore's migration changes a lot from year to year)." },
+  emigration: { label: "Emigration", br: 9, dr: 14, im: 3, em: 8, note: "A pattern seen in some Eastern European countries: more deaths than births AND more people leaving than arriving." },
 };
 
-const fmt = (n: number) => (n > 0 ? `+${n}` : `${n}`);
+const START = 1_000_000;
 
-export function PopulationChangeCalculator() {
-  const [preset, setPreset] = useState<PresetId>("japan");
-  const [r, setR] = useState<Rates>(PRESETS.japan);
-  const [reveal, setReveal] = useState(false);
+function fmt(n: number): string {
+  const s = Math.round(n).toLocaleString("en-GB");
+  return s.startsWith("-") ? "−" + s.slice(1) : s;
+}
 
-  const pick = (id: PresetId) => {
-    setPreset(id);
-    if (id !== "custom") setR(PRESETS[id]);
+function signed(n: number, dp = 0): string {
+  const v = dp ? n.toFixed(dp) : String(Math.round(n));
+  if (Number(v) === 0) return dp ? (0).toFixed(dp) : "0";
+  return n > 0 ? `+${v}` : `−${v.replace("-", "")}`;
+}
+
+function BalanceWidget() {
+  const [br, setBr] = useState(20);
+  const [dr, setDr] = useState(8);
+  const [im, setIm] = useState(5);
+  const [em, setEm] = useState(5);
+  const [preset, setPreset] = useState<PresetId>("custom");
+
+  const apply = (p: PresetId) => {
+    setPreset(p);
+    if (p === "custom") return;
+    const v = PRESETS[p];
+    setBr(v.br);
+    setDr(v.dr);
+    setIm(v.im);
+    setEm(v.em);
   };
-  const set = (k: keyof Rates) => (v: number) => { setPreset("custom"); setR((o) => ({ ...o, [k]: v })); };
+  const edit = (set: (v: number) => void) => (v: number) => {
+    set(v);
+    setPreset("custom");
+  };
 
-  const natural = r.births - r.deaths;
-  const netMig = r.immigrants - r.emigrants;
-  const total = natural + netMig;
-  const pct = total / 10; // per 1,000 -> %
-  const after10 = Math.round(10000 * Math.pow(1 + total / 1000, 10));
+  const nat = br - dr;
+  const net = im - em;
+  const total = nat + net;
+  const pct = total / 10;
+  const gains = br + im;
+  const losses = dr + em;
+  const after = (years: number) => START * Math.pow(1 + total / 1000, years);
+  const p25 = after(25);
+  const p50 = after(50);
 
-  // Waterfall bars: births, deaths, immigrants, emigrants, total (per 1,000)
-  const bars = useMemo(() => {
-    const steps = [
-      { label: "Births", v: r.births, color: "#10b981" },
-      { label: "Deaths", v: -r.deaths, color: "#f43f5e" },
-      { label: "Immig.", v: r.immigrants, color: "#0ea5e9" },
-      { label: "Emig.", v: -r.emigrants, color: "#f59e0b" },
-    ];
-    let run = 0;
-    const out = steps.map((s) => {
-      const from = run;
-      run += s.v;
-      return { ...s, from, to: run };
-    });
-    out.push({ label: "Total", v: run, color: run >= 0 ? "#4f46e5" : "#be123c", from: 0, to: run });
-    return out;
-  }, [r]);
+  // Driver: which component is bigger in size?
+  const driver = Math.abs(nat) === Math.abs(net) ? "both equally" : Math.abs(nat) > Math.abs(net) ? "natural change" : "net migration";
 
-  const lo = Math.min(0, ...bars.map((b) => Math.min(b.from, b.to)));
-  const hi = Math.max(0, ...bars.map((b) => Math.max(b.from, b.to)));
-  const span = Math.max(10, hi - lo);
-  const top = 20, h = 170;
-  const y = (v: number) => top + ((hi - v) / span) * h;
+  // Seesaw geometry. SVG rotate(θ) is clockwise; gains on the LEFT, so more gains → negative θ.
+  const cx = 180, cy = 190, L = 130, u = 1.5;
+  const theta = -Math.max(-14, Math.min(14, (gains - losses) * 0.5));
+  const rad = (theta * Math.PI) / 180;
+  const lx = cx - L * Math.cos(rad), ly = cy - L * Math.sin(rad);
+  const rx = cx + L * Math.cos(rad), ry = cy + L * Math.sin(rad);
+  const bw = 52;
 
-  let caption: string;
-  if (natural < 0 && netMig > 0 && total >= 0) caption = "Notice: more people die than are born (natural decrease), but immigration more than makes up for it, so the population still grows.";
-  else if (natural < 0 && netMig > 0) caption = "Notice: there is a natural decrease, and immigration slows the fall but cannot stop it — the population still shrinks.";
-  else if (natural < 0 && netMig <= 0) caption = "Notice: natural decrease AND net out-migration push the same way. This is how villages and some regions empty out — and those who leave are usually young adults, so even fewer babies are born later.";
-  else if (natural > 0 && netMig < 0) caption = "Notice: lots of babies, but people are leaving. Growth comes from natural increase; emigration only trims it.";
-  else if (Math.abs(netMig) > Math.abs(natural)) caption = "Notice: migration is the bigger driver of change here — natural change is small compared with people moving in and out.";
-  else caption = "Notice: natural increase (births minus deaths) is the main driver of growth here.";
+  // Projection chart (0–50 years).
+  const W = 360, H = 150, pl = 46, pr = 12, pt = 12, pb = 26;
+  const pts = Array.from({ length: 51 }, (_, y) => after(y));
+  const maxP = Math.max(START * 1.2, ...pts);
+  const minP = Math.min(START * 0.8, ...pts);
+  const X = (y: number) => pl + (y / 50) * (W - pl - pr);
+  const Y = (p: number) => pt + (1 - (p - minP) / (maxP - minP)) * (H - pt - pb);
+  const path = pts.map((p, y) => `${y === 0 ? "M" : "L"}${X(y).toFixed(1)},${Y(p).toFixed(1)}`).join(" ");
+  const ticks = [minP, START, maxP];
+
+  const presetNote = preset !== "custom" ? PRESETS[preset].note : null;
 
   return (
-    <Frame
-      title="Population Change Calculator"
-      caption={<p>{caption} <span className="text-slate-500">(Rates are per 1,000 people per year; simplified model with rounded figures.)</span></p>}
+    <WidgetFrame
+      title="Population change balance"
+      tryThis={[
+        "Make the population **shrink** even though births are higher than deaths. What did you have to change?",
+        "Pick **Ageing**. Which component is pulling the population down — and how big would immigration need to be to stop the fall?",
+        "Pick **Youthful**, then set immigration and emigration to 0. Does migration matter much here? Why not?",
+        "Find a setting where the population stays almost exactly the same, but with lots of people arriving AND leaving.",
+      ]}
+      caption={
+        <>
+          <p>
+            <b>Population change = (births − deaths) + (immigrants − emigrants).</b> Here, natural change is{" "}
+            <b>{signed(nat)}</b> per 1,000 and net migration is <b>{signed(net)}</b> per 1,000, so the population changes by{" "}
+            <b>{signed(total)}</b> per 1,000 people a year ({signed(pct, 1)}%).{" "}
+            {total > 0 ? "The gains side is heavier, so the population grows." : total < 0 ? "The losses side is heavier, so the population shrinks." : "Gains and losses balance exactly, so the population stays the same size."}
+          </p>
+          <p className="mt-2">
+            The bigger driver right now is <b>{driver}</b>.
+            {nat < 0 && net > 0 && total >= 0 ? " Immigration is fully making up for the natural decrease — just what Singapore relies on." : ""}
+            {nat < 0 && net <= 0 ? " Both components are negative — the population is being squeezed from both sides." : ""}
+            {nat > 20 ? " Very high natural increase like this is typical of youthful countries in Stage 2–3 of the DTM." : ""}
+          </p>
+          {presetNote ? <p className="mt-2 text-ink-2">{presetNote}</p> : null}
+          <p className="mt-2 text-ink-2">Simplified model: the projection keeps every rate fixed for 50 years. Real rates change over time (e.g. as countries develop, birth rates fall).</p>
+        </>
+      }
     >
-      <Choice<PresetId>
-        label="Choose a place (or drag the sliders)"
-        value={preset}
-        onChange={pick}
-        options={[
-          { id: "singapore", label: "Singapore-like" },
-          { id: "japan", label: "Japan-like" },
-          { id: "nigeria", label: "Nigeria-like" },
-          { id: "village", label: "Rural village" },
-          { id: "custom", label: "Custom" },
-        ]}
-      />
-      {preset !== "custom" ? <p className="mt-2 text-xs text-slate-500">{PRESETS[preset].note}</p> : null}
+      <div className="space-y-4">
+        <Segmented<PresetId>
+          label="Example patterns"
+          value={preset}
+          onChange={apply}
+          options={[
+            { value: "custom", label: "Custom" },
+            ...(Object.keys(PRESETS) as Exclude<PresetId, "custom">[]).map((k) => ({ value: k, label: PRESETS[k].label })),
+          ]}
+        />
 
-      <div className="mt-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">
-        <p className="font-semibold">Predict first: Japan has more immigrants than emigrants. Does its population still shrink?</p>
-        <button type="button" onClick={() => setReveal((v) => !v)} className="mt-1 text-xs font-bold text-amber-700 underline">
-          {reveal ? "Hide" : "Reveal"}
-        </button>
-        {reveal ? <p className="mt-1 text-xs">Yes. Net migration is only about +2 per 1,000, but natural decrease is about −7, so the total is about −5 per 1,000 (around −0.5% a year).</p> : null}
-      </div>
+        <svg viewBox="0 0 360 260" className="h-auto w-full" role="img" aria-label={`Balance: gains ${gains} per 1,000 (births ${br}, immigrants ${im}) against losses ${losses} per 1,000 (deaths ${dr}, emigrants ${em}). The ${total > 0 ? "gains side is heavier: the population grows" : total < 0 ? "losses side is heavier: the population shrinks" : "two sides balance: no change"}.`}>
+          {/* fulcrum */}
+          <polygon points={`${cx},${cy} ${cx - 22},${cy + 50} ${cx + 22},${cy + 50}`} className="fill-surface-2 stroke-ink-2" strokeWidth={1.5} />
+          <line x1={20} x2={340} y1={cy + 50} y2={cy + 50} className="stroke-line" strokeWidth={2} />
+          {/* beam */}
+          <line x1={lx} y1={ly} x2={rx} y2={ry} className="stroke-ink" strokeWidth={5} strokeLinecap="round" />
+          <circle cx={cx} cy={cy} r={5} className="fill-ink" />
+          {/* left stack: gains */}
+          <rect x={lx - bw / 2} y={ly - br * u} width={bw} height={br * u} fill="#22c55e" stroke="#14532d" strokeWidth={1} />
+          <rect x={lx - bw / 2} y={ly - (br + im) * u} width={bw} height={im * u} fill="#38bdf8" stroke="#075985" strokeWidth={1} />
+          {/* right stack: losses */}
+          <rect x={rx - bw / 2} y={ry - dr * u} width={bw} height={dr * u} fill="#f87171" stroke="#7f1d1d" strokeWidth={1} />
+          <rect x={rx - bw / 2} y={ry - (dr + em) * u} width={bw} height={em * u} fill="#fbbf24" stroke="#78350f" strokeWidth={1} />
+          <text x={lx} y={ly + 18} fontSize={12} textAnchor="middle" className="fill-ink" fontWeight={700}>GAINS {gains}</text>
+          <text x={rx} y={ry + 18} fontSize={12} textAnchor="middle" className="fill-ink" fontWeight={700}>LOSSES {losses}</text>
+          {/* legend */}
+          <g fontSize={11} className="fill-ink-2">
+            <rect x={8} y={8} width={10} height={10} fill="#22c55e" /><text x={22} y={17}>births</text>
+            <rect x={70} y={8} width={10} height={10} fill="#38bdf8" /><text x={84} y={17}>immigrants</text>
+            <rect x={170} y={8} width={10} height={10} fill="#f87171" /><text x={184} y={17}>deaths</text>
+            <rect x={232} y={8} width={10} height={10} fill="#fbbf24" /><text x={246} y={17}>emigrants</text>
+            <text x={8} y={34}>(all per 1,000 people per year)</text>
+          </g>
+        </svg>
 
-      <div className="mt-3 grid gap-3 sm:grid-cols-2">
-        <Slider label="Births per 1,000" min={0} max={50} value={r.births} onChange={set("births")} color="#059669" />
-        <Slider label="Deaths per 1,000" min={0} max={30} value={r.deaths} onChange={set("deaths")} color="#e11d48" />
-        <Slider label="Immigrants per 1,000" min={0} max={40} value={r.immigrants} onChange={set("immigrants")} color="#0284c7" />
-        <Slider label="Emigrants per 1,000" min={0} max={40} value={r.emigrants} onChange={set("emigrants")} color="#d97706" />
-      </div>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Slider label="Birth rate (per 1,000)" value={br} min={0} max={50} onChange={edit(setBr)} />
+          <Slider label="Death rate (per 1,000)" value={dr} min={0} max={30} onChange={edit(setDr)} />
+          <Slider label="Immigration (per 1,000)" value={im} min={0} max={30} onChange={edit(setIm)} />
+          <Slider label="Emigration (per 1,000)" value={em} min={0} max={30} onChange={edit(setEm)} />
+        </div>
 
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <Stat label="Natural change" value={fmt(natural)} tone={natural >= 0 ? "emerald" : "rose"} />
-        <Stat label="Net migration" value={fmt(netMig)} tone={netMig >= 0 ? "sky" : "amber"} />
-        <Stat label="Total change" value={fmt(total)} tone={total >= 0 ? "indigo" : "rose"} />
-        <Stat label="Growth rate" value={`${pct > 0 ? "+" : ""}${pct.toFixed(1)}%`} tone={total >= 0 ? "indigo" : "rose"} />
-      </div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <Readout label="Natural change /1,000" value={signed(nat)} tone={nat >= 0 ? "good" : "bad"} />
+          <Readout label="Net migration /1,000" value={signed(net)} tone={net >= 0 ? "good" : "bad"} />
+          <Readout label="Change per year" value={`${signed(pct, 1)}%`} tone={total >= 0 ? "good" : "bad"} />
+          <Readout label="1 million → in 25 yrs" value={fmt(p25)} tone="ink" />
+        </div>
 
-      <svg viewBox="0 0 340 230" className="mt-3 w-full" role="img" aria-label={`Waterfall chart: births ${r.births}, deaths ${r.deaths}, immigrants ${r.immigrants}, emigrants ${r.emigrants}, total change ${total} per 1,000 people`}>
-        <line x1="30" x2="330" y1={y(0)} y2={y(0)} stroke="#64748b" strokeWidth="1.5" />
-        <text x="26" y={y(0) + 4} fontSize="11" textAnchor="end" fill="#475569">0</text>
-        {bars.map((b, i) => {
-          const x = 40 + i * 58;
-          const y1 = y(Math.max(b.from, b.to));
-          const hh = Math.max(1.5, Math.abs(y(b.from) - y(b.to)));
-          const next = bars[i + 1];
-          return (
-            <g key={b.label}>
-              <rect x={x} y={y1} width="40" height={hh} rx="3" fill={b.color} opacity={i === 4 ? 1 : 0.85} />
-              {next && i < 3 ? <line x1={x + 40} x2={x + 58} y1={y(b.to)} y2={y(b.to)} stroke="#94a3b8" strokeDasharray="3 2" /> : null}
-              <text x={x + 20} y={y1 - 4} fontSize="11" textAnchor="middle" fontWeight="700" fill="#334155">{fmt(b.v)}</text>
-              <text x={x + 20} y="226" fontSize="11" textAnchor="middle" fill="#334155">{b.label}</text>
+        <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`Projection: a population of 1,000,000 becomes about ${fmt(p25)} after 25 years and ${fmt(p50)} after 50 years if rates stay the same.`}>
+          {ticks.map((t) => (
+            <g key={t}>
+              <line x1={pl} x2={W - pr} y1={Y(t)} y2={Y(t)} className="stroke-line" strokeWidth={1} />
+              <text x={pl - 4} y={Y(t) + 4} fontSize={10} textAnchor="end" className="fill-ink-2">{(t / 1e6).toFixed(2)}m</text>
             </g>
-          );
-        })}
-      </svg>
-
-      <p className="mt-1 text-sm text-slate-700">
-        A town of <b>10,000</b> people with these rates would have about <b>{after10.toLocaleString("en-GB")}</b> people after 10 years.
-      </p>
-      <p className="mt-1 text-xs text-slate-500">Total change = (births − deaths) + (immigrants − emigrants) = natural change + net migration.</p>
-    </Frame>
+          ))}
+          {[0, 10, 20, 30, 40, 50].map((y) => (
+            <text key={y} x={X(y)} y={H - 8} fontSize={10} textAnchor="middle" className="fill-ink-2">{y}</text>
+          ))}
+          <text x={W - pr} y={H - 8} fontSize={10} textAnchor="end" className="fill-ink-2">years</text>
+          <path d={path} fill="none" className={total >= 0 ? "stroke-good" : "stroke-bad"} strokeWidth={2.5} />
+          <circle cx={X(50)} cy={Y(p50)} r={3.5} className={total >= 0 ? "fill-good" : "fill-bad"} />
+        </svg>
+      </div>
+    </WidgetFrame>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/* 2. Push–Pull Decision Balance (Lee's model)                         */
-/* ------------------------------------------------------------------ */
+// ---------------------------------------------------------------------------
+// 2. Push–pull factor sorter (simplified Lee model)
+// ---------------------------------------------------------------------------
 
 type Kind = "push" | "pull" | "obstacle";
-interface Factor { id: string; kind: Kind; text: string; weight: number; danger?: boolean }
-interface Persona { id: string; name: string; journey: string; forced: boolean; factors: Factor[] }
 
-const PERSONAS: Persona[] = [
+interface Card {
+  id: string;
+  text: string;
+  kind: Kind;
+  weight: 1 | 2 | 3;
+  why: string;
+}
+
+interface Scenario {
+  id: string;
+  label: string;
+  story: string;
+  type: string;
+  cards: Card[];
+}
+
+const SCENARIOS: Scenario[] = [
   {
-    id: "farmer", name: "Farmer, rural Nigeria", journey: "Village in northern Nigeria → Lagos (internal, rural-to-urban)", forced: false,
-    factors: [
-      { id: "f1", kind: "push", text: "Drought and failing harvests", weight: 3 },
-      { id: "f2", kind: "push", text: "Low, unreliable farm income", weight: 2 },
-      { id: "f3", kind: "push", text: "Few secondary schools or clinics", weight: 1 },
-      { id: "f4", kind: "pull", text: "Jobs in factories, markets and building sites", weight: 3 },
-      { id: "f5", kind: "pull", text: "Cousin already lives in Lagos (chain migration)", weight: 2 },
-      { id: "f6", kind: "pull", text: "Better schools and hospitals", weight: 1 },
-      { id: "f7", kind: "obstacle", text: "Cost of the 1,000 km journey and city rent", weight: 2 },
-      { id: "f8", kind: "obstacle", text: "Leaving family land and elderly parents", weight: 2 },
-      { id: "f9", kind: "obstacle", text: "Fear of slum housing and no job at first", weight: 1 },
+    id: "bihar",
+    label: "Bihar → Mumbai",
+    story: "Priya, 19, lives in a farming village in Bihar, India. She is thinking about moving to Mumbai.",
+    type: "Voluntary, internal (rural–urban) migration.",
+    cards: [
+      { id: "b1", text: "Farm work in the village only pays in harvest season", kind: "push", weight: 3, why: "A problem at home (origin) — it pushes her away." },
+      { id: "b2", text: "Factory and service jobs in Mumbai pay all year round", kind: "pull", weight: 3, why: "An attraction at the destination." },
+      { id: "b3", text: "Her cousin already lives in Mumbai and can help her settle", kind: "pull", weight: 2, why: "Family networks at the destination are a strong pull." },
+      { id: "b4", text: "The train journey costs more than a month's wages", kind: "obstacle", weight: 1, why: "A cost of moving that sits between origin and destination." },
+      { id: "b5", text: "There is no college near her village", kind: "push", weight: 2, why: "Lack of services at home pushes young people out." },
+      { id: "b6", text: "Housing in Mumbai is very expensive and she may have to live in a crowded settlement", kind: "obstacle", weight: 2, why: "A difficulty that makes the move harder, not a reason to go." },
+      { id: "b7", text: "She does not speak Marathi, the local language in Mumbai", kind: "obstacle", weight: 1, why: "A language barrier is an intervening obstacle." },
     ],
   },
   {
-    id: "nurse", name: "Nurse, the Philippines", journey: "Manila → hospital job abroad, e.g. UK or Singapore (international)", forced: false,
-    factors: [
-      { id: "n1", kind: "push", text: "Low pay in local hospitals", weight: 3 },
-      { id: "n2", kind: "push", text: "Long shifts, short-staffed wards", weight: 2 },
-      { id: "n3", kind: "push", text: "Few chances of promotion", weight: 1 },
-      { id: "n4", kind: "pull", text: "Salary several times higher", weight: 3 },
-      { id: "n5", kind: "pull", text: "Can send remittances home to family", weight: 2 },
-      { id: "n6", kind: "pull", text: "Overseas hospitals actively recruiting", weight: 2 },
-      { id: "n7", kind: "obstacle", text: "Licensing exams and English test", weight: 2 },
-      { id: "n8", kind: "obstacle", text: "Visa rules and agency fees", weight: 2 },
-      { id: "n9", kind: "obstacle", text: "Leaving young children behind", weight: 3 },
+    id: "manila",
+    label: "Philippines → Singapore",
+    story: "Marco is a trained nurse in the Philippines. A hospital in Singapore has advertised jobs.",
+    type: "Voluntary, international (economic) migration.",
+    cards: [
+      { id: "m1", text: "Nurses in Singapore earn several times more than at home", kind: "pull", weight: 3, why: "Higher wages at the destination pull workers abroad." },
+      { id: "m2", text: "Nursing jobs at home are scarce and contracts are short", kind: "push", weight: 2, why: "Lack of secure work at home pushes him out." },
+      { id: "m3", text: "He needs a work pass and his nursing qualification must be recognised", kind: "obstacle", weight: 2, why: "Visa and registration rules are classic intervening obstacles." },
+      { id: "m4", text: "He could send money home to support his parents", kind: "pull", weight: 2, why: "The chance to send remittances is an attraction of working abroad." },
+      { id: "m5", text: "He would have to leave his family behind", kind: "obstacle", weight: 2, why: "Personal ties at home hold people back — an obstacle to moving." },
+      { id: "m6", text: "Singapore is safe and has modern hospitals", kind: "pull", weight: 1, why: "Safety and good working conditions attract migrants." },
+      { id: "m7", text: "Typhoons often damage his home town", kind: "push", weight: 1, why: "Hazards at home push people away." },
     ],
   },
   {
-    id: "syria", name: "Family, Syria", journey: "Aleppo → refugee in Türkiye or Germany (international, forced)", forced: true,
-    factors: [
-      { id: "s1", kind: "push", text: "Bombing and fighting in the city", weight: 3, danger: true },
-      { id: "s2", kind: "push", text: "Home destroyed", weight: 3, danger: true },
-      { id: "s3", kind: "push", text: "Shortages of food, water, medicine", weight: 2, danger: true },
-      { id: "s4", kind: "pull", text: "Safety and the right to claim asylum", weight: 3 },
-      { id: "s5", kind: "pull", text: "Relatives already in Türkiye", weight: 1 },
-      { id: "s6", kind: "pull", text: "Children can go back to school", weight: 1 },
-      { id: "s7", kind: "obstacle", text: "Closed or guarded borders", weight: 3 },
-      { id: "s8", kind: "obstacle", text: "Dangerous sea crossing, smugglers' fees", weight: 2 },
-      { id: "s9", kind: "obstacle", text: "Lost passports and documents", weight: 1 },
+    id: "sudan",
+    label: "Sudan → Chad",
+    story: "In 2023 fighting reached Amina's town in Darfur, Sudan. The border with Chad is a few days' walk away.",
+    type: "Forced, international migration (she would become a refugee).",
+    cards: [
+      { id: "s1", text: "Armed groups are attacking homes in her town", kind: "push", weight: 3, why: "Conflict is a very strong push factor — it forces people out." },
+      { id: "s2", text: "The market and clinic have been destroyed", kind: "push", weight: 3, why: "Loss of food and healthcare at home pushes people away." },
+      { id: "s3", text: "Refugee camps in Chad offer shelter, water and food aid", kind: "pull", weight: 2, why: "Safety and aid at the destination pull refugees." },
+      { id: "s4", text: "The journey is on foot through dangerous country", kind: "obstacle", weight: 2, why: "A dangerous journey is an obstacle between origin and destination." },
+      { id: "s5", text: "Neighbours from her town have already reached the camps", kind: "pull", weight: 1, why: "Knowing people at the destination makes it more attractive." },
+      { id: "s6", text: "She is caring for her elderly grandmother, who cannot walk far", kind: "obstacle", weight: 2, why: "Family responsibilities make moving harder." },
     ],
   },
 ];
 
-const KIND_STYLE: Record<Kind, { label: string; on: string; color: string }> = {
-  push: { label: "Push (at origin)", on: "bg-rose-100 ring-rose-300 text-rose-900", color: "#e11d48" },
-  pull: { label: "Pull (at destination)", on: "bg-emerald-100 ring-emerald-300 text-emerald-900", color: "#059669" },
-  obstacle: { label: "Intervening obstacles", on: "bg-amber-100 ring-amber-300 text-amber-900", color: "#d97706" },
-};
+const KIND_LABEL: Record<Kind, string> = { push: "Push", pull: "Pull", obstacle: "Obstacle" };
 
-export function PushPullBalance() {
-  const [pid, setPid] = useState("farmer");
-  const persona = PERSONAS.find((p) => p.id === pid) ?? PERSONAS[0];
-  const [off, setOff] = useState<Record<string, boolean>>({});
-  const [ties, setTies] = useState(2);
+function SorterBoard({ sc }: { sc: Scenario }) {
+  const [picks, setPicks] = useState<Record<string, Kind | undefined>>({});
+  const [checked, setChecked] = useState(false);
 
-  const active = persona.factors.filter((f) => !off[f.id]);
-  const sum = (k: Kind) => active.filter((f) => f.kind === k).reduce((a, f) => a + f.weight, 0);
-  const push = sum("push"), pull = sum("pull"), obst = sum("obstacle");
-  const move = push + pull;
-  const stay = obst + ties;
-  const diff = move - stay;
-  const danger = active.some((f) => f.danger);
-  const angle = Math.max(-18, Math.min(18, diff * 2.5)); // positive: right (MOVE) side goes down
-
-  const rad = (angle * Math.PI) / 180;
-  const cx = 170, cy = 70, arm = 110;
-  const lx = cx - arm * Math.cos(rad), ly = cy - arm * Math.sin(rad);
-  const rx = cx + arm * Math.cos(rad), ry = cy + arm * Math.sin(rad);
-
-  const verdict = danger ? "Forced to move" : diff >= 3 ? "Likely to move" : diff <= -3 ? "Likely to stay" : "Torn — could go either way";
-
-  let caption: string;
-  if (persona.forced && danger) caption = "Notice: this is forced migration. The push factors threaten the family's lives, so they flee even though the obstacles are huge — the obstacles change HOW dangerous the journey is, not WHETHER they go. People forced across a border are refugees; those who flee within their own country are internally displaced people (IDPs).";
-  else if (persona.forced) caption = "Notice: with the life-threatening push factors switched off, the family has a real choice again — the move would become voluntary, and the obstacles and ties start to matter much more.";
-  else if (diff >= 3) caption = "Notice: this is voluntary migration — the person chooses to move. Push and pull together outweigh the obstacles and personal ties, so in Lee's model the move goes ahead.";
-  else if (diff <= -3) caption = "Notice: the obstacles and personal ties outweigh the reasons to move, so the person stays. Try switching off an obstacle — e.g. cheaper travel or an easier visa — and watch the scale tip.";
-  else caption = "Notice: the scale is nearly level. Real decisions are often this close; a small change — a relative's job offer, a bad harvest — can tip it.";
-
-  const pan = (x: number, y0: number, label: string, val: number, color: string) => {
-    const blocks = Math.min(val, 12);
-    return (
-      <g>
-        <line x1={x} y1={y0} x2={x - 30} y2={y0 + 50} stroke="#64748b" />
-        <line x1={x} y1={y0} x2={x + 30} y2={y0 + 50} stroke="#64748b" />
-        <path d={`M ${x - 40} ${y0 + 50} h 80 l -10 12 h -60 z`} fill="#cbd5e1" stroke="#64748b" />
-        {Array.from({ length: blocks }, (_, i) => (
-          <rect key={i} x={x - 36 + (i % 6) * 12} y={y0 + 40 - Math.floor(i / 6) * 10} width="11" height="9" rx="1.5" fill={color} />
-        ))}
-        <text x={x} y={y0 + 78} fontSize="12" textAnchor="middle" fontWeight="700" fill="#334155">{label} {val}</text>
-      </g>
-    );
-  };
+  const done = sc.cards.filter((c) => picks[c.id]).length;
+  const correct = sc.cards.filter((c) => picks[c.id] === c.kind).length;
+  // Meter uses the learner's own sorting, so mis-sorting gives a misleading decision.
+  const reasons = sc.cards.reduce((s, c) => (picks[c.id] === "push" || picks[c.id] === "pull" ? s + c.weight : s), 0);
+  const obstacles = sc.cards.reduce((s, c) => (picks[c.id] === "obstacle" ? s + c.weight : s), 0);
+  const balance = reasons - obstacles;
+  const verdict = done === 0 ? "Sort some cards first" : balance >= 4 ? "Likely to move" : balance >= 1 ? "Leaning towards moving" : balance === 0 ? "Finely balanced" : "Likely to stay (for now)";
+  const maxSide = sc.cards.reduce((s, c) => s + c.weight, 0);
+  const W = 320;
+  const mid = W / 2;
+  const scale = (W / 2 - 10) / maxSide;
 
   return (
-    <Frame title="Push–Pull Decision Balance" caption={<p>{caption} <span className="text-slate-500">(Based on Lee&apos;s 1966 migration model: push factors at the origin, pull factors at the destination, intervening obstacles in between, plus personal factors. The weights are a simplified teaching model.)</span></p>}>
-      <Choice
-        label="Choose a migrant"
-        value={pid}
-        onChange={(v) => { setPid(v); setOff({}); }}
-        options={PERSONAS.map((p) => ({ id: p.id, label: p.name }))}
-      />
-      <p className="mt-2 text-xs text-slate-500">{persona.journey}</p>
-      <p className="mt-2 rounded-lg bg-amber-50 p-2 text-sm text-amber-900">Predict first: will this person move? Then switch factors on and off to test your idea.</p>
+    <div className="space-y-3">
+      <p className="text-sm text-ink">{sc.story}</p>
+      <ul className="space-y-2">
+        {sc.cards.map((c) => {
+          const pick = picks[c.id];
+          const ok = checked && pick === c.kind;
+          const bad = checked && pick !== undefined && pick !== c.kind;
+          return (
+            <li key={c.id} className={`rounded-xl border p-3 ${ok ? "border-good bg-good-soft" : bad ? "border-bad bg-bad-soft" : "border-line bg-surface"}`}>
+              <div className="text-sm font-semibold text-ink">{c.text}</div>
+              <div className="mt-2 flex flex-wrap gap-2" role="radiogroup" aria-label={`Sort: ${c.text}`}>
+                {(["push", "pull", "obstacle"] as Kind[]).map((k) => (
+                  <button
+                    key={k}
+                    type="button"
+                    role="radio"
+                    aria-checked={pick === k}
+                    onClick={() => {
+                      setPicks((p) => ({ ...p, [c.id]: k }));
+                      setChecked(false);
+                    }}
+                    className={`min-h-[40px] rounded-lg border px-3 text-sm font-bold transition ${pick === k ? "border-brand bg-brand text-brand-ink" : "border-line bg-surface-2 text-ink-2 hover:text-ink"}`}
+                  >
+                    {KIND_LABEL[k]}
+                  </button>
+                ))}
+              </div>
+              {checked && pick !== undefined ? (
+                <p className={`mt-2 text-xs ${ok ? "text-good" : "text-bad"}`}>
+                  {ok ? "✓ " : `✗ It's a ${KIND_LABEL[c.kind].toLowerCase()} factor. `}
+                  {c.why}
+                </p>
+              ) : null}
+            </li>
+          );
+        })}
+      </ul>
 
-      <svg viewBox="0 0 340 190" className="mt-2 w-full" role="img" aria-label={`Balance scale: stay side ${stay}, move side ${move}. Verdict: ${verdict}`}>
-        <polygon points={`${cx},${cy} ${cx - 18},180 ${cx + 18},180`} fill="#94a3b8" />
-        <line x1={lx} y1={ly} x2={rx} y2={ry} stroke="#334155" strokeWidth="6" strokeLinecap="round" />
-        <circle cx={cx} cy={cy} r="6" fill="#334155" />
-        {pan(lx, ly, "STAY", stay, "#d97706")}
-        {pan(rx, ry, "MOVE", move, "#4f46e5")}
-        <text x={cx} y="18" fontSize="13" textAnchor="middle" fontWeight="800" fill={danger ? "#be123c" : "#3730a3"}>{verdict}</text>
+      <div className="flex flex-wrap items-center gap-2">
+        <button type="button" className="btn btn-primary min-h-[40px]" onClick={() => setChecked(true)} disabled={done === 0}>
+          Check my sorting
+        </button>
+        <button
+          type="button"
+          className="btn btn-secondary min-h-[40px]"
+          onClick={() => {
+            setPicks({});
+            setChecked(false);
+          }}
+        >
+          Reset
+        </button>
+        {checked ? (
+          <span className={`text-sm font-bold ${correct === sc.cards.length ? "text-good" : "text-ink"}`}>
+            {correct} / {sc.cards.length} correct{done < sc.cards.length ? ` (${sc.cards.length - done} not sorted)` : ""}
+          </span>
+        ) : null}
+      </div>
+
+      <div className="grid grid-cols-3 gap-2">
+        <Readout label="Reasons to move" value={reasons} tone="good" />
+        <Readout label="Obstacles" value={obstacles} tone="bad" />
+        <Readout label="Decision" value={<span className="text-base">{verdict}</span>} tone="ink" />
+      </div>
+
+      <svg viewBox={`0 0 ${W} 60`} className="h-auto w-full" role="img" aria-label={`Decision meter: reasons to move score ${reasons}, obstacles score ${obstacles}. ${verdict}.`}>
+        <rect x={mid - obstacles * scale} y={14} width={obstacles * scale} height={20} className="fill-bad" rx={3} />
+        <rect x={mid} y={14} width={reasons * scale} height={20} className="fill-good" rx={3} />
+        <line x1={mid} x2={mid} y1={6} y2={42} className="stroke-ink" strokeWidth={2} />
+        <text x={8} y={54} fontSize={11} className="fill-ink-2">← stay</text>
+        <text x={W - 8} y={54} fontSize={11} textAnchor="end" className="fill-ink-2">move →</text>
       </svg>
 
-      <div className="mt-2 grid grid-cols-3 gap-2">
-        <Stat label="Push" value={push} tone="rose" />
-        <Stat label="Pull" value={pull} tone="emerald" />
-        <Stat label="Obstacles" value={obst} tone="amber" />
-      </div>
-
-      <div className="mt-3 space-y-3">
-        {(["push", "pull", "obstacle"] as Kind[]).map((k) => (
-          <div key={k}>
-            <p className="mb-1 text-xs font-bold uppercase tracking-wide" style={{ color: KIND_STYLE[k].color }}>{KIND_STYLE[k].label}</p>
-            <div className="flex flex-wrap gap-2">
-              {persona.factors.filter((f) => f.kind === k).map((f) => {
-                const on = !off[f.id];
-                return (
-                  <button
-                    key={f.id}
-                    type="button"
-                    aria-pressed={on}
-                    onClick={() => setOff((o) => ({ ...o, [f.id]: on }))}
-                    className={`rounded-lg px-2.5 py-1.5 text-left text-xs font-medium ring-1 transition ${on ? KIND_STYLE[k].on : "bg-white text-slate-400 line-through ring-slate-200"}`}
-                  >
-                    {f.text} <span className="font-bold">×{f.weight}</span>{f.danger ? " ⚠️" : ""}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        ))}
-        <Slider label="Personal ties to home (family, friends, language)" min={0} max={5} value={ties} onChange={setTies} color="#d97706" />
-      </div>
-    </Frame>
+      {checked && correct === sc.cards.length ? (
+        <p className="rounded-xl bg-good-soft p-3 text-sm text-ink">
+          <b>All sorted!</b> {sc.type}
+        </p>
+      ) : null}
+    </div>
   );
 }
+
+function PushPullWidget() {
+  const [sid, setSid] = useState(SCENARIOS[0].id);
+  const sc = SCENARIOS.find((s) => s.id === sid) ?? SCENARIOS[0];
+  return (
+    <WidgetFrame
+      title="Push, pull or obstacle?"
+      tryThis={[
+        "Sort every card, then check. Which cards were hardest to decide — and why?",
+        "Deliberately label an **obstacle** as a pull factor. What happens to the decision meter? Why is mis-sorting dangerous in an exam answer?",
+        "Compare **Sudan → Chad** with **Philippines → Singapore**. Which kind of factor dominates in forced migration?",
+      ]}
+      caption={
+        <>
+          <p>
+            <b>Push factors</b> are problems at the place people leave (origin). <b>Pull factors</b> are attractions of the destination.{" "}
+            <b>Intervening obstacles</b> sit in between — cost, distance, visas, language, family ties — and can stop a move even when the reasons to go are strong.
+          </p>
+          <p className="mt-2">
+            This follows Everett Lee&apos;s push–pull model (1966). The meter adds up the strength of each card <i>as you sorted it</i>: reasons to move on one side, obstacles on the other.
+            In <b>forced</b> migration the push factors are so strong that people move even when the obstacles are huge.
+          </p>
+          <p className="mt-2 text-ink-2">Simplified model: real decisions also depend on personal feelings, information and luck — the weights here are just a guide.</p>
+        </>
+      }
+    >
+      <div className="space-y-4">
+        <Segmented
+          label="Choose a migrant"
+          value={sid}
+          onChange={setSid}
+          options={SCENARIOS.map((s) => ({ value: s.id, label: s.label }))}
+        />
+        <SorterBoard key={sc.id} sc={sc} />
+      </div>
+    </WidgetFrame>
+  );
+}
+
+export const widgets: WidgetDef[] = [
+  {
+    id: "population-change-balance",
+    title: "Population change balance",
+    blurb: "Set births, deaths, immigration and emigration — watch the balance tip and the population grow or shrink over 50 years.",
+    Component: BalanceWidget,
+  },
+  {
+    id: "push-pull-sorter",
+    title: "Push, pull or obstacle?",
+    blurb: "Sort a migrant's reasons into push factors, pull factors and obstacles, then see whether they are likely to move.",
+    Component: PushPullWidget,
+  },
+];

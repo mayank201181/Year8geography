@@ -1,263 +1,433 @@
 "use client";
+import { useState } from "react";
+import { WidgetFrame, Slider, Stepper, Segmented, Readout, type WidgetDef } from "./kit";
 
-import { useMemo, useState } from "react";
-import { Choice, Frame, Slider, Stat } from "./kit";
-
-/* ───────────────────────── 1. Design-a-Survivor ───────────────────────── */
-
+// ---------------------------------------------------------------------------
+// 1. Design-a-creature: pick an environment and features → survival score.
+// ---------------------------------------------------------------------------
 type Env = "desert" | "polar" | "mountain";
-type TraitId =
-  | "thickFur" | "bigEars" | "blubber" | "fatHump" | "waxySkin" | "longRoots"
-  | "whiteCoat" | "compactBody" | "nocturnal" | "huddling" | "burrowing" | "bigLungs";
 
-/** Score per environment: +2 big help, +1 helps, 0 no real effect, −1/−2 hurts. Simplified for teaching. */
-const TRAITS: { id: TraitId; label: string; fx: Record<Env, [number, string]> }[] = [
-  { id: "thickFur", label: "🧶 Thick fur", fx: {
-    desert: [-1, "Traps body heat in the daytime heat (though it does help on freezing desert nights)."],
-    polar: [2, "Traps a layer of warm air next to the skin — the Arctic fox has some of the warmest fur of any mammal."],
-    mountain: [2, "Keeps out the cold and wind chill at altitude — yaks and snow leopards have long, thick coats."] } },
-  { id: "bigEars", label: "👂 Big ears", fx: {
-    desert: [2, "Large, thin ears full of blood vessels radiate heat away — a fennec fox's ears are 10–15 cm long."],
-    polar: [-2, "Big ears lose heat fast and get frostbite — the Arctic fox's ears are short and furry."],
-    mountain: [-1, "Cold winds strip heat from big ears; mountain mammals such as pikas have small, rounded ears."] } },
-  { id: "blubber", label: "🥓 Blubber", fx: {
-    desert: [-2, "A thick fat layer all over would make you overheat — desert animals store fat in one place instead."],
-    polar: [2, "Fat under the skin insulates — polar bears and seals have a layer up to about 10 cm thick."],
-    mountain: [-1, "Heavy blubber slows you down on steep slopes; mountain mammals rely on fur instead."] } },
-  { id: "fatHump", label: "🐫 Fat hump", fx: {
-    desert: [2, "Fat stored in one lump lets the rest of the body lose heat easily, and it is an energy store when food is scarce (a camel's hump is fat, not water)."],
-    polar: [0, "An energy store helps, but a lump of fat on your back doesn't insulate the rest of you — spreading it out as blubber works better."],
-    mountain: [1, "An energy store helps you get through long winters with little food."] } },
-  { id: "waxySkin", label: "🦎 Waxy / scaly skin", fx: {
-    desert: [2, "A waterproof coat cuts water loss — like a cactus's waxy skin or a lizard's scales."],
-    polar: [0, "Not much use here: the problem is cold, not drying out."],
-    mountain: [1, "High-altitude air is very dry and windy, so cutting water loss helps a little."] } },
-  { id: "longRoots", label: "🌱 Long roots", fx: {
-    desert: [2, "Deep roots reach water far underground — mesquite roots have been found about 50 m down."],
-    polar: [-1, "Permafrost (permanently frozen ground) blocks deep roots — tundra plants have shallow roots."],
-    mountain: [0, "Soil is thin and rocky — roots help you grip, but deep ones soon hit solid rock."] } },
-  { id: "whiteCoat", label: "⚪ White / pale coat", fx: {
-    desert: [1, "A pale, sandy coat reflects sunlight and blends in with the sand."],
-    polar: [2, "Camouflage in snow helps you hunt or hide — polar bears and winter Arctic foxes are white."],
-    mountain: [1, "Pale grey or white blends with snow and rock — like the snow leopard or the ptarmigan in winter."] } },
-  { id: "compactBody", label: "🔵 Small, rounded body (short legs, ears, tail)", fx: {
-    desert: [-1, "A compact shape keeps heat IN — the opposite of what you need here."],
-    polar: [2, "Less surface area to lose heat from: short legs, ears and tail keep warmth in."],
-    mountain: [2, "Compact bodies hold heat — think of the short-legged pika or the stocky yak."] } },
-  { id: "nocturnal", label: "🌙 Nocturnal", fx: {
-    desert: [2, "Active at night and resting in shade by day avoids ground temperatures of 60°C+."],
-    polar: [-1, "Nights are even colder, and winter 'night' can last for months — polar animals are active whenever food is around."],
-    mountain: [0, "Little help: mountain nights are colder still, though it avoids strong daytime UV."] } },
-  { id: "huddling", label: "🐧 Huddling", fx: {
-    desert: [-1, "Sharing body heat is the last thing you need in the daytime heat."],
-    polar: [2, "Emperor penguins huddle in thousands through −40°C storms, taking turns on the cold outside."],
-    mountain: [1, "Alpine marmots hibernate together in family groups to share warmth."] } },
-  { id: "burrowing", label: "🕳️ Burrowing", fx: {
-    desert: [2, "A burrow can be over 20°C cooler than the surface — jerboas and fennec foxes sleep underground by day."],
-    polar: [1, "Snow insulates — lemmings and Arctic fox cubs shelter in dens under the snow."],
-    mountain: [1, "Burrows shelter you from wind and snow — marmots and pikas use them."] } },
-  { id: "bigLungs", label: "🫁 Big lungs, oxygen-rich blood", fx: {
-    desert: [0, "No extra benefit at low altitude."],
-    polar: [0, "No extra benefit at sea level."],
-    mountain: [2, "At 5,000 m each breath holds only about half the oxygen it does at sea level — yaks and llamas have big lungs and blood that grabs oxygen well."] } },
+interface Feature {
+  id: string;
+  label: string;
+  /** Effect on survival in each environment (−2 … +2) with the reason. */
+  fx: Record<Env, [number, string]>;
+}
+
+const FEATURES: Feature[] = [
+  {
+    id: "bigEars",
+    label: "Large thin ears",
+    fx: {
+      desert: [2, "Large ears give off body heat to the air (like a fennec fox)."],
+      polar: [-2, "Large ears lose precious heat and risk frostbite — Arctic foxes have small ears."],
+      mountain: [-1, "Big ears lose heat in the cold mountain air."],
+    },
+  },
+  {
+    id: "thickFur",
+    label: "Thick fur / woolly undercoat",
+    fx: {
+      desert: [-1, "Thick fur traps heat — though a light coat can shade the skin from the sun."],
+      polar: [2, "Thick fur traps still air, a brilliant insulator."],
+      mountain: [2, "A dense undercoat keeps out the cold (like a yak or snow leopard)."],
+    },
+  },
+  {
+    id: "blubber",
+    label: "Layer of blubber",
+    fx: {
+      desert: [-2, "A fat layer all over would make overheating far more likely."],
+      polar: [2, "Blubber insulates in freezing water and stores energy."],
+      mountain: [0, "Some fat helps in the cold, but heavy blubber is a burden on steep slopes."],
+    },
+  },
+  {
+    id: "nocturnal",
+    label: "Nocturnal (active at night)",
+    fx: {
+      desert: [2, "Avoids the scorching daytime heat."],
+      polar: [-1, "Nights are the coldest time — and in winter there is little daylight anyway."],
+      mountain: [-1, "Nights at altitude are bitterly cold."],
+    },
+  },
+  {
+    id: "burrow",
+    label: "Shelters in a burrow or den",
+    fx: {
+      desert: [2, "Underground is cooler and more humid by day."],
+      polar: [1, "A snow den shelters from wind (polar bear mothers dig one)."],
+      mountain: [1, "A sheltered den protects from wind and cold."],
+    },
+  },
+  {
+    id: "wideFeet",
+    label: "Wide, padded or furry feet",
+    fx: {
+      desert: [1, "Wide pads stop sinking into soft sand and protect from hot ground."],
+      polar: [1, "Wide paws spread weight on snow and thin ice."],
+      mountain: [2, "Big furry paws act like snowshoes and grip rocky slopes."],
+    },
+  },
+  {
+    id: "bigLungs",
+    label: "Large lungs and heart",
+    fx: {
+      desert: [0, "No special advantage at low altitude."],
+      polar: [0, "No special advantage at sea level."],
+      mountain: [2, "Takes in and pumps more oxygen from thin air (like a yak)."],
+    },
+  },
+  {
+    id: "concUrine",
+    label: "Kidneys that save water",
+    fx: {
+      desert: [2, "Very concentrated urine saves water (like a kangaroo rat)."],
+      polar: [0, "Water is frozen, but saving it is less critical than keeping warm."],
+      mountain: [0, "Little effect on the main mountain problems."],
+    },
+  },
+  {
+    id: "white",
+    label: "White coat",
+    fx: {
+      desert: [0, "Pale colours reflect sunlight, but pure white stands out on sand."],
+      polar: [2, "Camouflage against snow and ice."],
+      mountain: [1, "Good camouflage in snow, less so on bare rock."],
+    },
+  },
+  {
+    id: "huddle",
+    label: "Huddles with others",
+    fx: {
+      desert: [-1, "Huddling traps heat — the opposite of what you need."],
+      polar: [2, "Huddling cuts each animal's exposed surface (like emperor penguins)."],
+      mountain: [1, "Sharing body heat helps on freezing nights."],
+    },
+  },
 ];
 
-const ENV: Record<Env, { name: string; sky: string; ground: string; real: string; maxPos: number }> = {
-  desert: { name: "Hot desert", sky: "#fef3c7", ground: "#fbbf24", real: "fennec fox, dromedary camel, saguaro cactus", maxPos: 13 },
-  polar: { name: "Polar", sky: "#e0f2fe", ground: "#f8fafc", real: "polar bear, Arctic fox, emperor penguin", maxPos: 11 },
-  mountain: { name: "High mountain", sky: "#dbeafe", ground: "#a8a29e", real: "snow leopard, yak, llama, pika", maxPos: 11 },
+const ENV_INFO: Record<Env, { name: string; problems: string; bg: string; ground: string }> = {
+  desert: { name: "Hot desert", problems: "heat by day and very little water", bg: "#fef3c7", ground: "#fde68a" },
+  polar: { name: "Polar", problems: "extreme cold, wind and a short summer", bg: "#e0f2fe", ground: "#f8fafc" },
+  mountain: { name: "High mountain", problems: "thin air (low oxygen), cold and strong UV", bg: "#e0e7ff", ground: "#d6d3d1" },
 };
 
-export function DesignASurvivor() {
+function DesignCreature() {
   const [env, setEnv] = useState<Env>("polar");
-  const [on, setOn] = useState<Set<TraitId>>(() => new Set<TraitId>(["bigEars"]));
-  const has = (t: TraitId) => on.has(t);
-  const toggle = (t: TraitId) => setOn((s) => { const n = new Set(s); if (n.has(t)) n.delete(t); else n.add(t); return n; });
-
-  const { score, chosen, missed } = useMemo(() => {
-    const chosen = TRAITS.filter((t) => on.has(t.id)).map((t) => ({ t, v: t.fx[env][0], why: t.fx[env][1] }));
-    const sum = chosen.reduce((a, c) => a + c.v, 0);
-    const missed = TRAITS.filter((t) => !on.has(t.id) && t.fx[env][0] >= 2).length;
-    return { score: Math.max(0, Math.min(100, Math.round(25 + (75 * sum) / ENV[env].maxPos))), chosen, missed };
-  }, [on, env]);
-
-  const verdict = score < 35 ? "Would not survive" : score < 65 ? "Just hanging on" : score < 90 ? "Well adapted" : "Superbly adapted";
-  const tone = score < 35 ? "rose" : score < 65 ? "amber" : "emerald";
-
-  // Creature geometry
-  const compact = has("compactBody"), big = has("blubber");
-  const rx = (compact ? 40 : 54) + (big ? 8 : 0), ry = (compact ? 32 : 24) + (big ? 8 : 0);
-  const leg = compact ? 12 : 26, groundY = 160, cx = 150, cy = groundY - leg - ry;
-  const coat = has("whiteCoat") ? "#f8fafc" : "#b7793f", edge = has("whiteCoat") ? "#94a3b8" : "#78350f";
-  const hx = cx + rx - 4, hy = cy - ry * 0.55, hr = compact ? 17 : 15, earH = has("bigEars") ? 34 : 9;
-  const night = has("nocturnal");
-  const fur = has("thickFur") ? { stroke: edge, strokeWidth: 5, strokeDasharray: "2 2" } : { stroke: edge, strokeWidth: 1.5 };
+  const [on, setOn] = useState<Record<string, boolean>>({ thickFur: true });
+  const chosen = FEATURES.filter((f) => on[f.id]);
+  const raw = chosen.reduce((s, f) => s + f.fx[env][0], 0);
+  // Best possible: sum of positive scores for this environment.
+  const best = FEATURES.reduce((s, f) => s + Math.max(0, f.fx[env][0]), 0);
+  const score = Math.max(0, Math.round((100 * raw) / best));
+  const verdict = score >= 75 ? "Thriving" : score >= 45 ? "Surviving" : score >= 20 ? "Struggling" : "Would not survive";
+  const tone = score >= 75 ? "good" : score >= 45 ? "brand" : "bad";
+  const info = ENV_INFO[env];
+  const earR = on.bigEars ? 20 : 8;
+  const coat = on.white ? "#f8fafc" : env === "desert" ? "#d6a35c" : "#a16207";
+  const furW = on.thickFur ? 6 : 2;
+  const goodOnes = chosen.filter((f) => f.fx[env][0] > 0);
+  const badOnes = chosen.filter((f) => f.fx[env][0] < 0);
+  const missing = FEATURES.filter((f) => !on[f.id] && f.fx[env][0] === 2);
 
   return (
-    <Frame
-      title="Design-a-Survivor"
-      caption={<p><b>Notice:</b> the same trait can save you in one place and kill you in another — big ears are brilliant in the desert but deadly at the poles. Real survivors here: <i>{ENV[env].real}</i>. {missed > 0 ? `There ${missed === 1 ? "is" : "are"} still ${missed} really useful trait${missed === 1 ? "" : "s"} you haven't picked.` : "You've picked every really useful trait!"} <span className="text-xs">(Simplified scoring; a real organism is either a plant or an animal — this one is made up!)</span></p>}
-    >
-      <p className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">🤔 <b>Predict first:</b> before you toggle anything, name the three traits you think matter most for a {ENV[env].name.toLowerCase()} — then test your guess.</p>
-      <Choice label="Environment" value={env} onChange={setEnv} options={[{ id: "desert", label: "🏜️ Hot desert" }, { id: "polar", label: "🧊 Polar" }, { id: "mountain", label: "🏔️ High mountain" }]} />
-      <div className="mt-3 flex flex-wrap gap-2">
-        {TRAITS.map((t) => (
-          <button key={t.id} type="button" aria-pressed={has(t.id)} onClick={() => toggle(t.id)}
-            className={`rounded-full px-3 py-1.5 text-xs font-semibold ring-1 transition ${has(t.id) ? "bg-indigo-600 text-white ring-indigo-600" : "bg-white text-slate-700 ring-slate-200 hover:bg-slate-50"}`}>
-            {t.label}
-          </button>
-        ))}
-      </div>
-      <div className="mt-2 flex gap-2 text-xs">
-        <button type="button" onClick={() => setOn(new Set())} className="rounded-lg bg-white px-2 py-1 ring-1 ring-slate-200">Clear all</button>
-        <button type="button" onClick={() => setOn(new Set(TRAITS.filter((t) => t.fx[env][0] > 0).map((t) => t.id)))} className="rounded-lg bg-white px-2 py-1 ring-1 ring-slate-200">Reveal the ideal survivor</button>
-      </div>
-
-      <svg viewBox="0 0 320 200" className="mt-3 w-full rounded-xl" role="img" aria-label={`Made-up creature in a ${ENV[env].name}: ${chosen.map((c) => c.t.label.replace(/^\S+\s/, "")).join(", ") || "no special traits"}`} fontFamily="sans-serif">
-        <rect width="320" height="200" fill={night ? "#1e293b" : ENV[env].sky} />
-        {night ? <circle cx="280" cy="30" r="14" fill="#fef9c3" /> : <circle cx="280" cy="30" r="16" fill={env === "desert" ? "#f59e0b" : "#fde68a"} />}
-        {env === "mountain" && <polygon points="0,160 60,70 110,130 170,50 240,140 290,90 320,120 320,160" fill="#cbd5e1" />}
-        {env === "mountain" && <polygon points="155,72 170,50 186,74 176,70 168,78" fill="#fff" />}
-        {env === "polar" && <polygon points="10,160 40,128 70,160" fill="#bae6fd" />}
-        <path d={env === "desert" ? "M0 160 Q80 148 160 160 T320 158 V200 H0Z" : "M0 160 H320 V200 H0Z"} fill={ENV[env].ground} />
-        {has("burrowing") && <path d="M236 160 q10 -10 22 0 l0 24 q-11 12 -50 6" fill="none" stroke="#57534e" strokeWidth="10" strokeLinecap="round" opacity="0.55" />}
-        {has("longRoots") && [-30, -10, 14, 32].map((d, i) => <path key={i} d={`M${cx + d} ${groundY} q${i % 2 ? 8 : -8} 18 ${i % 2 ? -4 : 4} 38`} stroke="#92400e" strokeWidth="2" fill="none" />)}
-        {has("huddling") && [40, 72].map((x) => <ellipse key={x} cx={x} cy={groundY - 22} rx="22" ry="18" fill={coat} stroke={edge} opacity="0.6" />)}
-        {[-0.6, -0.25, 0.3, 0.6].map((f, i) => <rect key={i} x={cx + f * rx - 4} y={groundY - leg - 4} width="8" height={leg + 4} rx="3" fill={coat} stroke={edge} />)}
-        {!compact && <path d={`M${cx - rx + 4} ${cy} q-30 -6 -36 -30`} stroke={coat === "#f8fafc" ? "#cbd5e1" : coat} strokeWidth="8" fill="none" strokeLinecap="round" />}
-        {has("fatHump") && <ellipse cx={cx - 8} cy={cy - ry + 4} rx="22" ry="18" fill={coat} {...fur} />}
-        <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={coat} {...fur} />
-        {big && <ellipse cx={cx} cy={cy} rx={rx - 7} ry={ry - 7} fill="none" stroke="#eab308" strokeWidth="5" opacity="0.8" />}
-        {has("bigLungs") && <g opacity="0.85"><ellipse cx={cx + 12} cy={cy} rx="9" ry="13" fill="#f472b6" /><ellipse cx={cx + 28} cy={cy} rx="9" ry="13" fill="#f472b6" /></g>}
-        {has("waxySkin") && <g stroke="#fff" strokeWidth="2" fill="none" opacity="0.9"><path d={`M${cx - 30} ${cy - 8} q8 -8 16 0`} /><path d={`M${cx - 20} ${cy + 6} q8 -8 16 0`} /><path d={`M${cx - 40} ${cy + 8} q8 -8 16 0`} /></g>}
-        <polygon points={`${hx - 12},${hy - hr + 6} ${hx - 6},${hy - hr - earH} ${hx},${hy - hr + 2}`} fill={coat} stroke={edge} />
-        <polygon points={`${hx + 2},${hy - hr + 2} ${hx + 10},${hy - hr - earH} ${hx + 14},${hy - hr + 6}`} fill={coat} stroke={edge} />
-        <circle cx={hx} cy={hy} r={hr} fill={coat} {...fur} />
-        <circle cx={hx + 6} cy={hy - 3} r={night ? 4.5 : 2.5} fill="#0f172a" />
-        <circle cx={hx + hr - 1} cy={hy + 4} r="2.5" fill="#0f172a" />
-        {big && <text x={cx} y={cy + ry + 2} fontSize="11" textAnchor="middle" fill="#854d0e" dy="-2">blubber</text>}
-        <text x="8" y="18" fontSize="12" fontWeight="700" fill={night ? "#f8fafc" : "#334155"}>{ENV[env].name}</text>
-      </svg>
-
-      <div className="mt-3 grid grid-cols-2 gap-2">
-        <Stat label="Survival score" value={`${score}/100`} tone={tone} />
-        <Stat label="Verdict" value={<span className="text-base">{verdict}</span>} tone={tone} />
-      </div>
-      <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-slate-200" aria-hidden>
-        <div className="h-full rounded-full transition-all" style={{ width: `${score}%`, background: score < 35 ? "#e11d48" : score < 65 ? "#f59e0b" : "#10b981" }} />
-      </div>
-      <ul className="mt-3 space-y-1.5 text-sm">
-        {chosen.length === 0 && <li className="text-slate-500">Pick some traits to see why they help or hurt.</li>}
-        {chosen.map(({ t, v, why }) => (
-          <li key={t.id} className="flex gap-2">
-            <span className={`shrink-0 rounded px-1.5 text-xs font-bold leading-5 ${v > 0 ? "bg-emerald-100 text-emerald-800" : v < 0 ? "bg-rose-100 text-rose-800" : "bg-slate-100 text-slate-600"}`}>
-              {v > 0 ? `helps +${v}` : v < 0 ? `hurts ${v}` : "no effect"}
-            </span>
-            <span><b>{t.label.replace(/^\S+\s/, "")}:</b> {why}</span>
-          </li>
-        ))}
-      </ul>
-    </Frame>
-  );
-}
-
-/* ───────────────────────── 2. Ears & Heat Loss ───────────────────────── */
-
-const BODY_T = 38; // °C, typical fox body temperature
-const MAKE = 6; // heat made per unit volume (relative units) — chosen so a fennec fox balances at ~25°C
-const geo = (r: number, ear: number) => {
-  const body = 4 * Math.PI * r * r, ears = 4 * 0.3 * ear * ear; // 2 triangular ears (base = 0.6 × length), both faces
-  const vol = (4 / 3) * Math.PI * r ** 3;
-  return { body, ears, sa: body + ears, vol, ratio: (body + ears) / vol };
-};
-const FENNEC = geo(8, 12).ratio, ARCTIC = geo(12, 4).ratio;
-
-export function EarsHeatLoss() {
-  const [r, setR] = useState(8);
-  const [ear, setEar] = useState(12);
-  const [t, setT] = useState(25);
-  const g = useMemo(() => geo(r, ear), [r, ear]);
-  const lost = g.ratio * (BODY_T - t); // heat lost per unit volume (relative units)
-  const x = lost / MAKE;
-  const status = lost < 0 ? { c: "#dc2626", s: "Gaining heat from the air!" }
-    : x < 0.7 ? { c: "#ea580c", s: "Overheating — can't shed heat fast enough" }
-    : x <= 1.5 ? { c: "#16a34a", s: "About balanced — comfortable" }
-    : { c: "#2563eb", s: `Losing heat ${x.toFixed(1)}× faster than it makes it` };
-
-  const pr = r * 3, hr = pr * 0.55, cx = 80, cy = 120, hx = cx + pr * 0.9, hy = cy - pr * 0.8, el = ear * 3.2;
-  const bar = (v: number) => Math.max(0, Math.min(150, (v / 30) * 150));
-  const ratioX = (v: number) => 186 + Math.min(1, v / 0.8) * 124;
-  const preset = (rr: number, ee: number, tt: number) => { setR(rr); setEar(ee); setT(tt); };
-
-  return (
-    <Frame
-      title="Ears & Heat Loss: fennec fox vs Arctic fox"
+    <WidgetFrame
+      title="Design a creature"
+      tryThis={[
+        "Build the best possible desert animal. Then switch to Polar without changing anything — what happens to the score?",
+        "Which single feature is helpful in all three environments?",
+        "Large thin ears: in which environment are they a big advantage, and why are they a disadvantage elsewhere?",
+      ]}
       caption={
-        <p><b>Notice:</b> {lost < 0
-          ? "when the air is hotter than the body (38°C), heat flows IN — and big ears soak it up faster. That's why fennec foxes hide in burrows by day and use their ears to cool down in the shade and at night."
-          : x > 1.5
-            ? `this shape loses heat ${x.toFixed(1)}× faster than it makes it. Shrink the ears and grow the body to cut the surface-area-to-volume ratio — that's why polar animals have small ears and big, rounded bodies.`
-            : x < 0.7
-              ? "this animal is too good at keeping heat in for this temperature. Bigger ears and a smaller body raise the surface-area-to-volume ratio so heat escapes faster — the desert design."
-              : "heat made and heat lost roughly match, so this shape suits this temperature."}{" "}
-          <b>Rules of thumb:</b> animals in cold places tend to be bigger (Bergmann&apos;s rule) with shorter ears, legs and tails (Allen&apos;s rule); hot-climate relatives are smaller with longer ones. <span className="text-xs">Simplified model: body = sphere, ears = flat triangles, no fur; heat made assumed proportional to body volume. Real Arctic foxes also rely on very thick fur.</span></p>
+        <>
+          <p>
+            <b>{info.name}:</b> the big problems here are {info.problems}. An adaptation is only &quot;good&quot; if it fits <i>this</i> environment — the same feature can help in one place and harm in another.
+          </p>
+          {missing.length ? (
+            <p className="mt-2 text-ink-2">Still missing a strong adaptation for here: {missing.map((f) => f.label.toLowerCase()).join(", ")}.</p>
+          ) : null}
+          <p className="mt-2 text-xs text-ink-2">Simplified model: scores are for comparison, not real survival odds. Real adaptations evolve over many generations by natural selection — an animal cannot pick them.</p>
+        </>
       }
     >
-      <details className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">
-        <summary className="cursor-pointer">🤔 <b>Predict first:</b> double the body size but keep the same shape — does surface area : volume go up or down?</summary>
-        <p className="mt-1">Down — it halves. Surface area grows ×4 but volume grows ×8. Try it: set body size to 6 cm and ear length to 6 cm (SA : V = 0.56), then double both to 12 cm and 12 cm (SA : V = 0.28 — exact half!).</p>
-      </details>
-      <div className="mb-3 flex flex-wrap gap-2 text-sm">
-        <button type="button" onClick={() => preset(8, 12, 25)} className="rounded-full bg-amber-100 px-3 py-1.5 font-semibold text-amber-900 ring-1 ring-amber-300">🏜️ Fennec fox (Sahara)</button>
-        <button type="button" onClick={() => preset(12, 4, -20)} className="rounded-full bg-sky-100 px-3 py-1.5 font-semibold text-sky-900 ring-1 ring-sky-300">🧊 Arctic fox (Arctic)</button>
+      <div className="space-y-4">
+        <Segmented
+          label="Environment"
+          value={env}
+          onChange={setEnv}
+          options={[
+            { value: "desert", label: "🏜️ Desert" },
+            { value: "polar", label: "🧊 Polar" },
+            { value: "mountain", label: "🏔️ Mountain" },
+          ]}
+        />
+        <div className="grid gap-4 sm:grid-cols-2">
+          <svg viewBox="0 0 240 170" className="h-auto w-full rounded-xl border border-line" role="img" aria-label={`Your creature in the ${info.name.toLowerCase()} environment, with ${chosen.length ? chosen.map((f) => f.label.toLowerCase()).join(", ") : "no special features"}. Survival score ${score} out of 100.`}>
+            <rect x="0" y="0" width="240" height="170" fill={info.bg} />
+            {env === "mountain" ? <polygon points="0,130 60,50 110,110 160,30 240,130" fill="#cbd5e1" /> : null}
+            {env === "desert" ? <circle cx="205" cy="30" r="16" fill="#fbbf24" /> : null}
+            <rect x="0" y="130" width="240" height="40" fill={info.ground} />
+            {on.burrow ? <ellipse cx="200" cy="140" rx="22" ry="9" fill="#78350f" opacity="0.6" /> : null}
+            {/* body */}
+            <ellipse cx="110" cy="105" rx="48" ry="28" fill={coat} stroke="#334155" strokeWidth={furW} strokeDasharray={on.thickFur ? "3 2" : undefined} />
+            {on.blubber ? <ellipse cx="110" cy="105" rx="40" ry="20" fill="none" stroke="#fbbf24" strokeWidth="4" opacity="0.8" /> : null}
+            {/* head + ears */}
+            <circle cx="160" cy="80" r="18" fill={coat} stroke="#334155" strokeWidth={furW / 2 + 1} />
+            <ellipse cx={152} cy={62 - earR / 2} rx={earR / 2.2} ry={earR} fill={coat} stroke="#334155" strokeWidth="1.5" />
+            <ellipse cx={170} cy={62 - earR / 2} rx={earR / 2.2} ry={earR} fill={coat} stroke="#334155" strokeWidth="1.5" />
+            <circle cx="166" cy="78" r="2.5" fill="#1f2937" />
+            {/* legs + feet */}
+            {[80, 135].map((x) => (
+              <g key={x}>
+                <rect x={x - 4} y="125" width="8" height="12" fill={coat} stroke="#334155" />
+                <ellipse cx={x} cy="138" rx={on.wideFeet ? 11 : 5} ry="3.5" fill="#334155" />
+              </g>
+            ))}
+            {on.bigLungs ? <ellipse cx="125" cy="100" rx="12" ry="9" fill="#fca5a5" stroke="#b91c1c" strokeWidth="1" /> : null}
+            {on.huddle ? (
+              <g opacity="0.55">
+                <ellipse cx="40" cy="112" rx="26" ry="18" fill={coat} stroke="#334155" />
+                <ellipse cx="60" cy="122" rx="26" ry="16" fill={coat} stroke="#334155" />
+              </g>
+            ) : null}
+            {on.nocturnal ? <text x="12" y="24" fontSize="18">🌙</text> : null}
+          </svg>
+          <div className="space-y-2">
+            <div className="grid grid-cols-2 gap-2">
+              <Readout label="Survival score" value={`${score}/100`} tone={tone} />
+              <Readout label="Verdict" value={verdict} tone={tone} />
+            </div>
+            <div className="h-3 w-full overflow-hidden rounded-full bg-surface-2" aria-hidden>
+              <div className={`h-full ${score >= 75 ? "bg-good" : score >= 45 ? "bg-brand" : "bg-bad"}`} style={{ width: `${score}%` }} />
+            </div>
+          </div>
+        </div>
+        <fieldset>
+          <legend className="mb-2 text-sm font-semibold text-ink-2">Choose features (tap to toggle)</legend>
+          <div className="flex flex-wrap gap-2">
+            {FEATURES.map((f) => (
+              <button
+                key={f.id}
+                type="button"
+                aria-pressed={!!on[f.id]}
+                onClick={() => setOn((o) => ({ ...o, [f.id]: !o[f.id] }))}
+                className={`min-h-[40px] rounded-xl border px-3 py-2 text-sm font-bold transition ${on[f.id] ? "border-brand bg-brand-soft text-brand" : "border-line bg-surface text-ink-2"}`}
+              >
+                {on[f.id] ? "✓ " : ""}
+                {f.label}
+              </button>
+            ))}
+          </div>
+        </fieldset>
+        {chosen.length ? (
+          <ul className="space-y-1 text-sm">
+            {goodOnes.map((f) => (
+              <li key={f.id} className="rounded-lg bg-good-soft px-3 py-1.5 text-ink">
+                <b className="text-good">+ {f.label}:</b> {f.fx[env][1]}
+              </li>
+            ))}
+            {badOnes.map((f) => (
+              <li key={f.id} className="rounded-lg bg-bad-soft px-3 py-1.5 text-ink">
+                <b className="text-bad">− {f.label}:</b> {f.fx[env][1]}
+              </li>
+            ))}
+            {chosen
+              .filter((f) => f.fx[env][0] === 0)
+              .map((f) => (
+                <li key={f.id} className="rounded-lg bg-surface-2 px-3 py-1.5 text-ink-2">
+                  <b>○ {f.label}:</b> {f.fx[env][1]}
+                </li>
+              ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-ink-2">Tap some features to build your creature.</p>
+        )}
       </div>
-      <div className="grid gap-3 sm:grid-cols-3">
-        <Slider label="Body size (radius)" min={5} max={20} value={r} onChange={setR} suffix=" cm" color="#b45309" />
-        <Slider label="Ear length" min={2} max={15} value={ear} onChange={setEar} suffix=" cm" color="#c2410c" />
-        <Slider label="Air temperature" min={-40} max={45} value={t} onChange={setT} suffix="°C" color={t < 10 ? "#2563eb" : "#dc2626"} />
-      </div>
-
-      <svg viewBox="0 0 320 200" className="mt-3 w-full rounded-xl bg-white" role="img" aria-label={`Fox with ${ear} cm ears and ${r} cm body radius at ${t} degrees: surface area to volume ratio ${g.ratio.toFixed(2)}; ${status.s}`} fontFamily="sans-serif">
-        <rect width="170" height="200" fill={t < 0 ? "#e0f2fe" : t > 30 ? "#fef3c7" : "#f0fdf4"} />
-        <circle cx={cx} cy={cy} r={pr + 10} fill={status.c} opacity="0.15" />
-        <polygon points={`${hx - hr * 0.7},${hy - hr * 0.5} ${hx - hr * 0.55},${hy - hr * 0.5 - el} ${hx - hr * 0.05},${hy - hr * 0.9}`} fill="#fdba74" stroke="#9a3412" />
-        <polygon points={`${hx + hr * 0.05},${hy - hr * 0.9} ${hx + hr * 0.55},${hy - hr * 0.5 - el} ${hx + hr * 0.7},${hy - hr * 0.5}`} fill="#fdba74" stroke="#9a3412" />
-        <circle cx={cx} cy={cy} r={pr} fill="#fb923c" stroke="#9a3412" />
-        <circle cx={hx} cy={hy} r={hr} fill="#fb923c" stroke="#9a3412" />
-        <circle cx={hx + hr * 0.35} cy={hy - hr * 0.1} r="2.5" fill="#0f172a" />
-        {lost !== 0 && [0, 1, 2].map((i) => {
-          const ax = hx + (i - 1) * hr * 0.6, ay = hy - hr * 0.6 - el * 0.6;
-          return <text key={i} x={ax} y={ay - 6} fontSize="13" textAnchor="middle" fill={status.c}>{lost > 0 ? "↑" : "↓"}</text>;
-        })}
-        <text x="8" y="16" fontSize="11" fill="#334155">Air {t}°C · body 38°C</text>
-        <text x="8" y="192" fontSize="11" fontWeight="700" fill={status.c}>{lost > 0 ? "heat out" : "heat in"}</text>
-
-        <text x="186" y="18" fontSize="11" fontWeight="700" fill="#334155">Per unit of body:</text>
-        <text x="186" y="36" fontSize="11" fill="#334155">heat made</text>
-        <rect x="186" y="40" width={bar(MAKE)} height="12" rx="3" fill="#f97316" />
-        <text x="186" y="68" fontSize="11" fill="#334155">heat lost {lost < 0 ? "(gaining!)" : ""}</text>
-        <rect x="186" y="72" width={bar(Math.abs(lost))} height="12" rx="3" fill={lost < 0 ? "#dc2626" : "#3b82f6"} />
-        {Math.abs(lost) > 30 && <text x="312" y="82" fontSize="11" textAnchor="end" fill="#fff">▶</text>}
-
-        <text x="186" y="112" fontSize="11" fontWeight="700" fill="#334155">SA : V ratio</text>
-        <line x1="186" y1="140" x2="310" y2="140" stroke="#94a3b8" strokeWidth="3" />
-        <text x="186" y="156" fontSize="11" fill="#64748b">0</text>
-        <text x="310" y="156" fontSize="11" textAnchor="end" fill="#64748b">0.8</text>
-        <line x1={ratioX(ARCTIC)} y1="132" x2={ratioX(ARCTIC)} y2="148" stroke="#0284c7" strokeWidth="2" />
-        <text x={ratioX(ARCTIC)} y="172" fontSize="11" textAnchor="middle" fill="#0284c7">Arctic</text>
-        <line x1={ratioX(FENNEC)} y1="132" x2={ratioX(FENNEC)} y2="148" stroke="#b45309" strokeWidth="2" />
-        <text x={ratioX(FENNEC)} y="186" fontSize="11" textAnchor="middle" fill="#b45309">Fennec</text>
-        <polygon points={`${ratioX(g.ratio)},138 ${ratioX(g.ratio) - 6},126 ${ratioX(g.ratio) + 6},126`} fill="#4f46e5" />
-        <text x={Math.max(205, Math.min(292, ratioX(g.ratio)))} y="122" fontSize="11" textAnchor="middle" fill="#4f46e5">you {g.ratio.toFixed(2)}</text>
-      </svg>
-
-      <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
-        <Stat label="Surface area" value={`${Math.round(g.sa)} cm²`} tone="amber" />
-        <Stat label="…of which ears" value={`${Math.round((g.ears / g.sa) * 100)}%`} tone="amber" />
-        <Stat label="Volume" value={`${Math.round(g.vol).toLocaleString()} cm³`} tone="sky" />
-        <Stat label="SA : V" value={g.ratio.toFixed(2)} tone="indigo" />
-      </div>
-      <p className="mt-2 rounded-lg px-3 py-2 text-sm font-semibold" style={{ color: status.c, background: `${status.c}14` }}>{status.s}</p>
-    </Frame>
+    </WidgetFrame>
   );
 }
+
+// ---------------------------------------------------------------------------
+// 2. Surface area to volume: body size + ears, and the penguin huddle.
+// ---------------------------------------------------------------------------
+function fmt(n: number, dp = 2): string {
+  return Number(n.toFixed(dp)).toLocaleString("en-GB", { maximumFractionDigits: dp });
+}
+
+function SurfaceVolume() {
+  const [mode, setMode] = useState<"body" | "huddle">("body");
+  const [side, setSide] = useState(4);
+  const [ear, setEar] = useState(1);
+  const [rows, setRows] = useState(1);
+
+  // Body mode: cube body of side s + two thin square ears of side e (both faces lose heat; ear volume ignored).
+  const bodySA = 6 * side * side;
+  const earSA = 2 * 2 * ear * ear;
+  const vol = side * side * side;
+  const ratio = (bodySA + earSA) / vol;
+  const bodyOnly = bodySA / vol;
+  const ratioMax = 7;
+
+  // Huddle mode: n × n penguins, each a 1-unit cube standing on ice (bottom face not exposed).
+  const n = rows;
+  const count = n * n;
+  const aloneEach = 5;
+  const huddleTotal = n * n + 4 * n;
+  const huddleEach = huddleTotal / count;
+  const saving = Math.round(100 * (1 - huddleEach / aloneEach));
+
+  const suited = ratio >= 2 ? "hot desert (loses heat fast)" : ratio <= 1 ? "polar cold (keeps heat in)" : "in between";
+
+  const scale = 120 / 10; // px per cm in the body drawing (max side 10 cm)
+  const s = side * scale;
+  const e = ear * scale;
+  const ox = 160 - s / 2;
+  const oy = 200 - s;
+
+  return (
+    <WidgetFrame
+      title="Surface area to volume: why size and ears matter"
+      tryThis={
+        mode === "body"
+          ? [
+              "Keep the ears small and shrink the body from 10 cm to 1 cm. What happens to SA : V?",
+              "Make an animal with SA : V below 1. Which environment would it suit — and why are polar bears and musk oxen big?",
+              "Give a 3 cm animal 3 cm ears. How much do the ears add to its SA : V? Think fennec fox.",
+            ]
+          : [
+              "Predict: with 2 rows (4 penguins), how much exposed surface does each penguin have? Then check.",
+              "How big must the huddle be for each penguin to lose less than half the heat it would alone?",
+              "Why do penguins keep shuffling from the edge to the middle?",
+            ]
+      }
+      caption={
+        mode === "body" ? (
+          <>
+            <p>
+              Heat is made throughout the body&apos;s <b>volume</b> but escapes through its <b>surface</b>. A bigger SA : V means heat escapes faster for the animal&apos;s size. When the side doubles, surface area becomes 4 times bigger but volume becomes 8 times bigger — so the ratio halves.
+            </p>
+            <p className="mt-2">
+              Right now the body alone has SA : V = {fmt(bodyOnly)}; the ears push it to {fmt(ratio)}. That suits a <b>{suited}</b> environment. Big ears help a fennec fox shed heat in the Sahara; small ears help an Arctic fox keep it.
+            </p>
+            <p className="mt-2 text-xs text-ink-2">Simplified model: body = cube, ears = thin squares (both sides count, ear volume ignored). Units: cm² ÷ cm³.</p>
+          </>
+        ) : (
+          <>
+            <p>
+              Alone, each penguin (modelled as a 1 × 1 × 1 cube on the ice) has <b>5</b> faces exposed to the wind. In a {n} × {n} huddle of {count}, only the tops and the outside edge are exposed: {n}² + 4 × {n} = {huddleTotal} faces, so about <b>{fmt(huddleEach)}</b> each — {saving}% less surface losing heat.
+            </p>
+            <p className="mt-2">Real emperor penguin huddles can contain thousands of birds, and they keep shuffling so everyone gets a turn in the warm middle and nobody stays on the windy edge for long.</p>
+            <p className="mt-2 text-xs text-ink-2">Simplified model: real penguins are not cubes, but the idea — less exposed surface per animal — is the same.</p>
+          </>
+        )
+      }
+    >
+      <div className="space-y-4">
+        <Segmented
+          label="Model"
+          value={mode}
+          onChange={setMode}
+          options={[
+            { value: "body", label: "Body & ears" },
+            { value: "huddle", label: "Penguin huddle" },
+          ]}
+        />
+        {mode === "body" ? (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-3">
+              <Slider label="Body size (side of cube)" value={side} min={1} max={10} onChange={setSide} format={(v) => `${v} cm`} />
+              <Slider label="Ear size (side of each ear)" value={ear} min={0} max={4} step={0.5} onChange={setEar} format={(v) => `${v} cm`} />
+              <div className="grid grid-cols-2 gap-2">
+                <Readout label="Surface area" value={`${fmt(bodySA + earSA, 1)} cm²`} tone="ink" />
+                <Readout label="Volume" value={`${vol} cm³`} tone="ink" />
+                <Readout label="SA : V" value={fmt(ratio)} tone={ratio >= 2 ? "bad" : ratio <= 1 ? "good" : "brand"} />
+                <Readout label="Best suited to" value={ratio >= 2 ? "Heat" : ratio <= 1 ? "Cold" : "Mild"} tone="ink" />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <svg viewBox="0 0 320 230" className="h-auto w-full" role="img" aria-label={`A cube body of side ${side} cm with ears of side ${ear} cm. Surface area to volume ratio ${fmt(ratio)}.`}>
+                <rect x="0" y="0" width="320" height="230" className="fill-surface-2" />
+                {/* ears */}
+                {ear > 0 ? (
+                  <>
+                    <polygon points={`${ox + s * 0.2},${oy} ${ox + s * 0.2 - e / 2},${oy - e} ${ox + s * 0.2 + e / 2},${oy - e}`} fill="#fdba74" stroke="#334155" />
+                    <polygon points={`${ox + s * 0.8},${oy} ${ox + s * 0.8 - e / 2},${oy - e} ${ox + s * 0.8 + e / 2},${oy - e}`} fill="#fdba74" stroke="#334155" />
+                  </>
+                ) : null}
+                {/* cube (simple 3D look) */}
+                <polygon points={`${ox},${oy} ${ox + s * 0.25},${oy - s * 0.2} ${ox + s * 1.25},${oy - s * 0.2} ${ox + s},${oy}`} fill="#fde68a" stroke="#334155" />
+                <polygon points={`${ox + s},${oy} ${ox + s * 1.25},${oy - s * 0.2} ${ox + s * 1.25},${oy + s * 0.8} ${ox + s},${oy + s}`} fill="#fcd34d" stroke="#334155" />
+                <rect x={ox} y={oy} width={s} height={s} fill="#fef3c7" stroke="#334155" />
+                <text x="160" y="222" fontSize="12" textAnchor="middle" className="fill-ink-2">Body side {side} cm · ears {ear} cm</text>
+              </svg>
+              <div aria-hidden className="space-y-1 text-xs text-ink-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-20">Body only</span>
+                  <div className="h-3 flex-1 rounded-full bg-surface-2">
+                    <div className="h-full rounded-full bg-brand" style={{ width: `${Math.min(100, (100 * bodyOnly) / ratioMax)}%` }} />
+                  </div>
+                  <span className="w-10 text-right tabular-nums">{fmt(bodyOnly)}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="w-20">With ears</span>
+                  <div className="h-3 flex-1 rounded-full bg-surface-2">
+                    <div className="h-full rounded-full bg-accent" style={{ width: `${Math.min(100, (100 * ratio) / ratioMax)}%` }} />
+                  </div>
+                  <span className="w-10 text-right tabular-nums">{fmt(ratio)}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="space-y-3">
+              <Stepper label="Rows in the huddle" value={rows} min={1} max={10} onChange={setRows} format={(v) => `${v} × ${v}`} />
+              <div className="grid grid-cols-2 gap-2">
+                <Readout label="Penguins" value={count} tone="ink" />
+                <Readout label="Exposed faces each" value={fmt(huddleEach)} tone={huddleEach < 2.5 ? "good" : "brand"} />
+                <Readout label="Alone, each" value={aloneEach} tone="ink" />
+                <Readout label="Heat-loss surface saved" value={`${saving}%`} tone={saving >= 50 ? "good" : "brand"} />
+              </div>
+            </div>
+            <svg viewBox="0 0 220 220" className="h-auto w-full" role="img" aria-label={`Top view of a ${n} by ${n} huddle of ${count} penguins. Edge penguins shown darker. Each has about ${fmt(huddleEach)} exposed faces compared with 5 alone.`}>
+              <rect x="0" y="0" width="220" height="220" fill="#e0f2fe" />
+              {Array.from({ length: count }, (_, i) => {
+                const r = Math.floor(i / n);
+                const c = i % n;
+                const size = 200 / n;
+                const edge = r === 0 || c === 0 || r === n - 1 || c === n - 1;
+                return (
+                  <circle
+                    key={i}
+                    cx={10 + c * size + size / 2}
+                    cy={10 + r * size + size / 2}
+                    r={size * 0.42}
+                    fill={edge ? "#1f2937" : "#f59e0b"}
+                    stroke="#f8fafc"
+                    strokeWidth={1}
+                  />
+                );
+              })}
+            </svg>
+          </div>
+        )}
+      </div>
+    </WidgetFrame>
+  );
+}
+
+export const widgets: WidgetDef[] = [
+  {
+    id: "adaptations-design-creature",
+    title: "Design a creature",
+    blurb: "Choose an environment and give your animal features — see which adaptations help, which harm, and why.",
+    Component: DesignCreature,
+  },
+  {
+    id: "adaptations-surface-volume",
+    title: "Surface area to volume explorer",
+    blurb: "Change body size, ear size and huddle size to see why small ears, big bodies and huddling keep heat in.",
+    Component: SurfaceVolume,
+  },
+];
