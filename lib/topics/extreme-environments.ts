@@ -459,7 +459,7 @@ export const extremeEnvironments: Topic = {
         answerIndex: 0,
         hint: "Think about what happens to the air that rose over the Equator.",
         explanation:
-          "Air rising at the Equator spreads out and sinks at about 30°N/S. Sinking air warms, dries and forms high pressure, so skies stay clear. Rising air (option B) causes rain, which is what happens over Singapore, not in deserts. Cold currents matter for some deserts like the Atacama, but not all.",
+          "Air rising at the Equator spreads out and sinks at about 30°N/S. Sinking air warms, dries and forms high pressure, so skies stay clear. Rising air creates low pressure and rain, which is what happens over Singapore, not in deserts. Cold currents matter for some deserts like the Atacama, but not all.",
         guideRef: "hot-deserts-why",
       },
       {
@@ -526,7 +526,7 @@ export const extremeEnvironments: Topic = {
           "(a) 5 + 4 + 4 + 1 + 1 + 0 + 0 + 0 + 0 + 1 + 3 + 6 = 25 mm. (b) Yes, Cairo is a desert because 25 mm is far below the 250 mm a year threshold — about one tenth of it.",
         markScheme: [
           { point: "Correct total of 25 mm", keywords: ["25 mm", "25mm", "= 25", "total of 25", "twenty-five"] },
-          { point: "States Cairo is a desert", keywords: ["desert", "yes", "arid"] },
+          { point: "States Cairo is a desert", keywords: ["is a desert", "cairo is a desert", "yes it is", "arid"] },
           { point: "Reason: below the 250 mm threshold", keywords: ["250", "threshold", "desert limit", "a tenth"] },
         ],
         commonError: "Dividing by 12 (giving an average monthly figure) when the question asks for the total.",
@@ -1443,17 +1443,17 @@ export const extremeEnvironments: Topic = {
           },
           {
             id: "xenv-mcq-p4-q14",
-            question: "Describing the distribution of hot deserts using TEA, which would be the best ANOMALY?",
+            question: "Describing the global distribution of major non-polar deserts using TEA, which would be the best ANOMALY?",
             options: [
               "The Gobi Desert lies at about 40–45°N, outside the usual 15–35° belt",
               "The Sahara lies across the Tropic of Cancer",
-              "Most hot deserts are in two belts near the Tropics",
+              "Most major non-polar deserts lie in two belts near the Tropics",
               "The Kalahari lies near the Tropic of Capricorn",
             ],
             answerIndex: 0,
             hint: "An anomaly does NOT fit the trend.",
             explanation:
-              "The Gobi breaks the pattern because it lies further north (and is a cold desert). 'Most hot deserts are in two belts' is the Trend, and the Sahara and Kalahari are Examples that fit it.",
+              "The Gobi breaks the subtropical-belt pattern because it lies much further north in central Asia (and is a cold mid-latitude desert). 'Most major non-polar deserts lie in two belts' is the Trend, and the Sahara and Kalahari are Examples that fit it.",
             guideRef: "types-and-locations",
           },
           {
@@ -1991,7 +1991,7 @@ export const extremeEnvironments: Topic = {
             modelAnswer: "1.2 × 6.5 = 7.8°C cooler. −5 − 7.8 = −12.8°C (about −13°C).",
             markScheme: [
               { point: "Working: 1.2 × 6.5 = 7.8", keywords: ["7.8", "1.2", "7,8"] },
-              { point: "Answer about −12.8°C / −13°C", keywords: ["−12.8", "-12.8", "−13", "-13", "12.8"] },
+              { point: "Answer about −12.8°C / −13°C", keywords: ["−12.8", "-12.8", "−13", "-13", "minus 12.8", "minus 13"] },
             ],
             commonError: "Getting −5 + 7.8 = 2.8°C by adding — the temperature should fall as you go higher.",
             guideRef: "mountains-altitude",
@@ -2124,9 +2124,9 @@ export const extremeEnvironments: Topic = {
             modelAnswer:
               "(a) Warmest = −32°C, coldest = −68°C. Range = −32 − (−68) = −32 + 68 = 36°C. (b) Total = −664; −664 ÷ 12 = −55.3°C.",
             markScheme: [
-              { point: "Correct working for range (−32 − (−68))", keywords: ["−32", "-32", "−68", "-68", "+ 68", "+68"] },
+              { point: "Correct working for range (−32 − (−68))", keywords: ["−32 + 68", "-32 + 68", "68 − 32", "68 - 32", "plus 68", "add 68"] },
               { point: "Range of 36°C", keywords: ["36°c", "36 °c", "36 degrees", "= 36", "range of 36", "range is 36"] },
-              { point: "Mean of about −55.3°C", keywords: ["−55.3", "-55.3", "55.3", "−55", "-55"] },
+              { point: "Mean of about −55.3°C", keywords: ["−55.3", "-55.3", "minus 55.3", "−55", "-55"] },
             ],
             commonError: "Getting −100°C or 100°C for the range by adding −32 and −68.",
             guideRef: "climate-calculations",
@@ -2216,7 +2216,7 @@ export const extremeEnvironments: Topic = {
             hint: "(a) divide; (b) 1 ÷ 250 × 100.",
             modelAnswer: "(a) 25 ÷ 1 = 25 times more rain. (b) 1 ÷ 250 × 100 = 0.4%.",
             markScheme: [
-              { point: "25 times", keywords: ["25 times", "25x", "25 ×", "twenty-five times"] },
+              { point: "25 times", keywords: ["25 times", "25x", "twenty-five times", "25 fold", "25-fold"] },
               { point: "0.4%", keywords: ["0.4", "0,4", "0.4%"] },
             ],
             commonError: "Giving the difference (24 mm) instead of 'how many times'.",

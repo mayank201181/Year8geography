@@ -178,18 +178,18 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * smooth(t);
 
 /** Simplified, idealised DTM rates (per 1000 per year) along x ∈ [0, 5] — stage n spans [n−1, n]. */
 function deathRate(x: number) {
-  if (x < 1) return 34 + 4 * Math.sin(x * 6 * Math.PI);
-  if (x < 2) return lerp(34, 15, x - 1);
-  if (x < 3) return lerp(15, 10, x - 2);
-  if (x < 4) return 10;
-  return lerp(10, 12, x - 4);
+  if (x < 1) return 35 + 3.5 * Math.sin(x * 6 * Math.PI);
+  if (x < 2) return lerp(35, 14, x - 1);
+  if (x < 3) return lerp(14, 10, x - 2);
+  if (x < 4) return lerp(10, 10.5, x - 3);
+  return lerp(10.5, 12.5, x - 4);
 }
 function birthRate(x: number) {
   if (x < 1) return 37 + 1.5 * Math.sin(x * 4 * Math.PI);
   if (x < 2) return 37;
-  if (x < 3) return lerp(37, 15, x - 2);
-  if (x < 4) return lerp(15, 12, x - 3);
-  return lerp(12, 8, x - 4);
+  if (x < 3) return lerp(37, 14, x - 2);
+  if (x < 4) return lerp(14, 10.5, x - 3);
+  return lerp(10.5, 7.5, x - 4);
 }
 
 const STAGES = [
@@ -206,12 +206,12 @@ export function DTMExplorer() {
 
   const pts = useMemo(() => {
     const out: { x: number; b: number; d: number; p: number }[] = [];
-    let pop = 1;
+    let cum = 4;
     for (let i = 0; i <= 200; i++) {
       const x = (i / 200) * 5;
       const b = birthRate(x), dr = deathRate(x);
-      out.push({ x, b, d: dr, p: pop });
-      pop *= Math.exp(((b - dr) / 1000) * 3.2); // each step ≈ a few years of growth (illustrative)
+      out.push({ x, b, d: dr, p: cum });
+      cum += (b - dr) * 0.025; // illustrative S-curve: slope proportional to natural change (b - dr)
     }
     const max = Math.max(...out.map((o) => o.p));
     return out.map((o) => ({ ...o, p: o.p / max }));

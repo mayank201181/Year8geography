@@ -6,7 +6,7 @@ export const extremeTourismExtras: TopicExtras = {
   didYouKnow: [
     "Antarctic tourist numbers (IAATO counts) grew from about 6,700 in 1992–93 to about 122,000 in 2023–24 — roughly 18 times as many.",
     "Ships carrying more than 500 passengers are not allowed to land anyone in Antarctica, and no more than 100 people may be ashore at one landing site at a time.",
-    "Mount Everest is 8,849 m high; in 2023 Nepal issued a record of about 478 climbing permits, and each foreign climber paid a US$11,000 permit fee.",
+    "Mount Everest is 8,849 m high; in 2023 Nepal issued a record of about 478 climbing permits, and each foreign climber paid a US$11,000 permit fee (raised to US$15,000 from 2025).",
     "Since 2024 climbers on Everest must carry 'poo bags' above Base Camp and bring their human waste back down — it barely rots in the freezing cold.",
     "A polar explorer pulling a sledge can burn 5,000–6,000+ kcal a day — more than twice the 2,000–2,500 kcal most people need at home.",
   ],

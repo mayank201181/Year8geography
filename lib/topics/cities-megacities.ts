@@ -182,7 +182,7 @@ export const citiesMegacities: Topic = {
           "Megacities have multiplied, and the growth has shifted away from rich countries towards Asia, Africa and Latin America, where urbanisation is happening fastest. Asia now has the large majority of megacities.",
       },
       body:
-        "A **megacity** is an urban area with a population of **more than 10 million people**.\n\n**How the number has grown (UN figures):**\n- **1950: 2** megacities — New York and Tokyo.\n- **1975: 3** — Mexico City joined them.\n- **1990: 10**\n- **2018: 33**\n- **2030: about 43** projected. Newer UN estimates use different methods, so the exact total depends on how city boundaries are drawn.\n\n**Examples (rounded metro populations — sources differ by several million):**\n- **Tokyo, Japan — about 37 million** (Greater Tokyo); the UN's largest city in 2018. Its population has now roughly peaked and is expected to fall slowly as Japan ages.\n- **Delhi, India — about 30 million+**, growing fast and expected to become the largest.\n- **Shanghai, China — about 25–30 million.**\n- **Dhaka, Bangladesh — over 20 million.**\n- **Cairo, Egypt — about 20–22 million**, the largest city in the Arab world.\n- **Lagos, Nigeria — about 15–17 million in the city, 20 million+ in the wider metro area.**\n- **São Paulo, Brazil — about 22 million**, the largest city in South America.\n- **Mumbai, India — about 20 million+**, India's financial capital.\n\nBe aware: a 2025 UN report using a new, wider way of drawing city boundaries ranked **Jakarta** first (about 42 million), with Dhaka second and Tokyo third. Those newer figures are not directly comparable with the 2018 list used in this topic — rankings depend on **where you draw the line** around a city.\n\n**Describing the distribution using TEA:**\n- **T (Trend)** — the overall pattern: most megacities are in **Asia** (about 20 of the 33 in 2018), mostly in the **Northern Hemisphere**, and many are on **coasts or major rivers** (ports and trade).\n- **E (Example)** — give named cities and data: e.g. Tokyo (about 37 million), Delhi, Shanghai, Dhaka, Mumbai.\n- **A (Anomaly)** — exceptions: e.g. Southern Hemisphere megacities such as **São Paulo, Buenos Aires and Lima**; very few in **Europe** (Moscow, Paris) and **none in Oceania**.\n\n**The shift:** in 1950 megacities were in HICs. Today most are in **LICs and NEEs**, and the fastest-growing big cities are in **Africa** (Lagos, Kinshasa, and soon Luanda and Dar es Salaam) and **South Asia**.",
+        "A **megacity** is an urban area with a population of **more than 10 million people**.\n\n**How the number has grown (UN figures):**\n- **1950: 2** megacities — New York and Tokyo.\n- **1970: 3** — Osaka joined them; by **1975** **Mexico City** became the fourth (and the first outside a high-income country).\n- **1990: 10**\n- **2018: 33**\n- **2030: about 43** projected. Newer UN estimates use different methods, so the exact total depends on how city boundaries are drawn.\n\n**Examples (rounded metro populations — sources differ by several million):**\n- **Tokyo, Japan — about 37 million** (Greater Tokyo); the UN's largest city in 2018. Its population has now roughly peaked and is expected to fall slowly as Japan ages.\n- **Delhi, India — about 30 million+**, growing fast and expected to become the largest.\n- **Shanghai, China — about 25–30 million.**\n- **Dhaka, Bangladesh — over 20 million.**\n- **Cairo, Egypt — about 20–22 million**, the largest city in the Arab world.\n- **Lagos, Nigeria — about 15–17 million in the city, 20 million+ in the wider metro area.**\n- **São Paulo, Brazil — about 22 million**, the largest city in South America.\n- **Mumbai, India — about 20 million+**, India's financial capital.\n\nBe aware: a 2025 UN report using a new, wider way of drawing city boundaries ranked **Jakarta** first (about 42 million), with Dhaka second and Tokyo third. Those newer figures are not directly comparable with the 2018 list used in this topic — rankings depend on **where you draw the line** around a city.\n\n**Describing the distribution using TEA:**\n- **T (Trend)** — the overall pattern: most megacities are in **Asia** (about 20 of the 33 in 2018), mostly in the **Northern Hemisphere**, and many are on **coasts or major rivers** (ports and trade).\n- **E (Example)** — give named cities and data: e.g. Tokyo (about 37 million), Delhi, Shanghai, Dhaka, Mumbai.\n- **A (Anomaly)** — exceptions: e.g. Southern Hemisphere megacities such as **São Paulo, Buenos Aires and Lima**; very few in **Europe** (Moscow, Paris) and **none in Oceania**.\n\n**The shift:** in 1950 megacities were in HICs. Today most are in **LICs and NEEs**, and the fastest-growing big cities are in **Africa** (Lagos, Kinshasa, and soon Luanda and Dar es Salaam) and **South Asia**.",
       diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Bar chart of the number of megacities in each world region in 2018"><text x="160" y="14" font-size="11" text-anchor="middle" font-weight="bold" fill="#1e293b">Megacities by region, 2018 (UN): 33 total</text><text x="102" y="42" font-size="10" text-anchor="end" fill="#1e293b">Asia</text><rect x="106" y="32" width="180" height="14" fill="#7c3aed"/><text x="290" y="43" font-size="10" fill="#1e293b">20</text><text x="102" y="68" font-size="10" text-anchor="end" fill="#1e293b">Latin America</text><rect x="106" y="58" width="54" height="14" fill="#a78bfa"/><text x="164" y="69" font-size="10" fill="#1e293b">6</text><text x="102" y="94" font-size="10" text-anchor="end" fill="#1e293b">Africa</text><rect x="106" y="84" width="27" height="14" fill="#a78bfa"/><text x="137" y="95" font-size="10" fill="#1e293b">3</text><text x="102" y="120" font-size="10" text-anchor="end" fill="#1e293b">Europe</text><rect x="106" y="110" width="18" height="14" fill="#c4b5fd"/><text x="128" y="121" font-size="10" fill="#1e293b">2</text><text x="102" y="146" font-size="10" text-anchor="end" fill="#1e293b">North America</text><rect x="106" y="136" width="18" height="14" fill="#c4b5fd"/><text x="128" y="147" font-size="10" fill="#1e293b">2</text><text x="102" y="168" font-size="10" text-anchor="end" fill="#1e293b">Oceania</text><text x="110" y="168" font-size="10" fill="#1e293b">0</text><text x="160" y="190" font-size="10" text-anchor="middle" fill="#b91c1c">In 1950 there were only 2: New York and Tokyo</text></svg>`,
       diagramCaption:
         "In 2018, about 20 of the world's 33 megacities were in Asia (including Istanbul, which the UN counts as Western Asia). In 1950 there were only two, both in high-income countries.",
@@ -1083,12 +1083,12 @@ export const citiesMegacities: Topic = {
           },
           {
             id: "city-mcq-p2-q20",
-            question: "By 1975 there were three megacities: Tokyo, New York and which other?",
+            question: "In the 1970s, which city became the first megacity outside a high-income country, joining Tokyo, New York and Osaka?",
             options: ["London", "Paris", "Shanghai", "Mexico City"],
             answerIndex: 3,
-            hint: "The first megacity outside a high-income country.",
+            hint: "It is a Latin American capital city.",
             explanation:
-              "Mexico City joined Tokyo and New York by 1975. London was once the world's biggest city, but it never reached 10 million in the UN's agglomeration figures.",
+              "Mexico City passed 10 million by 1975, joining Tokyo, New York and Osaka. London was once the world's biggest city, but it had not reached 10 million in the UN's agglomeration figures.",
             guideRef: "megacities",
           },
         ],
@@ -1385,7 +1385,7 @@ export const citiesMegacities: Topic = {
               "An explanation of why Asia has high birth rates",
               "A second example from Asia, such as Shanghai",
               "The history of Delhi",
-              "An anomaly, such as Lima or Buenos Aires in the Southern Hemisphere",
+              "An anomaly, such as Lima or Buenos Aires in South America (outside Asia)",
             ],
             answerIndex: 3,
             hint: "They have T and E. What is missing?",
@@ -1420,7 +1420,7 @@ export const citiesMegacities: Topic = {
             answerIndex: 2,
             hint: "Bluewater is outside the M25; the City is the Square Mile.",
             explanation:
-              "Travelling inwards you go fringe → outer suburbs → inner suburbs → inner city → CBD. Option A is the right zones but in the outward direction — the wrong way for this journey.",
+              "Travelling inwards you go fringe → outer suburbs → inner suburbs → inner city → CBD. Starting at the CBD and ending at the fringe is the outward direction — the wrong way for this journey.",
             guideRef: "urban-land-use",
           },
           {
@@ -1702,7 +1702,7 @@ export const citiesMegacities: Topic = {
             hint: "Density = population ÷ area.",
             modelAnswer: "6,000,000 ÷ 735 = about 8,163 people per km² (roughly 8,200 per km²).",
             markScheme: [
-              { point: "Correct method: population divided by area", keywords: ["divide", "/735", "6,000,000 ÷ 735", "6,000,000 / 735", "6000000/735"] },
+              { point: "Correct method: population divided by area", keywords: ["divide", "dividing", "over 735", "per km", "6000000 735"] },
               { point: "Correct answer with units (about 8,160–8,200 per km²)", keywords: ["8,163", "8,164", "8,160", "8,170", "8,200"] },
             ],
             commonError: "Multiplying instead of dividing, or leaving out the units (people per km²).",
@@ -1818,8 +1818,8 @@ export const citiesMegacities: Topic = {
             modelAnswer: "A world city is a city with major influence on the global economy, politics and culture, acting as a hub for finance, TNC headquarters and transport. Examples: London and New York (Singapore is another).",
             markScheme: [
               { point: "Global influence / connections", keywords: ["influence", "global", "connect", "hub", "power"] },
-              { point: "First named world city", keywords: ["london", "new york", "singapore", "tokyo", "paris", "hong kong"] },
-              { point: "Second named world city", keywords: ["london", "new york", "singapore", "tokyo", "paris", "hong kong"] },
+              { point: "First named world city", keywords: ["london", "tokyo", "paris", "shanghai"] },
+              { point: "Second named world city", keywords: ["new york", "singapore", "hong kong", "dubai"] },
             ],
             commonError: "Defining it as 'a very big city' — that describes a megacity.",
             guideRef: "world-cities",
@@ -1947,13 +1947,13 @@ export const citiesMegacities: Topic = {
           },
           {
             id: "city-qa-p2-q06",
-            question: "Study the data. Number of megacities — 1950: 2; 1975: 3; 1990: 10; 2018: 33; 2030 (projected): 43. (a) Describe the trend. (b) Calculate the percentage increase from 1990 to 2018.",
+            question: "Study the data. Number of megacities — 1950: 2; 1970: 3; 1990: 10; 2018: 33; 2030 (projected): 43. (a) Describe the trend. (b) Calculate the percentage increase from 1990 to 2018.",
             marks: 4,
             hint: "(33 − 10) ÷ 10 × 100.",
-            modelAnswer: "(a) The number of megacities has increased, slowly at first (from 2 in 1950 to 3 in 1975) and then very rapidly since 1975, reaching 33 in 2018 with 43 projected for 2030. (b) (33 − 10) ÷ 10 × 100 = 230% increase.",
+            modelAnswer: "(a) The number of megacities has increased, slowly at first (from 2 in 1950 to 3 in 1970) and then very rapidly since the 1970s, reaching 33 in 2018 with 43 projected for 2030. (b) (33 − 10) ÷ 10 × 100 = 230% increase.",
             markScheme: [
               { point: "Overall increase", keywords: ["increas", "rise", "grow", "went up"] },
-              { point: "Rate: slow then rapid, with data", keywords: ["slow", "rapid", "fast", "accelerat", "1975", "since"] },
+              { point: "Rate: slow then rapid, with data", keywords: ["slow", "rapid", "fast", "accelerat", "1970", "1975", "since"] },
               { point: "Correct method", keywords: ["33 - 10", "23", "23 ÷ 10", "23/10", "subtract"] },
               { point: "Correct answer 230%", keywords: ["230", "2.3 times", "two hundred and thirty"] },
             ],
@@ -2106,7 +2106,7 @@ export const citiesMegacities: Topic = {
             markScheme: [
               { point: "Point: states a benefit or a clear view", keywords: ["agree", "benefit", "advantage", "outweigh"] },
               { point: "Evidence: named city with a benefit", keywords: ["singapore", "mrt", "universit", "hospital", "london", "wage"] },
-              { point: "Explanation of why the benefit improves lives", keywords: ["quality of life", "better", "income", "education", "healthcare", "because"] },
+              { point: "Explanation of why the benefit improves lives", keywords: ["quality of life", "better", "income", "education", "healthcare"] },
               { point: "Counter-point: a problem identified", keywords: ["however", "congestion", "pollution", "slum", "housing cost", "inequality"] },
               { point: "Evidence for the problem: named place/figure", keywords: ["delhi", "mumbai", "dharavi", "4 in 10", "smog", "lagos"] },
               { point: "Link/conclusion: judgement that depends on management or who you are", keywords: ["overall", "depends", "managed", "conclusion", "planned", "therefore"] },

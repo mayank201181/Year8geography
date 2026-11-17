@@ -208,7 +208,7 @@ export const coastalProcesses: Topic = {
       heading: "Singapore's coast: reclaimed land, seawalls and rising seas",
       body:
         "Singapore is a low-lying island nation, so coastal processes are not just theory here. About **30% of the land is less than 5 m above mean sea level**.\n\n**A coast built by people.** Through **land reclamation** (creating new land by filling the sea with sand and soil), Singapore has grown from about **581 km² in the 1960s to about 735 km² today** — an increase of roughly a quarter. **East Coast Park**, about **15 km long**, sits entirely on land reclaimed from the late 1960s onwards and opened in the 1970s. Marine Parade Road was once on the seafront; the shore is now hundreds of metres further out.\n\n**A coast armoured against the sea.** Reclaimed sand is loose and easily eroded by hydraulic action and backwash, so it must be protected. Today **more than 70% of Singapore's coastline** is lined with **seawalls** (vertical or sloping concrete walls) and **rock revetments** (sloping banks of large boulders that absorb wave energy). At East Coast Park, **offshore breakwaters** and short headland breakwaters create a string of small bays where waves lose energy and sand is deposited, keeping the beach in place. Elsewhere, especially on Pulau Ubin and in Sungei Buloh, **mangroves** act as a natural buffer.\n\n**The threat of sea-level rise.** As the climate warms, seawater expands and land ice melts. Singapore's Centre for Climate Research projects that mean sea level could rise by **up to about 1 m by 2100** (the 2024 projections give a range of roughly 0.2–1.15 m), and when high tides and storm surges are added, sea levels could reach **4–5 m above today's mean sea level**. Higher seas mean waves reach further inland, more erosion of reclaimed land and more flooding.\n\n**PUB's plans.** In 2020 **PUB**, Singapore's national water agency, became the **national coastal protection agency**. The government has estimated that protecting the coast could cost about **S$100 billion or more over 100 years**, and set up a **Coastal and Flood Protection Fund** (first S$5 billion) in 2020. PUB is carrying out site-by-site studies, starting with the **City–East Coast** stretch and the **North-West coast** (Lim Chu Kang and Sungei Kadut). Ideas include raising and extending seawalls, tidal gates and polders, and the **Long Island** concept — reclaiming about **800 hectares** off East Coast, which could protect the coast and create a new reservoir.",
-      diagram: `<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of East Coast Park showing reclaimed land, rock revetment, breakwater and future sea level"><rect width="320" height="170" fill="#f0f9ff"/><path d="M0,95 L120,95 L150,120 L150,170 L0,170 Z" fill="#fde68a" stroke="#ca8a04"/><path d="M0,95 L60,95 L60,170 L0,170 Z" fill="#d9f99d" stroke="#65a30d"/><text x="30" y="88" font-size="9" text-anchor="middle" fill="#365314">old coast</text><text x="92" y="88" font-size="9" text-anchor="middle" fill="#713f12">park</text><text x="92" y="140" font-size="9" text-anchor="middle" fill="#713f12">reclaimed sand</text><path d="M120,95 L140,95 L172,132 L150,132 Z" fill="#78716c" stroke="#44403c"/><text x="168" y="108" font-size="9" fill="#44403c">rock revetment</text><rect x="150" y="132" width="170" height="38" fill="#7dd3fc"/><path d="M240,132 L252,116 L266,116 L278,132 Z" fill="#78716c" stroke="#44403c"/><text x="259" y="110" font-size="9" text-anchor="middle" fill="#44403c">breakwater</text><line x1="140" y1="132" x2="320" y2="132" stroke="#0369a1" stroke-width="1.5"/><text x="300" y="146" font-size="9" text-anchor="end" fill="#0c4a6e">today's sea level</text><line x1="130" y1="118" x2="320" y2="118" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 3"/><text x="318" y="160" font-size="9" text-anchor="end" fill="#dc2626">+1 m by 2100 (up to)</text><line x1="0" y1="20" x2="40" y2="20" stroke="#334155"/><text x="45" y="24" font-size="10" fill="#334155">Not to scale</text></svg>`,
+      diagram: `<svg viewBox="0 0 320 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of East Coast Park showing reclaimed land, rock revetment, breakwater and future sea level"><rect width="320" height="170" fill="#f0f9ff"/><path d="M0,95 L120,95 L150,120 L150,170 L0,170 Z" fill="#fde68a" stroke="#ca8a04"/><path d="M0,95 L60,95 L60,170 L0,170 Z" fill="#d9f99d" stroke="#65a30d"/><text x="30" y="88" font-size="9" text-anchor="middle" fill="#365314">old coast</text><text x="92" y="88" font-size="9" text-anchor="middle" fill="#713f12">park</text><text x="92" y="140" font-size="9" text-anchor="middle" fill="#713f12">reclaimed sand</text><path d="M120,95 L140,95 L172,132 L150,132 Z" fill="#78716c" stroke="#44403c"/><text x="168" y="108" font-size="9" fill="#44403c">rock revetment</text><rect x="150" y="132" width="170" height="38" fill="#7dd3fc"/><path d="M240,132 L252,116 L266,116 L278,132 Z" fill="#78716c" stroke="#44403c"/><text x="259" y="110" font-size="9" text-anchor="middle" fill="#44403c">breakwater</text><line x1="140" y1="132" x2="320" y2="132" stroke="#0369a1" stroke-width="1.5"/><text x="300" y="146" font-size="9" text-anchor="end" fill="#0c4a6e">today's sea level</text><line x1="130" y1="118" x2="320" y2="118" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="5 3"/><text x="318" y="114" font-size="9" text-anchor="end" fill="#dc2626">+1 m by 2100 (up to)</text><line x1="0" y1="20" x2="40" y2="20" stroke="#334155"/><text x="45" y="24" font-size="10" fill="#334155">Not to scale</text></svg>`,
       diagramCaption: "East Coast Park sits on reclaimed sand protected by a rock revetment and offshore breakwaters; a sea-level rise of up to about 1 m by 2100 would let waves reach higher up the defences.",
       keyPoints: [
         "East Coast Park (about 15 km) is built on land reclaimed from the late 1960s.",
@@ -1366,7 +1366,7 @@ export const coastalProcesses: Topic = {
         questions: [
           {
             id: "cproc-mcq-p4-q01",
-            question: "Beach A: fetch 200 km, wind 40 km/h for 6 hours. Beach B: fetch 4,000 km, wind 40 km/h for 6 hours. Which is likely to receive higher-energy waves?",
+            question: "Beach A: fetch 200 km, wind 40 km/h for 48 hours. Beach B: fetch 4,000 km, wind 40 km/h for 48 hours. Which is likely to receive higher-energy waves?",
             options: [
               "Beach B, because the fetch is twenty times longer",
               "Beach A, because a short fetch concentrates energy",
@@ -1376,7 +1376,7 @@ export const coastalProcesses: Topic = {
             answerIndex: 0,
             hint: "Only one variable differs between the beaches.",
             explanation:
-              "With wind speed and duration equal, the longer fetch at Beach B allows more energy transfer, so waves are bigger. A short fetch limits wave growth rather than concentrating energy.",
+              "With wind speed and duration equal (and blowing long enough for waves to cross the fetch), the longer fetch at Beach B allows far more energy transfer, so waves are bigger. A short fetch limits wave growth rather than concentrating energy.",
             guideRef: "coast-and-waves",
           },
           {
@@ -2064,7 +2064,7 @@ export const coastalProcesses: Topic = {
             hint: "Part ÷ whole × 100.",
             modelAnswer: "22 ÷ 30 × 100 = 73.3%. About 73.3% of this coastline is protected — similar to the national figure of over 70%.",
             markScheme: [
-              { point: "Correct method (22 ÷ 30 × 100)", keywords: ["22 ÷ 30", "22/30", "22 / 30", "× 100", "x 100"] },
+              { point: "Correct method (22 ÷ 30 × 100)", keywords: ["22 ÷ 30", "22/30", "22 / 30", "22 divided by 30", "22 over 30", "0.733"] },
               { point: "Correct answer 73.3%", keywords: ["73.3", "73.33", "73%", "73 %"] },
             ],
             commonError: "Dividing 30 by 22, giving 136%.",
@@ -2269,7 +2269,7 @@ export const coastalProcesses: Topic = {
               "Increase = 735 − 581 = 154 km². Percentage increase = 154 ÷ 581 × 100 ≈ 26.5%. Singapore's land area has grown by about a quarter, mostly through land reclamation.",
             markScheme: [
               { point: "Calculates the increase: 154", keywords: ["154", "735 - 581", "735 − 581", "735-581"] },
-              { point: "Divides by original (581) and multiplies by 100", keywords: ["÷ 581", "/581", "/ 581", "÷581", "x 100", "× 100"] },
+              { point: "Divides by original (581) and multiplies by 100", keywords: ["154 581", "divide by 581", "divided by 581", "over 581", "0.265"] },
               { point: "Correct answer about 26.5%", keywords: ["26.5", "26.51", "27%", "26%"] },
             ],
             commonError: "Dividing by 735 (the new value) and getting 21%.",

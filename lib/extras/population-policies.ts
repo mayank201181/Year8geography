@@ -36,7 +36,7 @@ export const populationPoliciesExtras: TopicExtras = {
   didYouKnow: [
     "Singapore's resident total fertility rate fell to 0.97 in 2023, the first time it dropped below 1 child per woman and far below the replacement level of 2.1.",
     "In the 1970s Singapore's slogan was \"Stop at Two\"; by 1987 it had switched to \"Have Three or More, if you can afford it\" because births had fallen too far.",
-    "China's one-child policy ran from 1980 to 2015. It was replaced by a two-child policy in 2016 and a three-child policy in 2021 as China's population began to age and shrink.",
+    "China's one-child policy ran from 1979 to 2015. It was replaced by a two-child policy in 2016 and a three-child policy in 2021 as China's population began to age and shrink.",
     "China's population fell in 2022 for the first time in about 60 years, and India overtook it as the world's most populous country in 2023.",
     "Between 1961 and 2020 world cereal production more than tripled while the world's population grew about 2.5 times, which is the kind of innovation Ester Boserup predicted.",
   ],
@@ -77,7 +77,7 @@ export const populationPoliciesExtras: TopicExtras = {
       title: "China's 4-2-1 family",
       svg: familyPyramidSvg,
       caption:
-        "Under the one-child policy (1980–2015) many Chinese children grew up with no siblings. When everyone has only one child, one adult may have to look after two parents and four grandparents: an ageing population with fewer workers to support it.",
+        "Under the one-child policy (1979–2015) many Chinese children grew up with no siblings. When everyone has only one child, one adult may have to look after two parents and four grandparents: an ageing population with fewer workers to support it.",
     },
     {
       title: "Two theories of population and food",

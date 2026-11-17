@@ -205,7 +205,7 @@ export function EarsHeatLoss() {
     >
       <details className="mb-2 rounded-lg bg-amber-50 px-3 py-2 text-sm text-amber-900">
         <summary className="cursor-pointer">🤔 <b>Predict first:</b> double the body size but keep the same shape — does surface area : volume go up or down?</summary>
-        <p className="mt-1">Down — it halves. Surface area grows ×4 but volume grows ×8. Try it: drag body size from 8 to 16 cm and watch the ratio.</p>
+        <p className="mt-1">Down — it halves. Surface area grows ×4 but volume grows ×8. Try it: set body size to 6 cm and ear length to 6 cm (SA : V = 0.56), then double both to 12 cm and 12 cm (SA : V = 0.28 — exact half!).</p>
       </details>
       <div className="mb-3 flex flex-wrap gap-2 text-sm">
         <button type="button" onClick={() => preset(8, 12, 25)} className="rounded-full bg-amber-100 px-3 py-1.5 font-semibold text-amber-900 ring-1 ring-amber-300">🏜️ Fennec fox (Sahara)</button>

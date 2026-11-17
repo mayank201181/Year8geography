@@ -1,19 +1,23 @@
 import type { TopicExtras } from "../types";
 
 const todSvg = `<svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Plan of a transit-oriented eco-neighbourhood: an MRT station in the centre surrounded by mixed-use shops and offices, a 400 to 500 metre walking circle of homes, a park connector with cycle lanes, and industry placed downwind behind a green buffer">
+  <defs><marker id="tod-wind" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto"><path d="M0,0 L6,3.5 L0,7 Z" fill="#0369a1"/></marker></defs>
   <rect x="0" y="0" width="360" height="260" fill="#ffffff"/>
   <text x="180" y="18" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e293b">A transit-oriented eco-neighbourhood</text>
-  <rect x="10" y="28" width="250" height="222" fill="#fef3c7" stroke="#fcd34d"/>
-  <circle cx="135" cy="139" r="96" fill="#fde68a" stroke="#d97706" stroke-dasharray="6 4"/>
-  <text x="135" y="54" font-size="11" text-anchor="middle" fill="#92400e">400–500 m walk (5–10 min)</text>
+  <rect x="10" y="28" width="250" height="226" fill="#fef3c7" stroke="#fcd34d"/>
+  <line x1="196" y1="38" x2="254" y2="38" stroke="#0369a1" stroke-width="1.6" marker-end="url(#tod-wind)"/>
+  <text x="225" y="35" font-size="9" text-anchor="middle" fill="#0369a1">prevailing wind</text>
+  <circle cx="135" cy="139" r="92" fill="#fde68a" stroke="#d97706" stroke-dasharray="6 4"/>
+  <text x="135" y="59" font-size="11" text-anchor="middle" fill="#92400e">400–500 m walk (5–10 min)</text>
   <circle cx="135" cy="139" r="40" fill="#c7d2fe" stroke="#6366f1"/>
   <text x="135" y="112" font-size="11" text-anchor="middle" fill="#3730a3">mixed-use core</text>
   <line x1="10" y1="139" x2="260" y2="139" stroke="#dc2626" stroke-width="5"/>
   <circle cx="135" cy="139" r="9" fill="#ffffff" stroke="#dc2626" stroke-width="3"/>
   <text x="135" y="166" font-size="11" text-anchor="middle" fill="#991b1b">MRT station</text>
-  <rect x="10" y="214" width="250" height="16" fill="#bbf7d0"/>
-  <line x1="10" y1="222" x2="260" y2="222" stroke="#15803d" stroke-width="2.5" stroke-dasharray="6 4"/>
-  <text x="135" y="244" font-size="11" text-anchor="middle" fill="#166534">park connector + cycle lane (flood-safe green corridor)</text>
+  <rect x="10" y="212" width="250" height="15" fill="#bbf7d0"/>
+  <line x1="10" y1="219.5" x2="260" y2="219.5" stroke="#15803d" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <text x="135" y="239" font-size="10.5" text-anchor="middle" fill="#166534">park connector + cycle lane</text>
+  <text x="135" y="250" font-size="10" text-anchor="middle" fill="#166534">(flood-safe green corridor)</text>
   <rect x="30" y="70" width="16" height="30" fill="#d97706"/><rect x="50" y="62" width="16" height="38" fill="#b45309"/>
   <rect x="200" y="70" width="16" height="30" fill="#d97706"/><rect x="220" y="62" width="16" height="38" fill="#b45309"/>
   <text x="56" y="114" font-size="11" text-anchor="middle" fill="#92400e">high-rise homes</text>

@@ -34,7 +34,7 @@ export const populationGrowthExtras: TopicExtras = {
         "Label cups 1 to 10. Put 1 grain in cup 1, 2 grains in cup 2, 4 in cup 3, and keep doubling.",
         "Before you start, predict: how many grains will cup 10 need? Write it down.",
         "Count carefully as far as you can (cup 10 needs 512 grains). Weigh a cup if counting gets too slow.",
-        "Each cup is one 'doubling time'. At 2% growth, the rule of 70 gives a doubling time of 35 years: work out how many years your 10 cups represent.",
+        "Each step from one cup to the next is one 'doubling time' (9 doublings from cup 1 to cup 10). At 2% growth, the rule of 70 gives a doubling time of 35 years: work out how many years those 9 doublings represent.",
         "Compare with adding the same number each time (1, 2, 3, 4 …). Which grows faster by cup 10?",
       ],
       science:

@@ -90,7 +90,7 @@ export const populationGrowth: Topic = {
       },
       body:
         "The population explosion did **not** happen mainly because people started having more babies. It happened because **death rates fell** while birth rates stayed high for several generations. The gap between the two lines produced rapid natural increase.\n\n**1. More and better food**\n\n- The **British Agricultural Revolution** (roughly 1700 to 1850) brought new methods such as **crop rotation** (the Norfolk four-course system), **selective breeding** of animals and Jethro Tull's **seed drill** (1701). Farms produced far more food with fewer workers, so fewer people starved and people were healthier and better able to fight disease.\n- In the 1960s the **Green Revolution** spread high-yield rice and wheat, fertilisers and irrigation across Asia and Latin America, helping countries such as India avoid feared famines.\n\n**2. The Industrial Revolution**\n\nFrom about **1750**, factories, railways and steamships made it possible to move food quickly to where it was needed, raised incomes over time and paid for public services. (At first, crowded industrial cities were very unhealthy, but wealth eventually funded better housing and sanitation.)\n\n**3. Sanitation and clean water**\n\n**Sanitation** means safe disposal of sewage and waste. After **John Snow** linked cholera to a dirty water pump in 1854, and London's **Great Stink** of 1858, engineer **Joseph Bazalgette** built a huge sewer network. Clean piped water and sewers cut deaths from cholera, typhoid and diarrhoea, which killed huge numbers of babies and children.\n\n**4. Medicine and health care**\n\n- **Vaccination**: Edward Jenner's smallpox vaccine (1796). Smallpox was declared eradicated worldwide in **1980**.\n- **Antibiotics**: penicillin, discovered by Alexander Fleming in **1928**, mass-produced in the 1940s.\n- Better hospitals, midwives, and knowledge about hygiene such as hand-washing.\n\nAs a result, global **life expectancy** (how long a newborn can expect to live on average) rose from about **46 years in 1950** to about **73 years** today, and the share of children dying before age five fell from about 1 in 4 to fewer than 1 in 25.\n\nIn today's lower-income countries, death rates fell **much faster** than they did in Europe, because vaccines, antibiotics and clean-water technology arrived all at once after 1950. That is why their populations grew so quickly in the late 20th century.",
-      diagram: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph of a falling death rate with causes labelled along the curve"><line x1="35" y1="160" x2="305" y2="160" stroke="#334155" stroke-width="1.5"/><line x1="35" y1="160" x2="35" y2="15" stroke="#334155" stroke-width="1.5"/><text x="170" y="182" font-size="10" text-anchor="middle" fill="#334155">Time (1700 to today)</text><text x="14" y="90" font-size="10" text-anchor="middle" fill="#334155" transform="rotate(-90 14 90)">Per 1,000 per year</text><path d="M38,32 L300,36" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 3"/><text x="240" y="28" font-size="10" fill="#2563eb">Birth rate</text><path d="M38,40 L90,44 Q140,60 175,100 Q215,140 300,146" fill="none" stroke="#dc2626" stroke-width="2.5"/><text x="250" y="138" font-size="10" fill="#dc2626">Death rate</text><circle cx="90" cy="44" r="4" fill="#f59e0b"/><text x="55" y="62" font-size="10" fill="#0f172a">1 Food: farming</text><text x="55" y="74" font-size="10" fill="#0f172a">revolutions</text><circle cx="150" cy="70" r="4" fill="#f59e0b"/><text x="160" y="66" font-size="10" fill="#0f172a">2 Clean water</text><text x="160" y="78" font-size="10" fill="#0f172a">and sewers</text><circle cx="200" cy="124" r="4" fill="#f59e0b"/><text x="82" y="118" font-size="10" fill="#0f172a">3 Vaccines and</text><text x="82" y="130" font-size="10" fill="#0f172a">antibiotics</text><text x="150" y="100" font-size="10" fill="#16a34a">gap = growth</text></svg>`,
+      diagram: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph of a falling death rate with causes labelled along the curve"><line x1="35" y1="160" x2="305" y2="160" stroke="#334155" stroke-width="1.5"/><line x1="35" y1="160" x2="35" y2="15" stroke="#334155" stroke-width="1.5"/><text x="170" y="182" font-size="10" text-anchor="middle" fill="#334155">Time (1700 to today)</text><text x="14" y="90" font-size="10" text-anchor="middle" fill="#334155" transform="rotate(-90 14 90)">Per 1,000 per year</text><path d="M38,32 L300,36" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="6 3"/><text x="240" y="28" font-size="10" fill="#2563eb">Birth rate</text><path d="M38,40 L90,44 Q140,60 175,100 Q215,140 300,146" fill="none" stroke="#dc2626" stroke-width="2.5"/><text x="250" y="138" font-size="10" fill="#dc2626">Death rate</text><circle cx="90" cy="44" r="4" fill="#f59e0b"/><text x="55" y="62" font-size="10" fill="#0f172a">1 Food: farming</text><text x="55" y="74" font-size="10" fill="#0f172a">revolutions</text><circle cx="150" cy="76" r="4" fill="#f59e0b"/><text x="160" y="66" font-size="10" fill="#0f172a">2 Clean water</text><text x="160" y="78" font-size="10" fill="#0f172a">and sewers</text><circle cx="200" cy="119" r="4" fill="#f59e0b"/><text x="82" y="118" font-size="10" fill="#0f172a">3 Vaccines and</text><text x="82" y="130" font-size="10" fill="#0f172a">antibiotics</text><text x="150" y="100" font-size="10" fill="#16a34a">gap = growth</text></svg>`,
       diagramCaption:
         "Death rates fell first, while birth rates stayed high. The widening gap between the two lines caused the population explosion.",
       keyPoints: [
@@ -122,7 +122,7 @@ export const populationGrowth: Topic = {
           "Birth rates fall when children are more likely to survive, girls stay in school longer, women have careers, contraception is available, families move to cities and children become expensive. These changes happen to most countries as they develop.",
       },
       body:
-        "After death rates fall, birth rates usually follow, but often a generation or more later. Here are the main reasons:\n\n- **Education of girls and women**: girls who stay in school longer tend to marry later, start families later and have fewer children. They are more likely to have paid careers, so having a child has a bigger **opportunity cost** (what you give up). Many demographers think this is the single most powerful factor.\n- **Contraception and family planning**: **contraception** means methods that prevent pregnancy. When it is cheap, available and accepted, couples can choose how many children to have and when.\n- **Lower infant and child mortality**: when parents are confident their children will survive, they no longer need to have extra babies as an insurance policy.\n- **Urbanisation**: **urbanisation** means a growing share of people living in towns and cities. On a farm, children help with work from a young age and are an economic asset. In a city, housing is small and expensive and children are in school, not working.\n- **The cost of raising children**: in high-income places, school fees, tuition, housing and childcare make children very expensive. In Singapore, the high cost of living and long working hours are often given as reasons for having fewer children.\n- **Pensions and welfare**: where the state or savings support old people, parents do not depend on many children to look after them in old age.\n- **Changing attitudes and status of women**: later marriage, more people choosing not to marry, and greater gender equality.\n\nSome governments have tried to change birth rates directly. **Anti-natalist** policies try to **reduce** births (for example China's **one-child policy**, 1980 to 2015, and Singapore's **Stop at Two** campaign of 1972). **Pro-natalist** policies try to **increase** births (for example Singapore's **Baby Bonus**, introduced in 2001, and its 1987 slogan **Have Three or More, if you can afford it**).\n\nWhen birth rates fall below replacement level (2.1) for a long time, a country faces an **ageing population** (a rising proportion of older people) and eventually **natural decrease**.",
+        "After death rates fall, birth rates usually follow, but often a generation or more later. Here are the main reasons:\n\n- **Education of girls and women**: girls who stay in school longer tend to marry later, start families later and have fewer children. They are more likely to have paid careers, so having a child has a bigger **opportunity cost** (what you give up). Many demographers think this is the single most powerful factor.\n- **Contraception and family planning**: **contraception** means methods that prevent pregnancy. When it is cheap, available and accepted, couples can choose how many children to have and when.\n- **Lower infant and child mortality**: when parents are confident their children will survive, they no longer need to have extra babies as an insurance policy.\n- **Urbanisation**: **urbanisation** means a growing share of people living in towns and cities. On a farm, children help with work from a young age and are an economic asset. In a city, housing is small and expensive and children are in school, not working.\n- **The cost of raising children**: in high-income places, school fees, tuition, housing and childcare make children very expensive. In Singapore, the high cost of living and long working hours are often given as reasons for having fewer children.\n- **Pensions and welfare**: where the state or savings support old people, parents do not depend on many children to look after them in old age.\n- **Changing attitudes and status of women**: later marriage, more people choosing not to marry, and greater gender equality.\n\nSome governments have tried to change birth rates directly. **Anti-natalist** policies try to **reduce** births (for example China's **one-child policy**, 1979 to 2015, and Singapore's **Stop at Two** campaign of 1972). **Pro-natalist** policies try to **increase** births (for example Singapore's **Baby Bonus**, introduced in 2001, and its 1987 slogan **Have Three or More, if you can afford it**).\n\nWhen birth rates fall below replacement level (2.1) for a long time, a country faces an **ageing population** (a rising proportion of older people) and eventually **natural decrease**.",
       diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow diagram showing five factors leading to fewer births per woman"><defs><marker id="wbrArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#475569"/></marker></defs><rect x="105" y="82" width="110" height="36" rx="8" fill="#fde68a" stroke="#b45309"/><text x="160" y="98" font-size="10" text-anchor="middle" fill="#78350f">Fewer births</text><text x="160" y="111" font-size="10" text-anchor="middle" fill="#78350f">per woman</text><rect x="8" y="10" width="92" height="30" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="54" y="29" font-size="10" text-anchor="middle" fill="#1e3a8a">Girls' education</text><rect x="220" y="10" width="92" height="30" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="266" y="29" font-size="10" text-anchor="middle" fill="#1e3a8a">Contraception</text><rect x="8" y="160" width="92" height="30" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="54" y="179" font-size="10" text-anchor="middle" fill="#1e3a8a">Urbanisation</text><rect x="220" y="160" width="92" height="30" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="266" y="179" font-size="10" text-anchor="middle" fill="#1e3a8a">Cost of children</text><rect x="114" y="10" width="92" height="30" rx="6" fill="#dcfce7" stroke="#16a34a"/><text x="160" y="23" font-size="10" text-anchor="middle" fill="#14532d">Fewer child</text><text x="160" y="35" font-size="10" text-anchor="middle" fill="#14532d">deaths</text><line x1="70" y1="40" x2="118" y2="80" stroke="#475569" stroke-width="1.5" marker-end="url(#wbrArrow)"/><line x1="250" y1="40" x2="202" y2="80" stroke="#475569" stroke-width="1.5" marker-end="url(#wbrArrow)"/><line x1="160" y1="40" x2="160" y2="78" stroke="#475569" stroke-width="1.5" marker-end="url(#wbrArrow)"/><line x1="70" y1="160" x2="118" y2="121" stroke="#475569" stroke-width="1.5" marker-end="url(#wbrArrow)"/><line x1="250" y1="160" x2="202" y2="121" stroke="#475569" stroke-width="1.5" marker-end="url(#wbrArrow)"/></svg>`,
       diagramCaption:
         "Several social and economic changes work together to reduce the number of children families choose to have.",
@@ -154,7 +154,7 @@ export const populationGrowth: Topic = {
           "India, in about April 2023 (UN estimate), with roughly 1.43 billion people. It was both: India kept growing while China's population started to fall in 2022. But the fastest growth rates of all are in sub-Saharan Africa.",
       },
       body:
-        "Population growth today is very **uneven**. Describe the pattern using **TEA**: **T**rend, **E**xample, **A**nomaly.\n\n- **Trend**: the fastest growth is in **sub-Saharan Africa** (the part of Africa south of the Sahara Desert) and parts of the Middle East and South Asia. The slowest growth, or decline, is in **Europe**, **East Asia** (Japan, South Korea, China) and some Caribbean islands.\n- **Example**: **Niger** has one of the highest fertility rates in the world (about **6 children per woman**) and grows by about **3.5% a year**, so its population (about **27 million**) would double in about **20 years**. Half its people are under about **15 years old**.\n- **Anomaly**: some places break the pattern, for example **Singapore** and **the Gulf states** grow quickly through **immigration** even though birth rates are low.\n\n**Nigeria** is Africa's most populous country, with roughly **220 to 230 million** people and a TFR of about **5**. Its largest city, Lagos, has around 15 to 17 million people (20 million+ in the wider metro area). The UN projects Nigeria could reach about **375 million by 2050**, rivalling the USA as the world's third most populous country after India and China.\n\n**India and China**: India overtook China as the world's most populous country in **2023**, with about **1.43 billion** people. India's fertility rate has fallen to about **2.0**, already below replacement, but **population momentum** (its very young population) means it will keep growing until about the 2060s. China's fertility is about **1.0**; its population **fell in 2022 for the first time since 1961**, partly a legacy of the **one-child policy** (1980 to 2015).\n\nThe UN says more than half of the world's growth up to 2050 will happen in just **eight countries**: the Democratic Republic of the Congo, Egypt, Ethiopia, India, Nigeria, Pakistan, the Philippines and Tanzania. By 2050 more than **1 in 5** people on Earth may live in sub-Saharan Africa (and about 1 in 4 in Africa as a whole).",
+        "Population growth today is very **uneven**. Describe the pattern using **TEA**: **T**rend, **E**xample, **A**nomaly.\n\n- **Trend**: the fastest growth is in **sub-Saharan Africa** (the part of Africa south of the Sahara Desert) and parts of the Middle East and South Asia. The slowest growth, or decline, is in **Europe**, **East Asia** (Japan, South Korea, China) and some Caribbean islands.\n- **Example**: **Niger** has one of the highest fertility rates in the world (about **6 children per woman**) and grows by about **3.5% a year**, so its population (about **27 million**) would double in about **20 years**. Half its people are under about **15 years old**.\n- **Anomaly**: some places break the pattern, for example **Singapore** and **the Gulf states** grow quickly through **immigration** even though birth rates are low.\n\n**Nigeria** is Africa's most populous country, with roughly **220 to 230 million** people and a TFR of about **5**. Its largest city, Lagos, has around 15 to 17 million people (20 million+ in the wider metro area). The UN projects Nigeria could reach about **375 million by 2050**, rivalling the USA as the world's third most populous country after India and China.\n\n**India and China**: India overtook China as the world's most populous country in **2023**, with about **1.43 billion** people. India's fertility rate has fallen to about **2.0**, already below replacement, but **population momentum** (its very young population) means it will keep growing until about the 2060s. China's fertility is about **1.0**; its population **fell in 2022 for the first time since 1961**, partly a legacy of the **one-child policy** (1979 to 2015).\n\nThe UN says more than half of the world's growth up to 2050 will happen in just **eight countries**: the Democratic Republic of the Congo, Egypt, Ethiopia, India, Nigeria, Pakistan, the Philippines and Tanzania. By 2050 more than **1 in 5** people on Earth may live in sub-Saharan Africa (and about 1 in 4 in Africa as a whole).",
       diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Horizontal bar chart of total fertility rate for Niger, Nigeria, world, India, China and Singapore with a replacement level line at 2.1"><text x="160" y="14" font-size="11" text-anchor="middle" fill="#0f172a">Children per woman (TFR, approx. early 2020s)</text><g font-size="10" fill="#0f172a" text-anchor="end"><text x="84" y="37">Niger</text><text x="84" y="63">Nigeria</text><text x="84" y="89">World</text><text x="84" y="115">India</text><text x="84" y="141">China</text><text x="84" y="167">Singapore</text></g><rect x="90" y="26" width="180" height="16" fill="#dc2626"/><rect x="90" y="52" width="150" height="16" fill="#f97316"/><rect x="90" y="78" width="69" height="16" fill="#64748b"/><rect x="90" y="104" width="60" height="16" fill="#eab308"/><rect x="90" y="130" width="30" height="16" fill="#2563eb"/><rect x="90" y="156" width="29" height="16" fill="#2563eb"/><g font-size="10" fill="#0f172a"><text x="274" y="38">~6</text><text x="244" y="64">~5</text><text x="163" y="90">~2.3</text><text x="154" y="116">~2.0</text><text x="124" y="142">~1.0</text><text x="123" y="168">0.97</text></g><line x1="153" y1="22" x2="153" y2="178" stroke="#16a34a" stroke-width="2" stroke-dasharray="5 3"/><text x="153" y="192" font-size="10" text-anchor="middle" fill="#15803d">Replacement level 2.1</text><line x1="90" y1="22" x2="90" y2="178" stroke="#334155"/></svg>`,
       diagramCaption:
         "Fertility rates vary hugely. Niger and Nigeria are far above replacement level (2.1); China and Singapore are far below it.",
@@ -819,7 +819,7 @@ export const populationGrowth: Topic = {
             id: "pgrow-mcq-p2-q07",
             question: "Which is an example of an ANTI-natalist policy?",
             options: [
-              "China's one-child policy (1980 to 2015)",
+              "China's one-child policy (1979 to 2015)",
               "Singapore's Baby Bonus",
               "Paid parental leave in Sweden",
               "Cheaper childcare in France",
@@ -879,7 +879,7 @@ export const populationGrowth: Topic = {
             id: "pgrow-mcq-p2-q12",
             question: "Why does a fall in child mortality usually lead, a generation later, to a fall in birth rates?",
             options: [
-              "Children who survive look after their parents, so parents need fewer",
+              "Governments automatically fine families once child mortality falls",
               "Hospitals provide contraception to every mother",
               "Parents no longer need extra babies as 'insurance' against some dying",
               "Healthy children make parents less fertile",
@@ -887,7 +887,7 @@ export const populationGrowth: Topic = {
             answerIndex: 2,
             hint: "Think about why families in the past had 'spare' children.",
             explanation:
-              "When parents are confident their children will survive, they do not need to have extra babies to make sure some live to adulthood. The first option sounds plausible but is not the main mechanism.",
+              "When parents are confident their children will survive, they do not need to have extra babies to make sure some live to adulthood. Falling child mortality does not trigger automatic government fines or reduce biological fertility.",
             guideRef: "why-birth-rates-fall",
           },
           {
@@ -938,11 +938,11 @@ export const populationGrowth: Topic = {
           {
             id: "pgrow-mcq-p2-q16",
             question: "In which year did China's population fall for the first time since 1961?",
-            options: ["1980", "2000", "2015", "2022"],
+            options: ["1979", "2000", "2015", "2022"],
             answerIndex: 3,
             hint: "It was the year before India overtook China.",
             explanation:
-              "China's population fell in 2022, and India overtook it in 2023. 1980 is when the one-child policy began.",
+              "China's population fell in 2022, and India overtook it in 2023. 1979 is when the one-child policy began.",
             guideRef: "fastest-growth-today",
           },
           {
@@ -1450,11 +1450,11 @@ export const populationGrowth: Topic = {
           {
             id: "pgrow-mcq-p4-q15",
             question: "When was China's one-child policy in force?",
-            options: ["1949 to 1979", "1980 to 2015", "2000 to 2020", "1960 to 1990"],
+            options: ["1949 to 1975", "1979 to 2015", "2000 to 2020", "1960 to 1990"],
             answerIndex: 1,
             hint: "It ended when China switched to a two-child policy.",
             explanation:
-              "The policy began in 1980 and was replaced by a two-child policy from 2016 (announced 2015). 1949 is when the People's Republic of China was founded.",
+              "The policy was introduced in 1979 and replaced by a two-child policy from 2016 (announced in 2015). 1949 is when the People's Republic of China was founded.",
             guideRef: "why-birth-rates-fall",
           },
           {
@@ -1509,7 +1509,7 @@ export const populationGrowth: Topic = {
             answerIndex: 1,
             hint: "Compare the carbon footprint of a person in Niger with one in a high-income country.",
             explanation:
-              "Over-consumption arguments point out that the richest people cause a large share of emissions, so how people live matters more than how many there are. The first option is the opposite view and ignores very different consumption levels.",
+              "Over-consumption arguments point out that the richest people cause a large share of emissions, so how people live matters more than how many there are. Blaming high-birth-rate countries alone is the opposite view and ignores very different consumption levels.",
             guideRef: "future-population",
           },
           {
@@ -1681,8 +1681,8 @@ export const populationGrowth: Topic = {
             hint: "70 divided by the growth rate.",
             modelAnswer: "Philippines: 70 / 1.4 = 50 years. Nigeria: 70 / 2.4 = 29.2, about 29 years.",
             markScheme: [
-              { point: "Philippines: 50 years", keywords: ["50 year", "50 yrs", "fifty", "philippines 50"] },
-              { point: "Nigeria: about 29 years", keywords: ["29 year", "29 2", "twenty nine", "nigeria 29"] },
+              { point: "Philippines: 50 years", keywords: ["50 year", "50 yrs", "fifty", "philippines 50", "50"] },
+              { point: "Nigeria: about 29 years", keywords: ["29 year", "29 2", "twenty nine", "nigeria 29", "29"] },
             ],
             commonError: "Dividing the rate by 70 instead of 70 by the rate.",
             guideRef: "birth-death-rates",
@@ -1709,7 +1709,7 @@ export const populationGrowth: Topic = {
             marks: 3,
             hint: "Think about what was happening in each country.",
             modelAnswer:
-              "India's population kept growing because it has a large young population (population momentum), even though its fertility has fallen to about 2.0. China's fertility had fallen to about 1.0, partly as a legacy of the one-child policy (1980 to 2015), and its population began to fall in 2022. So India, at about 1.43 billion, passed China.",
+              "India's population kept growing because it has a large young population (population momentum), even though its fertility has fallen to about 2.0. China's fertility had fallen to about 1.0, partly as a legacy of the one-child policy (1979 to 2015), and its population began to fall in 2022. So India, at about 1.43 billion, passed China.",
             markScheme: [
               { point: "India still growing / young population / momentum", keywords: ["young", "momentum", "still growing", "keeps growing", "youthful"] },
               { point: "China's very low fertility / one-child policy legacy", keywords: ["one-child", "one child", "low fertility", "low birth", "1.0"] },
@@ -1792,7 +1792,7 @@ export const populationGrowth: Topic = {
             markScheme: [
               { point: "Country A: 3.4%", keywords: ["3.4", "34 per", "a: 3.4", "a = 3.4"] },
               { point: "Country B: 0.1%", keywords: ["0.1", "1 per 1 000", "1 per 1000", "0 1 per"] },
-              { point: "Country C: -0.5% / natural decrease", keywords: ["-0.5", "minus 0.5", "0.5", "decrease"] },
+              { point: "Country C: -0.5% / natural decrease", keywords: ["-0.5", "−0.5", "minus 0.5", "decrease"] },
               { point: "Country A doubles fastest (about 21 years)", keywords: ["country a", "a doubles", "21", "20.6"] },
             ],
             commonError: "Forgetting the negative sign for Country C, or saying C doubles fastest.",
@@ -1992,7 +1992,7 @@ export const populationGrowth: Topic = {
             hint: "Per 1,000 to per 100.",
             modelAnswer: "Subtract the death rate from the birth rate (17 - 8 = 9 per 1,000), then divide by 10 to convert to per 100: 9 / 10 = 0.9% per year.",
             markScheme: [
-              { point: "Divide the per 1,000 figure by 10", keywords: ["divide by 10", "÷ 10", "/ 10", "/10", "divided by 10"] },
+              { point: "Divide the per 1,000 figure by 10", keywords: ["divide by 10", "divided by 10", "dividing by 10", "9 10", "over 10"] },
               { point: "Correct worked example: 9 per 1,000 = 0.9%", keywords: ["0.9", "0 9", "nought point nine", "zero point nine"] },
             ],
             commonError: "Multiplying by 10 or dividing by 100.",
@@ -2064,7 +2064,7 @@ export const populationGrowth: Topic = {
             marks: 4,
             hint: "'Anti' means against; 'pro' means for.",
             modelAnswer:
-              "Anti-natalist policies try to reduce the birth rate, for example China's one-child policy (1980 to 2015) or Singapore's Stop at Two campaign (1972). Pro-natalist policies try to increase the birth rate, for example Singapore's Baby Bonus (from 2001), which gives cash gifts and savings top-ups to parents.",
+              "Anti-natalist policies try to reduce the birth rate, for example China's one-child policy (1979 to 2015) or Singapore's Stop at Two campaign (1972). Pro-natalist policies try to increase the birth rate, for example Singapore's Baby Bonus (from 2001), which gives cash gifts and savings top-ups to parents.",
             markScheme: [
               { point: "Anti-natalist = reduce births", keywords: ["reduce birth", "reduce the birth", "lower birth", "fewer births", "fewer children", "discourage"] },
               { point: "Anti-natalist example (one-child policy / Stop at Two)", keywords: ["one-child", "one child", "stop at two", "china"] },
@@ -2139,7 +2139,7 @@ export const populationGrowth: Topic = {
             marks: 3,
             hint: "Think about fertility over the previous 40 years.",
             modelAnswer:
-              "China's fertility rate has been below replacement level for decades and is now about 1.0. The one-child policy (1980 to 2015) and rapid urbanisation, rising education and the high cost of housing and schooling all reduced births. With fewer births and an ageing population producing more deaths, deaths overtook births in 2022, so China had natural decrease.",
+              "China's fertility rate has been below replacement level for decades and is now about 1.0. The one-child policy (1979 to 2015) and rapid urbanisation, rising education and the high cost of housing and schooling all reduced births. With fewer births and an ageing population producing more deaths, deaths overtook births in 2022, so China had natural decrease.",
             markScheme: [
               { point: "Very low fertility / below replacement (about 1.0)", keywords: ["low fertility", "below replacement", "1.0", "low birth", "few births"] },
               { point: "Cause: one-child policy / cost of children / urbanisation", keywords: ["one-child", "one child", "cost", "urbanis", "urbaniz", "expensive"] },

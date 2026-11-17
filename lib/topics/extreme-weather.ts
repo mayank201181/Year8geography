@@ -478,7 +478,7 @@ export const extremeWeather: Topic = {
           "A sea surface temperature of at least 26.5°C; a location roughly 5–30° north or south of the Equator so that the Coriolis effect is strong enough to make the storm spin; and low wind shear so the storm's tall clouds are not torn apart (with plenty of warm, moist rising air).",
         markScheme: [
           { point: "Warm sea of at least 26.5°C", keywords: ["26", "27", "warm sea", "warm ocean", "warm water"] },
-          { point: "Latitude about 5–30° / Coriolis effect to make it spin", keywords: ["coriolis", "latitude", "spin", "rotat", "equator", "5 30"] },
+          { point: "Latitude about 5–30° (or 5–20°) / Coriolis effect to make it spin", keywords: ["coriolis", "latitude", "spin", "rotat", "equator", "5 30", "5 20", "5 to 30", "5 to 20"] },
           { point: "Low wind shear / rising moist air / low pressure", keywords: ["shear", "rising", "moist", "humid", "low pressure", "evaporat"] },
         ],
         commonError: "Writing 'hot weather' instead of a sea temperature, or saying cyclones form on the Equator.",
@@ -976,11 +976,17 @@ export const extremeWeather: Topic = {
           },
           {
             id: "xwx-mcq-p2-q20",
-            question: "Which location is MOST likely to see a tropical cyclone form? A: 15°N, sea 28°C, low wind shear. B: 2°N, sea 29°C, low wind shear. C: 40°N, sea 27°C. D: 20°S, sea 24°C.",
-            options: ["A", "B", "C", "D"],
+            question: "Which ocean location is MOST likely to see a tropical cyclone form?",
+            options: [
+              "15°N, sea 28°C, low wind shear",
+              "2°N, sea 29°C, low wind shear",
+              "40°N, sea 27°C, strong wind shear",
+              "20°S, sea 24°C, low wind shear",
+            ],
             answerIndex: 0,
             hint: "Check all three conditions: temperature, latitude and shear.",
-            explanation: "A meets every condition. B is warm but too near the Equator for the Coriolis effect; C is outside the 5–30° band; D's sea is below 26.5°C.",
+            explanation:
+              "15°N with a 28°C sea and low wind shear meets every condition. 2°N is warm enough but too close to the Equator for the Coriolis effect; 40°N lies outside the 5–30° tropical band with strong shear; and a 24°C sea at 20°S is below the 26.5°C threshold.",
             guideRef: "cyclone-formation",
           },
         ],
@@ -2414,7 +2420,7 @@ export const extremeWeather: Topic = {
               { point: "More frequent/intense heatwaves with evidence", keywords: ["heatwave", "40.3", "2022", "37", "hotter"] },
               { point: "Warmer seas → more intense/wetter cyclones", keywords: ["warmer sea", "intense", "stronger", "wetter", "more energy"] },
               { point: "Sea-level rise worsens storm surges", keywords: ["sea level", "sea-level", "surge", "coast"] },
-              { point: "Uncertainty: number of cyclones may not increase", keywords: ["uncertain", "not sure", "less sure", "frequency", "may not", "more cyclones"] },
+              { point: "Uncertainty: number of cyclones may not increase", keywords: ["uncertain", "less sure", "not certain", "frequency", "may not", "more cyclones"] },
               { point: "Human factors: preparedness reduces danger (Bangladesh/Odisha)", keywords: ["preparedness", "warning", "shelter", "bangladesh", "odisha", "forecast"] },
               { point: "Judgement", keywords: ["overall", "conclusion", "extent", "depends", "on balance"] },
             ],

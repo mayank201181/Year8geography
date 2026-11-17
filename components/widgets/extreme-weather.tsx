@@ -57,7 +57,7 @@ export function CycloneBuilder() {
   const organised = m.wind >= 40;
 
   let notice: string;
-  if (lat < 5) notice = `At ${lat}° the Coriolis effect is too weak to make the in-rushing air spin, so thunderstorms never organise into a cyclone. That is why Singapore (1°N) is almost never hit — Typhoon Vamei (2001), which formed at about 1.5°N just east of Singapore, is the famous rare exception.`;
+  if (lat < 5) notice = `At ${lat}° the Coriolis effect is too weak to make the in-rushing air spin, so thunderstorms never organise into a cyclone. That is why Singapore (1°N) is almost never hit — Tropical Storm Vamei (2001), which formed at about 1.5°N just east of Singapore, is the famous rare exception.`;
   else if (!m.warm) notice = `At ${sst}°C the sea is too cool (below 26.5°C) to supply enough warm, moist air. Less evaporation means less condensation and less latent heat — the storm's engine stalls.`;
   else if (!m.sea) notice = "Over land the storm is cut off from its fuel — warm, moist sea air — and friction from the rough ground slows the wind. It weakens after landfall, but its rain can still cause deadly floods and landslides inland.";
   else if (!m.calm) notice = `Wind shear of ${shear} km/h is strong: winds high up blow faster than winds below, tilting and tearing the tall tower of cloud apart so heat escapes. Strong shear is why many storms fizzle out.`;
@@ -300,7 +300,7 @@ export function ForecastDesk() {
         </p>
       ) : null}
       <div className="mt-2 grid grid-cols-3 gap-2">
-        <Stat label="Centre pressure" value={`${d.centre}`} tone={sys === "low" ? "rose" : "sky"} />
+        <Stat label="Centre pressure" value={`${d.centre} hPa`} tone={sys === "low" ? "rose" : "sky"} />
         <Stat label="Wind" value={<span className="text-base">{beaufort(d.wind)}</span>} tone="indigo" />
         <Stat label="Cloud" value={<span className="text-base">{sys === "low" ? "Overcast" : "Clear"}</span>} tone="amber" />
       </div>

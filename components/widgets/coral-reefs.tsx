@@ -236,18 +236,20 @@ export function ReefTypesTimeMachine() {
     const ys = SEA - peak / M_PER_PX;
     const shoreHalf = peak > 0 ? (peak / M_PER_PX) * K + 8 : 0;
     const lagoonPx = peak > 0 ? R_IN - shoreHalf : 2 * R_IN;
-    const reefTopDepth = keepUp === "yes" ? 0 : sunk * 0.4; // slow coral only keeps up with 60% of the sinking
+    // Slow coral keeps up with 80% of sinking until reefTopDepth exceeds 60 m (at sunk = 300 m, limestone = 240 m), then dies and stops growing.
+    const limestone = keepUp === "yes" ? sunk : Math.min(240, sunk * 0.8);
+    const reefTopDepth = sunk - limestone;
     const drowned = reefTopDepth > 60;
     let type: string;
     if (drowned) type = "Drowned reef";
     else if (peak <= 0) type = "Atoll";
     else if (lagoonPx < 12) type = "Fringing reef";
     else type = "Barrier reef";
-    return { sunk, peak, ys, shoreHalf, lagoonPx, reefTopDepth, drowned, type };
+    return { sunk, peak, ys, shoreHalf, lagoonPx, limestone, reefTopDepth, drowned, type };
   }, [t, keepUp]);
 
   const coneY = (dx: number) => s.ys + Math.max(0, Math.abs(dx) - 8) / K; // volcano surface at horizontal offset dx
-  const reefTop = SEA + s.reefTopDepth / M_PER_PX;
+  const reefTop = Math.min(226, SEA + s.reefTopDepth / M_PER_PX);
   const volcano = `${CX - (300 - s.ys) * K - 8},300 ${CX - 8},${s.ys} ${CX + 8},${s.ys} ${CX + (300 - s.ys) * K + 8},300`;
   const reefPoly = (side: 1 | -1) => {
     const xi = CX + side * R_IN, xo = CX + side * R_OUT;
@@ -271,7 +273,7 @@ export function ReefTypesTimeMachine() {
         <div className="space-y-1">
           <p><b>Notice:</b> {notice}</p>
           <p>Charles Darwin suggested this <b>subsidence theory</b> in 1842. It was confirmed in 1952 when drilling on Enewetak Atoll (Marshall Islands) went through about 1,300–1,400 m of coral limestone before hitting volcanic rock.</p>
-          <p className="text-xs text-slate-500">Simplified cross-section: vertical scale exaggerated; sinking rate 0.05 mm per year (50 m per million years). The Great Barrier Reef is a different kind of barrier reef — it grew on the edge of Australia's continental shelf, not around a volcano.</p>
+          <p className="text-xs text-slate-500">Simplified cross-section: vertical scale exaggerated; sinking rate 0.05 mm per year (50 m per million years). The Great Barrier Reef is a different kind of barrier reef — it grew on the edge of Australia&apos;s continental shelf, not around a volcano.</p>
         </div>
       }
     >
@@ -286,8 +288,8 @@ export function ReefTypesTimeMachine() {
       <svg viewBox="0 0 360 240" className="mt-3 w-full rounded-xl" role="img" aria-label={`Cross-section after ${t} million years: ${s.type}`}>
         <rect width="360" height={SEA} fill="#e0f2fe" />
         <rect y={SEA} width="360" height={240 - SEA} fill="#38bdf8" />
-        {/* lagoon-floor sediment (only shows in the water between the reef ring) */}
-        <rect x={CX - R_IN} y={SEA + 4 + s.reefTopDepth / M_PER_PX} width={2 * R_IN} height={240} fill="#fef3c7" opacity={s.peak <= 0 || s.lagoonPx > 12 ? 1 : 0} />
+        {/* lagoon-floor sediment (only shows in the water between a living reef ring) */}
+        <rect x={CX - R_IN} y={SEA + 4 + s.reefTopDepth / M_PER_PX} width={2 * R_IN} height={240} fill="#fef3c7" opacity={!s.drowned && (s.peak <= 0 || s.lagoonPx > 12) ? 1 : 0} />
         <polygon points={volcano} fill="#57534e" />
         {s.peak > 0 ? <polygon points={`${CX - s.shoreHalf},${SEA} ${CX - 8},${s.ys} ${CX + 8},${s.ys} ${CX + s.shoreHalf},${SEA}`} fill="#4d7c0f" /> : null}
         {([-1, 1] as const).map((side) => (
@@ -302,7 +304,7 @@ export function ReefTypesTimeMachine() {
         <text x="352" y="16" fontSize="12" fontWeight="700" fill="#0f172a" textAnchor="end">{s.type}</text>
         <text x="8" y="16" fontSize="11" fill="#0f172a">{t} million years</text>
         {s.peak > 0 ? <text x={CX} y={Math.max(30, s.ys - 4)} fontSize="11" fill="#14532d" textAnchor="middle">volcanic island</text> : null}
-        {!s.drowned ? <text x={CX + R_OUT} y={SEA - 8} fontSize="11" fill="#be185d" textAnchor="middle">reef</text> : <text x={CX + R_OUT} y={reefTop + 16} fontSize="11" fill="#0f172a" textAnchor="middle">dead reef</text>}
+        {!s.drowned ? <text x={CX + R_OUT} y={SEA - 8} fontSize="11" fill="#be185d" textAnchor="middle">reef</text> : <text x={CX + R_OUT} y={reefTop > 218 ? reefTop - 6 : reefTop + 16} fontSize="11" fill="#0f172a" textAnchor="middle">dead reef</text>}
         {s.lagoonPx > 12 && !s.drowned ? (
           <text x={s.peak > 0 ? CX + (s.shoreHalf + R_IN) / 2 : CX} y={SEA + 16} fontSize="11" fill="#075985" textAnchor="middle">lagoon</text>
         ) : null}
@@ -314,7 +316,7 @@ export function ReefTypesTimeMachine() {
         <Stat label="Reef type" value={<span className="text-base">{s.type}</span>} tone="sky" />
         <Stat label="Island summit" value={s.peak > 0 ? `${s.peak} m` : "under water"} tone="emerald" />
         <Stat label="Lagoon width" value={s.drowned ? "—" : s.peak > 0 && s.lagoonPx < 12 ? "none" : `~${kmLagoon.toFixed(1)} km`} tone="indigo" />
-        <Stat label="Coral limestone" value={`${(s.sunk - s.reefTopDepth).toFixed(0)} m thick`} tone="amber" />
+        <Stat label="Coral limestone" value={`${s.limestone.toFixed(0)} m thick`} tone="amber" />
       </div>
     </Frame>
   );

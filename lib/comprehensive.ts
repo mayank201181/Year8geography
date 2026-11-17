@@ -630,10 +630,10 @@ const mcqPapers: Paper<MCQ>[] = [
       {
         id: "exam-mcq-p4-q01",
         question: "Which statement about China and India is correct?",
-        options: ["China is still growing faster than India", "India's population passed China's in 1980, when the One Child Policy began", "Both countries have total fertility rates above 5", "India overtook China as the most populous country in 2023, and China's population has fallen since 2022"],
+        options: ["China is still growing faster than India", "India's population passed China's in 1979, when the One Child Policy began", "Both countries have total fertility rates above 5", "India overtook China as the most populous country in 2023, and China's population has fallen since 2022"],
         answerIndex: 3,
         hint: "India has about 1.43 billion people.",
-        explanation: "India passed China in 2023 and China's population began falling in 2022. 1980 is the start of China's One Child Policy, not the date India overtook China.",
+        explanation: "India passed China in 2023 and China's population began falling in 2022. 1979 is the start of China's One Child Policy, not the date India overtook China.",
       },
       {
         id: "exam-mcq-p4-q02",
@@ -710,7 +710,7 @@ const mcqPapers: Paper<MCQ>[] = [
       {
         id: "exam-mcq-p4-q11",
         question: "A cartoon shows polar bears chasing penguins across the ice. Why could this never happen in the wild?",
-        options: ["Polar bears hibernate whenever penguins are breeding", "Polar bears live only in the Arctic and penguins only in the Southern Hemisphere", "Penguins are too fast for polar bears", "Both animals live only in the Sahara"],
+        options: ["Polar bears hibernate whenever penguins are breeding", "Polar bears live only in the Arctic and wild penguins almost exclusively in the Southern Hemisphere", "Penguins are too fast for polar bears", "Both animals live only in the Sahara"],
         answerIndex: 1,
         hint: "Think about which pole each animal lives at.",
         explanation: "The two animals live at opposite ends of the Earth, so they never meet. Penguin speed is irrelevant — they are never in the same place.",
@@ -962,7 +962,7 @@ const qaPapers: Paper<QA>[] = [
         hint: "(Birth rate − death rate) ÷ 10 gives the percentage.",
         modelAnswer: "(a) 38 − 8 = 30 per 1,000, which is 3% a year. (b) Country B has a natural decrease of 5 per 1,000 (−0.5% a year) because deaths are higher than births, so its population is falling unless immigrants arrive. (c) Country B is most likely in Stage 5 of the DTM, like Japan.",
         markScheme: [
-          { point: "Calculates 3% (30 per 1,000)", keywords: ["3 percent", "three percent", "30 per 1000"] },
+          { point: "Calculates 3% (30 per 1,000)", keywords: ["3 percent", "3.0%", "3 per cent", "three percent", "30 per 1000", "30 1000"] },
           { point: "Country B: natural decrease / population falling", keywords: ["decrease", "falling", "declin", "shrink", "negative"] },
           { point: "Identifies Stage 5", keywords: ["stage 5", "stage five", "fifth stage"] },
         ],
@@ -1057,7 +1057,7 @@ const qaPapers: Paper<QA>[] = [
       },
       {
         id: "exam-qa-p2-q05",
-        question: "Explain two problems caused by China's One Child Policy (1980–2015).",
+        question: "Explain two problems caused by China's One Child Policy (1979–2015).",
         marks: 4,
         hint: "For each problem, say what happened and why it matters.",
         modelAnswer: "First, it caused a gender imbalance: many families preferred sons, so the sex ratio at birth peaked at about 118–120 boys per 100 girls, and the 2020 census found about 35 million more men than women, so many men cannot find wives. Second, it sped up ageing: with so few children, about 21% of people were 60+ by 2023, creating the 4-2-1 problem, where one child may support two parents and four grandparents, and there are fewer workers to pay for pensions and care.",
@@ -1415,7 +1415,7 @@ const qaPapers: Paper<QA>[] = [
         markScheme: [
           { point: "Push factor at origin", keywords: ["unemploy", "19", "poverty", "low wage", "few jobs"] },
           { point: "Pull factor at destination", keywords: ["higher wage", "job", "work", "better pay"] },
-          { point: "Obstacle removed or present", keywords: ["eu", "2004", "free movement", "border"] },
+          { point: "Obstacle removed or present", keywords: ["eu", "2004", "free movement", "border", "visa", "wall", "fence", "desert", "rio grande", "smuggl", "obstacle"] },
           { point: "Consequence such as remittances", keywords: ["remittance", "65 billion", "send money", "money home"] },
         ],
         commonError: "Mixing the two case studies or giving no figures.",
@@ -1456,7 +1456,7 @@ const qaPapers: Paper<QA>[] = [
           { point: "Fewer workers / labour shortage", keywords: ["labour shortage", "fewer workers", "workforce", "worker"] },
           { point: "Governments allow immigration to fill jobs", keywords: ["immigra", "foreign worker", "migrant", "work pass", "visa"] },
           { point: "More demand for care / healthcare", keywords: ["healthcare", "care", "hospital", "elder"] },
-          { point: "Evidence: figures or named policy", keywords: ["2019", "specified skilled", "tokyo", "29 percent"] },
+          { point: "Evidence: figures or named policy", keywords: ["2019", "specified skilled", "tokyo", "29 percent", "1.5 million", "1.9 million", "0.97", "19 percent", "1 in 4", "s pass", "employment pass"] },
         ],
         commonError: "Describing ageing without linking it to the need for migrant workers.",
       },

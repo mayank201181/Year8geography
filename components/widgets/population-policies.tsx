@@ -11,7 +11,7 @@ const PRESETS: { id: string; label: string; tfr: number }[] = [
   { id: "sg", label: "Singapore ~1.0", tfr: 1.0 },
   { id: "cn", label: "China OCP ~1.6", tfr: 1.6 },
   { id: "rep", label: "Replacement 2.1", tfr: 2.1 },
-  { id: "ne", label: "Niger ~6.7", tfr: 6.7 },
+  { id: "ne", label: "Niger ~6.0", tfr: 6.0 },
 ];
 
 const GEN_LABELS: [string, string][] = [["Adults", "(today)"], ["Children", "(gen 1)"], ["Grand-", "children"], ["Great-grand-", "children"]];
@@ -20,11 +20,11 @@ export function FertilityFuture() {
   const [tfr, setTfr] = useState(1.6);
   const [view, setView] = useState<"gens" | "tree">("gens");
 
-  // Simplified model: 100 adults = 50 couples; each woman has `tfr` children,
-  // so each generation is (tfr / 2) times the one before. No child deaths, no migration.
-  const gens = useMemo(() => [0, 1, 2, 3].map((n) => 100 * Math.pow(tfr / 2, n)), [tfr]);
-  const ratio = tfr / 2;
-  const maxBar = Math.max(110, gens[3]);
+  // Simplified model: 2.1 children per woman replaces a generation once child mortality
+  // and the natural ~105:100 sex ratio at birth are accounted for (no migration).
+  const ratio = tfr / 2.1;
+  const gens = useMemo(() => [0, 1, 2, 3].map((n) => 100 * Math.pow(tfr / 2.1, n)), [tfr]);
+  const maxBar = Math.max(115, gens[3]);
 
   // 4-2-1 family pyramid generalised: 4 grandparents : 2f parents : f^2 children
   const tiers = [
@@ -54,7 +54,7 @@ export function FertilityFuture() {
         <>
           <p><b>Notice:</b> {note}</p>
           <p className="mt-1 text-xs text-slate-500">
-            Simplified model: every adult pairs up, every child survives to have children, no migration. Real populations also keep growing
+            Simplified model: replacement level is 2.1 children per woman (allowing for child mortality and the sex ratio at birth), with no migration. Real populations also keep growing
             for a while after fertility falls (population momentum), because there are already many young people.
           </p>
         </>
@@ -186,14 +186,16 @@ export function MalthusBoserup() {
   const path = (k: keyof Pt) => shown.map((p, i) => `${i ? "L" : "M"}${x(p.t).toFixed(1)},${y(p[k]).toFixed(1)}`).join(" ");
   const now = pts[year];
   const perPerson = now.food / now.raw;
-  const crisis = mode === "malthus" && now.raw > now.food;
+  const crisis = mode === "malthus" && year >= 50;
   const jumpsSoFar = jumps.filter((j) => j.t <= year);
 
   let note: string;
   if (mode === "malthus") {
     note = year < 50
       ? `Population (doubling every 25 years) is racing towards the food line, which only adds the same amount each year. Food per person is falling: ${perPerson.toFixed(2)} units each.`
-      : `Crisis point reached at year 50! Malthus argued "positive checks" (famine, disease, war) would then push population back down to what the food can feed. The dashed line shows the ${Math.round(now.raw - now.food)} extra people who could not be fed.`;
+      : year === 50
+        ? `Crisis point reached at year 50! Population has caught up with the food supply (1.00 unit per person). Slide further to see Malthus's "positive checks" (famine, disease, war) hold population down.`
+        : `Past the crisis point (year 50)! Malthus argued "positive checks" (famine, disease, war) would push population back down to what the food can feed. The dashed line shows the ${Math.round(now.raw - now.food)} extra people who could not be fed.`;
   } else {
     note = jumpsSoFar.length === 0
       ? "Population is growing towards the food limit. Boserup said this pressure is exactly what pushes farmers to find new ways to grow more. Keep sliding…"

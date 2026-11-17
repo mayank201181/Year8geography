@@ -26,7 +26,7 @@ export const lagos: Topic = {
       },
       body:
         "**Lagos** is a city in **south-west Nigeria**, a country in **West Africa**. It sits on the coast of the **Gulf of Guinea**, on the stretch of coast called the **Bight of Benin** (a *bight* is a wide, gently curving bay). It is about 6.5° north of the Equator, so it has a hot, wet **tropical climate** with a rainy season from roughly April to October.\n\nLagos is built around the **Lagos Lagoon**, a large area of shallow, salty water cut off from the Atlantic Ocean by sandbars. Part of the city is on the **mainland** (districts such as Ikeja, Yaba and Surulere) and part is on **islands** such as **Lagos Island**, **Ikoyi** and **Victoria Island**. Long bridges, including the **Third Mainland Bridge** (about 11.8 km long), connect them.\n\nLagos was **Nigeria's capital city** from independence in 1960 until **1991**, when the government moved to **Abuja**, a planned city in the centre of the country. Abuja was chosen because it was more central, less crowded and seen as neutral between Nigeria's main ethnic and religious groups. Even so, Lagos is still Nigeria's **commercial capital**: the centre of business, banking, shipping and media.\n\n- **Site** = the land a settlement is built on (lagoon, islands, low-lying coast)\n- **Situation** = where it is in relation to things around it (on the Gulf of Guinea, near the border with Benin, gateway to Nigeria's 220+ million people)\n- **Megacity** = an urban area with more than **10 million** people",
-      diagram: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch map of Lagos showing the mainland, Lagos Lagoon, Lagos Island, Victoria Island, Makoko, Eko Atlantic and the Atlantic Ocean, with a north arrow and scale bar"><rect width="320" height="210" fill="#fef9c3"/><text x="70" y="40" font-size="11" fill="#78350f">MAINLAND</text><text x="70" y="54" font-size="10" fill="#78350f">Ikeja, Yaba, Surulere</text><path d="M0,95 Q80,80 160,92 T320,85 L320,140 L0,140 Z" fill="#93c5fd"/><text x="235" y="118" font-size="10" fill="#1e3a8a">Lagos Lagoon</text><ellipse cx="120" cy="128" rx="30" ry="9" fill="#fde68a" stroke="#92400e"/><text x="120" y="131" font-size="9" text-anchor="middle" fill="#78350f">Lagos Is.</text><rect x="0" y="140" width="320" height="22" fill="#fde68a"/><text x="200" y="155" font-size="10" fill="#78350f">Victoria Island / Lekki</text><line x1="95" y1="70" x2="112" y2="120" stroke="#374151" stroke-width="2"/><text x="20" y="78" font-size="9" fill="#374151">Third Mainland Bridge</text><circle cx="75" cy="100" r="4" fill="#dc2626"/><text x="30" y="112" font-size="9" fill="#991b1b">Makoko</text><rect x="150" y="162" width="40" height="10" fill="#d1d5db" stroke="#4b5563"/><text x="150" y="182" font-size="9" fill="#374151">Eko Atlantic</text><rect x="0" y="172" width="320" height="38" fill="#60a5fa" fill-opacity="0.6"/><text x="160" y="200" font-size="10" text-anchor="middle" fill="#1e3a8a">Atlantic Ocean (Bight of Benin)</text><line x1="290" y1="45" x2="290" y2="15" stroke="#111827" stroke-width="2" marker-end="url(#location-arrow)"/><text x="290" y="58" font-size="11" text-anchor="middle" fill="#111827">N</text><line x1="230" y1="30" x2="270" y2="30" stroke="#111827" stroke-width="2"/><text x="250" y="24" font-size="9" text-anchor="middle" fill="#111827">0 - 10 km</text><defs><marker id="location-arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#111827"/></marker></defs></svg>`,
+      diagram: `<svg viewBox="0 0 320 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch map of Lagos showing the mainland, Lagos Lagoon, Lagos Island, Victoria Island, Makoko, Eko Atlantic and the Atlantic Ocean, with a north arrow and scale bar"><rect width="320" height="210" fill="#fef9c3"/><text x="70" y="40" font-size="11" fill="#78350f">MAINLAND</text><text x="70" y="54" font-size="10" fill="#78350f">Ikeja, Yaba, Surulere</text><path d="M0,95 Q80,80 160,92 T320,85 L320,140 L0,140 Z" fill="#93c5fd"/><text x="235" y="118" font-size="10" fill="#1e3a8a">Lagos Lagoon</text><ellipse cx="120" cy="128" rx="30" ry="9" fill="#fde68a" stroke="#92400e"/><text x="120" y="131" font-size="9" text-anchor="middle" fill="#78350f">Lagos Is.</text><rect x="0" y="140" width="96" height="22" fill="#fde68a"/><rect x="108" y="140" width="212" height="22" fill="#fde68a"/><rect x="96" y="140" width="12" height="22" fill="#93c5fd"/><text x="214" y="155" font-size="10" text-anchor="middle" fill="#78350f">Victoria Island / Lekki</text><line x1="95" y1="70" x2="112" y2="120" stroke="#374151" stroke-width="2"/><text x="20" y="78" font-size="9" fill="#374151">Third Mainland Bridge</text><circle cx="75" cy="100" r="4" fill="#dc2626"/><text x="30" y="112" font-size="9" fill="#991b1b">Makoko</text><rect x="0" y="162" width="320" height="48" fill="#60a5fa"/><rect x="150" y="162" width="42" height="11" fill="#e5e7eb" stroke="#4b5563"/><text x="171" y="184" font-size="9" text-anchor="middle" fill="#0f172a">Eko Atlantic</text><text x="160" y="202" font-size="10" text-anchor="middle" fill="#1e3a8a">Atlantic Ocean (Bight of Benin)</text><line x1="290" y1="45" x2="290" y2="15" stroke="#111827" stroke-width="2" marker-end="url(#location-arrow)"/><text x="290" y="58" font-size="11" text-anchor="middle" fill="#111827">N</text><line x1="230" y1="30" x2="270" y2="30" stroke="#111827" stroke-width="2"/><text x="250" y="24" font-size="9" text-anchor="middle" fill="#111827">0 - 10 km</text><defs><marker id="location-arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#111827"/></marker></defs></svg>`,
       diagramCaption:
         "Sketch map (not to exact scale): Lagos wraps around a lagoon, with the mainland to the north, islands in the middle and a sandbar coast facing the Atlantic.",
       keyPoints: [
@@ -41,7 +41,7 @@ export const lagos: Topic = {
         facts: [
           "Location: about 6.5° N, 3.4° E, on the Gulf of Guinea in south-west Nigeria.",
           "Capital of Nigeria 1960–1991; Abuja officially became the capital in December 1991.",
-          "Lagos State is Nigeria's smallest state by area (about 3,500 km²) but one of its most populous.",
+          "Lagos State is Nigeria's smallest state by area (about 3,600 km²) but one of its most populous.",
           "Third Mainland Bridge: about 11.8 km long, linking the mainland to Lagos Island.",
           "Its ports (Apapa, Tin Can Island and the new Lekki Deep Sea Port, opened 2023) handle most of Nigeria's sea trade.",
         ],
@@ -125,7 +125,7 @@ export const lagos: Topic = {
       },
       body:
         "An **informal settlement** (often called a **slum** or shanty town) is an area of housing built without legal permission, usually on land the residents do not own, and usually lacking proper services such as clean water, sewers and electricity. The UN estimates that a large share of Lagos's people (often quoted as more than half) live in informal or substandard housing.\n\n**Makoko** is Lagos's most famous informal settlement. It is a **'floating slum'**: thousands of wooden houses built on **stilts** over the **Lagos Lagoon**, beside the Third Mainland Bridge. It began in the 19th century as a fishing village, and many residents are Egun people whose families came from neighbouring Benin. Population estimates range widely, from about **40,000 to over 100,000**.\n\n**Life in Makoko:**\n\n- People travel by **canoe**; children may paddle to school.\n- **Fishing** and smoking fish, sawmilling and trading are the main jobs.\n- There is **no sewerage**: toilets drop waste straight into the water, so diseases such as cholera and diarrhoea spread easily.\n- Few homes have legal electricity or piped water.\n- Residents risk **eviction**: in **2012** the government demolished part of Makoko with little warning, and in **2017** around 30,000 people were evicted from **Otodo-Gbame**, another waterfront community.\n\n**The informal economy** is all the work that is not registered, taxed or protected by law: street hawkers selling drinks to drivers stuck in traffic, market traders, waste pickers, **danfo** minibus conductors, **okada** motorbike-taxi riders and tailors working from home. More than half of Lagos's workers are thought to work informally.\n\n- **Advantages**: easy to start, provides cheap goods and services, gives newcomers an income immediately.\n- **Disadvantages**: low and unreliable pay, no sick pay or pension, no protection from harassment or eviction, and the government collects no tax to spend on services.",
-      diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a Makoko stilt house above the lagoon, with a canoe, waste dropping into the water and wooden stilts in the lagoon bed"><rect width="320" height="200" fill="#e0f2fe"/><rect x="0" y="120" width="320" height="60" fill="#60a5fa"/><rect x="0" y="180" width="320" height="20" fill="#a16207"/><text x="250" y="195" font-size="10" fill="#fef3c7">lagoon bed (mud)</text><polygon points="90,55 160,30 230,55" fill="#a8a29e" stroke="#57534e"/><rect x="95" y="55" width="130" height="45" fill="#d6a76c" stroke="#78350f"/><rect x="140" y="70" width="18" height="30" fill="#78350f"/><rect x="85" y="100" width="150" height="6" fill="#92400e"/><line x1="100" y1="106" x2="100" y2="182" stroke="#78350f" stroke-width="4"/><line x1="160" y1="106" x2="160" y2="182" stroke="#78350f" stroke-width="4"/><line x1="220" y1="106" x2="220" y2="182" stroke="#78350f" stroke-width="4"/><text x="240" y="45" font-size="10" fill="#374151">rusty metal roof</text><text x="232" y="80" font-size="10" fill="#374151">wooden walls</text><text x="5" y="150" font-size="10" fill="#1e3a8a">stilts driven into mud</text><path d="M20,125 Q45,140 70,125 Z" fill="#7c2d12"/><text x="12" y="118" font-size="10" fill="#374151">canoe</text><line x1="200" y1="106" x2="200" y2="135" stroke="#4b5563" stroke-dasharray="3 3"/><text x="205" y="140" font-size="10" fill="#7f1d1d">sewage into water</text><text x="160" y="16" font-size="11" text-anchor="middle" fill="#111827">Makoko stilt house (cross-section)</text></svg>`,
+      diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section of a Makoko stilt house above the lagoon, with a canoe, waste dropping into the water and wooden stilts in the lagoon bed"><rect width="320" height="200" fill="#e0f2fe"/><rect x="0" y="120" width="320" height="60" fill="#60a5fa"/><rect x="0" y="180" width="320" height="20" fill="#a16207"/><text x="314" y="195" font-size="10" text-anchor="end" fill="#fef3c7">lagoon bed (mud)</text><polygon points="90,55 160,30 230,55" fill="#a8a29e" stroke="#57534e"/><rect x="95" y="55" width="130" height="45" fill="#d6a76c" stroke="#78350f"/><rect x="140" y="70" width="18" height="30" fill="#78350f"/><rect x="85" y="100" width="150" height="6" fill="#92400e"/><line x1="100" y1="106" x2="100" y2="182" stroke="#78350f" stroke-width="4"/><line x1="160" y1="106" x2="160" y2="182" stroke="#78350f" stroke-width="4"/><line x1="220" y1="106" x2="220" y2="182" stroke="#78350f" stroke-width="4"/><text x="232" y="45" font-size="10" fill="#374151">rusty metal roof</text><text x="232" y="80" font-size="10" fill="#374151">wooden walls</text><text x="5" y="150" font-size="10" fill="#1e3a8a">stilts driven into mud</text><path d="M20,125 Q45,140 70,125 Z" fill="#7c2d12"/><text x="12" y="118" font-size="10" fill="#374151">canoe</text><line x1="200" y1="106" x2="200" y2="135" stroke="#4b5563" stroke-dasharray="3 3"/><text x="205" y="140" font-size="10" fill="#7f1d1d">sewage into water</text><text x="160" y="16" font-size="11" text-anchor="middle" fill="#111827">Makoko stilt house (cross-section)</text></svg>`,
       diagramCaption:
         "A Makoko house: wooden stilts in the lagoon mud, a canoe for transport and no sewer, so waste goes straight into the water people fish in.",
       keyPoints: [
@@ -545,7 +545,7 @@ export const lagos: Topic = {
         hint: "Percentage change = (new − old) ÷ old × 100.",
         modelAnswer: "(14.4 − 4.8) ÷ 4.8 × 100 = 9.6 ÷ 4.8 × 100 = 200%. The population tripled.",
         markScheme: [
-          { point: "Correct working: difference 9.6 divided by 4.8", keywords: ["9.6", "÷ 4.8", "/4.8", "/ 4.8", "divided by 4.8"] },
+          { point: "Correct working: difference 9.6 divided by 4.8", keywords: ["9.6", "divided by 4.8", "over 4.8"] },
           { point: "Correct answer 200%", keywords: ["200", "tripled", "three times"] },
         ],
         commonError: "Dividing by the new value (14.4) instead of the old value, giving about 67%.",
@@ -975,7 +975,7 @@ export const lagos: Topic = {
             answerIndex: 2,
             hint: "Informal work is not registered.",
             explanation:
-              "Informal workers usually pay no income tax, so the government has less money for roads, water and schools. Informal workers get no pensions at all, so the first option is the opposite of true.",
+              "Informal workers usually pay no income tax, so the government has less money for roads, water and schools. Informal workers get no pensions at all, so claiming it creates too many pensions is the opposite of true.",
             guideRef: "informal-settlements",
           },
           {
@@ -983,7 +983,7 @@ export const lagos: Topic = {
             question: "In Lagos, what is an 'okada'?",
             options: ["A motorbike taxi", "A floating house", "A yellow minibus", "A rail station"],
             answerIndex: 0,
-            hint: "They weave between cars in go-slows and were banned from major roads in 2020.",
+            hint: "They weave between cars in go-slows and were banned from major roads in 2020 (and across 10 LGAs in 2022).",
             explanation:
               "An okada is a motorbike taxi, part of the informal transport economy. The yellow minibuses are danfos.",
             guideRef: "informal-settlements",
@@ -1122,7 +1122,7 @@ export const lagos: Topic = {
             answerIndex: 3,
             hint: "Lots of people, not much land.",
             explanation:
-              "Lagos State is the smallest Nigerian state by area (about 3,500 km²) yet one of the most populous — which helps explain overcrowding and high land prices. It is on the coast, so it is not landlocked.",
+              "Lagos State is the smallest Nigerian state by area (about 3,600 km²) yet one of the most populous — which helps explain overcrowding and high land prices. It is on the coast, so it is not landlocked.",
             guideRef: "location",
           },
           {
@@ -1293,7 +1293,7 @@ export const lagos: Topic = {
             answerIndex: 2,
             hint: "It is a question that does not expect a spoken answer.",
             explanation:
-              "A rhetorical question makes the audience think and feel, without expecting a reply. The first option uses a statistic, which is persuasive too, but it is not a question.",
+              "A rhetorical question makes the audience think and feel, without expecting a reply. Quoting the city's population of 15–20 million uses a statistic, which is persuasive too, but it is not a question.",
             guideRef: "lagos-speech",
           },
           {
@@ -2447,7 +2447,7 @@ export const lagos: Topic = {
           {
             id: "lagos-qa-p4-q06",
             question:
-              "In 2020 Lagos banned okada motorbike taxis from many major roads. Explain why the government introduced the ban and why it was controversial.",
+              "Lagos banned okada motorbike taxis from many major roads in 2020 (and expanded the ban across 10 local government areas in 2022). Explain why the government introduced the ban and why it was controversial.",
             marks: 4,
             hint: "Reasons for: safety and order. Reasons against: jobs and transport for the poor.",
             modelAnswer:
@@ -2485,7 +2485,7 @@ export const lagos: Topic = {
             modelAnswer:
               "(a) Saving per journey = 3 − 1.5 = 1.5 hours. Two journeys a day × 5 days = 10 journeys. 1.5 × 10 = 15 hours a week. (b) Fewer vehicles on the road would reduce go-slows for everyone, and less fuel burned would reduce air pollution. People would also have more time to work, study or be with family, helping the economy.",
             markScheme: [
-              { point: "Working: 1.5 hours saved per journey × 10 journeys", keywords: ["1.5", "10 journeys", "× 10", "x 10", "2 × 5"] },
+              { point: "Working: 1.5 hours saved per journey × 10 journeys", keywords: ["10 journeys", "10 trips", "2 x 5", "two journeys", "3 hours a day", "15"] },
               { point: "Answer: 15 hours a week", keywords: ["15 hours", "15 h", "= 15", "15hrs"] },
               { point: "Benefit: less congestion / fewer vehicles", keywords: ["congestion", "fewer car", "fewer vehicles", "go-slow", "traffic"] },
               { point: "Benefit: less pollution or more productive time", keywords: ["pollut", "emission", "productiv", "econom", "more time"] },

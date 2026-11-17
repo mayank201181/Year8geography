@@ -239,7 +239,7 @@ export function ExpeditionKitPlanner() {
       </svg>
 
       <div className="mt-2 grid grid-cols-3 gap-2">
-        <Stat label="Team food energy" value={`${(r.totalKcal / 1000).toFixed(r.totalKcal < 100000 ? 1 : 0)}k kcal`} tone="amber" />
+        <Stat label="Team food energy" value={`${r.totalKcal.toLocaleString()} kcal`} tone="amber" />
         <Stat label="Food to pack" value={`${Math.round(r.foodKg)} kg`} tone="emerald" />
         <Stat label="Water needed" value={`${Math.round(r.waterL)} L`} tone="sky" />
       </div>

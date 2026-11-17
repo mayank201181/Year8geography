@@ -455,7 +455,7 @@ export const populationChange: Topic = {
         answerIndex: 2,
         hint: "Which two things add people to a country, and which two take people away?",
         explanation:
-          "Births and immigrants add people; deaths and emigrants remove them, so change = (B − D) + (I − E). The second option has migration the wrong way round — emigrants leaving would wrongly increase the population.",
+          "Births and immigrants add people; deaths and emigrants remove them, so change = (B − D) + (I − E). Writing (emigrants − immigrants) has migration the wrong way round — emigrants leaving would wrongly increase the population.",
         guideRef: "components",
       },
       {
@@ -509,7 +509,7 @@ export const populationChange: Topic = {
         modelAnswer:
           "Natural change = 50,000 − 30,000 = +20,000. Net migration = 12,000 − 20,000 = −8,000. Population change = 20,000 + (−8,000) = +12,000, so the population grew by 12,000.",
         markScheme: [
-          { point: "Natural change of +20,000 (births − deaths)", keywords: ["20,000", "20000", "20 000", "natural increase of 20"] },
+          { point: "Natural change of +20,000 (births − deaths)", keywords: ["20,000", "20000", "20 000", "natural increase of 20,000"] },
           { point: "Net migration of −8,000 (immigrants − emigrants)", keywords: ["-8,000", "−8,000", "-8000", "8,000", "8000", "net loss"] },
           { point: "Total change +12,000 — population grew", keywords: ["12,000", "12 000", "grew", "grow", "increased by"] },
         ],
@@ -1600,11 +1600,11 @@ export const populationChange: Topic = {
           {
             id: "pchange-mcq-p4-q18",
             question: "The Poland-born population of the UK was about 60,000 in 2001 and about 1,000,000 in 2017. Roughly how many times larger was it in 2017?",
-            options: ["About 1.6 times", "About 6 times", "About 160 times", "About 16 times"],
+            options: ["About 1.7 times", "About 6 times", "About 170 times", "About 17 times"],
             answerIndex: 3,
             hint: "1,000,000 ÷ 60,000.",
             explanation:
-              "1,000,000 ÷ 60,000 ≈ 16.7, so roughly 16–17 times larger — the closest option is about 16 times. 1.6 times is an error of one decimal place.",
+              "1,000,000 ÷ 60,000 ≈ 16.7, which rounds to about 17 times larger. 1.7 times and 170 times are decimal-place errors.",
             guideRef: "economic-migration",
           },
           {
@@ -1851,9 +1851,9 @@ export const populationChange: Topic = {
             modelAnswer:
               "(a) International and forced — they are refugees. (b) Internal and voluntary — rural–urban migration within Indonesia. (c) International and voluntary — an economic migrant.",
             markScheme: [
-              { point: "(a) international + forced / refugee", keywords: ["refugee", "forced", "international and forced"] },
-              { point: "(b) internal + voluntary / rural–urban", keywords: ["internal", "rural-urban", "rural–urban", "rural to urban"] },
-              { point: "(c) international + voluntary / economic migrant", keywords: ["economic", "voluntary", "skilled"] },
+              { point: "(a) international + forced / refugee", keywords: ["refugee", "international and forced", "forced and international", "a international", "a forced"] },
+              { point: "(b) internal + voluntary / rural–urban", keywords: ["internal and voluntary", "voluntary and internal", "rural-urban", "rural–urban", "rural to urban", "within indonesia"] },
+              { point: "(c) international + voluntary / economic migrant", keywords: ["economic", "international and voluntary", "voluntary and international", "skilled"] },
             ],
             commonError: "Calling the Javanese woman an international migrant because Jakarta is a capital city — she stayed in Indonesia.",
             guideRef: "migration-types",
@@ -1905,8 +1905,8 @@ export const populationChange: Topic = {
               "(a) Natural change = 120,000 − 80,000 = +40,000. (b) Net migration = 30,000 − 50,000 = −20,000. (c) Total change = 40,000 − 20,000 = +20,000.",
             markScheme: [
               { point: "Natural change +40,000", keywords: ["40,000", "40000", "40 000"] },
-              { point: "Net migration −20,000", keywords: ["-20,000", "−20,000", "-20000", "minus 20"] },
-              { point: "Total +20,000", keywords: ["+20,000", "+20000", "total 20", "= 20,000", "grew by 20", "increase of 20"] },
+              { point: "Net migration −20,000", keywords: ["-20,000", "−20,000", "-20000", "minus 20,000"] },
+              { point: "Total +20,000", keywords: ["c 20,000", "total 20,000", "total change 20,000", "total is 20,000", "40,000 - 20,000", "grew by 20,000", "increase of 20,000"] },
             ],
             commonError: "Writing net migration as +20,000 because the minus sign was dropped.",
             guideRef: "components",
@@ -1965,10 +1965,10 @@ export const populationChange: Topic = {
             hint: "Money, people's wellbeing, government, or nature?",
             modelAnswer: "(a) environmental; (b) political; (c) economic; (d) social.",
             markScheme: [
-              { point: "(a) environmental", keywords: ["environment", "(a) environ", "a environ", "a = environ"] },
-              { point: "(b) political", keywords: ["politic", "b) politic", "b = politic"] },
-              { point: "(c) economic", keywords: ["economic", "c) economic", "c = economic"] },
-              { point: "(d) social", keywords: ["social", "d) social", "d = social"] },
+              { point: "(a) environmental", keywords: ["a environ", "drought is environ", "crops is environ"] },
+              { point: "(b) political", keywords: ["b politic", "government is politic", "critics is politic", "arrest"] },
+              { point: "(c) economic", keywords: ["c economic", "wages is economic", "factory is economic"] },
+              { point: "(d) social", keywords: ["d social", "schools is social", "education is social"] },
             ],
             commonError: "Calling better schools 'economic' — education is a social factor even if it leads to better jobs later.",
             guideRef: "push-pull",
@@ -2133,7 +2133,7 @@ export const populationChange: Topic = {
               "Niger: (44 − 8) ÷ 10 = +3.6% natural increase. Japan: (6 − 13) ÷ 10 = −0.7%, a natural decrease. Niger's population is growing very rapidly from natural increase, whereas Japan's is shrinking naturally because deaths exceed births. The difference between them is 4.3 percentage points.",
             markScheme: [
               { point: "Niger = +3.6%", keywords: ["3.6", "+3.6", "3.6%"] },
-              { point: "Japan = −0.7%", keywords: ["-0.7", "−0.7", "minus 0.7", "0.7"] },
+              { point: "Japan = −0.7%", keywords: ["-0.7", "−0.7", "minus 0.7", "decrease of 0.7", "shrinks by 0.7"] },
               { point: "Niger has natural increase / growing fast", keywords: ["niger is growing", "natural increase", "growing", "increase"] },
               { point: "Japan has natural decrease / shrinking", keywords: ["natural decrease", "shrink", "falling", "decreas", "declin"] },
             ],
@@ -2338,7 +2338,7 @@ export const populationChange: Topic = {
             modelAnswer:
               "(a) Natural change = 600,000 − 650,000 = −50,000. Net migration = 300,000 − 100,000 = +200,000. Total change = +150,000. (b) Migration was more significant: the net migration gain of 200,000 was four times larger than the natural decrease of 50,000, so it turned a natural decrease into overall growth.",
             markScheme: [
-              { point: "Natural change −50,000", keywords: ["-50,000", "−50,000", "-50000", "minus 50"] },
+              { point: "Natural change −50,000", keywords: ["-50,000", "−50,000", "-50000", "minus 50,000"] },
               { point: "Net migration +200,000", keywords: ["200,000", "200000", "200 000"] },
               { point: "Total +150,000", keywords: ["150,000", "150000", "150 000"] },
               { point: "Migration more significant, justified with comparison", keywords: ["migration", "four times", "4 times", "larger", "bigger", "more significant"] },
@@ -2377,7 +2377,7 @@ export const populationChange: Topic = {
               "(a) (12 − 9) = 3 per 1,000; 3 × 4,000 = 12,000. (b) 20,000 − 8,000 = 12,000. (c) 12,000 + 12,000 = 24,000. (d) 24,000 ÷ 4,000,000 × 100 = 0.6%.",
             markScheme: [
               { point: "Natural increase 12,000", keywords: ["12,000", "12000", "12 000"] },
-              { point: "Net migration +12,000", keywords: ["20,000 - 8,000", "20,000 − 8,000", "20000-8000", "net migration 12", "net migration = 12"] },
+              { point: "Net migration +12,000", keywords: ["20,000 - 8,000", "20000-8000", "net migration 12,000", "net migration is 12,000", "b 12,000", "b plus 12,000"] },
               { point: "Total change 24,000", keywords: ["24,000", "24000", "24 000"] },
               { point: "Percentage change 0.6%", keywords: ["0.6", "0.6%", "0.6 percent"] },
             ],

@@ -8,7 +8,7 @@ export const adaptationsExtras: TopicExtras = {
     "The fennec fox is the world's smallest fox (about 1–1.5 kg), yet its ears can be up to 15 cm long — the biggest ears for its body size of any member of the dog family.",
     "A thirsty dromedary camel can drink over 100 litres of water in about 10 minutes, and can survive losing around 25% of its body weight in water.",
     "Polar bears are not really white: their hairs are see-through and scatter light, and the skin underneath is black, which helps absorb the Sun's heat.",
-    "Inside a tightly packed emperor penguin huddle, the temperature can rise above 20°C even when it is around −20°C outside.",
+    "Inside a tightly packed emperor penguin huddle, the temperature can rise above 20°C even when it is around −40°C outside.",
   ],
   experiments: [
     {

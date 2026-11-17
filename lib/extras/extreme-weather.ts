@@ -2,9 +2,9 @@ import type { TopicExtras } from "../types";
 
 export const extremeWeatherExtras: TopicExtras = {
   hook:
-    "Singapore's seas are hot enough to power a monster typhoon every single year — yet in all of recorded history only one has ever formed right on our doorstep. What invisible ingredient is missing at 1°N, and how do forecasters know days in advance where a storm will strike?",
+    "Singapore's seas are hot enough to power a typhoon every single year — yet in all of recorded history only one small tropical cyclone (Vamei, 2001) has ever formed right on our doorstep. What invisible ingredient is missing at 1°N, and how do forecasters know days in advance where a storm will strike?",
   didYouKnow: [
-    "Typhoon Vamei formed on 27 December 2001 at about 1.5°N, roughly 50 km from Singapore — the closest a tropical cyclone has ever been recorded to the Equator. Scientists estimated such an event happens perhaps once every 100–400 years.",
+    "Tropical Storm Vamei (classified as a minimal typhoon by some agencies) formed on 27 December 2001 at about 1.5°N, roughly 50 km from Singapore — the closest a tropical cyclone has ever been recorded to the Equator. Scientists estimated such an event happens perhaps once every 100–400 years.",
     "Typhoon Tip (1979) holds two records: the lowest sea-level pressure ever measured, 870 hPa, and the largest size — its winds stretched across a circle about 2,200 km wide, roughly the distance from Singapore to Hong Kong.",
     "The strongest surface wind gust ever measured (outside a tornado) was 408 km/h, on Barrow Island, Australia, during Tropical Cyclone Olivia in April 1996.",
     "According to NOAA, the heat released by condensation in an average hurricane is about 200 times the electricity-generating capacity of the whole world.",

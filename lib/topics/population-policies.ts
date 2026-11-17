@@ -70,7 +70,7 @@ export const populationPolicies: Topic = {
       id: "policy-types",
       heading: "How do countries solve population problems?",
       body:
-        "A **population policy** is a plan by a government to change the size, growth rate or structure of its population. There are two main kinds:\n\n- **Anti-natalist policies** try to **reduce** the birth rate. They are used where population is growing fast and the government fears over-population. Examples: China's One Child Policy (1980–2015), Singapore's 'Stop at Two' campaign (1970s), India's family planning programmes.\n- **Pro-natalist policies** try to **increase** the birth rate. They are used where the **total fertility rate (TFR)** — the average number of children a woman has in her lifetime — has fallen below the **replacement level** of about **2.1**, the number needed to replace both parents (the 0.1 allows for children who die young). Examples: Singapore's Baby Bonus, France's family allowances, Japan's childcare support.\n\nGovernments use a mix of **carrots** (incentives: cash, tax cuts, housing priority, free childcare) and **sticks** (disincentives: fines, losing benefits). Some policies are **voluntary** and rely on persuasion and education; others are **coercive**, meaning people are forced, as in parts of China's One Child Policy (forced abortions and sterilisations).\n\nOther tools do not target births at all:\n\n- **Migration policy**: letting in more immigrants to fill labour shortages (Singapore, Canada, Australia) or limiting them.\n- **Ageing policies**: raising the retirement age, reforming pensions, building elderly-friendly housing.\n- **Education and development**: there is strong evidence that **educating girls** and improving health care lowers birth rates without force. The Indian state of **Kerala** reached replacement-level fertility around the late 1980s mainly through high female literacy and good health care, and **Thailand** cut its TFR from about 6 in the 1960s to around 2 by 1990 with a popular, voluntary family-planning campaign.",
+        "A **population policy** is a plan by a government to change the size, growth rate or structure of its population. There are two main kinds:\n\n- **Anti-natalist policies** try to **reduce** the birth rate. They are used where population is growing fast and the government fears over-population. Examples: China's One Child Policy (1979–2015), Singapore's 'Stop at Two' campaign (1970s), India's family planning programmes.\n- **Pro-natalist policies** try to **increase** the birth rate. They are used where the **total fertility rate (TFR)** — the average number of children a woman has in her lifetime — has fallen below the **replacement level** of about **2.1**, the number needed to replace both parents (the 0.1 allows for children who die young). Examples: Singapore's Baby Bonus, France's family allowances, Japan's childcare support.\n\nGovernments use a mix of **carrots** (incentives: cash, tax cuts, housing priority, free childcare) and **sticks** (disincentives: fines, losing benefits). Some policies are **voluntary** and rely on persuasion and education; others are **coercive**, meaning people are forced, as in parts of China's One Child Policy (forced abortions and sterilisations).\n\nOther tools do not target births at all:\n\n- **Migration policy**: letting in more immigrants to fill labour shortages (Singapore, Canada, Australia) or limiting them.\n- **Ageing policies**: raising the retirement age, reforming pensions, building elderly-friendly housing.\n- **Education and development**: there is strong evidence that **educating girls** and improving health care lowers birth rates without force. The Indian state of **Kerala** reached replacement-level fertility around the late 1980s mainly through high female literacy and good health care, and **Thailand** cut its TFR from about 6 in the 1960s to around 2 by 1990 with a popular, voluntary family-planning campaign.",
       diagram: `<svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flow chart: a population problem of too many people leads to anti-natalist policy; too few births or ageing leads to pro-natalist policy; both can be helped by migration and education"><defs><marker id="pt-arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#334155"/></marker></defs><rect x="100" y="8" width="120" height="28" rx="6" fill="#f1f5f9" stroke="#334155"/><text x="160" y="27" font-size="11" text-anchor="middle" fill="#0f172a" font-weight="bold">Population problem?</text><line x1="130" y1="36" x2="80" y2="58" stroke="#334155" stroke-width="1.5" marker-end="url(#pt-arrow)"/><line x1="190" y1="36" x2="240" y2="58" stroke="#334155" stroke-width="1.5" marker-end="url(#pt-arrow)"/><rect x="10" y="60" width="140" height="36" rx="6" fill="#fee2e2" stroke="#dc2626"/><text x="80" y="75" font-size="10" text-anchor="middle" fill="#7f1d1d">Too many people /</text><text x="80" y="89" font-size="10" text-anchor="middle" fill="#7f1d1d">fast growth</text><rect x="170" y="60" width="140" height="36" rx="6" fill="#dbeafe" stroke="#2563eb"/><text x="240" y="75" font-size="10" text-anchor="middle" fill="#1e3a8a">Too few births /</text><text x="240" y="89" font-size="10" text-anchor="middle" fill="#1e3a8a">ageing population</text><line x1="80" y1="96" x2="80" y2="114" stroke="#334155" stroke-width="1.5" marker-end="url(#pt-arrow)"/><line x1="240" y1="96" x2="240" y2="114" stroke="#334155" stroke-width="1.5" marker-end="url(#pt-arrow)"/><rect x="10" y="116" width="140" height="48" rx="6" fill="#fecaca" stroke="#b91c1c"/><text x="80" y="132" font-size="11" text-anchor="middle" fill="#7f1d1d" font-weight="bold">ANTI-NATALIST</text><text x="80" y="146" font-size="10" text-anchor="middle" fill="#7f1d1d">fewer births</text><text x="80" y="158" font-size="10" text-anchor="middle" fill="#7f1d1d">e.g. China OCP</text><rect x="170" y="116" width="140" height="48" rx="6" fill="#bfdbfe" stroke="#1d4ed8"/><text x="240" y="132" font-size="11" text-anchor="middle" fill="#1e3a8a" font-weight="bold">PRO-NATALIST</text><text x="240" y="146" font-size="10" text-anchor="middle" fill="#1e3a8a">more births</text><text x="240" y="158" font-size="10" text-anchor="middle" fill="#1e3a8a">e.g. Baby Bonus</text><rect x="40" y="180" width="240" height="32" rx="6" fill="#dcfce7" stroke="#16a34a"/><text x="160" y="194" font-size="10" text-anchor="middle" fill="#14532d">Other tools: migration, educating girls,</text><text x="160" y="207" font-size="10" text-anchor="middle" fill="#14532d">raising the retirement age</text></svg>`,
       diagramCaption:
         "Which policy a government chooses depends on its problem: anti-natalist for rapid growth, pro-natalist for low fertility and ageing. Migration and development work alongside both.",
@@ -99,22 +99,22 @@ export const populationPolicies: Topic = {
     },
     {
       id: "china-one-child",
-      heading: "China's One Child Policy (1980–2015): why and how",
+      heading: "China's One Child Policy (1979–2015): why and how",
       body:
-        "**Why?** By the late 1970s China had about **970 million people**, around a fifth of the world's population, and was still poor. Mao Zedong had encouraged large families in the 1950s–60s, and the population had grown very fast. The new leader **Deng Xiaoping** wanted rapid economic growth, and the government feared that, without control, there would not be enough food, jobs, housing or schools. An earlier voluntary campaign, **'Later, Longer, Fewer'** (marry later, leave longer gaps between children, have fewer of them), had already cut the TFR from about **5.8 in 1970 to about 2.7 by 1979**, but leaders wanted to go further.\n\n**What?** From **1980** most urban couples were allowed **only one child**. The rules varied: from the mid-1980s many rural families could have a second child if the first was a girl; **ethnic minorities** were usually exempt; later, couples who were both only children could have two.\n\n**How was it enforced?** Through local 'family planning' officials and workplaces:\n\n- **Incentives (carrots)** for couples who signed a **one-child certificate**: cash bonuses, better housing, priority for schools and health care, longer maternity leave.\n- **Penalties (sticks)** for extra births: large fines called 'social maintenance fees' (often several times a family's yearly income), loss of jobs or promotion, and children without a *hukou* (household registration) who struggled to get schooling or health care.\n- **Coercion**: free contraception and IUDs were widely fitted, and in some places there were **forced abortions and sterilisations**, sometimes late in pregnancy.\n\n**Successes (according to supporters):**\n\n- The government claims about **400 million births were prevented** (many demographers think the real figure is far lower because fertility was already falling).\n- The TFR fell to about **1.6–1.7 by the 2000s**.\n- Fewer children meant more money per child for education and health; women had more time for work. Rapid economic growth lifted hundreds of millions of people out of poverty.",
-      diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line graph of China's total fertility rate from 1970 to 2023 falling from about 5.8 to about 1.0, with the One Child Policy period 1980 to 2015 shaded"><rect x="106" y="30" width="155" height="140" fill="#fef3c7"/><text x="183" y="44" font-size="10" text-anchor="middle" fill="#92400e" font-weight="bold">One Child Policy 1980–2015</text><line x1="40" y1="170" x2="305" y2="170" stroke="#1e293b"/><line x1="40" y1="170" x2="40" y2="25" stroke="#1e293b"/><line x1="40" y1="121" x2="305" y2="121" stroke="#64748b" stroke-dasharray="4 3"/><text x="302" y="116" font-size="10" text-anchor="end" fill="#475569">replacement 2.1</text><polyline points="62,35 84,86 106,109 150,114 194,133 239,133 265,128 283,140 296,147" fill="none" stroke="#dc2626" stroke-width="2.5"/><circle cx="62" cy="35" r="3" fill="#dc2626"/><circle cx="296" cy="147" r="3" fill="#dc2626"/><text x="68" y="34" font-size="10" fill="#7f1d1d">5.8</text><text x="296" y="162" font-size="10" text-anchor="middle" fill="#7f1d1d">1.0</text><text x="265" y="98" font-size="10" text-anchor="middle" fill="#1e3a8a">2-child</text><text x="265" y="108" font-size="10" text-anchor="middle" fill="#1e3a8a">2016</text><text x="290" y="64" font-size="10" text-anchor="middle" fill="#1e3a8a">3-child</text><text x="290" y="74" font-size="10" text-anchor="middle" fill="#1e3a8a">2021</text><text x="34" y="174" font-size="10" text-anchor="end" fill="#1e293b">0</text><text x="34" y="127" font-size="10" text-anchor="end" fill="#1e293b">2</text><text x="34" y="80" font-size="10" text-anchor="end" fill="#1e293b">4</text><text x="34" y="34" font-size="10" text-anchor="end" fill="#1e293b">6</text><text x="62" y="184" font-size="10" text-anchor="middle" fill="#1e293b">1970</text><text x="150" y="184" font-size="10" text-anchor="middle" fill="#1e293b">1990</text><text x="239" y="184" font-size="10" text-anchor="middle" fill="#1e293b">2010</text><text x="172" y="197" font-size="10" text-anchor="middle" fill="#475569">China: total fertility rate (children per woman, approx.)</text></svg>`,
+        "**Why?** By the late 1970s China had about **970 million people**, around a fifth of the world's population, and was still poor. Mao Zedong had encouraged large families in the 1950s–60s, and the population had grown very fast. The new leader **Deng Xiaoping** wanted rapid economic growth, and the government feared that, without control, there would not be enough food, jobs, housing or schools. An earlier voluntary campaign, **'Later, Longer, Fewer'** (marry later, leave longer gaps between children, have fewer of them), had already cut the TFR from about **5.8 in 1970 to about 2.7 by 1979**, but leaders wanted to go further.\n\n**What?** Introduced in **1979** (and enforced nationwide from 1980), the policy meant most urban couples were allowed **only one child**. The rules varied: from the mid-1980s many rural families could have a second child if the first was a girl; **ethnic minorities** were usually exempt; later, couples who were both only children could have two.\n\n**How was it enforced?** Through local 'family planning' officials and workplaces:\n\n- **Incentives (carrots)** for couples who signed a **one-child certificate**: cash bonuses, better housing, priority for schools and health care, longer maternity leave.\n- **Penalties (sticks)** for extra births: large fines called 'social maintenance fees' (often several times a family's yearly income), loss of jobs or promotion, and children without a *hukou* (household registration) who struggled to get schooling or health care.\n- **Coercion**: free contraception and IUDs were widely fitted, and in some places there were **forced abortions and sterilisations**, sometimes late in pregnancy.\n\n**Successes (according to supporters):**\n\n- The government claims about **400 million births were prevented** (many demographers think the real figure is far lower because fertility was already falling).\n- The TFR fell to about **1.6–1.7 by the 2000s**.\n- Fewer children meant more money per child for education and health; women had more time for work. Rapid economic growth lifted hundreds of millions of people out of poverty.",
+      diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line graph of China's total fertility rate from 1970 to 2023 falling from about 5.8 to about 1.0, with the One Child Policy period 1979 to 2015 shaded"><rect x="102" y="30" width="159" height="140" fill="#fef3c7"/><text x="181" y="44" font-size="10" text-anchor="middle" fill="#92400e" font-weight="bold">One Child Policy 1979–2015</text><line x1="40" y1="170" x2="305" y2="170" stroke="#1e293b"/><line x1="40" y1="170" x2="40" y2="25" stroke="#1e293b"/><line x1="40" y1="121" x2="305" y2="121" stroke="#64748b" stroke-dasharray="4 3"/><text x="302" y="116" font-size="10" text-anchor="end" fill="#475569">replacement 2.1</text><polyline points="62,35 84,86 106,109 150,114 194,133 239,133 265,128 283,140 296,147" fill="none" stroke="#dc2626" stroke-width="2.5"/><circle cx="62" cy="35" r="3" fill="#dc2626"/><circle cx="296" cy="147" r="3" fill="#dc2626"/><text x="68" y="34" font-size="10" fill="#7f1d1d">5.8</text><text x="296" y="162" font-size="10" text-anchor="middle" fill="#7f1d1d">1.0</text><text x="265" y="98" font-size="10" text-anchor="middle" fill="#1e3a8a">2-child</text><text x="265" y="108" font-size="10" text-anchor="middle" fill="#1e3a8a">2016</text><text x="290" y="64" font-size="10" text-anchor="middle" fill="#1e3a8a">3-child</text><text x="290" y="74" font-size="10" text-anchor="middle" fill="#1e3a8a">2021</text><text x="34" y="174" font-size="10" text-anchor="end" fill="#1e293b">0</text><text x="34" y="127" font-size="10" text-anchor="end" fill="#1e293b">2</text><text x="34" y="80" font-size="10" text-anchor="end" fill="#1e293b">4</text><text x="34" y="34" font-size="10" text-anchor="end" fill="#1e293b">6</text><text x="62" y="184" font-size="10" text-anchor="middle" fill="#1e293b">1970</text><text x="150" y="184" font-size="10" text-anchor="middle" fill="#1e293b">1990</text><text x="239" y="184" font-size="10" text-anchor="middle" fill="#1e293b">2010</text><text x="172" y="197" font-size="10" text-anchor="middle" fill="#475569">China: total fertility rate (children per woman, approx.)</text></svg>`,
       diagramCaption:
         "China's TFR fell steeply in the 1970s ('Later, Longer, Fewer') before the One Child Policy began, then stayed below replacement. Relaxing the rules in 2016 and 2021 did not bring a lasting rise.",
       keyPoints: [
-        "Introduced 1980 to cut growth and support economic development; ended 2015 (two-child from 2016, three-child from 2021).",
+        "Introduced 1979 to cut growth and support economic development; ended 2015 (two-child from 2016, three-child from 2021).",
         "Enforced with carrots (one-child certificate benefits), sticks (fines, job loss) and sometimes coercion.",
-        "TFR was already falling before 1980 — so not all of the drop can be credited to the policy.",
+        "TFR was already falling before 1979 — so not all of the drop can be credited to the policy.",
       ],
       thinkDeeper:
         "The TFR fell from 5.8 to 2.7 BEFORE the One Child Policy, then from 2.7 to about 1.6 during it. If you were judging how much difference the policy made, which part of the fall would you credit to it — and what else (e.g. urbanisation, rising incomes) might explain it?",
       discovery: {
         problem:
-          "Look at the graph: China's TFR was already falling steeply before 1980. Why might a government still bring in a very strict one-child rule at that moment?",
+          "Look at the graph: China's TFR was already falling steeply before 1979. Why might a government still bring in a very strict one-child rule at that moment?",
         idea:
           "Population momentum: even with falling fertility, China had a huge number of young people about to become parents (from the 1950s–60s baby boom), so total births would keep rising unless each couple had far fewer children.",
       },
@@ -144,7 +144,7 @@ export const populationPolicies: Topic = {
         "India overtook China as the world's most populous country in 2023.",
       ],
       thinkDeeper:
-        "China's leaders reversed the policy because births fell too far. Is it fair to judge a 1980 decision using what we know in 2025? What would a fair test of 'success' look like?",
+        "China's leaders reversed the policy because births fell too far. Is it fair to judge a 1979 decision using what we know in 2025? What would a fair test of 'success' look like?",
       discovery: {
         problem:
           "In some Chinese provinces in the 2000s, about 120 boys were born for every 100 girls. Nature gives about 105. Where did the 'missing girls' go, and what problems will this cause 25 years later?",
@@ -168,7 +168,7 @@ export const populationPolicies: Topic = {
       heading: "Singapore: from 'Stop at Two' to the Baby Bonus",
       body:
         "Singapore is a rare country that has used **both** anti-natalist and pro-natalist policies within one lifetime.\n\n**1. Anti-natalist: 'Stop at Two' (1966–1986).** After independence in 1965, Singapore was poor, crowded and short of housing and jobs, with a TFR of about **4.7**. The **Family Planning and Population Board** was set up in **1966**, and in **1972** the famous **'Stop at Two'** campaign began ('Girl or boy, two is enough'). Measures included:\n\n- Legal abortion and voluntary sterilisation (laws of 1969–70, widened in 1974).\n- Higher hospital delivery fees for each extra child.\n- No paid maternity leave after the second child.\n- Lower priority in primary-school registration for third and later children, and no extra priority in HDB flat allocation for large families.\n\nIt worked — almost too well. The TFR fell to replacement level (2.1) by **1975** and kept falling.\n\n**2. The Graduate Mothers' Scheme (1984).** Prime Minister Lee Kuan Yew worried that well-educated women were having fewer children than less-educated women. The scheme gave **priority school places to children of graduate mothers with three or more children**, while a separate grant (S$10,000) was offered to **low-income, less-educated mothers who were sterilised** after one or two children. It was very unpopular (seen as unfair and elitist) and was **scrapped in 1985**. The **Social Development Unit (SDU)**, a government matchmaking agency for graduates, was also set up in 1984.\n\n**3. Pro-natalist: 'Have Three or More, if you can afford it' (1987).** With the TFR at about 1.4 in 1986, the government reversed course. Incentives included tax rebates for a third child, childcare subsidies and HDB priority for larger families. The TFR briefly rose to about 2.0 in 1988 (helped by the popular Year of the Dragon), then drifted down again.\n\n**4. The Baby Bonus (2001 → today).** The **Baby Bonus** scheme gives a **cash gift** (since 2023, S$11,000 for each of the first two children and S$13,000 for the third and later children) plus a **Child Development Account (CDA)** in which the government adds a grant and matches parents' savings. Other measures: government-paid **paternity leave** (four weeks from 2024), shared parental leave, childcare and preschool subsidies, priority for HDB flats for couples with children (Parenthood Priority Scheme), and more support for large families announced in 2025.\n\n**Result?** Despite billions of dollars, Singapore's resident TFR fell to **0.97 in 2023**, one of the lowest in the world. Reasons include the high cost of housing, education and tuition, long working hours, more people marrying later or not at all, and women's careers. Singapore relies heavily on **immigration** to keep its workforce growing: about 3.6 million citizens, plus permanent residents and about 1.8 million non-residents.",
-      diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line graph of Singapore's total fertility rate from 1960 to 2023 falling from about 5.8 to 0.97, with policy dates marked: Stop at Two 1972, Have Three or More 1987, Baby Bonus 2001"><line x1="40" y1="170" x2="305" y2="170" stroke="#1e293b"/><line x1="40" y1="170" x2="40" y2="25" stroke="#1e293b"/><line x1="40" y1="121" x2="305" y2="121" stroke="#64748b" stroke-dasharray="4 3"/><text x="302" y="116" font-size="10" text-anchor="end" fill="#475569">replacement 2.1</text><line x1="89" y1="30" x2="89" y2="170" stroke="#dc2626" stroke-dasharray="2 2"/><line x1="150" y1="60" x2="150" y2="170" stroke="#2563eb" stroke-dasharray="2 2"/><line x1="207" y1="60" x2="207" y2="170" stroke="#2563eb" stroke-dasharray="2 2"/><text x="92" y="40" font-size="10" fill="#b91c1c">'Stop at Two' 1972</text><text x="150" y="56" font-size="10" text-anchor="middle" fill="#1d4ed8">'Three or More' 1987</text><text x="232" y="72" font-size="10" text-anchor="middle" fill="#1d4ed8">Baby Bonus 2001</text><polyline points="40,35 81,98 101,121 122,128 146,137 154,123 162,128 203,133 244,143 285,144 297,147" fill="none" stroke="#7c3aed" stroke-width="2.5"/><circle cx="40" cy="35" r="3" fill="#7c3aed"/><circle cx="297" cy="147" r="3" fill="#7c3aed"/><text x="290" y="162" font-size="10" text-anchor="middle" fill="#5b21b6">0.97</text><text x="34" y="174" font-size="10" text-anchor="end" fill="#1e293b">0</text><text x="34" y="127" font-size="10" text-anchor="end" fill="#1e293b">2</text><text x="34" y="80" font-size="10" text-anchor="end" fill="#1e293b">4</text><text x="34" y="34" font-size="10" text-anchor="end" fill="#1e293b">6</text><text x="40" y="184" font-size="10" text-anchor="middle" fill="#1e293b">1960</text><text x="122" y="184" font-size="10" text-anchor="middle" fill="#1e293b">1980</text><text x="203" y="184" font-size="10" text-anchor="middle" fill="#1e293b">2000</text><text x="285" y="184" font-size="10" text-anchor="middle" fill="#1e293b">2020</text><text x="172" y="197" font-size="10" text-anchor="middle" fill="#475569">Singapore resident TFR (approx.)</text></svg>`,
+      diagram: `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Line graph of Singapore's total fertility rate from 1960 to 2023 falling from about 5.8 to 0.97, with policy dates marked: Stop at Two 1972, Have Three or More 1987, Baby Bonus 2001"><line x1="40" y1="170" x2="305" y2="170" stroke="#1e293b"/><line x1="40" y1="170" x2="40" y2="25" stroke="#1e293b"/><line x1="40" y1="121" x2="305" y2="121" stroke="#64748b" stroke-dasharray="4 3"/><text x="302" y="116" font-size="10" text-anchor="end" fill="#475569">replacement 2.1</text><line x1="89" y1="30" x2="89" y2="170" stroke="#dc2626" stroke-dasharray="2 2"/><line x1="150" y1="60" x2="150" y2="170" stroke="#2563eb" stroke-dasharray="2 2"/><line x1="207" y1="76" x2="207" y2="170" stroke="#2563eb" stroke-dasharray="2 2"/><text x="92" y="40" font-size="10" fill="#b91c1c">'Stop at Two' 1972</text><text x="150" y="56" font-size="10" text-anchor="middle" fill="#1d4ed8">'Three or More' 1987</text><text x="232" y="72" font-size="10" text-anchor="middle" fill="#1d4ed8">Baby Bonus 2001</text><polyline points="40,35 81,98 101,121 122,128 146,137 154,123 162,128 203,133 244,143 285,144 297,147" fill="none" stroke="#7c3aed" stroke-width="2.5"/><circle cx="40" cy="35" r="3" fill="#7c3aed"/><circle cx="297" cy="147" r="3" fill="#7c3aed"/><text x="290" y="162" font-size="10" text-anchor="middle" fill="#5b21b6">0.97</text><text x="34" y="174" font-size="10" text-anchor="end" fill="#1e293b">0</text><text x="34" y="127" font-size="10" text-anchor="end" fill="#1e293b">2</text><text x="34" y="80" font-size="10" text-anchor="end" fill="#1e293b">4</text><text x="34" y="34" font-size="10" text-anchor="end" fill="#1e293b">6</text><text x="40" y="184" font-size="10" text-anchor="middle" fill="#1e293b">1960</text><text x="122" y="184" font-size="10" text-anchor="middle" fill="#1e293b">1980</text><text x="203" y="184" font-size="10" text-anchor="middle" fill="#1e293b">2000</text><text x="285" y="184" font-size="10" text-anchor="middle" fill="#1e293b">2020</text><text x="172" y="197" font-size="10" text-anchor="middle" fill="#475569">Singapore resident TFR (approx.)</text></svg>`,
       diagramCaption:
         "Singapore's TFR fell below replacement within a few years of 'Stop at Two' and has stayed below it ever since, despite pro-natalist policies from 1987 and the Baby Bonus from 2001.",
       keyPoints: [
@@ -284,7 +284,7 @@ export const populationPolicies: Topic = {
   examMistakes: [
     "Saying a densely populated place must be over-populated — always link population to RESOURCES and technology (Singapore is dense but not over-populated).",
     "Mixing up anti-natalist (reduce births) and pro-natalist (increase births).",
-    "Writing that the One Child Policy started in 2000 or ended in 2021 — it ran from 1980 to 2015; the two-child policy began in 2016 and the three-child policy in 2021.",
+    "Writing that the One Child Policy started in 2000 or ended in 2021 — it ran from 1979 to 2015; the two-child policy began in 2016 and the three-child policy in 2021.",
     "Listing problems of the OCP without explaining them — e.g. say WHY son preference plus one child led to a gender imbalance, and what that causes later.",
     "Evaluating without a judgement: 'to what extent' questions need a clear conclusion ('largely successful because…').",
     "Giving no data: quote figures such as TFR 0.97 (Singapore, 2023), about 35 million more men than women (China, 2020), or 400 million births claimed prevented.",
@@ -388,11 +388,11 @@ export const populationPolicies: Topic = {
     { front: "Optimum population", back: "The number of people that gives the highest standard of living per person with the available resources and technology." },
     { front: "Malthus (1798)", back: "Population grows geometrically (1, 2, 4, 8), food arithmetically (1, 2, 3, 4) → crisis, then positive checks: famine, disease, war." },
     { front: "Boserup (1965)", back: "'Necessity is the mother of invention': population pressure drives new farming technology, so food supply keeps up." },
-    { front: "Anti-natalist policy", back: "A policy to reduce the birth rate, e.g. China's One Child Policy (1980–2015), Singapore's 'Stop at Two' (1972)." },
+    { front: "Anti-natalist policy", back: "A policy to reduce the birth rate, e.g. China's One Child Policy (1979–2015), Singapore's 'Stop at Two' (1972)." },
     { front: "Pro-natalist policy", back: "A policy to increase the birth rate, e.g. Singapore's Baby Bonus (2001), French family allowances." },
     { front: "Total fertility rate (TFR)", back: "The average number of children a woman has in her lifetime. Replacement level is about 2.1." },
     { front: "4-2-1 problem", back: "One only child may have to support two parents and four grandparents (a result of the One Child Policy)." },
-    { front: "China's policy dates", back: "One Child Policy 1980–2015; two-child from 2016; three-child announced 2021. Population falling since 2022." },
+    { front: "China's policy dates", back: "One Child Policy 1979–2015; two-child from 2016; three-child announced 2021. Population falling since 2022." },
     { front: "Gender imbalance in China", back: "Sex ratio at birth peaked about 118–120 boys per 100 girls; about 35 million more men than women (2020 census)." },
     { front: "Singapore 'Stop at Two'", back: "1972 anti-natalist campaign: higher delivery fees, no paid maternity leave after 2nd child, school priority for small families." },
     { front: "Graduate Mothers' Scheme", back: "1984 Singapore scheme giving school priority to children of graduate mothers with 3+ children; unpopular and scrapped 1985." },
@@ -450,13 +450,13 @@ export const populationPolicies: Topic = {
         answerIndex: 1,
         hint: "Geographers compare people with something else, not with land area alone.",
         explanation:
-          "Over-population is about the balance between people and resources/technology. High density (option A) is tempting, but Singapore is very dense and not over-populated.",
+          "Over-population is about the balance between people and resources/technology. High density (>1,000 per km²) is tempting, but Singapore is very dense and not over-populated.",
         guideRef: "over-under-optimum",
       },
       {
         id: "ppol-quiz-mcq-2",
         question: "In which year did China replace the One Child Policy with a two-child policy?",
-        options: ["1980", "2008", "2021", "2016"],
+        options: ["1979", "2008", "2021", "2016"],
         answerIndex: 3,
         hint: "The change was announced in late 2015 and took effect on 1 January the following year.",
         explanation:
@@ -485,7 +485,7 @@ export const populationPolicies: Topic = {
         answerIndex: 2,
         hint: "She was more optimistic than Malthus.",
         explanation:
-          "Boserup argued that population pressure drives people to invent better farming methods. Options A and B describe Malthus's view.",
+          "Boserup argued that population pressure drives people to invent better farming methods. Population outgrowing food and famine/war checks describe Malthus's view.",
         guideRef: "malthus-boserup",
       },
     ],
@@ -496,7 +496,7 @@ export const populationPolicies: Topic = {
         marks: 4,
         hint: "Define each, then attach a real country and policy.",
         modelAnswer:
-          "An anti-natalist policy tries to reduce the birth rate, for example China's One Child Policy (1980–2015). A pro-natalist policy tries to increase the birth rate, for example Singapore's Baby Bonus, which since 2001 has given parents a cash gift and savings support for each new child.",
+          "An anti-natalist policy tries to reduce the birth rate, for example China's One Child Policy (1979–2015). A pro-natalist policy tries to increase the birth rate, for example Singapore's Baby Bonus, which since 2001 has given parents a cash gift and savings support for each new child.",
             markScheme: [
           { point: "Anti-natalist = reduce births / birth rate", keywords: ["reduce", "lower", "fewer", "decrease", "discourage", "cut"] },
           { point: "Named anti-natalist example", keywords: ["one child", "one-child", "stop at two", "china"] },
@@ -619,11 +619,11 @@ export const populationPolicies: Topic = {
           {
             id: "ppol-mcq-p1-q06",
             question: "In which year did China's One Child Policy begin?",
-            options: ["1949", "1966", "2000", "1980"],
+            options: ["1949", "1966", "2000", "1979"],
             answerIndex: 3,
             hint: "It came shortly after Deng Xiaoping became leader.",
             explanation:
-              "The policy was introduced in 1980 (announced 1979–80) and lasted until 2015. 1949 is when the People's Republic was founded, not when the policy began.",
+              "The policy was introduced in 1979 (enforced nationwide from 1980) and lasted until 2015. 1949 is when the People's Republic was founded, not when the policy began.",
             guideRef: "china-one-child",
           },
           {
@@ -673,7 +673,7 @@ export const populationPolicies: Topic = {
             answerIndex: 3,
             hint: "China has 55 officially recognised groups apart from the Han majority.",
             explanation:
-              "Most ethnic minorities could have more children. City families (option A) faced the strictest enforcement, and officials were expected to set an example.",
+              "Most ethnic minorities could have more children. City families in Beijing and Shanghai faced the strictest enforcement, and officials were expected to set an example.",
             guideRef: "china-one-child",
           },
           {
@@ -864,7 +864,7 @@ export const populationPolicies: Topic = {
             answerIndex: 3,
             hint: "Deng Xiaoping's top priority was making China richer.",
             explanation:
-              "Leaders feared there would not be enough food, jobs and housing, slowing economic growth. The policy actually made the gender imbalance and ageing worse, so options A and C are the reverse of what happened.",
+              "Leaders feared there would not be enough food, jobs and housing, slowing economic growth. The policy actually made the gender imbalance and ageing worse, rather than solving them.",
             guideRef: "china-one-child",
           },
           {
@@ -970,7 +970,7 @@ export const populationPolicies: Topic = {
           {
             id: "ppol-mcq-p2-q16",
             question: "France's long-running pro-natalist laws began with the…",
-            options: ["One Child Policy, 1980", "Code de la Famille, 1939", "Angel Plan, 1994", "Baby Bonus, 2001"],
+            options: ["One Child Policy, 1979", "Code de la Famille, 1939", "Angel Plan, 1994", "Baby Bonus, 2001"],
             answerIndex: 1,
             hint: "It was passed on the eve of the Second World War.",
             explanation:
@@ -1004,7 +1004,7 @@ export const populationPolicies: Topic = {
             answerIndex: 1,
             hint: "Think of a heavy train that keeps moving after the brakes go on.",
             explanation:
-              "When many young people reach parenthood age, total births stay high even if each couple has fewer children. Option D describes Malthus's idea, not momentum.",
+              "When many young people reach parenthood age, total births stay high even if each couple has fewer children. Population outgrowing food supply describes Malthus's idea, not momentum.",
             guideRef: "evaluating-policies",
           },
           {
@@ -1075,7 +1075,7 @@ export const populationPolicies: Topic = {
             answerIndex: 0,
             hint: "Over-population depends on resources and technology, not just space.",
             explanation:
-              "Singapore imports over 90% of its food and uses NEWater, desalination and high-rise HDB flats. It certainly does not grow all its own food, so option D is the reverse of the truth.",
+              "Singapore imports over 90% of its food and uses NEWater, desalination and high-rise HDB flats. Claiming it grows all its own food is the reverse of the truth.",
             guideRef: "over-under-optimum",
           },
           {
@@ -1185,7 +1185,7 @@ export const populationPolicies: Topic = {
             answerIndex: 0,
             hint: "Was 2016 the start of a trend or a one-off bump?",
             explanation:
-              "Births jumped briefly after 2016 then fell by about half. Small families had become normal and costs were high. The population is actually falling, so D is wrong.",
+              "Births jumped briefly after 2016 then fell by about half. Small families had become normal and costs were high, and China's total population is now falling rather than growing quickly.",
             guideRef: "one-child-problems",
           },
           {
@@ -1290,7 +1290,7 @@ export const populationPolicies: Topic = {
             answerIndex: 0,
             hint: "Correlation is not causation.",
             explanation:
-              "Birth rates fall as countries develop, so the fall might have happened anyway. Option B is false — birth rates change for many reasons.",
+              "Birth rates fall as countries develop, so the fall might have happened anyway. Claiming birth rates never change by themselves is false — they change for many social and economic reasons.",
             guideRef: "evaluating-policies",
           },
           {
@@ -1441,7 +1441,7 @@ export const populationPolicies: Topic = {
             answerIndex: 1,
             hint: "Permission to have more children is not the same as wanting or affording them.",
             explanation:
-              "Removing limits does not help if couples cannot afford, or do not want, more children. China actually has more men than women, so C is wrong.",
+              "Removing limits does not help if couples cannot afford, or do not want, more children. China actually has more men than women, not more women than men.",
             guideRef: "one-child-problems",
           },
           {
@@ -1491,7 +1491,7 @@ export const populationPolicies: Topic = {
             answerIndex: 0,
             hint: "Compare France with its European neighbours, not the whole world.",
             explanation:
-              "France kept fertility near 2.0 when much of Europe was around 1.3–1.6. Its TFR is far below the world's highest (over 6 in Niger), so B is wrong.",
+              "France kept fertility near 2.0 when much of Europe was around 1.3–1.6. Its TFR is far below the world's highest (over 6 in Niger).",
             guideRef: "evaluating-policies",
           },
           {
@@ -1571,7 +1571,7 @@ export const populationPolicies: Topic = {
             answerIndex: 2,
             hint: "The optimum depends on resources as well as people.",
             explanation:
-              "With fewer usable resources, the number of people the land can support well drops, so the same population may now be too many. Option B forgets that the optimum is not fixed.",
+              "With fewer usable resources, the number of people the land can support well drops, so the same population may now be too many. Saying it stays the same forgets that the optimum is not fixed.",
             guideRef: "over-under-optimum",
           },
         ],
@@ -1643,7 +1643,7 @@ export const populationPolicies: Topic = {
           },
           {
             id: "ppol-qa-p1-q05",
-            question: "Explain why China introduced the One Child Policy in 1980.",
+            question: "Explain why China introduced the One Child Policy in 1979.",
             marks: 3,
             hint: "Think about population size, past growth and the government's economic aims.",
             modelAnswer:
@@ -1825,7 +1825,7 @@ export const populationPolicies: Topic = {
             marks: 2,
             hint: "'Natal' means birth.",
             modelAnswer:
-              "An anti-natalist policy is a government policy that aims to reduce the birth rate, for example China's One Child Policy (1980–2015) or Singapore's 'Stop at Two' campaign (1972).",
+              "An anti-natalist policy is a government policy that aims to reduce the birth rate, for example China's One Child Policy (1979–2015) or Singapore's 'Stop at Two' campaign (1972).",
             markScheme: [
               { point: "Aims to reduce births/birth rate", keywords: ["reduce", "lower", "fewer", "decrease", "discourage", "limit"] },
               { point: "Valid example", keywords: ["one child", "one-child", "stop at two", "china", "india"] },

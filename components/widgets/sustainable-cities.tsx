@@ -245,7 +245,7 @@ export function FootprintCalculator() {
     { l: "Stuff & waste", v: WASTE[waste].v, c: "#a855f7" },
     { l: "Shared services", v: SHARED, c: "#94a3b8" },
   ];
-  const total = parts.reduce((s, p) => s + p.v, 0);
+  const total = Math.round(parts.reduce((s, p) => s + p.v, 0) * 100) / 100;
   const earths = total / BIOCAP;
   const biggest = parts.slice(0, 5).sort((a, b) => b.v - a.v)[0];
 
@@ -255,7 +255,7 @@ export function FootprintCalculator() {
   const yy = (v: number) => B - (v / max) * (B - T);
   const bw = 46, gap = (W - L - 8 - bw * bars.length) / bars.length;
 
-  const nEarth = Math.min(8, Math.ceil(earths));
+  const nEarth = Math.min(8, Math.ceil(earths - 1e-9));
   const sgEarths = 5.5 / BIOCAP;
 
   return (

@@ -68,7 +68,8 @@ export function HeadlandTimeLapse() {
   const W = 400;
   const retreat = W * (1 - Math.exp((-R.r0 * years) / W));
   const rateNow = R.r0 * Math.exp((-R.r0 * years) / W) * 100; // cm/yr
-  const c = 300 - retreat * 0.55;
+  const C0 = 110;
+  const c = C0 + retreat * 0.55;
   const f = years === 0 ? 0 : (retreat / 12) % 1; // where we are in one notch → collapse cycle
   const notch = f * 16;
   const rubble = years > 0 && retreat > 1 && f < 0.3;
@@ -160,11 +161,11 @@ export function HeadlandTimeLapse() {
         aria-label={`Cross-section of the cliff: it has retreated ${Math.round(retreat)} metres, leaving a wave-cut platform`}>
         <rect x="0" y="0" width="360" height="140" fill="#f8fafc" />
         <text x="6" y="16" fontSize="12" fontWeight="bold" fill="#0c4a6e">Meanwhile: cross-section through the cliff</text>
-        <path d={`M360,34 L${c},34 L${c},84 Q${c + notch * 1.9},93 ${c},101 L300,104 L0,124 L0,140 L360,140 Z`} fill={R.fill} stroke="#57534e" />
-        <path d={`M0,98 L${c},98 L${c},101 L300,104 L0,124 Z`} fill="#38bdf8" opacity="0.55" />
+        <path d={`M360,34 L${c},34 L${c},84 Q${c + notch * 1.9},93 ${c},101 L${C0},108 L0,124 L0,140 L360,140 Z`} fill={R.fill} stroke="#57534e" />
+        <path d={`M0,98 L${c},98 L${c},101 L${C0},108 L0,124 Z`} fill="#38bdf8" opacity="0.55" />
         {rubble ? [0, 1, 2].map((i) => <circle key={i} cx={c - 5 - i * 6} cy={99 - (i % 2) * 2} r={3 - (i % 2)} fill="#78716c" />) : null}
-        <line x1="300" y1="30" x2="300" y2="104" stroke="#57534e" strokeDasharray="4 3" />
-        <text x="298" y="28" fontSize="11" textAnchor="end" fill="#57534e">original cliff</text>
+        <line x1={C0} y1="30" x2={C0} y2="108" stroke="#57534e" strokeDasharray="4 3" />
+        <text x={C0} y="28" fontSize="11" textAnchor="middle" fill="#57534e">original cliff</text>
         <line x1="0" y1="92" x2="360" y2="92" stroke="#0369a1" strokeDasharray="5 3" />
         <line x1="0" y1="112" x2="120" y2="112" stroke="#0369a1" strokeDasharray="5 3" />
         <text x="4" y="89" fontSize="11" fill="#0369a1">high tide</text>
@@ -172,9 +173,9 @@ export function HeadlandTimeLapse() {
         {notch > 4 ? <text x={c + 8} y="78" fontSize="11" fill="#7c2d12">{notch > 10 ? "overhang ↓" : "notch"}</text> : null}
         {retreat > 40 ? (
           <>
-            <Arrow x1={c + 4} y1={116} x2={296} y2={116} w={1.2} color="#7c2d12" />
-            <Arrow x1={296} y1={116} x2={c + 4} y2={116} w={1.2} color="#7c2d12" />
-            <text x={(c + 300) / 2} y="132" fontSize="11" textAnchor="middle" fill="#7c2d12">wave-cut platform ≈ {Math.round(retreat)} m</text>
+            <Arrow x1={C0 + 4} y1={116} x2={c - 4} y2={116} w={1.2} color="#7c2d12" />
+            <Arrow x1={c - 4} y1={116} x2={C0 + 4} y2={116} w={1.2} color="#7c2d12" />
+            <text x={(C0 + c) / 2} y="132" fontSize="11" textAnchor="middle" fill="#7c2d12">wave-cut platform ≈ {Math.round(retreat)} m</text>
           </>
         ) : null}
       </svg>

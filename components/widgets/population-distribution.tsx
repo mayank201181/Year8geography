@@ -20,6 +20,7 @@ function fmtNum(n: number): string {
   if (n >= 100) return Math.round(n).toLocaleString("en-GB");
   if (n >= 10) return n.toFixed(0);
   if (n >= 1) return n.toFixed(1);
+  if (n > 0 && n < 0.01) return "< 0.01";
   return n.toFixed(2);
 }
 
@@ -34,7 +35,7 @@ const PLACES: Place[] = [
   { id: "mongolia", name: "Mongolia", pop: 3.5e6, area: 1_564_116, note: "Vast cold, dry steppe and desert. Nearly half of all Mongolians live in one city, Ulaanbaatar, so most of the land is almost empty." },
   { id: "australia", name: "Australia", pop: 27.2e6, area: 7_692_000, note: "Most Australians live along the wetter south-east and south-west coasts. The hot, dry interior (the Outback) is very sparsely populated." },
   { id: "world", name: "World (land)", pop: 8.1e9, area: 134_700_000, note: "The world average, using all land except Antarctica. Averages hide huge differences: some places are empty, others are packed." },
-  { id: "bangladesh", name: "Bangladesh", pop: 173e6, area: 148_460, note: "Flat, fertile land on the Ganges–Brahmaputra delta plus monsoon rain lets farmland feed a huge population — one of the most crowded large countries on Earth." },
+  { id: "bangladesh", name: "Bangladesh", pop: 173e6, area: 130_170, note: "Flat, fertile land on the Ganges–Brahmaputra delta plus monsoon rain lets farmland feed a huge population — one of the most crowded large countries on Earth." },
   { id: "hongkong", name: "Hong Kong", pop: 7.5e6, area: 1_110, note: "Steep hills and country parks cover most of Hong Kong, so people pack into high-rise towers on the small areas of flat land. Real density where people live is far higher than this average." },
   { id: "singapore", name: "Singapore", pop: 6.04e6, area: 735, note: "A city-state: almost the whole country is urban. Land is scarce, so about 8 in 10 residents live in high-rise HDB flats." },
   { id: "tampines", name: "Tampines HDB town", pop: 270_000, area: 20.9, note: "An HDB town (approximate figures for the whole planning area, including parks and industry). Housing estates are denser than Singapore's average because nature reserves, the airport and ports lower the national figure." },
@@ -106,7 +107,7 @@ export function DensityCalculator() {
             <button key={g} type="button" onClick={() => setGuess(g)} className={`rounded-full px-3 py-1 font-semibold ring-1 ${guess === g ? "bg-amber-600 text-white ring-amber-600" : "bg-white ring-amber-300"}`}>{g}</button>
           ))}
         </div>
-        {guess ? <p className="mt-2">{guess === "About 300×" ? "Yes! " : "Not quite — "}Bangladesh has ~1,170 people/km², Australia ~3.5, so it is <b>over 300× more crowded</b>. Bangladesh squeezes its people into an area about 1/50 the size of Australia.</p> : null}
+        {guess ? <p className="mt-2">{guess === "About 300×" ? "Yes! " : "Not quite — "}Bangladesh has ~1,330 people/km², Australia ~3.5, so it is <b>over 300× more crowded</b>. Bangladesh squeezes its people into a land area less than 1/50 the size of Australia.</p> : null}
       </div>
 
       <Choice label="Choose" value={mode} onChange={setMode} options={[{ id: "place", label: "Real places" }, { id: "custom", label: "Make your own" }]} />

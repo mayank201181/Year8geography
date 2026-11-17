@@ -208,7 +208,7 @@ export function PushPullLagos() {
 
   const push = PUSH.filter((f) => on[f.id]).reduce((s, f) => s + f.w, 0);
   const pull = PULL.filter((f) => on[f.id]).reduce((s, f) => s + f.w, 0);
-  const score = Math.max(0, push + pull - OBSTACLE);
+  const score = Math.min(100, Math.max(0, push + pull - OBSTACLE));
   const verdict = score >= 55 ? "Very likely to move to Lagos" : score >= 25 ? "Thinking about it" : "Likely to stay";
   const forced = on.conflict;
 

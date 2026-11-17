@@ -14,7 +14,7 @@ const U_YEARS = [1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020, 2030, 2040, 205
 type CountryId = "world" | "uk" | "japan" | "china" | "india" | "nigeria" | "brazil" | "singapore";
 
 const COUNTRIES: { id: CountryId; name: string; color: string; data: number[] }[] = [
-  { id: "world", name: "World", color: "#0f172a", data: [30, 34, 37, 39, 43, 47, 52, 56, 60, 65, 68] },
+  { id: "world", name: "World", color: "#0f172a", data: [30, 34, 37, 39, 43, 46.7, 51.7, 56, 60, 65, 68] },
   { id: "uk", name: "UK", color: "#2563eb", data: [79, 78, 77, 78, 78, 79, 81, 84, 86, 88, 89] },
   { id: "japan", name: "Japan", color: "#db2777", data: [53, 63, 72, 76, 77, 79, 91, 92, 93, 94, 95] },
   { id: "china", name: "China", color: "#dc2626", data: [12, 16, 17, 19, 26, 36, 49, 61, 71, 76, 80] },
@@ -56,11 +56,14 @@ export function UrbanisationCurves() {
   const x = (yr: number) => L + ((yr - 1950) / 100) * (W - L - R);
   const y = (p: number) => T + (1 - p / 100) * (H - T - B);
 
-  const shown = COUNTRIES.filter((c) => on.includes(c.id));
+  const shown = useMemo(() => COUNTRIES.filter((c) => on.includes(c.id)), [on]);
   const toggle = (id: CountryId) =>
     setOn((o) => (o.includes(id) ? (o.length > 1 ? o.filter((v) => v !== id) : o) : [...o, id]));
 
-  const readouts = shown.map((c) => ({ ...c, now: lerpSeries(U_YEARS, c.data, year), rise: lerpSeries(U_YEARS, c.data, year) - c.data[0] }));
+  const readouts = useMemo(
+    () => shown.map((c) => ({ ...c, now: lerpSeries(U_YEARS, c.data, year), rise: lerpSeries(U_YEARS, c.data, year) - c.data[0] })),
+    [shown, year],
+  );
 
   const caption = useMemo(() => {
     if (readouts.length === 0) return null;
@@ -181,7 +184,7 @@ const CITIES: { name: string; c: Continent; p: number[] }[] = [
   { name: "Lagos", c: "Africa", p: [0.3, 0.8, 1.4, 2.6, 4.8, 7.3, 10.4, 14.4, 20.6, 24.4] },
   { name: "Kinshasa", c: "Africa", p: [0.2, 0.4, 1.1, 2.1, 3.7, 6.1, 9.4, 14.3, 21.9, 26.7] },
   { name: "Manila", c: "Asia", p: [1.5, 2.3, 3.5, 5.9, 8.0, 10.0, 11.9, 13.9, 16.8, 18.6] },
-  { name: "Istanbul", c: "Europe", p: [1.0, 1.5, 2.8, 4.4, 6.6, 8.7, 12.7, 15.2, 17.1, 17.7] },
+  { name: "Istanbul", c: "Asia", p: [1.0, 1.5, 2.8, 4.4, 6.6, 8.7, 12.7, 15.2, 17.1, 17.7] },
 ];
 
 // Number of megacities (10 million+) in the WHOLE world, approximate UN estimates/projections.

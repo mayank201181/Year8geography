@@ -47,7 +47,7 @@ const PLACES: Record<PlaceId, { name: string; where: string; temp: number[]; rai
     name: "Lhasa, Tibet (Himalaya)", where: "30°N, 3,650 m",
     temp: [-0.3, 2.9, 6.6, 9.7, 13.7, 17.2, 16.8, 16.0, 14.4, 9.6, 3.8, 0.1],
     rain: [0.9, 1.4, 3.3, 8.5, 31, 82, 133, 131, 63, 6.4, 1.6, 0.9],
-    note: "the same latitude as Cairo but 3.6 km higher, so it is about 12°C colder; the summer monsoon brings almost all the rain from June to September",
+    note: "the same latitude as Cairo but 3.6 km higher, so its annual average is about 13°C colder; the summer monsoon brings almost all the rain from June to September",
   },
   manaus: {
     name: "Manaus, Brazil (Amazon)", where: "3°S, 92 m",
