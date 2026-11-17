@@ -323,7 +323,7 @@ export const paper: ExamPaper = {
       difficulty: "challenge",
       question:
         "Town T had 150,000 people at the start of one year. During that year:\n\n| Births | Deaths | Immigrants | Emigrants |\n|---|---|---|---|\n| 4,200 | 3,900 | 2,600 | 1,100 |\n\nCalculate the percentage change in Town T's population over the year. Give your answer to 1 decimal place.",
-      answer: { type: "number", value: 1.2, tolerance: 0.001, display: "1.2% (an increase)" },
+      answer: { type: "number", value: 1.2, tolerance: 0.001, display: "1.2%" },
       traps: [
         { spec: { type: "number", value: 1 }, feedback: "That is net migration only (1,500 people). Add natural change (births − deaths) too." },
         { spec: { type: "number", value: 0.2 }, feedback: "That is natural change only (300 people). Add net migration (immigrants − emigrants) too." },

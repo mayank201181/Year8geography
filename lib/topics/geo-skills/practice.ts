@@ -766,7 +766,7 @@ export const practice: TopicPractice = {
             { point: "Strength of primary data: you control the method, it is up to date and fits your question", keywords: ["control", "method", "up to date", "first-hand", "know how", "specific"] },
             { point: "Weakness of primary data: small sample, human error, timing", keywords: ["small sample", "sample", "error", "miscount", "one time", "anomaly", "bias"] },
             { point: "Strength of secondary data: large-scale, professional, consistent (e.g. Census 2020 covers the whole population)", keywords: ["census", "large", "whole population", "government", "professional", "official"] },
-            { point: "Weakness of secondary data: may be out of date, collected for another purpose, method unknown", keywords: ["out of date", "old", "every 10 years", "another purpose", "don't know", "unknown"] },
+            { point: "Weakness of secondary data: may be out of date, collected for another purpose, method unknown", keywords: ["out of date", "old", "every 10 years", "another purpose", "cannot check", "unknown"] },
             { point: "Uses named examples (pedestrian count, Singapore Census 2020) to support points", keywords: ["pedestrian", "count", "census", "2020", "singapore"] },
             { point: "Justified conclusion, e.g. reliability depends on collection method/sample; use both", keywords: ["overall", "depends", "both", "conclusion", "disagree", "therefore"] },
           ],

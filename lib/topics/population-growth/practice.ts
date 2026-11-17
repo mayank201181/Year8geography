@@ -812,7 +812,7 @@ export const practice: TopicPractice = {
       id: "population-growth-ch-q02",
       question:
         "Country G has **40 million** people, a birth rate of **38 per 1000** and a death rate of **8 per 1000**. Assume these rates stay the same and there is no migration. Each year's natural increase is added on before the next year is worked out.\n\nBy how much will Country G's population have **grown** after **2 years**? Give your answer in millions, to 3 decimal places.",
-      answer: { type: "number", value: 2.436, tolerance: 0.0005, display: "2.436 million (2,436,000 people)" },
+      answer: { type: "number", value: 2.436, tolerance: 0.0005, display: "2.436 million" },
       traps: [
         { spec: { type: "number", value: 2.4 }, feedback: "You added 3% of 40 million twice. In year 2 the 3% is taken of the **bigger** population (41.2 million)." },
         { spec: { type: "number", value: 27.6 }, feedback: "You used 30% a year. (38 − 8) = 30 per **1000**, which is 3%, not 30%." },
@@ -893,7 +893,7 @@ export const practice: TopicPractice = {
       id: "population-growth-ch-q05",
       question:
         "Between 2011 (7 billion) and 2022 (8 billion) the world added people at a certain average rate each year. The UN WPP 2024 projects about 9.7 billion by 2050.\n\nOn average, how many million **fewer** people per year is the world projected to add between 2022 and 2050 than it added between 2011 and 2022? Give your answer to the nearest million.",
-      answer: { type: "number", value: 30, tolerance: 0.5, display: "about 30 million fewer per year" },
+      answer: { type: "number", value: 30, tolerance: 0.5, display: "about 30 million per year" },
       traps: [
         { spec: { type: "number", value: 61 }, feedback: "About 61 million a year is the projected rate for 2022–2050. Now compare it with 2011–2022." },
         { spec: { type: "number", value: 91 }, feedback: "About 91 million a year is the 2011–2022 rate. Now work out the 2022–2050 rate and find the difference." },
@@ -947,7 +947,7 @@ export const practice: TopicPractice = {
       id: "population-growth-ch-q07",
       question:
         "Country M starts the year with **6.5 million** people. During the year it records **156,000** births, **52,000** deaths, **39,000** immigrants and **65,000** emigrants.\n\nCalculate the **overall** percentage change in Country M's population over the year, in %. (Use a minus sign if it is a decrease.)",
-      answer: { type: "number", value: 1.2, display: "1.2% (an increase)" },
+      answer: { type: "number", value: 1.2, display: "1.2%" },
       traps: [
         { spec: { type: "number", value: 1.6 }, feedback: "1.6% is only the rate of natural increase (births − deaths). The question asks for the **overall** change, so include net migration too." },
         { spec: { type: "number", value: 2 }, feedback: "You added net migration the wrong way round. Net migration = immigrants − emigrants = 39,000 − 65,000 = −26,000, a net **loss**." },

@@ -42,7 +42,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "coral-reefs-quiz-q03",
       question: "Coral reefs are found roughly between ___°N and ___°S. What number fills **both** gaps?",
-      answer: { type: "number", value: 30, display: "30 (30°N to 30°S)" },
+      answer: { type: "number", value: 30, display: "30°" },
       traps: [{ spec: { type: "number", value: 23.5 }, feedback: "Close — the tropics end at about 23.5°, but reefs stretch a little further, to about 30°N and 30°S." }],
       solution: ["Almost all warm-water coral reefs lie between about **30°N and 30°S**, where the sea is warm enough (above about 18 °C) all year."],
       commonError: "Giving the Tropics (23.5°) — reefs extend a little beyond them.",

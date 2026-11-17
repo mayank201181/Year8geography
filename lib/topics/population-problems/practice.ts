@@ -594,7 +594,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "population-problems-p2-q08",
           question:
-            "Use the census table in the previous question: 7.0% of China's population was aged 65+ in 2000 and 13.5% in 2020. By how many **percentage points** did this share rise?",
+            "In China's census data, 7.0% of China's population was aged 65+ in 2000 and 13.5% in 2020. By how many **percentage points** did this share rise?",
           answer: { type: "number", value: 6.5, tolerance: 0.05, display: "6.5 percentage points" },
           traps: [
             { spec: { type: "number", value: 93, tolerance: 1 }, feedback: "That's the *percentage change* (6.5 ÷ 7.0 × 100). The question asks for the difference in **percentage points**: just subtract." },

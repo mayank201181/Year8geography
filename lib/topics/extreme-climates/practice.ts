@@ -701,7 +701,7 @@ export const practice: TopicPractice = {
         { point: "Cooled air is stable / cannot rise; little evaporation, so fog rather than rain", keywords: ["stable", "cannot rise", "fog", "camanchaca", "little evaporation", "inversion"] },
         { point: "Andes create a rain shadow for moist air from the east", keywords: ["andes", "rain shadow", "east", "amazon", "trade winds"] },
         { point: "Factors combine / reinforce each other", keywords: ["combine", "together", "all three", "reinforce", "as well as"] },
-        { point: "Evidence of extreme dryness (a few mm a year / years without rain) and resolves the contradiction", keywords: ["few mm", "1 mm", "years without rain", "driest", "contradiction", "ocean keeps it dry"] },
+        { point: "Evidence of extreme dryness (a few mm a year / years without rain) and resolves the contradiction", keywords: ["few mm", "few millimetres", "1 mm", "years without rain", "without measurable rain", "driest", "contradiction", "ocean keeps it dry", "keep it dry"] },
       ],
       commonError: "Only giving the 'sinking air' reason that applies to every hot desert, and missing the cold current and the Andes.",
       difficulty: "challenge",

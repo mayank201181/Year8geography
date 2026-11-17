@@ -16,6 +16,8 @@ const load = async <T>(rel: string, name: string): Promise<T | undefined> => {
 let qs: Question[] = [];
 if (id === "exam") {
   for (const e of ["exam-n1", "exam-c1", "exam-n2", "exam-c2"]) qs.push(...(((await load<ExamPaper>(`lib/exam/${e}.ts`, "paper"))?.questions) ?? []));
+} else if (["exam-n1", "exam-c1", "exam-n2", "exam-c2"].includes(id)) {
+  qs = ((await load<ExamPaper>(`lib/exam/${id}.ts`, "paper"))?.questions) ?? [];
 } else {
   const practice = await load<TopicPractice>(`lib/topics/${id}/practice.ts`, "practice");
   qs = [
@@ -28,8 +30,18 @@ if (id === "exam") {
 }
 const byId = new Map(qs.map((q) => [q.id, q]));
 const answers: { id: string; answer: unknown; note?: string }[] = [];
-for (const f of readdirSync(outDir).filter((f) => f.startsWith(`${id}.answers`) && f.endsWith(".json"))) {
+for (const f of readdirSync(outDir).filter((f) => (f.startsWith(`${id}.answers`) || f === `${id}.json`) && f.endsWith(".json"))) {
   answers.push(...JSON.parse(readFileSync(path.join(outDir, f), "utf8")));
+}
+const ansSub = path.join(outDir, "answers");
+if (existsSync(ansSub)) {
+  const match = (f: string) =>
+    id === "exam"
+      ? (f === "exam.json" || /^exam-(?:n1|c1|n2|c2)\.json$/.test(f))
+      : f === `${id}.json` || (f.startsWith(`${id}.answers`) && f.endsWith(".json"));
+  for (const f of readdirSync(ansSub).filter(match)) {
+    answers.push(...JSON.parse(readFileSync(path.join(ansSub, f), "utf8")));
+  }
 }
 const answered = new Set(answers.map((a) => a.id));
 const mismatches: unknown[] = [];

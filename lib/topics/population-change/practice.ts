@@ -527,7 +527,7 @@ const paper2: Paper = {
       markScheme: [
         { point: "Large / growing proportion of elderly people (ageing population)", keywords: ["ageing", "aging", "elderly", "old", "over 65", "older people"] },
         { point: "Older people are more likely to die each year / diseases of old age", keywords: ["more likely to die", "heart", "cancer", "stroke", "dementia", "old age", "diseases"] },
-        { point: "Cause of ageing: low birth rate and long life expectancy", keywords: ["low birth rate", "fewer babies", "life expectancy", "live longer", "fertility"] },
+        { point: "Cause of ageing: low birth rate and long life expectancy", keywords: ["low birth rate", "birth rate has been low", "fewer babies", "life expectancy", "live longer", "live long", "fertility"] },
         { point: "Recognises death rate rise reflects age structure, not worse healthcare", keywords: ["not because", "healthcare", "age structure", "still excellent", "not poor"] },
       ],
       commonError: "Assuming a rising death rate must mean healthcare has got worse.",

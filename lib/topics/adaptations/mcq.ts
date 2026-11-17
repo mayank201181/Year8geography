@@ -858,7 +858,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 2,
         explanation:
-          "The two root systems tap **two different water sources**: shallow roots catch short bursts of rain before it evaporates, and the long tap root reaches moisture deeper in the ground that lasts long after the surface has dried (and also helps anchor the plant). The first option has them the wrong way round — a root deep underground cannot catch rain at the surface.",
+          "The two root systems tap **two different water sources**: shallow roots catch short bursts of rain before it evaporates, and the long tap root reaches moisture deeper in the ground that lasts long after the surface has dried (and also helps anchor the plant). Saying the deep root collects surface rain has them the wrong way round — a root deep underground cannot catch rain at the surface.",
         hints: [
           "Where is water found just after rain? Where is it found weeks later?",
           "Match each root to the water it can reach.",

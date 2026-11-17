@@ -1,7 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { checkAnswer, checkWithTraps, specSelfCheck } from "../lib/answerCheck.ts";
-import type { AnswerSpec } from "../lib/types.ts";
+import { suggestMarks } from "../lib/writtenCheck.ts";
+import type { AnswerSpec, WrittenQ } from "../lib/types.ts";
 
 const st = (spec: AnswerSpec, input: string) => checkAnswer(spec, input).status;
 
@@ -333,4 +334,85 @@ test("expressions: harmless brackets in a simplified answer", () => {
   assert.equal(st(sim("4x+3y"), "2(2x)+3y"), "close");
   assert.equal(st(sim("10x+8"), "2(5x+4)"), "close");
   assert.equal(st(sim("3y^2-2y"), "y(3y-2)"), "close");
+});
+
+test("geography units, category prefixes, and text display answers", () => {
+  assert.equal(st({ type: "number", value: 1.8 }, "1.8 m per year"), "correct");
+  assert.equal(st({ type: "number", value: 12 }, "12 waves per minute"), "correct");
+  assert.equal(st({ type: "number", value: 6.5 }, "6.5 percentage points"), "correct");
+  assert.equal(st({ type: "number", value: 4 }, "Category 4"), "correct");
+  assert.equal(st({ type: "number", value: 83 }, "83 million per year"), "correct");
+  assert.equal(st({ type: "number", value: 8 }, "about 8 million a year"), "correct");
+  assert.equal(st({ type: "number", value: 9 }, "9 °C-weeks"), "correct");
+  assert.equal(st({ type: "number", value: 20 }, "20 mb per 100 km"), "correct");
+  assert.equal(st({ type: "number", value: 194000, tolerance: 500 }, "about 194,000 visitors"), "correct");
+  assert.equal(
+    st({ type: "text", accept: ["Housing & Development Board", "HDB"], display: "Housing & Development Board (HDB)" }, "Housing and Development Board"),
+    "correct",
+  );
+  assert.equal(
+    st({ type: "text", accept: ["Housing & Development Board", "HDB"], display: "Housing & Development Board (HDB)" }, "Housing & Development Board (HDB)"),
+    "correct",
+  );
+});
+
+test("confusable geography terms never pass via typo forgiveness", () => {
+  const pairs: [string, string][] = [
+    ["corrasion", "corrosion"],
+    ["insolation", "insulation"],
+    ["hygrometer", "hydrometer"],
+    ["constrictive", "constructive"],
+    ["India", "Indian"],
+    ["Niger", "Nigeria"],
+    ["Lagos", "Laos"],
+    ["Lagos, Nigeria", "Laos, Nigeria"],
+    ["Tengeh", "Tengah"],
+    ["Tengeh Reservoir", "Tengah Reservoir"],
+    ["weather", "weathering"],
+    ["abrasion", "attrition"],
+    ["swash", "backwash"],
+    ["easting", "northing"],
+    ["latitude", "longitude"],
+    ["emigration", "immigration"],
+    ["urban", "rural"],
+    ["spit", "spot"],
+    ["spit", "silt"],
+    ["spit landform", "spot landform"],
+    ["arch", "ark"],
+    ["cave", "cove"],
+  ];
+  for (const [a, b] of pairs) {
+    assert.equal(st({ type: "text", accept: [a] }, b), "incorrect", `${a} vs ${b}`);
+    assert.equal(st({ type: "text", accept: [b] }, a), "incorrect", `${b} vs ${a}`);
+  }
+  // Genuine small spelling slips still pass with helpful feedback.
+  assert.equal(st({ type: "text", accept: ["hydraulic action"] }, "hydrolic action"), "correct");
+  assert.equal(st({ type: "text", accept: ["desalination"] }, "desalinaton"), "correct");
+});
+
+test("written suggestMarks: markdown, short-keyword word boundaries, stem-copy stripping, non-answers", () => {
+  const q: WrittenQ = {
+    id: "test-written-1",
+    kind: "written",
+    difficulty: "core",
+    question: "Study the graph showing **urban share** rising from 30% in 1950 to 55% in 2018. Explain two reasons why cities grow. [3 marks]",
+    marks: 3,
+    modelAnswer: "**Rural-urban migration** brings young adults seeking jobs, and **natural increase** adds babies.",
+    markScheme: [
+      { point: "Rural-urban migration for jobs", keywords: ["rural-urban migration", "jobs"] },
+      { point: "Natural increase among young migrants", keywords: ["natural increase", "now"] },
+      { point: "Quotes 55% or 18°C style short tokens cleanly", keywords: ["w", "18"] },
+    ],
+    hints: ["Think migration and births."],
+  };
+  // Markdown formatting stripped properly
+  assert.deepEqual(suggestMarks(q, "**Rural-urban migration** and *natural increase* at **18°C**."), [true, true, true]);
+  // Short keywords ("now", "w", "18") do NOT match substrings ("know", "180")
+  assert.deepEqual(suggestMarks(q, "People know about 180 factories."), [false, false, false]);
+  // Verbatim >=4-word stem copy scores 0
+  assert.deepEqual(suggestMarks(q, q.question), [false, false, false]);
+  // Non-answers score 0
+  for (const na of ["I don't know", "idk", "not sure", "no idea", "???"]) {
+    assert.deepEqual(suggestMarks(q, na), [false, false, false], na);
+  }
 });

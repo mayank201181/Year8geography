@@ -275,7 +275,7 @@ const FUTURE_BANK: Fact[] = [
   {
     tier: 1,
     clues: ["In which year did the world's population reach 8 billion, according to the UN?", "The UN marked the birth of the world's 8 billionth person in which year?"],
-    answer: { type: "number", value: 2022, display: "2022 (15 November)" },
+    answer: { type: "number", value: 2022, display: "2022" },
     why: "The UN marked **15 November 2022** as the day world population reached 8 billion.",
     traps: [{ spec: { type: "number", value: 2011 }, feedback: "2011 is when we reached 7 billion. 8 billion came 11 years later." }],
   },
@@ -303,9 +303,9 @@ const FUTURE_BANK: Fact[] = [
   {
     tier: 1,
     clues: ["In which decade does the UN (2024) expect world population to peak? Give the first year of the decade, e.g. 2050.", "World population is projected to peak in the 20__s. Give the first year of that decade, e.g. 2050."],
-    answer: { type: "number", value: 2080, display: "the 2080s" },
+    answer: { type: "text", accept: ["2080", "2080s", "the 2080s", "mid-2080s"], display: "2080 (the 2080s)" },
     why: "The UN's 2024 projections put the peak in the **mid-2080s**.",
-    traps: [{ spec: { type: "number", value: 2100 }, feedback: "Earlier projections went to 2100 still rising, but the 2024 projections peak in the 2080s." }],
+    traps: [textTrap(["2100", "2100s"], "Earlier projections went to 2100 still rising, but the 2024 projections peak in the 2080s.")],
   },
   {
     tier: 2,

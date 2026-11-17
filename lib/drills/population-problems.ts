@@ -552,7 +552,7 @@ interface ChinaFact {
 }
 
 const CHINA_FACTS: ChinaFact[] = [
-  { prompt: ["In which year did China's One-Child Policy begin?", "China introduced the One-Child Policy in which year?"], answer: { kind: "year", value: 1980 }, level: 1, why: "The One-Child Policy began in 1980.", trapYears: [{ value: 2015, feedback: "2015 is when the policy ENDED (announced) — it started in 1980." }] },
+  { prompt: ["In which year did China's One-Child Policy begin?", "China introduced the One-Child Policy in which year?"], answer: { kind: "text", accept: ["1979", "1980", "1979-1980", "1979–1980"] }, level: 1, why: "The One-Child Policy was announced in 1979 and rolled out nationwide in 1980 (running until 2015).", trapYears: [{ value: 2015, feedback: "2015 is when the policy ENDED (announced) — it started in 1979–1980." }] },
   { prompt: ["In which year was China's One-Child Policy officially ended (announced)?", "China announced the end of its One-Child Policy in which year?"], answer: { kind: "year", value: 2015 }, level: 1, why: "It was announced in 2015 and replaced by the two-child policy from 2016.", trapYears: [{ value: 2016, feedback: "2016 is when the two-child policy came into force; the end was announced in 2015." }] },
   { prompt: ["In which year did China's universal two-child policy come into force?", "From which year were all Chinese couples allowed two children?"], answer: { kind: "year", value: 2016 }, level: 1, why: "The two-child policy came into force in 2016.", trapYears: [{ value: 2021, feedback: "2021 is the three-child policy." }] },
   { prompt: ["In which year did China announce its three-child policy?", "China moved to a three-child policy in which year?", "Only five years after allowing two children, China raised the limit to three. In which year?"], answer: { kind: "year", value: 2021 }, level: 2, why: "The three-child policy was announced in 2021.", trapYears: [{ value: 2016, feedback: "2016 is the two-child policy." }] },
@@ -690,11 +690,13 @@ export const drills: Drill[] = [
           traps: traps && traps.length ? traps : undefined,
         };
       }
+      const textTraps: Trap[] | undefined = f.trapYears?.map((t) => ({ spec: { type: "text", accept: [String(t.value)] }, feedback: t.feedback }));
       return {
         prompt,
         answer: { type: "text", accept: f.answer.accept },
         solution: [`**${f.answer.accept[0]}**`, f.why],
         hint: "Think about how the policy worked (rewards, penalties, exceptions) and what it did to families.",
+        traps: textTraps && textTraps.length ? textTraps : undefined,
       };
     },
   },

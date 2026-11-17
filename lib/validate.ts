@@ -4,7 +4,8 @@
 // Pure — no React, no Next.
 // ---------------------------------------------------------------------------
 import type { AnswerSpec, Question, Topic, Trap, WorkedExample } from "./types.ts";
-import { checkAnswer, specSelfCheck, specSample } from "./answerCheck.ts";
+import { checkAnswer, displayAnswer, specSelfCheck, specSample } from "./answerCheck.ts";
+import { suggestMarks } from "./writtenCheck.ts";
 import { toMathML } from "./mathml.ts";
 
 export interface Issue {
@@ -47,6 +48,11 @@ export function checkSpec(where: string, spec: AnswerSpec, issues: Issue[]) {
   }
   const r = specSelfCheck(spec);
   if (r.status !== "correct") issues.push({ where, problem: `answer spec fails its own check (${r.status}: ${r.feedback ?? ""}) ${JSON.stringify(spec)}` });
+  const dispRaw = displayAnswer(spec).replace(/\{\{|\}\}/g, "");
+  const rd = checkAnswer(spec, dispRaw);
+  if (rd.status !== "correct") {
+    issues.push({ where, problem: `displayAnswer "${dispRaw}" fails checkAnswer (${rd.status}: ${rd.feedback ?? ""}) ${JSON.stringify(spec)}` });
+  }
   if (spec.type === "number" && !Number.isFinite(spec.value)) issues.push({ where, problem: "number answer is not finite" });
   if (spec.type === "fraction" && (!Number.isInteger(spec.n) || !Number.isInteger(spec.d) || spec.d === 0)) issues.push({ where, problem: "fraction n/d must be integers, d≠0" });
   if (spec.type === "text" && (!spec.accept || spec.accept.length === 0)) issues.push({ where, problem: "text answer has no accepted strings" });
@@ -81,16 +87,25 @@ export function checkQuestion(where: string, q: Question, sectionIds: Set<string
   if (q.kind === "mcq") {
     if (!Array.isArray(q.options) || q.options.length !== 4) issues.push({ where, problem: "MCQ must have exactly 4 options" });
     else {
-      q.options.forEach((o, i) => checkText(`${where}.options[${i}]`, o, issues));
+      q.options.forEach((o, i) => {
+        checkText(`${where}.options[${i}]`, o, issues);
+        if (/^[A-D]$/i.test(o.trim())) issues.push({ where: `${where}.options[${i}]`, problem: "bare letter option breaks when shuffled" });
+      });
       const norm = q.options.map((o) => o.replace(/\s+/g, "").toLowerCase());
       if (new Set(norm).size !== norm.length) issues.push({ where, problem: "duplicate options" });
     }
     if (!Number.isInteger(q.answerIndex) || q.answerIndex < 0 || q.answerIndex > 3) issues.push({ where, problem: "answerIndex out of range" });
     checkText(`${where}.explanation`, q.explanation, issues);
-    if (/\b(?:option|answer|choice)\s*\(?[A-D]\)?(?![a-z])|\b[A-D]\)\s|\bthe (?:first|second|third|fourth|last) (?:option|answer|choice)/.test(q.explanation)) {
+    const posRef = /\b(?:option|answer|choice)\s*\(?[A-D]\)?(?![a-z])|\b[A-D]\)\s|\bthe (?:first|second|third|fourth|last) (?:option|answer|choice)\b/i;
+    if (posRef.test(q.explanation)) {
       issues.push({ where, problem: "explanation refers to an option by letter/position (options are shuffled)" });
     }
-    if (/\b(?:all|none) of the above\b/i.test(q.options.join(" "))) issues.push({ where, problem: "'all/none of the above' breaks when options are shuffled" });
+    q.hints?.forEach((h, hi) => {
+      if (posRef.test(h)) issues.push({ where: `${where}.hints[${hi}]`, problem: "hint refers to an option by letter/position (options are shuffled)" });
+    });
+    if (/\b(?:all|none) of the above\b|\bboth\s+[A-D]\s+and\s+[A-D]\b/i.test(q.options.join(" "))) {
+      issues.push({ where, problem: "'all/none of the above' or 'both A and B' breaks when options are shuffled" });
+    }
   } else if (q.kind === "short") {
     checkSpec(`${where}.answer`, q.answer, issues);
     if (!Array.isArray(q.solution) || q.solution.length === 0) issues.push({ where, problem: "short question needs solution steps" });
@@ -106,6 +121,19 @@ export function checkQuestion(where: string, q: Question, sectionIds: Set<string
       if (!p.keywords?.length) issues.push({ where, problem: `markScheme[${i}] has no keywords` });
       else if (p.keywords.some((k) => k !== k.toLowerCase())) issues.push({ where, problem: `markScheme[${i}] keywords must be lower-case` });
     });
+    if (q.markScheme?.length && typeof q.modelAnswer === "string") {
+      const modelTicks = suggestMarks(q, q.modelAnswer);
+      if (!modelTicks.every(Boolean)) {
+        const missed = modelTicks.map((ok, i) => (ok ? null : i)).filter((x) => x !== null);
+        issues.push({ where, problem: `modelAnswer misses markScheme point(s) [${missed.join(", ")}] under suggestMarks` });
+      }
+      if (suggestMarks(q, q.question).some(Boolean)) {
+        issues.push({ where, problem: "copying question stem scores marks under suggestMarks" });
+      }
+      if (suggestMarks(q, "I don't know").some(Boolean)) {
+        issues.push({ where, problem: "'I don't know' scores marks under suggestMarks" });
+      }
+    }
   } else {
     issues.push({ where, problem: `unknown question kind ${(q as { kind?: string }).kind}` });
   }

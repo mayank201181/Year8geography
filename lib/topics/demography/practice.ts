@@ -560,7 +560,7 @@ export const practice: TopicPractice = {
           modelAnswer:
             "The base is narrow: only 8% of people are aged 0–9, compared with 15% aged 40–49, and each younger group is smaller than the one above. This suggests the birth rate is low and has been falling for decades. The top is wide: 32% of people are aged 60 or over and 8% are 80+, which shows a high life expectancy. Women live longer, as there are 5.5% females aged 80+ but only 2.5% males.",
           markScheme: [
-            { point: "Narrow base / younger groups shrinking → low or falling birth rate", keywords: ["narrow base", "low birth", "falling birth", "fewer children", "small base"] },
+            { point: "Narrow base / younger groups shrinking → low or falling birth rate", keywords: ["narrow base", "base is narrow", "low birth", "birth rate is low", "falling birth", "fewer children", "small base"] },
             { point: "Wide top / many elderly → high life expectancy", keywords: ["life expectancy", "elderly", "old", "wide top", "live longer"] },
             { point: "Accurate supporting figures (e.g. 8% aged 0–9, 32% aged 60+, 5.5% vs 2.5% at 80+)", keywords: ["8%", "32", "5.5", "2.5", "4%", "15"] },
           ],
@@ -832,7 +832,7 @@ export const practice: TopicPractice = {
       id: "demography-ch-q08",
       question:
         "Some studies of Singapore use 20–64 as 'working age' (because most 15–19-year-olds are still studying). Country V (illustrative data) has: 0–14: 0.6 million; 15–19: 0.2 million; 20–64: 2.4 million; 65+: 0.8 million.\n\nCalculate the dependency ratio both ways — the standard way (working age 15–64) and with working age 20–64 (so 0–19 are young dependants). How many points **higher** is the 20–64 version? Give your answer to 1 decimal place.",
-      answer: { type: "number", value: 12.8, tolerance: 0.1, allowFraction: false },
+      answer: { type: "number", value: 12.8, tolerance: 0.12, allowFraction: false },
       solution: [
         "Standard: (0.6 + 0.8) ÷ (0.2 + 2.4) × 100 = 1.4 ÷ 2.6 × 100 = 53.846…",
         "20–64 version: (0.6 + 0.2 + 0.8) ÷ 2.4 × 100 = 1.6 ÷ 2.4 × 100 = 66.666…",

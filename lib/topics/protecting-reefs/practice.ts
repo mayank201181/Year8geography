@@ -316,7 +316,7 @@ const paper2: Paper = {
       id: "protecting-reefs-p2-q02",
       question:
         "The Great Barrier Reef Marine Park covers about 344,000 km². About 33% of it is green no-take zone. Calculate the area of green zone. Give your answer to the nearest thousand km².",
-      answer: { type: "number", value: 114000, tolerance: 500, display: "about 114,000 km²" },
+      answer: { type: "number", value: 114000, tolerance: 1000, display: "about 114,000 km²" },
       solution: ["33% = 0.33", "0.33 × 344,000 = 113,520 km²", "To the nearest thousand: **114,000 km²**."],
       traps: [
         { spec: { type: "number", value: 11352, tolerance: 600 }, feedback: "33% is 0.33, not 0.033. Check your decimal point." },
@@ -617,7 +617,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "protecting-reefs-quiz-q05",
       question: "Since the 2004 rezoning, roughly what percentage of the Great Barrier Reef Marine Park has been green no-take zone?",
-      answer: { type: "number", value: 33, tolerance: 1, display: "about 33% (a third)" },
+      answer: { type: "number", value: 33, tolerance: 1, display: "about 33%" },
       solution: ["About **33%** — a third — compared with less than 5% before 2004."],
       traps: [{ spec: { type: "number", value: 5, tolerance: 0.5 }, feedback: "Less than 5% was the share BEFORE 2004. The rezoning raised it to about a third." }],
       difficulty: "warmup",

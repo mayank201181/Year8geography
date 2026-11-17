@@ -185,14 +185,14 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "extreme-weather-p1-q03",
-          question: "Using the same bar chart, calculate the **mean** daily rainfall for the week, in mm.",
+          question: "Using the bar chart, calculate the **mean** daily rainfall for the week, in mm.",
           diagram: SVG_RAIN_WEEK,
           answer: { type: "number", value: 20, display: "20 mm" },
           traps: [
             { spec: { type: "number", value: 28 }, feedback: "You divided by 5, leaving out the two dry days. A dry day is still a day — divide by 7." },
             { spec: { type: "number", value: 140 }, feedback: "140 mm is the total. Divide by the number of days." },
           ],
-          solution: ["Total = 140 mm (from the previous question).", "Mean = 140 ÷ 7 = **20 mm** per day."],
+          solution: ["Total = 14 + 0 + 36 + 8 + 0 + 46 + 36 = 140 mm.", "Mean = 140 ÷ 7 = **20 mm** per day."],
           commonError: "Dividing by 5 because Tuesday and Friday had no bar.",
           difficulty: "core",
           guideRef: "measuring-weather",
@@ -480,7 +480,8 @@ export const practice: TopicPractice = {
         {
           kind: "written",
           id: "extreme-weather-p2-q06",
-          question: "Using the pressure data in the previous question, **suggest and explain** the weather the town is likely to experience by 18:00. [3 marks]",
+          question:
+            "Air pressure at a coastal town on one day:\n\n| 00:00 | 06:00 | 12:00 | 18:00 |\n|---|---|---|---|\n| 1008 mb | 1001 mb | 989 mb | 976 mb |\n\nUsing these pressure readings, **suggest and explain** the weather the town is likely to experience by 18:00. [3 marks]",
           marks: 3,
           modelAnswer:
             "Pressure fell by 32 mb in 18 hours and the fall sped up through the day (7, then 12, then 13 mb), so a deep low — possibly a tropical storm — is approaching. In a low, warm moist air rises, cools and condenses, so the town will probably have thick cloud and heavy rain. Because pressure is changing so quickly, the isobars must be close together, so the town is likely to have very strong winds.",
@@ -500,7 +501,7 @@ export const practice: TopicPractice = {
           question:
             "Use the storm-track map and the Saffir–Simpson scale (Cat 1: 119–153 km/h, Cat 2: 154–177, Cat 3: 178–208, Cat 4: 209–251, Cat 5: 252 km/h or more). On how many of the five days was the storm at **Category 4 or above**?",
           diagram: SVG_TRACK,
-          answer: { type: "number", value: 2, display: "2 days (Day 3 and Day 4)" },
+          answer: { type: "number", value: 2, display: "2 days" },
           traps: [{ spec: { type: "number", value: 1 }, feedback: "Don't forget Day 3: 215 km/h is above 209 km/h, so it is Category 4." }],
           solution: ["Day 1: 95 km/h — below Cat 1 (a tropical storm).", "Day 2: 150 km/h — Cat 1. Day 5: 140 km/h — Cat 1.", "Day 3: 215 km/h — Cat 4. Day 4: 260 km/h — Cat 5.", "So **2 days** were Category 4 or above."],
           difficulty: "core",
@@ -739,7 +740,7 @@ export const practice: TopicPractice = {
       id: "extreme-weather-ch-q04",
       question:
         "A typhoon is **630 km** east of a city and moving directly towards it at **21 km/h**. The city's evacuation takes **18 hours** to complete and must be finished at least **6 hours** before the typhoon arrives. What is the latest time, in **hours from now**, that the evacuation can start?",
-      answer: { type: "number", value: 6, display: "6 hours from now" },
+      answer: { type: "number", value: 6, display: "6 hours" },
       traps: [
         { spec: { type: "number", value: 30 }, feedback: "30 hours is when the typhoon arrives. Now work backwards: the 6-hour safety margin, then the 18-hour evacuation." },
         { spec: { type: "number", value: 12 }, feedback: "You allowed for the 18-hour evacuation but forgot it must finish 6 hours before arrival." },
@@ -819,7 +820,7 @@ export const practice: TopicPractice = {
       id: "extreme-weather-ch-q07",
       question:
         "At 06:00 a tropical storm has sustained winds of **150 km/h**. Readings are taken every hour, and each reading is **4 km/h** higher than the one before. How many hours after 06:00 is the first reading at which the storm is **Category 4** (209 km/h or more)?",
-      answer: { type: "number", value: 15, display: "15 hours (21:00, 210 km/h)" },
+      answer: { type: "number", value: 15, display: "15 hours" },
       traps: [
         { spec: { type: "number", value: 14 }, feedback: "After 14 hours the wind is 150 + 56 = 206 km/h — still Category 3. Check the next reading." },
         { spec: { type: "number", value: 14.75 }, feedback: "Readings are only taken every whole hour, so the first reading at Category 4 is the next whole hour." },

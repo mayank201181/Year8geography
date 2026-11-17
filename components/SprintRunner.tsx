@@ -38,6 +38,7 @@ interface Miss {
   key: string;
   prompt: string;
   answerText: string;
+  diagram?: string;
   /** What the learner typed ("" = passed). */
   given: string;
   /** Answered correctly when it came back. */
@@ -257,7 +258,7 @@ export function SprintRunner() {
       if (miss) {
         miss.given = raw ?? "";
         miss.fixed = false;
-      } else run.misses.push({ key: item.key, prompt: item.prompt, answerText: item.answerText, given: raw ?? "", fixed: false });
+      } else run.misses.push({ key: item.key, prompt: item.prompt, answerText: item.answerText, diagram: item.diagram, given: raw ?? "", fixed: false });
       // Not straight away — a few questions later, once.
       if (!retry) run.queue.push({ item, due: run.answered + rng.int(RETRY_GAP[0], RETRY_GAP[1]) });
     }
@@ -520,6 +521,11 @@ export function SprintRunner() {
                     <p className="font-semibold">
                       <RichInline text={m.prompt} />
                     </p>
+                    {m.diagram ? (
+                      <div className="max-w-xs">
+                        <Diagram svg={m.diagram} />
+                      </div>
+                    ) : null}
                     <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-2">
                       <span>
                         Answer:{" "}

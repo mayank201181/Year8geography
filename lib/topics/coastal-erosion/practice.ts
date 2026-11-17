@@ -259,7 +259,7 @@ export const practice: TopicPractice = {
           question:
             P1_TABLE +
             "\n\nIn 2024 the marker post at Site A is 24 m from the cliff edge. If the cliff keeps retreating at its 2004–2024 average rate, how many years after 2024 will the edge reach the post? Give your answer to the nearest whole year.",
-          answer: { type: "number", value: 13, display: "13 years (during 2037)" },
+          answer: { type: "number", value: 13, display: "13 years" },
           traps: [{ spec: { type: "number", value: 43.2, tolerance: 0.1 }, feedback: "You multiplied 24 × 1.8. To find time, divide distance by rate: 24 ÷ 1.8." }],
           solution: ["Rate at Site A = 36 ÷ 20 = 1.8 m per year.", "Time = distance ÷ rate = 24 ÷ 1.8 = 13.3 years.", "To the nearest whole year: **13 years** (during 2037)."],
           commonError: "Multiplying distance by rate instead of dividing.",

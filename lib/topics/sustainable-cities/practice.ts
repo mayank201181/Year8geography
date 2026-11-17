@@ -662,7 +662,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "sustainable-cities-ch-q02",
       question:
-        "Use the Aqua Bay table from the previous question (reservoirs 180, imported 150, recycled 160, desalination 110 ML per day; total 600). By 2040 demand is expected to rise by 20%. The imported supply and reservoirs stay the same, and the city plans for recycled water to supply 40% of the **new** demand. How many ML per day must desalination supply in 2040?",
+        "In the fictional coastal city of Aqua Bay today, daily water supply is: reservoirs 180, imported 150, recycled 160 and desalination 110 ML per day (total 600 ML per day). By 2040 total demand is expected to rise by 20%. The imported supply and reservoirs stay the same, and the city plans for recycled water to supply 40% of the **new total** demand. How many ML per day must desalination supply in 2040?",
       answer: { type: "number", value: 102 },
       traps: [
         { spec: { type: "number", value: 230 }, feedback: "You kept recycled water at 160 ML. It rises to 40% of the new demand." },
@@ -702,7 +702,7 @@ export const practice: TopicPractice = {
       kind: "written",
       id: "sustainable-cities-ch-q04",
       question:
-        "Use Team Kingfisher's scoresheet from the previous question (weighted total 41 out of 60). Which **one** criterion should the team improve to raise its weighted score the most? Propose a specific design change for that criterion and justify your choice, including the effect on the score. [4 marks]",
+        "Team Kingfisher's eco-city scoresheet (weighted total 41 out of 60):\n\n| Criterion | Weighting | Score (out of 5) |\n|---|---|---|\n| Transport | ×3 | 4 |\n| Energy | ×3 | 2 |\n| Water | ×2 | 5 |\n| Waste | ×2 | 3 |\n| Green space | ×1 | 4 |\n| Community | ×1 | 3 |\n\nWhich **one** criterion should the team improve to raise its weighted score the most? Propose a specific design change for that criterion and justify your choice, including the effect on the score. [4 marks]",
       marks: 4,
       modelAnswer:
         "The team should improve **energy**. It has the joint-highest weighting (×3) but the lowest score (2 out of 5), so it has the most room to gain: raising it to 5 would add 3 × 3 = 9 points, taking the total from 41 to 50 out of 60. Transport has the same weighting but is already 4, so it can add only 3 points. A specific change would be to put solar panels on every roof and use centralised district cooling instead of separate air-conditioners, as in Tengah, so the town needs less fossil-fuel electricity. This would also cut emissions, helping the environmental pillar.",

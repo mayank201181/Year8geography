@@ -111,7 +111,7 @@ export const TOPIC_META: TopicMeta[] = [
       { id: "over-under-population", heading: "Over-, under- and optimum population", covers: "Population vs resources and technology, carrying capacity, optimum population, why 'over-population' is debated (consumption vs numbers), examples." },
       { id: "ageing-youthful", heading: "Ageing and youthful populations", covers: "Problems and opportunities of ageing populations (Japan, Singapore) and youthful populations (Niger, Nigeria): pensions, healthcare, workforce, schools, jobs." },
       { id: "population-policies", heading: "Population policies", covers: "Pro-natalist (Singapore Baby Bonus, France), anti-natalist (China, India's past campaigns), immigration policies; how and why they succeed or fail." },
-      { id: "china-one-child", heading: "China's One-Child Policy debate", covers: "OCP 1980–2015, how it worked (incentives/penalties, exceptions), effects (slower growth, gender imbalance, 4-2-1 problem, ageing), two-child (2016) and three-child (2021) policies, arguments for and against." },
+      { id: "china-one-child", heading: "China's One-Child Policy debate", covers: "OCP 1979–2015 (announced 1979, nationwide 1980), how it worked (incentives/penalties, exceptions), effects (slower growth, gender imbalance, 4-2-1 problem, ageing), two-child (2016) and three-child (2021) policies, arguments for and against." },
     ],
   },
   // ------------------------- EXTREME ENVIRONMENTS -------------------------

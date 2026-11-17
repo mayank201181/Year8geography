@@ -79,7 +79,7 @@ export const paper: ExamPaper = {
       difficulty: "core",
       question: "Use the map extract. Give the **6-figure grid reference** of the lighthouse.",
       diagram: MAP,
-      answer: { type: "text", accept: ["446734", "446 734", "446-734"], display: "446734" },
+      answer: { type: "text", accept: ["446734", "446 734", "446-734", "447734", "447 734", "447-734", "446735", "446 735", "446-735", "447735", "447 735", "447-735"], display: "446734" },
       traps: [
         { spec: { type: "text", accept: ["734446", "734 446"] }, feedback: "You gave the northing first. Easting first: along the corridor, then up the stairs." },
         { spec: { type: "text", accept: ["4473", "44 73"] }, feedback: "That is the 4-figure reference of the square. Add the tenths across and the tenths up to make six figures." },

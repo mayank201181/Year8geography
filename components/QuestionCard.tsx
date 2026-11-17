@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { MCQ, Question, ShortQ, WrittenQ } from "@/lib/types";
 import { checkWithTraps, displayAnswer, type CheckStatus } from "@/lib/answerCheck";
+import { suggestMarks } from "@/lib/writtenCheck";
+export { suggestMarks };
 import { optionOrder } from "@/lib/optionOrder";
 import { Diagram, Rich, RichInline } from "./Rich";
 import { AnswerInput } from "./AnswerInput";
@@ -416,11 +418,6 @@ function ShortBody({ q, mode, restored, onDone, onAnswer, topicId, onNext, nextL
 }
 
 // -------------------------------------------------------------- Written
-export function suggestMarks(q: WrittenQ, text: string): boolean[] {
-  const t = ` ${text.toLowerCase().replace(/\s+/g, " ")} `;
-  return q.markScheme.map((p) => p.keywords.some((k) => k && t.includes(k.toLowerCase())));
-}
-
 function WrittenBody({ q, mode, restored, onDone, onAnswer, topicId, onNext, nextLabel }: QuestionCardProps & { q: WrittenQ }) {
   const [value, setValue] = useState(typeof restored?.answer === "string" ? restored.answer : "");
   const [phase, setPhase] = useState<"answer" | "mark" | "done">(restored?.outcome ? "done" : "answer");

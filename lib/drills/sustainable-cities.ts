@@ -158,7 +158,7 @@ const SG: Fact[] = [
   { q: "HDB's 'forest town' in western Singapore, planned with a car-free town centre and a forest corridor.", a: ["tengah"], lvl: 2, why: "Roads run underground at the centre so the surface is safe for walking and cycling." },
   { q: "The network of green paths linking parks across Singapore for walkers, runners and cyclists.", a: ["park connector network", "park connectors", "park connector", "pcn"], lvl: 2, why: "It links green spaces so people (and some wildlife) can move between them." },
   { q: "Singapore's vision that replaced 'City in a Garden' — bringing nature right into the city.", a: ["city in nature"], lvl: 2, why: "It means more parks, nature corridors and restored habitats." },
-  { q: "The tap that can currently meet up to about 40% of Singapore's water demand.", a: ["newater", "new water"], lvl: 2, why: "PUB plans for NEWater to meet up to about 55% of demand by 2065." },
+  { q: "The tap that can currently meet up to about 40% of Singapore's water demand.", a: ["newater", "new water"], lvl: 2, why: "PUB plans for NEWater to meet up to about 55% of future water demand by 2060." },
   { q: "The year Singapore's water agreement with Malaysia expires.", a: ["2061"], lvl: 3, why: "It was signed in 1962 for 99 years — one reason Singapore built NEWater and desalination." },
   { q: "The year NEWater was officially launched as a water supply.", a: ["2003"], lvl: 3, why: "NEWater was launched in 2003, turning used water into a new 'tap'." },
   { q: "The year Electronic Road Pricing (ERP) began in Singapore.", a: ["1998"], lvl: 3, why: "It replaced the paper-licence Area Licensing Scheme of 1975." },

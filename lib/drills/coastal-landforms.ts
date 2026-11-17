@@ -972,7 +972,7 @@ export const drills: Drill[] = [
       const cheaper = wallYear < nourYear ? "the sea wall" : "beach nourishment";
       return {
         prompt: `For ${len} m of beach at ${town}: a sea wall costs £${big(wallRate)} per metre and lasts about ${wallLife} years; beach nourishment costs £${big(nourRate)} per metre each time and must be repeated every ${nourLife} years. Work out the cost **per year** of each. By how many pounds per year is the cheaper option cheaper?`,
-        answer: { type: "number", value: diff, display: `£${big(diff)} per year (${cheaper} is cheaper)` },
+        answer: { type: "number", value: diff, display: `£${big(diff)} per year` },
         solution: [
           `Sea wall: £${big(wallRate)} × ${len} = £${big(wallRate * len)}; ÷ ${wallLife} = £${big(wallYear)} per year`,
           `Nourishment: £${big(nourRate)} × ${len} = £${big(nourRate * len)}; ÷ ${nourLife} = £${big(nourYear)} per year`,

@@ -734,7 +734,7 @@ export const paper: ExamPaper = {
       topicId: "protecting-reefs",
       question:
         "The Great Barrier Reef Marine Park covers about **344,000 km²**. In the 2004 rezoning, the share of the park in green (no-take) zones rose from about **4.5%** to about **33%**.\n\nBy roughly how many km² did the area of green zones **increase**? Give your answer to the nearest thousand km².",
-      answer: { type: "number", value: 98000, tolerance: 50, display: "98,000 km²" },
+      answer: { type: "number", value: 98000, tolerance: 1000, display: "98,000 km²" },
       traps: [
         { spec: { type: "number", value: 113520, tolerance: 600 }, feedback: "That is the total green-zone area AFTER 2004 (33% of the park). The question asks how much it increased, so subtract the area before 2004." },
         { spec: { type: "number", value: 28.5, tolerance: 0.1 }, feedback: "28.5 is the increase in percentage points. Turn it into an area: 28.5% of 344,000 km²." },

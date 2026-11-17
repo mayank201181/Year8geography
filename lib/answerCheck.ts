@@ -386,40 +386,139 @@ function checkExpression(spec: Extract<AnswerSpec, { type: "expression" }>, inpu
 }
 
 function checkText(spec: Extract<AnswerSpec, { type: "text" }>, input: string): CheckResult {
+  const candidates = spec.display && !spec.accept.includes(spec.display) ? [...spec.accept, spec.display] : spec.accept;
   const n = normText(input);
-  if (spec.accept.some((a) => normText(a) === n)) return { status: "correct" };
-  // Geography key terms: forgive a leading article, plurals, hyphens and a small typo
+  if (candidates.some((a) => normText(a) === n)) return { status: "correct" };
+  // Geography key terms: forgive a leading article, plurals, hyphens, "&"/"and" and a small typo
   // ("the hydraulic-action" / "hydrolic action" / "stacks" → "hydraulic action" / "stack").
-  const soft = (s: string) =>
-    normalizeInput(s)
-      .toLowerCase()
-      .replace(/[“”"'.,!?;:()-]/g, " ")
-      .replace(/\b(the|a|an)\b/g, " ")
-      .replace(/\s+/g, "")
-      .replace(/(es|s)$/, "");
-  const ns = soft(input);
+  const ns = softPhrase(input);
   if (!ns) return { status: "incorrect" };
+  for (const a of candidates) {
+    const as = softPhrase(a);
+    if (as && as === ns) return { status: "correct" };
+  }
   for (const a of spec.accept) {
-    const as = soft(a);
-    if (as === ns) return { status: "correct" };
-    // Only allow a typo when there are letters (never for numbers like "1804").
-    if (/[a-z]/.test(as) && !/\d/.test(as) && as.length >= 6 && sameWordStarts(a, input) && editDistance(as, ns) <= (as.length >= 12 ? 2 : 1)) {
+    if (wordsMatchWithTypo(a, input)) {
       return { status: "correct", feedback: `Accepted — check the spelling: “${a}”.` };
     }
   }
   return { status: "incorrect" };
 }
 
+const NO_PLURAL_STRIP = new Set([
+  "lagos", "laos", "paris", "andes", "ganges", "thames", "wales", "texas",
+  "las", "los", "bus", "gas", "yes", "plus", "atlas", "focus", "census", "status", "virus",
+]);
+
+function stemWord(w: string): string {
+  if (w.length < 4 || NO_PLURAL_STRIP.has(w) || /(?:ss|us|is)$/.test(w)) return w;
+  if (w.endsWith("ies") && w.length >= 5) return `${w.slice(0, -3)}y`;
+  if (w.endsWith("es") && /(?:sh|ch|x|z|o)es$/.test(w)) return w.slice(0, -2);
+  if (w.endsWith("s")) return w.slice(0, -1);
+  return w;
+}
+
+function splitGeoWords(s: string): string[] {
+  return normalizeInput(s)
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[“”"'.,!?;:()/\\–—-]/g, " ")
+    .replace(/\b(the|a|an)\b/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+}
+
+function softPhrase(s: string): string {
+  return splitGeoWords(s).map(stemWord).join("");
+}
+
 /**
- * Typo tolerance must never turn one term into its opposite ("natural increase" vs
- * "natural decrease", "immigration" vs "emigration", "constructive" vs "destructive"):
- * require the same number of words and the same first two letters in every word.
+ * Distinct Geography terms / place names that share starting letters and small edit distance
+ * and must NEVER be accepted for one another via typo forgiveness.
  */
-function sameWordStarts(a: string, b: string): boolean {
-  const words = (s: string) =>
-    normalizeInput(s).toLowerCase().replace(/[“”"'.,!?;:()-]/g, " ").replace(/\b(the|a|an)\b/g, " ").trim().split(/\s+/).filter(Boolean);
-  const wa = words(a), wb = words(b);
-  return wa.length === wb.length && wa.every((w, i) => w.slice(0, 2) === wb[i].slice(0, 2));
+const CONFUSABLE_GROUPS: readonly (readonly string[])[] = [
+  ["corrasion", "corrosion"],
+  ["insolation", "insulation"],
+  ["hygrometer", "hydrometer"],
+  ["constrictive", "constructive", "conservative", "contractive"],
+  ["stalactite", "stalagmite"],
+  ["india", "indian"],
+  ["niger", "nigeria", "nigerian"],
+  ["austria", "australia", "australian"],
+  ["slovakia", "slovenia"],
+  ["guinea", "guyana"],
+  ["zambia", "gambia"],
+  ["iceland", "ireland"],
+  ["iran", "iraq"],
+  ["mali", "malawi"],
+  ["lagos", "laos"],
+  ["tengeh", "tengah"],
+  ["failing", "falling", "fall"],
+  ["weather", "weathering", "weathered"],
+  ["glacier", "glazier"],
+  ["desert", "dessert"],
+  ["biome", "biomass"],
+  ["hydration", "hydraulic"],
+  ["internal", "international"],
+  ["divergent", "convergent"],
+  ["emigration", "immigration"],
+  ["emigrant", "immigrant"],
+  ["latitude", "longitude", "altitude"],
+  ["easting", "northing"],
+  ["urban", "rural", "suburban"],
+  ["abrasion", "attrition", "traction"],
+  ["suspension", "solution", "saltation"],
+  ["swash", "backwash"],
+  ["spit", "spot", "silt", "split"],
+  ["arch", "ark"],
+  ["cave", "cove"],
+  ["stack", "stump"],
+  ["bar", "bay"],
+  ["arctic", "antarctic"],
+  ["cancer", "capricorn"],
+  ["slumping", "sliding"],
+  ["concordant", "discordant"],
+  ["cyclone", "anticyclone"],
+  ["afforestation", "deforestation"],
+  ["import", "export"],
+  ["imported", "exported"],
+  ["demography", "demographer"],
+  ["geography", "geographer"],
+];
+
+function isConfusablePair(w1: string, w2: string): boolean {
+  if (w1 === w2) return false;
+  return CONFUSABLE_GROUPS.some((g) => g.includes(w1) && g.includes(w2));
+}
+
+/**
+ * Typo tolerance must never turn one term into its opposite or a confusable term:
+ * check word-by-word, requiring identical word count, identical first two letters per word,
+ * exact stem match on short words (<6 letters) or words with digits, and not in CONFUSABLE_GROUPS.
+ */
+function wordsMatchWithTypo(a: string, b: string): boolean {
+  const wa = splitGeoWords(a);
+  const wb = splitGeoWords(b);
+  if (wa.length === 0 || wa.length !== wb.length) return false;
+  const totalLen = wa.reduce((sum, w) => sum + stemWord(w).length, 0);
+  const maxPhraseEdits = totalLen >= 12 ? 2 : 1;
+  let totalEdits = 0;
+  for (let i = 0; i < wa.length; i++) {
+    const sa = stemWord(wa[i]);
+    const sb = stemWord(wb[i]);
+    if (isConfusablePair(sa, sb) || isConfusablePair(wa[i], wb[i])) return false;
+    if (sa === sb) continue;
+    if (!/[a-z]/.test(sa) || /\d/.test(sa) || /\d/.test(sb)) return false;
+    if (sa.length < 6 || sb.length < 5) return false;
+    if (wa[i].slice(0, 2) !== wb[i].slice(0, 2)) return false;
+    const maxWordEdits = sa.length >= 12 || (wa.length >= 2 && totalLen >= 12 && sa.length >= 8) ? 2 : 1;
+    const d = editDistance(sa, sb);
+    if (d > maxWordEdits) return false;
+    totalEdits += d;
+    if (totalEdits > maxPhraseEdits) return false;
+  }
+  return totalEdits >= 1;
 }
 
 function editDistance(a: string, b: string): number {
@@ -492,11 +591,13 @@ export function specSelfCheck(spec: AnswerSpec): CheckResult {
 export function stripGeoUnits(raw: string): { num: string; mult: number } | null {
   let s = normalizeInput(raw).trim();
   const orig = s;
-  s = s.replace(/^(about|approx\.?|approximately|around|roughly|nearly|almost|c\.|ca\.|~|≈)\s*/i, "");
+  s = s.replace(/^(?:up\s+to\s+(?:about\s+)?|about|approx\.?|approximately|around|roughly|nearly|almost|c\.|ca\.|~|≈)\s*/i, "");
+  const catMatch = s.match(/^(?:category|cat\.?)\s+([−\-+]?\d+(?:\.\d+)?)\s*\.?$/i);
+  if (catMatch) return { num: catMatch[1], mult: 1 };
   s = s.replace(/^(s\$|a\$|us\$|£|€|₦|\$)\s*/i, "");
   let mult = 1;
   const unit = s.match(
-    /^([−\-+]?[\d.,\s]*\d(?:\s*\/\s*\d+)?)\s*(thousand|million|billion|bn|m(?=\s|$)|k(?=\s|$))?\s*(people|persons|inhabitants|residents)?\s*(per\s*(sq\.?\s*)?(km|kilomet(re|er))s?\s*(²|2|\^2|squared)?|\/\s*km\s*(²|2|\^2)?|per\s*square\s*kilomet(re|er)s?|per\s*1,?000|per\s*thousand|‰|per\s*cent|percent|%|°\s*c|degrees?\s*(c|celsius)?|°|mm|cm|km\/h|kph|km|m\/s|metres?|meters?|m|hpa|mb|millibars?|years?|yrs?|days?|hours?|hrs?|minutes?|mins?|tonnes?|t|litres?|l|people|times)?\s*\.?$/i,
+    /^([−\-+]?[\d.,\s]*\d(?:\s*\/\s*\d+)?)\s*(thousand|million|billion|bn|m(?=\s|$)|k(?=\s|$))?\s*(people|persons|inhabitants|residents|visitors|tourists|migrants|births|deaths|babies|children|waves|trees|colonies|households|cars|vehicles)?\s*(?:per\s*(?:sq\.?\s*)?(?:km|kilomet(?:re|er))s?\s*(?:²|2|\^2|squared)?|\/\s*km\s*(?:²|2|\^2)?|per\s*square\s*kilomet(?:re|er)s?|(?:sq\.?\s*)?(?:km|kilomet(?:re|er)|m|met(?:re|er)|cm|millimet(?:re|er)|mm)\s*(?:²|2|\^2|³|3|\^3)|(?:(?:mm|cm|m|metres?|meters?|km|kilometres?|kilometers?|waves?|litres?|l|gallons?|ml|megalitres?|tonnes?|t)\s*)?(?:per|a|an|\/)\s*(?:year|yr|day|hour|hr|minute|min|week|wk|month|second|sec|person)|(?:mb|hpa|millibars?)\s*(?:per|\/)\s*100\s*km|percentage\s*points?|%\s*points?|pp|°\s*c[\s-]*weeks?|dhw|degree\s*heating\s*weeks?|per\s*1,?000|per\s*thousand|‰|per\s*cent|percent|%|°\s*c|degrees?\s*(?:c|celsius)?|°|mm|cm|km\/h|kph|km|m\/s|metres?|meters?|m|hpa|mb|millibars?|hectares?|ha|gha|years?|yrs?|days?|hours?|hrs?|minutes?|mins?|tonnes?|t|litres?|l|gallons?|ml|megalitres?|people|times)?\s*\.?$/i,
   );
   if (!unit) return null;
   const word = (unit[2] ?? "").toLowerCase();

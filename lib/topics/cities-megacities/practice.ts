@@ -145,7 +145,7 @@ const paper1: Paper = {
     {
       kind: "written",
       id: "cities-megacities-p1-q08",
-      question: "Using the table in the previous question, compare the projected changes in the populations of Tokyo and Dhaka between 2018 and 2030. [3 marks]",
+      question: "Study the table.\n\n" + megaTable + "\n\nUsing the table, compare the projected changes in the populations of Tokyo and Dhaka between 2018 and 2030. [3 marks]",
       marks: 3,
       modelAnswer:
         "Tokyo's population is projected to fall slightly, from 37.5 million to 36.6 million (a decrease of 0.9 million). In contrast, Dhaka's population is projected to rise sharply, from 19.6 million to 28.1 million (an increase of 8.5 million). So Dhaka is growing much faster than Tokyo, and the gap between them shrinks from 17.9 million to 8.5 million, although Tokyo stays larger.",
@@ -176,7 +176,8 @@ const paper1: Paper = {
     {
       kind: "written",
       id: "cities-megacities-p1-q10",
-      question: "Using the graph in the previous question, describe the trend in the percentage of the world's population living in urban areas from 1950 to 2050. [3 marks]",
+      question: "Using the graph, describe the trend in the percentage of the world's population living in urban areas from 1950 to 2050. [3 marks]",
+      diagram: urbanShareGraph,
       marks: 3,
       modelAnswer:
         "The percentage of people living in urban areas rises throughout the period, from about 30% in 1950 to 55% in 2018. It passes 50% between 2000 (47%) and 2018 — around 2007–08 — so since then more than half the world's people have been urban. The rise is projected to continue, reaching about 68% by 2050, although this part is only a projection.",
@@ -648,7 +649,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "cities-megacities-quiz-q08",
       question: "In roughly which year did the world's urban population **first pass 50%** of the total? Give a single year.",
-      answer: { type: "number", value: 2007.5, tolerance: 0.6, display: "2007 or 2008" },
+      answer: { type: "number", value: 2007.5, tolerance: 0.6, display: "2007" },
       traps: [{ spec: { type: "number", value: 2023 }, feedback: "By 2023 the world was already about 57% urban. The 50% mark was passed more than a decade earlier." }],
       solution: ["The UN estimates the world passed the 50% urban mark around **2007–08**. By 2023 it was about 57%."],
       difficulty: "core",
@@ -711,7 +712,9 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "cities-megacities-ch-q02",
       question:
-        "Using the same table: if Dhaka grows by the projected amount, at a steady rate, between 2018 and 2030, about how many people is it gaining **per day**? Use 365 days in a year and give your answer to the nearest hundred.",
+        "Study the table.\n\n" +
+        megaTable +
+        "\n\nIf Dhaka grows by the projected amount, at a steady rate, between 2018 and 2030, about how many people is it gaining **per day**? Use 365 days in a year and give your answer to the nearest hundred.",
       answer: { type: "number", value: 1900, display: "about 1,900 people per day" },
       traps: [
         { spec: { type: "number", value: 708000, tolerance: 1000 }, feedback: "That is the increase per YEAR. Now divide by 365." },
